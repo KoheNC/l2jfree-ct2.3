@@ -28,8 +28,8 @@ import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jfree.gameserver.util.FloodProtector;
-import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.gameserver.util.FloodProtector.Protected;
+import com.l2jfree.gameserver.util.Util;
 
 /**
  * This class represents a packet sent by the client when a player drags an item over the

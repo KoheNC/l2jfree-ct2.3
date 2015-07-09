@@ -20,8 +20,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.SocialAction;
 import com.l2jfree.gameserver.util.FloodProtector;
-import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.gameserver.util.FloodProtector.Protected;
+import com.l2jfree.gameserver.util.Util;
 
 /**
  * This class ...

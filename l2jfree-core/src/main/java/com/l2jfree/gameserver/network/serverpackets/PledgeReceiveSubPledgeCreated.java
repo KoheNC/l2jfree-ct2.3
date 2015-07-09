@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.model.L2Clan.SubPledge;
+import com.l2jfree.gameserver.model.L2ClanMember;
 
 /**
  *

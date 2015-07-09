@@ -20,8 +20,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.GameServer.StartupHook;
+import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.tools.random.Rnd;
 
 /**
