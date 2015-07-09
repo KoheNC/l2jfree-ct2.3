@@ -16,44 +16,44 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 public class CharacterCreateFail extends L2GameServerPacket
 {
-	private static final String	_S__CHARACTERCREATEFAIL	= "[S] 10 CharacterCreateFail c[d]";
-
+	private static final String _S__CHARACTERCREATEFAIL = "[S] 10 CharacterCreateFail c[d]";
+	
 	/** Your character creation has failed. */
-	public static final int		REASON_CREATION_FAILED = 0x00;
+	public static final int REASON_CREATION_FAILED = 0x00;
 	/**
 	 * You cannot create another character. Please delete the existing character and try again.
 	 * <BR><I>Removes all settings that were selected (race, class, etc).</I>
 	 */
-	public static final int		REASON_TOO_MANY_CHARACTERS = 0x01;
+	public static final int REASON_TOO_MANY_CHARACTERS = 0x01;
 	/** This name already exists. */
-	public static final int		REASON_NAME_ALREADY_EXISTS = 0x02;
+	public static final int REASON_NAME_ALREADY_EXISTS = 0x02;
 	/** Your title cannot exceed 16 characters in length. Please try again. */
-	public static final int		REASON_16_ENG_CHARS = 0x03;
+	public static final int REASON_16_ENG_CHARS = 0x03;
 	/** Incorrect name. Please try again. */
-	public static final int		REASON_INCORRECT_NAME = 0x04;
+	public static final int REASON_INCORRECT_NAME = 0x04;
 	/** Characters cannot be created from this server. */
-	public static final int		REASON_CREATE_NOT_ALLOWED = 0x05;
+	public static final int REASON_CREATE_NOT_ALLOWED = 0x05;
 	/**
 	 * Unable to create character. You are unable to create a new character on the selected server.
 	 * A restriction is in place which restricts users from creating characters on different servers
 	 * where no previous character exists. Please choose another server.
 	 */
-	public static final int		REASON_CHOOSE_ANOTHER_SERVER = 0x06;
-
-	private final int			_error;
-
+	public static final int REASON_CHOOSE_ANOTHER_SERVER = 0x06;
+	
+	private final int _error;
+	
 	public CharacterCreateFail(int error)
 	{
 		_error = error;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x10);
 		writeD(_error);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

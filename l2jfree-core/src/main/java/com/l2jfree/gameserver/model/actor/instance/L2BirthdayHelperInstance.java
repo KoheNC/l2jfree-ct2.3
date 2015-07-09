@@ -33,17 +33,17 @@ public final class L2BirthdayHelperInstance extends L2Npc
 {
 	private static final int HELPING_LENGTH = 300000;
 	private static final int BIRTHDAY_CAKE_EFFECT = 5950;
-
+	
 	private int _ownerId;
 	private ScheduledFuture<?> _leaveTask;
-
+	
 	public L2BirthdayHelperInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 		_ownerId = 0;
 		_leaveTask = ThreadPoolManager.getInstance().scheduleGeneral(new Leaving(), HELPING_LENGTH);
 	}
-
+	
 	public final void setOwner(L2PcInstance player)
 	{
 		if (player == null)
@@ -54,16 +54,16 @@ public final class L2BirthdayHelperInstance extends L2Npc
 		else
 			_ownerId = player.getObjectId();
 	}
-
+	
 	@Override
 	public final void onBypassFeedback(L2PcInstance player, String command)
 	{
 		if (player.getObjectId() != _ownerId)
 			return;
-
+		
 		_leaveTask.cancel(false);
 		doDie(null);
-
+		
 		if (command.equals("accept"))
 		{
 			// 1st anniversary
@@ -79,7 +79,7 @@ public final class L2BirthdayHelperInstance extends L2Npc
 		else if (command.equals("refuse"))
 			showChatWindow(player, 2);
 	}
-
+	
 	@Override
 	public final void showChatWindow(L2PcInstance player, int val)
 	{
@@ -87,7 +87,7 @@ public final class L2BirthdayHelperInstance extends L2Npc
 			val = 3;
 		super.showChatWindow(player, val);
 	}
-
+	
 	private final class Leaving implements Runnable
 	{
 		@Override

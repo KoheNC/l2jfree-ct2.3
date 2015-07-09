@@ -20,21 +20,21 @@ package com.l2jfree.gameserver.network.clientpackets;
 public final class EndScenePlayer extends L2GameClientPacket
 {
 	private static final String _C__ENDSCENEPLAYER = "[C] D0:5b EndScenePlayer ch[d]";
-
+	
 	//private int					_sceneId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		//_sceneId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		//requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

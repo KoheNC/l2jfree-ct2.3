@@ -24,61 +24,61 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
 
 public class L2SkillMount extends L2Skill
 {
-	private final int	_npcId;
-	private final int	_itemId;
-
+	private final int _npcId;
+	private final int _itemId;
+	
 	public L2SkillMount(StatsSet set)
 	{
 		super(set);
 		_npcId = set.getInteger("npcId", 0);
 		_itemId = set.getInteger("itemId", 0);
 	}
-
+	
 	@Override
 	public void useSkill(L2Character caster, L2Character... targets)
 	{
 		if (!(caster instanceof L2PcInstance))
 			return;
-
-		L2PcInstance activePlayer = (L2PcInstance) caster;
-
+		
+		L2PcInstance activePlayer = (L2PcInstance)caster;
+		
 		if (!FloodProtector.tryPerformAction(activePlayer, Protected.ITEMPETSUMMON))
 			return;
-
+		
 		// Dismount Action
 		if (_npcId == 0)
 		{
 			activePlayer.dismount();
 			return;
 		}
-
+		
 		if (activePlayer.isSitting())
 		{
 			activePlayer.sendPacket(SystemMessageId.CANT_MOVE_SITTING);
 			return;
 		}
-
+		
 		if (activePlayer.inObserverMode())
 			return;
-
+		
 		if (activePlayer.isInOlympiadMode())
 		{
 			activePlayer.sendPacket(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT);
 			return;
 		}
-
+		
 		if (activePlayer.getPet() != null || activePlayer.isMounted())
 		{
 			activePlayer.sendPacket(SystemMessageId.YOU_ALREADY_HAVE_A_PET);
 			return;
 		}
-
+		
 		if (activePlayer.isAttackingNow() || activePlayer.isCursedWeaponEquipped())
 		{
 			activePlayer.sendPacket(SystemMessageId.YOU_CANNOT_SUMMON_IN_COMBAT);
 			return;
 		}
-
+		
 		activePlayer.mount(_npcId, _itemId, false);
 	}
 }

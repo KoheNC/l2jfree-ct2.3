@@ -65,8 +65,8 @@ public final class EffectSignetMDam extends L2Effect
 		else
 			return false;
 		
-		L2EffectPointInstance effectPoint = new L2EffectPointInstance(IdFactory.getInstance().getNextId(), template,
-				getEffector());
+		L2EffectPointInstance effectPoint =
+				new L2EffectPointInstance(IdFactory.getInstance().getNextId(), template, getEffector());
 		effectPoint.getStatus().setCurrentHp(effectPoint.getMaxHp());
 		effectPoint.getStatus().setCurrentMp(effectPoint.getMaxMp());
 		L2World.getInstance().storeObject(effectPoint);

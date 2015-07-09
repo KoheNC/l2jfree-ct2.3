@@ -31,25 +31,25 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class TransformationManager
 {
-	protected static final Log					_log		= LogFactory.getLog(TransformationManager.class);
-
+	protected static final Log _log = LogFactory.getLog(TransformationManager.class);
+	
 	public static TransformationManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
-	private final Map<Integer, L2Transformation>	_transformations;
-
+	
+	private final Map<Integer, L2Transformation> _transformations;
+	
 	private TransformationManager()
 	{
 		_transformations = new FastMap<Integer, L2Transformation>();
 	}
-
+	
 	public void report()
 	{
 		_log.info("Loaded: " + getAllTransformations().size() + " transformations.");
 	}
-
+	
 	public boolean transformPlayer(int id, L2PcInstance player)
 	{
 		L2Transformation template = getTransformationById(id);
@@ -57,29 +57,29 @@ public class TransformationManager
 		{
 			if (player.getPet() != null)
 				player.getPet().unSummon(player);
-
+			
 			player.transform(template);
 			return true;
 		}
-
+		
 		return false;
 	}
-
+	
 	public L2Transformation getTransformationById(int id)
 	{
 		return _transformations.get(id);
 	}
-
+	
 	public L2Transformation registerTransformation(L2Transformation transformation)
 	{
 		return _transformations.put(transformation.getId(), transformation);
 	}
-
+	
 	public Collection<L2Transformation> getAllTransformations()
 	{
 		return _transformations.values();
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

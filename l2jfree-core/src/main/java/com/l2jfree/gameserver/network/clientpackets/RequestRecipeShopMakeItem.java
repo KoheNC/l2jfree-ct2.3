@@ -23,13 +23,13 @@ import com.l2jfree.gameserver.util.Util;
 
 public class RequestRecipeShopMakeItem extends L2GameClientPacket
 {
-	private static final String	_C__AF_REQUESTRECIPESHOPMAKEITEM	= "[C] B6 RequestRecipeShopMakeItem";
-
-	private int					_id;
-	private int					_recipeId;
-
+	private static final String _C__AF_REQUESTRECIPESHOPMAKEITEM = "[C] B6 RequestRecipeShopMakeItem";
+	
+	private int _id;
+	private int _recipeId;
+	
 	//private long _unknown;
-
+	
 	/**
 	 * packet type id 0xac
 	 * format:		cd
@@ -42,38 +42,38 @@ public class RequestRecipeShopMakeItem extends L2GameClientPacket
 		_recipeId = readD();
 		/*_unknown = */readCompQ();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Object object = null;
-
+		
 		// Get object from target
 		if (activeChar.getTargetId() == _id)
 			object = activeChar.getTarget();
-
+		
 		// Get object from world
 		if (object == null)
 			object = L2World.getInstance().getPlayer(_id);
-
+		
 		if (!(object instanceof L2PcInstance))
 		{
 			requestFailed(SystemMessageId.TARGET_IS_INCORRECT);
 			return;
 		}
-
-		L2PcInstance manufacturer = (L2PcInstance) object;
-
+		
+		L2PcInstance manufacturer = (L2PcInstance)object;
+		
 		if (!activeChar.isSameInstance(manufacturer))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (activeChar.getPrivateStoreType() != 0)
 		{
 			requestFailed(SystemMessageId.PRIVATE_STORE_UNDER_WAY);
@@ -85,7 +85,7 @@ public class RequestRecipeShopMakeItem extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		if (activeChar.isInCraftMode() || manufacturer.isInCraftMode())
 		{
 			//activeChar.sendMessage("Currently in Craft Mode");
@@ -97,15 +97,15 @@ public class RequestRecipeShopMakeItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANT_CRAFT_DURING_COMBAT);
 			return;
 		}
-
+		
 		if (Util.checkIfInRange(150, activeChar, manufacturer, true))
 			RecipeController.getInstance().requestManufactureItem(manufacturer, _recipeId, activeChar);
 		else
 			sendPacket(SystemMessageId.TARGET_TOO_FAR);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

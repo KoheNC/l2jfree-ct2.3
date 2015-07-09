@@ -38,20 +38,20 @@ public final class EffectClanGate extends L2Effect
 	{
 		super(env, template);
 	}
-
+	
 	@Override
 	public L2EffectType getEffectType()
 	{
 		return L2EffectType.CLAN_GATE;
 	}
-
+	
 	@Override
 	protected boolean onStart()
 	{
 		L2Character effected = getEffected();
 		L2PcInstance lord;
 		if (effected instanceof L2PcInstance)
-			lord = (L2PcInstance) effected;
+			lord = (L2PcInstance)effected;
 		else
 			return false;
 		if (!GlobalRestrictions.canTeleport(lord) || lord.isInsideZone(L2Zone.FLAG_NOSUMMON))
@@ -67,11 +67,11 @@ public final class EffectClanGate extends L2Effect
 		clan.broadcastToOnlineMembers(SystemMessageId.COURT_MAGICIAN_CREATED_PORTAL.getSystemMessage());
 		return true;
 	}
-
+	
 	@Override
 	protected void onExit()
 	{
-		L2PcInstance lord = (L2PcInstance) getEffected();
+		L2PcInstance lord = (L2PcInstance)getEffected();
 		Castle c = CastleManager.getInstance().getCastleByOwner(lord.getClan());
 		if (c != null)
 			c.destroyClanGate();

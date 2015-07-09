@@ -35,17 +35,16 @@ public final class TowerOfNaiaManager
 	private static Log _log = LogFactory.getLog(TowerOfNaiaManager.class);
 	
 	// Bridge doors between Tully and Naia towers
-	public static final int[] TOWER_ENTER_DOOR_IDS =
-		{ 20250004, 20250005, 20250006, 20250007, 20250008, 20250009 };
+	public static final int[] TOWER_ENTER_DOOR_IDS = { 20250004, 20250005, 20250006, 20250007, 20250008, 20250009 };
 	
 	//public static final Location ROOF_START_POINT 			= new Location(16430, 244437, 11618);
 	public static final Location WAITING_ROOM_START_POINT = new Location(-47211, 246115, -9129);
 	
-	public static final int ROOF_LOCK_ID 				= 18491;
-	public static final int ROOF_CONTROLLER_ID 			= 18492;
-	public static final int WARD_ID 					= 18493;
-	public static final int ROOM_CONTROLLER_ID 			= 18494; // Ingenious Contraption
-	public static final int DARION_ID 					= 25603;
+	public static final int ROOF_LOCK_ID = 18491;
+	public static final int ROOF_CONTROLLER_ID = 18492;
+	public static final int WARD_ID = 18493;
+	public static final int ROOM_CONTROLLER_ID = 18494; // Ingenious Contraption
+	public static final int DARION_ID = 25603;
 	
 	public static FastList<TowerOfNaiaRoom> ROOMS = new FastList<TowerOfNaiaRoom>();
 	
@@ -81,21 +80,21 @@ public final class TowerOfNaiaManager
 	{
 		_instanceCount--;
 		InstanceManager.getInstance().destroyInstance(instanceId);
-		DoorTable.getInstance().openDoors(new int[]	{ 18250024, 18250025 }); // Open doors to the Core of Naia
+		DoorTable.getInstance().openDoors(new int[] { 18250024, 18250025 }); // Open doors to the Core of Naia
 	}
 	
 	public void prepareRoom(final int instanceId)
 	{
-		TowerOfNaiaInstance instance = (TowerOfNaiaInstance) InstanceManager.getInstance().getInstance(instanceId);
+		TowerOfNaiaInstance instance = (TowerOfNaiaInstance)InstanceManager.getInstance().getInstance(instanceId);
 		if (instance == null)
 			return;
-		 
+		
 		instance.prepareRoom();
 	}
 	
 	public void startRoomInvasion(final int instanceId)
 	{
-		TowerOfNaiaInstance instance = (TowerOfNaiaInstance) InstanceManager.getInstance().getInstance(instanceId);
+		TowerOfNaiaInstance instance = (TowerOfNaiaInstance)InstanceManager.getInstance().getInstance(instanceId);
 		if (instance == null)
 			return;
 		
@@ -104,7 +103,7 @@ public final class TowerOfNaiaManager
 	
 	public void finishRoomInvasion(final int instanceId)
 	{
-		TowerOfNaiaInstance instance = (TowerOfNaiaInstance) InstanceManager.getInstance().getInstance(instanceId);
+		TowerOfNaiaInstance instance = (TowerOfNaiaInstance)InstanceManager.getInstance().getInstance(instanceId);
 		if (instance == null)
 			return;
 		
@@ -113,7 +112,7 @@ public final class TowerOfNaiaManager
 	
 	public void notifyMobKilled(final int instanceId)
 	{
-		TowerOfNaiaInstance instance = (TowerOfNaiaInstance) InstanceManager.getInstance().getInstance(instanceId);
+		TowerOfNaiaInstance instance = (TowerOfNaiaInstance)InstanceManager.getInstance().getInstance(instanceId);
 		if (instance == null)
 			return;
 		

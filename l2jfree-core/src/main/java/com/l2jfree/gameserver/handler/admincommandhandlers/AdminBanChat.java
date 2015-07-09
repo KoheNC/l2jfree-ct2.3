@@ -37,6 +37,7 @@ public final class AdminBanChat implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_banchat", "admin_unbanchat" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		L2PcInstance targetPlayer = null;
@@ -76,7 +77,7 @@ public final class AdminBanChat implements IAdminCommandHandler
 			if (banLength > -1)
 			{
 				ObjectRestrictions.getInstance().timedRemoveRestriction(targetPlayer.getObjectId(),
-					AvailableRestriction.PlayerChat, banLength * 60000);
+						AvailableRestriction.PlayerChat, banLength * 60000);
 				
 				targetPlayer.sendMessage("You have been chat banned by a server admin for " + banLength + " minutes.");
 				activeChar.sendMessage(targetPlayer.getName() + " is now chat banned for " + banLength + " minutes.");
@@ -98,6 +99,7 @@ public final class AdminBanChat implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

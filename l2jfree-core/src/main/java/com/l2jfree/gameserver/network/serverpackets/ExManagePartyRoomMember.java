@@ -29,26 +29,26 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExManagePartyRoomMember extends L2GameServerPacket
 {
-	private static final String	_S__FE_0A_EXMANAGEPARTYROOMMEMBER = "[S] FE:0A ExManagePartyRoomMember";
-	public static final int ADDED		= 0x00;
-	public static final int MODIFIED	= 0x01;
-	public static final int REMOVED		= 0x02;
-
-	private final int			_type;
-	private final L2PcInstance	_member;
-
+	private static final String _S__FE_0A_EXMANAGEPARTYROOMMEMBER = "[S] FE:0A ExManagePartyRoomMember";
+	public static final int ADDED = 0x00;
+	public static final int MODIFIED = 0x01;
+	public static final int REMOVED = 0x02;
+	
+	private final int _type;
+	private final L2PcInstance _member;
+	
 	public ExManagePartyRoomMember(int changeType, L2PcInstance member)
 	{
 		_type = changeType;
 		_member = member;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x0A);
-
+		
 		writeD(_type);
 		writeD(_member.getObjectId());
 		writeS(_member.getName());
@@ -57,7 +57,7 @@ public class ExManagePartyRoomMember extends L2GameServerPacket
 		writeD(MapRegionManager.getInstance().getL2Region(_member));
 		writeD(L2PartyRoom.getPartyRoomState(_member));
 	}
-
+	
 	@Override
 	public String getType()
 	{

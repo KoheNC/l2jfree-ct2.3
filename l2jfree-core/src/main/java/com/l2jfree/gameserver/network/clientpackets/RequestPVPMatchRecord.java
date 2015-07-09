@@ -27,13 +27,13 @@ public class RequestPVPMatchRecord extends L2GameClientPacket
 	{
 		// trigger, no data
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

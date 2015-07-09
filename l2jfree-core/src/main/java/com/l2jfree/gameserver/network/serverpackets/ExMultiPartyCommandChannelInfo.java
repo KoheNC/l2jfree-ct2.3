@@ -30,14 +30,13 @@ public class ExMultiPartyCommandChannelInfo extends L2GameServerPacket
 	{
 		_cc = cc;
 	}
-
 	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x31);
-
+		
 		writeS(_cc.getChannelLeader().getName());
 		writeD(0x00);
 		writeD(_cc.getMemberCount());
@@ -50,7 +49,7 @@ public class ExMultiPartyCommandChannelInfo extends L2GameServerPacket
 			writeD(party.getMemberCount());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

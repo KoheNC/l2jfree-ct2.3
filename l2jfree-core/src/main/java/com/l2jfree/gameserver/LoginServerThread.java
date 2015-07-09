@@ -34,8 +34,8 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.L2GameClient;
-import com.l2jfree.gameserver.network.L2GameSelectorThread;
 import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
+import com.l2jfree.gameserver.network.L2GameSelectorThread;
 import com.l2jfree.gameserver.network.gameserverpackets.AuthRequest;
 import com.l2jfree.gameserver.network.gameserverpackets.BlowFishKey;
 import com.l2jfree.gameserver.network.gameserverpackets.ChangeAccessLevel;
@@ -340,8 +340,7 @@ public final class LoginServerThread extends NetworkThread
 								if (Config.CONNECTION_FILTERING)
 								{
 									// not supported by login, inform that GS can't do anything
-									_log
-											.warn("Connection filtering has been disabled, as the login server doesn't support it.");
+									_log.warn("Connection filtering has been disabled, as the login server doesn't support it.");
 								}
 							}
 							
@@ -489,7 +488,7 @@ public final class LoginServerThread extends NetworkThread
 								break;
 							}
 						}
-							//$FALL-THROUGH$
+						//$FALL-THROUGH$
 						default:
 						{
 							_log.warn("Unknown opcode: " + Integer.toHexString(packetType));

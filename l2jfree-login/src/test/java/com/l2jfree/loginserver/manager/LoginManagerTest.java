@@ -33,9 +33,9 @@ import com.l2jfree.loginserver.services.exception.AccountWrongPasswordException;
  */
 public class LoginManagerTest extends TestCase
 {
-	private ClassPathXmlApplicationContext	context	= null;
-	private LoginManager					loginManager;
-
+	private ClassPathXmlApplicationContext context = null;
+	private LoginManager loginManager;
+	
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
@@ -45,10 +45,10 @@ public class LoginManagerTest extends TestCase
 		super.setUp();
 		context = new ClassPathXmlApplicationContext("classpath*:/**/**/applicationContext-TestMock.xml");
 		L2Registry.setApplicationContext(context);
-
+		
 		loginManager = LoginManager.getInstance();
 	}
-
+	
 	/**
 	 *
 	 */
@@ -56,28 +56,28 @@ public class LoginManagerTest extends TestCase
 	{
 		SessionKey sk = loginManager.assignSessionKeyToLogin("player1", null);
 		assertNotNull(sk);
-
+		
 		assertTrue(loginManager.isAccountInLoginServer("player1"));
 	}
-
+	
 	/**
 	 *
 	 */
 	public void testRemoveAccount()
 	{
 		loginManager.assignSessionKeyToLogin("player1", null);
-
+		
 		loginManager.removeAuthedLoginClient("player1");
-
+		
 		assertTrue(!loginManager.isAccountInLoginServer("player1"));
 		assertNull(loginManager.getKeyForAccount("player1"));
-
+		
 	}
-
+	
 	public void testAccountBanned() throws Exception
 	{
 		Config.LOGIN_TRY_BEFORE_BAN = 3;
-
+		
 		InetAddress netAddress = InetAddress.getByName("123.123.123.123");
 		try
 		{
@@ -89,11 +89,11 @@ public class LoginManagerTest extends TestCase
 			assertNotNull(e.getMessage(), e);
 		}
 	}
-
+	
 	public void testConnection() throws Exception
 	{
 		Config.LOGIN_TRY_BEFORE_BAN = 3;
-
+		
 		InetAddress netAddress = InetAddress.getByName("123.123.123.123");
 		try
 		{
@@ -104,7 +104,7 @@ public class LoginManagerTest extends TestCase
 		{
 			assertNotNull(e.getMessage(), e);
 		}
-
+		
 		try
 		{
 			assertTrue(loginManager.loginValid("player1", "testpwd1", netAddress));
@@ -114,12 +114,12 @@ public class LoginManagerTest extends TestCase
 			fail(e.getMessage());
 		}
 	}
-
+	
 	public void testHackingAttempt() throws IOException
 	{
 		Config.LOGIN_TRY_BEFORE_BAN = 3;
 		InetAddress netAddress = InetAddress.getByName("123.123.123.123");
-
+		
 		try
 		{
 			// First try, failed connect = 1
@@ -139,7 +139,7 @@ public class LoginManagerTest extends TestCase
 		// don't forget to unban client to avoid perturbation on other tests
 		BanManager.getInstance().removeBanForAddress(netAddress.getHostAddress());
 	}
-
+	
 	public void testLoginWithNullAdress() throws Exception
 	{
 		InetAddress address = null;
@@ -148,12 +148,12 @@ public class LoginManagerTest extends TestCase
 		Config.AUTO_CREATE_ACCOUNTS = true;
 		assertTrue(loginManager.loginValid("unknownplayer", "pwdforplayer", address));
 	}
-
+	
 	public void testAutoCreateAccount() throws IOException
 	{
 		Config.AUTO_CREATE_ACCOUNTS = true;
 		InetAddress netAddress = InetAddress.getByName("123.123.123.123");
-
+		
 		try
 		{
 			assertTrue(loginManager.loginValid("unknownplayer", "pwdforplayer", netAddress));
@@ -163,5 +163,5 @@ public class LoginManagerTest extends TestCase
 			fail(e.getMessage());
 		}
 	}
-
+	
 }

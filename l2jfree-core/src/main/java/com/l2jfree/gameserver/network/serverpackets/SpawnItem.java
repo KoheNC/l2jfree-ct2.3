@@ -39,7 +39,7 @@ public final class SpawnItem extends L2GameServerPacket
 	private final int _x, _y, _z;
 	private int _stackable;
 	private long _count;
-
+	
 	public SpawnItem(L2Object obj)
 	{
 		_objectId = obj.getObjectId();
@@ -49,7 +49,7 @@ public final class SpawnItem extends L2GameServerPacket
 		
 		if (obj instanceof L2ItemInstance)
 		{
-			L2ItemInstance item = (L2ItemInstance) obj;
+			L2ItemInstance item = (L2ItemInstance)obj;
 			_itemId = item.getItemDisplayId();
 			_stackable = item.isStackable() ? 0x01 : 0x00;
 			_count = item.getCount();
@@ -77,7 +77,7 @@ public final class SpawnItem extends L2GameServerPacket
 		writeCompQ(_count);
 		writeD(0x00); //c2
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

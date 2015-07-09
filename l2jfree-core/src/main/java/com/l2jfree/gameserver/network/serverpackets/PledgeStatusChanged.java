@@ -43,18 +43,18 @@ public class PledgeStatusChanged extends L2GameServerPacket
 		writeC(0xcd);
 		writeD(_clan.getLeaderId());
 		writeD(_clan.getClanId());
-        writeD(0);
-        writeD(_clan.getLevel());
-        writeD(0);
-        writeD(0);
-        writeD(0);
+		writeD(0);
+		writeD(_clan.getLevel());
+		writeD(0);
+		writeD(0);
+		writeD(0);
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override
-    public String getType()
+	public String getType()
 	{
 		return _S__CD_PLEDGESTATUS_CHANGED;
 	}

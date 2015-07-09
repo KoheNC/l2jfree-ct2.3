@@ -38,7 +38,7 @@ public class RecipeShopMsg extends L2GameServerPacket
 		writeD(_activeChar.getObjectId());
 		writeS(_activeChar.getCreateList().getStoreName());//_activeChar.getTradeList().getSellStoreName());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

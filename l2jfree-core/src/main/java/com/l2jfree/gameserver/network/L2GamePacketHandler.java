@@ -42,6 +42,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L
 {
 	private static final Log _log = LogFactory.getLog(L2GamePacketHandler.class);
 	
+	@Override
 	public L2GameClientPacket handlePacket(ByteBuffer buf, L2GameClient client, final int opcode)
 	{
 		L2GameClientPacket msg = null;
@@ -52,12 +53,12 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L
 			case CONNECTED:
 				switch (opcode)
 				{
-					/* Commented out by Kerberos: not useful anymore
-					case 0x00:
-						if (Config.PACKET_HANDLER_DEBUG)
-							_log.warn("Client " + client.toString() + " is trying to connect using Interlude Client");
-						break;
-					*/
+				/* Commented out by Kerberos: not useful anymore
+				case 0x00:
+					if (Config.PACKET_HANDLER_DEBUG)
+						_log.warn("Client " + client.toString() + " is trying to connect using Interlude Client");
+					break;
+				*/
 					case 0x0e:
 						msg = new ProtocolVersion();
 						break;
@@ -134,7 +135,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L
 			case IN_GAME:
 				switch (opcode)
 				{
-					// to avoid unnecessary warning about invalid opcode (player clicked the button multiple times)
+				// to avoid unnecessary warning about invalid opcode (player clicked the button multiple times)
 					case 0x12: // CharacterSelected
 						break;
 					//

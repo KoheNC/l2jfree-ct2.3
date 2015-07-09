@@ -27,34 +27,34 @@ import com.l2jfree.gameserver.network.serverpackets.RecipeShopManageList;
  */
 public class RequestRecipeShopManageList extends L2GameClientPacket
 {
-	private static final String	_C__B0_RequestRecipeShopManageList	= "[C] b0 RequestRecipeShopManageList";
-
+	private static final String _C__B0_RequestRecipeShopManageList = "[C] b0 RequestRecipeShopManageList";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		// Player shouldn't be able to set stores if he/she is alike dead (dead or fake death)
 		if (player.isAlikeDead())
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (player.isInsideZone(L2Zone.FLAG_NOSTORE))
 		{
 			requestFailed(SystemMessageId.NO_PRIVATE_WORKSHOP_HERE);
 			return;
 		}
-
+		
 		if (player.getPrivateStoreType() != 0)
 		{
 			player.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
@@ -62,15 +62,15 @@ public class RequestRecipeShopManageList extends L2GameClientPacket
 			if (player.isSitting())
 				player.standUp();
 		}
-
+		
 		if (player.getCreateList() == null)
 			player.setCreateList(new L2ManufactureList());
-
+		
 		sendPacket(new RecipeShopManageList(player, true));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

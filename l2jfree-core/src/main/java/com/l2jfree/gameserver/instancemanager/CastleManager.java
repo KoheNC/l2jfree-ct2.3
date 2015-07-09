@@ -35,23 +35,22 @@ import com.l2jfree.gameserver.model.entity.Castle;
 
 public class CastleManager implements InstanceListManager
 {
-	protected static Log		_log			= LogFactory.getLog(CastleManager.class);
-
-	private FastMap<Integer, Castle>	_castles;
-
+	protected static Log _log = LogFactory.getLog(CastleManager.class);
+	
+	private FastMap<Integer, Castle> _castles;
+	
 	public static final CastleManager getInstance()
 	{
 		return SingletonHolder._instance;
-
+		
 	}
-
-	private static final int	_castleCirclets[]	=
-													{ 0, 6838, 6835, 6839, 6837, 6840, 6834, 6836, 8182, 8183 };
-
+	
+	private static final int _castleCirclets[] = { 0, 6838, 6835, 6839, 6837, 6840, 6834, 6836, 8182, 8183 };
+	
 	private CastleManager()
 	{
 	}
-
+	
 	public final Castle getClosestCastle(L2Object activeObject)
 	{
 		Castle castle = getCastle(activeObject);
@@ -59,7 +58,7 @@ public class CastleManager implements InstanceListManager
 		{
 			double closestDistance = Double.MAX_VALUE;
 			double distance;
-
+			
 			for (Castle castleToCheck : getCastles().values())
 			{
 				if (castleToCheck == null)
@@ -74,13 +73,14 @@ public class CastleManager implements InstanceListManager
 		}
 		return castle;
 	}
-
+	
 	public void reload()
 	{
 		getCastles().clear();
 		loadInstances();
 	}
-
+	
+	@Override
 	public void loadInstances()
 	{
 		Connection con = null;
@@ -88,20 +88,20 @@ public class CastleManager implements InstanceListManager
 		{
 			PreparedStatement statement;
 			ResultSet rs;
-
+			
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			statement = con.prepareStatement("SELECT id FROM castle ORDER BY id");
 			rs = statement.executeQuery();
-
+			
 			while (rs.next())
 			{
 				int id = rs.getInt("id");
 				getCastles().put(id, new Castle(id));
 			}
-
+			
 			statement.close();
-
+			
 			_log.info("Loaded: " + getCastles().size() + " castles");
 		}
 		catch (SQLException e)
@@ -113,17 +113,17 @@ public class CastleManager implements InstanceListManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public final Castle getCastleById(int castleId)
 	{
 		return getCastles().get(castleId);
 	}
-
+	
 	public final Castle getCastle(L2Object activeObject)
 	{
 		return getCastle(activeObject.getX(), activeObject.getY(), activeObject.getZ());
 	}
-
+	
 	public final Castle getCastle(int x, int y, int z)
 	{
 		Castle castle;
@@ -135,7 +135,7 @@ public class CastleManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final Castle getCastleByName(String name)
 	{
 		Castle castle;
@@ -147,12 +147,12 @@ public class CastleManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final Castle getCastleByOwner(L2Clan clan)
 	{
 		if (clan == null)
 			return null;
-
+		
 		Castle castle;
 		for (int i = 1; i <= getCastles().size(); i++)
 		{
@@ -162,54 +162,53 @@ public class CastleManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final FastMap<Integer, Castle> getCastles()
 	{
 		if (_castles == null)
 			_castles = new FastMap<Integer, Castle>();
 		return _castles;
 	}
-
+	
 	public final void validateTaxes(int sealStrifeOwner)
 	{
 		for (Castle castle : _castles.values())
 			castle.revalidateTax();
 	}
-
-	int	_castleId	= 1;	// from this castle
-
+	
+	int _castleId = 1; // from this castle
+	
 	public int getCirclet()
 	{
 		return getCircletByCastleId(_castleId);
 	}
-
+	
 	public int getCircletByCastleId(int castleId)
 	{
 		if (castleId > 0 && castleId < 10)
 			return _castleCirclets[castleId];
-
+		
 		return 0;
 	}
-
+	
 	// Remove this castle's circlets from the clan
 	public void removeCirclet(L2Clan clan, int castleId)
 	{
 		for (L2ClanMember member : clan.getMembers())
 			removeCirclet(member, castleId);
 	}
-
+	
 	public void removeCirclet(L2ClanMember member, int castleId)
 	{
 		if (member == null)
 			return;
 		L2PcInstance player = member.getPlayerInstance();
 		int circletId = getCircletByCastleId(castleId);
-
+		
 		if (circletId != 0)
 		{
 			// Online Player circlet removal
-			if (player != null &&
-					player.getInventory() != null)
+			if (player != null && player.getInventory() != null)
 			{
 				L2ItemInstance circlet = player.getInventory().getItemByItemId(circletId);
 				if (circlet != null)
@@ -225,7 +224,8 @@ public class CastleManager implements InstanceListManager
 			try
 			{
 				con = L2DatabaseFactory.getInstance().getConnection();
-				PreparedStatement statement = con.prepareStatement("DELETE FROM items WHERE owner_id = ? and item_id = ?");
+				PreparedStatement statement =
+						con.prepareStatement("DELETE FROM items WHERE owner_id = ? and item_id = ?");
 				statement.setInt(1, member.getObjectId());
 				statement.setInt(2, circletId);
 				statement.execute();
@@ -241,11 +241,13 @@ public class CastleManager implements InstanceListManager
 			}
 		}
 	}
-
+	
+	@Override
 	public void updateReferences()
 	{
 	}
-
+	
+	@Override
 	public void activateInstances()
 	{
 		for (final Castle castle : _castles.values())
@@ -253,7 +255,7 @@ public class CastleManager implements InstanceListManager
 			castle.activateInstance();
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

@@ -33,14 +33,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JarClassLoader extends ClassLoader
 {
-	private static Log	_log	= LogFactory.getLog(JarClassLoader.class);
-	HashSet<String>		_jars	= new HashSet<String>();
-
+	private static Log _log = LogFactory.getLog(JarClassLoader.class);
+	HashSet<String> _jars = new HashSet<String>();
+	
 	public void addJarFile(String filename)
 	{
 		_jars.add(filename);
 	}
-
+	
 	@Override
 	public Class<?> findClass(String name) throws ClassNotFoundException
 	{
@@ -54,7 +54,7 @@ public class JarClassLoader extends ClassLoader
 			throw new ClassNotFoundException(name, e);
 		}
 	}
-
+	
 	private byte[] loadClassData(String name) throws IOException
 	{
 		byte[] classData = null;
@@ -62,7 +62,7 @@ public class JarClassLoader extends ClassLoader
 		{
 			ZipFile zipFile = null;
 			DataInputStream zipStream = null;
-
+			
 			try
 			{
 				File file = new File(jarFile);
@@ -71,9 +71,9 @@ public class JarClassLoader extends ClassLoader
 				ZipEntry entry = zipFile.getEntry(fileName);
 				if (entry == null)
 					continue;
-				classData = new byte[(int) entry.getSize()];
+				classData = new byte[(int)entry.getSize()];
 				zipStream = new DataInputStream(zipFile.getInputStream(entry));
-				zipStream.readFully(classData, 0, (int) entry.getSize());
+				zipStream.readFully(classData, 0, (int)entry.getSize());
 				break;
 			}
 			catch (IOException e)

@@ -34,20 +34,21 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class ChatTrade implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Market };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Market };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
 	 */
+	@Override
 	public SystemChatChannelId[] getChatTypes()
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
+	@Override
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		if (!FloodProtector.tryPerformAction(activeChar, Protected.TRADE_CHAT) && !activeChar.isGM())
@@ -55,18 +56,21 @@ public class ChatTrade implements IChatHandler
 			activeChar.sendMessage("Flood protection: Using trade chat failed.");
 			return;
 		}
-
+		
 		if (Config.IRC_ENABLED && Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("trade") || Config.IRC_ENABLED
 				&& Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("all"))
 		{
 			IrcManager.getInstance().getConnection().sendChan("13+" + activeChar.getName() + ": " + text);
 		}
-		String name = (activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS)? "[GM]" + activeChar.getName() : activeChar.getName();
+		String name =
+				(activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS) ? "[GM]" + activeChar.getName() : activeChar
+						.getName();
 		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, name, text);
-
+		
 		if (Config.DEFAULT_TRADE_CHAT == ChatMode.REGION)
 		{
-			L2MapRegion region = MapRegionManager.getInstance().getRegion(activeChar.getX(), activeChar.getY(), activeChar.getZ());
+			L2MapRegion region =
+					MapRegionManager.getInstance().getRegion(activeChar.getX(), activeChar.getY(), activeChar.getZ());
 			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 			{
 				if (region == MapRegionManager.getInstance().getRegion(player.getX(), player.getY(), player.getZ())
@@ -77,12 +81,12 @@ public class ChatTrade implements IChatHandler
 				}
 			}
 		}
-		else if (Config.DEFAULT_TRADE_CHAT == ChatMode.GLOBAL || Config.DEFAULT_TRADE_CHAT == ChatMode.GM && activeChar.isGM())
+		else if (Config.DEFAULT_TRADE_CHAT == ChatMode.GLOBAL || Config.DEFAULT_TRADE_CHAT == ChatMode.GM
+				&& activeChar.isGM())
 		{
 			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 			{
-				if (!(Config.REGION_CHAT_ALSO_BLOCKED
-						&& BlockList.isBlocked(player, activeChar))
+				if (!(Config.REGION_CHAT_ALSO_BLOCKED && BlockList.isBlocked(player, activeChar))
 						&& player.isSameInstance(activeChar))
 				{
 					player.sendPacket(cs);

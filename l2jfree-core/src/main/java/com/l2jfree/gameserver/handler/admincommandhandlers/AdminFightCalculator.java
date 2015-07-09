@@ -37,9 +37,10 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class AdminFightCalculator implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_fight_calculator", "admin_fight_calculator_show", "admin_fcs", };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_fight_calculator", "admin_fight_calculator_show",
+			"admin_fcs", };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		try
@@ -56,12 +57,13 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleStart(String params, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(params);
@@ -90,18 +92,18 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			if (s.equals("mid2"))
 			{
 				mid2 = Integer.parseInt(st.nextToken());
-				}
+			}
 		}
-
+		
 		L2NpcTemplate npc1 = null;
 		if (mid1 != 0)
 			npc1 = NpcTable.getInstance().getTemplate(mid1);
 		L2NpcTemplate npc2 = null;
 		if (mid2 != 0)
 			npc2 = NpcTable.getInstance().getTemplate(mid2);
-
+		
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-
+		
 		TextBuilder replyMSG = new TextBuilder();
 		if (npc1 != null && npc2 != null)
 		{
@@ -114,7 +116,8 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			replyMSG.append("<tr><td>" + npc1.getName() + "</td><td>" + npc2.getName() + "</td></tr>");
 			replyMSG.append("</table>");
 			replyMSG.append("<center><br><br><br>");
-			replyMSG.append("<button value=\"OK\" action=\"bypass -h admin_fight_calculator_show " + npc1.getNpcId() + " " + npc2.getNpcId()
+			replyMSG.append("<button value=\"OK\" action=\"bypass -h admin_fight_calculator_show " + npc1.getNpcId()
+					+ " " + npc2.getNpcId()
 					+ "\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 			replyMSG.append("</center>");
 			replyMSG.append("</body></html>");
@@ -126,8 +129,8 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			for (L2NpcTemplate n : NpcTable.getInstance().getAllTemplates())
 			{
 				if (n.getLevel() == lvl1)
-					replyMSG.append("<tr><td><a action=\"bypass -h admin_fight_calculator lvl1 " + lvl1 + " lvl2 " + lvl2 + " mid1 " + n.getNpcId() + " mid2 "
-							+ mid2 + "\">" + n.getName() + "</a></td></tr>");
+					replyMSG.append("<tr><td><a action=\"bypass -h admin_fight_calculator lvl1 " + lvl1 + " lvl2 "
+							+ lvl2 + " mid1 " + n.getNpcId() + " mid2 " + mid2 + "\">" + n.getName() + "</a></td></tr>");
 			}
 			replyMSG.append("</table></body></html>");
 		}
@@ -138,8 +141,8 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			for (L2NpcTemplate n : NpcTable.getInstance().getAllTemplates())
 			{
 				if (n.getLevel() == lvl2)
-					replyMSG.append("<tr><td><a action=\"bypass -h admin_fight_calculator lvl1 " + lvl1 + " lvl2 " + lvl2 + " mid1 " + mid1 + " mid2 "
-							+ n.getNpcId() + "\">" + n.getName() + "</a></td></tr>");
+					replyMSG.append("<tr><td><a action=\"bypass -h admin_fight_calculator lvl1 " + lvl1 + " lvl2 "
+							+ lvl2 + " mid1 " + mid1 + " mid2 " + n.getNpcId() + "\">" + n.getName() + "</a></td></tr>");
 			}
 			replyMSG.append("</table></body></html>");
 		}
@@ -152,26 +155,25 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			replyMSG.append("<tr><td><edit var=\"lvl1\" width=80></td><td><edit var=\"lvl2\" width=80></td></tr>");
 			replyMSG.append("</table>");
 			replyMSG.append("<center><br><br><br>");
-			replyMSG
-					.append("<button value=\"OK\" action=\"bypass -h admin_fight_calculator lvl1 $lvl1 lvl2 $lvl2\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			replyMSG.append("<button value=\"OK\" action=\"bypass -h admin_fight_calculator lvl1 $lvl1 lvl2 $lvl2\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 			replyMSG.append("</center>");
 			replyMSG.append("</body></html>");
 		}
-
+		
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	private void handleShow(String params, L2PcInstance activeChar)
 	{
 		params = params.trim();
-
+		
 		L2Character npc1 = null;
 		L2Character npc2 = null;
 		if (params.length() == 0)
 		{
 			npc1 = activeChar;
-			npc2 = (L2Character) activeChar.getTarget();
+			npc2 = (L2Character)activeChar.getTarget();
 			if (npc2 == null)
 			{
 				activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
@@ -185,11 +187,11 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			StringTokenizer st = new StringTokenizer(params);
 			mid1 = Integer.parseInt(st.nextToken());
 			mid2 = Integer.parseInt(st.nextToken());
-
+			
 			npc1 = new L2MonsterInstance(IdFactory.getInstance().getNextId(), NpcTable.getInstance().getTemplate(mid1));
 			npc2 = new L2MonsterInstance(IdFactory.getInstance().getNextId(), NpcTable.getInstance().getTemplate(mid2));
 		}
-
+		
 		int miss1 = 0;
 		int miss2 = 0;
 		int shld1 = 0;
@@ -202,14 +204,14 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		double pdef2 = 0;
 		double dmg1 = 0;
 		double dmg2 = 0;
-
+		
 		// ATTACK speed in milliseconds
 		int sAtk1 = npc1.calculateTimeBetweenAttacks(npc2, null);
 		int sAtk2 = npc2.calculateTimeBetweenAttacks(npc1, null);
 		// number of ATTACK per 100 seconds
 		sAtk1 = 100000 / sAtk1;
 		sAtk2 = 100000 / sAtk2;
-
+		
 		for (int i = 0; i < 10000; i++)
 		{
 			boolean _miss1 = Formulas.calcHitMiss(npc1, npc2);
@@ -221,14 +223,14 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			boolean _crit1 = Formulas.calcCriticalHit(npc1, npc2);
 			if (_crit1)
 				crit1++;
-
+			
 			double _patk1 = npc1.getPAtk(npc2);
 			_patk1 += Rnd.nextDouble() * npc1.getRandomDamage(npc2);
 			patk1 += _patk1;
-
+			
 			double _pdef1 = npc1.getPDef(npc2);
 			pdef1 += _pdef1;
-
+			
 			if (!_miss1)
 			{
 				npc1.setAttackingBodypart();
@@ -237,7 +239,7 @@ public class AdminFightCalculator implements IAdminCommandHandler
 				npc1.abortAttack();
 			}
 		}
-
+		
 		for (int i = 0; i < 10000; i++)
 		{
 			boolean _miss2 = Formulas.calcHitMiss(npc2, npc1);
@@ -249,14 +251,14 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			boolean _crit2 = Formulas.calcCriticalHit(npc2, npc1);
 			if (_crit2)
 				crit2++;
-
+			
 			double _patk2 = npc2.getPAtk(npc1);
 			_patk2 += Rnd.nextDouble() * npc2.getRandomDamage(npc1);
 			patk2 += _patk2;
-
+			
 			double _pdef2 = npc2.getPDef(npc1);
 			pdef2 += _pdef2;
-
+			
 			if (!_miss2)
 			{
 				npc2.setAttackingBodypart();
@@ -265,7 +267,7 @@ public class AdminFightCalculator implements IAdminCommandHandler
 				npc2.abortAttack();
 			}
 		}
-
+		
 		miss1 /= 100;
 		miss2 /= 100;
 		shld1 /= 100;
@@ -278,19 +280,19 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		pdef2 /= 10000;
 		dmg1 /= 10000;
 		dmg2 /= 10000;
-
+		
 		// total damage per 100 seconds
-		int tdmg1 = (int) (sAtk1 * dmg1);
-		int tdmg2 = (int) (sAtk2 * dmg2);
+		int tdmg1 = (int)(sAtk1 * dmg1);
+		int tdmg2 = (int)(sAtk2 * dmg2);
 		// HP restored per 100 seconds
 		double maxHp1 = npc1.getMaxHp();
-		int hp1 = (int) (Formulas.calcHpRegen(npc1) * 100000 / Formulas.getRegeneratePeriod(npc1));
-
+		int hp1 = (int)(Formulas.calcHpRegen(npc1) * 100000 / Formulas.getRegeneratePeriod(npc1));
+		
 		double maxHp2 = npc2.getMaxHp();
-		int hp2 = (int) (Formulas.calcHpRegen(npc2) * 100000 / Formulas.getRegeneratePeriod(npc2));
-
+		int hp2 = (int)(Formulas.calcHpRegen(npc2) * 100000 / Formulas.getRegeneratePeriod(npc2));
+		
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-
+		
 		TextBuilder replyMSG = new TextBuilder();
 		replyMSG.append("<html><title>Selected mobs to fight</title>");
 		replyMSG.append("<body>");
@@ -301,26 +303,27 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		}
 		else
 		{
-			replyMSG.append("<tr><td width=140>Parameter</td><td width=70>" + ((L2NpcTemplate) npc1.getTemplate()).getName() + "</td><td width=70>"
-					+ ((L2NpcTemplate) npc2.getTemplate()).getName() + "</td></tr>");
+			replyMSG.append("<tr><td width=140>Parameter</td><td width=70>"
+					+ ((L2NpcTemplate)npc1.getTemplate()).getName() + "</td><td width=70>"
+					+ ((L2NpcTemplate)npc2.getTemplate()).getName() + "</td></tr>");
 		}
 		replyMSG.append("<tr><td>miss</td><td>" + miss1 + "%</td><td>" + miss2 + "%</td></tr>");
 		replyMSG.append("<tr><td>shld</td><td>" + shld2 + "%</td><td>" + shld1 + "%</td></tr>");
 		replyMSG.append("<tr><td>crit</td><td>" + crit1 + "%</td><td>" + crit2 + "%</td></tr>");
-		replyMSG.append("<tr><td>pAtk / pDef</td><td>" + ((int) patk1) + " / " + ((int) pdef1) + "</td><td>" + ((int) patk2) + " / " + ((int) pdef2)
-				+ "</td></tr>");
+		replyMSG.append("<tr><td>pAtk / pDef</td><td>" + ((int)patk1) + " / " + ((int)pdef1) + "</td><td>"
+				+ ((int)patk2) + " / " + ((int)pdef2) + "</td></tr>");
 		replyMSG.append("<tr><td>made hits</td><td>" + sAtk1 + "</td><td>" + sAtk2 + "</td></tr>");
-		replyMSG.append("<tr><td>dmg per hit</td><td>" + ((int) dmg1) + "</td><td>" + ((int) dmg2) + "</td></tr>");
+		replyMSG.append("<tr><td>dmg per hit</td><td>" + ((int)dmg1) + "</td><td>" + ((int)dmg2) + "</td></tr>");
 		replyMSG.append("<tr><td>got dmg</td><td>" + tdmg2 + "</td><td>" + tdmg1 + "</td></tr>");
 		replyMSG.append("<tr><td>got regen</td><td>" + hp1 + "</td><td>" + hp2 + "</td></tr>");
-		replyMSG.append("<tr><td>had HP</td><td>" + (int) maxHp1 + "</td><td>" + (int) maxHp2 + "</td></tr>");
+		replyMSG.append("<tr><td>had HP</td><td>" + (int)maxHp1 + "</td><td>" + (int)maxHp2 + "</td></tr>");
 		replyMSG.append("<tr><td>die</td>");
 		if (tdmg2 - hp1 > 1)
-			replyMSG.append("<td>" + (int) (100 * maxHp1 / (tdmg2 - hp1)) + " sec</td>");
+			replyMSG.append("<td>" + (int)(100 * maxHp1 / (tdmg2 - hp1)) + " sec</td>");
 		else
 			replyMSG.append("<td>never</td>");
 		if (tdmg1 - hp2 > 1)
-			replyMSG.append("<td>" + (int) (100 * maxHp2 / (tdmg1 - hp2)) + " sec</td>");
+			replyMSG.append("<td>" + (int)(100 * maxHp2 / (tdmg1 - hp2)) + " sec</td>");
 		else
 			replyMSG.append("<td>never</td>");
 		replyMSG.append("</tr>");
@@ -328,24 +331,25 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		replyMSG.append("<center><br>");
 		if (params.length() == 0)
 		{
-			replyMSG
-					.append("<button value=\"Retry\" action=\"bypass -h admin_fight_calculator_show\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			replyMSG.append("<button value=\"Retry\" action=\"bypass -h admin_fight_calculator_show\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		else
 		{
-			replyMSG.append("<button value=\"Retry\" action=\"bypass -h admin_fight_calculator_show " + ((L2NpcTemplate) npc1.getTemplate()).getNpcId() + " "
-					+ ((L2NpcTemplate) npc2.getTemplate()).getNpcId() + "\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			replyMSG.append("<button value=\"Retry\" action=\"bypass -h admin_fight_calculator_show "
+					+ ((L2NpcTemplate)npc1.getTemplate()).getNpcId() + " "
+					+ ((L2NpcTemplate)npc2.getTemplate()).getNpcId()
+					+ "\"  width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		replyMSG.append("</center>");
 		replyMSG.append("</body></html>");
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
-
+		
 		if (params.length() != 0)
 		{
-			((L2MonsterInstance) npc1).deleteMe();
-			((L2MonsterInstance) npc2).deleteMe();
+			((L2MonsterInstance)npc1).deleteMe();
+			((L2MonsterInstance)npc2).deleteMe();
 		}
 	}
-
+	
 }

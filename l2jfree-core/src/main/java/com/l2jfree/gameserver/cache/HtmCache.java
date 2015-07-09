@@ -26,8 +26,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javolution.util.FastMap;
 
@@ -36,6 +36,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
+import com.l2jfree.L2Config;
 import com.l2jfree.gameserver.network.serverpackets.AbstractNpcHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
 
@@ -46,11 +47,13 @@ public final class HtmCache
 {
 	private static final Log _log = LogFactory.getLog(HtmCache.class);
 	
-	private static final FileFilter HTM_FILTER = new FileFilter() {
-		public boolean accept(File file)
+	private static final FileFilter HTM_FILTER = file -> {
+		if (L2Config.isIDEMode() && file.toURI().getPath().contains("target/classes"))
 		{
-			return file.isDirectory() || file.getName().endsWith(".htm") || file.getName().endsWith(".html");
+			return false;
 		}
+		
+		return file.isDirectory() || file.getName().endsWith(".htm") || file.getName().endsWith(".html");
 	};
 	
 	public static HtmCache getInstance()
@@ -86,7 +89,7 @@ public final class HtmCache
 		}
 		
 		_log.info("Cache[HTML]: Caching started...");
-
+		
 		if (cacheFile.exists())
 		{
 			_log.info("Cache[HTML]: Using cache file...");

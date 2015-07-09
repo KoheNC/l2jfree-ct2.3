@@ -37,9 +37,11 @@ public final class FriendListManager
 {
 	private static final Log _log = LogFactory.getLog(FriendListManager.class);
 	
-	private static final String SELECT_QUERY = "SELECT charId1, charId2 FROM character_friends WHERE charId1=? or charId2=?";
+	private static final String SELECT_QUERY =
+			"SELECT charId1, charId2 FROM character_friends WHERE charId1=? or charId2=?";
 	private static final String INSERT_QUERY = "INSERT INTO character_friends (charId1, charId2) VALUES (?,?)";
-	private static final String DELETE_QUERY = "DELETE FROM character_friends WHERE (charId1=? AND charId2=?) OR (charId1=? AND charId2=?)";
+	private static final String DELETE_QUERY =
+			"DELETE FROM character_friends WHERE (charId1=? AND charId2=?) OR (charId1=? AND charId2=?)";
 	
 	public static FriendListManager getInstance()
 	{
@@ -173,7 +175,7 @@ public final class FriendListManager
 		
 		return true;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

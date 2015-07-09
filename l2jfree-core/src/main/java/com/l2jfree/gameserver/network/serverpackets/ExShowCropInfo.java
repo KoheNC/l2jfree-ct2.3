@@ -31,16 +31,16 @@ import com.l2jfree.gameserver.model.L2Manor;
 
 public class ExShowCropInfo extends L2GameServerPacket
 {
-	private static final String		_S__FE_1C_EXSHOWSEEDINFO	= "[S] FE:1D ExShowCropInfo";
-	private final List<CropProcure>	_crops;
-	private final int						_manorId;
-
+	private static final String _S__FE_1C_EXSHOWSEEDINFO = "[S] FE:1D ExShowCropInfo";
+	private final List<CropProcure> _crops;
+	private final int _manorId;
+	
 	public ExShowCropInfo(int manorId, List<CropProcure> crops)
 	{
 		_manorId = manorId;
 		_crops = crops;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -69,7 +69,7 @@ public class ExShowCropInfo extends L2GameServerPacket
 			writeD(L2Manor.getInstance().getRewardItem(crop.getId(), 2)); // Rewrad 2 Type Item Id
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

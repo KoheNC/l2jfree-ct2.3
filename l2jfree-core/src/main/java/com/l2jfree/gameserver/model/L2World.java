@@ -47,10 +47,10 @@ public final class L2World
 	public static final int SHIFT_BY = 12;
 	
 	/** Map dimensions */
-    public static final int MAP_MIN_X = -327680;
-    public static final int MAP_MAX_X = 229376;
-    public static final int MAP_MIN_Y = -262144;
-    public static final int MAP_MAX_Y = 294912;
+	public static final int MAP_MIN_X = -327680;
+	public static final int MAP_MAX_X = 229376;
+	public static final int MAP_MIN_Y = -262144;
+	public static final int MAP_MAX_Y = 294912;
 	public static final int MAP_MIN_Z = -32768;
 	public static final int MAP_MAX_Z = 32767;
 	
@@ -110,16 +110,18 @@ public final class L2World
 		
 		if (oldObject != null && oldObject != object)
 		{
-			_log.warn("[" + oldObject + "] replaced with [" + object + "] - objId: " + objectId + "!", new IllegalStateException());
+			_log.warn("[" + oldObject + "] replaced with [" + object + "] - objId: " + objectId + "!",
+					new IllegalStateException());
 			if (Config.BAN_DUPLICATE_ITEM_OWNER)
 			{
 				// this does generate a standalone duplicate item!
 				if (object instanceof L2ItemInstance)
 				{
-					L2ItemInstance item = (L2ItemInstance) object;
+					L2ItemInstance item = (L2ItemInstance)object;
 					L2PcInstance player = findPlayer(item.getOwnerId());
 					if (player != null)
-						Util.handleIllegalPlayerAction(player, "Duplicate item detected for " + player, IllegalPlayerAction.PUNISH_KICKBAN);
+						Util.handleIllegalPlayerAction(player, "Duplicate item detected for " + player,
+								IllegalPlayerAction.PUNISH_KICKBAN);
 				}
 			}
 		}
@@ -166,7 +168,7 @@ public final class L2World
 		L2Object obj = _objects.get(objectId);
 		
 		if (obj instanceof L2Character)
-			return (L2Character) obj;
+			return (L2Character)obj;
 		
 		return null;
 	}
@@ -176,7 +178,7 @@ public final class L2World
 		L2Object obj = _objects.get(objectId);
 		
 		if (obj instanceof L2PcInstance)
-			return (L2PcInstance) obj;
+			return (L2PcInstance)obj;
 		
 		return null;
 	}
@@ -239,7 +241,7 @@ public final class L2World
 	public L2PcInstance getPlayer(int objectId)
 	{
 		L2Object object = _objects.get(objectId);
-		return object instanceof L2PcInstance ? (L2PcInstance) object : null;
+		return object instanceof L2PcInstance ? (L2PcInstance)object : null;
 	}
 	
 	/**
@@ -530,7 +532,7 @@ public final class L2World
 		
 		_log.info("All visible NPC's deleted.");
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

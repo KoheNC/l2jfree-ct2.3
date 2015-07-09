@@ -29,7 +29,7 @@ public class CompiledScriptHolder implements Serializable
 	 * Version 1
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private long _lastModified;
 	private long _size;
 	private CompiledScript _compiledScript;
@@ -50,7 +50,7 @@ public class CompiledScriptHolder implements Serializable
 	{
 		this(compiledScript, scriptFile.lastModified(), scriptFile.length());
 	}
-
+	
 	/**
 	 * @return Returns the lastModified.
 	 */
@@ -58,7 +58,7 @@ public class CompiledScriptHolder implements Serializable
 	{
 		return _lastModified;
 	}
-
+	
 	/**
 	 * @param lastModified The lastModified to set.
 	 */
@@ -66,7 +66,7 @@ public class CompiledScriptHolder implements Serializable
 	{
 		_lastModified = lastModified;
 	}
-
+	
 	/**
 	 * @return Returns the size.
 	 */
@@ -74,7 +74,7 @@ public class CompiledScriptHolder implements Serializable
 	{
 		return _size;
 	}
-
+	
 	/**
 	 * @param size The size to set.
 	 */
@@ -82,7 +82,7 @@ public class CompiledScriptHolder implements Serializable
 	{
 		_size = size;
 	}
-
+	
 	/**
 	 * @return Returns the compiledScript.
 	 */
@@ -90,7 +90,7 @@ public class CompiledScriptHolder implements Serializable
 	{
 		return _compiledScript;
 	}
-
+	
 	/**
 	 * @param compiledScript The compiledScript to set.
 	 */

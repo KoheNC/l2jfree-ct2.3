@@ -27,35 +27,35 @@ import com.l2jfree.gameserver.network.serverpackets.AllyCrest;
 public class RequestAllyCrest extends L2GameClientPacket
 {
 	private static final String _C__88_REQUESTALLYCREST = "[C] 88 RequestAllyCrest";
-
+	
 	private int _crestId;
-
+	
 	/**
 	 * packet type id 0x88
 	 * format: cd
 	 */
-    @Override
-    protected void readImpl()
-    {
-        _crestId = readD();
-    }
-
-    @Override
-    protected void runImpl()
+	@Override
+	protected void readImpl()
+	{
+		_crestId = readD();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("allycrestid " + _crestId + " requested");
-
-        byte[] data = CrestCache.getInstance().getAllyCrest(_crestId);
-
+		
+		byte[] data = CrestCache.getInstance().getAllyCrest(_crestId);
+		
 		if (data != null)
 			sendPacket(new AllyCrest(_crestId, data));
 		else if (_log.isDebugEnabled())
 			_log.debug("allycrest is missing:" + _crestId);
-
-        sendPacket(ActionFailed.STATIC_PACKET);
+		
+		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

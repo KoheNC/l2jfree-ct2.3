@@ -26,16 +26,16 @@ import javax.script.ScriptException;
  */
 public abstract class ManagedScript
 {
-	private final File	_scriptFile;
-	private long	_lastLoadTime;
-	private boolean	_isActive;
-
+	private final File _scriptFile;
+	private long _lastLoadTime;
+	private boolean _isActive;
+	
 	public ManagedScript()
 	{
 		_scriptFile = L2ScriptEngineManager.getInstance().getCurrentLoadingScript();
 		setLastLoadTime(System.currentTimeMillis());
 	}
-
+	
 	/**
 	 * Attempts to reload this script and to refresh the necessary bindings with it ScriptControler.<BR>
 	 * Subclasses of this class should override this method to properly refresh their bindings when necessary.
@@ -58,19 +58,19 @@ public abstract class ManagedScript
 			return false;
 		}
 	}
-
+	
 	public abstract boolean unload();
-
+	
 	public void setActive(boolean status)
 	{
 		_isActive = status;
 	}
-
+	
 	public boolean isActive()
 	{
 		return _isActive;
 	}
-
+	
 	/**
 	 * @return Returns the scriptFile.
 	 */
@@ -78,7 +78,7 @@ public abstract class ManagedScript
 	{
 		return _scriptFile;
 	}
-
+	
 	/**
 	 * @param lastLoadTime The lastLoadTime to set.
 	 */
@@ -86,7 +86,7 @@ public abstract class ManagedScript
 	{
 		_lastLoadTime = lastLoadTime;
 	}
-
+	
 	/**
 	 * @return Returns the lastLoadTime.
 	 */
@@ -94,8 +94,8 @@ public abstract class ManagedScript
 	{
 		return _lastLoadTime;
 	}
-
+	
 	public abstract String getScriptName();
-
+	
 	public abstract ScriptManager<?> getScriptManager();
 }

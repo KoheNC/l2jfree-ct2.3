@@ -19,21 +19,21 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class SuperCmdServerStatus extends L2GameClientPacket
 {
 	// currently server acts as opcode is ch?!
-	private static final String	_C__SUPERCMDSERVERSTATUS	= "[C] 4A:02 SuperCmdServerStatus cc";
-
+	private static final String _C__SUPERCMDSERVERSTATUS = "[C] 4A:02 SuperCmdServerStatus cc";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		_log.info("SuperCmdServerStatus received from " + getActiveChar());
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -20,31 +20,31 @@ import com.l2jfree.gameserver.network.serverpackets.ExGetBossRecord;
 
 public class RequestGetBossRecord extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTGETBOSSRECORD	= "[C] D0:40 RequestGetBossRecord ch[d]";
-
+	private static final String _C__REQUESTGETBOSSRECORD = "[C] D0:40 RequestGetBossRecord ch[d]";
+	
 	//private int				_unk;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		/*_unk = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		int points = RaidPointsManager.getPointsByOwnerId(activeChar.getObjectId());
 		int ranking = RaidPointsManager.calculateRanking(activeChar.getObjectId());
-
+		
 		sendPacket(new ExGetBossRecord(ranking, points, RaidPointsManager.getList(activeChar)));
-
+		
 		// no AF here
 	}
-
+	
 	@Override
 	public String getType()
 	{

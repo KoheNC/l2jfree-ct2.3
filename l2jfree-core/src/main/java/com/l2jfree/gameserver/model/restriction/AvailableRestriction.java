@@ -29,15 +29,14 @@ public enum AvailableRestriction
 	PlayerScrollTeleport,
 	PlayerGotoLove,
 	PlayerSummonFriend,
-	PlayerChat()
-	{
+	PlayerChat() {
 		@Override
 		public void activatedOn(L2PcInstance player)
 		{
 			player.sendMessage("You have been chat banned.");
 			player.sendEtcStatusUpdate();
 		}
-
+		
 		@Override
 		public void deactivatedOn(L2PcInstance player)
 		{
@@ -46,25 +45,25 @@ public enum AvailableRestriction
 		}
 	},
 	;
-
+	
 	private AvailableRestriction()
 	{
 	}
-
+	
 	public void activatedOn(L2PcInstance player)
 	{
 	}
-
+	
 	public void deactivatedOn(L2PcInstance player)
 	{
 	}
-
+	
 	public static final AvailableRestriction forName(String name)
 	{
 		for (AvailableRestriction restriction : AvailableRestriction.values())
 			if (restriction.name().equals(name))
 				return restriction;
-
+		
 		return null;
 	}
 }

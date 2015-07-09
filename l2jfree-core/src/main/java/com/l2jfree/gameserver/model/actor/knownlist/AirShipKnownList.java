@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class AirShipKnownList extends CharKnownList
 {
-
+	
 	/**
 	 * @param activeChar
 	 */
@@ -32,7 +32,7 @@ public class AirShipKnownList extends CharKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
@@ -40,7 +40,7 @@ public class AirShipKnownList extends CharKnownList
 			return 0;
 		return 8000;
 	}
-
+	
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{

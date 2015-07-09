@@ -34,38 +34,38 @@ import com.l2jfree.gameserver.network.serverpackets.ExClosePartyRoom;
 public class PartyRoomManager
 {
 	public static final int ENTRIES_PER_PAGE = 64;
-
-	private volatile int						_nextId;
-	private final FastSet<L2PcInstance>			_waitingList;
-	private final FastMap<Integer, L2PartyRoom>	_rooms;
-
+	
+	private volatile int _nextId;
+	private final FastSet<L2PcInstance> _waitingList;
+	private final FastMap<Integer, L2PartyRoom> _rooms;
+	
 	public PartyRoomManager()
 	{
 		_nextId = 1;
 		_waitingList = new FastSet<L2PcInstance>();
 		_rooms = new FastMap<Integer, L2PartyRoom>();
 	}
-
+	
 	public static final PartyRoomManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private final FastSet<L2PcInstance> getWaitingList()
 	{
 		return _waitingList;
 	}
-
+	
 	private final FastMap<Integer, L2PartyRoom> getPartyRooms()
 	{
 		return _rooms;
 	}
-
+	
 	public final L2PartyRoom getPartyRoom(int roomId)
 	{
 		return getPartyRooms().get(roomId);
 	}
-
+	
 	public void addToWaitingList(L2PcInstance player)
 	{
 		if (getWaitingList().add(player))
@@ -74,14 +74,14 @@ public class PartyRoomManager
 			player.broadcastUserInfo();
 		}
 	}
-
+	
 	public void removeFromWaitingList(L2PcInstance player)
 	{
 		getWaitingList().remove(player);
 		player.setLookingForParty(false);
 		player.broadcastUserInfo();
 	}
-
+	
 	public List<L2PcInstance> getWaitingList(int minLevel, int maxLevel)
 	{
 		ArrayList<L2PcInstance> list = new ArrayList<L2PcInstance>();
@@ -90,7 +90,7 @@ public class PartyRoomManager
 				list.add(pc);
 		return list;
 	}
-
+	
 	/**
 	 * Creates a party room without checking conditions. Removes leader from waiting list
 	 * and adds him to the party room.
@@ -111,7 +111,7 @@ public class PartyRoomManager
 		room.setParty(leader.getParty());
 		getPartyRooms().put(room.getId(), room);
 	}
-
+	
 	/**
 	 * Disbands the party room with the given ID, if it exists.
 	 * @param roomId Party Room's ID
@@ -121,14 +121,14 @@ public class PartyRoomManager
 		L2PartyRoom room = getPartyRooms().remove(roomId);
 		if (room == null)
 			return;
-
+		
 		L2Party party = room.getParty();
 		if (party != null)
 		{
 			room.setParty(null);
 			party.setPartyRoom(null);
 		}
-
+		
 		for (L2PcInstance member : room.getMembers())
 		{
 			member.setPartyRoom(null);
@@ -136,19 +136,18 @@ public class PartyRoomManager
 			member.sendPacket(SystemMessageId.PARTY_ROOM_DISBANDED);
 		}
 	}
-
+	
 	public List<L2PartyRoom> getRooms(L2PcInstance player)
 	{
-		return getRooms(player.getPartyMatchingRegion(),
-				MapRegionManager.getInstance().getL2Region(player),
+		return getRooms(player.getPartyMatchingRegion(), MapRegionManager.getInstance().getL2Region(player),
 				player.getPartyMatchingLevelRestriction(), player.getLevel());
 	}
-
+	
 	public List<L2PartyRoom> getRooms(int reqRegion, int curRegion, boolean lvlRestrict, int lvl)
 	{
 		if (reqRegion == -2) // find rooms near player
 			return getRoomsNearby(curRegion, lvlRestrict, lvl);
-
+		
 		ArrayList<L2PartyRoom> list = new ArrayList<L2PartyRoom>();
 		for (L2PartyRoom room : getPartyRooms().values())
 		{
@@ -162,7 +161,7 @@ public class PartyRoomManager
 		}
 		return list;
 	}
-
+	
 	public List<L2PartyRoom> getRoomsNearby(int region, boolean lvlRestrict, int lvl)
 	{
 		ArrayList<L2PartyRoom> list = new ArrayList<L2PartyRoom>();
@@ -175,7 +174,7 @@ public class PartyRoomManager
 		}
 		return list;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

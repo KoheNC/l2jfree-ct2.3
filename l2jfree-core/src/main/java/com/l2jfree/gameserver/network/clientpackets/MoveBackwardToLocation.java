@@ -33,7 +33,7 @@ public final class MoveBackwardToLocation extends L2GameClientPacket
 	private int _originY;
 	private int _originZ;
 	*/
-
+	
 	private int _moveMovement;
 	
 	@Override
@@ -123,7 +123,7 @@ public final class MoveBackwardToLocation extends L2GameClientPacket
 			}
 			
 			activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO,
-				new L2CharPosition(_targetX, _targetY, _targetZ, 0));
+					new L2CharPosition(_targetX, _targetY, _targetZ, 0));
 			sendAF();
 		}
 	}

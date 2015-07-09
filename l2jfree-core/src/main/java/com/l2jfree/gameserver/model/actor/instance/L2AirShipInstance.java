@@ -65,12 +65,13 @@ public final class L2AirShipInstance extends L2Character
 		protected class L2AirShipPoint
 		{
 			public int speed1 = 350;
-//			public int speed2 = 4000;
+			//			public int speed2 = 4000;
 			public int x;
 			public int y;
 			public int z;
 			public int time;
 		}
+		
 		/**
 		 * @param idWaypoint
 
@@ -80,6 +81,7 @@ public final class L2AirShipInstance extends L2Character
 			idWaypoint = pIdWaypoint;
 			loadBoatPath();
 		}
+		
 		/**
 		 * @param line
 		 * @return
@@ -100,6 +102,7 @@ public final class L2AirShipInstance extends L2Character
 				_path.put(i, bp);
 			}
 		}
+		
 		/**
 		 * 
 		 */
@@ -114,8 +117,7 @@ public final class L2AirShipInstance extends L2Character
 				String line = null;
 				while ((line = lnr.readLine()) != null)
 				{
-					if (line.trim().length() == 0
-					        || !line.startsWith(idWaypoint + ";"))
+					if (line.trim().length() == 0 || !line.startsWith(idWaypoint + ";"))
 						continue;
 					parseLine(line);
 					return;
@@ -135,18 +137,18 @@ public final class L2AirShipInstance extends L2Character
 				IOUtils.closeQuietly(lnr);
 			}
 		}
-	
+		
 		/**
 		 * @param state
 		 * @return
 		 */
-        public int state(int state, L2AirShipInstance _boat)
+		public int state(int state, L2AirShipInstance _boat)
 		{
 			if (state < max)
 			{
 				L2AirShipPoint bp = _path.get(state);
 				
-				_boat._easi = new ExMoveToLocationAirShip(L2AirShipInstance.this,bp.x, bp.y, bp.z);
+				_boat._easi = new ExMoveToLocationAirShip(L2AirShipInstance.this, bp.x, bp.y, bp.z);
 				// _boat.getTemplate().baseRunSpd = bp.speed1;
 				boatSpeed = bp.speed1;
 				_boat.moveAirShipToLocation(bp.x, bp.y, bp.z, bp.speed1);
@@ -238,16 +240,15 @@ public final class L2AirShipInstance extends L2Character
 		
 		// Caclulate the Nb of ticks between the current position and the
 		// destination
-		int ticksToMove = (int) (GameTimeController.TICKS_PER_SECOND * distance / speed);
+		int ticksToMove = (int)(GameTimeController.TICKS_PER_SECOND * distance / speed);
 		
 		// Calculate and set the heading of the L2Character
-		int heading = (int) (Math.atan2(-sin, -cos) * 10430.378350470452724949566316381);
+		int heading = (int)(Math.atan2(-sin, -cos) * 10430.378350470452724949566316381);
 		heading += 32768;
 		getPosition().setHeading(heading);
 		
 		if (_log.isDebugEnabled())
-			_log.debug("dist:" + distance + "speed:" + speed + " ttt:"
-			        + ticksToMove + " heading:" + heading);
+			_log.debug("dist:" + distance + "speed:" + speed + " ttt:" + ticksToMove + " heading:" + heading);
 		
 		m._xDestination = x;
 		m._yDestination = y;
@@ -280,11 +281,13 @@ public final class L2AirShipInstance extends L2Character
 			_airShip = instance;
 		}
 		
+		@Override
 		public void run()
 		{
 			_airShip.begin();
 		}
 	}
+	
 	class AirShiprun implements Runnable
 	{
 		private int _state;
@@ -301,6 +304,7 @@ public final class L2AirShipInstance extends L2Character
 			_airShip = instance;
 		}
 		
+		@Override
 		public void run()
 		{
 			_airShip._easi = null;
@@ -310,7 +314,7 @@ public final class L2AirShipInstance extends L2Character
 				if (time == 0)
 				{
 					_airShip._cycle = 2;
-					teleportAirShip(-167874,256731,-509,41035);
+					teleportAirShip(-167874, 256731, -509, 41035);
 					AirShiprun asr = new AirShiprun(0, _airShip);
 					ThreadPoolManager.getInstance().scheduleGeneral(asr, 5000);
 				}
@@ -329,7 +333,7 @@ public final class L2AirShipInstance extends L2Character
 							continue;
 						oustPlayer(player);
 					}
-					airShipControllerShout(32607,true);
+					airShipControllerShout(32607, true);
 					AirShipCaptain asc = new AirShipCaptain(_airShip);
 					ThreadPoolManager.getInstance().scheduleGeneral(asc, 60000);
 				}
@@ -342,10 +346,10 @@ public final class L2AirShipInstance extends L2Character
 				if (time == 0)
 				{
 					_airShip._cycle = 4;
-					teleportAirShip(-157261,255664,221,64781);
+					teleportAirShip(-157261, 255664, 221, 64781);
 					AirShiprun asr = new AirShiprun(0, _airShip);
 					ThreadPoolManager.getInstance().scheduleGeneral(asr, 5000);
-
+					
 				}
 				else
 					_state++;
@@ -362,7 +366,7 @@ public final class L2AirShipInstance extends L2Character
 							continue;
 						oustPlayer(player);
 					}
-					airShipControllerShout(32609,true);
+					airShipControllerShout(32609, true);
 					AirShipCaptain asc = new AirShipCaptain(_airShip);
 					ThreadPoolManager.getInstance().scheduleGeneral(asc, 60000);
 				}
@@ -392,13 +396,15 @@ public final class L2AirShipInstance extends L2Character
 		{
 			case 32607:
 				if (isArraived)
-					message = "The regurarly scheduled airship has arrived. It will depart for the Aden continent in 1 minute. ";
+					message =
+							"The regurarly scheduled airship has arrived. It will depart for the Aden continent in 1 minute. ";
 				else
 					message = "The regurarly scheduled airship that flies to the Aden continent has departed.";
 				break;
 			case 32609:
 				if (isArraived)
-					message = "The regurarly scheduled airship has arrived. It will depart for the Gracia continent in 1 minute. ";
+					message =
+							"The regurarly scheduled airship has arrived. It will depart for the Gracia continent in 1 minute. ";
 				else
 					message = "The regurarly scheduled airship that flies to the Gracia continent has departed.";
 				break;
@@ -413,7 +419,7 @@ public final class L2AirShipInstance extends L2Character
 				asci.broadcastMessage(message);
 			}
 	}
-
+	
 	public ExMoveToLocationAirShip getAirShipInfo()
 	{
 		return _easi;
@@ -421,7 +427,7 @@ public final class L2AirShipInstance extends L2Character
 	
 	public void beginCycle()
 	{
-		AirShipCaptain asc = new AirShipCaptain( this);
+		AirShipCaptain asc = new AirShipCaptain(this);
 		ThreadPoolManager.getInstance().scheduleGeneral(asc, 60000);
 	}
 	
@@ -459,6 +465,7 @@ public final class L2AirShipInstance extends L2Character
 			}
 		}
 	}
+	
 	/**
 	 * @param i
 	 */
@@ -469,14 +476,14 @@ public final class L2AirShipInstance extends L2Character
 		{
 			_cycle = 1;
 			setIsInDock(false);
-			airShipControllerShout(32609,false);
+			airShipControllerShout(32609, false);
 			AirShiprun asr = new AirShiprun(0, this);
 			ThreadPoolManager.getInstance().executeTask(asr);
 		}
 		else if (_cycle == 3)
 		{
 			setIsInDock(false);
-			airShipControllerShout(32607,false);
+			airShipControllerShout(32607, false);
 			AirShiprun asr = new AirShiprun(0, this);
 			ThreadPoolManager.getInstance().executeTask(asr);
 		}
@@ -511,6 +518,7 @@ public final class L2AirShipInstance extends L2Character
 	{
 		_t3 = new L2AirShipTrajet(idWaypoint3);
 	}
+	
 	public void setTrajet4(int idWaypoint4)
 	{
 		_t4 = new L2AirShipTrajet(idWaypoint4);
@@ -520,25 +528,27 @@ public final class L2AirShipInstance extends L2Character
 	{
 		_isInDock = val;
 	}
+	
 	public boolean isInDock()
 	{
 		return _isInDock;
 	}
+	
 	public void onPlayerBoarding(L2PcInstance player)
 	{
 		// cannot board
-		if (!isInDock()	|| _passengers.contains(player))
+		if (!isInDock() || _passengers.contains(player))
 			return;
-			
+		
 		_passengers.add(player);
 		player.setAirShip(this);
 		player.broadcastPacket(new ExGetOnAirShip(player, this));
 		//player.sendPacket(new ExSetCompassZoneCode(ExSetCompassZoneCode.GENERALZONE));
 	}
-
+	
 	public void oustPlayer(L2PcInstance player)
 	{
-		int x,y,z;
+		int x, y, z;
 		if (_cycle == 1 || _cycle == 4)
 		{
 			x = -149379;
@@ -552,11 +562,11 @@ public final class L2AirShipInstance extends L2Character
 			z = 2608;
 		}
 		_passengers.remove(player);
-		player.broadcastPacket(new ExGetOffAirShip(player, this, x ,y ,z));
+		player.broadcastPacket(new ExGetOffAirShip(player, this, x, y, z));
 		player.setAirShip(null);
 	}
 	
-	public void teleportAirShip(int x, int y, int z,int heading)
+	public void teleportAirShip(int x, int y, int z, int heading)
 	{
 		teleToLocation(x, y, z, heading, false);
 		for (L2PcInstance player : _passengers)
@@ -564,40 +574,47 @@ public final class L2AirShipInstance extends L2Character
 			if (player == null)
 				continue;
 			player.sendPacket(new ExStopMoveAirShip(this));
-			player.teleToLocation(x,y,z, heading,false);
+			player.teleToLocation(x, y, z, heading, false);
 			player.sendPacket(new ExAirShipInfo(this));
 		}
 	}
+	
 	@Override
 	public L2ItemInstance getActiveWeaponInstance()
 	{
 		return null;
 	}
+	
 	@Override
 	public L2Weapon getActiveWeaponItem()
 	{
 		return null;
 	}
+	
 	@Override
 	public L2ItemInstance getSecondaryWeaponInstance()
 	{
 		return null;
 	}
+	
 	@Override
 	public L2Weapon getSecondaryWeaponItem()
 	{
 		return null;
 	}
+	
 	@Override
 	public int getLevel()
 	{
 		return 0;
 	}
+	
 	@Override
 	public boolean isAutoAttackable(L2Character attacker)
 	{
 		return false;
 	}
+	
 	@Override
 	protected boolean canReplaceAI()
 	{
@@ -617,15 +634,16 @@ public final class L2AirShipInstance extends L2Character
 		{
 		}*/
 	}
-
-    public int getSpeed1()
-    {
-	    return 300;
-    }
-    public int getSpeed2()
-    {
-	    return 4000;
-    }
+	
+	public int getSpeed1()
+	{
+		return 300;
+	}
+	
+	public int getSpeed2()
+	{
+		return 4000;
+	}
 	
 	@Override
 	public void sendInfo(L2PcInstance activeChar)

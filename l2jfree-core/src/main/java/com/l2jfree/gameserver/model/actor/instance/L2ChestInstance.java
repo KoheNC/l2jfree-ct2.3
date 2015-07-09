@@ -29,7 +29,7 @@ public final class L2ChestInstance extends L2MonsterInstance
 {
 	private volatile boolean _isInteracted;
 	private volatile boolean _specialDrop;
-
+	
 	public L2ChestInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
@@ -37,7 +37,7 @@ public final class L2ChestInstance extends L2MonsterInstance
 		_isInteracted = false;
 		_specialDrop = false;
 	}
-
+	
 	@Override
 	public void onSpawn()
 	{
@@ -46,32 +46,32 @@ public final class L2ChestInstance extends L2MonsterInstance
 		_specialDrop = false;
 		setMustRewardExpSp(true);
 	}
-
+	
 	public synchronized boolean isInteracted()
 	{
 		return _isInteracted;
 	}
-
+	
 	public synchronized void setInteracted()
 	{
 		_isInteracted = true;
 	}
-
+	
 	public synchronized boolean isSpecialDrop()
 	{
 		return _specialDrop;
 	}
-
+	
 	public synchronized void setSpecialDrop()
 	{
 		_specialDrop = true;
 	}
-
+	
 	@Override
 	public void doItemDrop(L2NpcTemplate npcTemplate, L2Character lastAttacker)
 	{
 		int id = getTemplate().getNpcId();
-
+		
 		if (!_specialDrop)
 		{
 			if (id >= 18265 && id <= 18286)
@@ -91,46 +91,63 @@ public final class L2ChestInstance extends L2MonsterInstance
 			else
 				return;
 		}
-		super.doItemDrop(NpcTable.getInstance().getTemplate(id),lastAttacker);
+		super.doItemDrop(NpcTable.getInstance().getTemplate(id), lastAttacker);
 	}
+	
 	// Cast - Trap Chest
 	public void chestTrap(L2Character player)
 	{
 		int trapSkillId = 0;
 		int rnd = Rnd.get(120);
-
+		
 		if (getTemplate().getLevel() >= 61)
 		{
-			if (rnd >= 90) trapSkillId = 4139;//explosion
-			else if (rnd >= 50) trapSkillId = 4118;//area paralysys
-			else if (rnd >= 20) trapSkillId = 1167;//poison cloud
-			else trapSkillId = 223;//sting
+			if (rnd >= 90)
+				trapSkillId = 4139;//explosion
+			else if (rnd >= 50)
+				trapSkillId = 4118;//area paralysys
+			else if (rnd >= 20)
+				trapSkillId = 1167;//poison cloud
+			else
+				trapSkillId = 223;//sting
 		}
 		else if (getTemplate().getLevel() >= 41)
 		{
-			if (rnd >= 90) trapSkillId = 4139;//explosion
-			else if (rnd >= 60) trapSkillId = 96;//bleed
-			else if (rnd >= 20) trapSkillId = 1167;//poison cloud
-			else trapSkillId = 4118;//area paralysys
+			if (rnd >= 90)
+				trapSkillId = 4139;//explosion
+			else if (rnd >= 60)
+				trapSkillId = 96;//bleed
+			else if (rnd >= 20)
+				trapSkillId = 1167;//poison cloud
+			else
+				trapSkillId = 4118;//area paralysys
 		}
 		else if (getTemplate().getLevel() >= 21)
 		{
-			if (rnd >= 80) trapSkillId = 4139;//explosion
-			else if (rnd >= 50) trapSkillId = 96;//bleed
-			else if (rnd >= 20) trapSkillId = 1167;//poison cloud
-			else trapSkillId = 129;//poison
+			if (rnd >= 80)
+				trapSkillId = 4139;//explosion
+			else if (rnd >= 50)
+				trapSkillId = 96;//bleed
+			else if (rnd >= 20)
+				trapSkillId = 1167;//poison cloud
+			else
+				trapSkillId = 129;//poison
 		}
 		else
 		{
-			if (rnd >= 80) trapSkillId = 4139;//explosion
-			else if (rnd >= 50) trapSkillId = 96;//bleed
-			else trapSkillId = 129;//poison
+			if (rnd >= 80)
+				trapSkillId = 4139;//explosion
+			else if (rnd >= 50)
+				trapSkillId = 96;//bleed
+			else
+				trapSkillId = 129;//poison
 		}
-
+		
 		if (player.getActingPlayer() != null)
 			player.getActingPlayer().sendMessage("There was a trap!");
 		handleCast(player, trapSkillId);
 	}
+	
 	//<--
 	//cast casse
 	//<--
@@ -138,33 +155,34 @@ public final class L2ChestInstance extends L2MonsterInstance
 	{
 		int skillLevel = 1;
 		byte lvl = getTemplate().getLevel();
-		if (lvl > 20 && lvl <= 40) skillLevel = 3;
-		else if (lvl > 40 && lvl <= 60) skillLevel = 5;
-		else if (lvl > 60) skillLevel = 6;
-
-		if (player.isDead()
-			|| !player.isVisible()
-			|| !player.isInsideRadius(this, getKnownList().getDistanceToWatchObject(player), false, false))
+		if (lvl > 20 && lvl <= 40)
+			skillLevel = 3;
+		else if (lvl > 40 && lvl <= 60)
+			skillLevel = 5;
+		else if (lvl > 60)
+			skillLevel = 6;
+		
+		if (player.isDead() || !player.isVisible()
+				|| !player.isInsideRadius(this, getKnownList().getDistanceToWatchObject(player), false, false))
 			return false;
-
+		
 		L2Skill skill = SkillTable.getInstance().getInfo(skillId, skillLevel);
-
+		
 		if (player.getFirstEffect(skill) == null)
 		{
 			skill.getEffects(this, player);
-			broadcastPacket(new MagicSkillUse(
-				this, player, skill.getId(), skillLevel, skill.getHitTime(), 0));
+			broadcastPacket(new MagicSkillUse(this, player, skill.getId(), skillLevel, skill.getHitTime(), 0));
 			return true;
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean isMovementDisabled()
 	{
 		return (super.isMovementDisabled() && !isInteracted());
 	}
-
+	
 	@Override
 	public boolean hasRandomAnimation()
 	{

@@ -39,7 +39,7 @@ import com.l2jfree.util.L2FastSet;
  */
 public final class MinionList
 {
-	private final static Log				_log			= LogFactory.getLog(L2MonsterInstance.class);
+	private final static Log _log = LogFactory.getLog(L2MonsterInstance.class);
 	
 	/** List containing the current spawned minions for this L2MonsterInstance */
 	private final Set<L2MinionInstance> minionReferences = new L2FastSet<L2MinionInstance>().setShared(true);
@@ -66,7 +66,7 @@ public final class MinionList
 				count++;
 			}
 		}
-
+		
 		return count;
 	}
 	
@@ -149,7 +149,7 @@ public final class MinionList
 		if (minions == null)
 			return;
 		
-		int minionCount = 0, minionId =	0, minionsToSpawn;
+		int minionCount = 0, minionId = 0, minionsToSpawn;
 		for (L2MinionData minion : minions)
 		{
 			switch (master.getNpcId())
@@ -181,7 +181,7 @@ public final class MinionList
 			}
 		}
 	}
-
+	
 	/**
 	 * Init a Minion and add it in the world as a visible object.<BR><BR>
 	 * 
@@ -199,20 +199,20 @@ public final class MinionList
 	{
 		// Get the template of the Minion to spawn
 		L2NpcTemplate minionTemplate = NpcTable.getInstance().getTemplate(minionid);
-
+		
 		// Create and Init the Minion and generate its Identifier
 		L2MinionInstance monster = new L2MinionInstance(IdFactory.getInstance().getNextId(), minionTemplate);
-
+		
 		if (Config.CHAMPION_MINIONS && master.isChampion())
 			monster.setChampion(true);
-
+		
 		// Set the Minion HP, MP and Heading
 		monster.getStatus().setCurrentHpMp(monster.getMaxHp(), monster.getMaxMp());
 		monster.setHeading(master.getHeading());
-
+		
 		// Set the Minion leader to this RaidBoss
 		monster.setLeader(master);
-
+		
 		//move monster to masters instance
 		monster.setInstanceId(instanceId);
 		
@@ -232,11 +232,12 @@ public final class MinionList
 		if (randPlusMin == 1)
 			spawnConstant *= -1;
 		int newY = master.getY() + Math.round(spawnConstant);
-
+		
 		monster.spawnMe(newX, newY, master.getZ());
-
+		
 		if (_log.isDebugEnabled())
-			_log.debug("Spawned minion template " + minionTemplate.getNpcId() + " with objid: " + monster.getObjectId() + " to boss " + master.getObjectId()
-					+ " ,at: " + monster.getX() + " x, " + monster.getY() + " y, " + monster.getZ() + " z");
+			_log.debug("Spawned minion template " + minionTemplate.getNpcId() + " with objid: " + monster.getObjectId()
+					+ " to boss " + master.getObjectId() + " ,at: " + monster.getX() + " x, " + monster.getY() + " y, "
+					+ monster.getZ() + " z");
 	}
 }

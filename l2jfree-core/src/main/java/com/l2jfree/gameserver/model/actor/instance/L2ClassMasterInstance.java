@@ -42,32 +42,32 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
 		String pom = "";
-
+		
 		if (val == 0)
 			pom = "" + npcId;
 		else
 			pom = npcId + "-" + val;
-
+		
 		return "data/html/classmaster/" + pom + ".htm";
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		if (Config.ALT_L2J_CLASS_MASTER)
 		{
 			super.onAction(player);
 			return;
 		}
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (getObjectId() != player.getTargetId())
 		{
@@ -81,33 +81,33 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 				return;
 			}
-
+			
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 			L2TextBuilder sb = L2TextBuilder.newInstance();
 			sb.append("<html><body>");
 			sb.append(getName() + ":<br>");
 			sb.append("<br>");
-
+			
 			ClassId classId = player.getClassId();
 			int level = player.getLevel();
 			int jobLevel = classId.level();
-
+			
 			int newJobLevel = jobLevel + 1;
-
+			
 			if ((((level >= 20 && jobLevel == 0) || (level >= 40 && jobLevel == 1) || (level >= 76 && jobLevel == 2)) && Config.ALT_CLASS_MASTER_SETTINGS
-					.isAllowed(newJobLevel))
-					|| Config.ALT_CLASS_MASTER_STRIDER_UPDATE)
+					.isAllowed(newJobLevel)) || Config.ALT_CLASS_MASTER_STRIDER_UPDATE)
 			{
 				if (((level >= 20 && jobLevel == 0) || (level >= 40 && jobLevel == 1) || (level >= 76 && jobLevel == 2))
 						&& Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(newJobLevel))
 				{
 					sb.append("You can change your occupation to following:<br>");
-
+					
 					for (ClassId child : ClassId.values())
 						if (child.childOf(classId) && child.level() == newJobLevel)
-							sb.append("<br><a action=\"bypass -h npc_" + getObjectId() + "_change_class " + (child.getId()) + "\"> "
-									+ CharTemplateTable.getClassNameById(child.getId()) + "</a>");
-
+							sb.append("<br><a action=\"bypass -h npc_" + getObjectId() + "_change_class "
+									+ (child.getId()) + "\"> " + CharTemplateTable.getClassNameById(child.getId())
+									+ "</a>");
+					
 					if (Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel) != null
 							&& !Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).isEmpty())
 					{
@@ -116,18 +116,19 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 						for (Integer _itemId : Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).keySet())
 						{
 							int _count = Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).get(_itemId);
-							sb.append("<tr><td><font color=\"LEVEL\">" + _count + "</font></td><td>" + ItemTable.getInstance().getTemplate(_itemId).getName()
-									+ "</td></tr>");
+							sb.append("<tr><td><font color=\"LEVEL\">" + _count + "</font></td><td>"
+									+ ItemTable.getInstance().getTemplate(_itemId).getName() + "</td></tr>");
 						}
 						sb.append("</table>");
 					}
 				}
-
+				
 				if (Config.ALT_CLASS_MASTER_STRIDER_UPDATE)
 				{
 					sb.append("<table width=270>");
 					sb.append("<tr><td><br></td></tr>");
-					sb.append("<tr><td><a action=\"bypass -h npc_" + getObjectId() + "_upgrade_hatchling\">Upgrade Hatchling to Strider</a></td></tr>");
+					sb.append("<tr><td><a action=\"bypass -h npc_" + getObjectId()
+							+ "_upgrade_hatchling\">Upgrade Hatchling to Strider</a></td></tr>");
 					sb.append("</table>");
 				}
 				sb.append("<br>");
@@ -136,76 +137,77 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			{
 				switch (jobLevel)
 				{
-				case 0:
-					if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(1))
-						sb.append("Come back here when you reached level 20 to change your class.<br>");
-					else if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(2))
-						sb.append("Come back after your first occupation change.<br>");
-					else if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(3))
-						sb.append("Come back after your second occupation change.<br>");
-					else
-						sb.append("I can't change your occupation.<br>");
-					break;
-				case 1:
-					if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(2))
-						sb.append("Come back here when you reached level 40 to change your class.<br>");
-					else if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(3))
-						sb.append("Come back after your second occupation change.<br>");
-					else
-						sb.append("I can't change your occupation.<br>");
-					break;
-				case 2:
-					if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(3))
-						sb.append("Come back here when you reached level 76 to change your class.<br>");
-					else
-						sb.append("I can't change your occupation.<br>");
-					break;
-				case 3:
-					sb.append("There is no class change available for you anymore.<br>");
-					break;
+					case 0:
+						if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(1))
+							sb.append("Come back here when you reached level 20 to change your class.<br>");
+						else if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(2))
+							sb.append("Come back after your first occupation change.<br>");
+						else if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(3))
+							sb.append("Come back after your second occupation change.<br>");
+						else
+							sb.append("I can't change your occupation.<br>");
+						break;
+					case 1:
+						if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(2))
+							sb.append("Come back here when you reached level 40 to change your class.<br>");
+						else if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(3))
+							sb.append("Come back after your second occupation change.<br>");
+						else
+							sb.append("I can't change your occupation.<br>");
+						break;
+					case 2:
+						if (Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(3))
+							sb.append("Come back here when you reached level 76 to change your class.<br>");
+						else
+							sb.append("I can't change your occupation.<br>");
+						break;
+					case 3:
+						sb.append("There is no class change available for you anymore.<br>");
+						break;
 				}
 				//If the player hasn't available class , he can change pet too...
 				if (Config.ALT_CLASS_MASTER_STRIDER_UPDATE)
 				{
 					sb.append("<table width=270>");
 					sb.append("<tr><td><br></td></tr>");
-					sb.append("<tr><td><a action=\"bypass -h npc_" + getObjectId() + "_upgrade_hatchling\">Upgrade Hatchling to Strider</a></td></tr>");
+					sb.append("<tr><td><a action=\"bypass -h npc_" + getObjectId()
+							+ "_upgrade_hatchling\">Upgrade Hatchling to Strider</a></td></tr>");
 					sb.append("</table>");
 				}
 				sb.append("<br>");
 			}
-
+			
 			for (Quest q : Quest.findAllEvents())
 				sb.append("Event: <a action=\"bypass -h Quest " + q.getName() + "\">" + q.getDescr() + "</a><br>");
 			sb.append("</body></html>");
 			html.setHtml(sb.moveToString());
 			player.sendPacket(html);
-
+			
 		}
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		if (Config.ALT_L2J_CLASS_MASTER)
 		{
-			if(command.startsWith("1stClass"))
+			if (command.startsWith("1stClass"))
 			{
 				showHtmlMenu(player, getObjectId(), 1);
 			}
-			else if(command.startsWith("2ndClass"))
+			else if (command.startsWith("2ndClass"))
 			{
 				showHtmlMenu(player, getObjectId(), 2);
 			}
-			else if(command.startsWith("3rdClass"))
+			else if (command.startsWith("3rdClass"))
 			{
 				showHtmlMenu(player, getObjectId(), 3);
 			}
-			else if(command.startsWith("change_class"))
+			else if (command.startsWith("change_class"))
 			{
 				int val = Integer.parseInt(command.substring(13));
-
+				
 				if (checkAndChangeClass(player, val))
 				{
 					NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
@@ -220,31 +222,31 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			}
 			return;
 		}
-
+		
 		if (command.startsWith("change_class"))
 		{
 			int val = Integer.parseInt(command.substring(13));
-
+			
 			ClassId classId = player.getClassId();
 			ClassId newClassId = ClassId.values()[val];
-
+			
 			int level = player.getLevel();
 			int jobLevel = classId.level();
 			int newJobLevel = newClassId.level();
-
+			
 			// -- Exploit prevention
 			// Prevents changing if config option disabled
 			if (!Config.ALT_CLASS_MASTER_SETTINGS.isAllowed(newJobLevel))
 				return;
-
+			
 			// Prevents changing to class not in same class tree
 			if (!newClassId.childOf(classId))
 				return;
-
+			
 			// Prevents changing between same level jobs
 			if (newJobLevel != jobLevel + 1)
 				return;
-
+			
 			// Check for player level
 			if (level < 20 && newJobLevel > 1)
 				return;
@@ -253,31 +255,32 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			if (level < 76 && newJobLevel > 3)
 				return;
 			// -- Prevention ends
-
+			
 			if (!checkDestroyAndRewardItems(player, newJobLevel))
 				return;
-
+			
 			changeClass(player, val);
-
+			
 			player.rewardSkills();
-
+			
 			if (newJobLevel == 3)
 				// System sound 3rd occupation
 				player.sendPacket(SystemMessageId.THIRD_CLASS_TRANSFER);
 			else
 				// System sound for 1st and 2nd occupation
 				player.sendPacket(SystemMessageId.CLASS_TRANSFER);
-
+			
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 			L2TextBuilder sb = L2TextBuilder.newInstance();
 			sb.append("<html><body>");
 			sb.append(getName() + ":<br>");
 			sb.append("<br>");
-			sb.append("You have now become a <font color=\"LEVEL\">" + CharTemplateTable.getClassNameById(player.getClassId().getId()) + "</font>.");
+			sb.append("You have now become a <font color=\"LEVEL\">"
+					+ CharTemplateTable.getClassNameById(player.getClassId().getId()) + "</font>.");
 			sb.append("</body></html>");
 			html.setHtml(sb.moveToString());
 			player.sendPacket(html);
-
+			
 			// Update the overloaded status of the L2PcInstance
 			player.refreshOverloaded();
 			// Update the expertise status of the L2PcInstance
@@ -288,7 +291,8 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			boolean canUpgrade = false;
 			if (player.getPet() != null)
 			{
-				if (player.getPet().getNpcId() == 12311 || player.getPet().getNpcId() == 12312 || player.getPet().getNpcId() == 12313)
+				if (player.getPet().getNpcId() == 12311 || player.getPet().getNpcId() == 12312
+						|| player.getPet().getNpcId() == 12313)
 				{
 					if (player.getPet().getLevel() >= 55)
 						canUpgrade = true;
@@ -300,27 +304,25 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			}
 			else
 				player.sendMessage("You have to summon your hatchling if you want to upgrade him.");
-
+			
 			if (!canUpgrade)
 				return;
-
-			int[] hatchCollar =
-			{ 3500, 3501, 3502 };
-			int[] striderCollar =
-			{ 4422, 4423, 4424 };
-
+			
+			int[] hatchCollar = { 3500, 3501, 3502 };
+			int[] striderCollar = { 4422, 4423, 4424 };
+			
 			//TODO: Maybe show a complete list of all hatchlings instead of using first one
 			for (int i = 0; i < 3; i++)
 			{
 				L2ItemInstance collar = player.getInventory().getItemByItemId(hatchCollar[i]);
-
+				
 				if (collar != null)
 				{
 					// Unsummon the hatchling
 					player.getPet().unSummon(player);
 					player.destroyItem("ClassMaster", collar, player, true);
 					player.addItem("ClassMaster", striderCollar[i], 1, player, true, true);
-
+					
 					return;
 				}
 			}
@@ -330,22 +332,22 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			super.onBypassFeedback(player, command);
 		}
 	}
-
+	
 	private void changeClass(L2PcInstance player, int val)
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Changing class to ClassId:" + val);
 		player.setClassId(val);
-
+		
 		if (player.isSubClassActive())
 			player.getSubClasses().get(player.getClassIndex()).setClassId(player.getActiveClass());
 		else
 			player.setBaseClass(player.getActiveClass());
-
+		
 		player.broadcastUserInfo();
 		player.broadcastClassIcon();
 	}
-
+	
 	private static boolean checkDestroyAndRewardItems(L2PcInstance player, int newJobLevel)
 	{
 		// Check if player have all required items for class transfer
@@ -358,36 +360,34 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 				return false;
 			}
 		}
-
+		
 		// Get all required items for class transfer
 		for (Integer _itemId : Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).keySet())
 		{
 			int _count = Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).get(_itemId);
 			player.destroyItemByItemId("ClassMaster", _itemId, _count, player, true);
 		}
-
+		
 		// Reward player with items
 		for (Integer _itemId : Config.ALT_CLASS_MASTER_SETTINGS.getRewardItems(newJobLevel).keySet())
 		{
 			int _count = Config.ALT_CLASS_MASTER_SETTINGS.getRewardItems(newJobLevel).get(_itemId);
 			player.addItem("ClassMaster", _itemId, _count, player, true);
 		}
-
+		
 		return true;
 	}
-
+	
 	// L2JServer CM methods below
-
+	
 	public static final void onTutorialLink(L2PcInstance player, String request)
 	{
-		if (!Config.ALT_CLASS_MASTER_TUTORIAL
-				|| request == null
-				|| !request.startsWith("CO"))
+		if (!Config.ALT_CLASS_MASTER_TUTORIAL || request == null || !request.startsWith("CO"))
 			return;
-
+		
 		if (!FloodProtector.tryPerformAction(player, Protected.SUBCLASS))
 			return;
-
+		
 		try
 		{
 			int val = Integer.parseInt(request.substring(2));
@@ -398,31 +398,31 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 		}
 		player.sendPacket(new TutorialCloseHtml());
 	}
-
+	
 	public static final void onTutorialQuestionMark(L2PcInstance player, int number)
 	{
 		if (!Config.ALT_CLASS_MASTER_TUTORIAL || number != 1001)
 			return;
-
+		
 		showTutorialHtml(player);
 	}
-
+	
 	public static final void showQuestionMark(L2PcInstance player)
 	{
 		if (!Config.ALT_CLASS_MASTER_TUTORIAL)
 			return;
-
+		
 		final ClassId classId = player.getClassId();
 		if (getMinLevel(classId.level()) > player.getLevel())
 			return;
-
+		
 		player.sendPacket(new TutorialShowQuestionMark(1001));
 	}
-
+	
 	private static final void showHtmlMenu(L2PcInstance player, int objectId, int level)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(objectId);
-
+		
 		if (!Config.ALT_L2J_CLASS_MASTER)
 		{
 			html.setFile("data/html/classmaster/disabled.htm");
@@ -451,7 +451,7 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 							menu.append("</a><br>");
 						}
 					}
-
+					
 					if (menu.length() > 0)
 					{
 						html.setFile("data/html/classmaster/template.htm");
@@ -476,23 +476,22 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 				}
 			}
 		}
-
+		
 		html.replace("%objectId%", String.valueOf(objectId));
 		player.sendPacket(html);
 	}
-
+	
 	private static final void showTutorialHtml(L2PcInstance player)
 	{
 		final ClassId currentClassId = player.getClassId();
 		int newJobLevel = currentClassId.level() + 1;
-		if (getMinLevel(currentClassId.level()) > player.getLevel()
-				&& !Config.ALT_CLASS_MASTER_ENTIRE_TREE)
+		if (getMinLevel(currentClassId.level()) > player.getLevel() && !Config.ALT_CLASS_MASTER_ENTIRE_TREE)
 			return;
-
+		
 		String msg = HtmCache.getInstance().getHtm("data/html/classmaster/tutorialtemplate.htm");
-
+		
 		msg = msg.replaceAll("%name%", CharTemplateTable.getClassNameById(currentClassId.getId()));
-
+		
 		final L2TextBuilder menu = L2TextBuilder.newInstance(100);
 		for (ClassId cid : ClassId.values())
 		{
@@ -505,7 +504,7 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 				menu.append("</a><br>");
 			}
 		}
-
+		
 		if (Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel) != null
 				&& !Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).isEmpty())
 		{
@@ -514,41 +513,40 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 			for (Integer _itemId : Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).keySet())
 			{
 				int _count = Config.ALT_CLASS_MASTER_SETTINGS.getRequireItems(newJobLevel).get(_itemId);
-				menu.append("<tr><td><font color=\"LEVEL\">" + _count + "</font></td><td>" + ItemTable.getInstance().getTemplate(_itemId).getName()
-						+ "</td></tr>");
+				menu.append("<tr><td><font color=\"LEVEL\">" + _count + "</font></td><td>"
+						+ ItemTable.getInstance().getTemplate(_itemId).getName() + "</td></tr>");
 			}
 			menu.append("</table><br><br>");
 		}
-
+		
 		msg = msg.replaceAll("%menu%", menu.moveToString());
 		player.sendPacket(new TutorialShowHtml(msg));
 	}
-
+	
 	private static final boolean checkAndChangeClass(L2PcInstance player, int val)
 	{
 		final ClassId currentClassId = player.getClassId();
 		int newJobLevel = currentClassId.level() + 1;
-		if (getMinLevel(currentClassId.level()) > player.getLevel()
-				&& !Config.ALT_CLASS_MASTER_ENTIRE_TREE)
+		if (getMinLevel(currentClassId.level()) > player.getLevel() && !Config.ALT_CLASS_MASTER_ENTIRE_TREE)
 			return false;
-
+		
 		if (!validateClassId(currentClassId, val))
 			return false;
-
+		
 		if (!checkDestroyAndRewardItems(player, newJobLevel))
 			return false;
-
+		
 		player.setClassId(val);
-
+		
 		if (player.isSubClassActive())
 			player.getSubClasses().get(player.getClassIndex()).setClassId(player.getActiveClass());
 		else
 			player.setBaseClass(player.getActiveClass());
-
+		
 		player.broadcastUserInfo();
 		return true;
 	}
-
+	
 	/**
 	 * Returns minimum player level required for next class transfer
 	 * @param level - current skillId level (0 - start, 1 - first, etc)
@@ -567,7 +565,7 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 				return Integer.MAX_VALUE;
 		}
 	}
-
+	
 	/**
 	 * Returns true if class change is possible
 	 * @param oldCID current player ClassId
@@ -586,7 +584,7 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Returns true if class change is possible
 	 * @param oldCID current player ClassId
@@ -597,14 +595,13 @@ public final class L2ClassMasterInstance extends L2NpcInstance
 	{
 		if (newCID == null || newCID.getRace() == null)
 			return false;
-
+		
 		if (oldCID.equals(newCID.getParent()))
 			return true;
-
-		if (Config.ALT_CLASS_MASTER_ENTIRE_TREE
-				&& newCID.childOf(oldCID))
+		
+		if (Config.ALT_CLASS_MASTER_ENTIRE_TREE && newCID.childOf(oldCID))
 			return true;
-
+		
 		return false;
 	}
 }

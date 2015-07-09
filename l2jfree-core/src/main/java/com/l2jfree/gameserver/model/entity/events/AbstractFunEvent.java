@@ -102,7 +102,7 @@ public abstract class AbstractFunEvent
 	 * @throws IllegalStateException if the previous and the expected previous state is different
 	 */
 	protected synchronized void setState(FunEventState expectedPrevState, FunEventState nextState)
-		throws IllegalStateException
+			throws IllegalStateException
 	{
 		final FunEventState prevState = getState();
 		
@@ -190,6 +190,7 @@ public abstract class AbstractFunEvent
 			}
 		}
 		
+		@Override
 		public void run()
 		{
 			synchronized (AbstractFunEvent.this)

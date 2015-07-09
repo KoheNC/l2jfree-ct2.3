@@ -61,12 +61,16 @@ public class CharKnownList extends ObjectKnownList
 	
 	public final boolean knowsObject(L2Object object)
 	{
-		return object != null && (getActiveChar() == object || _knownObjects != null && _knownObjects.containsKey(object.getObjectId()));
+		return object != null
+				&& (getActiveChar() == object || _knownObjects != null
+						&& _knownObjects.containsKey(object.getObjectId()));
 	}
 	
 	public final boolean knowsThePlayer(L2PcInstance player)
 	{
-		return player != null && (getActiveChar() == player || _knownPlayers != null && _knownPlayers.containsKey(player.getObjectId()));
+		return player != null
+				&& (getActiveChar() == player || _knownPlayers != null
+						&& _knownPlayers.containsKey(player.getObjectId()));
 	}
 	
 	@Override
@@ -150,13 +154,13 @@ public class CharKnownList extends ObjectKnownList
 	public Iterable<L2Character> getKnownCharactersInRadius(final int radius)
 	{
 		return L2Collections.filteredIterable(L2Character.class, getKnownObjects().values(),
-			new L2Collections.Filter<L2Character>()
-			{
-				public boolean accept(L2Character obj)
-				{
-					return Util.checkIfInRange(radius, getActiveChar(), obj, true);
-				}
-			});
+				new L2Collections.Filter<L2Character>() {
+					@Override
+					public boolean accept(L2Character obj)
+					{
+						return Util.checkIfInRange(radius, getActiveChar(), obj, true);
+					}
+				});
 	}
 	
 	public final Map<Integer, L2Object> getKnownObjects()
@@ -172,13 +176,13 @@ public class CharKnownList extends ObjectKnownList
 	public final Iterable<L2PcInstance> getKnownPlayersInRadius(final int radius)
 	{
 		return L2Collections.filteredIterable(L2PcInstance.class, getKnownPlayers().values(),
-			new L2Collections.Filter<L2PcInstance>()
-			{
-				public boolean accept(L2PcInstance player)
-				{
-					return Util.checkIfInRange(radius, getActiveChar(), player, true);
-				}
-			});
+				new L2Collections.Filter<L2PcInstance>() {
+					@Override
+					public boolean accept(L2PcInstance player)
+					{
+						return Util.checkIfInRange(radius, getActiveChar(), player, true);
+					}
+				});
 	}
 	
 	@Override

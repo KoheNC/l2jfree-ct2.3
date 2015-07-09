@@ -34,6 +34,7 @@ public class TeleportToLocation extends L2GameServerPacket
 	private final int _y;
 	private final int _z;
 	private final int _heading;
+	
 	/**
 	 * @param _characters
 	 */
@@ -54,13 +55,13 @@ public class TeleportToLocation extends L2GameServerPacket
 		writeD(_x);
 		writeD(_y);
 		writeD(_z);
-		if(Config.PACKET_FINAL)
+		if (Config.PACKET_FINAL)
 		{
 			writeD(0x00); // isValidation ??
 			writeD(_heading); // nYaw
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

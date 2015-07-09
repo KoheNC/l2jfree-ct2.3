@@ -25,11 +25,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExGetOnAirShip extends L2GameServerPacket
 {
-
-	private static final String	_S__FE_63_EXGETONAIRSHIP	= "[S] FE:63 ExGetOnAirShip";
-
-	private final int			_playerId, _airShipId, _x, _y, _z;
-
+	
+	private static final String _S__FE_63_EXGETONAIRSHIP = "[S] FE:63 ExGetOnAirShip";
+	
+	private final int _playerId, _airShipId, _x, _y, _z;
+	
 	public ExGetOnAirShip(L2PcInstance player, L2AirShipInstance ship)
 	{
 		_playerId = player.getObjectId();
@@ -39,20 +39,20 @@ public class ExGetOnAirShip extends L2GameServerPacket
 		_z = ship.getZ();
 		player.getPosition().setXYZ(_x, _y, _z);
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x63);
-
+		
 		writeD(_playerId);
 		writeD(_airShipId);
 		writeD(_x);
 		writeD(_y);
 		writeD(_z);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -39,28 +39,28 @@ public class RequestExSetPledgeCrestLarge extends L2GameClientPacket
 {
 	private static final String _C__D0_11_REQUESTEXSETPLEDGECRESTLARGE = "[C] D0:11 RequestExSetPledgeCrestLarge";
 	private static final int MAX_INSIGNIA_BYTESIZE = 2176;
-
+	
 	private int _size;
 	private byte[] _data;
-
-    @Override
-    protected void readImpl()
-    {
-        _size = readD();
-        if (_size > 0 && _size < MAX_INSIGNIA_BYTESIZE) // client CAN send a RequestExSetPledgeCrestLarge with the size set to 0 then format is just chd
-        {
-            _data = new byte[_size];
-            readB(_data);
-        }
-    }
-
+	
 	@Override
-    protected void runImpl()
+	protected void readImpl()
+	{
+		_size = readD();
+		if (_size > 0 && _size < MAX_INSIGNIA_BYTESIZE) // client CAN send a RequestExSetPledgeCrestLarge with the size set to 0 then format is just chd
+		{
+			_data = new byte[_size];
+			readB(_data);
+		}
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		SystemMessageId fail = null;
 		L2Clan clan = activeChar.getClan();
 		if (!L2Clan.checkPrivileges(activeChar, L2Clan.CP_CL_REGISTER_CREST))
@@ -71,15 +71,15 @@ public class RequestExSetPledgeCrestLarge extends L2GameClientPacket
 			fail = SystemMessageId.CANNOT_SET_CREST_WHILE_DISSOLUTION_IN_PROGRESS;
 		else if (_size > MAX_INSIGNIA_BYTESIZE)
 			fail = SystemMessageId.INVALID_INSIGNIA_FORMAT;
-
+		
 		if (fail != null)
 		{
 			requestFailed(fail);
 			return;
 		}
-
+		
 		CrestCache cc = CrestCache.getInstance();
-
+		
 		if (_data == null)
 		{
 			if (!cc.removePledgeCrestLarge(clan.getCrestId()))
@@ -88,7 +88,7 @@ public class RequestExSetPledgeCrestLarge extends L2GameClientPacket
 				requestFailed(SystemMessageId.FILE_NOT_FOUND);
 				return;
 			}
-
+			
 			clan.setHasCrestLarge(false);
 			sendPacket(SystemMessageId.CLAN_CREST_HAS_BEEN_DELETED);
 			for (L2PcInstance member : clan.getOnlineMembers(0))
@@ -97,50 +97,51 @@ public class RequestExSetPledgeCrestLarge extends L2GameClientPacket
 		else if (clan.getHasCastle() > 0 || clan.getHasHideout() > 0)
 		{
 			int newId = IdFactory.getInstance().getNextId();
-            if (!cc.savePledgeCrestLarge(newId, _data))
-            {
-            	//all lies, the problem is server-side :D
-            	requestFailed(SystemMessageId.INVALID_INSIGNIA_COLOR);
-                return;
-            }
-            else if (clan.hasCrestLarge() && !cc.removePledgeCrestLarge(clan.getCrestId()))
-            {
-            	_log.warn("Error deleting large crest of clan:" + clan.getName());
-    			requestFailed(SystemMessageId.FILE_NOT_FOUND);
-    			return;
-            }
-
-            Connection con = null;
-            try
-            {
-                con = L2DatabaseFactory.getInstance().getConnection(con);
-                PreparedStatement statement = con.prepareStatement("UPDATE clan_data SET crest_large_id = ? WHERE clan_id = ?");
-                statement.setInt(1, newId);
-                statement.setInt(2, clan.getClanId());
-                statement.executeUpdate();
-                statement.close();
-            }
-            catch (SQLException e)
-            {
-                _log.warn("could not update the large crest id:", e);
-            }
-            finally
-            {
-                L2DatabaseFactory.close(con);
-            }
-
-            clan.setCrestLargeId(newId);
-            clan.setHasCrestLarge(true);
-
-            sendPacket(SystemMessageId.CLAN_EMBLEM_WAS_SUCCESSFULLY_REGISTERED);
-            
-            for (L2PcInstance member : clan.getOnlineMembers(0))
-                member.broadcastUserInfo();
+			if (!cc.savePledgeCrestLarge(newId, _data))
+			{
+				//all lies, the problem is server-side :D
+				requestFailed(SystemMessageId.INVALID_INSIGNIA_COLOR);
+				return;
+			}
+			else if (clan.hasCrestLarge() && !cc.removePledgeCrestLarge(clan.getCrestId()))
+			{
+				_log.warn("Error deleting large crest of clan:" + clan.getName());
+				requestFailed(SystemMessageId.FILE_NOT_FOUND);
+				return;
+			}
+			
+			Connection con = null;
+			try
+			{
+				con = L2DatabaseFactory.getInstance().getConnection(con);
+				PreparedStatement statement =
+						con.prepareStatement("UPDATE clan_data SET crest_large_id = ? WHERE clan_id = ?");
+				statement.setInt(1, newId);
+				statement.setInt(2, clan.getClanId());
+				statement.executeUpdate();
+				statement.close();
+			}
+			catch (SQLException e)
+			{
+				_log.warn("could not update the large crest id:", e);
+			}
+			finally
+			{
+				L2DatabaseFactory.close(con);
+			}
+			
+			clan.setCrestLargeId(newId);
+			clan.setHasCrestLarge(true);
+			
+			sendPacket(SystemMessageId.CLAN_EMBLEM_WAS_SUCCESSFULLY_REGISTERED);
+			
+			for (L2PcInstance member : clan.getOnlineMembers(0))
+				member.broadcastUserInfo();
 		}
-
+		
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

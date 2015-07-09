@@ -27,23 +27,24 @@ import com.l2jfree.gameserver.templates.item.L2Weapon;
 public class RequestExRemoveItemAttribute extends L2GameClientPacket
 {
 	private static final String _C__D0_23_REQUESTEXREMOVEITEMATTRIBUTE = "[C] D0:23 RequestExRemoveItemAttribute";
-
+	
 	private int _objectId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
-
+		if (activeChar == null)
+			return;
+		
 		L2ItemInstance targetItem = activeChar.getInventory().getItemByObjectId(_objectId);
-
+		
 		if (targetItem == null || targetItem.getElementals() == null)
 		{
 			requestFailed(SystemMessageId.FAILED_TO_REMOVE_ELEMENTAL_POWER);
@@ -55,7 +56,7 @@ public class RequestExRemoveItemAttribute extends L2GameClientPacket
 			if (targetItem.isEquipped())
 				targetItem.getElementals().removeBonus(activeChar);
 			targetItem.clearElementAttr();
-
+			
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addModifiedItem(targetItem);
 			sendPacket(iu);
@@ -76,7 +77,7 @@ public class RequestExRemoveItemAttribute extends L2GameClientPacket
 			activeChar.broadcastUserInfo();
 			sendPacket(new ExShowBaseAttributeCancelWindow(activeChar));
 		}
-
+		
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	

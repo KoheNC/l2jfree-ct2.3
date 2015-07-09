@@ -36,17 +36,17 @@ import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 
 public class BoatManager
 {
-	private final static Log	_log	= LogFactory.getLog(BoatManager.class);
-
+	private final static Log _log = LogFactory.getLog(BoatManager.class);
+	
 	public static final BoatManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	// =========================================================
 	// Data Field
 	private final Map<Integer, L2BoatInstance> _staticItems = new FastMap<Integer, L2BoatInstance>();
-
+	
 	// =========================================================
 	// Constructor
 	private BoatManager()
@@ -54,7 +54,7 @@ public class BoatManager
 		_log.info("Initializing BoatManager");
 		load();
 	}
-
+	
 	// =========================================================
 	// Method - Private
 	private final void load()
@@ -68,7 +68,7 @@ public class BoatManager
 		{
 			File doorData = new File(Config.DATAPACK_ROOT, "data/boat.csv");
 			lnr = new LineNumberReader(new BufferedReader(new FileReader(doorData)));
-
+			
 			String line = null;
 			while ((line = lnr.readLine()) != null)
 			{
@@ -91,9 +91,12 @@ public class BoatManager
 		{
 			_log.warn("error while creating boat table ", e);
 		}
-		finally { IOUtils.closeQuietly(lnr); }
+		finally
+		{
+			IOUtils.closeQuietly(lnr);
+		}
 	}
-
+	
 	/**
 	 * @param line
 	 * @return
@@ -102,32 +105,32 @@ public class BoatManager
 	{
 		L2BoatInstance boat;
 		StringTokenizer st = new StringTokenizer(line, ";");
-
+		
 		String name = st.nextToken();
 		int id = Integer.parseInt(st.nextToken());
 		int xspawn = Integer.parseInt(st.nextToken());
 		int yspawn = Integer.parseInt(st.nextToken());
 		int zspawn = Integer.parseInt(st.nextToken());
 		int heading = Integer.parseInt(st.nextToken());
-
+		
 		StatsSet npcDat = new StatsSet();
 		npcDat.set("npcId", id);
 		npcDat.set("level", 0);
 		npcDat.set("jClass", "boat");
-
+		
 		npcDat.set("baseSTR", 0);
 		npcDat.set("baseCON", 0);
 		npcDat.set("baseDEX", 0);
 		npcDat.set("baseINT", 0);
 		npcDat.set("baseWIT", 0);
 		npcDat.set("baseMEN", 0);
-
+		
 		npcDat.set("baseShldDef", 0);
 		npcDat.set("baseShldRate", 0);
 		npcDat.set("baseAccCombat", 38);
 		npcDat.set("baseEvasRate", 38);
 		npcDat.set("baseCritRate", 38);
-
+		
 		npcDat.set("collision_radius", 0);
 		npcDat.set("collision_height", 0);
 		npcDat.set("fcollision_radius", 0);
@@ -161,7 +164,7 @@ public class BoatManager
 		boat.getPosition().setXYZ(xspawn, yspawn, zspawn);
 		boat.setId(id);
 		//boat.spawnMe();
-
+		
 		int IdWaypoint1 = Integer.parseInt(st.nextToken());
 		int IdWTicket1 = Integer.parseInt(st.nextToken());
 		int ntx1 = Integer.parseInt(st.nextToken());
@@ -188,7 +191,7 @@ public class BoatManager
 		boat.setTrajet2(IdWaypoint1, IdWTicket1, ntx1, nty1, ntz1, npc1, mess10_1, mess5_1, mess1_1, mess0_1, messb_1);
 		return boat;
 	}
-
+	
 	// =========================================================
 	// Property - Public
 	/**
@@ -199,7 +202,7 @@ public class BoatManager
 	{
 		return _staticItems.get(boatId);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

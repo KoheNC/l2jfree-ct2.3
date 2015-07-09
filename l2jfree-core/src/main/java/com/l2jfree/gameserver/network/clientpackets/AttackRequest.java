@@ -32,49 +32,50 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class AttackRequest extends L2GameClientPacket
 {
 	private static final String _C__ATTACKREQUEST = "[C] 01 AttackRequest c[ddddc]";
-
-    private int _objectId;
-/*
-    private int _originX;
-    private int _originY;
-    private int _originZ;
-    private boolean _shift;
-*/
-
-    @Override
-    protected void readImpl()
-    {
-    	_objectId	= readD();
+	
+	private int _objectId;
+	
+	/*
+	    private int _originX;
+	    private int _originY;
+	    private int _originZ;
+	    private boolean _shift;
+	*/
+	
+	@Override
+	protected void readImpl()
+	{
+		_objectId = readD();
 		/*_originX	= */readD();
 		/*_originY	= */readD();
 		/*_originZ	= */readD();
 		/*_shift	= (readC() == 1);*/readC();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		// prevent target jumping
-		if (activeChar.getLastTargetId() == _objectId &&
-				activeChar.getLastTargetTime() > (System.currentTimeMillis() - Config.RETARGET_BLOCKING_PERIOD))
+		if (activeChar.getLastTargetId() == _objectId
+				&& activeChar.getLastTargetTime() > (System.currentTimeMillis() - Config.RETARGET_BLOCKING_PERIOD))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		// removes spawn protection
 		activeChar.onActionRequest();
-
+		
 		final L2Object target;
 		if (activeChar.getTargetId() == _objectId)
 			target = activeChar.getTarget();
 		else
 			target = L2World.getInstance().findObject(_objectId);
-
+		
 		if (target == null)
 		{
 			sendAF();
@@ -82,31 +83,30 @@ public class AttackRequest extends L2GameClientPacket
 		}
 		else if (target instanceof L2PcInstance)
 		{
-			L2PcInstance tgt = (L2PcInstance) target;
+			L2PcInstance tgt = (L2PcInstance)target;
 			if (tgt.getAppearance().isInvisible() && !activeChar.isGM())
 			{
 				sendAF();
 				return;
 			}
 		}
-
+		
 		if (!activeChar.isSameInstance(target))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (activeChar.getTarget() != target)
 			target.onAction(activeChar);
-		else if ((target.getObjectId() != activeChar.getObjectId())
-				&& activeChar.getPrivateStoreType() == 0
+		else if ((target.getObjectId() != activeChar.getObjectId()) && activeChar.getPrivateStoreType() == 0
 				&& activeChar.getActiveRequester() == null)
 			target.onForcedAttack(activeChar);
-
+		
 		// actually AF is sent after moving to target, just before auto attack starts
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

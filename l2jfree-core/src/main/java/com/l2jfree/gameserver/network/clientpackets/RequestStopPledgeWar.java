@@ -24,16 +24,16 @@ import com.l2jfree.gameserver.taskmanager.AttackStanceTaskManager;
 
 public class RequestStopPledgeWar extends L2GameClientPacket
 {
-	private static final String	_C__4F_REQUESTSTOPPLEDGEWAR	= "[C] 4F RequestStopPledgeWar";
-
-	private String				_pledgeName;
-
+	private static final String _C__4F_REQUESTSTOPPLEDGEWAR = "[C] 4F RequestStopPledgeWar";
+	
+	private String _pledgeName;
+	
 	@Override
 	protected void readImpl()
 	{
 		_pledgeName = readS();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -51,7 +51,7 @@ public class RequestStopPledgeWar extends L2GameClientPacket
 			requestFailed(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
 			return;
 		}
-
+		
 		L2Clan warClan = ClanTable.getInstance().getClanByName(_pledgeName);
 		if (warClan == null)
 		{
@@ -63,7 +63,7 @@ public class RequestStopPledgeWar extends L2GameClientPacket
 			requestFailed(new SystemMessage(SystemMessageId.NO_CLAN_WAR_AGAINST_CLAN_S1).addString(warClan.getName()));
 			return;
 		}
-
+		
 		for (L2ClanMember member : clan.getMembers())
 		{
 			if (member == null || member.getPlayerInstance() == null)
@@ -74,10 +74,10 @@ public class RequestStopPledgeWar extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		//_log.info("RequestStopPledgeWar: By leader: " + playerClan.getLeaderName() + " of clan: "
 		//	+ playerClan.getName() + " to clan: " + _pledgeName);
-
+		
 		//        L2PcInstance leader = L2World.getInstance().getPlayer(clan.getLeaderName());
 		//        if(leader != null && leader.isOnline() == 0)
 		//        {
@@ -85,7 +85,7 @@ public class RequestStopPledgeWar extends L2GameClientPacket
 		//            player.sendPacket(new ActionFailed());
 		//            return;
 		//        }
-
+		
 		//        if (leader.isProcessingRequest())
 		//        {
 		//            SystemMessage sm = new SystemMessage(SystemMessageId.S1_IS_BUSY_TRY_LATER);
@@ -93,14 +93,14 @@ public class RequestStopPledgeWar extends L2GameClientPacket
 		//            player.sendPacket(sm);
 		//            return;
 		//        }
-
+		
 		ClanTable.getInstance().deleteclanswars(clan.getClanId(), warClan.getClanId());
-
+		
 		sendAF();
 		//        player.onTransactionRequest(leader);
 		//        leader.sendPacket(new StopPledgeWar(_clan.getName(),player.getName()));
 	}
-
+	
 	@Override
 	public String getType()
 	{

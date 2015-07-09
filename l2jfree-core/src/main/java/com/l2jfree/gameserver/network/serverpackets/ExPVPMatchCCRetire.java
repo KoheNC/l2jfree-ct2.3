@@ -22,18 +22,18 @@ public class ExPVPMatchCCRetire extends StaticPacket
 {
 	private static final String _S__EXPVPMATCHCCRETIRE = "[S] FE:8B ExPVPMatchCCRetire ch";
 	public static final ExPVPMatchCCRetire PACKET = new ExPVPMatchCCRetire();
-
+	
 	private ExPVPMatchCCRetire()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x8b);
 	}
-
+	
 	@Override
 	public String getType()
 	{

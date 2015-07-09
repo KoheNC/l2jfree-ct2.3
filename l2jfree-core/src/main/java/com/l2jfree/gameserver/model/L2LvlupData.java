@@ -33,7 +33,7 @@ public class L2LvlupData
 	private float _classMpAdd;
 	private float _classMpBase;
 	private float _classMpModifier;
-
+	
 	/**
 	 * @return Returns the _classHpAdd.
 	 */
@@ -42,7 +42,7 @@ public class L2LvlupData
 	{
 		return _classHpAdd;
 	}
-
+	
 	/**
 	 * @param hpAdd The _classHpAdd to set.
 	 */
@@ -50,7 +50,7 @@ public class L2LvlupData
 	{
 		_classHpAdd = hpAdd;
 	}
-
+	
 	/**
 	 * @return Returns the _classHpBase.
 	 */
@@ -59,7 +59,7 @@ public class L2LvlupData
 	{
 		return _classHpBase;
 	}
-
+	
 	/**
 	 * @param hpBase The _classHpBase to set.
 	 */
@@ -67,7 +67,7 @@ public class L2LvlupData
 	{
 		_classHpBase = hpBase;
 	}
-
+	
 	/**
 	 * @return Returns the _classHpModifier.
 	 */
@@ -76,7 +76,7 @@ public class L2LvlupData
 	{
 		return _classHpModifier;
 	}
-
+	
 	/**
 	 * @param hpModifier The _classHpModifier to set.
 	 */
@@ -84,7 +84,7 @@ public class L2LvlupData
 	{
 		_classHpModifier = hpModifier;
 	}
-
+	
 	/**
 	 * @return Returns the _classCpAdd.
 	 */
@@ -93,7 +93,7 @@ public class L2LvlupData
 	{
 		return _classCpAdd;
 	}
-
+	
 	/**
 	 * @param hpAdd The _classCpAdd to set.
 	 */
@@ -101,7 +101,7 @@ public class L2LvlupData
 	{
 		_classCpAdd = cpAdd;
 	}
-
+	
 	/**
 	 * @return Returns the _classCpBase.
 	 */
@@ -110,7 +110,7 @@ public class L2LvlupData
 	{
 		return _classCpBase;
 	}
-
+	
 	/**
 	 * @param hpBase The _classCpBase to set.
 	 */
@@ -118,7 +118,7 @@ public class L2LvlupData
 	{
 		_classCpBase = cpBase;
 	}
-
+	
 	/**
 	 * @return Returns the _classCpModifier.
 	 */
@@ -127,7 +127,7 @@ public class L2LvlupData
 	{
 		return _classCpModifier;
 	}
-
+	
 	/**
 	 * @param cpModifier The _classCpModifier to set.
 	 */
@@ -135,7 +135,7 @@ public class L2LvlupData
 	{
 		_classCpModifier = cpModifier;
 	}
-
+	
 	/**
 	 * @return Returns the _classid.
 	 */
@@ -143,7 +143,7 @@ public class L2LvlupData
 	{
 		return _classid;
 	}
-
+	
 	/**
 	 * @param _classid The _classid to set.
 	 */
@@ -151,7 +151,7 @@ public class L2LvlupData
 	{
 		_classid = pClassid;
 	}
-
+	
 	/**
 	 * @return Returns the _classLvl.
 	 */
@@ -160,7 +160,7 @@ public class L2LvlupData
 	{
 		return _classLvl;
 	}
-
+	
 	/**
 	 * @param lvl The _classLvl to set.
 	 */
@@ -168,7 +168,7 @@ public class L2LvlupData
 	{
 		_classLvl = lvl;
 	}
-
+	
 	/**
 	 * @return Returns the _classMpAdd.
 	 */
@@ -177,7 +177,7 @@ public class L2LvlupData
 	{
 		return _classMpAdd;
 	}
-
+	
 	/**
 	 * @param mpAdd The _classMpAdd to set.
 	 */
@@ -185,7 +185,7 @@ public class L2LvlupData
 	{
 		_classMpAdd = mpAdd;
 	}
-
+	
 	/**
 	 * @return Returns the _classMpBase.
 	 */
@@ -194,7 +194,7 @@ public class L2LvlupData
 	{
 		return _classMpBase;
 	}
-
+	
 	/**
 	 * @param mpBase The _classMpBase to set.
 	 */
@@ -202,7 +202,7 @@ public class L2LvlupData
 	{
 		_classMpBase = mpBase;
 	}
-
+	
 	/**
 	 * @return Returns the _classMpModifier.
 	 */
@@ -211,7 +211,7 @@ public class L2LvlupData
 	{
 		return _classMpModifier;
 	}
-
+	
 	/**
 	 * @param mpModifier The _classMpModifier to set.
 	 */

@@ -18,12 +18,12 @@ public class TutorialShowQuestionMark extends L2GameServerPacket
 {
 	private static final String _S__A7_TUTORIALSHOWQUESTIONMARK = "[S] a7 TutorialShowQuestionMark";
 	private final int _mark;
-
+	
 	public TutorialShowQuestionMark(int mark)
 	{
 		_mark = mark; //this influences the blinking frequancy :S
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -33,7 +33,7 @@ public class TutorialShowQuestionMark extends L2GameServerPacket
 		writeC(0xa7);
 		writeD(_mark);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

@@ -18,8 +18,7 @@ import com.l2jfree.gameserver.model.L2Object;
 
 public abstract class ObjectKnownList
 {
-	private static final ObjectKnownList _instance = new ObjectKnownList()
-	{
+	private static final ObjectKnownList _instance = new ObjectKnownList() {
 		@Override
 		public boolean addKnownObject(L2Object object)
 		{

@@ -26,20 +26,20 @@ public final class RequestHennaRemove extends L2GameClientPacket
 {
 	private static final String _C__BC_RequestHennaRemove = "[C] bc RequestHennaRemove";
 	private int _symbolId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_symbolId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		for (int i = 1; i <= 3; i++)
 		{
 			L2Henna henna = activeChar.getHenna(i);
@@ -51,10 +51,10 @@ public final class RequestHennaRemove extends L2GameClientPacket
 					sendPacket(SystemMessageId.YOU_NOT_ENOUGH_ADENA);
 			}
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

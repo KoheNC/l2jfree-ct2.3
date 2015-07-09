@@ -41,14 +41,14 @@ public class ExCubeGameTeamList extends L2GameServerPacket
 	List<L2PcInstance> _bluePlayers;
 	List<L2PcInstance> _redPlayers;
 	int _roomNumber;
-
+	
 	public ExCubeGameTeamList(List<L2PcInstance> redPlayers, List<L2PcInstance> bluePlayers, int roomNumber)
 	{
 		_redPlayers = redPlayers;
 		_bluePlayers = bluePlayers;
 		_roomNumber = roomNumber - 1;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -75,7 +75,7 @@ public class ExCubeGameTeamList extends L2GameServerPacket
 			writeS(player.getName());
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
@@ -84,5 +84,5 @@ public class ExCubeGameTeamList extends L2GameServerPacket
 	{
 		return _S__FE_97_00_EXCUBEGAMETEAMLIST;
 	}
-
+	
 }

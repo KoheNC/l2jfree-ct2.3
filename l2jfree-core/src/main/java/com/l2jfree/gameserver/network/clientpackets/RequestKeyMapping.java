@@ -20,31 +20,31 @@ package com.l2jfree.gameserver.network.clientpackets;
  */
 public class RequestKeyMapping extends L2GameClientPacket
 {
-
-    /**
-     * @see com.l2jfree.gameserver.clientpackets.L2GameClientPacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return "[C] D0:21 RequestKeyMapping";
-    }
-
-    /**
-     * @see com.l2jfree.gameserver.clientpackets.L2GameClientPacket#readImpl()
-     */
-    @Override
-    protected void readImpl()
-    {
-        // trigger (no data)
-    }
-
-    /**
-     * @see com.l2jfree.gameserver.clientpackets.L2GameClientPacket#runImpl()
-     */
-    @Override
-    protected void runImpl()
-    {
-        // pending
-    }
+	
+	/**
+	 * @see com.l2jfree.gameserver.clientpackets.L2GameClientPacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return "[C] D0:21 RequestKeyMapping";
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.clientpackets.L2GameClientPacket#readImpl()
+	 */
+	@Override
+	protected void readImpl()
+	{
+		// trigger (no data)
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.clientpackets.L2GameClientPacket#runImpl()
+	 */
+	@Override
+	protected void runImpl()
+	{
+		// pending
+	}
 }

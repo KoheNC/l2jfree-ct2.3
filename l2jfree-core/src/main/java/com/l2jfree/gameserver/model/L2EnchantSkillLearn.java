@@ -20,7 +20,6 @@ import javolution.util.FastTable;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * This class ...
  * 
@@ -30,16 +29,16 @@ public final class L2EnchantSkillLearn
 {
 	private final int _id;
 	private final int _baseLvl;
-
+	
 	@SuppressWarnings("unchecked")
 	private List<EnchantSkillDetail>[] _enchantDetails = new FastTable[0];
-
+	
 	public L2EnchantSkillLearn(int id, int baseLvl)
 	{
 		_id = id;
 		_baseLvl = baseLvl;
 	}
-
+	
 	/**
 	 * @return Returns the id.
 	 */
@@ -47,7 +46,7 @@ public final class L2EnchantSkillLearn
 	{
 		return _id;
 	}
-
+	
 	/**
 	 * @return Returns the minLevel.
 	 */
@@ -55,7 +54,7 @@ public final class L2EnchantSkillLearn
 	{
 		return _baseLvl;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public void addEnchantDetail(EnchantSkillDetail esd)
 	{
@@ -65,10 +64,10 @@ public final class L2EnchantSkillLearn
 		{
 			throw new IllegalArgumentException("Skill enchantments should have level higher then 100");
 		}
-
+		
 		if (enchantType >= _enchantDetails.length)
 		{
-			List<EnchantSkillDetail>[] newArray = new FastTable[enchantType+1];
+			List<EnchantSkillDetail>[] newArray = new FastTable[enchantType + 1];
 			System.arraycopy(_enchantDetails, 0, newArray, 0, _enchantDetails.length);
 			_enchantDetails = newArray;
 			_enchantDetails[enchantType] = new FastTable<EnchantSkillDetail>();
@@ -76,12 +75,12 @@ public final class L2EnchantSkillLearn
 		int index = L2EnchantSkillLearn.getEnchantIndex(esd.getLevel());
 		_enchantDetails[enchantType].add(index, esd);
 	}
-
+	
 	public List<EnchantSkillDetail>[] getEnchantRoutes()
 	{
 		return _enchantDetails;
 	}
-
+	
 	public EnchantSkillDetail getEnchantSkillDetail(int level)
 	{
 		int enchantType = L2EnchantSkillLearn.getEnchantType(level);
@@ -96,17 +95,17 @@ public final class L2EnchantSkillLearn
 		}
 		return _enchantDetails[enchantType].get(index);
 	}
-
+	
 	public static int getEnchantIndex(int level)
 	{
 		return (level % 100) - 1;
 	}
-
+	
 	public static int getEnchantType(int level)
 	{
 		return ((level - 1) / 100) - 1;
 	}
-
+	
 	public static class EnchantSkillDetail
 	{
 		private final int _level;
@@ -124,11 +123,8 @@ public final class L2EnchantSkillLearn
 		private final byte _rate84;
 		private final byte _rate85;
 		
-		public EnchantSkillDetail(int lvl, int minSkillLvl, int cost, int exp,
-				byte rate76, byte rate77, byte rate78,
-				byte rate79, byte rate80, byte rate81,
-				byte rate82, byte rate83, byte rate84,
-				byte rate85)
+		public EnchantSkillDetail(int lvl, int minSkillLvl, int cost, int exp, byte rate76, byte rate77, byte rate78,
+				byte rate79, byte rate80, byte rate81, byte rate82, byte rate83, byte rate84, byte rate85)
 		{
 			_level = lvl;
 			_minSkillLevel = minSkillLvl;
@@ -161,7 +157,7 @@ public final class L2EnchantSkillLearn
 		{
 			return _minSkillLevel;
 		}
-
+		
 		/**
 		 * @return Returns the spCost.
 		 */
@@ -174,7 +170,7 @@ public final class L2EnchantSkillLearn
 		{
 			return _exp;
 		}
-
+		
 		public byte getRate(L2PcInstance ply)
 		{
 			byte result;

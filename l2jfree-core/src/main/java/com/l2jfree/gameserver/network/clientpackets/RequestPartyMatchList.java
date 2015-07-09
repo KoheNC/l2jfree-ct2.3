@@ -29,14 +29,14 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class RequestPartyMatchList extends L2GameClientPacket
 {
 	private static final String _C__80_REQUESTPARTYMATCHLIST = "[C] 80 RequestPartyMatchList";
-
+	
 	private int _lootDist;
 	private int _maxMembers;
 	private int _minLevel;
 	private int _maxLevel;
 	private int _roomId;
 	private String _roomTitle;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -47,25 +47,26 @@ public class RequestPartyMatchList extends L2GameClientPacket
 		_lootDist = readD();
 		_roomTitle = readS();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Party party = activeChar.getParty();
 		if (party != null && !party.isLeader(activeChar))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		L2PartyRoom room = activeChar.getPartyRoom();
 		if (room == null)
 		{
-			PartyRoomManager.getInstance().createRoom(activeChar, _minLevel, _maxLevel, _maxMembers, _lootDist, _roomTitle);
+			PartyRoomManager.getInstance().createRoom(activeChar, _minLevel, _maxLevel, _maxMembers, _lootDist,
+					_roomTitle);
 			sendPacket(SystemMessageId.PARTY_ROOM_CREATED);
 		}
 		else if (room.getId() == _roomId)
@@ -78,10 +79,10 @@ public class RequestPartyMatchList extends L2GameClientPacket
 			room.updateRoomStatus(false);
 			room.broadcastPacket(SystemMessageId.PARTY_ROOM_REVISED.getSystemMessage());
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -28,11 +28,11 @@ import com.l2jfree.gameserver.templates.item.L2Item;
  */
 public class RequestUnEquipItem extends L2GameClientPacket
 {
-	private static final String	_C__11_REQUESTUNEQUIPITEM	= "[C] 11 RequestUnequipItem";
-
+	private static final String _C__11_REQUESTUNEQUIPITEM = "[C] 11 RequestUnequipItem";
+	
 	// cd
-	private int					_slot;
-
+	private int _slot;
+	
 	/**
 	 * packet type id 0x11
 	 * format:		cd
@@ -43,53 +43,57 @@ public class RequestUnEquipItem extends L2GameClientPacket
 	{
 		_slot = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (_log.isDebugEnabled())
 			_log.debug("request unequip slot " + _slot);
-
+		
 		if (activeChar.isInEvent(CTFPlayerInfo.class) && activeChar.as(CTFPlayerInfo.class)._haveFlagCTF)
 		{
 			activeChar.sendMessage("You can't unequip a CTF flag.");
 			sendAF();
 			return;
 		}
-
+		
 		L2ItemInstance item = activeChar.getInventory().getPaperdollItemByL2ItemId(_slot);
-		if (item == null || item.isWear() || // Wear-items are not to be unequipped
-				item.getItemId() == 9819 || // Fortress siege combat flags can't be unequipped
+		if (item == null
+				|| item.isWear()
+				|| // Wear-items are not to be unequipped
+				item.getItemId() == 9819
+				|| // Fortress siege combat flags can't be unequipped
 				// Prevent player from unequipping items in special conditions
-				activeChar.isStunned() || activeChar.isSleeping() || activeChar.isParalyzed() || activeChar.isAlikeDead())
+				activeChar.isStunned() || activeChar.isSleeping() || activeChar.isParalyzed()
+				|| activeChar.isAlikeDead())
 		{
 			sendAF();
 			return;
 		}
-
+		
 		// Prevent of unequiping a cursed weapon
 		else if (_slot == L2Item.SLOT_LR_HAND && activeChar.isCursedWeaponEquipped())
 		{
 			sendAF();
 			return;
 		}
-
+		
 		else if (activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow())
 		{
 			requestFailed(SystemMessageId.CANNOT_USE_ITEM_WHILE_USING_MAGIC);
 			return;
 		}
-
+		
 		L2ItemInstance[] unequiped = activeChar.getInventory().unEquipItemInBodySlotAndRecord(_slot);
-
+		
 		for (L2ItemInstance element : unequiped)
 			activeChar.getInventory().updateInventory(element);
 		activeChar.broadcastUserInfo();
-
+		
 		// this can be 0 if the user pressed the right mouse button twice very fast
 		if (unequiped.length > 0)
 		{
@@ -107,10 +111,10 @@ public class RequestUnEquipItem extends L2GameClientPacket
 			}
 			sendPacket(sm);
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

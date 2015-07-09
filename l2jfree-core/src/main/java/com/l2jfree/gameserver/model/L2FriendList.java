@@ -78,14 +78,14 @@ public final class L2FriendList
 			name = CharNameTable.getInstance().getByObjectId(objId);
 			
 			_owner.sendPacket(new SystemMessage(SystemMessageId.C1_HAS_BEEN_DELETED_FROM_YOUR_FRIENDS_LIST)
-				.addString(name));
+					.addString(name));
 			_owner.sendPacket(new FriendList(_owner));
 			
 			L2PcInstance friend = L2World.getInstance().findPlayer(objId);
 			if (friend != null)
 			{
 				friend.sendPacket(new SystemMessage(SystemMessageId.C1_HAS_BEEN_DELETED_FROM_YOUR_FRIENDS_LIST)
-					.addPcName(_owner));
+						.addPcName(_owner));
 				friend.sendPacket(new FriendList(friend));
 			}
 		}

@@ -34,7 +34,7 @@ public class Earthquake extends L2GameServerPacket
 		_intensity = intensity;
 		_duration = duration;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -44,9 +44,9 @@ public class Earthquake extends L2GameServerPacket
 		writeD(_z);
 		writeD(_intensity);
 		writeD(_duration);
-		writeD(0x00);       // Unknown
+		writeD(0x00); // Unknown
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

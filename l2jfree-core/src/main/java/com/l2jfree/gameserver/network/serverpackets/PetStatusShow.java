@@ -26,7 +26,7 @@ public class PetStatusShow extends L2GameServerPacket
 {
 	private static final String _S__C9_PETSTATUSSHOW = "[S] B0 PetStatusShow";
 	private final int _summonType;
-    
+	
 	public PetStatusShow(L2Summon summon)
 	{
 		_summonType = summon.getSummonType();
@@ -38,7 +38,7 @@ public class PetStatusShow extends L2GameServerPacket
 		writeC(0xB1);
 		writeD(_summonType);
 	}
-    
+	
 	@Override
 	public String getType()
 	{

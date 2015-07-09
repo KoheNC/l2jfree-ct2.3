@@ -29,79 +29,79 @@ import com.l2jfree.gameserver.templates.StatsSet;
 public class L2CharTemplate
 {
 	// BaseStats
-	private int		baseSTR;
-	private int		baseCON;
-	private int		baseDEX;
-	private int		baseINT;
-	private int		baseWIT;
-	private int		baseMEN;
-	private float	baseHpMax;
-	private float	baseCpMax;
-	private float	baseMpMax;
-
+	private int baseSTR;
+	private int baseCON;
+	private int baseDEX;
+	private int baseINT;
+	private int baseWIT;
+	private int baseMEN;
+	private float baseHpMax;
+	private float baseCpMax;
+	private float baseMpMax;
+	
 	/** HP Regen base */
-	private float	baseHpReg;
-
+	private float baseHpReg;
+	
 	/** MP Regen base */
-	private float	baseMpReg;
-
-	private int		basePAtk;
-	private int		baseMAtk;
-	private int		basePDef;
-	private int		baseMDef;
-	private int		basePAtkSpd;
-	private int		baseMAtkSpd;
-	private float	baseMReuseRate;
-	private int		baseShldDef;
-	private int		baseAtkRange;
-	private int		baseShldRate;
-	private int		baseCritRate;
-	private int		baseMCritRate;
-	private int		baseRunSpd;
-	private int		baseWalkSpd;
+	private float baseMpReg;
+	
+	private int basePAtk;
+	private int baseMAtk;
+	private int basePDef;
+	private int baseMDef;
+	private int basePAtkSpd;
+	private int baseMAtkSpd;
+	private float baseMReuseRate;
+	private int baseShldDef;
+	private int baseAtkRange;
+	private int baseShldRate;
+	private int baseCritRate;
+	private int baseMCritRate;
+	private int baseRunSpd;
+	private int baseWalkSpd;
 	// SpecialStats
-	private int		baseBreath;
-	private int		baseAggression;
-	private int		baseBleed;
-	private int		basePoison;
-	private int		baseStun;
-	private int		baseRoot;
-	private int		baseMovement;
-	private int		baseConfusion;
-	private int		baseSleep;
-	private int		baseFire;
-	private int		baseWind;
-	private int		baseWater;
-	private int		baseEarth;
-	private int		baseHoly;
-	private int		baseDark;
-
-	private double	baseAggressionVuln;
-	private double	baseBleedVuln;
-	private double	basePoisonVuln;
-	private double	baseStunVuln;
-	private double	baseRootVuln;
-	private double	baseMovementVuln;
-	private double	baseConfusionVuln;
-	private double	baseSleepVuln;
-	private double	baseFireRes;
-	private double	baseWindRes;
-	private double	baseWaterRes;
-	private double	baseEarthRes;
-	private double	baseHolyRes;
-	private double	baseDarkRes;
-	private double	baseCritVuln;
-
-	private double	baseCancelVuln;
-
-	private boolean	isUndead;
-
-	private int		baseMpConsumeRate;
-	private int		baseHpConsumeRate;
-
-	protected double	collisionRadius;
-	protected double	collisionHeight;
-
+	private int baseBreath;
+	private int baseAggression;
+	private int baseBleed;
+	private int basePoison;
+	private int baseStun;
+	private int baseRoot;
+	private int baseMovement;
+	private int baseConfusion;
+	private int baseSleep;
+	private int baseFire;
+	private int baseWind;
+	private int baseWater;
+	private int baseEarth;
+	private int baseHoly;
+	private int baseDark;
+	
+	private double baseAggressionVuln;
+	private double baseBleedVuln;
+	private double basePoisonVuln;
+	private double baseStunVuln;
+	private double baseRootVuln;
+	private double baseMovementVuln;
+	private double baseConfusionVuln;
+	private double baseSleepVuln;
+	private double baseFireRes;
+	private double baseWindRes;
+	private double baseWaterRes;
+	private double baseEarthRes;
+	private double baseHolyRes;
+	private double baseDarkRes;
+	private double baseCritVuln;
+	
+	private double baseCancelVuln;
+	
+	private boolean isUndead;
+	
+	private int baseMpConsumeRate;
+	private int baseHpConsumeRate;
+	
+	protected double collisionRadius;
+	protected double collisionHeight;
+	
 	/**
 	 * Empty constructor (we have to use setter to initialize the object).
 	 * 
@@ -112,7 +112,7 @@ public class L2CharTemplate
 	public L2CharTemplate()
 	{
 	}
-
+	
 	public L2CharTemplate(StatsSet set)
 	{
 		// Base stats
@@ -141,7 +141,7 @@ public class L2CharTemplate
 		baseMCritRate = set.getInteger("baseMCritRate", 80);
 		baseRunSpd = set.getInteger("baseRunSpd");
 		baseWalkSpd = set.getInteger("baseWalkSpd");
-
+		
 		// SpecialStats
 		baseBreath = set.getInteger("baseBreath", 100);
 		baseAggression = set.getInteger("baseAggression", 0);
@@ -174,18 +174,18 @@ public class L2CharTemplate
 		baseDarkRes = set.getInteger("baseDarkRes", 0);
 		baseCritVuln = set.getInteger("baseCritVuln", 1);
 		baseCancelVuln = set.getInteger("baseCancelVuln", 1);
-
+		
 		isUndead = (set.getInteger("isUndead", 0) == 1);
-
+		
 		//C4 Stats
 		baseMpConsumeRate = set.getInteger("baseMpConsumeRate", 0);
 		baseHpConsumeRate = set.getInteger("baseHpConsumeRate", 0);
-
+		
 		// Geometry
 		collisionRadius = set.getDouble("collision_radius");
 		collisionHeight = set.getDouble("collision_height");
 	}
-
+	
 	/**
 	 * @return the baseAggression
 	 */
@@ -193,7 +193,7 @@ public class L2CharTemplate
 	{
 		return baseAggression;
 	}
-
+	
 	/**
 	 * @param baseAggression the baseAggression to set
 	 */
@@ -201,7 +201,7 @@ public class L2CharTemplate
 	{
 		baseAggression = _baseAggression;
 	}
-
+	
 	/**
 	 * @return the baseAggressionRes
 	 */
@@ -209,7 +209,7 @@ public class L2CharTemplate
 	{
 		return baseAggressionVuln;
 	}
-
+	
 	/**
 	 * @param baseAggressionRes the baseAggressionRes to set
 	 */
@@ -217,7 +217,7 @@ public class L2CharTemplate
 	{
 		baseAggressionVuln = _baseAggressionVuln;
 	}
-
+	
 	/**
 	 * @return the baseAtkRange
 	 */
@@ -225,7 +225,7 @@ public class L2CharTemplate
 	{
 		return baseAtkRange;
 	}
-
+	
 	/**
 	 * @param baseAtkRange the baseAtkRange to set
 	 */
@@ -233,7 +233,7 @@ public class L2CharTemplate
 	{
 		baseAtkRange = _baseAtkRange;
 	}
-
+	
 	/**
 	 * @return the baseBleed
 	 */
@@ -241,7 +241,7 @@ public class L2CharTemplate
 	{
 		return baseBleed;
 	}
-
+	
 	/**
 	 * @param baseBleed the baseBleed to set
 	 */
@@ -249,7 +249,7 @@ public class L2CharTemplate
 	{
 		baseBleed = _baseBleed;
 	}
-
+	
 	/**
 	 * @return the baseBleedRes
 	 */
@@ -257,7 +257,7 @@ public class L2CharTemplate
 	{
 		return baseBleedVuln;
 	}
-
+	
 	/**
 	 * @param baseBleedRes the baseBleedRes to set
 	 */
@@ -265,7 +265,7 @@ public class L2CharTemplate
 	{
 		baseBleedVuln = _baseBleedVuln;
 	}
-
+	
 	/**
 	 * @return the baseBreath
 	 */
@@ -273,7 +273,7 @@ public class L2CharTemplate
 	{
 		return baseBreath == 0 ? 100 : baseBreath;
 	}
-
+	
 	/**
 	 * @param baseBreath the baseBreath to set
 	 */
@@ -281,7 +281,7 @@ public class L2CharTemplate
 	{
 		baseBreath = _baseBreath;
 	}
-
+	
 	/**
 	 * @return the baseCON
 	 */
@@ -289,7 +289,7 @@ public class L2CharTemplate
 	{
 		return baseCON;
 	}
-
+	
 	/**
 	 * @param baseCON the baseCON to set
 	 */
@@ -297,7 +297,7 @@ public class L2CharTemplate
 	{
 		baseCON = _baseCON;
 	}
-
+	
 	/**
 	 * @return the baseConfusion
 	 */
@@ -305,7 +305,7 @@ public class L2CharTemplate
 	{
 		return baseConfusion;
 	}
-
+	
 	/**
 	 * @param baseConfusion the baseConfusion to set
 	 */
@@ -313,7 +313,7 @@ public class L2CharTemplate
 	{
 		baseConfusion = _baseConfusion;
 	}
-
+	
 	/**
 	 * @return the baseConfusionRes
 	 */
@@ -321,7 +321,7 @@ public class L2CharTemplate
 	{
 		return baseConfusionVuln;
 	}
-
+	
 	/**
 	 * @param baseConfusionRes the baseConfusionRes to set
 	 */
@@ -329,7 +329,7 @@ public class L2CharTemplate
 	{
 		baseConfusionVuln = _baseConfusionVuln;
 	}
-
+	
 	/**
 	 * @return the baseCpMax
 	 */
@@ -337,7 +337,7 @@ public class L2CharTemplate
 	{
 		return baseCpMax;
 	}
-
+	
 	/**
 	 * @param baseCpMax the baseCpMax to set
 	 */
@@ -345,7 +345,7 @@ public class L2CharTemplate
 	{
 		baseCpMax = _baseCpMax;
 	}
-
+	
 	/**
 	 * @return the baseCritRate
 	 */
@@ -353,7 +353,7 @@ public class L2CharTemplate
 	{
 		return baseCritRate;
 	}
-
+	
 	/**
 	 * @param baseCritRate the baseCritRate to set
 	 */
@@ -361,7 +361,7 @@ public class L2CharTemplate
 	{
 		baseCritRate = _baseCritRate;
 	}
-
+	
 	/**
 	 * @return the baseMCritRate
 	 */
@@ -369,7 +369,7 @@ public class L2CharTemplate
 	{
 		return baseMCritRate;
 	}
-
+	
 	/**
 	 * @param baseMCritRate the baseMCritRate to set
 	 */
@@ -377,7 +377,7 @@ public class L2CharTemplate
 	{
 		baseMCritRate = _baseMCritRate;
 	}
-
+	
 	/**
 	 * @return the baseDark
 	 */
@@ -385,7 +385,7 @@ public class L2CharTemplate
 	{
 		return baseDark;
 	}
-
+	
 	/**
 	 * @param baseDark the baseDark to set
 	 */
@@ -393,7 +393,7 @@ public class L2CharTemplate
 	{
 		baseDark = _baseDark;
 	}
-
+	
 	/**
 	 * @return the baseDarkRes
 	 */
@@ -401,7 +401,7 @@ public class L2CharTemplate
 	{
 		return baseDarkRes;
 	}
-
+	
 	/**
 	 * @param baseDarkRes the baseDarkRes to set
 	 */
@@ -409,7 +409,7 @@ public class L2CharTemplate
 	{
 		baseDarkRes = _baseDarkRes;
 	}
-
+	
 	/**
 	 * @return the baseDEX
 	 */
@@ -417,7 +417,7 @@ public class L2CharTemplate
 	{
 		return baseDEX;
 	}
-
+	
 	/**
 	 * @param baseDEX the baseDEX to set
 	 */
@@ -425,7 +425,7 @@ public class L2CharTemplate
 	{
 		baseDEX = _baseDEX;
 	}
-
+	
 	/**
 	 * @return the baseEarth
 	 */
@@ -433,7 +433,7 @@ public class L2CharTemplate
 	{
 		return baseEarth;
 	}
-
+	
 	/**
 	 * @param baseEarth the baseEarth to set
 	 */
@@ -441,7 +441,7 @@ public class L2CharTemplate
 	{
 		baseEarth = _baseEarth;
 	}
-
+	
 	/**
 	 * @return the baseEarthRes
 	 */
@@ -449,7 +449,7 @@ public class L2CharTemplate
 	{
 		return baseEarthRes;
 	}
-
+	
 	/**
 	 * @param baseEarthRes the baseEarthRes to set
 	 */
@@ -457,7 +457,7 @@ public class L2CharTemplate
 	{
 		baseEarthRes = _baseEarthRes;
 	}
-
+	
 	/**
 	 * @return the baseFire
 	 */
@@ -465,7 +465,7 @@ public class L2CharTemplate
 	{
 		return baseFire;
 	}
-
+	
 	/**
 	 * @param baseFire the baseFire to set
 	 */
@@ -473,7 +473,7 @@ public class L2CharTemplate
 	{
 		baseFire = _baseFire;
 	}
-
+	
 	/**
 	 * @return the baseFireRes
 	 */
@@ -481,7 +481,7 @@ public class L2CharTemplate
 	{
 		return baseFireRes;
 	}
-
+	
 	/**
 	 * @param baseFireRes the baseFireRes to set
 	 */
@@ -489,7 +489,7 @@ public class L2CharTemplate
 	{
 		baseFireRes = _baseFireRes;
 	}
-
+	
 	/**
 	 * @return the baseHoly
 	 */
@@ -497,7 +497,7 @@ public class L2CharTemplate
 	{
 		return baseHoly;
 	}
-
+	
 	/**
 	 * @param baseHoly the baseHoly to set
 	 */
@@ -505,7 +505,7 @@ public class L2CharTemplate
 	{
 		baseHoly = _baseHoly;
 	}
-
+	
 	/**
 	 * @return the baseHolyRes
 	 */
@@ -513,7 +513,7 @@ public class L2CharTemplate
 	{
 		return baseHolyRes;
 	}
-
+	
 	/**
 	 * @param baseHolyRes the baseHolyRes to set
 	 */
@@ -521,7 +521,7 @@ public class L2CharTemplate
 	{
 		baseHolyRes = _baseHolyRes;
 	}
-
+	
 	/**
 	 * @return the baseHpConsumeRate
 	 */
@@ -529,7 +529,7 @@ public class L2CharTemplate
 	{
 		return baseHpConsumeRate;
 	}
-
+	
 	/**
 	 * @param baseHpConsumeRate the baseHpConsumeRate to set
 	 */
@@ -537,7 +537,7 @@ public class L2CharTemplate
 	{
 		baseHpConsumeRate = _baseHpConsumeRate;
 	}
-
+	
 	/**
 	 * @return the baseHpMax
 	 */
@@ -545,7 +545,7 @@ public class L2CharTemplate
 	{
 		return baseHpMax;
 	}
-
+	
 	/**
 	 * @param baseHpMax the baseHpMax to set
 	 */
@@ -553,7 +553,7 @@ public class L2CharTemplate
 	{
 		baseHpMax = _baseHpMax;
 	}
-
+	
 	/**
 	 * @return the baseHpReg
 	 */
@@ -561,7 +561,7 @@ public class L2CharTemplate
 	{
 		return baseHpReg;
 	}
-
+	
 	/**
 	 * @param baseHpReg the baseHpReg to set
 	 */
@@ -569,7 +569,7 @@ public class L2CharTemplate
 	{
 		baseHpReg = _baseHpReg;
 	}
-
+	
 	/**
 	 * @return the baseINT
 	 */
@@ -577,7 +577,7 @@ public class L2CharTemplate
 	{
 		return baseINT;
 	}
-
+	
 	/**
 	 * @param baseINT the baseINT to set
 	 */
@@ -585,7 +585,7 @@ public class L2CharTemplate
 	{
 		baseINT = _baseINT;
 	}
-
+	
 	/**
 	 * @return the baseMAtk
 	 */
@@ -593,7 +593,7 @@ public class L2CharTemplate
 	{
 		return baseMAtk;
 	}
-
+	
 	/**
 	 * @param baseMAtk the baseMAtk to set
 	 */
@@ -601,7 +601,7 @@ public class L2CharTemplate
 	{
 		baseMAtk = _baseMAtk;
 	}
-
+	
 	/**
 	 * @return the baseMAtkSpd
 	 */
@@ -609,7 +609,7 @@ public class L2CharTemplate
 	{
 		return baseMAtkSpd;
 	}
-
+	
 	/**
 	 * @param baseMAtkSpd the baseMAtkSpd to set
 	 */
@@ -617,7 +617,7 @@ public class L2CharTemplate
 	{
 		baseMAtkSpd = _baseMAtkSpd;
 	}
-
+	
 	/**
 	 * @return the baseMDef
 	 */
@@ -625,7 +625,7 @@ public class L2CharTemplate
 	{
 		return baseMDef;
 	}
-
+	
 	/**
 	 * @param baseMDef the baseMDef to set
 	 */
@@ -633,7 +633,7 @@ public class L2CharTemplate
 	{
 		baseMDef = _baseMDef;
 	}
-
+	
 	/**
 	 * @return the baseMEN
 	 */
@@ -641,7 +641,7 @@ public class L2CharTemplate
 	{
 		return baseMEN;
 	}
-
+	
 	/**
 	 * @param baseMEN the baseMEN to set
 	 */
@@ -649,7 +649,7 @@ public class L2CharTemplate
 	{
 		baseMEN = _baseMEN;
 	}
-
+	
 	/**
 	 * @return the baseMovement
 	 */
@@ -657,7 +657,7 @@ public class L2CharTemplate
 	{
 		return baseMovement;
 	}
-
+	
 	/**
 	 * @param baseMovement the baseMovement to set
 	 */
@@ -665,7 +665,7 @@ public class L2CharTemplate
 	{
 		baseMovement = _baseMovement;
 	}
-
+	
 	/**
 	 * @return the baseMovementRes
 	 */
@@ -673,7 +673,7 @@ public class L2CharTemplate
 	{
 		return baseMovementVuln;
 	}
-
+	
 	/**
 	 * @param baseMovementRes the baseMovementRes to set
 	 */
@@ -681,7 +681,7 @@ public class L2CharTemplate
 	{
 		baseMovementVuln = _baseMovementVuln;
 	}
-
+	
 	/**
 	 * @return the baseMpConsumeRate
 	 */
@@ -689,7 +689,7 @@ public class L2CharTemplate
 	{
 		return baseMpConsumeRate;
 	}
-
+	
 	/**
 	 * @param baseMpConsumeRate the baseMpConsumeRate to set
 	 */
@@ -697,7 +697,7 @@ public class L2CharTemplate
 	{
 		baseMpConsumeRate = _baseMpConsumeRate;
 	}
-
+	
 	/**
 	 * @return the baseMpMax
 	 */
@@ -705,7 +705,7 @@ public class L2CharTemplate
 	{
 		return baseMpMax;
 	}
-
+	
 	/**
 	 * @param baseMpMax the baseMpMax to set
 	 */
@@ -713,7 +713,7 @@ public class L2CharTemplate
 	{
 		baseMpMax = _baseMpMax;
 	}
-
+	
 	/**
 	 * @return the baseMpReg
 	 */
@@ -721,7 +721,7 @@ public class L2CharTemplate
 	{
 		return baseMpReg;
 	}
-
+	
 	/**
 	 * @param baseMpReg the baseMpReg to set
 	 */
@@ -729,7 +729,7 @@ public class L2CharTemplate
 	{
 		baseMpReg = _baseMpReg;
 	}
-
+	
 	/**
 	 * @return the baseMReuseRate
 	 */
@@ -737,7 +737,7 @@ public class L2CharTemplate
 	{
 		return baseMReuseRate == 0.f ? 1.f : baseMReuseRate;
 	}
-
+	
 	/**
 	 * @param baseMReuseRate the baseMReuseRate to set
 	 */
@@ -745,7 +745,7 @@ public class L2CharTemplate
 	{
 		baseMReuseRate = _baseMReuseRate;
 	}
-
+	
 	/**
 	 * @return the basePAtk
 	 */
@@ -753,7 +753,7 @@ public class L2CharTemplate
 	{
 		return basePAtk;
 	}
-
+	
 	/**
 	 * @param basePAtk the basePAtk to set
 	 */
@@ -761,7 +761,7 @@ public class L2CharTemplate
 	{
 		basePAtk = _basePAtk;
 	}
-
+	
 	/**
 	 * @return the basePAtkSpd
 	 */
@@ -769,7 +769,7 @@ public class L2CharTemplate
 	{
 		return basePAtkSpd;
 	}
-
+	
 	/**
 	 * @param basePAtkSpd the basePAtkSpd to set
 	 */
@@ -777,7 +777,7 @@ public class L2CharTemplate
 	{
 		basePAtkSpd = _basePAtkSpd;
 	}
-
+	
 	/**
 	 * @return the basePDef
 	 */
@@ -785,7 +785,7 @@ public class L2CharTemplate
 	{
 		return basePDef;
 	}
-
+	
 	/**
 	 * @param basePDef the basePDef to set
 	 */
@@ -793,7 +793,7 @@ public class L2CharTemplate
 	{
 		basePDef = _basePDef;
 	}
-
+	
 	/**
 	 * @return the basePoison
 	 */
@@ -801,7 +801,7 @@ public class L2CharTemplate
 	{
 		return basePoison;
 	}
-
+	
 	/**
 	 * @param basePoison the basePoison to set
 	 */
@@ -809,7 +809,7 @@ public class L2CharTemplate
 	{
 		basePoison = _basePoison;
 	}
-
+	
 	/**
 	 * @return the basePoisonRes
 	 */
@@ -817,7 +817,7 @@ public class L2CharTemplate
 	{
 		return basePoisonVuln;
 	}
-
+	
 	/**
 	 * @param basePoisonRes the basePoisonRes to set
 	 */
@@ -825,7 +825,7 @@ public class L2CharTemplate
 	{
 		basePoisonVuln = _basePoisonVuln;
 	}
-
+	
 	/**
 	 * @return the baseRoot
 	 */
@@ -833,7 +833,7 @@ public class L2CharTemplate
 	{
 		return baseRoot;
 	}
-
+	
 	/**
 	 * @param baseRoot the baseRoot to set
 	 */
@@ -841,7 +841,7 @@ public class L2CharTemplate
 	{
 		baseRoot = _baseRoot;
 	}
-
+	
 	/**
 	 * @return the baseRootRes
 	 */
@@ -849,7 +849,7 @@ public class L2CharTemplate
 	{
 		return baseRootVuln;
 	}
-
+	
 	/**
 	 * @param baseRootRes the baseRootRes to set
 	 */
@@ -857,7 +857,7 @@ public class L2CharTemplate
 	{
 		baseRootVuln = _baseRootVuln;
 	}
-
+	
 	/**
 	 * @return the baseRunSpd
 	 */
@@ -865,7 +865,7 @@ public class L2CharTemplate
 	{
 		return baseRunSpd;
 	}
-
+	
 	/**
 	 * @return the baseWalkSpd
 	 */
@@ -873,7 +873,7 @@ public class L2CharTemplate
 	{
 		return baseWalkSpd;
 	}
-
+	
 	/**
 	 * @param baseRunSpd the baseRunSpd to set
 	 */
@@ -881,7 +881,7 @@ public class L2CharTemplate
 	{
 		baseRunSpd = _baseRunSpd;
 	}
-
+	
 	/**
 	 * @return the baseShldDef
 	 */
@@ -889,7 +889,7 @@ public class L2CharTemplate
 	{
 		return baseShldDef;
 	}
-
+	
 	/**
 	 * @param baseShldDef the baseShldDef to set
 	 */
@@ -897,7 +897,7 @@ public class L2CharTemplate
 	{
 		baseShldDef = _baseShldDef;
 	}
-
+	
 	/**
 	 * @return the baseShldRate
 	 */
@@ -905,7 +905,7 @@ public class L2CharTemplate
 	{
 		return baseShldRate;
 	}
-
+	
 	/**
 	 * @param baseShldRate the baseShldRate to set
 	 */
@@ -913,7 +913,7 @@ public class L2CharTemplate
 	{
 		baseShldRate = _baseShldRate;
 	}
-
+	
 	/**
 	 * @return the baseSleep
 	 */
@@ -921,7 +921,7 @@ public class L2CharTemplate
 	{
 		return baseSleep;
 	}
-
+	
 	/**
 	 * @param baseSleep the baseSleep to set
 	 */
@@ -929,7 +929,7 @@ public class L2CharTemplate
 	{
 		baseSleep = _baseSleep;
 	}
-
+	
 	/**
 	 * @return the baseSleepRes
 	 */
@@ -937,7 +937,7 @@ public class L2CharTemplate
 	{
 		return baseSleepVuln;
 	}
-
+	
 	/**
 	 * @param baseSleepRes the baseSleepRes to set
 	 */
@@ -945,7 +945,7 @@ public class L2CharTemplate
 	{
 		baseSleepVuln = _baseSleepVuln;
 	}
-
+	
 	/**
 	 * @return the baseSTR
 	 */
@@ -953,7 +953,7 @@ public class L2CharTemplate
 	{
 		return baseSTR;
 	}
-
+	
 	/**
 	 * @param baseSTR the baseSTR to set
 	 */
@@ -961,7 +961,7 @@ public class L2CharTemplate
 	{
 		baseSTR = _baseSTR;
 	}
-
+	
 	/**
 	 * @return the baseStun
 	 */
@@ -969,7 +969,7 @@ public class L2CharTemplate
 	{
 		return baseStun;
 	}
-
+	
 	/**
 	 * @param baseStun the baseStun to set
 	 */
@@ -977,7 +977,7 @@ public class L2CharTemplate
 	{
 		baseStun = _baseStun;
 	}
-
+	
 	/**
 	 * @return the baseStunRes
 	 */
@@ -985,7 +985,7 @@ public class L2CharTemplate
 	{
 		return baseStunVuln;
 	}
-
+	
 	/**
 	 * @param baseStunRes the baseStunRes to set
 	 */
@@ -993,7 +993,7 @@ public class L2CharTemplate
 	{
 		baseStunVuln = _baseStunVuln;
 	}
-
+	
 	/**
 	 * @return the baseWater
 	 */
@@ -1001,7 +1001,7 @@ public class L2CharTemplate
 	{
 		return baseWater;
 	}
-
+	
 	/**
 	 * @param baseWater the baseWater to set
 	 */
@@ -1009,7 +1009,7 @@ public class L2CharTemplate
 	{
 		baseWater = _baseWater;
 	}
-
+	
 	/**
 	 * @return the baseWaterRes
 	 */
@@ -1017,7 +1017,7 @@ public class L2CharTemplate
 	{
 		return baseWaterRes;
 	}
-
+	
 	/**
 	 * @param baseWaterRes the baseWaterRes to set
 	 */
@@ -1025,7 +1025,7 @@ public class L2CharTemplate
 	{
 		baseWaterRes = _baseWaterRes;
 	}
-
+	
 	/**
 	 * @return the baseWind
 	 */
@@ -1033,7 +1033,7 @@ public class L2CharTemplate
 	{
 		return baseWind;
 	}
-
+	
 	/**
 	 * @param baseWind the baseWind to set
 	 */
@@ -1041,7 +1041,7 @@ public class L2CharTemplate
 	{
 		baseWind = _baseWind;
 	}
-
+	
 	/**
 	 * @return the baseWindRes
 	 */
@@ -1049,7 +1049,7 @@ public class L2CharTemplate
 	{
 		return baseWindRes;
 	}
-
+	
 	/**
 	 * @param baseWindRes the baseWindRes to set
 	 */
@@ -1057,7 +1057,7 @@ public class L2CharTemplate
 	{
 		baseWindRes = _baseWindRes;
 	}
-
+	
 	/**
 	 * @return the baseWIT
 	 */
@@ -1065,7 +1065,7 @@ public class L2CharTemplate
 	{
 		return baseWIT;
 	}
-
+	
 	/**
 	 * @param baseWIT the baseWIT to set
 	 */
@@ -1073,15 +1073,15 @@ public class L2CharTemplate
 	{
 		baseWIT = _baseWIT;
 	}
-
+	
 	/**
 	 * @return the integer collisionHeight
 	 */
 	public int getCollisionHeight()
 	{
-		return (int) collisionHeight;
+		return (int)collisionHeight;
 	}
-
+	
 	/**
 	 * @param collisionHeight the collisionHeight to set
 	 */
@@ -1089,15 +1089,15 @@ public class L2CharTemplate
 	{
 		collisionHeight = _collisionHeight;
 	}
-
+	
 	/**
 	 * @return the integer collisionRadius
 	 */
 	public int getCollisionRadius()
 	{
-		return (int) collisionRadius;
+		return (int)collisionRadius;
 	}
-
+	
 	/**
 	 * @param collisionRadius the collisionRadius to set
 	 */
@@ -1105,7 +1105,7 @@ public class L2CharTemplate
 	{
 		collisionRadius = _collisionRadius;
 	}
-
+	
 	/**
 	 * @return the isUndead
 	 */
@@ -1113,7 +1113,7 @@ public class L2CharTemplate
 	{
 		return isUndead;
 	}
-
+	
 	/**
 	 * @param isUndead the isUndead to set
 	 */
@@ -1121,22 +1121,22 @@ public class L2CharTemplate
 	{
 		isUndead = _isUndead;
 	}
-
+	
 	public double getBaseCritVuln()
 	{
 		return baseCritVuln;
 	}
-
+	
 	public void setBaseCritVuln(double baseCritVuln)
 	{
 		this.baseCritVuln = baseCritVuln;
 	}
-
+	
 	public double getBaseCancelVuln()
 	{
 		return baseCancelVuln;
 	}
-
+	
 	public void setBaseCancelVuln(double baseCancelVuln)
 	{
 		this.baseCancelVuln = baseCancelVuln;

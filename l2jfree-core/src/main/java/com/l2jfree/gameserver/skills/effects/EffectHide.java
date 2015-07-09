@@ -52,10 +52,10 @@ public class EffectHide extends L2Effect
 		{
 			L2PcInstance activeChar = ((L2PcInstance)getEffected());
 			activeChar.getAppearance().setInvisible();
-
+			
 			if (activeChar.getAI().getNextCtrlIntention() == CtrlIntention.AI_INTENTION_ATTACK)
 				activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-
+			
 			final DeleteObject del = new DeleteObject(activeChar);
 			for (L2Character obj : activeChar.getKnownList().getKnownCharacters())
 			{

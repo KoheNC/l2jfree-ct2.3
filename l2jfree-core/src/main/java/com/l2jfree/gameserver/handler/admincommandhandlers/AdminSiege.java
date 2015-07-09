@@ -43,37 +43,22 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminSiege implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_siege",
-			"admin_add_attacker",
-			"admin_add_defender",
-			"admin_add_guard",
-			"admin_list_siege_clans",
-			"admin_clear_siege_list",
-			"admin_move_defenders",
-			"admin_spawn_doors",
-			"admin_endsiege",
-			"admin_startsiege",
-			"admin_setsiegetime",
-			"admin_setcastle",
-			"admin_removecastle",
-			"admin_clanhall",
-			"admin_clanhallset",
-			"admin_clanhalldel",
-			"admin_clanhallopendoors",
-			"admin_clanhallclosedoors",
-			"admin_clanhallteleportself"			};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_siege", "admin_add_attacker", "admin_add_defender",
+			"admin_add_guard", "admin_list_siege_clans", "admin_clear_siege_list", "admin_move_defenders",
+			"admin_spawn_doors", "admin_endsiege", "admin_startsiege", "admin_setsiegetime", "admin_setcastle",
+			"admin_removecastle", "admin_clanhall", "admin_clanhallset", "admin_clanhalldel",
+			"admin_clanhallopendoors", "admin_clanhallclosedoors", "admin_clanhallteleportself" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		command = st.nextToken(); // Get actual command
-
+		
 		// Get castle
 		Castle castle = null;
 		ClanHall clanhall = null;
-
+		
 		if (st.hasMoreTokens())
 		{
 			String s = st.nextToken();
@@ -101,7 +86,7 @@ public class AdminSiege implements IAdminCommandHandler
 				}
 			}
 		}
-
+		
 		if ((castle == null || castle.getCastleId() < 0) && clanhall == null)
 			// No castle specified
 			showCastleSelectPage(activeChar);
@@ -110,12 +95,12 @@ public class AdminSiege implements IAdminCommandHandler
 			String val = "";
 			if (st.hasMoreTokens())
 				val = st.nextToken();
-
+			
 			L2Object target = activeChar.getTarget();
 			L2PcInstance player = null;
 			if (target instanceof L2PcInstance)
-				player = (L2PcInstance) target;
-
+				player = (L2PcInstance)target;
+			
 			if (command.equalsIgnoreCase("admin_add_attacker") && castle != null)
 			{
 				if (player == null)
@@ -136,7 +121,8 @@ public class AdminSiege implements IAdminCommandHandler
 				{
 					int npcId = Integer.parseInt(val);
 					if (st.hasMoreTokens())
-						castle.getSiege().getSiegeGuardManager().addAnyGuard(activeChar, npcId, Integer.parseInt(st.nextToken()));
+						castle.getSiege().getSiegeGuardManager()
+								.addAnyGuard(activeChar, npcId, Integer.parseInt(st.nextToken()));
 					else
 						castle.getSiege().getSiegeGuardManager().addAnyGuard(activeChar, npcId);
 				}
@@ -182,7 +168,7 @@ public class AdminSiege implements IAdminCommandHandler
 				{
 					if (castle == null)
 						return false;
-
+					
 					Calendar newAdminSiegeDate = castle.getSiegeDate();
 					if (val.equalsIgnoreCase("day"))
 						newAdminSiegeDate.set(Calendar.DAY_OF_YEAR, Integer.parseInt(st.nextToken()));
@@ -190,7 +176,7 @@ public class AdminSiege implements IAdminCommandHandler
 						newAdminSiegeDate.set(Calendar.HOUR_OF_DAY, Integer.parseInt(st.nextToken()));
 					else if (val.equalsIgnoreCase("min"))
 						newAdminSiegeDate.set(Calendar.MINUTE, Integer.parseInt(st.nextToken()));
-
+					
 					if (newAdminSiegeDate.getTimeInMillis() < System.currentTimeMillis())
 					{
 						activeChar.sendMessage("Unable to change Siege Date");
@@ -263,7 +249,7 @@ public class AdminSiege implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	private void showSiegeTimePage(L2PcInstance activeChar, Castle castle)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
@@ -278,26 +264,30 @@ public class AdminSiege implements IAdminCommandHandler
 			newDay.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
 		if (!SevenSigns.getInstance().isDateInSealValidPeriod(newDay))
 			newDay.add(Calendar.DAY_OF_MONTH, 7);
-
+		
 		if (isSunday)
 		{
 			adminReply.replace("%sundaylink%", String.valueOf(newDay.get(Calendar.DAY_OF_YEAR)));
-			adminReply.replace("%sunday%", String.valueOf(newDay.get(Calendar.MONTH) + "/" + String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
+			adminReply.replace("%sunday%", String.valueOf(newDay.get(Calendar.MONTH) + "/"
+					+ String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
 			newDay.add(Calendar.DAY_OF_MONTH, 13);
 			adminReply.replace("%saturdaylink%", String.valueOf(newDay.get(Calendar.DAY_OF_YEAR)));
-			adminReply.replace("%saturday%", String.valueOf(newDay.get(Calendar.MONTH) + "/" + String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
+			adminReply.replace("%saturday%", String.valueOf(newDay.get(Calendar.MONTH) + "/"
+					+ String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
 		}
 		else
 		{
 			adminReply.replace("%saturdaylink%", String.valueOf(newDay.get(Calendar.DAY_OF_YEAR)));
-			adminReply.replace("%saturday%", String.valueOf(newDay.get(Calendar.MONTH) + "/" + String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
+			adminReply.replace("%saturday%", String.valueOf(newDay.get(Calendar.MONTH) + "/"
+					+ String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
 			newDay.add(Calendar.DAY_OF_MONTH, 1);
 			adminReply.replace("%sundaylink%", String.valueOf(newDay.get(Calendar.DAY_OF_YEAR)));
-			adminReply.replace("%sunday%", String.valueOf(newDay.get(Calendar.MONTH) + "/" + String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
+			adminReply.replace("%sunday%", String.valueOf(newDay.get(Calendar.MONTH) + "/"
+					+ String.valueOf(newDay.get(Calendar.DAY_OF_MONTH))));
 		}
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	private void showCastleSelectPage(L2PcInstance activeChar)
 	{
 		int i = 0;
@@ -355,7 +345,7 @@ public class AdminSiege implements IAdminCommandHandler
 		adminReply.replace("%freeclanhalls%", cList.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	private void showSiegePage(L2PcInstance activeChar, String castleName)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
@@ -363,7 +353,7 @@ public class AdminSiege implements IAdminCommandHandler
 		adminReply.replace("%castleName%", castleName);
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	private void showClanHallPage(L2PcInstance activeChar, ClanHall clanhall)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
@@ -377,7 +367,8 @@ public class AdminSiege implements IAdminCommandHandler
 			adminReply.replace("%clanhallOwner%", owner.getName());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

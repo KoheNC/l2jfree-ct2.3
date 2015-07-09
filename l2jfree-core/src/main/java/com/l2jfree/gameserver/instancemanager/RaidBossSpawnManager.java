@@ -37,22 +37,22 @@ public class RaidBossSpawnManager extends BossSpawnManager
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	@Override
 	protected void init()
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM raidboss_spawnlist ORDER BY boss_id");
 			ResultSet rset = statement.executeQuery();
-
+			
 			L2Spawn spawnDat;
 			L2NpcTemplate template;
-
+			
 			while (rset.next())
 			{
 				template = getValidTemplate(rset.getInt("boss_id"));
@@ -66,18 +66,19 @@ public class RaidBossSpawnManager extends BossSpawnManager
 					spawnDat.setHeading(rset.getInt("heading"));
 					spawnDat.setRespawnMinDelay(rset.getInt("respawn_min_delay"));
 					spawnDat.setRespawnMaxDelay(rset.getInt("respawn_max_delay"));
-
-					addNewSpawn(spawnDat, rset.getLong("respawn_time"), rset.getDouble("currentHp"), rset.getDouble("currentMp"), false);
+					
+					addNewSpawn(spawnDat, rset.getLong("respawn_time"), rset.getDouble("currentHp"),
+							rset.getDouble("currentMp"), false);
 				}
 				else
 				{
 					_log.warn("RaidBossSpawnManager: Could not load raidboss #" + rset.getInt("boss_id") + " from DB");
 				}
 			}
-
+			
 			_log.info("RaidBossSpawnManager: Loaded " + _bosses.size() + " Instances");
 			_log.info("RaidBossSpawnManager: Scheduled " + _schedules.size() + " Instances");
-
+			
 			rset.close();
 			statement.close();
 		}
@@ -94,7 +95,7 @@ public class RaidBossSpawnManager extends BossSpawnManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	@Override
 	protected void insertIntoDb(L2Spawn spawnDat, long respawnTime, double currentHP, double currentMP)
 	{
@@ -102,8 +103,8 @@ public class RaidBossSpawnManager extends BossSpawnManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO raidboss_spawnlist (boss_id,amount,loc_x,loc_y,loc_z,heading,respawn_time,currentHp,currentMp) VALUES(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement statement =
+					con.prepareStatement("INSERT INTO raidboss_spawnlist (boss_id,amount,loc_x,loc_y,loc_z,heading,respawn_time,currentHp,currentMp) VALUES(?,?,?,?,?,?,?,?,?)");
 			statement.setInt(1, spawnDat.getNpcId());
 			statement.setInt(2, spawnDat.getAmount());
 			statement.setInt(3, spawnDat.getLocx());
@@ -126,16 +127,17 @@ public class RaidBossSpawnManager extends BossSpawnManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	@Override
 	public void updateSpawn(int bossId, int x, int y, int z, int h)
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("UPDATE raidboss_spawnlist SET loc_x = ?, loc_y = ?, loc_z = ?, heading = ? WHERE boss_id=?");
+			PreparedStatement statement =
+					con.prepareStatement("UPDATE raidboss_spawnlist SET loc_x = ?, loc_y = ?, loc_z = ?, heading = ? WHERE boss_id=?");
 			statement.setInt(1, x);
 			statement.setInt(2, y);
 			statement.setInt(3, z);
@@ -153,12 +155,12 @@ public class RaidBossSpawnManager extends BossSpawnManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	@Override
 	protected void deleteFromDb(L2Spawn spawnDat, int bossId)
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
@@ -177,7 +179,7 @@ public class RaidBossSpawnManager extends BossSpawnManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	@Override
 	protected void updateDb()
 	{
@@ -192,13 +194,13 @@ public class RaidBossSpawnManager extends BossSpawnManager
 					continue;
 				if (boss.getRaidStatus().equals(StatusEnum.ALIVE))
 					updateStatus(boss, false);
-
+				
 				StatsSet info = _storedInfo.get(bossId);
 				if (info == null)
 					continue;
-
-				PreparedStatement statement = con
-						.prepareStatement("UPDATE raidboss_spawnlist SET respawn_time = ?, currentHp = ?, currentMp = ? WHERE boss_id = ?");
+				
+				PreparedStatement statement =
+						con.prepareStatement("UPDATE raidboss_spawnlist SET respawn_time = ?, currentHp = ?, currentMp = ? WHERE boss_id = ?");
 				statement.setLong(1, info.getLong("respawnTime"));
 				statement.setDouble(2, info.getDouble("currentHp"));
 				statement.setDouble(3, info.getDouble("currentMp"));
@@ -216,7 +218,7 @@ public class RaidBossSpawnManager extends BossSpawnManager
 			}
 		}
 	}
-
+	
 	@Override
 	public L2NpcTemplate getValidTemplate(int bossId)
 	{
@@ -227,7 +229,7 @@ public class RaidBossSpawnManager extends BossSpawnManager
 			return null;
 		return template;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

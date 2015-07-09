@@ -26,17 +26,17 @@ import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 public final class Reed extends QuestJython
 {
 	private static final String REED_OCCUPATION = "30520_reed_occupation_change";
-
+	
 	//Quest NPCs
 	private static final int REED = 30520;
-
+	
 	public Reed(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		addStartNpc(REED);
 		addTalkId(REED);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -45,7 +45,7 @@ public final class Reed extends QuestJython
 		else
 			return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
@@ -53,16 +53,16 @@ public final class Reed extends QuestJython
 			return "30520-07.htm";
 		switch (talker.getClassId())
 		{
-		case DwarvenFighter:
-			return "30520-01.htm";
-		case Artisan:
-		case Scavenger:
-			return "30520-05.htm";
-		default:
-			return "30520-06.htm";
+			case DwarvenFighter:
+				return "30520-01.htm";
+			case Artisan:
+			case Scavenger:
+				return "30520-05.htm";
+			default:
+				return "30520-06.htm";
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new Reed(-1, REED_OCCUPATION, "village_master");

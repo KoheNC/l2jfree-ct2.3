@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,44 +31,46 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class AdminGm implements IAdminCommandHandler
 {
-	private final static Log		_log			= LogFactory.getLog(AdminGm.class);
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_gm" };
-
+	private final static Log _log = LogFactory.getLog(AdminGm.class);
+	private static final String[] ADMIN_COMMANDS = { "admin_gm" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_gm"))
 			handleGm(activeChar);
-
+		
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleGm(L2PcInstance activeChar)
 	{
 		if (activeChar.isGM())
 		{
 			GmListTable.deleteGm(activeChar);
 			activeChar.setIsGM(false);
-
+			
 			activeChar.sendMessage("You no longer have GM status.");
 			activeChar.updateNameTitleColor();
-
+			
 			if (_log.isDebugEnabled())
-				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") turned his GM status off");
+				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId()
+						+ ") turned his GM status off");
 		}
 		else
 		{
 			GmListTable.addGm(activeChar, false);
 			activeChar.setIsGM(true);
-
+			
 			activeChar.sendMessage("You now have GM status.");
 			activeChar.updateNameTitleColor();
-
+			
 			if (_log.isDebugEnabled())
 				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") turned his GM status on");
 		}

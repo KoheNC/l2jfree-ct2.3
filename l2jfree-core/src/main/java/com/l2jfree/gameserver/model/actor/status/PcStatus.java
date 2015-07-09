@@ -18,8 +18,8 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.model.actor.L2Summon;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance.ConditionListenerDependency;
+import com.l2jfree.gameserver.model.actor.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
@@ -150,7 +150,7 @@ public final class PcStatus extends CharStatus
 			SystemMessage smsg = new SystemMessage(SystemMessageId.C1_RECEIVED_DAMAGE_OF_S3_FROM_C2);
 			smsg.addPcName(getActiveChar());
 			smsg.addCharName(attacker);
-			smsg.addNumber((int) realValue);
+			smsg.addNumber((int)realValue);
 			getActiveChar().sendPacket(smsg);
 		}
 		

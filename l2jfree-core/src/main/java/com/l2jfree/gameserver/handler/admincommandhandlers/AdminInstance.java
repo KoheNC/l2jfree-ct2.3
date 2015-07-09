@@ -29,18 +29,15 @@ import com.l2jfree.gameserver.model.entity.Instance;
  */
 public class AdminInstance implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_setinstance",
-			"admin_createinstance",
-			"admin_destroyinstance",
-			"admin_listinstances"					};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_setinstance", "admin_createinstance",
+			"admin_destroyinstance", "admin_listinstances" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
-
+		
 		// create new instance
 		if (command.startsWith("admin_createinstance"))
 		{
@@ -81,7 +78,7 @@ public class AdminInstance implements IAdminCommandHandler
 					activeChar.sendMessage("Instance " + val + " doesnt exist.");
 					return false;
 				}
-
+				
 				L2Object target = activeChar.getTarget();
 				if (target == null || target instanceof L2Summon) // Don't separate summons from masters
 				{
@@ -91,7 +88,7 @@ public class AdminInstance implements IAdminCommandHandler
 				target.setInstanceId(val);
 				if (target instanceof L2PcInstance)
 				{
-					L2PcInstance player = (L2PcInstance) target;
+					L2PcInstance player = (L2PcInstance)target;
 					player.sendMessage("Admin set your instance to:" + val);
 					InstanceManager.getInstance().getInstance(val).addPlayer(player.getObjectId());
 					player.teleToLocation(player.getX(), player.getY(), player.getZ());
@@ -126,7 +123,8 @@ public class AdminInstance implements IAdminCommandHandler
 		
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

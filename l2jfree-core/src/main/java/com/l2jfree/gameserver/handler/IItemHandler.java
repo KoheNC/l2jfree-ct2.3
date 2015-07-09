@@ -29,15 +29,15 @@ import com.l2jfree.gameserver.model.actor.L2Playable;
 
 public interface IItemHandler
 {
-	public static Log	_log	= LogFactory.getLog(IItemHandler.class);
-
+	public static Log _log = LogFactory.getLog(IItemHandler.class);
+	
 	/**
 	 * Launch task associated to the item.
 	 * @param activeChar : L2Playable designating the player
 	 * @param item : L2ItemInstance designating the item to use
 	 */
 	public void useItem(L2Playable playable, L2ItemInstance item);
-
+	
 	/**
 	 * Returns the list of item IDs corresponding to the type of item.<BR><BR>
 	 * <B><I>Use :</I></U><BR>

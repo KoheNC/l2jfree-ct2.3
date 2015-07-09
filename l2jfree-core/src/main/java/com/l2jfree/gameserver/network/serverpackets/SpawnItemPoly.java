@@ -39,19 +39,19 @@ public class SpawnItemPoly extends L2GameServerPacket
 	private int _x, _y, _z;
 	private int _stackable;
 	private long _count;
-
+	
 	public SpawnItemPoly(L2Object object)
 	{
-		if(object instanceof L2ItemInstance)
+		if (object instanceof L2ItemInstance)
 		{
-		    L2ItemInstance item = (L2ItemInstance) object;
-	    	_objectId = object.getObjectId();
-	    	_itemId = object.getPoly().getPolyId();
-	    	_x = item.getX();
-	    	_y = item.getY();
-	     	_z = item.getZ();
-	    	_stackable = item.isStackable() ? 0x01 : 0x00;
-	     	_count = item.getCount();
+			L2ItemInstance item = (L2ItemInstance)object;
+			_objectId = object.getObjectId();
+			_itemId = object.getPoly().getPolyId();
+			_x = item.getX();
+			_y = item.getY();
+			_z = item.getZ();
+			_stackable = item.isStackable() ? 0x01 : 0x00;
+			_count = item.getCount();
 		}
 		else
 		{
@@ -61,7 +61,7 @@ public class SpawnItemPoly extends L2GameServerPacket
 			_y = object.getY();
 			_z = object.getZ();
 			_stackable = 0x00;
-	     	_count = 1;
+			_count = 1;
 		}
 	}
 	
@@ -80,7 +80,7 @@ public class SpawnItemPoly extends L2GameServerPacket
 		writeD(_count);
 		writeD(0x00); //c2
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

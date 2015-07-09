@@ -19,21 +19,21 @@ public class JoinParty extends L2GameServerPacket
 	private static final String _S__JOINPARTY = "[S] 3A JoinParty c[d]";
 	public static final JoinParty ACCEPTED = new JoinParty(0x01);
 	public static final JoinParty DECLINED = new JoinParty(0x00);
-
+	
 	private final int _response;
-
+	
 	private JoinParty(int response)
 	{
 		_response = response;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x3a);
 		writeD(_response);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

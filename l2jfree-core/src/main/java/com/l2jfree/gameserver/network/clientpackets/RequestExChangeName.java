@@ -26,7 +26,7 @@ public final class RequestExChangeName extends L2GameClientPacket
 {
 	private int _unk1, _unk2;
 	private String _name;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -34,7 +34,7 @@ public final class RequestExChangeName extends L2GameClientPacket
 		_name = readS(); // new name
 		_unk2 = readD(); // always 0?
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{

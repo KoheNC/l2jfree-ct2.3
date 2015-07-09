@@ -14,6 +14,8 @@
  */
 package com.l2jfree.lang;
 
+import java.util.regex.Matcher;
+
 import javolution.lang.Realtime;
 import javolution.text.Text;
 

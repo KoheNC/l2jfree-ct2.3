@@ -61,7 +61,7 @@ public final class ItemLog
 		private static final String EXCLUDED_PROCESSES = "Consume";
 		
 		private static final EnumSet<L2EtcItemType> EXCLUDED_ITEM_TYPES = EnumSet.of(L2EtcItemType.SHOT,
-			L2EtcItemType.ARROW, L2EtcItemType.BOLT, L2EtcItemType.HERB);
+				L2EtcItemType.ARROW, L2EtcItemType.BOLT, L2EtcItemType.HERB);
 		
 		@Override
 		public boolean isLoggable(LogRecord record)

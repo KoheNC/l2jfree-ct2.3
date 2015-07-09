@@ -27,31 +27,31 @@ import com.l2jfree.loginserver.serverpackets.ServerList;
  */
 public class RequestServerList extends L2LoginClientPacket
 {
-	private int	_skey1;
-	private int	_skey2;
-
+	private int _skey1;
+	private int _skey2;
+	
 	public int getSessionKey1()
 	{
 		return _skey1;
 	}
-
+	
 	public int getSessionKey2()
 	{
 		return _skey2;
 	}
-
+	
 	@Override
 	protected int getMinimumLength()
 	{
 		return 8;
 	}
-
+	
 	@Override
 	public void readImpl()
 	{
 		_skey1 = readD(); // loginOk 1
 		_skey2 = readD(); // loginOk 2
-
+		
 		// the byte equal to 4 must be related to _serverId in RSLog
 		/* A byte equal to 4, 6 null bytes, 1 byte, 1 byte, 2 bytes, rest - null bytes
 		 * 2 bytes will match with respective RequestServerLogin bytes, the 1 & 1 byte
@@ -63,7 +63,7 @@ public class RequestServerList extends L2LoginClientPacket
 		*/
 		skip(23);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.ReceivablePacket#run()
 	 */
@@ -76,7 +76,7 @@ public class RequestServerList extends L2LoginClientPacket
 			client.closeLogin(LoginFail.REASON_IGNORE);
 			return;
 		}
-
+		
 		if (client.getSessionKey().checkLoginPair(_skey1, _skey2))
 			client.sendPacket(new ServerList(client));
 		else

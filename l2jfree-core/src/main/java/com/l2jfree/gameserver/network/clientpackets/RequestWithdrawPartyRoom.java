@@ -22,25 +22,26 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class RequestWithdrawPartyRoom extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTWITHDRAWPARTYROOM	= "[C] D0:0B RequestWithdrawPartyRoom ch[dd]";
-
-	private int					_roomId;
+	private static final String _C__REQUESTWITHDRAWPARTYROOM = "[C] D0:0B RequestWithdrawPartyRoom ch[dd]";
+	
+	private int _roomId;
+	
 	//private int					_unk;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_roomId = readD();
 		/*_unk = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Party party = activeChar.getParty();
 		if (party != null && party.isInDimensionalRift()
 				&& !party.getDimensionalRift().getRevivedAtWaitingRoom().contains(activeChar))
@@ -48,7 +49,7 @@ public class RequestWithdrawPartyRoom extends L2GameClientPacket
 			requestFailed(SystemMessageId.COULD_NOT_LEAVE_PARTY);
 			return;
 		}
-
+		
 		L2PartyRoom room = activeChar.getPartyRoom();
 		if (room != null && room.getId() == _roomId)
 		{
@@ -60,7 +61,7 @@ public class RequestWithdrawPartyRoom extends L2GameClientPacket
 				room.removeMember(activeChar, false);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

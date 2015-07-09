@@ -24,21 +24,21 @@ import com.l2jfree.gameserver.util.Util;
 public class ChangeMoveType extends L2GameClientPacket
 {
 	private static final String _C__CHANGEMOVETYPE = "[C] 35 ChangeMoveType c[d]";
-
-    @Override
-    protected void readImpl()
-    {
-        readD();
-    }
-
-    @Override
-    protected void runImpl()
+	
+	@Override
+	protected void readImpl()
 	{
-    	L2PcInstance player = getActiveChar();
+		readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance player = getActiveChar();
 		if (player != null)
 			Util.handleIllegalPlayerAction(player, player + " sent a deprecated packet!");
 	}
-
+	
 	@Override
 	public String getType()
 	{

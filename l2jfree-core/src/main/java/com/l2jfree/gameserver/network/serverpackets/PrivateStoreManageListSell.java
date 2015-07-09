@@ -29,13 +29,13 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class PrivateStoreManageListSell extends L2GameServerPacket
 {
-	private static final String			_S__B3_PRIVATESELLLISTSELL	= "[S] 9a PrivateSellListSell";
-	private final int					_objId;
-	private final long					_playerAdena;
-	private final boolean				_packageSale;
-	private final TradeList.TradeItem[]	_itemList;
-	private final TradeList.TradeItem[]	_sellList;
-
+	private static final String _S__B3_PRIVATESELLLISTSELL = "[S] 9a PrivateSellListSell";
+	private final int _objId;
+	private final long _playerAdena;
+	private final boolean _packageSale;
+	private final TradeList.TradeItem[] _itemList;
+	private final TradeList.TradeItem[] _sellList;
+	
 	public PrivateStoreManageListSell(L2PcInstance player, boolean isPackageSale)
 	{
 		_objId = player.getObjectId();
@@ -45,7 +45,7 @@ public class PrivateStoreManageListSell extends L2GameServerPacket
 		_itemList = player.getInventory().getAvailableItems(player.getSellList());
 		_sellList = player.getSellList().getItems();
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -54,7 +54,7 @@ public class PrivateStoreManageListSell extends L2GameServerPacket
 		writeD(_objId);
 		writeD(_packageSale ? 1 : 0); // Package sell
 		writeCompQ(_playerAdena);
-
+		
 		//section2
 		writeD(_itemList.length); //for potential sells
 		for (TradeList.TradeItem item : _itemList)
@@ -68,10 +68,10 @@ public class PrivateStoreManageListSell extends L2GameServerPacket
 			writeH(item.getCustomType2());
 			writeD(item.getItem().getBodyPart());
 			writeCompQ(item.getPrice()); //store price
-
+			
 			writeElementalInfo(item); //8x h or d
 		}
-
+		
 		//section 3
 		writeD(_sellList.length); //count for any items already added for sell
 		for (TradeList.TradeItem item : _sellList)
@@ -86,11 +86,11 @@ public class PrivateStoreManageListSell extends L2GameServerPacket
 			writeD(item.getItem().getBodyPart());
 			writeCompQ(item.getPrice());//your price
 			writeCompQ(item.getItem().getReferencePrice()); //store price
-
+			
 			writeElementalInfo(item); //8x h or d
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

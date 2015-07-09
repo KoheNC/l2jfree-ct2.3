@@ -31,8 +31,9 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 public final class Pdam implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.PDAM, L2SkillType.FATALCOUNTER, L2SkillType.BLOW,
-		L2SkillType.CHARGEDAM };
+			L2SkillType.CHARGEDAM };
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill0, L2Character... targets)
 	{
 		// support for Double Shot, etc
@@ -55,7 +56,8 @@ public final class Pdam implements ISkillHandler
 			
 			modifier = 0.8 + 0.201 * player.getCharges(); // thanks Diego Vargas of L2Guru: 70*((0.8+0.201*No.Charges) * (PATK+POWER)) / PDEF
 			
-			if (skill.getTargetType() != SkillTargetType.TARGET_AREA && skill.getTargetType() != SkillTargetType.TARGET_MULTIFACE)
+			if (skill.getTargetType() != SkillTargetType.TARGET_AREA
+					&& skill.getTargetType() != SkillTargetType.TARGET_MULTIFACE)
 				player.decreaseCharges(skill.getNeededCharges());
 		}
 		else
@@ -143,6 +145,7 @@ public final class Pdam implements ISkillHandler
 			weapon.useSoulshotCharge();
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

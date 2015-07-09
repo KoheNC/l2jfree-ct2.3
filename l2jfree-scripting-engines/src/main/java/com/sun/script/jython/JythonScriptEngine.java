@@ -96,23 +96,27 @@ public class JythonScriptEngine extends AbstractScriptEngine implements Compilab
 	}
 	
 	// Compilable methods
+	@Override
 	public CompiledScript compile(String script) throws ScriptException
 	{
 		PyCode code = compileScript(script, context);
 		return new JythonCompiledScript(code);
 	}
 	
+	@Override
 	public CompiledScript compile(Reader reader) throws ScriptException
 	{
 		return compile(readFully(reader));
 	}
 	
 	// Invocable methods
+	@Override
 	public Object invokeFunction(String name, Object... args) throws ScriptException, NoSuchMethodException
 	{
 		return invokeImpl(null, name, args);
 	}
 	
+	@Override
 	public Object invokeMethod(Object obj, String name, Object... args) throws ScriptException, NoSuchMethodException
 	{
 		if (obj == null)
@@ -161,6 +165,7 @@ public class JythonScriptEngine extends AbstractScriptEngine implements Compilab
 		return py2java(res);
 	}
 	
+	@Override
 	public <T> T getInterface(Object obj, Class<T> clazz)
 	{
 		if (obj == null)
@@ -170,6 +175,7 @@ public class JythonScriptEngine extends AbstractScriptEngine implements Compilab
 		return makeInterface(obj, clazz);
 	}
 	
+	@Override
 	public <T> T getInterface(Class<T> clazz)
 	{
 		return makeInterface(null, clazz);
@@ -184,6 +190,7 @@ public class JythonScriptEngine extends AbstractScriptEngine implements Compilab
 		}
 		final Object thiz = obj;
 		return (T)Proxy.newProxyInstance(clazz.getClassLoader(), new Class[] { clazz }, new InvocationHandler() {
+			@Override
 			public Object invoke(Object proxy, Method m, Object[] args) throws Throwable
 			{
 				Object res = invokeImpl(thiz, m.getName(), args);
@@ -193,17 +200,20 @@ public class JythonScriptEngine extends AbstractScriptEngine implements Compilab
 	}
 	
 	// ScriptEngine methods
+	@Override
 	public Object eval(String str, ScriptContext ctx) throws ScriptException
 	{
 		PyCode code = compileScript(str, ctx);
 		return evalCode(code, ctx);
 	}
 	
+	@Override
 	public Object eval(Reader reader, ScriptContext ctx) throws ScriptException
 	{
 		return eval(readFully(reader), ctx);
 	}
 	
+	@Override
 	public ScriptEngineFactory getFactory()
 	{
 		synchronized (this)
@@ -216,6 +226,7 @@ public class JythonScriptEngine extends AbstractScriptEngine implements Compilab
 		return factory;
 	}
 	
+	@Override
 	public Bindings createBindings()
 	{
 		return new SimpleBindings();

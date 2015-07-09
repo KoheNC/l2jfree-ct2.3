@@ -23,8 +23,8 @@ import java.util.Map;
  */
 public class ScriptEngine
 {
-	private static Map<String, ParserFactory>	parserFactories	= new HashMap<String, ParserFactory>();
-
+	private static Map<String, ParserFactory> parserFactories = new HashMap<String, ParserFactory>();
+	
 	protected static Parser createParser(String name) throws ParserNotCreatedException
 	{
 		ParserFactory s = parserFactories.get(name);
@@ -37,7 +37,7 @@ public class ScriptEngine
 				// have been executed if the shape was found.
 				// the shape is expected to have put its factory
 				// in the hashtable.
-
+				
 				s = parserFactories.get(name);
 				if (s == null) // if the shape factory is not there even now
 				{
@@ -53,12 +53,12 @@ public class ScriptEngine
 		}
 		return (s.create());
 	}
-
+	
 	public static Map<String, ParserFactory> getParserFactories()
 	{
 		return parserFactories;
 	}
-
+	
 	public static void setParserFactories(Hashtable<String, ParserFactory> parserFactories)
 	{
 		ScriptEngine.parserFactories = parserFactories;

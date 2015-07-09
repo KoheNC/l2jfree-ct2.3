@@ -26,9 +26,9 @@ import com.l2jfree.L2Registry;
  */
 public class GameServerManagerTest extends TestCase
 {
-	private ClassPathXmlApplicationContext	context	= null;
-	private GameServerManager				gsManager;
-
+	private ClassPathXmlApplicationContext context = null;
+	private GameServerManager gsManager;
+	
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
@@ -40,7 +40,7 @@ public class GameServerManagerTest extends TestCase
 		L2Registry.setApplicationContext(context);
 		gsManager = GameServerManager.getInstance();
 	}
-
+	
 	/**
 	 * Check if 127 server from servernames.xml are loaded
 	 *

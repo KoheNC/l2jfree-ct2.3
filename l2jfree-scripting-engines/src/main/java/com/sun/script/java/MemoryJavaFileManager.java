@@ -44,8 +44,8 @@ import java.util.Map;
 import javax.tools.FileObject;
 import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
-import javax.tools.SimpleJavaFileObject;
 import javax.tools.JavaFileObject.Kind;
+import javax.tools.SimpleJavaFileObject;
 
 import org.eclipse.jdt.internal.compiler.tool.EclipseFileManager;
 
@@ -135,7 +135,7 @@ public final class MemoryJavaFileManager extends EclipseFileManager
 	
 	@Override
 	public JavaFileObject getJavaFileForOutput(JavaFileManager.Location location, String className, Kind kind,
-		FileObject sibling) throws IOException
+			FileObject sibling) throws IOException
 	{
 		if (kind == Kind.CLASS)
 		{

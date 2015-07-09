@@ -112,7 +112,7 @@ public final class EnchantHPBonusData
 							if (value == null)
 							{
 								_log.warn("[EnchantHPBonusData] Bad Hp value!! grade: " + grade + " FullArmor? "
-									+ fullArmor + " token: " + i);
+										+ fullArmor + " token: " + i);
 								value = 0;
 							}
 							bonus[i] = value;

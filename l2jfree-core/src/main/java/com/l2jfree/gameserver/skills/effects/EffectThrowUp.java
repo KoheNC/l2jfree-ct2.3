@@ -19,8 +19,8 @@ import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.network.serverpackets.FlyToLocation;
-import com.l2jfree.gameserver.network.serverpackets.ValidateLocation;
 import com.l2jfree.gameserver.network.serverpackets.FlyToLocation.FlyType;
+import com.l2jfree.gameserver.network.serverpackets.ValidateLocation;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
 import com.l2jfree.gameserver.templates.skills.L2EffectType;
@@ -85,8 +85,9 @@ public class EffectThrowUp extends L2Effect
 		
 		if (Config.GEODATA > 0)
 		{
-			Location destiny = GeoData.getInstance().moveCheck(getEffected().getX(), getEffected().getY(),
-					getEffected().getZ(), _x, _y, _z, getEffected().getInstanceId());
+			Location destiny =
+					GeoData.getInstance().moveCheck(getEffected().getX(), getEffected().getY(), getEffected().getZ(),
+							_x, _y, _z, getEffected().getInstanceId());
 			_x = destiny.getX();
 			_y = destiny.getY();
 		}

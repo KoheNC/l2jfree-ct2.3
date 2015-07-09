@@ -22,11 +22,11 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2FortWyvernManagerInstance extends L2WyvernManagerInstance
 {
-    public L2FortWyvernManagerInstance (int objectId, L2NpcTemplate template)
-    {
-        super(objectId, template);
-    }
-
+	public L2FortWyvernManagerInstance(int objectId, L2NpcTemplate template)
+	{
+		super(objectId, template);
+	}
+	
 	@Override
 	protected final boolean isOwnerClan(L2PcInstance player)
 	{

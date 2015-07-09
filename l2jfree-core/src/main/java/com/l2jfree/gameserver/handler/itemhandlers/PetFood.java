@@ -32,14 +32,12 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class PetFood implements IItemHandler
 {
-	private static final int[] ITEM_IDS =
-	{
-		2515, 4038, 5168, 5169, 6316, 7582, 9668, 10425
-	};
-
+	private static final int[] ITEM_IDS = { 2515, 4038, 5168, 5169, 6316, 7582, 9668, 10425 };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.actor.instance.L2Playable, com.l2jfree.gameserver.model.L2ItemInstance)
 	 */
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		int itemId = item.getItemId();
@@ -71,7 +69,7 @@ public class PetFood implements IItemHandler
 				break;
 		}
 	}
-
+	
 	public boolean useFood(L2Playable activeChar, int magicId, L2ItemInstance item)
 	{
 		L2Skill skill = SkillTable.getInstance().getInfo(magicId, 1);
@@ -79,7 +77,7 @@ public class PetFood implements IItemHandler
 		{
 			if (activeChar instanceof L2PetInstance)
 			{
-				L2PetInstance pet = (L2PetInstance) activeChar;
+				L2PetInstance pet = (L2PetInstance)activeChar;
 				if (pet.destroyItem("Consume", item.getObjectId(), 1, null, false))
 				{
 					pet.broadcastPacket(new MagicSkillUse(pet, pet, magicId, 1, 0, 0));
@@ -92,12 +90,12 @@ public class PetFood implements IItemHandler
 			}
 			else if (activeChar instanceof L2PcInstance)
 			{
-				L2PcInstance player = (L2PcInstance) activeChar;
+				L2PcInstance player = (L2PcInstance)activeChar;
 				int itemId = item.getItemId();
 				if (player.isMounted())
 				{
 					int petId = player.getMountNpcId();
-
+					
 					if (PetDataTable.isPetFood(petId, itemId))
 					{
 						if (player.destroyItem("Consume", item.getObjectId(), 1, null, false))
@@ -120,10 +118,11 @@ public class PetFood implements IItemHandler
 		}
 		return false;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#getItemIds()
 	 */
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

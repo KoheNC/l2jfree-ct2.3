@@ -22,33 +22,34 @@ import com.l2jfree.gameserver.model.actor.L2Summon;
  */
 public class ExPartyPetWindowDelete extends L2GameServerPacket
 {
-    private final static String S_FE_6A_EXPARTYPETWINDOWDELETE = "[S] FE:6a ExPartyPetWindowDelete";
-    private final L2Summon _summon;
-    
-    public ExPartyPetWindowDelete(L2Summon summon)
-    {
-        _summon = summon;
-    }
-    /**
-     * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return S_FE_6A_EXPARTYPETWINDOWDELETE;
-    }
-
-    /**
-     * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
-     */
-    @Override
-    protected void writeImpl()
-    {
-        writeC(0xfe);
-        writeH(0x6a);
-        writeD(_summon.getObjectId());
-        writeD(_summon.getOwner().getObjectId());
-        writeS(_summon.getName());
-    }
-    
+	private final static String S_FE_6A_EXPARTYPETWINDOWDELETE = "[S] FE:6a ExPartyPetWindowDelete";
+	private final L2Summon _summon;
+	
+	public ExPartyPetWindowDelete(L2Summon summon)
+	{
+		_summon = summon;
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return S_FE_6A_EXPARTYPETWINDOWDELETE;
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
+	 */
+	@Override
+	protected void writeImpl()
+	{
+		writeC(0xfe);
+		writeH(0x6a);
+		writeD(_summon.getObjectId());
+		writeD(_summon.getOwner().getObjectId());
+		writeS(_summon.getName());
+	}
+	
 }

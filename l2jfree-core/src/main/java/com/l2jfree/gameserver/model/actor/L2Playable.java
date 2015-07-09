@@ -50,13 +50,13 @@ public abstract class L2Playable extends L2Character
 	@SuppressWarnings("hiding")
 	public static final L2Playable[] EMPTY_ARRAY = new L2Playable[0];
 	
-	private boolean	_isNoblesseBlessed	= false;	// For Noblesse Blessing skill, restores buffs after death
-	private boolean	_getCharmOfLuck		= false;	// Charm of Luck - During a Raid/Boss war, decreased chance for death penalty
-	private boolean	_isPhoenixBlessed	= false;	// For Soul of The Phoenix or Salvation buffs
-	private boolean	_isSilentMoving		= false;	// Silent Move
-	private boolean	_protectionBlessing	= false;	// Blessed by Blessing of Protection
+	private boolean _isNoblesseBlessed = false; // For Noblesse Blessing skill, restores buffs after death
+	private boolean _getCharmOfLuck = false; // Charm of Luck - During a Raid/Boss war, decreased chance for death penalty
+	private boolean _isPhoenixBlessed = false; // For Soul of The Phoenix or Salvation buffs
+	private boolean _isSilentMoving = false; // Silent Move
+	private boolean _protectionBlessing = false; // Blessed by Blessing of Protection
 	private boolean _lockedTarget = false;
-
+	
 	/**
 	 * Constructor of L2Playable (use L2Character constructor).<BR><BR>
 	 * 
@@ -75,7 +75,7 @@ public abstract class L2Playable extends L2Character
 		getStatus(); // Init status
 		setIsInvul(false);
 	}
-
+	
 	@Override
 	public abstract PlayableKnownList getKnownList();
 	
@@ -87,13 +87,13 @@ public abstract class L2Playable extends L2Character
 	{
 		if (!super.doDie(killer))
 			return false;
-
+		
 		if (killer != null && killer.getActingPlayer() != null)
 			killer.getActingPlayer().onKillUpdatePvPKarma(this);
-
+		
 		return true;
 	}
-
+	
 	public boolean checkIfPvP(L2Character target)
 	{
 		if (target == null)
@@ -102,33 +102,33 @@ public abstract class L2Playable extends L2Character
 			return false; // Target is self
 		if (!(target instanceof L2Playable))
 			return false; // Target is not a L2Playable
-
+			
 		L2PcInstance player = null;
 		if (this instanceof L2PcInstance)
-			player = (L2PcInstance) this;
+			player = (L2PcInstance)this;
 		else if (this instanceof L2Summon)
-			player = ((L2Summon) this).getOwner();
-
+			player = ((L2Summon)this).getOwner();
+		
 		if (player == null)
 			return false; // Active player is null
 		if (player.getKarma() != 0)
 			return false; // Active player has karma
-
+			
 		L2PcInstance targetPlayer = null;
 		if (target instanceof L2PcInstance)
-			targetPlayer = (L2PcInstance) target;
+			targetPlayer = (L2PcInstance)target;
 		else if (target instanceof L2Summon)
-			targetPlayer = ((L2Summon) target).getOwner();
-
+			targetPlayer = ((L2Summon)target).getOwner();
+		
 		if (targetPlayer == null)
 			return false; // Target player is null
-
+			
 		if (targetPlayer == this)
 			return false; // Target player is self
-
-        return targetPlayer.getKarma() == 0;
+			
+		return targetPlayer.getKarma() == 0;
 	}
-
+	
 	/**
 	 * Return True.<BR><BR>
 	 */
@@ -137,7 +137,7 @@ public abstract class L2Playable extends L2Character
 	{
 		return true;
 	}
-
+	
 	@Override
 	public final void sendDamageMessage(L2Character target, int damage, boolean mcrit, boolean pcrit, boolean miss)
 	{
@@ -150,33 +150,33 @@ public abstract class L2Playable extends L2Character
 			target.sendAvoidMessage(this);
 			return;
 		}
-
+		
 		if (pcrit)
 		{
 			attOwner.sendPacket(new SystemMessage(SystemMessageId.C1_HAD_CRITICAL_HIT).addCharName(this));
-
+			
 			if (this instanceof L2PcInstance && target instanceof L2Npc)
 			{
 				// Soul Mastery skill
 				final L2Skill skill = getKnownSkill(L2Skill.SKILL_SOUL_MASTERY);
-
+				
 				if (skill != null && Rnd.get(100) < skill.getCritChance())
 					attOwner.absorbSoulFromNpc(skill, target);
 			}
 		}
-
+		
 		if (mcrit)
 			sendPacket(SystemMessageId.CRITICAL_HIT_MAGIC);
-
+		
 		if (trgOwner != null && attOwner != trgOwner)
 		{
 			if (attOwner.isInOlympiadMode() && target instanceof L2PcInstance && trgOwner.isInOlympiadMode()
-				&& trgOwner.getOlympiadGameId() == attOwner.getOlympiadGameId())
+					&& trgOwner.getOlympiadGameId() == attOwner.getOlympiadGameId())
 			{
 				Olympiad.getInstance().notifyCompetitorDamage(attOwner, damage, attOwner.getOlympiadGameId());
 			}
 		}
-
+		
 		final SystemMessage sm;
 		if (target.isInvul() && !(target instanceof L2NpcInstance))
 		{
@@ -199,7 +199,7 @@ public abstract class L2Playable extends L2Character
 		}
 		attOwner.sendPacket(sm);
 	}
-
+	
 	@Override
 	public final void sendAvoidMessage(L2Character attacker)
 	{
@@ -208,7 +208,7 @@ public abstract class L2Playable extends L2Character
 		sm.addCharName(attacker);
 		getActingPlayer().sendPacket(sm);
 	}
-
+	
 	@Override
 	public final void sendResistedMyMagicMessage(L2Character target)
 	{
@@ -217,7 +217,7 @@ public abstract class L2Playable extends L2Character
 		getActingPlayer().sendPacket(sm);
 		target.sendResistedAgainstMagicMessage(this);
 	}
-
+	
 	@Override
 	public final void sendResistedAgainstMagicMessage(L2Character attacker)
 	{
@@ -226,7 +226,7 @@ public abstract class L2Playable extends L2Character
 		sm.addCharName(attacker);
 		getActingPlayer().sendPacket(sm);
 	}
-
+	
 	@Override
 	public final void sendResistedMyMagicSlightlyMessage(L2Character target)
 	{
@@ -238,7 +238,7 @@ public abstract class L2Playable extends L2Character
 		getActingPlayer().sendPacket(sm);
 		target.sendResistedAgainstMagicWeaklyMessage(this);
 	}
-
+	
 	@Override
 	public final void sendResistedAgainstMagicWeaklyMessage(L2Character attacker)
 	{
@@ -247,57 +247,57 @@ public abstract class L2Playable extends L2Character
 		sm.addCharName(attacker);
 		getActingPlayer().sendPacket(sm);
 	}
-
+	
 	// Support for Noblesse Blessing skill, where buffs are retained after resurrect
 	public final boolean isNoblesseBlessed()
 	{
 		return _isNoblesseBlessed;
 	}
-
+	
 	public final void setIsNoblesseBlessed(boolean value)
 	{
 		_isNoblesseBlessed = value;
 		updateAbnormalEffect();
 	}
-
+	
 	public final void startNoblesseBlessing()
 	{
 		setIsNoblesseBlessed(true);
 	}
-
+	
 	public final void stopNoblesseBlessing(boolean all)
 	{
 		if (all)
 			stopEffects(L2EffectType.NOBLESSE_BLESSING);
-
+		
 		setIsNoblesseBlessed(false);
 	}
-
+	
 	// Support for Soul of the Phoenix and Salvation skills
 	public final boolean isPhoenixBlessed()
 	{
 		return _isPhoenixBlessed;
 	}
-
+	
 	public final void setIsPhoenixBlessed(boolean value)
 	{
 		_isPhoenixBlessed = value;
 		updateAbnormalEffect();
 	}
-
+	
 	public final void startPhoenixBlessing()
 	{
 		setIsPhoenixBlessed(true);
 	}
-
+	
 	public final void stopPhoenixBlessing(boolean all)
 	{
 		if (all)
 			stopEffects(L2EffectType.PHOENIX_BLESSING);
-
+		
 		setIsPhoenixBlessed(false);
 	}
-
+	
 	/**
 	 * Set the Silent Moving mode Flag.<BR><BR>
 	 */
@@ -305,7 +305,7 @@ public abstract class L2Playable extends L2Character
 	{
 		_isSilentMoving = flag;
 	}
-
+	
 	/**
 	 * Return True if the Silent Moving mode is active.<BR><BR>
 	 */
@@ -313,57 +313,57 @@ public abstract class L2Playable extends L2Character
 	{
 		return _isSilentMoving;
 	}
-
+	
 	// For Newbie Protection Blessing skill, keeps you safe from an attack by a chaotic character >= 10 levels apart from you
 	public final boolean getProtectionBlessing()
 	{
 		return _protectionBlessing;
 	}
-
+	
 	public final void setProtectionBlessing(boolean value)
 	{
 		_protectionBlessing = value;
 		updateAbnormalEffect();
 	}
-
+	
 	public void startProtectionBlessing()
 	{
 		setProtectionBlessing(true);
 	}
-
-	 /**
-	 * @param effect
-	 */
+	
+	/**
+	* @param effect
+	*/
 	public void stopProtectionBlessing(boolean all)
 	{
 		if (all)
 			stopEffects(L2EffectType.PROTECTION_BLESSING);
-
+		
 		setProtectionBlessing(false);
 	}
-
+	
 	// Charm of Luck - During a Raid/Boss war, decreased chance for death penalty
 	public final boolean getCharmOfLuck()
 	{
 		return _getCharmOfLuck;
 	}
-
+	
 	public final void setCharmOfLuck(boolean value)
 	{
 		_getCharmOfLuck = value;
 		updateAbnormalEffect();
 	}
-
+	
 	public final void startCharmOfLuck()
 	{
 		setCharmOfLuck(true);
 	}
-
+	
 	public final void stopCharmOfLuck(boolean all)
 	{
 		if (all)
 			stopEffects(L2EffectType.CHARM_OF_LUCK);
-
+		
 		setCharmOfLuck(false);
 	}
 	
@@ -568,7 +568,7 @@ public abstract class L2Playable extends L2Character
 			
 			if (this instanceof L2PcInstance)
 			{
-				L2PcInstance player = (L2PcInstance) this;
+				L2PcInstance player = (L2PcInstance)this;
 				
 				player.sendEtcStatusUpdate();
 				player.broadcastUserInfo();

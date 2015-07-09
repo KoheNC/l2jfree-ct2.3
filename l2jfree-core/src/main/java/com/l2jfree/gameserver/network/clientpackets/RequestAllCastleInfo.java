@@ -20,23 +20,23 @@ import com.l2jfree.gameserver.network.serverpackets.ExShowCastleInfo;
 public class RequestAllCastleInfo extends L2GameClientPacket
 {
 	private static final String _C__REQUESTALLCASTLEINFO = "[C] D0:3C RequestAllCastleInfo ch";
-
-    @Override
-    protected void readImpl()
-    {
-    	// trigger packet
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	if (getActiveChar() != null)
-    		sendPacket(ExShowCastleInfo.PACKET);
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__REQUESTALLCASTLEINFO;
-    }
+	
+	@Override
+	protected void readImpl()
+	{
+		// trigger packet
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		if (getActiveChar() != null)
+			sendPacket(ExShowCastleInfo.PACKET);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__REQUESTALLCASTLEINFO;
+	}
 }

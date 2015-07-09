@@ -27,16 +27,15 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class InstanceZone implements IUserCommandHandler
 {
-	private static final int[] COMMAND_IDS =
-	{
-		114
-	};
+	private static final int[] COMMAND_IDS = { 114 };
 	
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;
 	}
 	
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		if (id != COMMAND_IDS[0])
@@ -55,8 +54,8 @@ public class InstanceZone implements IUserCommandHandler
 						firstMessage = false;
 						activeChar.sendPacket(SystemMessageId.INSTANCE_ZONE_TIME_LIMIT);
 					}
-					int hours = (int) (remainingTime / 3600);
-					int minutes = (int) ((remainingTime % 3600) / 60);
+					int hours = (int)(remainingTime / 3600);
+					int minutes = (int)((remainingTime % 3600) / 60);
 					SystemMessage sm = new SystemMessage(SystemMessageId.AVAILABLE_AFTER_S1_S2_HOURS_S3_MINUTES);
 					sm.addString(InstanceManager.getInstance().getInstanceIdName(instanceId));
 					sm.addNumber(hours);

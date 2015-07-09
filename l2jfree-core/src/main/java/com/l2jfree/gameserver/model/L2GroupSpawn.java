@@ -23,63 +23,65 @@ import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.tools.random.Rnd;
 
-
 /**
  * @author littlecrow A special spawn implementation to spawn controllable mob
  */
 public class L2GroupSpawn extends L2Spawn
 {
-	private final Constructor<?>	_constructor;
-	private final L2NpcTemplate	_template;
-
+	private final Constructor<?> _constructor;
+	private final L2NpcTemplate _template;
+	
 	public L2GroupSpawn(L2NpcTemplate mobTemplate) throws SecurityException, ClassNotFoundException
 	{
 		super(mobTemplate);
-		_constructor = Class.forName("com.l2jfree.gameserver.model.actor.instance.L2ControllableMobInstance").getConstructors()[0];
+		_constructor =
+				Class.forName("com.l2jfree.gameserver.model.actor.instance.L2ControllableMobInstance")
+						.getConstructors()[0];
 		_template = mobTemplate;
-
+		
 		setAmount(1);
 	}
-
+	
 	public L2Npc doGroupSpawn()
 	{
 		L2Npc mob = null;
-
+		
 		try
 		{
 			if (_template.isAssignableTo(L2PetInstance.class) || _template.isAssignableTo(L2MinionInstance.class))
 				return null;
-
+			
 			Object[] parameters = { IdFactory.getInstance().getNextId(), _template };
 			Object tmp = _constructor.newInstance(parameters);
-
+			
 			if (!(tmp instanceof L2Npc))
 				return null;
-
-			mob = (L2Npc) tmp;
-
+			
+			mob = (L2Npc)tmp;
+			
 			int newlocx, newlocy, newlocz;
-
+			
 			newlocx = getLocx();
 			newlocy = getLocy();
 			newlocz = getLocz();
-
+			
 			mob.getStatus().setCurrentHpMp(mob.getMaxHp(), mob.getMaxMp());
-
+			
 			if (getHeading() == -1)
 				mob.setHeading(Rnd.nextInt(61794));
 			else
 				mob.setHeading(getHeading());
-
+			
 			mob.setSpawn(this);
 			mob.spawnMe(newlocx, newlocy, newlocz);
 			mob.onSpawn();
-
+			
 			if (_log.isDebugEnabled())
-				_log.debug("spawned Mob ID: " + _template.getNpcId() + " ,at: " + mob.getX() + " x, " + mob.getY() + " y, " + mob.getZ() + " z");
-
+				_log.debug("spawned Mob ID: " + _template.getNpcId() + " ,at: " + mob.getX() + " x, " + mob.getY()
+						+ " y, " + mob.getZ() + " z");
+			
 			return mob;
-
+			
 		}
 		catch (Exception e)
 		{

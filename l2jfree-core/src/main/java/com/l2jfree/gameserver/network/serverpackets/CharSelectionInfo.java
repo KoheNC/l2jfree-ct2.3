@@ -32,7 +32,8 @@ import com.l2jfree.gameserver.network.L2GameClient;
 
 public class CharSelectionInfo extends L2GameServerPacket
 {
-	private static final String _S__09_CHARSELECTINFO = "[S] 09 CharSelectInfo [ddc (sdsddd dddd ddd ff d q ddddd dddddddddddddddddddddddddddddddddd ff ddd hh d)]";
+	private static final String _S__09_CHARSELECTINFO =
+			"[S] 09 CharSelectInfo [ddc (sdsddd dddd ddd ff d q ddddd dddddddddddddddddddddddddddddddddd ff ddd hh d)]";
 	
 	private final String _loginName;
 	private final int _sessionId;
@@ -143,8 +144,8 @@ public class CharSelectionInfo extends L2GameServerPacket
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("SELECT account_name, charId, char_name, level, maxHp, curHp, maxMp, curMp, face, hairStyle, hairColor, sex, heading, x, y, z, exp, sp, karma, pvpkills, pkkills, clanid, race, classid, deletetime, cancraft, title, accesslevel, online, char_slot, lastAccess, base_class, transform_id FROM characters WHERE account_name=?");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT account_name, charId, char_name, level, maxHp, curHp, maxMp, curMp, face, hairStyle, hairColor, sex, heading, x, y, z, exp, sp, karma, pvpkills, pkkills, clanid, race, classid, deletetime, cancraft, title, accesslevel, online, char_slot, lastAccess, base_class, transform_id FROM characters WHERE account_name=?");
 			statement.setString(1, _loginName);
 			ResultSet charList = statement.executeQuery();
 			
@@ -179,8 +180,8 @@ public class CharSelectionInfo extends L2GameServerPacket
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("SELECT exp, sp, level FROM character_subclasses WHERE charId=? && class_id=? ORDER BY charId");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT exp, sp, level FROM character_subclasses WHERE charId=? && class_id=? ORDER BY charId");
 			statement.setInt(1, ObjectId);
 			statement.setInt(2, activeClassId);
 			ResultSet charList = statement.executeQuery();
@@ -296,8 +297,8 @@ public class CharSelectionInfo extends L2GameServerPacket
 			try
 			{
 				con = L2DatabaseFactory.getInstance().getConnection(con);
-				PreparedStatement statement = con
-						.prepareStatement("SELECT augAttributes FROM item_attributes WHERE itemId=?");
+				PreparedStatement statement =
+						con.prepareStatement("SELECT augAttributes FROM item_attributes WHERE itemId=?");
 				statement.setInt(1, weaponObjId);
 				ResultSet result = statement.executeQuery();
 				if (result.next())

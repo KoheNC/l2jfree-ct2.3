@@ -28,7 +28,6 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 
-
 /**
  * Admin Command Handler for Mammon NPCs
  * 
@@ -36,19 +35,22 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class AdminMammon implements IAdminCommandHandler
 {
-
-	private static final String[]	ADMIN_COMMANDS		=
-														{ "admin_mammon_find", "admin_mammon_respawn", "admin_list_spawns", "admin_msg" };
-
-	private final boolean					_isSealValidation	= SevenSigns.getInstance().isSealValidationPeriod();
-
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_mammon_find", "admin_mammon_respawn", "admin_list_spawns",
+			"admin_msg" };
+	
+	private final boolean _isSealValidation = SevenSigns.getInstance().isSealValidationPeriod();
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		int npcId = 0;
 		int teleportIndex = -1;
-		AutoSpawnInstance blackSpawnInst = AutoSpawnManager.getInstance().getAutoSpawnInstance(SevenSigns.MAMMON_BLACKSMITH_ID, false);
-		AutoSpawnInstance merchSpawnInst = AutoSpawnManager.getInstance().getAutoSpawnInstance(SevenSigns.MAMMON_MERCHANT_ID, false);
-
+		AutoSpawnInstance blackSpawnInst =
+				AutoSpawnManager.getInstance().getAutoSpawnInstance(SevenSigns.MAMMON_BLACKSMITH_ID, false);
+		AutoSpawnInstance merchSpawnInst =
+				AutoSpawnManager.getInstance().getAutoSpawnInstance(SevenSigns.MAMMON_MERCHANT_ID, false);
+		
 		if (command.startsWith("admin_mammon_find"))
 		{
 			try
@@ -60,7 +62,7 @@ public class AdminMammon implements IAdminCommandHandler
 			{
 				activeChar.sendMessage("Usage: //mammon_find [teleportIndex] (where 1 = Blacksmith, 2 = Merchant)");
 			}
-
+			
 			if (!_isSealValidation)
 			{
 				activeChar.sendMessage("The competition period is currently in effect.");
@@ -93,7 +95,7 @@ public class AdminMammon implements IAdminCommandHandler
 			else
 				activeChar.sendMessage("Merchant of Mammon isn't registered for spawn.");
 		}
-
+		
 		else if (command.startsWith("admin_mammon_respawn"))
 		{
 			if (!_isSealValidation)
@@ -104,19 +106,21 @@ public class AdminMammon implements IAdminCommandHandler
 			if (merchSpawnInst != null)
 			{
 				long merchRespawn = AutoSpawnManager.getInstance().getTimeToNextSpawn(merchSpawnInst);
-				activeChar.sendMessage("The Merchant of Mammon will respawn in " + (merchRespawn / 60000) + " minute(s).");
+				activeChar.sendMessage("The Merchant of Mammon will respawn in " + (merchRespawn / 60000)
+						+ " minute(s).");
 			}
 			else
 				activeChar.sendMessage("Merchant of Mammon isn't registered for spawn.");
 			if (blackSpawnInst != null)
 			{
 				long blackRespawn = AutoSpawnManager.getInstance().getTimeToNextSpawn(blackSpawnInst);
-				activeChar.sendMessage("The Blacksmith of Mammon will respawn in " + (blackRespawn / 60000) + " minute(s).");
+				activeChar.sendMessage("The Blacksmith of Mammon will respawn in " + (blackRespawn / 60000)
+						+ " minute(s).");
 			}
 			else
 				activeChar.sendMessage("Blacksmith of Mammon isn't registered for spawn.");
 		}
-
+		
 		else if (command.startsWith("admin_list_spawns"))
 		{
 			try
@@ -136,17 +140,18 @@ public class AdminMammon implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendPacket(SystemMessage.sendString("Command format is //list_spawns <npcId|npc_name> [tele_index]"));
+				activeChar.sendPacket(SystemMessage
+						.sendString("Command format is //list_spawns <npcId|npc_name> [tele_index]"));
 			}
-
+			
 			SpawnTable.getInstance().findNPCInstances(activeChar, npcId, teleportIndex);
 		}
-
+		
 		// Used for testing SystemMessage IDs	- Use //msg <ID>
 		else if (command.startsWith("admin_msg"))
 		{
 			int msgId = -1;
-
+			
 			try
 			{
 				msgId = Integer.parseInt(command.substring(10).trim());
@@ -160,7 +165,8 @@ public class AdminMammon implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

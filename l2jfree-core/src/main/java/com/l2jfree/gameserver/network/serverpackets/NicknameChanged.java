@@ -25,13 +25,13 @@ public class NicknameChanged extends L2GameServerPacket
 	private static final String S_CC_NICKNAMECHANGED = "[S] cc NicknameChanged";
 	private final String _title;
 	private final int _objectId;
-
+	
 	public NicknameChanged(L2PcInstance cha)
 	{
 		_objectId = cha.getObjectId();
 		_title = cha.getTitle();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
 	 */
@@ -42,7 +42,7 @@ public class NicknameChanged extends L2GameServerPacket
 		writeD(_objectId);
 		writeS(_title);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
 	 */
@@ -51,5 +51,5 @@ public class NicknameChanged extends L2GameServerPacket
 	{
 		return S_CC_NICKNAMECHANGED;
 	}
-
+	
 }

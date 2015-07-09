@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ChooseInventoryItem extends L2GameServerPacket
 {
 	private static final String _S__7C_CHOOSEINVENTORYITEM = "[S] 7c ChooseInventoryItem [d]";
-
+	
 	private final int _itemId;
-	   
+	
 	public ChooseInventoryItem(int Item)
 	{
 		_itemId = Item;
@@ -31,7 +31,7 @@ public class ChooseInventoryItem extends L2GameServerPacket
 		writeC(0x7c);
 		writeD(_itemId);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

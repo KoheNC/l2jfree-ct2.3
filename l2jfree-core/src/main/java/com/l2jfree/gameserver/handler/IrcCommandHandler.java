@@ -44,22 +44,22 @@ public class IrcCommandHandler
 	public void registerIrcCommandHandler(IIrcCommandHandler handler)
 	{
 		String[] ids = handler.getIrcCommandList();
-
+		
 		for (String element : ids)
 			_datatable.put(element, handler);
 	}
-
+	
 	public IIrcCommandHandler getIrcCommandHandler(String BypassCommand)
 	{
 		String command = BypassCommand;
-
+		
 		if (BypassCommand.indexOf(" ") != -1)
 		{
 			command = BypassCommand.substring(0, BypassCommand.indexOf(" "));
 		}
 		return _datatable.get(command);
 	}
-
+	
 	/**
 	 * @return
 	 */

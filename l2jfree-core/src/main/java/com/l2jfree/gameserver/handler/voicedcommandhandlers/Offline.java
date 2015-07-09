@@ -22,9 +22,9 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class Offline implements IVoicedCommandHandler
 {
-	private static final String[] VOICED_COMMANDS =
-		{ "offline" };
+	private static final String[] VOICED_COMMANDS = { "offline" };
 	
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (!Config.ALLOW_OFFLINE_TRADE)
@@ -37,7 +37,7 @@ public class Offline implements IVoicedCommandHandler
 				if (!Config.ALLOW_OFFLINE_TRADE_CRAFT)
 					break;
 			}
-				//$FALL-THROUGH$
+			//$FALL-THROUGH$
 			case L2PcInstance.STORE_PRIVATE_SELL:
 			case L2PcInstance.STORE_PRIVATE_BUY:
 			case L2PcInstance.STORE_PRIVATE_PACKAGE_SELL:
@@ -46,7 +46,8 @@ public class Offline implements IVoicedCommandHandler
 				{
 					if (Config.OFFLINE_TRADE_PRICE > 0)
 					{
-						if(activeChar.getInventory().destroyItemByItemId("offlinetrade", Config.OFFLINE_TRADE_PRICE_ITEM, Config.OFFLINE_TRADE_PRICE, null,	null) != null)
+						if (activeChar.getInventory().destroyItemByItemId("offlinetrade",
+								Config.OFFLINE_TRADE_PRICE_ITEM, Config.OFFLINE_TRADE_PRICE, null, null) != null)
 							activeChar.enterOfflineMode();
 						else
 							activeChar.sendPacket(SystemMessageId.NOT_ENOUGH_ITEMS);
@@ -69,6 +70,7 @@ public class Offline implements IVoicedCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

@@ -55,98 +55,82 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class FourSepulchersManager extends BossLair
 {
-	private static final String				QUEST_ID				= "620_FourGoblets";
-
-	private static final int				ENTRANCE_PASS			= 7075;
-	private static final int				USED_PASS				= 7261;
-	private static final int				CHAPEL_KEY				= 7260;
-	private static final int				ANTIQUE_BROOCH			= 7262;
-
-	protected boolean						_inEntryTime			= false;
-	protected boolean						_inWarmUpTime			= false;
-	protected boolean						_inAttackTime			= false;
-	protected boolean						_inCoolDownTime			= false;
-
-	protected ScheduledFuture<?>			_changeCoolDownTimeTask	= null;
-	protected ScheduledFuture<?>			_changeEntryTimeTask	= null;
-	protected ScheduledFuture<?>			_changeWarmUpTimeTask	= null;
-	protected ScheduledFuture<?>			_changeAttackTimeTask	= null;
-	protected ScheduledFuture<?>			_onPartyAnnihilatedTask	= null;
-
-
-	private final int[][]							_startHallSpawn			=
-																	{
-																	{ 181632, -85587, -7218 },
-																	{ 179963, -88978, -7218 },
-																	{ 173217, -86132, -7218 },
-																	{ 175608, -82296, -7218 } };
-
-	private final int[][][]						_shadowSpawnLoc			=
-																	{
-																	{
-																	{ 25339, 191231, -85574, -7216, 33380 },
-																	{ 25349, 189534, -88969, -7216, 32768 },
-																	{ 25346, 173195, -76560, -7215, 49277 },
-																	{ 25342, 175591, -72744, -7215, 49317 } },
-																	{
-																	{ 25342, 191231, -85574, -7216, 33380 },
-																	{ 25339, 189534, -88969, -7216, 32768 },
-																	{ 25349, 173195, -76560, -7215, 49277 },
-																	{ 25346, 175591, -72744, -7215, 49317 } },
-																	{
-																	{ 25346, 191231, -85574, -7216, 33380 },
-																	{ 25342, 189534, -88969, -7216, 32768 },
-																	{ 25339, 173195, -76560, -7215, 49277 },
-																	{ 25349, 175591, -72744, -7215, 49317 } },
-																	{
-																	{ 25349, 191231, -85574, -7216, 33380 },
-																	{ 25346, 189534, -88969, -7216, 32768 },
-																	{ 25342, 173195, -76560, -7215, 49277 },
-																	{ 25339, 175591, -72744, -7215, 49317 } }, };
-
-	protected Map<Integer, Boolean>			_archonSpawned			= new FastMap<Integer, Boolean>();
-	protected Map<Integer, Boolean>			_hallInUse				= new FastMap<Integer, Boolean>();
-	protected Map<Integer, int[]>			_startHallSpawns		= new FastMap<Integer, int[]>();
-	protected Map<Integer, Integer>			_hallGateKeepers		= new FastMap<Integer, Integer>();
-	protected Map<Integer, Integer>			_keyBoxNpc				= new FastMap<Integer, Integer>();
-	protected Map<Integer, Integer>			_victim					= new FastMap<Integer, Integer>();
-	protected Map<Integer, L2Spawn>			_executionerSpawns		= new FastMap<Integer, L2Spawn>();
-	protected Map<Integer, L2Spawn>			_keyBoxSpawns			= new FastMap<Integer, L2Spawn>();
-	protected Map<Integer, L2Spawn>			_mysteriousBoxSpawns	= new FastMap<Integer, L2Spawn>();
-	protected Map<Integer, L2Spawn>			_shadowSpawns			= new FastMap<Integer, L2Spawn>();
-	protected Map<Integer, List<L2Spawn>>	_dukeFinalMobs			= new FastMap<Integer, List<L2Spawn>>();
-	protected Map<Integer, List<L2SepulcherMonsterInstance>> _dukeMobs = new FastMap<Integer, List<L2SepulcherMonsterInstance>>();
-	protected Map<Integer, List<L2Spawn>>	_emperorsGraveNpcs		= new FastMap<Integer, List<L2Spawn>>();
-	protected Map<Integer, List<L2Spawn>>	_magicalMonsters		= new FastMap<Integer, List<L2Spawn>>();
-	protected Map<Integer, List<L2Spawn>>	_physicalMonsters		= new FastMap<Integer, List<L2Spawn>>();
-	protected Map<Integer, List<L2SepulcherMonsterInstance>> _viscountMobs = new FastMap<Integer, List<L2SepulcherMonsterInstance>>();
-
-	protected List<L2Spawn>					_physicalSpawns;
-	protected List<L2Spawn>					_magicalSpawns;
-	protected FastList<L2Spawn>				_managers;
-	protected List<L2Spawn>					_dukeFinalSpawns;
-	protected List<L2Spawn>					_emperorsGraveSpawns;
-	protected List<L2Npc>			_allMobs				= new FastList<L2Npc>();
-
+	private static final String QUEST_ID = "620_FourGoblets";
+	
+	private static final int ENTRANCE_PASS = 7075;
+	private static final int USED_PASS = 7261;
+	private static final int CHAPEL_KEY = 7260;
+	private static final int ANTIQUE_BROOCH = 7262;
+	
+	protected boolean _inEntryTime = false;
+	protected boolean _inWarmUpTime = false;
+	protected boolean _inAttackTime = false;
+	protected boolean _inCoolDownTime = false;
+	
+	protected ScheduledFuture<?> _changeCoolDownTimeTask = null;
+	protected ScheduledFuture<?> _changeEntryTimeTask = null;
+	protected ScheduledFuture<?> _changeWarmUpTimeTask = null;
+	protected ScheduledFuture<?> _changeAttackTimeTask = null;
+	protected ScheduledFuture<?> _onPartyAnnihilatedTask = null;
+	
+	private final int[][] _startHallSpawn = { { 181632, -85587, -7218 }, { 179963, -88978, -7218 },
+			{ 173217, -86132, -7218 }, { 175608, -82296, -7218 } };
+	
+	private final int[][][] _shadowSpawnLoc = {
+			{ { 25339, 191231, -85574, -7216, 33380 }, { 25349, 189534, -88969, -7216, 32768 },
+					{ 25346, 173195, -76560, -7215, 49277 }, { 25342, 175591, -72744, -7215, 49317 } },
+			{ { 25342, 191231, -85574, -7216, 33380 }, { 25339, 189534, -88969, -7216, 32768 },
+					{ 25349, 173195, -76560, -7215, 49277 }, { 25346, 175591, -72744, -7215, 49317 } },
+			{ { 25346, 191231, -85574, -7216, 33380 }, { 25342, 189534, -88969, -7216, 32768 },
+					{ 25339, 173195, -76560, -7215, 49277 }, { 25349, 175591, -72744, -7215, 49317 } },
+			{ { 25349, 191231, -85574, -7216, 33380 }, { 25346, 189534, -88969, -7216, 32768 },
+					{ 25342, 173195, -76560, -7215, 49277 }, { 25339, 175591, -72744, -7215, 49317 } }, };
+	
+	protected Map<Integer, Boolean> _archonSpawned = new FastMap<Integer, Boolean>();
+	protected Map<Integer, Boolean> _hallInUse = new FastMap<Integer, Boolean>();
+	protected Map<Integer, int[]> _startHallSpawns = new FastMap<Integer, int[]>();
+	protected Map<Integer, Integer> _hallGateKeepers = new FastMap<Integer, Integer>();
+	protected Map<Integer, Integer> _keyBoxNpc = new FastMap<Integer, Integer>();
+	protected Map<Integer, Integer> _victim = new FastMap<Integer, Integer>();
+	protected Map<Integer, L2Spawn> _executionerSpawns = new FastMap<Integer, L2Spawn>();
+	protected Map<Integer, L2Spawn> _keyBoxSpawns = new FastMap<Integer, L2Spawn>();
+	protected Map<Integer, L2Spawn> _mysteriousBoxSpawns = new FastMap<Integer, L2Spawn>();
+	protected Map<Integer, L2Spawn> _shadowSpawns = new FastMap<Integer, L2Spawn>();
+	protected Map<Integer, List<L2Spawn>> _dukeFinalMobs = new FastMap<Integer, List<L2Spawn>>();
+	protected Map<Integer, List<L2SepulcherMonsterInstance>> _dukeMobs =
+			new FastMap<Integer, List<L2SepulcherMonsterInstance>>();
+	protected Map<Integer, List<L2Spawn>> _emperorsGraveNpcs = new FastMap<Integer, List<L2Spawn>>();
+	protected Map<Integer, List<L2Spawn>> _magicalMonsters = new FastMap<Integer, List<L2Spawn>>();
+	protected Map<Integer, List<L2Spawn>> _physicalMonsters = new FastMap<Integer, List<L2Spawn>>();
+	protected Map<Integer, List<L2SepulcherMonsterInstance>> _viscountMobs =
+			new FastMap<Integer, List<L2SepulcherMonsterInstance>>();
+	
+	protected List<L2Spawn> _physicalSpawns;
+	protected List<L2Spawn> _magicalSpawns;
+	protected FastList<L2Spawn> _managers;
+	protected List<L2Spawn> _dukeFinalSpawns;
+	protected List<L2Spawn> _emperorsGraveSpawns;
+	protected List<L2Npc> _allMobs = new FastList<L2Npc>();
+	
 	protected long _coolDownTimeEnd = 0;
 	protected long _entryTimeEnd = 0;
 	protected long _warmUpTimeEnd = 0;
 	protected long _attackTimeEnd = 0;
-
+	
 	protected byte _newCycleMin = 55;
-
+	
 	protected boolean _firstTimeRun;
-
+	
 	public static final FourSepulchersManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	@Override
 	public void setUnspawn()
 	{
 	}
-
+	
 	@Override
 	public void init()
 	{
@@ -158,17 +142,17 @@ public class FourSepulchersManager extends BossLair
 			_changeWarmUpTimeTask.cancel(true);
 		if (_changeAttackTimeTask != null)
 			_changeAttackTimeTask.cancel(true);
-
+		
 		_changeCoolDownTimeTask = null;
 		_changeEntryTimeTask = null;
 		_changeWarmUpTimeTask = null;
 		_changeAttackTimeTask = null;
-
+		
 		_inEntryTime = false;
 		_inWarmUpTime = false;
 		_inAttackTime = false;
 		_inCoolDownTime = false;
-
+		
 		_firstTimeRun = true;
 		initFixedInfo();
 		loadMysteriousBox();
@@ -183,42 +167,39 @@ public class FourSepulchersManager extends BossLair
 		timeSelector();
 		
 	}
-
+	
 	// Phase select on server launch
 	protected void timeSelector()
 	{
 		timeCalculator();
 		long currentTime = System.currentTimeMillis();
 		// If current time >= time of entry beginning and if current time < time of entry beginning + time of entry end
-		if(currentTime >= _coolDownTimeEnd && currentTime < _entryTimeEnd) // Entry time check
+		if (currentTime >= _coolDownTimeEnd && currentTime < _entryTimeEnd) // Entry time check
 		{
 			cleanUp();
-			_changeEntryTimeTask =
-				ThreadPoolManager.getInstance().scheduleGeneral(new ChangeEntryTime(), 0);
+			_changeEntryTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeEntryTime(), 0);
 			_log.info("FourSepulchersManager: Beginning in Entry time");
 		}
-		else if(currentTime >= _entryTimeEnd && currentTime < _warmUpTimeEnd) // Warmup time check
+		else if (currentTime >= _entryTimeEnd && currentTime < _warmUpTimeEnd) // Warmup time check
 		{
 			cleanUp();
-			_changeWarmUpTimeTask =
-				ThreadPoolManager.getInstance().scheduleGeneral(new ChangeWarmUpTime(), 0);
+			_changeWarmUpTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeWarmUpTime(), 0);
 			_log.info("FourSepulchersManager: Beginning in WarmUp time");
 		}
-		else if(currentTime >= _warmUpTimeEnd && currentTime < _attackTimeEnd) // Attack time check
+		else if (currentTime >= _warmUpTimeEnd && currentTime < _attackTimeEnd) // Attack time check
 		{
 			cleanUp();
-			_changeAttackTimeTask =
-				ThreadPoolManager.getInstance().scheduleGeneral(new ChangeAttackTime(), 0);
+			_changeAttackTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeAttackTime(), 0);
 			_log.info("FourSepulchersManager: Beginning in Attack time");
 		}
-		else // Else cooldown time and without cleanup because it's already implemented
+		else
+		// Else cooldown time and without cleanup because it's already implemented
 		{
-			_changeCoolDownTimeTask =
-				ThreadPoolManager.getInstance().scheduleGeneral(new ChangeCoolDownTime(), 0);
+			_changeCoolDownTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeCoolDownTime(), 0);
 			_log.info("FourSepulchersManager: Beginning in Cooldown time");
 		}
 	}
-
+	
 	// Phase end times calculator
 	protected void timeCalculator()
 	{
@@ -231,24 +212,24 @@ public class FourSepulchersManager extends BossLair
 		_warmUpTimeEnd = _entryTimeEnd + Config.ALT_FS_TIME_WARMUP * 60000;
 		_attackTimeEnd = _warmUpTimeEnd + Config.ALT_FS_TIME_ATTACK * 60000;
 	}
-
+	
 	protected void cleanUp()
 	{
 		for (L2PcInstance player : getPlayersInside())
 		{
 			player.teleToLocation(TeleportWhereType.Town);
 		}
-
+		
 		deleteAllMobs();
-
+		
 		closeAllDoors();
-
+		
 		_hallInUse.clear();
-		_hallInUse.put(31921,false);
-		_hallInUse.put(31922,false);
-		_hallInUse.put(31923,false);
-		_hallInUse.put(31924,false);
-
+		_hallInUse.put(31921, false);
+		_hallInUse.put(31922, false);
+		_hallInUse.put(31923, false);
+		_hallInUse.put(31924, false);
+		
 		if (!_archonSpawned.isEmpty())
 		{
 			Set<Integer> npcIdSet = _archonSpawned.keySet();
@@ -258,18 +239,18 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected void spawnManagers()
 	{
 		_managers = new FastList<L2Spawn>();
-
+		
 		int i = 31921;
 		for (L2Spawn spawnDat; i <= 31924; i++)
 		{
 			if (i < 31921 || i > 31924)
 				continue;
 			L2NpcTemplate template1 = NpcTable.getInstance().getTemplate(i);
-			if(template1 == null)
+			if (template1 == null)
 				continue;
 			spawnDat = new L2Spawn(template1);
 			spawnDat.setAmount(1);
@@ -305,22 +286,22 @@ public class FourSepulchersManager extends BossLair
 			SpawnTable.getInstance().addNewSpawn(spawnDat, false);
 			spawnDat.doSpawn();
 			spawnDat.startRespawn();
-			_log.info("FourSepulchersManager: Spawned "+spawnDat.getTemplate().getName());
+			_log.info("FourSepulchersManager: Spawned " + spawnDat.getTemplate().getName());
 		}
 	}
-
+	
 	protected void initFixedInfo()
 	{
 		_startHallSpawns.put(31921, _startHallSpawn[0]);
 		_startHallSpawns.put(31922, _startHallSpawn[1]);
 		_startHallSpawns.put(31923, _startHallSpawn[2]);
 		_startHallSpawns.put(31924, _startHallSpawn[3]);
-
+		
 		_hallInUse.put(31921, false);
 		_hallInUse.put(31922, false);
 		_hallInUse.put(31923, false);
 		_hallInUse.put(31924, false);
-
+		
 		_hallGateKeepers.put(31925, 25150012);
 		_hallGateKeepers.put(31926, 25150013);
 		_hallGateKeepers.put(31927, 25150014);
@@ -341,7 +322,7 @@ public class FourSepulchersManager extends BossLair
 		_hallGateKeepers.put(31942, 25150024);
 		_hallGateKeepers.put(31943, 25150025);
 		_hallGateKeepers.put(31944, 25150026);
-
+		
 		_keyBoxNpc.put(18120, 31455);
 		_keyBoxNpc.put(18121, 31455);
 		_keyBoxNpc.put(18122, 31455);
@@ -381,7 +362,7 @@ public class FourSepulchersManager extends BossLair
 		_keyBoxNpc.put(18217, 31466);
 		_keyBoxNpc.put(18218, 31466);
 		_keyBoxNpc.put(18219, 31466);
-
+		
 		_victim.put(18150, 18158);
 		_victim.put(18151, 18159);
 		_victim.put(18152, 18160);
@@ -391,23 +372,23 @@ public class FourSepulchersManager extends BossLair
 		_victim.put(18156, 18164);
 		_victim.put(18157, 18165);
 	}
-
+	
 	private void loadMysteriousBox()
 	{
 		Connection con = null;
-
+		
 		_mysteriousBoxSpawns.clear();
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 0 ORDER BY id");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 0 ORDER BY id");
 			ResultSet rset = statement.executeQuery();
-
+			
 			L2Spawn spawnDat;
 			L2NpcTemplate template1;
-
+			
 			while (rset.next())
 			{
 				template1 = NpcTable.getInstance().getTemplate(rset.getInt("npc_templateid"));
@@ -426,10 +407,11 @@ public class FourSepulchersManager extends BossLair
 				}
 				else
 				{
-					_log.warn("FourSepulchersManager.LoadMysteriousBox: Data missing in NPC table for ID: " + rset.getInt("npc_templateid") + ".");
+					_log.warn("FourSepulchersManager.LoadMysteriousBox: Data missing in NPC table for ID: "
+							+ rset.getInt("npc_templateid") + ".");
 				}
 			}
-
+			
 			rset.close();
 			statement.close();
 			_log.info("FourSepulchersManager: Loaded " + _mysteriousBoxSpawns.size() + " Mysterious-Box spawns.");
@@ -444,12 +426,12 @@ public class FourSepulchersManager extends BossLair
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void initKeyBoxSpawns()
 	{
 		L2Spawn spawnDat;
 		L2NpcTemplate template;
-
+		
 		for (int keyNpcId : _keyBoxNpc.keySet())
 		{
 			try
@@ -469,7 +451,8 @@ public class FourSepulchersManager extends BossLair
 				}
 				else
 				{
-					_log.warn("FourSepulchersManager.InitKeyBoxSpawns: Data missing in NPC table for ID: " + _keyBoxNpc.get(keyNpcId) + ".");
+					_log.warn("FourSepulchersManager.InitKeyBoxSpawns: Data missing in NPC table for ID: "
+							+ _keyBoxNpc.get(keyNpcId) + ".");
 				}
 			}
 			catch (Exception e)
@@ -478,35 +461,35 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	private void loadPhysicalMonsters()
 	{
 		_physicalMonsters.clear();
-
+		
 		int loaded = 0;
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
-			PreparedStatement statement1 = con
-					.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 1 ORDER BY key_npc_id");
+			
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 1 ORDER BY key_npc_id");
 			ResultSet rset1 = statement1.executeQuery();
 			while (rset1.next())
 			{
 				int keyNpcId = rset1.getInt("key_npc_id");
-
-				PreparedStatement statement2 = con
-						.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 1 ORDER BY id");
+				
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 1 ORDER BY id");
 				statement2.setInt(1, keyNpcId);
 				ResultSet rset2 = statement2.executeQuery();
-
+				
 				L2Spawn spawnDat;
 				L2NpcTemplate template1;
-
+				
 				_physicalSpawns = new FastList<L2Spawn>();
-
+				
 				while (rset2.next())
 				{
 					template1 = NpcTable.getInstance().getTemplate(rset2.getInt("npc_templateid"));
@@ -525,15 +508,16 @@ public class FourSepulchersManager extends BossLair
 					}
 					else
 					{
-						_log.warn("FourSepulchersManager.LoadPhysicalMonsters: Data missing in NPC table for ID: " + rset2.getInt("npc_templateid") + ".");
+						_log.warn("FourSepulchersManager.LoadPhysicalMonsters: Data missing in NPC table for ID: "
+								+ rset2.getInt("npc_templateid") + ".");
 					}
 				}
-
+				
 				rset2.close();
 				statement2.close();
 				_physicalMonsters.put(keyNpcId, _physicalSpawns);
 			}
-
+			
 			rset1.close();
 			statement1.close();
 			_log.info("FourSepulchersManager: Loaded " + loaded + " Physical type monsters spawns.");
@@ -548,35 +532,35 @@ public class FourSepulchersManager extends BossLair
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void loadMagicalMonsters()
 	{
 		_magicalMonsters.clear();
-
+		
 		int loaded = 0;
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
-			PreparedStatement statement1 = con
-					.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 2 ORDER BY key_npc_id");
+			
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 2 ORDER BY key_npc_id");
 			ResultSet rset1 = statement1.executeQuery();
 			while (rset1.next())
 			{
 				int keyNpcId = rset1.getInt("key_npc_id");
-
-				PreparedStatement statement2 = con
-						.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 2 ORDER BY id");
+				
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 2 ORDER BY id");
 				statement2.setInt(1, keyNpcId);
 				ResultSet rset2 = statement2.executeQuery();
-
+				
 				L2Spawn spawnDat;
 				L2NpcTemplate template1;
-
+				
 				_magicalSpawns = new FastList<L2Spawn>();
-
+				
 				while (rset2.next())
 				{
 					template1 = NpcTable.getInstance().getTemplate(rset2.getInt("npc_templateid"));
@@ -595,15 +579,16 @@ public class FourSepulchersManager extends BossLair
 					}
 					else
 					{
-						_log.warn("FourSepulchersManager.LoadMagicalMonsters: Data missing in NPC table for ID: " + rset2.getInt("npc_templateid") + ".");
+						_log.warn("FourSepulchersManager.LoadMagicalMonsters: Data missing in NPC table for ID: "
+								+ rset2.getInt("npc_templateid") + ".");
 					}
 				}
-
+				
 				rset2.close();
 				statement2.close();
 				_magicalMonsters.put(keyNpcId, _magicalSpawns);
 			}
-
+			
 			rset1.close();
 			statement1.close();
 			_log.info("FourSepulchersManager: Loaded " + loaded + " Magical type monsters spawns.");
@@ -618,36 +603,36 @@ public class FourSepulchersManager extends BossLair
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void loadDukeMonsters()
 	{
 		_dukeFinalMobs.clear();
 		_archonSpawned.clear();
-
+		
 		int loaded = 0;
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
-			PreparedStatement statement1 = con
-					.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 5 ORDER BY key_npc_id");
+			
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 5 ORDER BY key_npc_id");
 			ResultSet rset1 = statement1.executeQuery();
 			while (rset1.next())
 			{
 				int keyNpcId = rset1.getInt("key_npc_id");
-
-				PreparedStatement statement2 = con
-						.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 5 ORDER BY id");
+				
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 5 ORDER BY id");
 				statement2.setInt(1, keyNpcId);
 				ResultSet rset2 = statement2.executeQuery();
-
+				
 				L2Spawn spawnDat;
 				L2NpcTemplate template1;
-
+				
 				_dukeFinalSpawns = new FastList<L2Spawn>();
-
+				
 				while (rset2.next())
 				{
 					template1 = NpcTable.getInstance().getTemplate(rset2.getInt("npc_templateid"));
@@ -666,16 +651,17 @@ public class FourSepulchersManager extends BossLair
 					}
 					else
 					{
-						_log.warn("FourSepulchersManager.LoadDukeMonsters: Data missing in NPC table for ID: " + rset2.getInt("npc_templateid") + ".");
+						_log.warn("FourSepulchersManager.LoadDukeMonsters: Data missing in NPC table for ID: "
+								+ rset2.getInt("npc_templateid") + ".");
 					}
 				}
-
+				
 				rset2.close();
 				statement2.close();
 				_dukeFinalMobs.put(keyNpcId, _dukeFinalSpawns);
 				_archonSpawned.put(keyNpcId, false);
 			}
-
+			
 			rset1.close();
 			statement1.close();
 			_log.info("FourSepulchersManager: loaded " + loaded + " Church of duke monsters spawns.");
@@ -690,35 +676,35 @@ public class FourSepulchersManager extends BossLair
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void loadEmperorsGraveMonsters()
 	{
 		_emperorsGraveNpcs.clear();
-
+		
 		int loaded = 0;
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
-			PreparedStatement statement1 = con
-					.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 6 ORDER BY key_npc_id");
+			
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT DISTINCT key_npc_id FROM four_sepulchers_spawnlist WHERE spawntype = 6 ORDER BY key_npc_id");
 			ResultSet rset1 = statement1.executeQuery();
 			while (rset1.next())
 			{
 				int keyNpcId = rset1.getInt("key_npc_id");
-
-				PreparedStatement statement2 = con
-						.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 6 ORDER BY id");
+				
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, count, npc_templateid, locx, locy, locz, heading, respawn_delay, key_npc_id FROM four_sepulchers_spawnlist WHERE key_npc_id = ? AND spawntype = 6 ORDER BY id");
 				statement2.setInt(1, keyNpcId);
 				ResultSet rset2 = statement2.executeQuery();
-
+				
 				L2Spawn spawnDat;
 				L2NpcTemplate template1;
-
+				
 				_emperorsGraveSpawns = new FastList<L2Spawn>();
-
+				
 				while (rset2.next())
 				{
 					template1 = NpcTable.getInstance().getTemplate(rset2.getInt("npc_templateid"));
@@ -737,15 +723,16 @@ public class FourSepulchersManager extends BossLair
 					}
 					else
 					{
-						_log.warn("FourSepulchersManager.LoadEmperorsGraveMonsters: Data missing in NPC table for ID: " + rset2.getInt("npc_templateid") + ".");
+						_log.warn("FourSepulchersManager.LoadEmperorsGraveMonsters: Data missing in NPC table for ID: "
+								+ rset2.getInt("npc_templateid") + ".");
 					}
 				}
-
+				
 				rset2.close();
 				statement2.close();
 				_emperorsGraveNpcs.put(keyNpcId, _emperorsGraveSpawns);
 			}
-
+			
 			rset1.close();
 			statement1.close();
 			_log.info("FourSepulchersManager: loaded " + loaded + " Emperor's grave NPC spawns.");
@@ -760,17 +747,17 @@ public class FourSepulchersManager extends BossLair
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	protected void initLocationShadowSpawns()
 	{
 		int locNo = Rnd.get(4);
 		final int[] gateKeeper = { 31929, 31934, 31939, 31944 };
-
+		
 		L2Spawn spawnDat;
 		L2NpcTemplate template;
-
+		
 		_shadowSpawns.clear();
-
+		
 		for (int i = 0; i <= 3; i++)
 		{
 			template = NpcTable.getInstance().getTemplate(_shadowSpawnLoc[locNo][i][0]);
@@ -795,16 +782,17 @@ public class FourSepulchersManager extends BossLair
 			}
 			else
 			{
-				_log.error("FourSepulchersManager.InitLocationShadowSpawns: Data missing in NPC table for ID: " + _shadowSpawnLoc[locNo][i][0] + ".");
+				_log.error("FourSepulchersManager.InitLocationShadowSpawns: Data missing in NPC table for ID: "
+						+ _shadowSpawnLoc[locNo][i][0] + ".");
 			}
 		}
 	}
-
+	
 	protected void initExecutionerSpawns()
 	{
 		L2Spawn spawnDat;
 		L2NpcTemplate template;
-
+		
 		for (int keyNpcId : _victim.keySet())
 		{
 			try
@@ -824,7 +812,8 @@ public class FourSepulchersManager extends BossLair
 				}
 				else
 				{
-					_log.warn("FourSepulchersManager.InitExecutionerSpawns: Data missing in NPC table for ID: " + _victim.get(keyNpcId) + ".");
+					_log.warn("FourSepulchersManager.InitExecutionerSpawns: Data missing in NPC table for ID: "
+							+ _victim.get(keyNpcId) + ".");
 				}
 			}
 			catch (Exception e)
@@ -833,45 +822,46 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	public boolean isEntryTime()
 	{
 		return _inEntryTime;
 	}
-
+	
 	public boolean isAttackTime()
 	{
 		return _inAttackTime;
 	}
-
+	
 	public synchronized void tryEntry(L2Npc npc, L2PcInstance player)
 	{
 		int npcId = npc.getNpcId();
 		switch (npcId)
 		{
 		// ID ok
-		case 31921:
-		case 31922:
-		case 31923:
-		case 31924:
-			break;
-		// ID not ok
-		default:
-			if (!player.isGM())
-			{
-				_log.warn("Player " + player.getName() + "(" + player.getObjectId() + ") tried to cheat in four sepulchers.");
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " tried to enter four sepulchers with invalid npc id.",
-						Config.DEFAULT_PUNISH);
-			}
-			return;
+			case 31921:
+			case 31922:
+			case 31923:
+			case 31924:
+				break;
+			// ID not ok
+			default:
+				if (!player.isGM())
+				{
+					_log.warn("Player " + player.getName() + "(" + player.getObjectId()
+							+ ") tried to cheat in four sepulchers.");
+					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName()
+							+ " tried to enter four sepulchers with invalid npc id.", Config.DEFAULT_PUNISH);
+				}
+				return;
 		}
-
+		
 		if (_hallInUse.get(npcId))
 		{
 			showHtmlFile(player, npcId + "-FULL.htm", npc, null);
 			return;
 		}
-
+		
 		if (Config.ALT_FS_PARTY_MEMBER_COUNT > 1)
 		{
 			if (!player.isInParty() || player.getParty().getMemberCount() < Config.ALT_FS_PARTY_MEMBER_COUNT)
@@ -879,17 +869,17 @@ public class FourSepulchersManager extends BossLair
 				showHtmlFile(player, npcId + "-SP.htm", npc, null);
 				return;
 			}
-
+			
 			if (!player.getParty().isLeader(player))
 			{
 				showHtmlFile(player, npcId + "-NL.htm", npc, null);
 				return;
 			}
-
+			
 			for (L2PcInstance mem : player.getParty().getPartyMembers())
 			{
 				QuestState qs = mem.getQuestState(QUEST_ID);
-				if(qs == null || (!qs.isStarted() && !qs.isCompleted()))
+				if (qs == null || (!qs.isStarted() && !qs.isCompleted()))
 				{
 					showHtmlFile(player, npcId + "-NS.htm", npc, mem);
 					return;
@@ -899,7 +889,7 @@ public class FourSepulchersManager extends BossLair
 					showHtmlFile(player, npcId + "-SE.htm", npc, mem);
 					return;
 				}
-
+				
 				if (player.getWeightPenalty() >= 3)
 				{
 					mem.sendPacket(SystemMessageId.INVENTORY_LESS_THAN_80_PERCENT);
@@ -911,8 +901,8 @@ public class FourSepulchersManager extends BossLair
 		{
 			if (!player.getParty().isLeader(player))
 			{
-					showHtmlFile(player, npcId + "-NL.htm", npc, null);
-					return;
+				showHtmlFile(player, npcId + "-NL.htm", npc, null);
+				return;
 			}
 			for (L2PcInstance mem : player.getParty().getPartyMembers())
 			{
@@ -937,7 +927,7 @@ public class FourSepulchersManager extends BossLair
 		else
 		{
 			QuestState qs = player.getQuestState(QUEST_ID);
-			if(qs == null || (!qs.isStarted() && !qs.isCompleted()))
+			if (qs == null || (!qs.isStarted() && !qs.isCompleted()))
 			{
 				showHtmlFile(player, npcId + "-NS.htm", npc, player);
 				return;
@@ -947,31 +937,31 @@ public class FourSepulchersManager extends BossLair
 				showHtmlFile(player, npcId + "-SE.htm", npc, player);
 				return;
 			}
-
+			
 			if (player.getWeightPenalty() >= 3)
 			{
 				player.sendPacket(SystemMessageId.INVENTORY_LESS_THAN_80_PERCENT);
 				return;
 			}
 		}
-
+		
 		if (!isEntryTime())
 		{
 			showHtmlFile(player, npcId + "-NE.htm", npc, null);
 			return;
 		}
-
+		
 		showHtmlFile(player, npcId + "-OK.htm", npc, null);
-
+		
 		entry(npcId, player);
 	}
-
+	
 	private void entry(int npcId, L2PcInstance player)
 	{
 		int[] Location = _startHallSpawns.get(npcId);
 		int driftx;
 		int drifty;
-
+		
 		if (Config.ALT_FS_PARTY_MEMBER_COUNT > 1)
 		{
 			List<L2PcInstance> members = new FastList<L2PcInstance>();
@@ -982,7 +972,7 @@ public class FourSepulchersManager extends BossLair
 					members.add(mem);
 				}
 			}
-
+			
 			for (L2PcInstance mem : members)
 			{
 				driftx = Rnd.get(-80, 80);
@@ -993,14 +983,14 @@ public class FourSepulchersManager extends BossLair
 				{
 					mem.addItem("Quest", USED_PASS, 1, mem, true);
 				}
-
+				
 				L2ItemInstance hallsKey = mem.getInventory().getItemByItemId(CHAPEL_KEY);
 				if (hallsKey != null)
 				{
 					mem.destroyItemByItemId("Quest", CHAPEL_KEY, hallsKey.getCount(), mem, true);
 				}
 			}
-
+			
 			_hallInUse.put(npcId, true);
 		}
 		else if (player.isInParty())
@@ -1013,7 +1003,7 @@ public class FourSepulchersManager extends BossLair
 					members.add(mem);
 				}
 			}
-
+			
 			for (L2PcInstance mem : members)
 			{
 				driftx = Rnd.get(-80, 80);
@@ -1024,14 +1014,14 @@ public class FourSepulchersManager extends BossLair
 				{
 					mem.addItem("Quest", USED_PASS, 1, mem, true);
 				}
-
+				
 				L2ItemInstance hallsKey = mem.getInventory().getItemByItemId(CHAPEL_KEY);
 				if (hallsKey != null)
 				{
 					mem.destroyItemByItemId("Quest", CHAPEL_KEY, hallsKey.getCount(), mem, true);
 				}
 			}
-
+			
 			_hallInUse.put(npcId, true);
 		}
 		else
@@ -1044,22 +1034,22 @@ public class FourSepulchersManager extends BossLair
 			{
 				player.addItem("Quest", USED_PASS, 1, player, true);
 			}
-
+			
 			L2ItemInstance hallsKey = player.getInventory().getItemByItemId(CHAPEL_KEY);
 			if (hallsKey != null)
 			{
 				player.destroyItemByItemId("Quest", CHAPEL_KEY, hallsKey.getCount(), player, true);
 			}
-
+			
 			_hallInUse.put(npcId, true);
 		}
 	}
-
+	
 	public void spawnMysteriousBox(int npcId)
 	{
 		if (!isAttackTime())
 			return;
-
+		
 		L2Spawn spawnDat = _mysteriousBoxSpawns.get(npcId);
 		if (spawnDat != null)
 		{
@@ -1067,30 +1057,30 @@ public class FourSepulchersManager extends BossLair
 			spawnDat.stopRespawn();
 		}
 	}
-
+	
 	public void spawnMonster(int npcId)
 	{
 		if (!isAttackTime())
 			return;
-
+		
 		FastList<L2Spawn> monsterList;
 		List<L2SepulcherMonsterInstance> mobs = new FastList<L2SepulcherMonsterInstance>();
 		L2Spawn keyBoxMobSpawn;
-
+		
 		if (Rnd.get(2) == 0)
 		{
-			monsterList = (FastList<L2Spawn>) _physicalMonsters.get(npcId);
+			monsterList = (FastList<L2Spawn>)_physicalMonsters.get(npcId);
 		}
 		else
 		{
-			monsterList = (FastList<L2Spawn>) _magicalMonsters.get(npcId);
+			monsterList = (FastList<L2Spawn>)_magicalMonsters.get(npcId);
 		}
-
+		
 		if (monsterList != null)
 		{
 			boolean spawnKeyBoxMob = false;
 			boolean spawnedKeyBoxMob = false;
-
+			
 			for (L2Spawn spawnDat : monsterList)
 			{
 				if (spawnedKeyBoxMob)
@@ -1101,21 +1091,21 @@ public class FourSepulchersManager extends BossLair
 				{
 					switch (npcId)
 					{
-					case 31469:
-					case 31474:
-					case 31479:
-					case 31484:
-						if (Rnd.get(48) == 0)
-						{
-							spawnKeyBoxMob = true;
-							//_log.info("FourSepulchersManager.SpawnMonster: Set to spawn Church of Viscount Key Mob.");
-						}
-						break;
+						case 31469:
+						case 31474:
+						case 31479:
+						case 31484:
+							if (Rnd.get(48) == 0)
+							{
+								spawnKeyBoxMob = true;
+								//_log.info("FourSepulchersManager.SpawnMonster: Set to spawn Church of Viscount Key Mob.");
+							}
+							break;
 					}
 				}
-
+				
 				L2SepulcherMonsterInstance mob = null;
-
+				
 				if (spawnKeyBoxMob)
 				{
 					try
@@ -1131,7 +1121,7 @@ public class FourSepulchersManager extends BossLair
 							keyBoxMobSpawn.setHeading(spawnDat.getHeading());
 							keyBoxMobSpawn.setRespawnDelay(3600);
 							SpawnTable.getInstance().addNewSpawn(keyBoxMobSpawn, false);
-							mob = (L2SepulcherMonsterInstance) keyBoxMobSpawn.doSpawn();
+							mob = (L2SepulcherMonsterInstance)keyBoxMobSpawn.doSpawn();
 							keyBoxMobSpawn.stopRespawn();
 						}
 						else
@@ -1143,93 +1133,93 @@ public class FourSepulchersManager extends BossLair
 					{
 						_log.error("FourSepulchersManager.SpawnMonster: Spawn could not be initialized: ", e);
 					}
-
+					
 					spawnedKeyBoxMob = true;
 				}
 				else
 				{
-					mob = (L2SepulcherMonsterInstance) spawnDat.doSpawn();
+					mob = (L2SepulcherMonsterInstance)spawnDat.doSpawn();
 					spawnDat.stopRespawn();
 				}
-
+				
 				if (mob != null)
 				{
 					mob.mysteriousBoxId = npcId;
 					switch (npcId)
 					{
-					case 31469:
-					case 31474:
-					case 31479:
-					case 31484:
-					case 31472:
-					case 31477:
-					case 31482:
-					case 31487:
-						mobs.add(mob);
-						break;
+						case 31469:
+						case 31474:
+						case 31479:
+						case 31484:
+						case 31472:
+						case 31477:
+						case 31482:
+						case 31487:
+							mobs.add(mob);
+							break;
 					}
 					_allMobs.add(mob);
 				}
 			}
-
+			
 			switch (npcId)
 			{
-			case 31469:
-			case 31474:
-			case 31479:
-			case 31484:
-				_viscountMobs.put(npcId, mobs);
-				break;
-
-			case 31472:
-			case 31477:
-			case 31482:
-			case 31487:
-				_dukeMobs.put(npcId, mobs);
-				break;
+				case 31469:
+				case 31474:
+				case 31479:
+				case 31484:
+					_viscountMobs.put(npcId, mobs);
+					break;
+				
+				case 31472:
+				case 31477:
+				case 31482:
+				case 31487:
+					_dukeMobs.put(npcId, mobs);
+					break;
 			}
 		}
 	}
-
+	
 	public synchronized boolean isViscountMobsAnnihilated(int npcId)
 	{
-		FastList<L2SepulcherMonsterInstance> mobs = (FastList<L2SepulcherMonsterInstance>) _viscountMobs.get(npcId);
-
+		FastList<L2SepulcherMonsterInstance> mobs = (FastList<L2SepulcherMonsterInstance>)_viscountMobs.get(npcId);
+		
 		if (mobs == null)
 			return true;
-
+		
 		for (L2SepulcherMonsterInstance mob : mobs)
 		{
 			if (!mob.isDead())
 				return false;
 		}
-
+		
 		return true;
 	}
-
+	
 	public synchronized boolean isDukeMobsAnnihilated(int npcId)
 	{
-		FastList<L2SepulcherMonsterInstance> mobs = (FastList<L2SepulcherMonsterInstance>) _dukeMobs.get(npcId);
-
+		FastList<L2SepulcherMonsterInstance> mobs = (FastList<L2SepulcherMonsterInstance>)_dukeMobs.get(npcId);
+		
 		if (mobs == null)
 			return true;
-
+		
 		for (L2SepulcherMonsterInstance mob : mobs)
 		{
 			if (!mob.isDead())
 				return false;
 		}
-
+		
 		return true;
 	}
-
+	
 	public void spawnKeyBox(L2Npc activeChar)
 	{
 		if (!isAttackTime())
 			return;
-
+		
 		L2Spawn spawnDat = _keyBoxSpawns.get(activeChar.getNpcId());
-
+		
 		if (spawnDat != null)
 		{
 			spawnDat.setAmount(1);
@@ -1240,17 +1230,17 @@ public class FourSepulchersManager extends BossLair
 			spawnDat.setRespawnDelay(3600);
 			_allMobs.add(spawnDat.doSpawn());
 			spawnDat.stopRespawn();
-
+			
 		}
 	}
-
+	
 	public void spawnExecutionerOfHalisha(L2Npc activeChar)
 	{
 		if (!isAttackTime())
 			return;
-
+		
 		L2Spawn spawnDat = _executionerSpawns.get(activeChar.getNpcId());
-
+		
 		if (spawnDat != null)
 		{
 			spawnDat.setAmount(1);
@@ -1263,25 +1253,25 @@ public class FourSepulchersManager extends BossLair
 			spawnDat.stopRespawn();
 		}
 	}
-
+	
 	public void spawnArchonOfHalisha(int npcId)
 	{
 		if (!isAttackTime())
 			return;
-
+		
 		Boolean status = _archonSpawned.get(npcId);
 		if (status != null && status)
 			return;
-
-		FastList<L2Spawn> monsterList = (FastList<L2Spawn>) _dukeFinalMobs.get(npcId);
-
+		
+		FastList<L2Spawn> monsterList = (FastList<L2Spawn>)_dukeFinalMobs.get(npcId);
+		
 		if (monsterList != null)
 		{
 			for (L2Spawn spawnDat : monsterList)
 			{
-				L2SepulcherMonsterInstance mob = (L2SepulcherMonsterInstance) spawnDat.doSpawn();
+				L2SepulcherMonsterInstance mob = (L2SepulcherMonsterInstance)spawnDat.doSpawn();
 				spawnDat.stopRespawn();
-
+				
 				if (mob != null)
 				{
 					mob.mysteriousBoxId = npcId;
@@ -1291,14 +1281,14 @@ public class FourSepulchersManager extends BossLair
 			_archonSpawned.put(npcId, true);
 		}
 	}
-
+	
 	public void spawnEmperorsGraveNpc(int npcId)
 	{
 		if (!isAttackTime())
 			return;
-
-		FastList<L2Spawn> monsterList = (FastList<L2Spawn>) _emperorsGraveNpcs.get(npcId);
-
+		
+		FastList<L2Spawn> monsterList = (FastList<L2Spawn>)_emperorsGraveNpcs.get(npcId);
+		
 		if (monsterList != null)
 		{
 			for (L2Spawn spawnDat : monsterList)
@@ -1308,14 +1298,14 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected void locationShadowSpawns()
 	{
 		int locNo = Rnd.get(4);
 		final int[] gateKeeper = { 31929, 31934, 31939, 31944 };
-
+		
 		L2Spawn spawnDat;
-
+		
 		for (int i = 0; i <= 3; i++)
 		{
 			int keyNpcId = gateKeeper[i];
@@ -1327,18 +1317,18 @@ public class FourSepulchersManager extends BossLair
 			_shadowSpawns.put(keyNpcId, spawnDat);
 		}
 	}
-
+	
 	public void spawnShadow(int npcId)
 	{
 		if (!isAttackTime())
 			return;
-
+		
 		L2Spawn spawnDat = _shadowSpawns.get(npcId);
 		if (spawnDat != null)
 		{
-			L2SepulcherMonsterInstance mob = (L2SepulcherMonsterInstance) spawnDat.doSpawn();
+			L2SepulcherMonsterInstance mob = (L2SepulcherMonsterInstance)spawnDat.doSpawn();
 			spawnDat.stopRespawn();
-
+			
 			if (mob != null)
 			{
 				mob.mysteriousBoxId = npcId;
@@ -1346,13 +1336,13 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	public void checkAnnihilated(final L2PcInstance player)
 	{
 		if (isPlayersAnnihilated())
 		{
-			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-			{
+			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+				@Override
 				public void run()
 				{
 					onPartyAnnihilated(player);
@@ -1360,7 +1350,7 @@ public class FourSepulchersManager extends BossLair
 			}, 5000);
 		}
 	}
-
+	
 	public void onPartyAnnihilated(L2PcInstance player)
 	{
 		if (player.getParty() != null)
@@ -1381,7 +1371,7 @@ public class FourSepulchersManager extends BossLair
 			player.teleToLocation(169589 + driftX, -90493 + driftY, -2914);
 		}
 	}
-
+	
 	public void deleteAllMobs()
 	{
 		int delCnt = 0;
@@ -1400,7 +1390,7 @@ public class FourSepulchersManager extends BossLair
 		}
 		_allMobs.clear();
 	}
-
+	
 	protected void closeAllDoors()
 	{
 		for (int doorId : _hallGateKeepers.values())
@@ -1414,7 +1404,7 @@ public class FourSepulchersManager extends BossLair
 				}
 				else
 				{
-					_log.warn("FourSepulchersManager: Attempted to close undefined door. doorId: "+doorId);
+					_log.warn("FourSepulchersManager: Attempted to close undefined door. doorId: " + doorId);
 				}
 			}
 			catch (Exception e)
@@ -1423,7 +1413,7 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected byte minuteSelect(byte min)
 	{
 		switch (min % 5)
@@ -1431,16 +1421,16 @@ public class FourSepulchersManager extends BossLair
 			case 0:
 				return min;
 			case 1:
-				return (byte) (min - 1);
+				return (byte)(min - 1);
 			case 2:
-				return (byte) (min - 2);
+				return (byte)(min - 2);
 			case 3:
-				return (byte) (min + 2);
+				return (byte)(min + 2);
 			default:
-				return (byte) (min + 1);
+				return (byte)(min + 1);
 		}
 	}
-
+	
 	public void managerSay(byte min)
 	{
 		// For attack phase, sending message every 5 minutes
@@ -1449,14 +1439,14 @@ public class FourSepulchersManager extends BossLair
 			// Do not shout when < 5 minutes
 			if (min < 5)
 				return;
-
+			
 			min = minuteSelect(min);
-
+			
 			String msg = min + " minute(s) have passed."; // Now this is a proper message ^^
-
+			
 			if (min == 90)
 				msg = "Game over. The teleport will appear momentarily";
-
+			
 			for (L2Spawn temp : _managers)
 			{
 				if (temp == null)
@@ -1470,18 +1460,19 @@ public class FourSepulchersManager extends BossLair
 				}
 				// Hall not used right now, so its manager will not tell you anything :)
 				// If you don't need this - delete next two lines.
-				if(!_hallInUse.get(temp.getNpcId()))
+				if (!_hallInUse.get(temp.getNpcId()))
 					continue;
-
+				
 				((L2SepulcherNpcInstance)temp.getLastSpawn()).sayInShout(msg);
 			}
 		}
 		else if (_inEntryTime)
 		{
 			String msg1 = "You may now enter the Sepulcher";
-			String msg2 = "If you place your hand on the stone statue in front of each sepulcher," +
-					" you will be able to enter";
-
+			String msg2 =
+					"If you place your hand on the stone statue in front of each sepulcher,"
+							+ " you will be able to enter";
+			
 			for (L2Spawn temp : _managers)
 			{
 				if (temp == null)
@@ -1499,33 +1490,35 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected class ManagerSay implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			if (_inAttackTime)
 			{
 				Calendar tmp = Calendar.getInstance();
 				tmp.setTimeInMillis(System.currentTimeMillis() - _warmUpTimeEnd);
-				if(tmp.get(Calendar.MINUTE) + 5 < Config.ALT_FS_TIME_ATTACK)
+				if (tmp.get(Calendar.MINUTE) + 5 < Config.ALT_FS_TIME_ATTACK)
 				{
-					managerSay((byte) tmp.get(Calendar.MINUTE)); // Byte because minute cannot be more than 59
+					managerSay((byte)tmp.get(Calendar.MINUTE)); // Byte because minute cannot be more than 59
 					ThreadPoolManager.getInstance().scheduleGeneral(new ManagerSay(), 5 * 60000);
 				}
 				// Attack time ending chat
-				else if(tmp.get(Calendar.MINUTE) + 5 >= Config.ALT_FS_TIME_ATTACK)
+				else if (tmp.get(Calendar.MINUTE) + 5 >= Config.ALT_FS_TIME_ATTACK)
 				{
-					managerSay((byte) 90); // Sending a unique Id :D
+					managerSay((byte)90); // Sending a unique Id :D
 				}
 			}
 			else if (_inEntryTime)
 				managerSay((byte)0);
 		}
 	}
-
+	
 	protected class ChangeEntryTime implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			//_log.info("FourSepulchersManager:In Entry Time");
@@ -1533,7 +1526,7 @@ public class FourSepulchersManager extends BossLair
 			_inWarmUpTime = false;
 			_inAttackTime = false;
 			_inCoolDownTime = false;
-
+			
 			long interval = 0;
 			// If this is first launch - search time when entry time will be ended:
 			// Counting difference between time when entry time ends and current time
@@ -1552,9 +1545,10 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected class ChangeWarmUpTime implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			//_log.info("FourSepulchersManager:In Warm-Up Time");
@@ -1562,7 +1556,7 @@ public class FourSepulchersManager extends BossLair
 			_inWarmUpTime = false;
 			_inAttackTime = false;
 			_inCoolDownTime = false;
-
+			
 			long interval = 0;
 			// Searching time when warmup time will be ended:
 			// Counting difference between time when warmup time ends and current time
@@ -1571,9 +1565,8 @@ public class FourSepulchersManager extends BossLair
 				interval = _warmUpTimeEnd - System.currentTimeMillis();
 			else
 				interval = Config.ALT_FS_TIME_WARMUP * 60000;
-			_changeAttackTimeTask =
-				ThreadPoolManager.getInstance().scheduleGeneral(new ChangeAttackTime(),interval);
-
+			_changeAttackTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeAttackTime(), interval);
+			
 			if (_changeWarmUpTimeTask != null)
 			{
 				_changeWarmUpTimeTask.cancel(true);
@@ -1581,9 +1574,10 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected class ChangeAttackTime implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			//_log.info("FourSepulchersManager:In Attack Time");
@@ -1591,30 +1585,32 @@ public class FourSepulchersManager extends BossLair
 			_inWarmUpTime = false;
 			_inAttackTime = true;
 			_inCoolDownTime = false;
-
+			
 			locationShadowSpawns();
-
+			
 			spawnMysteriousBox(31921);
 			spawnMysteriousBox(31922);
 			spawnMysteriousBox(31923);
 			spawnMysteriousBox(31924);
-
-			if(!_firstTimeRun)
-				_warmUpTimeEnd=System.currentTimeMillis();
-
+			
+			if (!_firstTimeRun)
+				_warmUpTimeEnd = System.currentTimeMillis();
+			
 			long interval = 0;
 			// Say task
-			if(_firstTimeRun)
+			if (_firstTimeRun)
 			{
 				for (double min = Calendar.getInstance().get(Calendar.MINUTE); min < _newCycleMin; min++)
 				{
 					// Looking for next shout time....
-					if(min % 5 == 0)//check if min can be divided by 5
+					if (min % 5 == 0)//check if min can be divided by 5
 					{
-						_log.info(Calendar.getInstance().getTime() + " Atk announce scheduled to " + min + " minute of this hour.");
+						_log.info(Calendar.getInstance().getTime() + " Atk announce scheduled to " + min
+								+ " minute of this hour.");
 						Calendar inter = Calendar.getInstance();
-						inter.set(Calendar.MINUTE, (int) min);
-						ThreadPoolManager.getInstance().scheduleGeneral(new ManagerSay(), inter.getTimeInMillis() - System.currentTimeMillis());
+						inter.set(Calendar.MINUTE, (int)min);
+						ThreadPoolManager.getInstance().scheduleGeneral(new ManagerSay(),
+								inter.getTimeInMillis() - System.currentTimeMillis());
 						break;
 					}
 				}
@@ -1628,8 +1624,9 @@ public class FourSepulchersManager extends BossLair
 				interval = _attackTimeEnd - System.currentTimeMillis();
 			else
 				interval = Config.ALT_FS_TIME_ATTACK * 60000;
-			_changeCoolDownTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeCoolDownTime(), interval);
-
+			_changeCoolDownTimeTask =
+					ThreadPoolManager.getInstance().scheduleGeneral(new ChangeCoolDownTime(), interval);
+			
 			if (_changeAttackTimeTask != null)
 			{
 				_changeAttackTimeTask.cancel(true);
@@ -1637,9 +1634,10 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	protected class ChangeCoolDownTime implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			//_log.info("FourSepulchersManager:In Cool-Down Time");
@@ -1647,21 +1645,21 @@ public class FourSepulchersManager extends BossLair
 			_inWarmUpTime = false;
 			_inAttackTime = false;
 			_inCoolDownTime = true;
-
+			
 			cleanUp();
-
+			
 			Calendar time = Calendar.getInstance();
 			// One hour = 55th min to 55 min of next hour, so we check for this, also check for first launch
-			if(Calendar.getInstance().get(Calendar.MINUTE) > _newCycleMin && !_firstTimeRun)
+			if (Calendar.getInstance().get(Calendar.MINUTE) > _newCycleMin && !_firstTimeRun)
 				time.set(Calendar.HOUR, Calendar.getInstance().get(Calendar.HOUR) + 1);
 			time.set(Calendar.MINUTE, _newCycleMin);
 			_log.info("FourSepulchersManager: Entry time: " + time.getTime());
 			if (_firstTimeRun)
 				_firstTimeRun = false; // Cooldown phase ends event hour, so it will be not first run
-
+				
 			long interval = time.getTimeInMillis() - System.currentTimeMillis();
 			_changeEntryTimeTask = ThreadPoolManager.getInstance().scheduleGeneral(new ChangeEntryTime(), interval);
-
+			
 			if (_changeCoolDownTimeTask != null)
 			{
 				_changeCoolDownTimeTask.cancel(true);
@@ -1669,12 +1667,12 @@ public class FourSepulchersManager extends BossLair
 			}
 		}
 	}
-
+	
 	public Map<Integer, Integer> getHallGateKeepers()
 	{
 		return _hallGateKeepers;
 	}
-
+	
 	public void showHtmlFile(L2PcInstance player, String file, L2Npc npc, L2PcInstance member)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
@@ -1683,7 +1681,7 @@ public class FourSepulchersManager extends BossLair
 			html.replace("%member%", member.getName());
 		player.sendPacket(html);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

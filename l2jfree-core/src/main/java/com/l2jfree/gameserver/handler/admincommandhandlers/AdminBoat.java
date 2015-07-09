@@ -23,7 +23,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class AdminBoat implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_boat" };
-
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		L2BoatInstance boat = activeChar.getBoat();
@@ -32,10 +33,10 @@ public class AdminBoat implements IAdminCommandHandler
 			activeChar.sendMessage("Usage only possible while riding a boat.");
 			return false;
 		}
-
+		
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
-
+		
 		if (st.hasMoreTokens())
 		{
 			String cmd = st.nextToken();
@@ -63,21 +64,24 @@ public class AdminBoat implements IAdminCommandHandler
 		else
 		{
 			activeChar.sendMessage("====== Boat Information ======");
-			activeChar.sendMessage("Name: "+boat.getBoatName()+" ("+boat.getId()+") ObjId: "+boat.getObjectId());
-			activeChar.sendMessage("Cycle: "+boat.isInCycle()+" ("+boat.getCycle()+")");
-			activeChar.sendMessage("Players inside: "+boat.getSizeInside());
-			activeChar.sendMessage("Position: "+boat.getX()+" "+boat.getY()+" "+boat.getZ()+" "+boat.getPosition().getHeading());
+			activeChar.sendMessage("Name: " + boat.getBoatName() + " (" + boat.getId() + ") ObjId: "
+					+ boat.getObjectId());
+			activeChar.sendMessage("Cycle: " + boat.isInCycle() + " (" + boat.getCycle() + ")");
+			activeChar.sendMessage("Players inside: " + boat.getSizeInside());
+			activeChar.sendMessage("Position: " + boat.getX() + " " + boat.getY() + " " + boat.getZ() + " "
+					+ boat.getPosition().getHeading());
 			activeChar.sendMessage("==============================");
 		}
-
+		
 		return true;
 	}
-
+	
 	private void showUsage(L2PcInstance cha)
 	{
 		cha.sendMessage("Usage: //boat [cycle|reload]");
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

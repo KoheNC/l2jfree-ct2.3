@@ -38,34 +38,36 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public class Dungeon extends QuestJython
 {
-	private final FastMap<Integer, Prison>	_prisons				= new FastMap<Integer, Prison>();
+	private final FastMap<Integer, Prison> _prisons = new FastMap<Integer, Prison>();
 	//private FastMap<Integer, Integer>	_fortInstances;
-
-	private final String						_default				= "<html><body>You are either not on a quest that involves this NPC, or you don't meet"
-																		+ " this NPC's minimum quest requirements.</body></html>";
-	private final String						_noParty				= "<html><body>You must be in a party to enter.</body></html>";
-	private final String						_notPartyLeader			= "<html><body>You must be the party leader to enter.</body></html>";
+	
+	private final String _default =
+			"<html><body>You are either not on a quest that involves this NPC, or you don't meet"
+					+ " this NPC's minimum quest requirements.</body></html>";
+	private final String _noParty = "<html><body>You must be in a party to enter.</body></html>";
+	private final String _notPartyLeader = "<html><body>You must be the party leader to enter.</body></html>";
 	//private String 						_notEnough 				= "<html><body>Not enough members in your party have completed the required quest.</body></html>";
-	private final String						_canNotEnterYet			= "<html><body>The 4 hour time limit to re-enter is not over yet.</body></html>";
-
-	private final int					SOUL_HUNTER_CHAKUNDEL	= 25552;
-	private final int					RANGER_KARANKAWA		= 25557;
-	private final int					JAX_THE_DESTROYER		= 25569;
-
+	private final String _canNotEnterYet =
+			"<html><body>The 4 hour time limit to re-enter is not over yet.</body></html>";
+	
+	private final int SOUL_HUNTER_CHAKUNDEL = 25552;
+	private final int RANGER_KARANKAWA = 25557;
+	private final int JAX_THE_DESTROYER = 25569;
+	
 	public static void main(String[] args)
 	{
 		new Dungeon(-1, "DungeonInstance", "custom");
 	}
-
+	
 	public Dungeon(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
-		int[] mobs =
-		{ SOUL_HUNTER_CHAKUNDEL, RANGER_KARANKAWA, JAX_THE_DESTROYER };
+		int[] mobs = { SOUL_HUNTER_CHAKUNDEL, RANGER_KARANKAWA, JAX_THE_DESTROYER };
 		// Detention Camp Wardens
 		int[] npcs =
-		{ 35666, 35698, 35735, 35767, 35804, 35835, 35867, 35904, 35936, 35974, 36011, 36043, 36081, 36118, 36149, 36181, 36219, 36257, 36294, 36326, 36364 };
-
+				{ 35666, 35698, 35735, 35767, 35804, 35835, 35867, 35904, 35936, 35974, 36011, 36043, 36081, 36118,
+						36149, 36181, 36219, 36257, 36294, 36326, 36364 };
+		
 		for (int npcId : npcs)
 			addStartNpc(npcId);
 		for (int npcId : npcs)
@@ -73,7 +75,7 @@ public class Dungeon extends QuestJython
 		for (int npcId : mobs)
 			addKillId(npcId);
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance player)
 	{
@@ -92,7 +94,7 @@ public class Dungeon extends QuestJython
 			return _default;
 		if (clan.getClanId() != fort.getOwnerId())
 			return _default;
-
+		
 		if (!_prisons.isEmpty())
 		{
 			if (_prisons.containsKey(fort.getFortId()))
@@ -102,53 +104,53 @@ public class Dungeon extends QuestJython
 					return _canNotEnterYet;
 			}
 		}
-
+		
 		if (prison == null)
 		{
 			prison = new Prison(fort.getFortId());
 			_prisons.put(prison.getFortId(), prison);
 		}
-
+		
 		for (L2PcInstance partyMember : party.getPartyMembers())
 		{
 			//if (partyMember.getQuestState("").isCompleted())
 			partyMember.setInstanceId(prison.getInstanceId());
 			partyMember.teleToLocation(11740, -49148, -3000, true);
 		}
-
+		
 		prison.initSpawn();
-
+		
 		return super.onTalk(npc, player);
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
 		int npcId = npc.getNpcId();
 		Prison prison = null;
-
+		
 		for (Prison p : _prisons.values())
 			if (player.isSameInstance(p.getInstanceId()))
 				prison = p;
-
+		
 		// TODO: check what should happen
 		if (prison == null)
 			return null;
-
+		
 		switch (npcId)
 		{
-		case SOUL_HUNTER_CHAKUNDEL:
-		case RANGER_KARANKAWA:
-		case JAX_THE_DESTROYER:
-			prison.setState(prison.getState() + 1);
-			prison.initSpawn();
-			break;
-		default:
-			break;
+			case SOUL_HUNTER_CHAKUNDEL:
+			case RANGER_KARANKAWA:
+			case JAX_THE_DESTROYER:
+				prison.setState(prison.getState() + 1);
+				prison.initSpawn();
+				break;
+			default:
+				break;
 		}
 		return super.onKill(npc, player, isPet);
 	}
-
+	
 	/*
 	private Prision getPrision(int id)
 	{
@@ -157,48 +159,50 @@ public class Dungeon extends QuestJython
 	*/
 	private class Prison
 	{
-		private int							_fortId;
-		private int							_instanceId;
-		private int							_state;
-		private boolean						_canEnter;
-
-//		protected FastList<L2NpcInstance>	_rbList	= new FastList<L2NpcInstance>();
-
-		private final int					STATE_4	= 4;
-		private final int					STATE_1	= 1;
-		private final int					STATE_2	= 2;
-		private final int					STATE_3	= 3;
-
+		private int _fortId;
+		private int _instanceId;
+		private int _state;
+		private boolean _canEnter;
+		
+		//		protected FastList<L2NpcInstance>	_rbList	= new FastList<L2NpcInstance>();
+		
+		private final int STATE_4 = 4;
+		private final int STATE_1 = 1;
+		private final int STATE_2 = 2;
+		private final int STATE_3 = 3;
+		
 		private class ReEntrenceTimerTask implements Runnable
 		{
+			@Override
 			public void run()
 			{
 				_canEnter = true;
 			}
 		}
-
+		
 		private class PrisonSpawnTask implements Runnable
 		{
+			@Override
 			public void run()
 			{
 				switch (getState())
 				{
-				case STATE_4:
-
-					break;
-				case STATE_1:
-					spawn(SOUL_HUNTER_CHAKUNDEL);
-					break;
-				case STATE_2:
-					spawn(RANGER_KARANKAWA);
-					break;
-				case STATE_3:
-					spawn(JAX_THE_DESTROYER);
-					break;
+					case STATE_4:
+						
+						break;
+					case STATE_1:
+						spawn(SOUL_HUNTER_CHAKUNDEL);
+						break;
+					case STATE_2:
+						spawn(RANGER_KARANKAWA);
+						break;
+					case STATE_3:
+						spawn(JAX_THE_DESTROYER);
+						break;
 				}
 			}
 		}
-
+		
 		public Prison(int id)
 		{
 			try
@@ -214,7 +218,7 @@ public class Dungeon extends QuestJython
 				_log.warn("", e);
 			}
 		}
-
+		
 		private void spawn(int npcId)
 		{
 			L2Spawn spawnDat;
@@ -246,32 +250,32 @@ public class Dungeon extends QuestJython
 				_log.warn("PrisonDungeon: Spawns could not be initialized: ", e);
 			}
 		}
-
+		
 		public void initSpawn()
 		{
 			ThreadPoolManager.getInstance().schedule(new PrisonSpawnTask(), 300000);
 		}
-
+		
 		public int getInstanceId()
 		{
 			return _instanceId;
 		}
-
+		
 		public int getFortId()
 		{
 			return _fortId;
 		}
-
+		
 		public int getState()
 		{
 			return _state;
 		}
-
+		
 		public void setState(int val)
 		{
 			_state = val;
 		}
-
+		
 		public boolean getCanEnter()
 		{
 			return _canEnter;

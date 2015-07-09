@@ -25,18 +25,11 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class AdminRide implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_ride_wyvern",
-			"admin_ride_strider",
-			"admin_ride_wolf",
-			"admin_unride_wyvern",
-			"admin_unride_strider",
-			"admin_unride_wolf",
-			"admin_ride_horse",
-			"admin_unride_horse",
-			"admin_unride",						};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_ride_wyvern", "admin_ride_strider", "admin_ride_wolf",
+			"admin_unride_wyvern", "admin_unride_strider", "admin_unride_wolf", "admin_ride_horse",
+			"admin_unride_horse", "admin_unride", };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_ride"))
@@ -65,7 +58,7 @@ public class AdminRide implements IAdminCommandHandler
 				if (activeChar.getTransformation() != null)
 					activeChar.sendPacket(SystemMessageId.YOU_CANNOT_MOUNT_A_STEED_WHILE_TRANSFORMED);
 				else
-					 TransformationManager.getInstance().transformPlayer(106, activeChar);
+					TransformationManager.getInstance().transformPlayer(106, activeChar);
 				return true;
 			}
 			else
@@ -81,7 +74,8 @@ public class AdminRide implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

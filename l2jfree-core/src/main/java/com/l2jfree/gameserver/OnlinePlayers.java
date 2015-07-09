@@ -31,13 +31,17 @@ public class OnlinePlayers
 	
 	class AnnounceOnline implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			if (L2World.getInstance().getAllPlayers().size() == 1)
-				Announcements.getInstance().announceToAll("There is " + L2World.getInstance().getAllPlayers().size() + " online player.");
+				Announcements.getInstance().announceToAll(
+						"There is " + L2World.getInstance().getAllPlayers().size() + " online player.");
 			else
-				Announcements.getInstance().announceToAll("There are " + L2World.getInstance().getAllPlayers().size() + " online players.");
-			ThreadPoolManager.getInstance().scheduleGeneral(new AnnounceOnline(), Config.ONLINE_PLAYERS_ANNOUNCE_INTERVAL);
+				Announcements.getInstance().announceToAll(
+						"There are " + L2World.getInstance().getAllPlayers().size() + " online players.");
+			ThreadPoolManager.getInstance().scheduleGeneral(new AnnounceOnline(),
+					Config.ONLINE_PLAYERS_ANNOUNCE_INTERVAL);
 		}
 	}
 	

@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.clientpackets;
 
-
 /**
  * @author mrTJO
  * Format: chdd
@@ -47,11 +46,11 @@ public final class RequestExCubeGameChangeTeam extends L2GameClientPacket
 				// Remove Player (me)
 				break;
 			default:
-				_log.warn("Wrong Team ID: "+_team);
+				_log.warn("Wrong Team ID: " + _team);
 				break;
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

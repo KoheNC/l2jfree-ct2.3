@@ -26,18 +26,18 @@ import com.l2jfree.gameserver.network.serverpackets.NpcSay;
 public final class SeedOfEvil extends QuestJython
 {
 	private static final String SEED_OF_EVIL = "158_SeedOfEvil";
-
+	
 	// Quest NPCs
 	private static final int BIOTIN = 30031;
-
+	
 	// Quest items
 	private static final int CLAY_TABLET = 1025;
-
+	
 	// Quest monsters
 	private static final int NERKAS = 27016;
 	private static final String NERKAS_ATTACKED = "...How dare you challenge me!";
 	private static final String NERKAS_KILLED = "May Beleth's power be spread on the whole world!";
-
+	
 	private SeedOfEvil(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
@@ -47,7 +47,7 @@ public final class SeedOfEvil extends QuestJython
 		addAttackId(NERKAS);
 		addKillId(NERKAS);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -64,26 +64,25 @@ public final class SeedOfEvil extends QuestJython
 		else
 			return event;
 	}
-
+	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet,
-			L2Skill skill)
+	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
-		case ATTACK_NOONE:
-			npc.broadcastPacket(new NpcSay(npc, NERKAS_ATTACKED));
-			npc.setQuestAttackStatus(ATTACK_SINGLE);
-			npc.setQuestFirstAttacker(attacker);
-			break;
-		case ATTACK_SINGLE:
-			//if (attacker != npc.getQuestFirstAttacker())
-			//	npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			break;
+			case ATTACK_NOONE:
+				npc.broadcastPacket(new NpcSay(npc, NERKAS_ATTACKED));
+				npc.setQuestAttackStatus(ATTACK_SINGLE);
+				npc.setQuestFirstAttacker(attacker);
+				break;
+			case ATTACK_SINGLE:
+				//if (attacker != npc.getQuestFirstAttacker())
+				//	npc.setQuestAttackStatus(ATTACK_MULTIPLE);
+				break;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -92,20 +91,19 @@ public final class SeedOfEvil extends QuestJython
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(SEED_OF_EVIL);
-		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) != 1
-				|| npc.getQuestAttackStatus() != ATTACK_SINGLE)
+		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) != 1 || npc.getQuestAttackStatus() != ATTACK_SINGLE)
 			return null;
-
+		
 		if (qs.getQuestItemsCount(CLAY_TABLET) == 0)
 		{
 			qs.giveItems(CLAY_TABLET, 1);
 			quester.sendPacket(SND_MIDDLE);
 			qs.set(CONDITION, 2);
 		}
-
+		
 		return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
@@ -114,7 +112,7 @@ public final class SeedOfEvil extends QuestJython
 			return NO_QUEST;
 		else if (qs.isCompleted())
 			return QUEST_DONE;
-
+		
 		int cond = qs.getInt(CONDITION);
 		if (cond == 0)
 		{
@@ -141,7 +139,7 @@ public final class SeedOfEvil extends QuestJython
 				return "30031-05.htm";
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new SeedOfEvil(158, SEED_OF_EVIL, "Seed of Evil");

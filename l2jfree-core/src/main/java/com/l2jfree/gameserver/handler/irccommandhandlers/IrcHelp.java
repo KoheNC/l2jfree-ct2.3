@@ -24,8 +24,8 @@ import com.l2jfree.gameserver.network.L2IrcClient;
  */
 public class IrcHelp implements IIrcCommandHandler
 {
-	private static final String[]	IRC_COMMANDS	= { "!help" };
-
+	private static final String[] IRC_COMMANDS = { "!help" };
+	
 	/**
 	 * @see net.sf.l2j.gameserver.handler.IIrcCommandHandler#getIrcCommandList()
 	 */
@@ -34,7 +34,7 @@ public class IrcHelp implements IIrcCommandHandler
 	{
 		return IRC_COMMANDS;
 	}
-
+	
 	/**
 	 * @see net.sf.l2j.gameserver.handler.IIrcCommandHandler#useIrcCommand(java.lang.String,
 	 *      java.lang.String, java.lang.String, boolean)
@@ -45,7 +45,7 @@ public class IrcHelp implements IIrcCommandHandler
 		if (command.startsWith("!help"))
 		{
 			L2IrcClient irc = IrcManager.getInstance().getConnection();
-
+			
 			if (authed)
 			{
 				if (irc != null)

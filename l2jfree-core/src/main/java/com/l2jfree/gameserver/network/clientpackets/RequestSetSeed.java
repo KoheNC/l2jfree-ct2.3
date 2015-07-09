@@ -47,25 +47,26 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class RequestSetSeed extends L2GameClientPacket
 {
-	private static final String	_C__D0_0A_REQUESTSETSEED	= "[C] D0:0A RequestSetSeed";
-
-	private static final int	BATCH_LENGTH				= 12;							// length of the one item
-	private static final int	BATCH_LENGTH_FINAL			= 20;
-
-	private int					_manorId;
-
-	private Seed				_items[]					= null;
-
+	private static final String _C__D0_0A_REQUESTSETSEED = "[C] D0:0A RequestSetSeed";
+	
+	private static final int BATCH_LENGTH = 12; // length of the one item
+	private static final int BATCH_LENGTH_FINAL = 20;
+	
+	private int _manorId;
+	
+	private Seed _items[] = null;
+	
 	@Override
 	protected void readImpl()
 	{
 		_manorId = readD();
 		int count = readD();
-		if (count <= 0 || count > Config.MAX_ITEM_IN_PACKET || count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
+		if (count <= 0 || count > Config.MAX_ITEM_IN_PACKET
+				|| count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
 		{
 			return;
 		}
-
+		
 		_items = new Seed[count];
 		for (int i = 0; i < count; i++)
 		{
@@ -80,27 +81,27 @@ public class RequestSetSeed extends L2GameClientPacket
 			_items[i] = new Seed(itemId, sales, price);
 		}
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (_items == null || player.getClan() == null)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		// check player privileges
 		if (!L2Clan.checkPrivileges(player, L2Clan.CP_CS_MANOR_ADMIN))
 		{
 			requestFailed(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
 			return;
 		}
-
+		
 		// check castle owner
 		Castle currentCastle = CastleManager.getInstance().getCastleById(_manorId);
 		if (currentCastle.getOwnerId() != player.getClanId())
@@ -108,30 +109,30 @@ public class RequestSetSeed extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		L2Object manager = player.getTarget();
-
+		
 		if (!(manager instanceof L2CastleChamberlainInstance))
 			manager = player.getLastFolkNPC();
-
+		
 		if (!(manager instanceof L2CastleChamberlainInstance))
 		{
 			sendAF();
 			return;
 		}
-
-		if (((L2CastleChamberlainInstance) manager).getCastle() != currentCastle)
+		
+		if (((L2CastleChamberlainInstance)manager).getCastle() != currentCastle)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (!player.isInsideRadius(manager, INTERACTION_DISTANCE, true, false))
 		{
 			requestFailed(SystemMessageId.TOO_FAR_FROM_NPC);
 			return;
 		}
-
+		
 		List<SeedProduction> seeds = new ArrayList<SeedProduction>(_items.length);
 		for (Seed i : _items)
 		{
@@ -143,36 +144,36 @@ public class RequestSetSeed extends L2GameClientPacket
 			}
 			seeds.add(s);
 		}
-
+		
 		CastleManager.getInstance().getCastleById(_manorId).setSeedProduction(seeds, CastleManorManager.PERIOD_NEXT);
 		if (Config.ALT_MANOR_SAVE_ALL_ACTIONS)
 			CastleManager.getInstance().getCastleById(_manorId).saveSeedData(CastleManorManager.PERIOD_NEXT);
-
+		
 		sendAF();
 	}
-
+	
 	private class Seed
 	{
-		private final int	_itemId;
-		private final long	_sales;
-		private final long	_price;
-
+		private final int _itemId;
+		private final long _sales;
+		private final long _price;
+		
 		public Seed(int id, long s, long p)
 		{
 			_itemId = id;
 			_sales = s;
 			_price = p;
 		}
-
+		
 		public SeedProduction getSeed()
 		{
 			if (_sales != 0 && (MAX_ADENA / _sales) < _price)
 				return null;
-
+			
 			return CastleManorManager.getInstance().getNewSeedProduction(_itemId, _sales, _price, _sales);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

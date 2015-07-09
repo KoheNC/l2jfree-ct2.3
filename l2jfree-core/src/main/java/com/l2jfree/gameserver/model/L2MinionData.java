@@ -30,15 +30,15 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class L2MinionData
 {
-
+	
 	/** The Identifier of the L2Minion */
-	private int	_minionId;
-
+	private int _minionId;
+	
 	/** The number of this Minion Type to spawn */
-	private int	_minionAmount;
-	private int	_minionAmountMin;
-	private int	_minionAmountMax;
-
+	private int _minionAmount;
+	private int _minionAmountMin;
+	private int _minionAmountMax;
+	
 	/**
 	 * Set the Identifier of the Minion to spawn.<BR>
 	 * <BR>
@@ -50,7 +50,7 @@ public class L2MinionData
 	{
 		_minionId = id;
 	}
-
+	
 	/**
 	 * Return the Identifier of the Minion to spawn.<BR>
 	 * <BR>
@@ -59,7 +59,7 @@ public class L2MinionData
 	{
 		return _minionId;
 	}
-
+	
 	/**
 	 * Set the minimum of minions to amount.<BR>
 	 * <BR>
@@ -71,7 +71,7 @@ public class L2MinionData
 	{
 		_minionAmountMin = amountMin;
 	}
-
+	
 	/**
 	 * Set the maximum of minions to amount.<BR>
 	 * <BR>
@@ -83,7 +83,7 @@ public class L2MinionData
 	{
 		_minionAmountMax = amountMax;
 	}
-
+	
 	/**
 	 * Set the amount of this Minion type to spawn.<BR>
 	 * <BR>
@@ -95,7 +95,7 @@ public class L2MinionData
 	{
 		_minionAmount = amount;
 	}
-
+	
 	/**
 	 * Return the amount of this Minion type to spawn.<BR>
 	 * <BR>
@@ -107,7 +107,7 @@ public class L2MinionData
 			_minionAmount = Rnd.get(_minionAmountMin, _minionAmountMax);
 			return _minionAmount;
 		}
-
+		
 		return _minionAmountMin;
 	}
 }

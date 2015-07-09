@@ -39,31 +39,30 @@ import com.l2jfree.gameserver.util.Util;
  */
 public class SummonFriend implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.SUMMON_FRIEND };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SUMMON_FRIEND };
+	
 	public static boolean checkSummonerStatus(L2PcInstance summonerChar)
 	{
 		if (summonerChar == null)
 			return false;
-
+		
 		if (summonerChar.isInOlympiadMode())
 		{
 			summonerChar.sendPacket(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT);
 			return false;
 		}
-
+		
 		if (summonerChar.inObserverMode())
 		{
 			return false;
 		}
-
+		
 		if (summonerChar.isInsideZone(L2Zone.FLAG_NOSUMMON) || summonerChar.isFlyingMounted())
 		{
 			summonerChar.sendPacket(SystemMessageId.YOU_MAY_NOT_SUMMON_FROM_YOUR_CURRENT_LOCATION);
 			return false;
 		}
-
+		
 		if (summonerChar.isInInstance())
 		{
 			Instance summonerInstance = InstanceManager.getInstance().getInstance(summonerChar.getInstanceId());
@@ -73,15 +72,15 @@ public class SummonFriend implements ISkillHandler
 				return false;
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	public static boolean checkTargetStatus(L2PcInstance targetChar, L2PcInstance summonerChar)
 	{
 		if (targetChar == null)
 			return false;
-
+		
 		if (targetChar.isAlikeDead())
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.C1_IS_DEAD_AT_THE_MOMENT_AND_CANNOT_BE_SUMMONED);
@@ -89,15 +88,17 @@ public class SummonFriend implements ISkillHandler
 			summonerChar.sendPacket(sm);
 			return false;
 		}
-
+		
 		if (targetChar.isInStoreMode())
 		{
-			SystemMessage sm = new SystemMessage(SystemMessageId.C1_CURRENTLY_TRADING_OR_OPERATING_PRIVATE_STORE_AND_CANNOT_BE_SUMMONED);
+			SystemMessage sm =
+					new SystemMessage(
+							SystemMessageId.C1_CURRENTLY_TRADING_OR_OPERATING_PRIVATE_STORE_AND_CANNOT_BE_SUMMONED);
 			sm.addPcName(targetChar);
 			summonerChar.sendPacket(sm);
 			return false;
 		}
-
+		
 		if (targetChar.isRooted() || targetChar.isInCombat())
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.C1_IS_ENGAGED_IN_COMBAT_AND_CANNOT_BE_SUMMONED);
@@ -105,25 +106,25 @@ public class SummonFriend implements ISkillHandler
 			summonerChar.sendPacket(sm);
 			return false;
 		}
-
+		
 		if (targetChar.isInOlympiadMode())
 		{
 			summonerChar.sendPacket(SystemMessageId.YOU_CANNOT_SUMMON_PLAYERS_WHO_ARE_IN_OLYMPIAD);
 			return false;
 		}
-
+		
 		if (targetChar.inObserverMode())
 		{
 			summonerChar.sendPacket(SystemMessageId.YOUR_TARGET_IS_IN_AN_AREA_WHICH_BLOCKS_SUMMONING);
 			return false;
 		}
-
+		
 		if (targetChar.isFestivalParticipant() || targetChar.isFlyingMounted())
 		{
 			summonerChar.sendPacket(SystemMessageId.YOUR_TARGET_IS_IN_AN_AREA_WHICH_BLOCKS_SUMMONING);
 			return false;
 		}
-
+		
 		if (targetChar.isInsideZone(L2Zone.FLAG_NOSUMMON))
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.C1_IN_SUMMON_BLOCKING_AREA);
@@ -131,9 +132,8 @@ public class SummonFriend implements ISkillHandler
 			summonerChar.sendPacket(sm);
 			return false;
 		}
-
-		if (ObjectRestrictions.getInstance()
-				.checkRestriction(targetChar, AvailableRestriction.PlayerSummonFriend))
+		
+		if (ObjectRestrictions.getInstance().checkRestriction(targetChar, AvailableRestriction.PlayerSummonFriend))
 		{
 			summonerChar.sendMessage("You cannot summon your friend due to his restrictions.");
 			targetChar.sendMessage("You cannot be summoned due to a restriction.");
@@ -146,7 +146,7 @@ public class SummonFriend implements ISkillHandler
 			targetChar.sendMessage("You cannot be summoned due to events restriction.");
 			return false;
 		}
-
+		
 		// On retail character can enter 7s dungeon with summon friend,
 		// but will be teleported away by mobs
 		// because currently this is not working in L2J we do not allowing summoning
@@ -170,20 +170,20 @@ public class SummonFriend implements ISkillHandler
 				}
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	public static void teleToTarget(L2PcInstance targetChar, L2PcInstance summonerChar, L2Skill summonSkill)
 	{
 		if (targetChar == null || summonerChar == null || summonSkill == null)
 			return;
-
+		
 		if (!checkSummonerStatus(summonerChar))
 			return;
 		if (!checkTargetStatus(targetChar, summonerChar))
 			return;
-
+		
 		int itemConsumeId = summonSkill.getTargetConsumeId();
 		int itemConsumeCount = summonSkill.getTargetConsume();
 		if (itemConsumeId != 0 && itemConsumeCount != 0)
@@ -195,7 +195,8 @@ public class SummonFriend implements ISkillHandler
 				targetChar.sendPacket(sm);
 				return;
 			}
-			targetChar.getInventory().destroyItemByItemId("Consume", itemConsumeId, itemConsumeCount, summonerChar, targetChar);
+			targetChar.getInventory().destroyItemByItemId("Consume", itemConsumeId, itemConsumeCount, summonerChar,
+					targetChar);
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_DISAPPEARED);
 			sm.addItemName(itemConsumeId);
 			targetChar.sendPacket(sm);
@@ -205,16 +206,17 @@ public class SummonFriend implements ISkillHandler
 		targetChar.setIsIn7sDungeon(summonerChar.isIn7sDungeon());
 		targetChar.teleToLocation(summonerChar.getX(), summonerChar.getY(), summonerChar.getZ(), true);
 	}
-
+	
+	@Override
 	public void useSkill(L2Character activeChar, final L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return; // currently not implemented for others
-
-		final L2PcInstance activePlayer = (L2PcInstance) activeChar;
+			
+		final L2PcInstance activePlayer = (L2PcInstance)activeChar;
 		if (!checkSummonerStatus(activePlayer))
 			return;
-
+		
 		for (L2Character element : targets)
 		{
 			if (!(element instanceof L2PcInstance))
@@ -222,12 +224,12 @@ public class SummonFriend implements ISkillHandler
 			
 			if (activeChar == element)
 				continue;
-
-			final L2PcInstance target = (L2PcInstance) element;
-
+			
+			final L2PcInstance target = (L2PcInstance)element;
+			
 			if (!checkTargetStatus(target, activePlayer))
 				continue;
-
+			
 			if (!Util.checkIfInRange(0, activeChar, target, false))
 			{
 				if (target.hasActiveConfirmDlg())
@@ -237,7 +239,7 @@ public class SummonFriend implements ISkillHandler
 					activePlayer.sendPacket(sm);
 					continue;
 				}
-
+				
 				if (skill.getId() == 1403) //summon friend
 				{
 					// Send message
@@ -263,7 +265,8 @@ public class SummonFriend implements ISkillHandler
 			}
 		}
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

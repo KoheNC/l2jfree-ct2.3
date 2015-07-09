@@ -227,7 +227,8 @@ public class L2SkillSummon extends L2Skill
 		if (summonTemplate.isAssignableTo(L2SiegeSummonInstance.class))
 			summon = new L2SiegeSummonInstance(IdFactory.getInstance().getNextId(), summonTemplate, activeChar, this);
 		else if (summonTemplate.isAssignableTo(L2MerchantSummonInstance.class))
-			summon = new L2MerchantSummonInstance(IdFactory.getInstance().getNextId(), summonTemplate, activeChar, this);
+			summon =
+					new L2MerchantSummonInstance(IdFactory.getInstance().getNextId(), summonTemplate, activeChar, this);
 		else
 			summon = new L2SummonInstance(IdFactory.getInstance().getNextId(), summonTemplate, activeChar, this);
 		

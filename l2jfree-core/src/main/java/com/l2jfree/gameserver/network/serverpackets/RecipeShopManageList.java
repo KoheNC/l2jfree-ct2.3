@@ -25,22 +25,22 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class RecipeShopManageList extends L2GameServerPacket
 {
-
-	private static final String	_S__D8_RecipeShopManageList	= "[S] de RecipeShopManageList";
-	private final L2PcInstance		_seller;
-	private final boolean				_isDwarven;
-	private L2RecipeList[]		_recipes;
-
+	
+	private static final String _S__D8_RecipeShopManageList = "[S] de RecipeShopManageList";
+	private final L2PcInstance _seller;
+	private final boolean _isDwarven;
+	private L2RecipeList[] _recipes;
+	
 	public RecipeShopManageList(L2PcInstance seller, boolean isDwarven)
 	{
 		_seller = seller;
 		_isDwarven = isDwarven;
-
+		
 		if (_isDwarven && _seller.hasDwarvenCraft())
 			_recipes = _seller.getDwarvenRecipeBook();
 		else
 			_recipes = _seller.getCommonRecipeBook();
-
+		
 		// clean previous recipes
 		if (_seller.getCreateList() != null)
 		{
@@ -52,7 +52,7 @@ public class RecipeShopManageList extends L2GameServerPacket
 			}
 		}
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -60,7 +60,7 @@ public class RecipeShopManageList extends L2GameServerPacket
 		writeD(_seller.getObjectId());
 		writeD(_seller.getAdena());
 		writeD(_isDwarven ? 0x00 : 0x01);
-
+		
 		if (_recipes == null)
 		{
 			writeD(0);
@@ -68,7 +68,7 @@ public class RecipeShopManageList extends L2GameServerPacket
 		else
 		{
 			writeD(_recipes.length);//number of items in recipe book
-
+			
 			for (int i = 0; i < _recipes.length; i++)
 			{
 				L2RecipeList temp = _recipes[i];
@@ -76,7 +76,7 @@ public class RecipeShopManageList extends L2GameServerPacket
 				writeD(i + 1);
 			}
 		}
-
+		
 		if (_seller.getCreateList() == null)
 		{
 			writeD(0);
@@ -85,7 +85,7 @@ public class RecipeShopManageList extends L2GameServerPacket
 		{
 			L2ManufactureList list = _seller.getCreateList();
 			writeD(list.size());
-
+			
 			for (L2ManufactureItem item : list.getList())
 			{
 				writeD(item.getRecipeId());
@@ -94,7 +94,7 @@ public class RecipeShopManageList extends L2GameServerPacket
 			}
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

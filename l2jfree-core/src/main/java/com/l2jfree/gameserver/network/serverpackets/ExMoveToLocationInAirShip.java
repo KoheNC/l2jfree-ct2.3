@@ -21,6 +21,7 @@ public class ExMoveToLocationInAirShip extends L2GameServerPacket
 {
 	private final L2PcInstance _activeChar;
 	private final L2CharPosition _destination;
+	
 	//private L2CharPosition _origin;
 	/**
 	 * @param actor
@@ -33,14 +34,15 @@ public class ExMoveToLocationInAirShip extends L2GameServerPacket
 		_destination = destination;
 		//_origin = origin;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
 	protected void writeImpl()
 	{
-		if (_activeChar.getAirShip() == null) return;
+		if (_activeChar.getAirShip() == null)
+			return;
 		
 		writeC(0xfe);
 		writeH(0x6D);
@@ -51,7 +53,7 @@ public class ExMoveToLocationInAirShip extends L2GameServerPacket
 		writeD(_destination.z);
 		writeD(_destination.heading);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */

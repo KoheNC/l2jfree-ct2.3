@@ -24,8 +24,9 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ExAskJoinMPCC extends L2GameServerPacket
 {
 	private static final String _S__FE_1A_EXASKJOINMPCC = "[S] FE:1a ExAskJoinMPCC [s]";
-
+	
 	private final String _requestorName;
+	
 	/**
 	 * @param String Name of CCLeader
 	 */
@@ -43,9 +44,9 @@ public class ExAskJoinMPCC extends L2GameServerPacket
 		writeC(0xFE);
 		writeH(0x1a);
 		
-		writeS(_requestorName);  // name of CCLeader
+		writeS(_requestorName); // name of CCLeader
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

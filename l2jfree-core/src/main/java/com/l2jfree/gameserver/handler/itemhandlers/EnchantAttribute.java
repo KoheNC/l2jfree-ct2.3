@@ -26,60 +26,33 @@ import com.l2jfree.gameserver.network.serverpackets.ExChooseInventoryAttributeIt
 public class EnchantAttribute implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int	ITEM_IDS[]	=
-											{
-			9546,
-			9547,
-			9548,
-			9549,
-			9550,
-			9551,
-			9552,
-			9553,
-			9554,
-			9555,
-			9556,
-			9557,
-			9558,
-			9559,
-			9560,
-			9561,
-			9562,
-			9563,
-			9564,
-			9565,
-			9566,
-			9567,
-			9568,
-			9569,
-			10521,
-			10522,
-			10523,
-			10524,
-			10525,
-			10526							};
-
+	private static final int ITEM_IDS[] = { 9546, 9547, 9548, 9549, 9550, 9551, 9552, 9553, 9554, 9555, 9556, 9557,
+			9558, 9559, 9560, 9561, 9562, 9563, 9564, 9565, 9566, 9567, 9568, 9569, 10521, 10522, 10523, 10524, 10525,
+			10526 };
+	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-
-		L2PcInstance activeChar = (L2PcInstance) playable;
+		
+		L2PcInstance activeChar = (L2PcInstance)playable;
 		if (activeChar.isCastingNow())
 			return;
-
+		
 		// Restrict enchant during restart/shutdown (because of an existing exploit)
 		if (Shutdown.isActionDisabled(DisableType.ENCHANT))
 		{
 			activeChar.sendPacket(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-
+		
 		//activeChar.sendPacket(SystemMessageId.SELECT_ITEM_TO_ADD_ELEMENTAL_POWER);
 		activeChar.setActiveEnchantAttrItem(item);
 		activeChar.sendPacket(new ExChooseInventoryAttributeItem(item.getItemId()));
 	}
-
+	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

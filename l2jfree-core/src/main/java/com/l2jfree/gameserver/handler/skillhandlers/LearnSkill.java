@@ -26,6 +26,7 @@ public class LearnSkill implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.LEARN_SKILL };
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;
@@ -45,7 +46,8 @@ public class LearnSkill implements ISkillHandler
 		{
 			if (player.getSkillLevel(skill.getNewSkillId()[i]) < 0 && skill.getNewSkillId()[i] != 0)
 			{
-				L2Skill newSkill = SkillTable.getInstance().getInfo(skill.getNewSkillId()[i], skill.getNewSkillLvl()[i]);
+				L2Skill newSkill =
+						SkillTable.getInstance().getInfo(skill.getNewSkillId()[i], skill.getNewSkillLvl()[i]);
 				if (newSkill != null)
 					player.addSkill(newSkill, true);
 			}

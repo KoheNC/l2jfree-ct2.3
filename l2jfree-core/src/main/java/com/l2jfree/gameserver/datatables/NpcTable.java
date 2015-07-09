@@ -129,7 +129,8 @@ public final class NpcTable
 					if (npcSkill == null)
 					{
 						if (Config.ALT_DEV_VERIFY_NPC_SKILLS)
-							_log.warn("NpcTable: Missing skill for npcskills for skill id-lvl: " + skillId + " " + level);
+							_log.warn("NpcTable: Missing skill for npcskills for skill id-lvl: " + skillId + " "
+									+ level);
 						continue;
 					}
 					
@@ -146,7 +147,8 @@ public final class NpcTable
 			
 			try
 			{
-				PreparedStatement statement = con.prepareStatement("SELECT npcid, skillid, level FROM custom_npcskills");
+				PreparedStatement statement =
+						con.prepareStatement("SELECT npcid, skillid, level FROM custom_npcskills");
 				ResultSet npcskills = statement.executeQuery();
 				
 				while (npcskills.next())
@@ -173,7 +175,8 @@ public final class NpcTable
 					
 					if (npcSkill == null)
 					{
-						_log.warn("NpcTable: Missing skill for custom_npcskills for skill id-lvl: " + skillId + " " + level);
+						_log.warn("NpcTable: Missing skill for custom_npcskills for skill id-lvl: " + skillId + " "
+								+ level);
 						continue;
 					}
 					
@@ -190,7 +193,8 @@ public final class NpcTable
 			
 			try
 			{
-				PreparedStatement statement2 = con.prepareStatement("SELECT * FROM droplist ORDER BY mobId, chance DESC");
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT * FROM droplist ORDER BY mobId, chance DESC");
 				ResultSet dropData = statement2.executeQuery();
 				
 				while (dropData.next())
@@ -224,7 +228,8 @@ public final class NpcTable
 			
 			try
 			{
-				PreparedStatement statement2 = con.prepareStatement("SELECT * FROM custom_droplist ORDER BY mobId, chance DESC");
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT * FROM custom_droplist ORDER BY mobId, chance DESC");
 				ResultSet dropData = statement2.executeQuery();
 				
 				while (dropData.next())
@@ -266,13 +271,14 @@ public final class NpcTable
 					int npcId = learndata.getInt("npc_id");
 					int classId = learndata.getInt("class_id");
 					L2NpcTemplate npc = getTemplate(npcId);
-
+					
 					if (npc == null)
 					{
-						_log.warn("NPCTable: Error getting NPC template ID " + npcId + " while trying to load skill trainer data.");
+						_log.warn("NPCTable: Error getting NPC template ID " + npcId
+								+ " while trying to load skill trainer data.");
 						continue;
 					}
-
+					
 					npc.addTeachInfo(ClassId.values()[classId]);
 				}
 				
@@ -371,19 +377,27 @@ public final class NpcTable
 			npcDat.set("armor", NpcData.getInt("armor"));
 			npcDat.set("baseWalkSpd", NpcData.getInt("walkspd"));
 			npcDat.set("baseRunSpd", NpcData.getInt("runspd"));
-
-			npcDat.safeSet("baseSTR", NpcData.getInt("str"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: " + npcDat.getString("idTemplate"));
-			npcDat.safeSet("baseCON", NpcData.getInt("con"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: " + npcDat.getString("idTemplate"));
-			npcDat.safeSet("baseDEX", NpcData.getInt("dex"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: " + npcDat.getString("idTemplate"));
-			npcDat.safeSet("baseINT", NpcData.getInt("int"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: " + npcDat.getString("idTemplate"));
-			npcDat.safeSet("baseWIT", NpcData.getInt("wit"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: " + npcDat.getString("idTemplate"));
-			npcDat.safeSet("baseMEN", NpcData.getInt("men"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: " + npcDat.getString("idTemplate"));
-
+			
+			npcDat.safeSet("baseSTR", NpcData.getInt("str"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: "
+					+ npcDat.getString("idTemplate"));
+			npcDat.safeSet("baseCON", NpcData.getInt("con"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: "
+					+ npcDat.getString("idTemplate"));
+			npcDat.safeSet("baseDEX", NpcData.getInt("dex"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: "
+					+ npcDat.getString("idTemplate"));
+			npcDat.safeSet("baseINT", NpcData.getInt("int"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: "
+					+ npcDat.getString("idTemplate"));
+			npcDat.safeSet("baseWIT", NpcData.getInt("wit"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: "
+					+ npcDat.getString("idTemplate"));
+			npcDat.safeSet("baseMEN", NpcData.getInt("men"), 0, Formulas.MAX_STAT_VALUE, "Loading NPC template; ID: "
+					+ npcDat.getString("idTemplate"));
+			
 			npcDat.set("baseHpMax", NpcData.getInt("hp"));
 			npcDat.set("baseCpMax", 0);
 			npcDat.set("baseMpMax", NpcData.getInt("mp"));
-			npcDat.set("baseHpReg", NpcData.getFloat("hpreg") > 0 ? NpcData.getFloat("hpreg") : 1.5 + ((level - 1) / 10.0));
-			npcDat.set("baseMpReg", NpcData.getFloat("mpreg") > 0 ? NpcData.getFloat("mpreg") : 0.9 + 0.3 * ((level - 1) / 10.0));
+			npcDat.set("baseHpReg", NpcData.getFloat("hpreg") > 0 ? NpcData.getFloat("hpreg")
+					: 1.5 + ((level - 1) / 10.0));
+			npcDat.set("baseMpReg", NpcData.getFloat("mpreg") > 0 ? NpcData.getFloat("mpreg")
+					: 0.9 + 0.3 * ((level - 1) / 10.0));
 			npcDat.set("basePAtk", NpcData.getInt("patk"));
 			npcDat.set("basePDef", NpcData.getInt("pdef"));
 			npcDat.set("baseMAtk", NpcData.getInt("matk"));
@@ -440,31 +454,31 @@ public final class NpcTable
 			// save a copy of the old data
 			L2NpcTemplate old = getTemplate(id);
 			FastMap<Integer, L2Skill> skills = null;
-
+			
 			// L2NpcTemplate.getSkillS() is unmodifiable, so the entrySet() of it can't be used
 			if (old != null && old.getSkills() != null)
 			{
 				skills = new FastMap<Integer, L2Skill>(old.getSkills().size());
-
+				
 				for (Integer key : old.getSkills().keySet())
 					skills.put(key, old.getSkills().get(key));
 			}
-
+			
 			L2DropCategory[] categories = new L2DropCategory[0];
-
+			
 			if (old != null && old.getDropData() != null)
 				categories = (L2DropCategory[])ArrayUtils.addAll(categories, old.getDropData());
-
+			
 			FastList<ClassId> classIds = new FastList<ClassId>();
-
+			
 			if (old != null && old.getTeachInfo() != null)
 				classIds.addAll(old.getTeachInfo());
-
+			
 			L2MinionData[] minions = new L2MinionData[0];
-
+			
 			if (old != null && old.getMinionData() != null)
 				minions = (L2MinionData[])ArrayUtils.addAll(minions, old.getMinionData());
-
+			
 			// reload the NPC base data
 			con = L2DatabaseFactory.getInstance().getConnection();
 			PreparedStatement st = con.prepareStatement("SELECT * FROM npc WHERE id=?");
@@ -473,7 +487,7 @@ public final class NpcTable
 			loaded = fillNpcTable(rs);
 			rs.close();
 			st.close();
-
+			
 			if (!loaded)
 			{
 				st = con.prepareStatement("SELECT * FROM custom_npc WHERE id=?");
@@ -483,17 +497,17 @@ public final class NpcTable
 				rs.close();
 				st.close();
 			}
-
+			
 			// restore additional data from saved copy
 			L2NpcTemplate created = getTemplate(id);
-
+			
 			if (skills != null)
 				for (L2Skill skill : skills.values())
 					created.addSkill(skill);
-
+			
 			for (ClassId classId : classIds)
 				created.addTeachInfo(classId);
-
+			
 			for (L2MinionData minion : minions)
 				created.addRaidData(minion);
 		}
@@ -506,10 +520,10 @@ public final class NpcTable
 		{
 			L2DatabaseFactory.close(con);
 		}
-
+		
 		return loaded;
 	}
-
+	
 	// just wrapper
 	public void reloadAll()
 	{
@@ -522,12 +536,12 @@ public final class NpcTable
 		if (reloadQuests)
 			QuestManager.getInstance().reloadAllQuests();
 	}
-
+	
 	public void cleanUp()
 	{
 		_npcs.clear(false);
 	}
-
+	
 	public void saveNpc(StatsSet npc)
 	{
 		Connection con = null;
@@ -535,26 +549,26 @@ public final class NpcTable
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			Map<String, Object> set = npc.getSet();
-
+			
 			String name = "";
 			String values = "";
-
+			
 			for (Object obj : set.keySet())
 			{
-				name = (String) obj;
-
+				name = (String)obj;
+				
 				if (name.equalsIgnoreCase("npcId"))
 					continue;
-
+				
 				if (values != "")
 					values += ", ";
-
+				
 				values += name + " = '" + set.get(name) + "'";
 			}
-
+			
 			String query = "UPDATE npc SET " + values + " WHERE id = ?";
 			String query_custom = "UPDATE custom_npc SET " + values + " WHERE id = ?";
-
+			
 			try
 			{
 				PreparedStatement statement = con.prepareStatement(query);
@@ -566,7 +580,7 @@ public final class NpcTable
 			{
 				_log.warn("", e);
 			}
-
+			
 			try
 			{
 				PreparedStatement statement = con.prepareStatement(query_custom);
@@ -588,17 +602,17 @@ public final class NpcTable
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public L2NpcTemplate getTemplate(int id)
 	{
 		return _npcs.get(id);
 	}
-
+	
 	public Iterable<L2NpcTemplate> getAllTemplates()
 	{
 		return _npcs;
 	}
-
+	
 	public L2NpcTemplate getTemplateByName(String name)
 	{
 		for (L2NpcTemplate npcTemplate : _npcs)
@@ -606,7 +620,7 @@ public final class NpcTable
 				return npcTemplate;
 		return null;
 	}
-
+	
 	public L2NpcTemplate[] getAllOfLevel(int lvl)
 	{
 		FastList<L2NpcTemplate> list = new FastList<L2NpcTemplate>();
@@ -615,7 +629,7 @@ public final class NpcTable
 				list.add(t);
 		return list.toArray(new L2NpcTemplate[list.size()]);
 	}
-
+	
 	public L2NpcTemplate[] getAllMonstersOfLevel(int lvl)
 	{
 		FastList<L2NpcTemplate> list = new FastList<L2NpcTemplate>();
@@ -624,7 +638,7 @@ public final class NpcTable
 				list.add(t);
 		return list.toArray(new L2NpcTemplate[list.size()]);
 	}
-
+	
 	public L2NpcTemplate[] getAllNpcStartingWith(String letter)
 	{
 		FastList<L2NpcTemplate> list = new FastList<L2NpcTemplate>();
@@ -633,7 +647,7 @@ public final class NpcTable
 				list.add(t);
 		return list.toArray(new L2NpcTemplate[list.size()]);
 	}
-
+	
 	/**
 	 * @param classType
 	 * @return
@@ -642,7 +656,7 @@ public final class NpcTable
 	{
 		return null;
 	}
-
+	
 	/**
 	 * @param clazz
 	 * @return
@@ -651,7 +665,7 @@ public final class NpcTable
 	{
 		return null;
 	}
-
+	
 	/**
 	 * @param aiType
 	 * @return
@@ -660,18 +674,18 @@ public final class NpcTable
 	{
 		return null;
 	}
-
+	
 	public List<L2NpcTemplate> getMobsByDrop(int itemid)
 	{
 		List<L2NpcTemplate> returnVal = new FastList<L2NpcTemplate>();
-		for(L2NpcTemplate tempNpc:_npcs)
+		for (L2NpcTemplate tempNpc : _npcs)
 		{
 			List<L2DropData> dropdata = tempNpc.getAllDropData();
-			if(dropdata!=null)
+			if (dropdata != null)
 			{
-				for(L2DropData tempDrop:dropdata)
+				for (L2DropData tempDrop : dropdata)
 				{
-					if(tempDrop.getItemId()==itemid)
+					if (tempDrop.getItemId() == itemid)
 					{
 						returnVal.add(tempNpc);
 						break;
@@ -681,7 +695,7 @@ public final class NpcTable
 		}
 		return returnVal;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

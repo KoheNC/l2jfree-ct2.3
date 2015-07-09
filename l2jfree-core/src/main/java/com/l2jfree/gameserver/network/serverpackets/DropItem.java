@@ -18,10 +18,10 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 
 public class DropItem extends L2GameServerPacket
 {
-	private static final String	_S__16_DROPITEM	= "[S] 16 DropItem [ddddddddd]";
-	private final L2ItemInstance		_item;
-	private final int					_charObjId;
-
+	private static final String _S__16_DROPITEM = "[S] 16 DropItem [ddddddddd]";
+	private final L2ItemInstance _item;
+	private final int _charObjId;
+	
 	/**
 	 * Constructor of the DropItem server packet
 	 * 
@@ -33,7 +33,7 @@ public class DropItem extends L2GameServerPacket
 		_item = item;
 		_charObjId = playerObjId;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -41,7 +41,7 @@ public class DropItem extends L2GameServerPacket
 		writeD(_charObjId);
 		writeD(_item.getObjectId());
 		writeD(_item.getItemDisplayId());
-
+		
 		writeD(_item.getX());
 		writeD(_item.getY());
 		writeD(_item.getZ());
@@ -55,10 +55,10 @@ public class DropItem extends L2GameServerPacket
 			writeD(0x00);
 		}
 		writeCompQ(_item.getCount());
-
+		
 		writeD(0x01); // unknown
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

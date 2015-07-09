@@ -34,12 +34,12 @@ public class L2SiegeDangerZone extends L2DamageZone
 {
 	private static final int SPEED_SKILL = 4625;
 	private Siege _siege;
-
+	
 	@Override
 	protected void checkForDamage(L2Character character)
 	{
 		super.checkForDamage(character);
-
+		
 		if (getHPDamagePerSecond() > 0 && character instanceof L2Playable)
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.C1_RECEIVED_DAMAGE_FROM_S2_THROUGH_FIRE_OF_MAGIC);
@@ -48,17 +48,16 @@ public class L2SiegeDangerZone extends L2DamageZone
 			character.getActingPlayer().sendPacket(sm);
 		}
 	}
-
+	
 	@Override
 	protected boolean checkDynamicConditions(L2Character character)
 	{
-		if (_siege == null || !_siege.getIsInProgress() || !(character instanceof L2Playable)
-				|| !isActive())
+		if (_siege == null || !_siege.getIsInProgress() || !(character instanceof L2Playable) || !isActive())
 			return false;
-
+		
 		return super.checkDynamicConditions(character);
 	}
-
+	
 	@Override
 	protected void register() throws Exception
 	{
@@ -66,7 +65,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 		_siege = c.getSiege();
 		c.loadDangerZone(this);
 	}
-
+	
 	/** Activates this zone. */
 	public void activate()
 	{
@@ -76,13 +75,13 @@ public class L2SiegeDangerZone extends L2DamageZone
 			if (_applyEnter == null)
 				_applyEnter = new L2Skill[] { s };
 			else
-				_applyEnter = (L2Skill[]) ArrayUtils.add(_applyEnter, s);
+				_applyEnter = (L2Skill[])ArrayUtils.add(_applyEnter, s);
 			_removeExit = ArrayUtils.add(_removeExit, SPEED_SKILL);
 		}
 		else
 			_log.warn("Missing siege danger zone skill! " + SPEED_SKILL + " Lv 12");
 	}
-
+	
 	/** Deactivates this zone. */
 	public void deactivate()
 	{
@@ -91,10 +90,16 @@ public class L2SiegeDangerZone extends L2DamageZone
 			removeFromZone(c);
 		_removeExit = null;
 	}
-
+	
 	public boolean isActive()
 	{
-		try { return _applyEnter[0].getLevel() > 0; }
-		catch (NullPointerException npe) { return false; }
+		try
+		{
+			return _applyEnter[0].getLevel() > 0;
+		}
+		catch (NullPointerException npe)
+		{
+			return false;
+		}
 	}
 }

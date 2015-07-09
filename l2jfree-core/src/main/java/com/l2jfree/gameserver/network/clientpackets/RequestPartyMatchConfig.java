@@ -28,11 +28,11 @@ import com.l2jfree.gameserver.network.serverpackets.ListPartyWaiting;
 public class RequestPartyMatchConfig extends L2GameClientPacket
 {
 	private static final String _C__7F_REQUESTPARTYMATCHCONFIG = "[C] 7F RequestPartyMatchConfig";
-
+	
 	private int _page;
 	private int _region;
 	private boolean _allLevels;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -40,30 +40,30 @@ public class RequestPartyMatchConfig extends L2GameClientPacket
 		_region = readD(); // 0 to 15, or -1
 		_allLevels = readD() == 1;
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		L2Party party = player.getParty();
 		if (party != null && !party.isLeader(player))
 		{
 			requestFailed(SystemMessageId.CANT_VIEW_PARTY_ROOMS);
 			return;
 		}
-
+		
 		player.setPartyMatchingLevelRestriction(_allLevels);
 		player.setPartyMatchingRegion(_region);
-
+		
 		PartyRoomManager.getInstance().addToWaitingList(player);
 		sendPacket(new ListPartyWaiting(player, _page));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

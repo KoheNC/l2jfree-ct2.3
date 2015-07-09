@@ -49,39 +49,39 @@ import com.l2jfree.lang.L2TextBuilder;
  */
 public class AuctionBBSManager extends BaseBBSManager
 {
-	private final static Log			_log		= LogFactory.getLog(AuctionBBSManager.class);
-
-	private static FastList<Integer>	_lotsBidded	= new FastList<Integer>();
-
+	private final static Log _log = LogFactory.getLog(AuctionBBSManager.class);
+	
+	private static FastList<Integer> _lotsBidded = new FastList<Integer>();
+	
 	public static AuctionBBSManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private class LotList
 	{
-		private Integer	lotId;
-		private Integer	ownerId;
-		private Integer	itemId;
-		private Integer	objectId;
-		private Long	count;
-		private Integer	enchantLevel;
-		private Integer	currency;
-		private Integer	startingBid;
-		private Integer	bidIncrement;
-		private Integer	buyNow;
-		private Long	endDate;
-		private String	endDateFormated;
-		private Boolean	isProcessed;
+		private Integer lotId;
+		private Integer ownerId;
+		private Integer itemId;
+		private Integer objectId;
+		private Long count;
+		private Integer enchantLevel;
+		private Integer currency;
+		private Integer startingBid;
+		private Integer bidIncrement;
+		private Integer buyNow;
+		private Long endDate;
+		private String endDateFormated;
+		private Boolean isProcessed;
 	}
-
+	
 	private class BidList
 	{
-		private Integer	bidderId;
-		private Long	bidAmount;
-		private String	bidDateFormated;
+		private Integer bidderId;
+		private Long bidAmount;
+		private String bidDateFormated;
 	}
-
+	
 	public FastList<LotList> getLots()
 	{
 		FastList<LotList> _lots = new FastList<LotList>();
@@ -122,7 +122,7 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		return _lots;
 	}
-
+	
 	public FastList<BidList> getBids(int lotId)
 	{
 		FastList<BidList> _bids = new FastList<BidList>();
@@ -130,7 +130,8 @@ public class AuctionBBSManager extends BaseBBSManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT * FROM auction_bids WHERE lotId = ? ORDER BY bidDate DESC");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT * FROM auction_bids WHERE lotId = ? ORDER BY bidDate DESC");
 			statement.setInt(1, lotId);
 			ResultSet result = statement.executeQuery();
 			while (result.next())
@@ -138,7 +139,8 @@ public class AuctionBBSManager extends BaseBBSManager
 				BidList bid = new BidList();
 				bid.bidderId = result.getInt("bidderId");
 				bid.bidAmount = result.getLong("bidAmount");
-				bid.bidDateFormated = new SimpleDateFormat("MMM dd, HH:mm:ss").format(new Date(result.getLong("bidDate")));
+				bid.bidDateFormated =
+						new SimpleDateFormat("MMM dd, HH:mm:ss").format(new Date(result.getLong("bidDate")));
 				_bids.add(bid);
 			}
 			result.close();
@@ -154,16 +156,16 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		return _bids;
 	}
-
+	
 	private LotList getLot(int lotId)
 	{
 		for (LotList temp : getLots())
 			if (temp.lotId == lotId)
 				return temp;
-
+		
 		return new LotList();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -196,7 +198,8 @@ public class AuctionBBSManager extends BaseBBSManager
 			{
 				try
 				{
-					addBid(activeChar, Integer.parseInt(params[1]), Long.valueOf(params[2]), Integer.parseInt(params[3]), Long.valueOf(params[4].replaceAll(",", "")));
+					addBid(activeChar, Integer.parseInt(params[1]), Long.valueOf(params[2]),
+							Integer.parseInt(params[3]), Long.valueOf(params[4].replaceAll(",", "")));
 				}
 				catch (NumberFormatException e)
 				{
@@ -216,9 +219,9 @@ public class AuctionBBSManager extends BaseBBSManager
 			Long startingBid, increment, buyNow, count;
 			String[] params;
 			params = command.split(" ");
-			if(params.length!=8)
+			if (params.length != 8)
 				return;
-
+			
 			hours = Integer.parseInt(params[1]);
 			currency = Integer.parseInt(params[2]);
 			startingBid = Long.parseLong(params[3]);
@@ -235,14 +238,16 @@ public class AuctionBBSManager extends BaseBBSManager
 				showInventoryPage(activeChar, 1, hours, currency, startingBid, increment, buyNow);
 				return;
 			}
-			if (hours > 168 || startingBid > Long.valueOf("500000000") || increment > Long.valueOf("1000000") || buyNow > Long.valueOf("2000000000") || count > Long.valueOf("2000000000") || hours < 1 || startingBid < Long.valueOf("0")
-					|| increment < Long.valueOf("0") || buyNow < Long.valueOf("0") || count < Long.valueOf("1") || (buyNow <= startingBid && buyNow > Long.valueOf("0")))
+			if (hours > 168 || startingBid > Long.valueOf("500000000") || increment > Long.valueOf("1000000")
+					|| buyNow > Long.valueOf("2000000000") || count > Long.valueOf("2000000000") || hours < 1
+					|| startingBid < Long.valueOf("0") || increment < Long.valueOf("0") || buyNow < Long.valueOf("0")
+					|| count < Long.valueOf("1") || (buyNow <= startingBid && buyNow > Long.valueOf("0")))
 			{
 				activeChar.sendMessage("Error: One of your fields was incorrect!");
 				return;
 			}
 			addAuction(activeChar, hours, currency, startingBid, increment, buyNow, count, objectId);
-
+			
 			showAuctionPage(activeChar, 1, "All", false);
 			showComfirmationPage(activeChar);
 		}
@@ -252,23 +257,28 @@ public class AuctionBBSManager extends BaseBBSManager
 			Long startingBid, increment, buyNow;
 			String[] params;
 			params = command.split(" ");
-
+			
 			try
 			{
 				page = Integer.parseInt(params[1].replaceAll(",", ""));
 				hours = Integer.parseInt(params[2].replaceAll(",", ""));
-				currency = (params[3].equals("Adena") ? PcInventory.ADENA_ID : (params[3].equals("Ancient_Adena") ? PcInventory.ANCIENT_ADENA_ID : (params[3].equals(ItemTable.getInstance().getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName().replace(' ', '_')) ? Config.AUCTION_SPECIAL_CURRENCY : Integer
-						.parseInt(params[3]))));
+				currency =
+						(params[3].equals("Adena") ? PcInventory.ADENA_ID : (params[3].equals("Ancient_Adena")
+								? PcInventory.ANCIENT_ADENA_ID : (params[3].equals(ItemTable.getInstance()
+										.getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName().replace(' ', '_'))
+										? Config.AUCTION_SPECIAL_CURRENCY : Integer.parseInt(params[3]))));
 				startingBid = Long.parseLong(params[4].replaceAll(",", ""));
 				increment = Long.parseLong(params[5].replaceAll(",", ""));
 				buyNow = Long.parseLong(params[6].replaceAll(",", ""));
-				if (hours > 168 || startingBid > Long.valueOf("500000000") || increment > Long.valueOf("1000000") || buyNow > Long.valueOf("2000000000") || hours < 1 || startingBid < Long.valueOf("0") || increment < Long.valueOf("0")
-						|| buyNow < Long.valueOf("0") || (buyNow <= startingBid && buyNow > Long.valueOf("0")))
+				if (hours > 168 || startingBid > Long.valueOf("500000000") || increment > Long.valueOf("1000000")
+						|| buyNow > Long.valueOf("2000000000") || hours < 1 || startingBid < Long.valueOf("0")
+						|| increment < Long.valueOf("0") || buyNow < Long.valueOf("0")
+						|| (buyNow <= startingBid && buyNow > Long.valueOf("0")))
 				{
 					activeChar.sendMessage("Error: One of your fields was incorrect!");
 					return;
 				}
-
+				
 				showInventoryPage(activeChar, page, hours, currency, startingBid, increment, buyNow);
 			}
 			catch (Exception e)
@@ -295,20 +305,21 @@ public class AuctionBBSManager extends BaseBBSManager
 			notImplementedYet(activeChar, command);
 		}
 	}
-
+	
 	private void showAuctionPage(L2PcInstance activeChar, int page, String viewOnly, boolean showEnded)
 	{
 		int index = 0, minIndex = 0, maxIndex = 0;
 		maxIndex = (page == 1 ? page * 9 : (page * 10) - 1);
 		minIndex = maxIndex - 9;
 		getLotsBiddedOn(activeChar);
-
+		
 		final L2TextBuilder html = L2TextBuilder.newInstance();
 		html.append("<html>");
 		html.append("<body><br><br>");
-
+		
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=810><tr><td width=10></td><td width=800 height=30 align=left>");
-		html.append("<a action=\"bypass _bbshome\">HOME</a>&nbsp;&gt;&nbsp;<a action=\"bypass _bbsauction;1;" + viewOnly + ";" + showEnded + "\">" + (showEnded ? "Ended" : "Active") + " Auctions</a>");
+		html.append("<a action=\"bypass _bbshome\">HOME</a>&nbsp;&gt;&nbsp;<a action=\"bypass _bbsauction;1;"
+				+ viewOnly + ";" + showEnded + "\">" + (showEnded ? "Ended" : "Active") + " Auctions</a>");
 		html.append("</td></tr>");
 		html.append("</table>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=770 bgcolor=808080>");
@@ -316,11 +327,11 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("</tr><tr>");
 		html.append("<td fixWIDTH=5></td>");
 		html.append("<td><a action=\"bypass _bbsauction_new\">[New Auction]</a></td>");
-		html.append("<td><a action=\"bypass _bbsauction;1;" + viewOnly + ";" + (showEnded ? "false" : "true") + "\">[" + (showEnded ? "Active" : "Ended") + " Auctions]</a></td>");
+		html.append("<td><a action=\"bypass _bbsauction;1;" + viewOnly + ";" + (showEnded ? "false" : "true") + "\">["
+				+ (showEnded ? "Active" : "Ended") + " Auctions]</a></td>");
 		html.append("<td fixWIDTH=350></td>");
 		html.append("<td>View Only:</td>");
-		html
-		.append("<td fixWIDTH=125><combobox width=115 var=Combo list=\"All;Ancient;Big Blunt;Big Sword;Blunt;Bow;Crossbow;Dagger;Dual Fist;Dual Sword;Etc;Fist;Heavy Armor;Light Armor;Robe Armor;Material;Other;Other Armor;PetCollar;Pet;Pole;Potion;Quest;Rapier;Receipe;Scroll;Seed;Shield;Shot;Sword\"></td>");
+		html.append("<td fixWIDTH=125><combobox width=115 var=Combo list=\"All;Ancient;Big Blunt;Big Sword;Blunt;Bow;Crossbow;Dagger;Dual Fist;Dual Sword;Etc;Fist;Heavy Armor;Light Armor;Robe Armor;Material;Other;Other Armor;PetCollar;Pet;Pole;Potion;Quest;Rapier;Receipe;Scroll;Seed;Shield;Shot;Sword\"></td>");
 		html.append("<td><button value=\"Go\" action=\"Write Auction Sort _ Combo Combo Combo\" width=20 height=16 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		html.append("<td fixWIDTH=5></td>");
 		html.append("</tr>");
@@ -337,7 +348,7 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=120 align=center>Ending Date</td>");
 		html.append("<td FIXWIDTH=5></td>");
 		html.append("</tr></table>");
-
+		
 		for (LotList lot : getLots())
 		{
 			long highestBid = getHighestBid(lot.lotId);
@@ -345,7 +356,8 @@ public class AuctionBBSManager extends BaseBBSManager
 			L2Item item = ItemTable.getInstance().getTemplate(lot.itemId);
 			if (viewOnly.equals("All") || viewOnly.equals(item.getItemType().toString()))
 			{
-				if ((lot.endDate > System.currentTimeMillis() && !showEnded) || (lot.endDate < System.currentTimeMillis() && showEnded))
+				if ((lot.endDate > System.currentTimeMillis() && !showEnded)
+						|| (lot.endDate < System.currentTimeMillis() && showEnded))
 				{
 					if (index < minIndex)
 					{
@@ -354,23 +366,35 @@ public class AuctionBBSManager extends BaseBBSManager
 					}
 					if (index > maxIndex)
 						break;
-					html.append("<table border=0 cellspacing=0 cellpadding=2 width=770 " + (_lotsBidded.contains(lot.lotId) ? "bgcolor=\"333388\"" : (activeChar.getObjectId().equals(lot.ownerId) ? "bgcolor=\"337722\"" : "")) + ">");
+					html.append("<table border=0 cellspacing=0 cellpadding=2 width=770 "
+							+ (_lotsBidded.contains(lot.lotId) ? "bgcolor=\"333388\"" : (activeChar.getObjectId()
+									.equals(lot.ownerId) ? "bgcolor=\"337722\"" : "")) + ">");
 					html.append("<tr>");
 					html.append("<td FIXWIDTH=5></td>");
 					if (item.isEquipable())
-						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view " + lot.lotId + "\">" + "+" + lot.enchantLevel + " " + item.getName() + "</a></td>");
+						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view "
+								+ lot.lotId + "\">" + "+" + lot.enchantLevel + " " + item.getName() + "</a></td>");
 					else if (!lot.enchantLevel.equals(0))
-						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view " + lot.lotId + "\">" + "Level " + lot.enchantLevel + " " + item.getName() + "</a></td>");
+						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view "
+								+ lot.lotId + "\">" + "Level " + lot.enchantLevel + " " + item.getName() + "</a></td>");
 					else if (!lot.count.equals(Long.valueOf("1")))
-						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view " + lot.lotId + "\">" + "(" + Util.formatAdena(lot.count.intValue()) + ") " + item.getName() + "</a></td>");
+						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view "
+								+ lot.lotId + "\">" + "(" + Util.formatAdena(lot.count.intValue()) + ") "
+								+ item.getName() + "</a></td>");
 					else
-						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view " + lot.lotId + "\">" + item.getName() + "</a></td>");
-					html.append("<td FIXWIDTH=100 align=center valign=center>" + Util.formatAdena((int) currentBid) + "</td>");
-					html.append("<td FIXWIDTH=100 align=center valign=center>"
-							+ (lot.buyNow.equals(0) || currentBid >= lot.buyNow ? "-" : (lot.ownerId.equals(activeChar.getObjectId()) || showEnded ? "Buy Now!" : "<a action=\"bypass _bbsauction_buy_now " + lot.lotId + "\">Buy Now!</a>"))
+						html.append("<td FIXWIDTH=380 align=left valign=top><a action=\"bypass _bbsauction_view "
+								+ lot.lotId + "\">" + item.getName() + "</a></td>");
+					html.append("<td FIXWIDTH=100 align=center valign=center>" + Util.formatAdena((int)currentBid)
 							+ "</td>");
-					html.append("<td FIXWIDTH=60 align=center valign=center><img src=icon." + (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00" : Config.AUCTION_SPECIAL_CURRENCY_ICON))
-							+ " width=32 height=20></td>");
+					html.append("<td FIXWIDTH=100 align=center valign=center>"
+							+ (lot.buyNow.equals(0) || currentBid >= lot.buyNow ? "-" : (lot.ownerId.equals(activeChar
+									.getObjectId()) || showEnded ? "Buy Now!"
+									: "<a action=\"bypass _bbsauction_buy_now " + lot.lotId + "\">Buy Now!</a>"))
+							+ "</td>");
+					html.append("<td FIXWIDTH=60 align=center valign=center><img src=icon."
+							+ (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency
+									.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00"
+									: Config.AUCTION_SPECIAL_CURRENCY_ICON)) + " width=32 height=20></td>");
 					html.append("<td FIXWIDTH=120 align=center valign=center>" + lot.endDateFormated + "</td>");
 					html.append("<td FIXWIDTH=5></td>");
 					html.append("</tr></table>");
@@ -381,17 +405,25 @@ public class AuctionBBSManager extends BaseBBSManager
 			}
 		}
 		html.append("<center><table width=770><tr>");
-		html.append("<td align=right><button action=\"bypass _bbsauction;" + (page == 1 ? page : page - 1) + ";" + viewOnly + ";" + showEnded
+		html.append("<td align=right><button action=\"bypass _bbsauction;" + (page == 1 ? page : page - 1) + ";"
+				+ viewOnly + ";" + showEnded
 				+ "\" width=16 height=16 back=\"L2UI_ct1.button_df_left_down\" fore=\"L2UI_ct1.button_df_left\"></td>");
 		for (int i = 1; i <= 10; i++)
-			html.append("<td align=center fixedwidth=10><a action=\"bypass _bbsauction;" + i + ";" + viewOnly + ";" + showEnded + "\">" + i + "</a></td>");
-		html.append("<td align=left><button action=\"bypass _bbsauction;" + (page + 1) + ";" + viewOnly + ";" + showEnded + "\" width=16 height=16 back=\"L2UI_ct1.button_df_right_down\" fore=\"L2UI_ct1.button_df_right\"></td>");
+			html.append("<td align=center fixedwidth=10><a action=\"bypass _bbsauction;" + i + ";" + viewOnly + ";"
+					+ showEnded + "\">" + i + "</a></td>");
+		html.append("<td align=left><button action=\"bypass _bbsauction;"
+				+ (page + 1)
+				+ ";"
+				+ viewOnly
+				+ ";"
+				+ showEnded
+				+ "\" width=16 height=16 back=\"L2UI_ct1.button_df_right_down\" fore=\"L2UI_ct1.button_df_right\"></td>");
 		html.append("</tr></table>");
-
+		
 		html.append("</body></html>");
 		separateAndSend(html, activeChar);
 	}
-
+	
 	private void showLotPage(L2PcInstance activeChar, int lotId)
 	{
 		int count = 0;
@@ -411,14 +443,14 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		bidCount = countBids(lot.lotId);
 		L2Item item = ItemTable.getInstance().getTemplate(lot.itemId);
-
+		
 		if (currentBid == 0)
 			currentBid = lot.startingBid;
-
+		
 		final L2TextBuilder html = L2TextBuilder.newInstance();
 		html.append("<html>");
 		html.append("<body><br><br>");
-
+		
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=810><tr><td width=10></td><td width=800 height=30 align=left>");
 		html.append("<a action=\"bypass _bbshome\">HOME</a>&nbsp;&gt;&nbsp;<a action=\"bypass _bbsauction\">Active Auctions</a>");
 		html.append("</td></tr>");
@@ -429,11 +461,14 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=5 height=20></td>");
 		html.append("<td FIXWIDTH=100 height=20 align=right>Item:&nbsp;</td>");
 		if (item.isEquipable())
-			html.append("<td FIXWIDTH=360 height=20 align=left>" + "+" + lot.enchantLevel + " " + item.getName() + "</td>");
+			html.append("<td FIXWIDTH=360 height=20 align=left>" + "+" + lot.enchantLevel + " " + item.getName()
+					+ "</td>");
 		else if (!lot.enchantLevel.equals(0))
-			html.append("<td FIXWIDTH=360 height=20 align=left>" + "Level " + lot.enchantLevel + " " + item.getName() + "</td>");
+			html.append("<td FIXWIDTH=360 height=20 align=left>" + "Level " + lot.enchantLevel + " " + item.getName()
+					+ "</td>");
 		else if (!lot.count.equals(Long.valueOf("1")))
-			html.append("<td FIXWIDTH=360 height=20 align=left>(" + Util.formatAdena(lot.count.intValue()) + ") " + item.getName() + "</td>");
+			html.append("<td FIXWIDTH=360 height=20 align=left>(" + Util.formatAdena(lot.count.intValue()) + ") "
+					+ item.getName() + "</td>");
 		else
 			html.append("<td FIXWIDTH=360 height=20 align=left>" + item.getName() + "</td>");
 		html.append("<td FIXWIDTH=150 height=20 align=right>End Date:&nbsp;</td>");
@@ -464,8 +499,10 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=100 height=20 align=right>Current Bid:&nbsp;</td>");
 		html.append("<td FIXWIDTH=360 height=20 align=left>" + Util.formatAdena(getHighestBid(lotId)) + "</td>");//
 		html.append("<td FIXWIDTH=150 height=20 align=right>Currency:&nbsp;</td>");
-		html.append("<td FIXWIDTH=150 height=20 align=left><img src=icon." + (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00" : Config.AUCTION_SPECIAL_CURRENCY_ICON))
-				+ " width=32 height=16></td>");
+		html.append("<td FIXWIDTH=150 height=20 align=left><img src=icon."
+				+ (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency
+						.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00"
+						: Config.AUCTION_SPECIAL_CURRENCY_ICON)) + " width=32 height=16></td>");
 		html.append("<td fixWIDTH=5 height=20></td>");
 		html.append("</tr>");
 		html.append("</table>");
@@ -478,7 +515,7 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=200 align=center>Date</td>");
 		html.append("<td FIXWIDTH=85></td>");
 		html.append("</tr></table>");
-
+		
 		for (BidList bid : getBids(lot.lotId))
 		{
 			count++;
@@ -487,8 +524,12 @@ public class AuctionBBSManager extends BaseBBSManager
 			html.append("<table border=0 cellspacing=0 cellpadding=2 width=770><tr>");
 			html.append("<td FIXWIDTH=85></td>");
 			html.append("<td FIXWIDTH=200 align=center>" + getCharName(bid.bidderId) + "</td>");
-			html.append("<td FIXWIDTH=200 align=center>(" + Util.formatAdena(bid.bidAmount.intValue()) + ") "
-					+ (lot.currency.equals(PcInventory.ADENA_ID) ? "Adena" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "Ancient Adena" : ItemTable.getInstance().getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName())) + "</td>");
+			html.append("<td FIXWIDTH=200 align=center>("
+					+ Util.formatAdena(bid.bidAmount.intValue())
+					+ ") "
+					+ (lot.currency.equals(PcInventory.ADENA_ID) ? "Adena" : (lot.currency
+							.equals(PcInventory.ANCIENT_ADENA_ID) ? "Ancient Adena" : ItemTable.getInstance()
+							.getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName())) + "</td>");
 			html.append("<td FIXWIDTH=200 align=center>" + bid.bidDateFormated + "</td>");
 			html.append("<td FIXWIDTH=85></td>");
 			html.append("</tr></table>");
@@ -502,16 +543,21 @@ public class AuctionBBSManager extends BaseBBSManager
 			html.append("<td>This auction lot has ended.</td>");
 		else
 		{
-			html.append("<td>Please enter a bid more than " + Util.formatAdena((bidCount != 0 ? (currentBid + lot.bidIncrement) : currentBid)) + " "
-					+ (lot.currency.equals(PcInventory.ADENA_ID) ? "Adena" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "Ancient Adena" : ItemTable.getInstance().getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName())) + "</td>");
+			html.append("<td>Please enter a bid more than "
+					+ Util.formatAdena((bidCount != 0 ? (currentBid + lot.bidIncrement) : currentBid))
+					+ " "
+					+ (lot.currency.equals(PcInventory.ADENA_ID) ? "Adena" : (lot.currency
+							.equals(PcInventory.ANCIENT_ADENA_ID) ? "Ancient Adena" : ItemTable.getInstance()
+							.getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName())) + "</td>");
 			html.append("</tr><tr>");
-			html.append("<td><button value=\"Bid Window\" action=\"bypass _bbsauction_bid " + lot.lotId + "\" width=100 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+			html.append("<td><button value=\"Bid Window\" action=\"bypass _bbsauction_bid " + lot.lotId
+					+ "\" width=100 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		}
 		html.append("</tr></table>");
 		html.append("</body></html>");
 		separateAndSend(html, activeChar);
 	}
-
+	
 	private void showBidPage(L2PcInstance activeChar, int lotId)
 	{
 		LotList lot = null;
@@ -527,13 +573,13 @@ public class AuctionBBSManager extends BaseBBSManager
 		L2Item item = ItemTable.getInstance().getTemplate(lot.itemId);
 		int currentBid = getHighestBid(lotId);
 		int bidCount = countBids(lot.lotId);
-
+		
 		if (currentBid == 0)
 			currentBid = lot.startingBid;
-
+		
 		NpcHtmlMessage nhm = new NpcHtmlMessage(5);
 		L2TextBuilder html = L2TextBuilder.newInstance("<html><body>");
-
+		
 		html.append("<title>Bidding Window</title>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280 bgcolor=808080>");
 		html.append("<tr>");
@@ -547,7 +593,10 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=180>" + Util.formatAdena(lot.count.intValue()) + "</td>");
 		html.append("</tr><tr>");
 		html.append("<td FIXWIDTH=100 align=right>Currency:</td>");
-		html.append("<td FIXWIDTH=180><img src=icon." + (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00" : Config.AUCTION_SPECIAL_CURRENCY_ICON)) + " width=32 height=16></td>");
+		html.append("<td FIXWIDTH=180><img src=icon."
+				+ (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency
+						.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00"
+						: Config.AUCTION_SPECIAL_CURRENCY_ICON)) + " width=32 height=16></td>");
 		html.append("</tr></table>");
 		html.append("<br>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280><tr><td FIXWIDTH=280 height=20></td></tr></table>");
@@ -566,27 +615,33 @@ public class AuctionBBSManager extends BaseBBSManager
 			html.append("The auction has ended.");
 		else
 		{
-			html.append("<td>Please enter a bid more then " + Util.formatAdena((bidCount != 0 ? (currentBid + lot.bidIncrement) : currentBid)) + " "
-					+ (lot.currency.equals(PcInventory.ADENA_ID) ? "Adena" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "Ancient Adena" : ItemTable.getInstance().getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName())) + "</td>");
+			html.append("<td>Please enter a bid more then "
+					+ Util.formatAdena((bidCount != 0 ? (currentBid + lot.bidIncrement) : currentBid))
+					+ " "
+					+ (lot.currency.equals(PcInventory.ADENA_ID) ? "Adena" : (lot.currency
+							.equals(PcInventory.ANCIENT_ADENA_ID) ? "Ancient Adena" : ItemTable.getInstance()
+							.getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName())) + "</td>");
 			html.append("<edit var=\"Value\" width=150 height=11 length=\"13\"><br>");
-			html.append("<button value=\"Place Bid\" action=\"bypass -h _bbsauction_bid " + lot.lotId + " " + lot.bidIncrement + " " + lot.currency + " $Value\" width=80 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			html.append("<button value=\"Place Bid\" action=\"bypass -h _bbsauction_bid " + lot.lotId + " "
+					+ lot.bidIncrement + " " + lot.currency
+					+ " $Value\" width=80 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
-
+		
 		html.append("</body></html>");
-
+		
 		nhm.setHtml(html.moveToString());
 		activeChar.sendPacket(nhm);
-
+		
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to
 		// avoid that the client wait another packet
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showNewAuctionPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage nhm = new NpcHtmlMessage(5);
 		L2TextBuilder html = L2TextBuilder.newInstance("<html><body>");
-
+		
 		html.append("<title>New Auction Lot Window</title>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280>");
 		html.append("<tr>");
@@ -596,7 +651,9 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("</tr><tr>");
 		html.append("<td FIXWIDTH=280 height=30>Please select a currency.</td>");
 		html.append("</tr><tr>");
-		html.append("<td FIXWIDTH=280 height=30><combobox width=200 var=Currency list=\"Adena;Ancient_Adena;" + ItemTable.getInstance().getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName().replace(' ', '_') + "\"></td>");
+		html.append("<td FIXWIDTH=280 height=30><combobox width=200 var=Currency list=\"Adena;Ancient_Adena;"
+				+ ItemTable.getInstance().getTemplate(Config.AUCTION_SPECIAL_CURRENCY).getName().replace(' ', '_')
+				+ "\"></td>");
 		html.append("</tr><tr>");
 		html.append("<td FIXWIDTH=280 height=30>Please enter a minimum starting bid price. (0 - 500,000,000)</td>");
 		html.append("</tr><tr>");
@@ -610,36 +667,56 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("</tr><tr>");
 		html.append("<td FIXWIDTH=280 height=30><edit var=\"BuyNow\" width=150 height=11 length=\"13\"></td>");
 		html.append("</tr><tr>");
-		html
-		.append("<td FIXWIDTH=280 height=30 align=right><button value=\"Continue to next page\" action=\"bypass _bbsauction_new_next 1 $Time $Currency $StartingBid $Increment $BuyNow\" width=175 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		html.append("<td FIXWIDTH=280 height=30 align=right><button value=\"Continue to next page\" action=\"bypass _bbsauction_new_next 1 $Time $Currency $StartingBid $Increment $BuyNow\" width=175 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		html.append("</tr><tr>");
 		html.append("<td FIXWIDTH=280 height=20></td>");
 		html.append("</tr>");
 		html.append("</table>");
-
+		
 		html.append("</body></html>");
 		nhm.setHtml(html.moveToString());
 		activeChar.sendPacket(nhm);
-
+		
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to
 		// avoid that the client wait another packet
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
-	private void showInventoryPage(L2PcInstance activeChar, int page, int time, int currency, long startingBid, long increment, long buyNow)
+	
+	private void showInventoryPage(L2PcInstance activeChar, int page, int time, int currency, long startingBid,
+			long increment, long buyNow)
 	{
 		int index = 0, minIndex = 0, maxIndex = 0;
 		maxIndex = (page == 1 ? page * 19 : (page * 20) - 1);
 		minIndex = maxIndex - 19;
-
+		
 		NpcHtmlMessage nhm = new NpcHtmlMessage(5);
 		L2TextBuilder html = L2TextBuilder.newInstance("<html><body>");
-
+		
 		html.append("<title>New Auction Lot Window</title>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280><tr>");
-		html.append("<td FIXWIDTH=280 height=20 align=left><button value=\"<< Prev\" action=\"bypass _bbsauction_new_next " + (page == 1 ? page : page - 1) + " " + time + " " + currency + " " + startingBid + " " + increment + " " + buyNow
-				+ "\" width=75 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-		html.append("<td FIXWIDTH=280 height=20 align=right><button value=\"Next >>\" action=\"bypass _bbsauction_new_next " + (page + 1) + " " + time + " " + currency + " " + startingBid + " " + increment + " " + buyNow
+		html.append("<td FIXWIDTH=280 height=20 align=left><button value=\"<< Prev\" action=\"bypass _bbsauction_new_next "
+				+ (page == 1 ? page : page - 1)
+				+ " "
+				+ time
+				+ " "
+				+ currency
+				+ " "
+				+ startingBid
+				+ " "
+				+ increment
+				+ " " + buyNow + "\" width=75 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		html.append("<td FIXWIDTH=280 height=20 align=right><button value=\"Next >>\" action=\"bypass _bbsauction_new_next "
+				+ (page + 1)
+				+ " "
+				+ time
+				+ " "
+				+ currency
+				+ " "
+				+ startingBid
+				+ " "
+				+ increment
+				+ " "
+				+ buyNow
 				+ "\" width=75 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		html.append("</tr></table>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280>");
@@ -652,9 +729,11 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("</tr>");
 		for (L2ItemInstance item : activeChar.getInventory().getItems())
 		{
-			if (((item.isTradeable() && !item.isAugmented() && !item.isShadowItem() && !Config.AUCTION_EXCLUDED_ITEMS_LIST.contains(item.getItemId())) || Config.AUCTION_INCLUDED_ITEMS_LIST.contains(item.getItemId())) && !item.isEquipped())
+			if (((item.isTradeable() && !item.isAugmented() && !item.isShadowItem() && !Config.AUCTION_EXCLUDED_ITEMS_LIST
+					.contains(item.getItemId())) || Config.AUCTION_INCLUDED_ITEMS_LIST.contains(item.getItemId()))
+					&& !item.isEquipped())
 			{
-
+				
 				if (index < minIndex)
 				{
 					index++;
@@ -665,7 +744,8 @@ public class AuctionBBSManager extends BaseBBSManager
 				if (item.isStackable())
 				{
 					html.append("<tr>");
-					html.append("<td FIXWIDTH=280><a action=\"bypass _bbsauction_new " + time + " " + currency + " " + startingBid + " " + increment + " " + buyNow + " $Count " + item.getObjectId() + "\">("
+					html.append("<td FIXWIDTH=280><a action=\"bypass _bbsauction_new " + time + " " + currency + " "
+							+ startingBid + " " + increment + " " + buyNow + " $Count " + item.getObjectId() + "\">("
 							+ Util.formatAdena(item.getCount()) + ") " + item.getName() + "</a></td>");
 					html.append("</tr>");
 				}
@@ -673,11 +753,14 @@ public class AuctionBBSManager extends BaseBBSManager
 				{
 					html.append("<tr>");
 					if (item.getEnchantLevel() > 0)
-						html.append("<td FIXWIDTH=280><a action=\"bypass _bbsauction_new " + time + " " + currency + " " + startingBid + " " + increment + " " + buyNow + " " + 1 + " " + item.getObjectId() + "\">"
-								+ (item.isEquipable() ? "+" : "Level ") + item.getEnchantLevel() + " " + item.getName() + "</a></td>");
+						html.append("<td FIXWIDTH=280><a action=\"bypass _bbsauction_new " + time + " " + currency
+								+ " " + startingBid + " " + increment + " " + buyNow + " " + 1 + " "
+								+ item.getObjectId() + "\">" + (item.isEquipable() ? "+" : "Level ")
+								+ item.getEnchantLevel() + " " + item.getName() + "</a></td>");
 					else
-						html.append("<td FIXWIDTH=280><a action=\"bypass _bbsauction_new " + time + " " + currency + " " + startingBid + " " + increment + " " + buyNow + " " + 1 + " " + item.getObjectId() + "\">" + item.getName()
-								+ "</a></td>");
+						html.append("<td FIXWIDTH=280><a action=\"bypass _bbsauction_new " + time + " " + currency
+								+ " " + startingBid + " " + increment + " " + buyNow + " " + 1 + " "
+								+ item.getObjectId() + "\">" + item.getName() + "</a></td>");
 					html.append("</tr>");
 				}
 				html.append("<tr>");
@@ -690,16 +773,16 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=280 height=20></td>");
 		html.append("</tr>");
 		html.append("</table>");
-
+		
 		html.append("</body></html>");
 		nhm.setHtml(html.moveToString());
 		activeChar.sendPacket(nhm);
-
+		
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to
 		// avoid that the client wait another packet
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showBuyNowPage(L2PcInstance activeChar, int lotId)
 	{
 		LotList lot = null;
@@ -714,13 +797,13 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		L2Item item = ItemTable.getInstance().getTemplate(lot.itemId);
 		int currentBid = getHighestBid(lotId);
-
+		
 		if (currentBid == 0)
 			currentBid = lot.startingBid;
-
+		
 		NpcHtmlMessage nhm = new NpcHtmlMessage(5);
 		L2TextBuilder html = L2TextBuilder.newInstance("<html><body>");
-
+		
 		html.append("<title>Buy Now Comfirmation Window</title>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280 bgcolor=808080>");
 		html.append("<tr>");
@@ -734,7 +817,10 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("<td FIXWIDTH=180>" + Util.formatAdena(lot.count.intValue()) + "</td>");
 		html.append("</tr><tr>");
 		html.append("<td FIXWIDTH=100 align=right>Currency:</td>");
-		html.append("<td FIXWIDTH=180><img src=icon." + (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00" : Config.AUCTION_SPECIAL_CURRENCY_ICON)) + " width=32 height=16></td>");
+		html.append("<td FIXWIDTH=180><img src=icon."
+				+ (lot.currency.equals(PcInventory.ADENA_ID) ? "etc_adena_i00" : (lot.currency
+						.equals(PcInventory.ANCIENT_ADENA_ID) ? "etc_ancient_adena_i00"
+						: Config.AUCTION_SPECIAL_CURRENCY_ICON)) + " width=32 height=16></td>");
 		html.append("</tr></table>");
 		html.append("<br>");
 		html.append("<table border=0 cellspacing=0 cellpadding=0 width=280><tr><td FIXWIDTH=280 height=20></td></tr></table>");
@@ -756,20 +842,22 @@ public class AuctionBBSManager extends BaseBBSManager
 		{
 			html.append("<td FIXWIDTH=280>Are you sure you wish to buy now?</td>");
 			html.append("</tr><tr>");
-			html.append("<td FIXWIDTH=280 align=center><button value=\"BUY NOW!\" action=\"bypass _bbsauction_buy_now_confirm " + lot.lotId + "\" width=100 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+			html.append("<td FIXWIDTH=280 align=center><button value=\"BUY NOW!\" action=\"bypass _bbsauction_buy_now_confirm "
+					+ lot.lotId
+					+ "\" width=100 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		}
 		html.append("</tr>");
 		html.append("</table>");
-
+		
 		html.append("</body></html>");
 		nhm.setHtml(html.moveToString());
 		activeChar.sendPacket(nhm);
-
+		
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to
 		// avoid that the client wait another packet
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showComfirmationPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage nhm = new NpcHtmlMessage(5);
@@ -780,12 +868,12 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("</body></html>");
 		nhm.setHtml(html.moveToString());
 		activeChar.sendPacket(nhm);
-
+		
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to
 		// avoid that the client wait another packet
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showBuyNowComfirmationPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage nhm = new NpcHtmlMessage(5);
@@ -796,24 +884,26 @@ public class AuctionBBSManager extends BaseBBSManager
 		html.append("</body></html>");
 		nhm.setHtml(html.moveToString());
 		activeChar.sendPacket(nhm);
-
+		
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to
 		// avoid that the client wait another packet
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
-	private void addAuction(L2PcInstance activeChar, int hours, int currency, long statingBid, long increment, long buyNow, long count, int objectId)
+	
+	private void addAuction(L2PcInstance activeChar, int hours, int currency, long statingBid, long increment,
+			long buyNow, long count, int objectId)
 	{
 		long epochHours = hours * 60 * 60 * 1000;
 		L2ItemInstance item = activeChar.getInventory().getItemByObjectId(objectId);
-
-		if (activeChar.destroyItem("Auction New Lot", objectId, (int) count, activeChar, true))
+		
+		if (activeChar.destroyItem("Auction New Lot", objectId, (int)count, activeChar, true))
 		{
 			java.sql.Connection con = null;
 			try
 			{
 				con = L2DatabaseFactory.getInstance().getConnection(con);
-				PreparedStatement statement = con.prepareStatement("INSERT INTO auction_lots (ownerId, itemId, objectId, count, enchantLevel, currency, startingBid, bidIncrement, buyNow, endDate) VALUES (?,?,?,?,?,?,?,?,?,?)");
+				PreparedStatement statement =
+						con.prepareStatement("INSERT INTO auction_lots (ownerId, itemId, objectId, count, enchantLevel, currency, startingBid, bidIncrement, buyNow, endDate) VALUES (?,?,?,?,?,?,?,?,?,?)");
 				statement.setInt(1, activeChar.getObjectId());
 				statement.setInt(2, item.getItemId());
 				statement.setInt(3, (count == 1 ? objectId : IdFactory.getInstance().getNextId()));
@@ -826,9 +916,14 @@ public class AuctionBBSManager extends BaseBBSManager
 				statement.setLong(10, System.currentTimeMillis() + epochHours);
 				statement.execute();
 				statement.close();
-
+				
 				if (activeChar.isGM() && Config.GM_AUDIT)
-					GMAudit.auditGMAction(activeChar, "auction", "_bbsauction_new", count + " - " + item.getEnchantLevel() + " - " + item.getItemId() + " - " + item.getItemName() + " - " + objectId);
+					GMAudit.auditGMAction(
+							activeChar,
+							"auction",
+							"_bbsauction_new",
+							count + " - " + item.getEnchantLevel() + " - " + item.getItemId() + " - "
+									+ item.getItemName() + " - " + objectId);
 			}
 			catch (Exception e)
 			{
@@ -840,12 +935,12 @@ public class AuctionBBSManager extends BaseBBSManager
 			}
 		}
 	}
-
+	
 	public void processAuctions()
 	{
 		boolean playerWasOnline = false;
 		BidList bid = null;
-
+		
 		for (LotList lot : getLots())
 		{
 			if (lot.endDate < System.currentTimeMillis() && !lot.isProcessed)
@@ -864,7 +959,9 @@ public class AuctionBBSManager extends BaseBBSManager
 							{
 								if (player.getObjectId().equals(lot.ownerId))
 								{
-									L2ItemInstance item = player.getInventory().addItem("Auction Give Bid", lot.currency, bid.bidAmount.intValue(), null, null);
+									L2ItemInstance item =
+											player.getInventory().addItem("Auction Give Bid", lot.currency,
+													bid.bidAmount.intValue(), null, null);
 									InventoryUpdate iu = new InventoryUpdate();
 									iu.addItem(item);
 									player.sendPacket(iu);
@@ -879,11 +976,20 @@ public class AuctionBBSManager extends BaseBBSManager
 								}
 							}
 							if (!playerWasOnline)
-								addItemToInventory(con, lot.ownerId, IdFactory.getInstance().getNextId(), lot.currency, bid.bidAmount, 0);
-							sendMail(con, lot.ownerId, "Auctioneer", "Your auction was success!", "Item Sold: "
-									+ (!lot.count.equals(1) ? "(" + Util.formatAdena(lot.count.intValue()) + ")" : (itemWon.isEquipable() ? "+" : "Level ") + lot.enchantLevel) + " " + itemWon.getName() + "<br>Check your inventory for "
-									+ Util.formatAdena(bid.bidAmount.intValue()) + " " + ItemTable.getInstance().getTemplate(lot.currency));
-
+								addItemToInventory(con, lot.ownerId, IdFactory.getInstance().getNextId(), lot.currency,
+										bid.bidAmount, 0);
+							sendMail(
+									con,
+									lot.ownerId,
+									"Auctioneer",
+									"Your auction was success!",
+									"Item Sold: "
+											+ (!lot.count.equals(1) ? "(" + Util.formatAdena(lot.count.intValue())
+													+ ")" : (itemWon.isEquipable() ? "+" : "Level ") + lot.enchantLevel)
+											+ " " + itemWon.getName() + "<br>Check your inventory for "
+											+ Util.formatAdena(bid.bidAmount.intValue()) + " "
+											+ ItemTable.getInstance().getTemplate(lot.currency));
+							
 							for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 								if (player.getObjectId().equals(bid.bidderId))
 								{
@@ -891,11 +997,15 @@ public class AuctionBBSManager extends BaseBBSManager
 									player.sendPacket(ExMailArrived.STATIC_PACKET);
 									break;
 								}
-							addItemToInventory(con, bid.bidderId, (lot.count.equals(1) ? lot.objectId : IdFactory.getInstance().getNextId()), lot.itemId, lot.count, lot.enchantLevel);
-
+							addItemToInventory(con, bid.bidderId, (lot.count.equals(1) ? lot.objectId : IdFactory
+									.getInstance().getNextId()), lot.itemId, lot.count, lot.enchantLevel);
+							
 							sendMail(con, bid.bidderId, "Bidder", "You won an auction!!", "Please relog to see your "
-									+ (!lot.count.equals(1) ? "(" + Util.formatAdena(lot.count.intValue()) + ")" : (itemWon.isEquipable() ? "+" : "Level ") + lot.enchantLevel) + " " + itemWon.getName());
-							PreparedStatement statement = con.prepareStatement("UPDATE auction_lots SET processed = 'true' WHERE lotId = ?");
+									+ (!lot.count.equals(1) ? "(" + Util.formatAdena(lot.count.intValue()) + ")"
+											: (itemWon.isEquipable() ? "+" : "Level ") + lot.enchantLevel) + " "
+									+ itemWon.getName());
+							PreparedStatement statement =
+									con.prepareStatement("UPDATE auction_lots SET processed = 'true' WHERE lotId = ?");
 							statement.setInt(1, lot.lotId);
 							statement.execute();
 							statement.close();
@@ -923,13 +1033,22 @@ public class AuctionBBSManager extends BaseBBSManager
 								player.sendPacket(ExMailArrived.STATIC_PACKET);
 								break;
 							}
-
-						addItemToInventory(con, lot.ownerId, (lot.count.equals(1) ? lot.objectId : IdFactory.getInstance().getNextId()), lot.itemId, lot.count, lot.enchantLevel);
-
-						sendMail(con, lot.ownerId, "Auctioneer", "Your auction did not have any bids", "Please relog to see your "
-								+ (!lot.count.equals(1) ? "(" + Util.formatAdena(lot.count.intValue()) + ")" : (itemWon.isEquipable() ? "+" : "Level ") + lot.enchantLevel) + " " + itemWon.getName());
-
-						PreparedStatement statement = con.prepareStatement("UPDATE auction_lots SET processed = 'true' WHERE lotId = ?");
+						
+						addItemToInventory(con, lot.ownerId, (lot.count.equals(1) ? lot.objectId : IdFactory
+								.getInstance().getNextId()), lot.itemId, lot.count, lot.enchantLevel);
+						
+						sendMail(
+								con,
+								lot.ownerId,
+								"Auctioneer",
+								"Your auction did not have any bids",
+								"Please relog to see your "
+										+ (!lot.count.equals(1) ? "(" + Util.formatAdena(lot.count.intValue()) + ")"
+												: (itemWon.isEquipable() ? "+" : "Level ") + lot.enchantLevel) + " "
+										+ itemWon.getName());
+						
+						PreparedStatement statement =
+								con.prepareStatement("UPDATE auction_lots SET processed = 'true' WHERE lotId = ?");
 						statement.setInt(1, lot.lotId);
 						statement.execute();
 						statement.close();
@@ -946,7 +1065,7 @@ public class AuctionBBSManager extends BaseBBSManager
 			}
 		}
 	}
-
+	
 	public void removeOldAuctions()
 	{
 		for (LotList lot : getLots())
@@ -961,7 +1080,7 @@ public class AuctionBBSManager extends BaseBBSManager
 					statement.setInt(1, lot.lotId);
 					statement.execute();
 					statement.close();
-
+					
 					statement = con.prepareStatement("DELETE FROM auction_lots WHERE lotId = ?");
 					statement.setInt(1, lot.lotId);
 					statement.execute();
@@ -977,9 +1096,9 @@ public class AuctionBBSManager extends BaseBBSManager
 				}
 			}
 		}
-
+		
 	}
-
+	
 	private boolean addBid(L2PcInstance activeChar, int lotId, long bidIncrement, int currency, long bidAmount)
 	{
 		boolean playerWasOnline = false;
@@ -987,38 +1106,40 @@ public class AuctionBBSManager extends BaseBBSManager
 		int prevBidderId, prevBidAmount;
 		LotList lot = getLot(lotId);
 		int bidCount = countBids(lot.lotId);
-
+		
 		if (currentBid == 0)
 			currentBid = lot.startingBid;
-
+		
 		if (lot.endDate < System.currentTimeMillis())
 		{
 			activeChar.sendMessage("This auction lot has already ended and is no longer taking bids.");
 			return false;
 		}
-
+		
 		if (bidAmount <= activeChar.getInventory().getInventoryItemCount(currency, 0))
 		{
-			if (bidAmount > (bidCount != 0 ? currentBid + bidIncrement : (long) currentBid))
+			if (bidAmount > (bidCount != 0 ? currentBid + bidIncrement : (long)currentBid))
 			{
 				java.sql.Connection con = null;
 				try
 				{
 					con = L2DatabaseFactory.getInstance().getConnection(con);
-					PreparedStatement statement = con.prepareStatement("SELECT * FROM auction_bids WHERE lotId = ? ORDER BY bidId DESC");
+					PreparedStatement statement =
+							con.prepareStatement("SELECT * FROM auction_bids WHERE lotId = ? ORDER BY bidId DESC");
 					statement.setInt(1, lotId);
 					ResultSet result = statement.executeQuery();
-					if(result.next())
+					if (result.next())
 					{
 						prevBidderId = result.getInt("bidderId");
 						prevBidAmount = result.getInt("bidAmount");
 						statement.close();
-
+						
 						for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 						{
 							if (player.getObjectId().equals(prevBidderId))
 							{
-								L2ItemInstance item = player.getInventory().addItem("Auction", currency, prevBidAmount, null, null);
+								L2ItemInstance item =
+										player.getInventory().addItem("Auction", currency, prevBidAmount, null, null);
 								InventoryUpdate iu = new InventoryUpdate();
 								iu.addItem(item);
 								player.sendPacket(iu);
@@ -1033,12 +1154,16 @@ public class AuctionBBSManager extends BaseBBSManager
 							}
 						}
 						if (!playerWasOnline)
-							addItemToInventory(con, prevBidderId, IdFactory.getInstance().getNextId(), currency, prevBidAmount, 0);
-						sendMail(con, prevBidderId, "Bidder", "You've been out bidded!", "Someone has out bidded you!<br1><a action=\"bypass _bbsauction_bid " + lotId + "\">Click here to bid fast!</a>");
+							addItemToInventory(con, prevBidderId, IdFactory.getInstance().getNextId(), currency,
+									prevBidAmount, 0);
+						sendMail(con, prevBidderId, "Bidder", "You've been out bidded!",
+								"Someone has out bidded you!<br1><a action=\"bypass _bbsauction_bid " + lotId
+										+ "\">Click here to bid fast!</a>");
 					}
-
+					
 					con = L2DatabaseFactory.getInstance().getConnection(con);
-					statement = con.prepareStatement("INSERT INTO auction_bids (lotId, bidderId, bidAmount, bidDate) VALUES (?,?,?,?)");
+					statement =
+							con.prepareStatement("INSERT INTO auction_bids (lotId, bidderId, bidAmount, bidDate) VALUES (?,?,?,?)");
 					statement.setInt(1, lotId);
 					statement.setInt(2, activeChar.getObjectId());
 					statement.setLong(3, bidAmount);
@@ -1046,16 +1171,17 @@ public class AuctionBBSManager extends BaseBBSManager
 					statement.execute();
 					statement.close();
 					if (currency == PcInventory.ADENA_ID)
-						activeChar.reduceAdena("Auction Bid", (int) bidAmount, activeChar, true);
+						activeChar.reduceAdena("Auction Bid", (int)bidAmount, activeChar, true);
 					else if (currency == PcInventory.ANCIENT_ADENA_ID)
-						activeChar.reduceAncientAdena("Auction Bid", (int) bidAmount, activeChar, true);
+						activeChar.reduceAncientAdena("Auction Bid", (int)bidAmount, activeChar, true);
 					else
-						activeChar.destroyItemByItemId("Auction Bid", currency, (int) bidAmount, activeChar, true);
+						activeChar.destroyItemByItemId("Auction Bid", currency, (int)bidAmount, activeChar, true);
 					activeChar.sendMessage("Your bid has been placed.");
-
+					
 					if (activeChar.isGM() && Config.GM_AUDIT)
-						GMAudit.auditGMAction(activeChar, "auction", "_bbsauction_bid", lotId + " - " + currency + " - " + (int) bidAmount);
-
+						GMAudit.auditGMAction(activeChar, "auction", "_bbsauction_bid", lotId + " - " + currency
+								+ " - " + (int)bidAmount);
+					
 				}
 				catch (Exception e)
 				{
@@ -1074,15 +1200,18 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		else
 		{
-			activeChar.sendMessage("You do not have enough " + ItemTable.getInstance().getTemplate(currency).getName() + " to bid!");
+			activeChar.sendMessage("You do not have enough " + ItemTable.getInstance().getTemplate(currency).getName()
+					+ " to bid!");
 			return false;
 		}
 		return true;
 	}
-
-	private void addItemToInventory(java.sql.Connection con, int charId, int objectId, int currency, long count, int enchantLevel) throws SQLException
+	
+	private void addItemToInventory(java.sql.Connection con, int charId, int objectId, int currency, long count,
+			int enchantLevel) throws SQLException
 	{
-		PreparedStatement statement = con.prepareStatement("INSERT INTO items (owner_id, object_id, item_id, count, enchant_level, loc, loc_data) VALUES (?,?,?,?,?,?,?)");
+		PreparedStatement statement =
+				con.prepareStatement("INSERT INTO items (owner_id, object_id, item_id, count, enchant_level, loc, loc_data) VALUES (?,?,?,?,?,?,?)");
 		statement.setInt(1, charId);
 		statement.setInt(2, objectId);
 		statement.setInt(3, currency);
@@ -1093,10 +1222,12 @@ public class AuctionBBSManager extends BaseBBSManager
 		statement.execute();
 		statement.close();
 	}
-
-	private void sendMail(java.sql.Connection con, int charId, String recipient, String subject, String message) throws SQLException
+	
+	private void sendMail(java.sql.Connection con, int charId, String recipient, String subject, String message)
+			throws SQLException
 	{
-		PreparedStatement statement = con.prepareStatement("INSERT INTO character_mail (charId, senderId, location, recipientNames, subject, message, sentDate, deleteDate, unread) VALUES (?,?,?,?,?,?,?,?,?)");
+		PreparedStatement statement =
+				con.prepareStatement("INSERT INTO character_mail (charId, senderId, location, recipientNames, subject, message, sentDate, deleteDate, unread) VALUES (?,?,?,?,?,?,?,?,?)");
 		statement.setInt(1, charId);
 		statement.setInt(2, 100100);
 		statement.setString(3, "inbox");
@@ -1109,7 +1240,7 @@ public class AuctionBBSManager extends BaseBBSManager
 		statement.execute();
 		statement.close();
 	}
-
+	
 	private void endAuction(int lotId)
 	{
 		java.sql.Connection con = null;
@@ -1131,11 +1262,11 @@ public class AuctionBBSManager extends BaseBBSManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private int countBids(int lotId)
 	{
 		int count = 0;
-
+		
 		java.sql.Connection con = null;
 		try
 		{
@@ -1158,16 +1289,17 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		return count;
 	}
-
+	
 	private int getHighestBid(int lotId)
 	{
 		int bidAmount = 0;
-
+		
 		java.sql.Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT MAX(bidAmount) FROM auction_bids WHERE lotId = ?");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT MAX(bidAmount) FROM auction_bids WHERE lotId = ?");
 			statement.setInt(1, lotId);
 			ResultSet result = statement.executeQuery();
 			result.next();
@@ -1185,19 +1317,20 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		return bidAmount;
 	}
-
+	
 	private BidList getHighestBidder(int lotId)
 	{
 		BidList bid = new BidList();
-
+		
 		java.sql.Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT * FROM auction_bids WHERE lotId = ? ORDER BY bidId DESC");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT * FROM auction_bids WHERE lotId = ? ORDER BY bidId DESC");
 			statement.setInt(1, lotId);
 			ResultSet result = statement.executeQuery();
-			while(result.next())
+			while (result.next())
 			{
 				bid.bidderId = result.getInt("bidderId");
 				bid.bidAmount = result.getLong("bidAmount");
@@ -1216,7 +1349,7 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		return bid;
 	}
-
+	
 	private void getLotsBiddedOn(L2PcInstance activeChar)
 	{
 		java.sql.Connection con = null;
@@ -1224,7 +1357,8 @@ public class AuctionBBSManager extends BaseBBSManager
 		{
 			_lotsBidded = new FastList<Integer>();
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT lotId FROM auction_bids WHERE bidderId = ? GROUP BY 1");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT lotId FROM auction_bids WHERE bidderId = ? GROUP BY 1");
 			statement.setInt(1, activeChar.getObjectId());
 			ResultSet result = statement.executeQuery();
 			while (result.next())
@@ -1241,11 +1375,11 @@ public class AuctionBBSManager extends BaseBBSManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private String getCharName(int charId)
 	{
 		String charName = "No Name";
-
+		
 		java.sql.Connection con = null;
 		try
 		{
@@ -1268,7 +1402,7 @@ public class AuctionBBSManager extends BaseBBSManager
 		}
 		return charName;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1295,11 +1429,11 @@ public class AuctionBBSManager extends BaseBBSManager
 			}
 			else
 				viewOnly = ar4;
-
+			
 			showAuctionPage(activeChar, 1, viewOnly, false);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

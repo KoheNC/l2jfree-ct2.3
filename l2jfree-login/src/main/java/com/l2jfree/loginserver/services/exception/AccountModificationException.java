@@ -23,8 +23,8 @@ public class AccountModificationException extends Exception
 	/**
 	 * Default serialVersion UID
 	 */
-	private static final long	serialVersionUID	= 1L;
-
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Default constructor
 	 */
@@ -32,7 +32,7 @@ public class AccountModificationException extends Exception
 	{
 		super();
 	}
-
+	
 	/**
 	 * constructor with reason
 	 */
@@ -40,7 +40,7 @@ public class AccountModificationException extends Exception
 	{
 		super(reason);
 	}
-
+	
 	/**
 	 * Copy constructor
 	 */
@@ -48,7 +48,7 @@ public class AccountModificationException extends Exception
 	{
 		super(e);
 	}
-
+	
 	/**
 	 * Copy constructor
 	 */
@@ -56,5 +56,5 @@ public class AccountModificationException extends Exception
 	{
 		super(reason, e);
 	}
-
+	
 }

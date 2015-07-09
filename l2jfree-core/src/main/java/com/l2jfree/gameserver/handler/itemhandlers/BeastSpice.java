@@ -25,22 +25,22 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class BeastSpice implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int[]	ITEM_IDS	=
-											{ 6643, 6644 };
-
+	private static final int[] ITEM_IDS = { 6643, 6644 };
+	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-
-		L2PcInstance activeChar = (L2PcInstance) playable;
-
+		
+		L2PcInstance activeChar = (L2PcInstance)playable;
+		
 		if (!(activeChar.getTarget() instanceof L2FeedableBeastInstance))
 		{
 			activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
 			return;
 		}
-
+		
 		int itemId = item.getItemId();
 		if (itemId == 6643)
 		{ // Golden Spice
@@ -51,7 +51,8 @@ public class BeastSpice implements IItemHandler
 			activeChar.useMagic(SkillTable.getInstance().getInfo(2189, 1), false, false);
 		}
 	}
-
+	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

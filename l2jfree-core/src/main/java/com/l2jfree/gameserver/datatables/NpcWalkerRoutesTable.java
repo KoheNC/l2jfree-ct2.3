@@ -35,20 +35,20 @@ import com.l2jfree.gameserver.model.L2NpcWalkerNode;
  */
 public class NpcWalkerRoutesTable
 {
-	private final static Log			_log	= LogFactory.getLog(SpawnTable.class);
-
-	private final FastList<L2NpcWalkerNode>	_routes = new FastList<L2NpcWalkerNode>();
-
+	private final static Log _log = LogFactory.getLog(SpawnTable.class);
+	
+	private final FastList<L2NpcWalkerNode> _routes = new FastList<L2NpcWalkerNode>();
+	
 	public static NpcWalkerRoutesTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private NpcWalkerRoutesTable()
 	{
 		_log.info("Initializing Walker Routes Table.");
 	}
-
+	
 	public void load()
 	{
 		_routes.clear();
@@ -56,8 +56,8 @@ public class NpcWalkerRoutesTable
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("SELECT route_id, npc_id, move_point, chatText, move_x, move_y, move_z, delay, running FROM walker_routes ORDER By move_point ASC");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT route_id, npc_id, move_point, chatText, move_x, move_y, move_z, delay, running FROM walker_routes ORDER By move_point ASC");
 			ResultSet rset = statement.executeQuery();
 			L2NpcWalkerNode route;
 			while (rset.next())
@@ -67,19 +67,19 @@ public class NpcWalkerRoutesTable
 				route.setNpcId(rset.getInt("npc_id"));
 				route.setMovePoint(rset.getString("move_point"));
 				route.setChatText(rset.getString("chatText"));
-
+				
 				route.setMoveX(rset.getInt("move_x"));
 				route.setMoveY(rset.getInt("move_y"));
 				route.setMoveZ(rset.getInt("move_z"));
 				route.setDelay(rset.getInt("delay"));
 				route.setRunning(rset.getBoolean("running"));
-
+				
 				_routes.add(route);
 			}
-
+			
 			rset.close();
 			statement.close();
-
+			
 			_log.info("WalkerRoutesTable: Loaded " + _routes.size() + " Npc Walker Routes.");
 		}
 		catch (Exception e)
@@ -91,11 +91,11 @@ public class NpcWalkerRoutesTable
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public ArrayList<L2NpcWalkerNode> getRouteForNpc(int id)
 	{
 		ArrayList<L2NpcWalkerNode> _return = new ArrayList<L2NpcWalkerNode>();
-
+		
 		for (FastList.Node<L2NpcWalkerNode> n = _routes.head(), end = _routes.tail(); (n = n.getNext()) != end;)
 		{
 			if (n.getValue().getNpcId() == id)
@@ -105,7 +105,7 @@ public class NpcWalkerRoutesTable
 		}
 		return _return;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

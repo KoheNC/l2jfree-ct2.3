@@ -19,34 +19,34 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class ExSpawnEmitter extends L2GameServerPacket
 {
-    public ExSpawnEmitter(int playerObjectId, int npcObjectId)
-    {
-        _playerObjectId = playerObjectId;
-        _npcObjectId = npcObjectId;
-    }
-
-    public ExSpawnEmitter(L2PcInstance player, L2Npc npc)
-    {
-        _playerObjectId = player.getObjectId();
-        _npcObjectId = npc.getObjectId();
-    }
-
-    @Override
+	public ExSpawnEmitter(int playerObjectId, int npcObjectId)
+	{
+		_playerObjectId = playerObjectId;
+		_npcObjectId = npcObjectId;
+	}
+	
+	public ExSpawnEmitter(L2PcInstance player, L2Npc npc)
+	{
+		_playerObjectId = player.getObjectId();
+		_npcObjectId = npc.getObjectId();
+	}
+	
+	@Override
 	protected final void writeImpl()
-    {
-        writeC(0xfe);
-        writeH(0x5d);
-        writeD(_npcObjectId);
-        writeD(_playerObjectId);
-        writeD(0x00);
-    }
-
-    @Override
+	{
+		writeC(0xfe);
+		writeH(0x5d);
+		writeD(_npcObjectId);
+		writeD(_playerObjectId);
+		writeD(0x00);
+	}
+	
+	@Override
 	public String getType()
-    {
-        return "SpawnEmitter";
-    }
-
-    private final int _npcObjectId;
-    private final int _playerObjectId;
+	{
+		return "SpawnEmitter";
+	}
+	
+	private final int _npcObjectId;
+	private final int _playerObjectId;
 }

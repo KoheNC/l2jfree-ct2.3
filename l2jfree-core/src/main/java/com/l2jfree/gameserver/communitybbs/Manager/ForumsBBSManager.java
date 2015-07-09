@@ -30,10 +30,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class ForumsBBSManager extends BaseBBSManager
 {
-	private final static Log		_log	= LogFactory.getLog(ForumsBBSManager.class);
-	private final List<Forum>				_table;
-	private int						_lastid	= 1;
-
+	private final static Log _log = LogFactory.getLog(ForumsBBSManager.class);
+	private final List<Forum> _table;
+	private int _lastid = 1;
+	
 	/**
 	 * @return
 	 */
@@ -41,26 +41,26 @@ public class ForumsBBSManager extends BaseBBSManager
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private ForumsBBSManager()
 	{
 		_table = new FastList<Forum>();
 		load();
 	}
-
+	
 	public void addForum(Forum ff)
 	{
 		if (ff == null)
 			return;
-
+		
 		_table.add(ff);
-
+		
 		if (ff.getID() > _lastid)
 		{
 			_lastid = ff.getID();
 		}
 	}
-
+	
 	/**
 	 *
 	 */
@@ -90,14 +90,14 @@ public class ForumsBBSManager extends BaseBBSManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public void initRoot()
 	{
 		for (Forum f : _table)
 			f.vload();
 		_log.info("Loaded " + _table.size() + " forums. Last forum id used: " + _lastid);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
 	 */
@@ -105,9 +105,9 @@ public class ForumsBBSManager extends BaseBBSManager
 	public void parsecmd(String command, L2PcInstance activeChar)
 	{
 		// TODO Auto-generated method stub
-
+		
 	}
-
+	
 	/**
 	 * @param string
 	 * @return
@@ -121,10 +121,10 @@ public class ForumsBBSManager extends BaseBBSManager
 				return f;
 			}
 		}
-
+		
 		return null;
 	}
-
+	
 	/**
 	 * @param name
 	 * @param forumByName
@@ -136,7 +136,7 @@ public class ForumsBBSManager extends BaseBBSManager
 		forum.insertIntoDb();
 		return forum;
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -144,7 +144,7 @@ public class ForumsBBSManager extends BaseBBSManager
 	{
 		return ++_lastid;
 	}
-
+	
 	/**
 	 * @param idf
 	 * @return
@@ -160,7 +160,7 @@ public class ForumsBBSManager extends BaseBBSManager
 		}
 		return null;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
 	 */
@@ -169,7 +169,7 @@ public class ForumsBBSManager extends BaseBBSManager
 	{
 		// TODO Auto-generated method stub
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

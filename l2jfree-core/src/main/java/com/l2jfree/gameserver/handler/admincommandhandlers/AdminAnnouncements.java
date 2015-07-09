@@ -40,24 +40,14 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class AdminAnnouncements implements IAdminCommandHandler
 {
-	private static final int			CRITICAL_INTERVAL	= 60000;
-	private static final String[]		ADMIN_COMMANDS		=
-															{
-			"admin_list_announcements",
-			"admin_reload_announcements",
-			"admin_announce_announcements",
-			"admin_add_announcement",
-			"admin_del_announcement",
-			"admin_announce",
-			"admin_announce_menu",
-			"admin_reload_autoannounce",
-			"admin_disable_chat",
-			"admin_enable_chat",
-			"admin_ca",
-			"admin_anno"
-															};
-	private static ScheduledFuture<?>	_chatReEnable		= null;
-
+	private static final int CRITICAL_INTERVAL = 60000;
+	private static final String[] ADMIN_COMMANDS = { "admin_list_announcements", "admin_reload_announcements",
+			"admin_announce_announcements", "admin_add_announcement", "admin_del_announcement", "admin_announce",
+			"admin_announce_menu", "admin_reload_autoannounce", "admin_disable_chat", "admin_enable_chat", "admin_ca",
+			"admin_anno" };
+	private static ScheduledFuture<?> _chatReEnable = null;
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_list_announcements"))
@@ -109,7 +99,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 			{
 			}
 		}
-
+		
 		// Command is admin announce
 		else if (command.startsWith("admin_announce"))
 		{
@@ -138,7 +128,9 @@ public class AdminAnnouncements implements IAdminCommandHandler
 			}
 			if (Config.GM_ANNOUNCER_NAME)
 				command += " [" + activeChar.getName() + "]";
-			CreatureSay cs = new CreatureSay(activeChar.getObjectId(), SystemChatChannelId.Chat_Critical_Announce, activeChar.getName(), command.replace("admin_ca", "**"));
+			CreatureSay cs =
+					new CreatureSay(activeChar.getObjectId(), SystemChatChannelId.Chat_Critical_Announce,
+							activeChar.getName(), command.replace("admin_ca", "**"));
 			Announcements.getInstance().announceToAll(cs);
 		}
 		else if (command.startsWith("admin_disable_chat"))
@@ -150,16 +142,15 @@ public class AdminAnnouncements implements IAdminCommandHandler
 			}
 			else
 				_chatReEnable.cancel(true);
-			_chatReEnable = ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-			{
+			_chatReEnable = ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 				@Override
 				public void run()
 				{
 					enableChat();
 				}
 			}, CRITICAL_INTERVAL);
-			activeChar.sendMessage("You have " + CRITICAL_INTERVAL / 1000 +
-					" seconds for your announcements, repeat the command to reset timer.");
+			activeChar.sendMessage("You have " + CRITICAL_INTERVAL / 1000
+					+ " seconds for your announcements, repeat the command to reset timer.");
 			activeChar.sendMessage("//enable_chat to re-enable chat before timer expires.");
 		}
 		else if (command.startsWith("admin_enable_chat"))
@@ -171,16 +162,17 @@ public class AdminAnnouncements implements IAdminCommandHandler
 				enableChat();
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	private void enableChat()
 	{
 		Config.DISABLE_ALL_CHAT = false;
 		Announcements.getInstance().announceToAll(SystemMessageId.CHAT_ENABLED);
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

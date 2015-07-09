@@ -29,15 +29,15 @@ public class L2FortEnvoyInstance extends L2Npc
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		player.setLastFolkNPC(this);
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -60,14 +60,15 @@ public class L2FortEnvoyInstance extends L2Npc
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
-
+		
 		String filename;
-
-		if (!player.isClanLeader() || player.getClan() == null || getFort().getFortId() != player.getClan().getHasFort())
+		
+		if (!player.isClanLeader() || player.getClan() == null
+				|| getFort().getFortId() != player.getClan().getHasFort())
 			filename = "data/html/fortress/envoy-noclan.htm";
 		else if (getFort().getFortState() == 0)
 			filename = "data/html/fortress/envoy.htm";
@@ -76,21 +77,24 @@ public class L2FortEnvoyInstance extends L2Npc
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));
-		html.replace("%castleName%", String.valueOf(CastleManager.getInstance().getCastleById(getFort().getCastleIdFromEnvoy(getNpcId())).getName()));
-
+		html.replace(
+				"%castleName%",
+				String.valueOf(CastleManager.getInstance().getCastleById(getFort().getCastleIdFromEnvoy(getNpcId()))
+						.getName()));
+		
 		player.sendPacket(html);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		String par = "";
 		if (st.countTokens() >= 1)
 			par = st.nextToken();
-
+		
 		if (actualCommand.equalsIgnoreCase("select"))
 		{
 			int val = 0;
@@ -98,8 +102,12 @@ public class L2FortEnvoyInstance extends L2Npc
 			{
 				val = Integer.parseInt(par);
 			}
-			catch (IndexOutOfBoundsException ioobe){}
-			catch (NumberFormatException nfe){}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+			}
+			catch (NumberFormatException nfe)
+			{
+			}
 			int castleId = 0;
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 			if (val == 2)
@@ -107,15 +115,20 @@ public class L2FortEnvoyInstance extends L2Npc
 				castleId = getFort().getCastleIdFromEnvoy(getNpcId());
 				if (CastleManager.getInstance().getCastleById(castleId).getOwnerId() < 1)
 				{
-					html.setHtml("<html><body>Contact is currently not possible, "+CastleManager.getInstance().getCastleById(castleId).getName()+" Castle isn't currently owned by any clan.</body></html>");
+					html.setHtml("<html><body>Contact is currently not possible, "
+							+ CastleManager.getInstance().getCastleById(castleId).getName()
+							+ " Castle isn't currently owned by any clan.</body></html>");
 					player.sendPacket(html);
 					return;
 				}
 			}
 			getFort().setFortState(val, castleId);
 			html.setFile("data/html/fortress/envoy-ok.htm");
-			html.replace("%castleName%", String.valueOf(CastleManager.getInstance().getCastleById(getFort().getCastleIdFromEnvoy(getNpcId())).getName()));
-
+			html.replace(
+					"%castleName%",
+					String.valueOf(CastleManager.getInstance()
+							.getCastleById(getFort().getCastleIdFromEnvoy(getNpcId())).getName()));
+			
 			player.sendPacket(html);
 		}
 		else

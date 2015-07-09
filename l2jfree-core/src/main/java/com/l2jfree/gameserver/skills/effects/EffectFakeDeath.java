@@ -87,7 +87,7 @@ public final class EffectFakeDeath extends L2Effect
 		 * NPC.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK); //Train
 		 * him! } }
 		 */
-
+		
 		double manaDam = calc();
 		
 		if (manaDam > getEffected().getStatus().getCurrentMp())

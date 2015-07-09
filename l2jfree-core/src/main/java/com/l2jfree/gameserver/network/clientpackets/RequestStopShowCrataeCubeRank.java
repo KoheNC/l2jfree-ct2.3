@@ -25,7 +25,7 @@ public final class RequestStopShowCrataeCubeRank extends L2GameClientPacket
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{

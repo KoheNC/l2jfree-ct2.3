@@ -22,10 +22,10 @@ import com.l2jfree.loginserver.L2LoginClient;
  */
 public final class GGAuth extends L2LoginServerPacket
 {
-	public static final int		SKIP_GG_AUTH_REQUEST	= 0x0b;
-
-	private final int					_response;
-
+	public static final int SKIP_GG_AUTH_REQUEST = 0x0b;
+	
+	private final int _response;
+	
 	public GGAuth(int response)
 	{
 		_response = response;
@@ -34,7 +34,7 @@ public final class GGAuth extends L2LoginServerPacket
 			_log.warn("Reason Hex: " + (Integer.toHexString(response)));
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.SendablePacket#write()
 	 */

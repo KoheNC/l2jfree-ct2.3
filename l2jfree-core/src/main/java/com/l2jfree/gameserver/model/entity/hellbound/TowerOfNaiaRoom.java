@@ -40,13 +40,13 @@ public final class TowerOfNaiaRoom
 {
 	private static Log _log = LogFactory.getLog(TowerOfNaiaRoom.class);
 	
-	private int[] _preOpenDoorIds 	= null;
-	private int[] _preCloseDoorIds 	= null;
-	private int[] _postOpenDoorIds 	= null;
-	private int[] _postCloseDoorIds	= null;
+	private int[] _preOpenDoorIds = null;
+	private int[] _preCloseDoorIds = null;
+	private int[] _postOpenDoorIds = null;
+	private int[] _postCloseDoorIds = null;
 	
-	private FastList<SpawnData> 	_mobSpawnData 					= new FastList<SpawnData>();
-	private SpawnData 				_ingeniousContraptionSpawnData 	= null;
+	private FastList<SpawnData> _mobSpawnData = new FastList<SpawnData>();
+	private SpawnData _ingeniousContraptionSpawnData = null;
 	
 	public void init(final int roomId)
 	{
@@ -67,7 +67,7 @@ public final class TowerOfNaiaRoom
 			{
 				int doorId = rset.getInt("door_id");
 				byte action = rset.getByte("action_order");
-				switch(action)
+				switch (action)
 				{
 					case 0:
 						_preOpenDoorIds = ArrayUtils.add(_preOpenDoorIds, doorId);
@@ -118,7 +118,7 @@ public final class TowerOfNaiaRoom
 					int z = rset.getInt("locz");
 					int heading = rset.getInt("heading");
 					int respawnDelay = rset.getInt("respawn_delay");
-					SpawnData spawnData = new SpawnData(npcId, x, y, z, heading, respawnDelay);  
+					SpawnData spawnData = new SpawnData(npcId, x, y, z, heading, respawnDelay);
 					if (npcId == TowerOfNaiaManager.ROOM_CONTROLLER_ID)
 						_ingeniousContraptionSpawnData = spawnData;
 					else
@@ -141,7 +141,7 @@ public final class TowerOfNaiaRoom
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public void prepare(final int instanceId)
 	{
 		DoorTable.openInstanceDoors(instanceId, _preOpenDoorIds);
@@ -150,14 +150,14 @@ public final class TowerOfNaiaRoom
 			spawnNpc(_ingeniousContraptionSpawnData, instanceId);
 		}
 	}
-
+	
 	public void start(final int instanceId)
 	{
 		DoorTable.closeInstanceDoors(instanceId, _preCloseDoorIds);
 		for (SpawnData mob : _mobSpawnData)
 			spawnNpc(mob, instanceId);
 	}
-		
+	
 	public void finish(final int instanceId)
 	{
 		DoorTable.openInstanceDoors(instanceId, _postOpenDoorIds);

@@ -19,6 +19,7 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+
 /**
  * This class ...
  * 
@@ -27,8 +28,7 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 public class NpcInfoPoly extends L2GameServerPacket
 {
 	//   ddddddddddddddddddffffdddcccccSSddd dddddc
-	     
-	     
+	
 	private static final String _S__22_NPCINFO = "[S] 16 NpcInfo";
 	private L2Character _activeChar;
 	private final L2Object _obj;
@@ -45,7 +45,7 @@ public class NpcInfoPoly extends L2GameServerPacket
 	L2NpcTemplate _template;
 	private final int _collisionRadius;
 	private final int _collisionHeight;
-
+	
 	/**
 	 * @param _activeCharracters
 	 */
@@ -60,15 +60,15 @@ public class NpcInfoPoly extends L2GameServerPacket
 		_isSummoned = false;
 		_collisionRadius = _template.getCollisionRadius();
 		_collisionHeight = _template.getCollisionHeight();
-		if(_obj instanceof L2Character)
+		if (_obj instanceof L2Character)
 		{
-			_activeChar = (L2Character) obj;
+			_activeChar = (L2Character)obj;
 			_isAttackable = obj.isAutoAttackable(attacker);
 			_rhand = _template.getRhand();
 			_lhand = _template.getLhand();
 		}
 		
-		if(_obj instanceof L2ItemInstance)
+		if (_obj instanceof L2ItemInstance)
 		{
 			_x = _obj.getX();
 			_y = _obj.getY();
@@ -97,7 +97,7 @@ public class NpcInfoPoly extends L2GameServerPacket
 			_walkSpd = _activeChar.getStat().getWalkSpeed();
 			_swimRunSpd = _flRunSpd = _flyRunSpd = _runSpd;
 			_swimWalkSpd = _flWalkSpd = _flyWalkSpd = _walkSpd;
-			_isRunning=_activeChar.isRunning();
+			_isRunning = _activeChar.isRunning();
 			_isInCombat = _activeChar.isInCombat();
 			_isAlikeDead = _activeChar.isAlikeDead();
 			_name = _activeChar.getName();
@@ -112,7 +112,7 @@ public class NpcInfoPoly extends L2GameServerPacket
 	{
 		writeC(0x0c);
 		writeD(_obj.getObjectId());
-		writeD(_npcId+1000000);  // npctype id
+		writeD(_npcId + 1000000); // npctype id
 		writeD(_isAttackable ? 1 : 0);
 		writeD(_x);
 		writeD(_y);
@@ -123,8 +123,8 @@ public class NpcInfoPoly extends L2GameServerPacket
 		writeD(_pAtkSpd);
 		writeD(_runSpd);
 		writeD(_walkSpd);
-		writeD(_swimRunSpd/*0x32*/);  // swimspeed
-		writeD(_swimWalkSpd/*0x32*/);  // swimspeed
+		writeD(_swimRunSpd/*0x32*/); // swimspeed
+		writeD(_swimWalkSpd/*0x32*/); // swimspeed
 		writeD(_flRunSpd);
 		writeD(_flWalkSpd);
 		writeD(_flyRunSpd);
@@ -136,7 +136,7 @@ public class NpcInfoPoly extends L2GameServerPacket
 		writeD(_rhand); // right hand weapon
 		writeD(0);
 		writeD(_lhand); // left hand weapon
-		writeC(1);	// name above char 1=true ... ??
+		writeC(1); // name above char 1=true ... ??
 		writeC(_isRunning ? 1 : 0);
 		writeC(_isInCombat ? 1 : 0);
 		writeC(_isAlikeDead ? 1 : 0);
@@ -145,15 +145,15 @@ public class NpcInfoPoly extends L2GameServerPacket
 		writeS(_title);
 		writeD(0);
 		writeD(0);
-		writeD(0000);  // hmm karma ??
-
-		writeH(_abnormalEffect);  // C2
-		writeH(0x00);  // C2
-		writeD(0000);  // C2
-		writeD(0000);  // C2
-		writeD(0000);  // C2
-		writeD(0000);  // C2
-		writeC(0000);  // C2
+		writeD(0000); // hmm karma ??
+		
+		writeH(_abnormalEffect); // C2
+		writeH(0x00); // C2
+		writeD(0000); // C2
+		writeD(0000); // C2
+		writeD(0000); // C2
+		writeD(0000); // C2
+		writeC(0000); // C2
 	}
 	
 	/* (non-Javadoc)

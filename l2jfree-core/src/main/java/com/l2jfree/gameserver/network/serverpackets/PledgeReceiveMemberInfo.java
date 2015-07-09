@@ -24,7 +24,7 @@ public class PledgeReceiveMemberInfo extends L2GameServerPacket
 {
 	private static final String _S__FE_3D_PLEDGERECEIVEMEMBERINFO = "[S] FE:3D PledgeReceiveMemberInfo";
 	private final L2ClanMember _member;
-
+	
 	/**
 	 * @param member
 	 */
@@ -32,7 +32,7 @@ public class PledgeReceiveMemberInfo extends L2GameServerPacket
 	{
 		_member = member;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -41,22 +41,23 @@ public class PledgeReceiveMemberInfo extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x3e);
-
+		
 		writeD(_member.getSubPledgeType());
 		writeS(_member.getName());
 		writeS(_member.getTitle()); // title
 		writeD(_member.getPledgeRank()); // power
 		
 		//clan or subpledge name
-		if(_member.getSubPledgeType() != 0)
+		if (_member.getSubPledgeType() != 0)
 		{
 			writeS((_member.getClan().getSubPledge(_member.getSubPledgeType())).getName());
 		}
-		else writeS(_member.getClan().getName());
+		else
+			writeS(_member.getClan().getName());
 		
 		writeS(_member.getApprenticeOrSponsorName()); // name of this member's apprentice/sponsor
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -65,5 +66,5 @@ public class PledgeReceiveMemberInfo extends L2GameServerPacket
 	{
 		return _S__FE_3D_PLEDGERECEIVEMEMBERINFO;
 	}
-
+	
 }

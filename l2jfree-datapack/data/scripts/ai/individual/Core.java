@@ -43,15 +43,15 @@ public class Core extends L2AttackableAIScript
 	private static final int SUSCEPTOR = 29011;
 	//private static final int PERUM = 29012;
 	//private static final int PREMO = 29013;
-
+	
 	private final FastMap<Integer, CoreStatus> _status = new FastMap<Integer, CoreStatus>().setShared(true);
-
+	
 	public Core(int id, String name, String descr)
 	{
 		super(id, name, descr);
 		registerMobs(CORE, DEATH_KNIGHT, DOOM_WRAITH, SUSCEPTOR);
 	}
-
+	
 	@Override
 	public String onSpawn(L2Npc npc)
 	{
@@ -66,24 +66,32 @@ public class Core extends L2AttackableAIScript
 			for (int i = 0; i < 5; i++)
 			{
 				int x = 16800 + i * 360;
-				minion = (L2Attackable) addSpawn(DEATH_KNIGHT, x, 110000, npc.getZ(), 280 + Rnd.get(40), false, 0, npc.getInstanceId());
+				minion =
+						(L2Attackable)addSpawn(DEATH_KNIGHT, x, 110000, npc.getZ(), 280 + Rnd.get(40), false, 0,
+								npc.getInstanceId());
 				minions.add(minion);
-				minion = (L2Attackable) addSpawn(DEATH_KNIGHT, x, 109000, npc.getZ(), 280 + Rnd.get(40), false, 0, npc.getInstanceId());
+				minion =
+						(L2Attackable)addSpawn(DEATH_KNIGHT, x, 109000, npc.getZ(), 280 + Rnd.get(40), false, 0,
+								npc.getInstanceId());
 				minions.add(minion);
 				x = 16800 + i * 600;
-				minion = (L2Attackable) addSpawn(DOOM_WRAITH, x, 109300, npc.getZ(), 280 + Rnd.get(40), false, 0, npc.getInstanceId());
+				minion =
+						(L2Attackable)addSpawn(DOOM_WRAITH, x, 109300, npc.getZ(), 280 + Rnd.get(40), false, 0,
+								npc.getInstanceId());
 				minions.add(minion);
 			}
 			for (int i = 0; i < 4; i++)
 			{
 				int x = 16800 + i * 450;
-				minion = (L2Attackable) addSpawn(SUSCEPTOR, x, 110300, npc.getZ(), 280 + Rnd.get(40), false, 0, npc.getInstanceId());
+				minion =
+						(L2Attackable)addSpawn(SUSCEPTOR, x, 110300, npc.getZ(), 280 + Rnd.get(40), false, 0,
+								npc.getInstanceId());
 				minions.add(minion);
 			}
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -99,13 +107,15 @@ public class Core extends L2AttackableAIScript
 			}
 			else
 			{
-				L2Attackable minion = (L2Attackable) addSpawn(npc.getNpcId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), false, 0, npc.getInstanceId());
+				L2Attackable minion =
+						(L2Attackable)addSpawn(npc.getNpcId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(),
+								false, 0, npc.getInstanceId());
 				status.getMinions().add(minion);
 			}
 		}
 		return super.onAdvEvent(event, npc, player);
 	}
-
+	
 	@Override
 	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
 	{
@@ -126,7 +136,7 @@ public class Core extends L2AttackableAIScript
 		}
 		return super.onAttack(npc, attacker, damage, isPet);
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -143,7 +153,7 @@ public class Core extends L2AttackableAIScript
 			status.setAttacked(false);
 			addSpawn(31842, 16502, 110165, -6394, 0, false, 900000, npc.getInstanceId());
 			addSpawn(31842, 18948, 110166, -6397, 0, false, 900000, npc.getInstanceId());
-
+			
 			startQuestTimer(objId + "_despawn_minions", 20000, null, null);
 			cancelQuestTimers(objId + "_spawn_minion");
 		}
@@ -162,45 +172,45 @@ public class Core extends L2AttackableAIScript
 		}
 		return super.onKill(npc, killer, isPet);
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new Core(-1, "core", "ai");
 	}
-
+	
 	public static class CoreStatus
 	{
 		private boolean _alive;
 		private boolean _attacked;
 		private final L2FastSet<L2Attackable> _minions;
-
+		
 		public CoreStatus()
 		{
 			_alive = true;
 			_attacked = false;
 			_minions = new L2FastSet<L2Attackable>().setShared(true);
 		}
-
+		
 		public final boolean isAlive()
 		{
 			return _alive;
 		}
-
+		
 		public final void setAlive(boolean alive)
 		{
 			_alive = alive;
 		}
-
+		
 		public final boolean isAttacked()
 		{
 			return _attacked;
 		}
-
+		
 		public final void setAttacked(boolean attacked)
 		{
 			_attacked = attacked;
 		}
-
+		
 		public final L2FastSet<L2Attackable> getMinions()
 		{
 			return _minions;

@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,11 +32,11 @@ import com.l2jfree.gameserver.network.serverpackets.BuyList;
  */
 public class AdminShop implements IAdminCommandHandler
 {
-	private final static Log		_log			= LogFactory.getLog(AdminShop.class);
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_buy", "admin_gmshop" };
-
+	private final static Log _log = LogFactory.getLog(AdminShop.class);
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_buy", "admin_gmshop" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_buy"))
@@ -57,12 +56,13 @@ public class AdminShop implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleBuyRequest(L2PcInstance activeChar, String command)
 	{
 		int val = -1;
@@ -74,9 +74,9 @@ public class AdminShop implements IAdminCommandHandler
 		{
 			_log.warn("admin buylist failed:" + command);
 		}
-
+		
 		L2TradeList list = TradeListTable.getInstance().getBuyList(val);
-
+		
 		if (list != null)
 		{
 			activeChar.sendPacket(new BuyList(list, activeChar.getAdena()));

@@ -56,74 +56,75 @@ public class L2MerchantSummonInstance extends L2SummonInstance implements L2Merc
 		return null;
 	}
 	
-    @Override
-    public void deleteMe(L2PcInstance owner)
-    {
-
-    }
-
-    @Override
-    public void unSummon(L2PcInstance owner)
-    {
-    	if (isVisible())
-    	{
+	@Override
+	public void deleteMe(L2PcInstance owner)
+	{
+		
+	}
+	
+	@Override
+	public void unSummon(L2PcInstance owner)
+	{
+		if (isVisible())
+		{
 			stopAllEffects();
-	        L2WorldRegion oldRegion = getWorldRegion();
-		    decayMe();
-		    if (oldRegion != null) oldRegion.removeFromZones(this);
-            getKnownList().removeAllKnownObjects();
-	        setTarget(null);
-	        SQLQueue.getInstance().run();
-    	}
-    }
-
-    @Override
-    public void setFollowStatus(boolean state)
-    {
-    	
-    }
-    
+			L2WorldRegion oldRegion = getWorldRegion();
+			decayMe();
+			if (oldRegion != null)
+				oldRegion.removeFromZones(this);
+			getKnownList().removeAllKnownObjects();
+			setTarget(null);
+			SQLQueue.getInstance().run();
+		}
+	}
+	
+	@Override
+	public void setFollowStatus(boolean state)
+	{
+		
+	}
+	
 	@Override
 	public boolean isAutoAttackable(L2Character attacker)
-    {
+	{
 		return false;
-    }
-
-    @Override
-    public boolean isInvul()
-    {
-    	return true;
-    }
-
-    @Override
-    public L2Party getParty()
-    {
-    	return null;
-    }
-
-    @Override
-    public boolean isInParty()
-    {
-    	return false;
-    }
-
-    @Override
-    public void useMagic(SkillUsageRequest request)
-    {
-
-    }
-
-    @Override
-    public void doCast(L2Skill skill)
-    {
-
-    }
-
-    @Override
-    public boolean isInCombat()
-    {
-    	return false;
-    }
+	}
+	
+	@Override
+	public boolean isInvul()
+	{
+		return true;
+	}
+	
+	@Override
+	public L2Party getParty()
+	{
+		return null;
+	}
+	
+	@Override
+	public boolean isInParty()
+	{
+		return false;
+	}
+	
+	@Override
+	public void useMagic(SkillUsageRequest request)
+	{
+		
+	}
+	
+	@Override
+	public void doCast(L2Skill skill)
+	{
+		
+	}
+	
+	@Override
+	public boolean isInCombat()
+	{
+		return false;
+	}
 	
 	@Override
 	public void onAction(L2PcInstance player)
@@ -162,17 +163,17 @@ public class L2MerchantSummonInstance extends L2SummonInstance implements L2Merc
 	{
 		return 0;
 	}
-
+	
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		if (actualCommand.equalsIgnoreCase("Buy"))
 		{
 			if (st.countTokens() < 1)
 				return;
-
+			
 			int val = Integer.parseInt(st.nextToken());
 			showBuyWindow(player, val);
 		}
@@ -181,17 +182,17 @@ public class L2MerchantSummonInstance extends L2SummonInstance implements L2Merc
 			showSellWindow(player);
 		}
 	}
-
+	
 	protected final void showBuyWindow(L2PcInstance player, int val)
 	{
 		double taxRate = 0;
-
+		
 		taxRate = 50;
 		
 		player.tempInventoryDisable();
-
+		
 		L2TradeList list = TradeListTable.getInstance().getBuyList(val);
-
+		
 		if (list != null && list.getNpcId() == getNpcId())
 		{
 			BuyList bl = new BuyList(list, player.getAdena(), taxRate);
@@ -202,20 +203,20 @@ public class L2MerchantSummonInstance extends L2SummonInstance implements L2Merc
 			_log.warn("possible client hacker: " + player.getName() + " attempting to buy from GM shop! < Ban him!");
 			_log.warn("buylist id:" + val);
 		}
-
+		
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	protected final void showSellWindow(L2PcInstance player)
 	{
 		player.sendPacket(new SellList(player));
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
-		String filename = "data/html/merchant/"+getNpcId()+".htm";
+		String filename = "data/html/merchant/" + getNpcId() + ".htm";
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));

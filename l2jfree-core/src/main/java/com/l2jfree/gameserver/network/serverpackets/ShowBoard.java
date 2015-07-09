@@ -22,13 +22,14 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class ShowBoard extends L2GameServerPacket
 {
 	private static final String _S__6E_SHOWBOARD = "[S] 6e ShowBoard";
-
+	
 	public static void notImplementedYet(L2PcInstance activeChar, String command)
 	{
 		if (activeChar == null || command == null)
 			return;
 		
-		separateAndSend(activeChar, "<html><body><br><br><center>The command: [" + command + "] isn't implemented yet!</center><br><br></body></html>");
+		separateAndSend(activeChar, "<html><body><br><br><center>The command: [" + command
+				+ "] isn't implemented yet!</center><br><br></body></html>");
 	}
 	
 	public static void separateAndSend(L2PcInstance activeChar, String html)
@@ -59,20 +60,20 @@ public class ShowBoard extends L2GameServerPacket
 	private final String _htmlCode;
 	private final String _id;
 	private List<String> _arg;
-
+	
 	public ShowBoard(String htmlCode, String id)
 	{
 		_id = id;
 		_htmlCode = htmlCode; // html code must not exceed 8192 bytes
 	}
-
+	
 	public ShowBoard(List<String> arg)
 	{
 		_id = "1002";
 		_htmlCode = null;
 		_arg = arg;
 	}
-
+	
 	private byte[] get1002()
 	{
 		int len = _id.getBytes().length * 2 + 2;
@@ -103,7 +104,7 @@ public class ShowBoard extends L2GameServerPacket
 		}
 		return data;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -134,7 +135,7 @@ public class ShowBoard extends L2GameServerPacket
 			}
 			data[i++] = 8;
 			data[i++] = 0;
-
+			
 			byte[] html = new byte[0];
 			if (_htmlCode != null)
 			{
@@ -165,7 +166,7 @@ public class ShowBoard extends L2GameServerPacket
 			writeB(get1002());
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

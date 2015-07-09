@@ -33,9 +33,9 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class AdminGmChat implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_gmchat", "admin_snoop", "admin_gmchat_menu" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_gmchat", "admin_snoop", "admin_gmchat_menu" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_gmchat"))
@@ -46,7 +46,7 @@ public class AdminGmChat implements IAdminCommandHandler
 			AdminHelpPage.showHelpPage(activeChar, "main_menu.htm");
 		return true;
 	}
-
+	
 	/**
 	 * @param command
 	 * @param activeChar
@@ -55,15 +55,15 @@ public class AdminGmChat implements IAdminCommandHandler
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
-
+		
 		if (!st.hasMoreTokens())
 		{
 			activeChar.sendMessage("Usage: //snoop <player_name>");
 			return;
 		}
-
+		
 		L2PcInstance player = L2World.getInstance().getPlayer(st.nextToken());
-		if(player == null)
+		if (player == null)
 		{
 			activeChar.sendPacket(SystemMessageId.TARGET_CANT_FOUND);
 			return;
@@ -77,12 +77,13 @@ public class AdminGmChat implements IAdminCommandHandler
 		player.addSnooper(activeChar); // GM added to player list
 		activeChar.addSnooped(player); // Player added to GM list
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	/**
 	 * @param command
 	 * @param activeChar

@@ -39,30 +39,30 @@ import com.l2jfree.gameserver.model.quest.QuestState;
  */
 public class RequestTutorialClientEvent extends L2GameClientPacket
 {
-	private static final String	_C__7E_REQUESTTUTORIALCLIENTEVENT	= "[C] 7E RequestTutorialClientEvent";
-
-	private int					_event;
-
+	private static final String _C__7E_REQUESTTUTORIALCLIENTEVENT = "[C] 7E RequestTutorialClientEvent";
+	
+	private int _event;
+	
 	@Override
 	protected void readImpl()
 	{
 		_event = readD(); // event
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		QuestState qs = player.getQuestState("255_Tutorial");
 		if (qs != null)
 			qs.getQuest().notifyEvent("CE" + _event + "", null, player);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

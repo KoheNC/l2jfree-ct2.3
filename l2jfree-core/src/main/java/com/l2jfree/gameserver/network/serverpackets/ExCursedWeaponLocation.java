@@ -25,26 +25,27 @@ public class ExCursedWeaponLocation extends L2GameServerPacket
 {
 	private static final String _S__FE_47_EXCURSEDWEAPONLOCATION = "[S] FE:47 ExCursedWeaponLocation [d(dd ddd)]";
 	private final FastList<CursedWeaponInfo> _cursedWeaponInfo;
-
+	
 	public ExCursedWeaponLocation(FastList<CursedWeaponInfo> cursedWeaponInfo)
 	{
 		_cursedWeaponInfo = cursedWeaponInfo;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x47);
-
+		
 		if (!_cursedWeaponInfo.isEmpty())
 		{
 			writeD(_cursedWeaponInfo.size());
-			for (FastList.Node<CursedWeaponInfo> n = _cursedWeaponInfo.head(), end = _cursedWeaponInfo.tail(); (n = n.getNext()) != end;)
+			for (FastList.Node<CursedWeaponInfo> n = _cursedWeaponInfo.head(), end = _cursedWeaponInfo.tail(); (n =
+					n.getNext()) != end;)
 			{
 				writeD(n.getValue().id);
 				writeD(n.getValue().activated);
-
+				
 				writeD(n.getValue().loc.getX());
 				writeD(n.getValue().loc.getY());
 				writeD(n.getValue().loc.getZ());
@@ -56,13 +57,13 @@ public class ExCursedWeaponLocation extends L2GameServerPacket
 			writeD(0);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{
 		return _S__FE_47_EXCURSEDWEAPONLOCATION;
 	}
-
+	
 	public static class CursedWeaponInfo
 	{
 		public final Location loc;

@@ -22,18 +22,18 @@ import com.l2jfree.gameserver.model.actor.L2Character;
  */
 public final class Env
 {
-	public L2Character		player;
-//	Disabled until it's really used...
-//	public L2CubicInstance	cubic;
-	public L2Character		target;
-//	Disabled until it's really used...
-//	public L2ItemInstance	item;
-	public L2Skill			skill;
-//	Disabled until it's really used...
-//	public L2Effect			effect;
-	public double			value;
-	public double			baseValue = Double.NaN;
-	public boolean			skillMastery;
+	public L2Character player;
+	//	Disabled until it's really used...
+	//	public L2CubicInstance	cubic;
+	public L2Character target;
+	//	Disabled until it's really used...
+	//	public L2ItemInstance	item;
+	public L2Skill skill;
+	//	Disabled until it's really used...
+	//	public L2Effect			effect;
+	public double value;
+	public double baseValue = Double.NaN;
+	public boolean skillMastery;
 	
 	public Env()
 	{

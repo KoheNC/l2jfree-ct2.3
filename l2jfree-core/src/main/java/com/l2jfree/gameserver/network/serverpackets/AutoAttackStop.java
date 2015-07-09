@@ -18,7 +18,7 @@ public class AutoAttackStop extends L2GameServerPacket
 {
 	private static final String _S__26_AUTOATTACKSTOP = "[S] 26 AutoAttackStop [d]";
 	private final int _targetObjId;
-
+	
 	/**
 	 * @param _characters
 	 */
@@ -33,7 +33,7 @@ public class AutoAttackStop extends L2GameServerPacket
 		writeC(0x26);
 		writeD(_targetObjId);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

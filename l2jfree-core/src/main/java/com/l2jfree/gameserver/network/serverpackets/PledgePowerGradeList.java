@@ -32,11 +32,11 @@ import com.l2jfree.gameserver.model.L2Clan.RankPrivs;
 public class PledgePowerGradeList extends L2GameServerPacket
 {
 	private static final String _S__FE_3B_PLEDGEPOWERGRADELIST = "[S] FE:3B PledgePowerGradeList";
-    private final RankPrivs[] _privs;
+	private final RankPrivs[] _privs;
 	
 	public PledgePowerGradeList(RankPrivs[] privs)
 	{
-        _privs = privs;
+		_privs = privs;
 	}
 	
 	@Override

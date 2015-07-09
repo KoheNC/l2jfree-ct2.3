@@ -26,14 +26,10 @@ import com.l2jfree.lang.L2TextBuilder;
 
 public class AdminBuffs implements IAdminCommandHandler
 {
-	private static final String[] ADMIN_COMMANDS =
-	{
-		"admin_getbuffs",
-		"admin_stopbuff",
-		"admin_stopallbuffs",
-		"admin_areacancel"
-	};
+	private static final String[] ADMIN_COMMANDS = { "admin_getbuffs", "admin_stopbuff", "admin_stopallbuffs",
+			"admin_areacancel" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_getbuffs"))
@@ -52,7 +48,7 @@ public class AdminBuffs implements IAdminCommandHandler
 					showBuffs(target, activeChar);
 					return true;
 				}
-
+				
 				activeChar.sendMessage("The player " + playername + " is not online");
 				return false;
 			}
@@ -94,7 +90,7 @@ public class AdminBuffs implements IAdminCommandHandler
 				removeAllBuffs(activeChar, playername);
 				return true;
 			}
-
+			
 			return false;
 		}
 		else if (command.startsWith("admin_areacancel"))
@@ -125,6 +121,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
@@ -180,7 +177,8 @@ public class AdminBuffs implements IAdminCommandHandler
 				else if (e.getId() == skillId)
 				{
 					e.exit();
-					remover.sendMessage("Removed " + e.getSkill().getName() + " level " + e.getLevel() + " from " + playername);
+					remover.sendMessage("Removed " + e.getSkill().getName() + " level " + e.getLevel() + " from "
+							+ playername);
 				}
 			}
 			showBuffs(player, remover);

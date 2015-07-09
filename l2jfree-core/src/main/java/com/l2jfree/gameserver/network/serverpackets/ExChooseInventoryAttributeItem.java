@@ -19,7 +19,8 @@ package com.l2jfree.gameserver.network.serverpackets;
  */
 public class ExChooseInventoryAttributeItem extends L2GameServerPacket
 {
-	private static final String _S__FE_62_EXCHOOSEINVENTORYATTRIBUTEITEM = "[S] FE:62 ExChooseInventoryAttributeItem [d]";
+	private static final String _S__FE_62_EXCHOOSEINVENTORYATTRIBUTEITEM =
+			"[S] FE:62 ExChooseInventoryAttributeItem [d]";
 	
 	private final int _itemId;
 	
@@ -33,7 +34,7 @@ public class ExChooseInventoryAttributeItem extends L2GameServerPacket
 	{
 		return _S__FE_62_EXCHOOSEINVENTORYATTRIBUTEITEM;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{

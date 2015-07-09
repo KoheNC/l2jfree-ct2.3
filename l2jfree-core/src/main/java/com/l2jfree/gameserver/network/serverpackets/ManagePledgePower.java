@@ -16,52 +16,51 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.L2Clan;
 
-
 public class ManagePledgePower extends L2GameServerPacket
 {
-    private static final String _S__30_MANAGEPLEDGEPOWER = "[S] 30 ManagePledgePower";
-    
-    private final int _action;
-    private final L2Clan _clan;
-    private final int _rank;
-    private int _privs;
-    
-    public ManagePledgePower(L2Clan clan, int action, int rank)
-    {
-        _clan = clan;
-        _action = action;
-        _rank = rank;
-    }
-    
-    @Override
-    protected final void writeImpl()
-    {
-        if(_action == 1)
-        {
-        	_privs = _clan.getRankPrivs(_rank);
-        }
-        else
-        {
-            return;
-        	/*
-            if (L2World.getInstance().findObject(_clanId) == null)
-                return;
-            
+	private static final String _S__30_MANAGEPLEDGEPOWER = "[S] 30 ManagePledgePower";
+	
+	private final int _action;
+	private final L2Clan _clan;
+	private final int _rank;
+	private int _privs;
+	
+	public ManagePledgePower(L2Clan clan, int action, int rank)
+	{
+		_clan = clan;
+		_action = action;
+		_rank = rank;
+	}
+	
+	@Override
+	protected final void writeImpl()
+	{
+		if (_action == 1)
+		{
+			_privs = _clan.getRankPrivs(_rank);
+		}
+		else
+		{
+			return;
+			/*
+			if (L2World.getInstance().findObject(_clanId) == null)
+			    return;
+			
 			privs = ((L2PcInstance)L2World.getInstance().findObject(_clanId)).getClanPrivileges();
 			*/
-        }
-        writeC(0x2a);
-        writeD(0);
-        writeD(0);
-        writeD(_privs);
-   }
-    
-    /* (non-Javadoc)
-     * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _S__30_MANAGEPLEDGEPOWER;
-    }
+		}
+		writeC(0x2a);
+		writeD(0);
+		writeD(0);
+		writeD(_privs);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _S__30_MANAGEPLEDGEPOWER;
+	}
 }

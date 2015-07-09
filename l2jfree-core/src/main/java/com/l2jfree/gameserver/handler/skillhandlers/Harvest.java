@@ -34,38 +34,38 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class Harvest implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.HARVEST };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.HARVEST };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance activePlayer = (L2PcInstance) activeChar;
+		
+		L2PcInstance activePlayer = (L2PcInstance)activeChar;
 		
 		InventoryUpdate iu = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
-
+		
 		if (_log.isDebugEnabled())
 			_log.info("Casting harvest");
-
+		
 		for (L2Character element : targets)
 		{
 			if (!(element instanceof L2MonsterInstance))
 				continue;
-
-			L2MonsterInstance target = (L2MonsterInstance) element;
-
+			
+			L2MonsterInstance target = (L2MonsterInstance)element;
+			
 			if (activePlayer != target.getSeeder())
 			{
 				activePlayer.sendPacket(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_HARVEST);
 				continue;
 			}
-
+			
 			boolean send = false;
 			int total = 0;
 			int cropId = 0;
-
+			
 			if (target.isSeeded())
 			{
 				if (calcSuccess(activePlayer, target))
@@ -81,7 +81,9 @@ public class Harvest implements ISkillHandler
 								activePlayer.getParty().distributeItem(activePlayer, ritem, true, target);
 							else
 							{
-								L2ItemInstance item = activePlayer.getInventory().addItem("Manor", ritem.getItemId(), ritem.getCount(), activePlayer, target);
+								L2ItemInstance item =
+										activePlayer.getInventory().addItem("Manor", ritem.getItemId(),
+												ritem.getCount(), activePlayer, target);
 								if (iu != null)
 									iu.addItem(item);
 								send = true;
@@ -102,7 +104,7 @@ public class Harvest implements ISkillHandler
 								smsg.addItemName(cropId);
 								activePlayer.getParty().broadcastToPartyMembers(activePlayer, smsg);
 							}
-
+							
 							if (iu != null)
 								activePlayer.sendPacket(iu);
 							else
@@ -121,33 +123,34 @@ public class Harvest implements ISkillHandler
 			}
 		}
 	}
-
+	
 	private boolean calcSuccess(L2PcInstance activePlayer, L2MonsterInstance target)
 	{
 		int basicSuccess = 100;
 		int levelPlayer = activePlayer.getLevel();
 		int levelTarget = target.getLevel();
-
+		
 		int diff = (levelPlayer - levelTarget);
 		if (diff < 0)
 			diff = -diff;
-
+		
 		// Apply penalty, target <=> player levels
 		// 5% penalty for each level
 		if (diff > 5)
 		{
 			basicSuccess -= (diff - 5) * 5;
 		}
-
+		
 		// success rate cant be less than 1%
 		if (basicSuccess < 1)
 			basicSuccess = 1;
-
+		
 		int rate = Rnd.nextInt(99);
-
-        return rate < basicSuccess;
+		
+		return rate < basicSuccess;
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

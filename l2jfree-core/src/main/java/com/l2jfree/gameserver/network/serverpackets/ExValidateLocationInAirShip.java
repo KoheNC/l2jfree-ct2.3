@@ -15,40 +15,42 @@
 package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+
 /**
  * @authos kerberos
  *
  */
 public class ExValidateLocationInAirShip extends L2GameServerPacket
 {
-    private final L2PcInstance _activeChar;
-
-    public ExValidateLocationInAirShip(L2PcInstance player)
-    {
-        _activeChar = player;
-    }
-
-    @Override
+	private final L2PcInstance _activeChar;
+	
+	public ExValidateLocationInAirShip(L2PcInstance player)
+	{
+		_activeChar = player;
+	}
+	
+	@Override
 	protected final void writeImpl()
-    {
-        if (_activeChar.getAirShip() == null) return;
-        
-        writeC(0xfe);
-        writeH(0x6F);
-        writeD(_activeChar.getObjectId());
-        writeD(_activeChar.getAirShip().getObjectId());
-        writeD(_activeChar.getX());
-        writeD(_activeChar.getY());
-        writeD(_activeChar.getZ());
-        writeD(_activeChar.getHeading());
-    }
-
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
+	{
+		if (_activeChar.getAirShip() == null)
+			return;
+		
+		writeC(0xfe);
+		writeH(0x6F);
+		writeD(_activeChar.getObjectId());
+		writeD(_activeChar.getAirShip().getObjectId());
+		writeD(_activeChar.getX());
+		writeD(_activeChar.getY());
+		writeD(_activeChar.getZ());
+		writeD(_activeChar.getHeading());
+	}
+	
+	/* (non-Javadoc)
+	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
 	public String getType()
-    {
-        return "[S] FE:6F ExValidateLocationInAirShip";
-    }
+	{
+		return "[S] FE:6F ExValidateLocationInAirShip";
+	}
 }

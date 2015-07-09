@@ -31,18 +31,18 @@ import com.l2jfree.gameserver.network.serverpackets.NpcSay;
 public final class DangerousAllure extends QuestJython
 {
 	private static final String DANGEROUS_ALLURE = "170_DangerousAllure";
-
+	
 	// Quest NPCs
 	private static final int VELLIOR = 30305;
-
+	
 	// Quest items
 	private static final int NIGHTMARE_CRYSTAL = 1046;
-
+	
 	// Quest monsters
 	private static final int MERKENIS = 27022;
 	private static final String MERKENIS_ATTACKED = "I shall put you in a never-ending nightmare!";
 	private static final String MERKENIS_KILLED = "My soul is to Icarus...";
-
+	
 	private DangerousAllure(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
@@ -52,7 +52,7 @@ public final class DangerousAllure extends QuestJython
 		addAttackId(MERKENIS);
 		addKillId(MERKENIS);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -69,26 +69,25 @@ public final class DangerousAllure extends QuestJython
 		else
 			return event;
 	}
-
+	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet,
-			L2Skill skill)
+	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
-		case ATTACK_NOONE:
-			npc.broadcastPacket(new NpcSay(npc, MERKENIS_ATTACKED));
-			npc.setQuestAttackStatus(ATTACK_SINGLE);
-			npc.setQuestFirstAttacker(attacker);
-			break;
-		case ATTACK_SINGLE:
-			//if (attacker != npc.getQuestFirstAttacker())
-			//	npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			break;
+			case ATTACK_NOONE:
+				npc.broadcastPacket(new NpcSay(npc, MERKENIS_ATTACKED));
+				npc.setQuestAttackStatus(ATTACK_SINGLE);
+				npc.setQuestFirstAttacker(attacker);
+				break;
+			case ATTACK_SINGLE:
+				//if (attacker != npc.getQuestFirstAttacker())
+				//	npc.setQuestAttackStatus(ATTACK_MULTIPLE);
+				break;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -96,10 +95,9 @@ public final class DangerousAllure extends QuestJython
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(DANGEROUS_ALLURE);
-		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) != 1
-				|| npc.getQuestAttackStatus() != ATTACK_SINGLE)
+		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) != 1 || npc.getQuestAttackStatus() != ATTACK_SINGLE)
 			return null;
-
+		
 		if (qs.getQuestItemsCount(NIGHTMARE_CRYSTAL) == 0)
 		{
 			npc.broadcastPacket(new NpcSay(npc, MERKENIS_KILLED));
@@ -107,10 +105,10 @@ public final class DangerousAllure extends QuestJython
 			quester.sendPacket(SND_MIDDLE);
 			qs.set(CONDITION, 2);
 		}
-
+		
 		return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
@@ -119,7 +117,7 @@ public final class DangerousAllure extends QuestJython
 			return NO_QUEST;
 		else if (qs.isCompleted())
 			return QUEST_DONE;
-
+		
 		int cond = qs.getInt(CONDITION);
 		if (cond == 0)
 		{
@@ -150,7 +148,7 @@ public final class DangerousAllure extends QuestJython
 				return "30305-05.htm";
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new DangerousAllure(170, DANGEROUS_ALLURE, "Dangerous Allure");

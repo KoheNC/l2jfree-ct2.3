@@ -37,14 +37,16 @@ public final class StrSiegeAssault extends ISkillConditionChecker
 		if (!(activeChar instanceof L2PcInstance))
 			return false;
 		
-		final L2PcInstance player = (L2PcInstance) activeChar;
+		final L2PcInstance player = (L2PcInstance)activeChar;
 		
-		if (!SiegeManager.checkIfOkToUseStriderSiegeAssault(player, false) && !FortSiegeManager.checkIfOkToUseStriderSiegeAssault(player, false))
+		if (!SiegeManager.checkIfOkToUseStriderSiegeAssault(player, false)
+				&& !FortSiegeManager.checkIfOkToUseStriderSiegeAssault(player, false))
 			return false;
 		
 		return super.checkConditions(activeChar, skill);
 	}
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
@@ -52,14 +54,15 @@ public final class StrSiegeAssault extends ISkillConditionChecker
 		
 		L2PcInstance player = (L2PcInstance)activeChar;
 		
-		if (SiegeManager.checkIfOkToUseStriderSiegeAssault(player, false) ||
-				FortSiegeManager.checkIfOkToUseStriderSiegeAssault(player, false) ||
-				CCHManager.checkIfOkToUseStriderSiegeAssault(player, false))
+		if (SiegeManager.checkIfOkToUseStriderSiegeAssault(player, false)
+				|| FortSiegeManager.checkIfOkToUseStriderSiegeAssault(player, false)
+				|| CCHManager.checkIfOkToUseStriderSiegeAssault(player, false))
 		{
 			SkillHandler.getInstance().useSkill(L2SkillType.PDAM, activeChar, skill, targets);
 		}
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

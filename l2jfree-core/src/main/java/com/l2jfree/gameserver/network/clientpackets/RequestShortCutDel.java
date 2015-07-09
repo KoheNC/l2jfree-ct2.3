@@ -23,11 +23,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class RequestShortCutDel extends L2GameClientPacket
 {
-	private static final String	_C__35_REQUESTSHORTCUTDEL	= "[C] 35 RequestShortCutDel";
-
-	private int					_slot;
-	private int					_page;
-
+	private static final String _C__35_REQUESTSHORTCUTDEL = "[C] 35 RequestShortCutDel";
+	
+	private int _slot;
+	private int _page;
+	
 	/**
 	 * packet type id 0x35
 	 * format:		cd
@@ -40,25 +40,25 @@ public class RequestShortCutDel extends L2GameClientPacket
 		_slot = id % 12;
 		_page = id / 12;
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (_page > 10 || _page < 0)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		activeChar.deleteShortCut(_slot, _page);
 		// client needs no confirmation. this packet is just to inform the server
 		//sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

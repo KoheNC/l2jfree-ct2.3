@@ -25,27 +25,27 @@ import com.l2jfree.gameserver.network.serverpackets.HennaEquipList;
 public final class RequestHennaDrawList extends L2GameClientPacket
 {
 	private static final String _C__BA_RequestHennaDrawList = "[C] ba RequestHennaDrawList";
-
+	
 	//private int _unknown;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		/*_unknown = */readD(); // ?? just a trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		sendPacket(new HennaEquipList(activeChar));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

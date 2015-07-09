@@ -24,17 +24,17 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class PackageSendableList extends L2GameServerPacket
 {
-	private static final String			_S__C3_PACKAGESENDABLELIST	= "[S] C3 PackageSendableList";
-
-	private final FastList<L2ItemInstance>	_items;
-	private final int						_targetPlayerObjId;
-	private final long						_playerAdena;
-
+	private static final String _S__C3_PACKAGESENDABLELIST = "[S] C3 PackageSendableList";
+	
+	private final FastList<L2ItemInstance> _items;
+	private final int _targetPlayerObjId;
+	private final long _playerAdena;
+	
 	public PackageSendableList(L2PcInstance sender, int playerOID)
 	{
 		_targetPlayerObjId = playerOID;
 		_playerAdena = sender.getAdena();
-
+		
 		_items = new FastList<L2ItemInstance>();
 		for (L2ItemInstance temp : sender.getInventory().getAvailableItems(true, false))
 		{
@@ -42,7 +42,7 @@ public class PackageSendableList extends L2GameServerPacket
 				_items.add(temp);
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -50,7 +50,7 @@ public class PackageSendableList extends L2GameServerPacket
 	protected void writeImpl()
 	{
 		writeC(0xd2);
-
+		
 		writeD(_targetPlayerObjId);
 		writeCompQ(_playerAdena);
 		writeD(_items.size());
@@ -72,7 +72,7 @@ public class PackageSendableList extends L2GameServerPacket
 		}
 		_items.clear();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

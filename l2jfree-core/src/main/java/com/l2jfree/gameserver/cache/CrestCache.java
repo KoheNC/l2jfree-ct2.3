@@ -90,11 +90,13 @@ public class CrestCache
 				
 				if (file.getName().startsWith("Crest_Large_"))
 				{
-					_cachePledgeLarge.put(Integer.valueOf(file.getName().substring(12, file.getName().length() - 4)), content);
+					_cachePledgeLarge.put(Integer.valueOf(file.getName().substring(12, file.getName().length() - 4)),
+							content);
 				}
 				else if (file.getName().startsWith("Crest_"))
 				{
-					_cachePledge.put(Integer.valueOf(file.getName().substring(6, file.getName().length() - 4)), content);
+					_cachePledge
+							.put(Integer.valueOf(file.getName().substring(6, file.getName().length() - 4)), content);
 				}
 				else if (file.getName().startsWith("AllyCrest_"))
 				{
@@ -129,7 +131,7 @@ public class CrestCache
 		File dir = new File(Config.DATAPACK_ROOT, "data/crests/");
 		
 		File[] files = dir.listFiles(new OldPledgeFilter());
-
+		
 		if (files == null)
 			files = new File[0];
 		
@@ -151,11 +153,12 @@ public class CrestCache
 				_log.info("Renamed Clan crest to new format: Crest_" + newId + ".bmp");
 				
 				Connection con = null;
-
+				
 				try
 				{
 					con = L2DatabaseFactory.getInstance().getConnection(con);
-					PreparedStatement statement = con.prepareStatement("UPDATE clan_data SET crest_id = ? WHERE clan_id = ?");
+					PreparedStatement statement =
+							con.prepareStatement("UPDATE clan_data SET crest_id = ? WHERE clan_id = ?");
 					statement.setInt(1, newId);
 					statement.setInt(2, clan.getClanId());
 					statement.executeUpdate();
@@ -185,7 +188,7 @@ public class CrestCache
 	public String toString()
 	{
 		return "Cache[Crest]: " + String.format("%.3f", (float)_bytesBuffLen / 1048576) + " megabytes on "
-			+ _loadedFiles + " file(s) loaded.";
+				+ _loadedFiles + " file(s) loaded.";
 	}
 	
 	public int getLoadedFiles()
@@ -320,6 +323,7 @@ public class CrestCache
 	
 	class BmpFilter implements FileFilter
 	{
+		@Override
 		public boolean accept(File file)
 		{
 			return (file.getName().endsWith(".bmp"));
@@ -328,12 +332,13 @@ public class CrestCache
 	
 	class OldPledgeFilter implements FileFilter
 	{
+		@Override
 		public boolean accept(File file)
 		{
 			return (file.getName().startsWith("Pledge_"));
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

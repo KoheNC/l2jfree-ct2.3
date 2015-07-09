@@ -113,8 +113,9 @@ public final class EffectFear extends L2Effect
 		posX += _dX * FEAR_RANGE;
 		posY += _dY * FEAR_RANGE;
 		
-		Location destiny = GeoData.getInstance().moveCheck(getEffected().getX(), getEffected().getY(),
-				getEffected().getZ(), posX, posY, posZ, getEffected().getInstanceId());
+		Location destiny =
+				GeoData.getInstance().moveCheck(getEffected().getX(), getEffected().getY(), getEffected().getZ(), posX,
+						posY, posZ, getEffected().getInstanceId());
 		if (!(getEffected() instanceof L2PetInstance))
 			getEffected().setRunning();
 		getEffected().getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(destiny));

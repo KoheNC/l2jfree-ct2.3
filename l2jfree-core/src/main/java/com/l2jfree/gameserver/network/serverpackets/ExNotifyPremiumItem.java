@@ -25,18 +25,18 @@ public final class ExNotifyPremiumItem extends StaticPacket
 {
 	private static final String _S__EXNOTIFYPREMIUMITEM = "[S] FE:85 ExNotifyPremiumItem ch";
 	public static final ExNotifyPremiumItem PACKET = new ExNotifyPremiumItem();
-
+	
 	private ExNotifyPremiumItem()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x85);
 	}
-
+	
 	@Override
 	public String getType()
 	{

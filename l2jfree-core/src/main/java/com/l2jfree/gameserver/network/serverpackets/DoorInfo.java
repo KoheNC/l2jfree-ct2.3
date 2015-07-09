@@ -22,12 +22,12 @@ public class DoorInfo extends L2GameServerPacket
 {
 	private static final String _S__4C_DOORINFO = "[S] 4c DoorInfo [ddd]";
 	private final L2DoorInstance _door;
-
+	
 	public DoorInfo(L2DoorInstance door)
 	{
 		_door = door;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -36,7 +36,7 @@ public class DoorInfo extends L2GameServerPacket
 		writeD(_door.getDoorId());
 		writeD(0x00); //door hp view
 	}
-
+	
 	@Override
 	public String getType()
 	{

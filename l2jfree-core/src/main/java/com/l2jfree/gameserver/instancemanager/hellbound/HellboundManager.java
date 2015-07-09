@@ -362,8 +362,7 @@ public final class HellboundManager
 			new SpawnData(18467, -64, 235182, -3253, 35793, 60, 60, 60),
 			new SpawnData(18467, -114, 235206, -3235, 39343, 60, 60, 60) };
 	
-	private static final SpawnData[] CHIMERA_SPAWNS = {
-			new SpawnData(22349, 1527, 232903, -3272, 36685, 60, 60, 60),
+	private static final SpawnData[] CHIMERA_SPAWNS = { new SpawnData(22349, 1527, 232903, -3272, 36685, 60, 60, 60),
 			new SpawnData(22349, 1223, 235495, -3328, 28019, 60, 60, 60),
 			new SpawnData(22349, 2199, 232986, -3216, 58088, 60, 60, 60),
 			new SpawnData(22349, 4125, 234074, -3272, 62181, 60, 60, 60),
@@ -543,6 +542,7 @@ public final class HellboundManager
 	
 	private final class SaveToDB implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			Connection con = null;
@@ -870,8 +870,9 @@ public final class HellboundManager
 		
 		if (previousLevel != getCurrentLevel())
 		{
-			String message = "Hellbound went " + ((previousLevel < getCurrentLevel()) ? "up" : "down") + " to stage "
-					+ getCurrentLevel();
+			String message =
+					"Hellbound went " + ((previousLevel < getCurrentLevel()) ? "up" : "down") + " to stage "
+							+ getCurrentLevel();
 			
 			Announcements.getInstance().announceToAll(message);
 			

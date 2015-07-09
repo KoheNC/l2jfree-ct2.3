@@ -72,7 +72,7 @@ public final class UserCommandHandler extends NumberHandlerRegistry<IUserCommand
 	{
 		return get(userCommand);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

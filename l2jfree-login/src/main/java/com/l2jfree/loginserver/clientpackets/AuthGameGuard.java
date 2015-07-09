@@ -25,19 +25,19 @@ import com.l2jfree.loginserver.serverpackets.LoginFail;
  */
 public class AuthGameGuard extends L2LoginClientPacket
 {
-	private int	_sessionId;
-
+	private int _sessionId;
+	
 	public int getSessionId()
 	{
 		return _sessionId;
 	}
-
+	
 	@Override
 	protected int getMinimumLength()
 	{
 		return 20;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.clientpackets.L2LoginClientPacket#readImpl()
 	 */
@@ -45,7 +45,7 @@ public class AuthGameGuard extends L2LoginClientPacket
 	protected void readImpl()
 	{
 		_sessionId = readD();
-
+		
 		/* 19 null bytes, 1 byte, 3 bytes, rest - null bytes
 		 * 3 bytes will match with RequestAuthLogin first three bytes
 		 * and the randomly deviated 1 byte will be as 4th byte in RAL
@@ -55,7 +55,7 @@ public class AuthGameGuard extends L2LoginClientPacket
 		*/
 		skip(35);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.ReceivablePacket#run()
 	 */

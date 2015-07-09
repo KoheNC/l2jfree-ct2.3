@@ -26,27 +26,28 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class RequestExAcceptJoinMPCC extends L2GameClientPacket
 {
 	private static final String _C__D0_0E_REQUESTEXASKJOINMPCC = "[C] D0:0E RequestExAcceptJoinMPCC";
-
+	
 	private int _response;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_response = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
-		if (player == null) return;
+		if (player == null)
+			return;
 		L2PcInstance requestor = player.getActiveRequester();
-        if (requestor == null)
-        {
-        	sendPacket(ActionFailed.STATIC_PACKET);
-        	return;
-        }
-
+		if (requestor == null)
+		{
+			sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
 		SystemMessage sm;
 		if (_response == 1)
 		{
@@ -70,12 +71,12 @@ public class RequestExAcceptJoinMPCC extends L2GameClientPacket
 			requestor.sendPacket(sm);
 		}
 		sm = null;
-
+		
 		sendPacket(ActionFailed.STATIC_PACKET);
 		player.setActiveRequester(null);
 		requestor.onTransactionResponse();
 	}
-
+	
 	@Override
 	public String getType()
 	{

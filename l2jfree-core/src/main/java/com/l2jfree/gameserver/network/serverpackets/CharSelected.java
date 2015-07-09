@@ -20,10 +20,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class CharSelected extends L2GameServerPacket
 {
-	private static final String _S__0B_activeCharRSELECTED = "[S] 0b CharSelected [sdsddddddddddffdqdddddddddddd ddddddddddddddddddddddddddd ff ddd c hh d]";
+	private static final String _S__0B_activeCharRSELECTED =
+			"[S] 0b CharSelected [sdsddddddddddffdqdddddddddddd ddddddddddddddddddddddddddd ff ddd c hh d]";
 	private final L2PcInstance _activeChar;
 	private final int _sessionId;
-
+	
 	/**
 	 * @param _activeCharracters
 	 */
@@ -32,26 +33,26 @@ public class CharSelected extends L2GameServerPacket
 		_activeChar = cha;
 		_sessionId = sessionId;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x0b);
-
+		
 		writeS(_activeChar.getName());
 		writeD(_activeChar.getCharId());
 		writeS(_activeChar.getTitle());
 		writeD(_sessionId);
 		writeD(_activeChar.getClanId());
-		writeD(0x00);  //??
-		writeD(_activeChar.getAppearance().getSex()? 1 : 0);
+		writeD(0x00); //??
+		writeD(_activeChar.getAppearance().getSex() ? 1 : 0);
 		writeD(_activeChar.getRace().ordinal());
 		writeD(_activeChar.getClassId().getId());
 		writeD(0x01); // active ??
 		writeD(_activeChar.getX());
 		writeD(_activeChar.getY());
 		writeD(_activeChar.getZ());
-
+		
 		writeF(_activeChar.getStatus().getCurrentHp());
 		writeF(_activeChar.getStatus().getCurrentMp());
 		writeD(_activeChar.getSp());
@@ -65,22 +66,22 @@ public class CharSelected extends L2GameServerPacket
 		writeD(_activeChar.getStat().getMEN());
 		writeD(_activeChar.getStat().getDEX());
 		writeD(_activeChar.getStat().getWIT());
-
+		
 		writeD(GameTimeController.getInstance().getGameTime());
 		writeD(0x00);
-
+		
 		writeD(_activeChar.getClassId().getId());
 		writeD(0x00);
 		writeD(0x00);
 		writeD(0x00);
 		writeD(0x00);
-
+		
 		writeB(new byte[64]);
-
+		
 		if (Config.PACKET_FINAL)
 			writeD(0x00);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

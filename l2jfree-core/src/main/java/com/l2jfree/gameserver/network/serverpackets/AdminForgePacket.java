@@ -41,7 +41,7 @@ public class AdminForgePacket extends L2GameServerPacket
 	
 	public AdminForgePacket()
 	{
-	
+		
 	}
 	
 	/* (non-Javadoc)
@@ -56,7 +56,7 @@ public class AdminForgePacket extends L2GameServerPacket
 		}
 		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -65,38 +65,39 @@ public class AdminForgePacket extends L2GameServerPacket
 	{
 		return "[S] -1 AdminForge";
 	}
+	
 	/**
 	 * @param b
 	 * @param string
 	 */
 	public boolean generate(byte b, String string)
 	{
-		if((b == 'C')||(b == 'c'))
+		if ((b == 'C') || (b == 'c'))
 		{
 			writeC(Integer.decode(string));
 			return true;
 		}
-		else if((b == 'D')||(b == 'd'))
+		else if ((b == 'D') || (b == 'd'))
 		{
 			writeD(Integer.decode(string));
 			return true;
 		}
-		else if((b == 'H')||(b == 'h'))
+		else if ((b == 'H') || (b == 'h'))
 		{
 			writeH(Integer.decode(string));
 			return true;
 		}
-		else if((b == 'F')||(b == 'f'))
+		else if ((b == 'F') || (b == 'f'))
 		{
 			writeF(Double.parseDouble(string));
 			return true;
 		}
-		else if((b == 'S')||(b == 's'))
+		else if ((b == 'S') || (b == 's'))
 		{
 			writeS(string);
 			return true;
 		}
-		else if((b == 'B')||(b == 'b')||(b == 'X')||(b == 'x'))
+		else if ((b == 'B') || (b == 'b') || (b == 'X') || (b == 'x'))
 		{
 			writeB(new BigInteger(string).toByteArray());
 			return true;

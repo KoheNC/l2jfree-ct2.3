@@ -17,19 +17,19 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class SunRise extends StaticPacket
 {
 	private static final String _S__SUNRISE = "[S] 12 SunRise c";
-
+	
 	public static final SunRise STATIC_PACKET = new SunRise();
-
+	
 	private SunRise()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x12);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

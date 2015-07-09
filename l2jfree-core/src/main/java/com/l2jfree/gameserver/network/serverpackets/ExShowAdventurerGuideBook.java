@@ -18,18 +18,18 @@ public class ExShowAdventurerGuideBook extends StaticPacket
 {
 	private static final String _S__EXSHOWADVENTURERGUIDEBOOK = "[S] FE:38 ExShowAdventurerGuideBook ch";
 	public static final ExShowAdventurerGuideBook PACKET = new ExShowAdventurerGuideBook();
-
+	
 	private ExShowAdventurerGuideBook()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x38);
 	}
-
+	
 	@Override
 	public String getType()
 	{

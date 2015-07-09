@@ -20,9 +20,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2BoatInstance;
  * @author Maktakien
  *
  */
-public class VehicleInfo  extends L2GameServerPacket
+public class VehicleInfo extends L2GameServerPacket
 {
-	 private final L2BoatInstance _boat;
+	private final L2BoatInstance _boat;
+	
 	/**
 	 * @param instance
 	 */
@@ -30,7 +31,7 @@ public class VehicleInfo  extends L2GameServerPacket
 	{
 		_boat = boat;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -41,11 +42,11 @@ public class VehicleInfo  extends L2GameServerPacket
 		writeD(_boat.getObjectId());
 		writeD(_boat.getX());
 		writeD(_boat.getY());
-        writeD(_boat.getZ());
-        writeD(_boat.getPosition().getHeading());
+		writeD(_boat.getZ());
+		writeD(_boat.getPosition().getHeading());
 		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

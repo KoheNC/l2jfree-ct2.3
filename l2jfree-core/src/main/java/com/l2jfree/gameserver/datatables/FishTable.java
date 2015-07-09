@@ -33,17 +33,17 @@ import com.l2jfree.gameserver.model.FishData;
  */
 public class FishTable
 {
-	private final static Log		_log		= LogFactory.getLog(SkillTreeTable.class);
-
-	private static List<FishData>	_fishsNormal;
-	private static List<FishData>	_fishsEasy;
-	private static List<FishData>	_fishsHard;
-
+	private final static Log _log = LogFactory.getLog(SkillTreeTable.class);
+	
+	private static List<FishData> _fishsNormal;
+	private static List<FishData> _fishsEasy;
+	private static List<FishData> _fishsHard;
+	
 	public static FishTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private FishTable()
 	{
 		//Create table that contains all fish datas
@@ -56,10 +56,10 @@ public class FishTable
 			_fishsNormal = new FastList<FishData>();
 			_fishsHard = new FastList<FishData>();
 			FishData fish;
-			PreparedStatement statement = con
-					.prepareStatement("SELECT id, level, name, hp, hpregen, fish_type, fish_group, fish_guts, guts_check_time, wait_time, combat_time FROM fish ORDER BY id");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT id, level, name, hp, hpregen, fish_type, fish_group, fish_guts, guts_check_time, wait_time, combat_time FROM fish ORDER BY id");
 			ResultSet Fishes = statement.executeQuery();
-
+			
 			while (Fishes.next())
 			{
 				int id = Fishes.getInt("id");
@@ -73,17 +73,19 @@ public class FishTable
 				int guts_check_time = Fishes.getInt("guts_check_time");
 				int wait_time = Fishes.getInt("wait_time");
 				int combat_time = Fishes.getInt("combat_time");
-				fish = new FishData(id, lvl, name, hp, hpreg, type, group, fish_guts, guts_check_time, wait_time, combat_time);
+				fish =
+						new FishData(id, lvl, name, hp, hpreg, type, group, fish_guts, guts_check_time, wait_time,
+								combat_time);
 				switch (fish.getGroup())
 				{
-				case 0:
-					_fishsEasy.add(fish);
-					break;
-				case 1:
-					_fishsNormal.add(fish);
-					break;
-				case 2:
-					_fishsHard.add(fish);
+					case 0:
+						_fishsEasy.add(fish);
+						break;
+					case 1:
+						_fishsNormal.add(fish);
+						break;
+					case 2:
+						_fishsHard.add(fish);
 				}
 			}
 			Fishes.close();
@@ -98,10 +100,10 @@ public class FishTable
 		{
 			L2DatabaseFactory.close(con);
 		}
-
+		
 		_log.info("FishTable: Loaded " + count + " Fishes.");
 	}
-
+	
 	/**
 	 * @param Fish - lvl
 	 * @param Fish - type
@@ -114,14 +116,14 @@ public class FishTable
 		List<FishData> _fishs = null;
 		switch (group)
 		{
-		case 0:
-			_fishs = _fishsEasy;
-			break;
-		case 1:
-			_fishs = _fishsNormal;
-			break;
-		case 2:
-			_fishs = _fishsHard;
+			case 0:
+				_fishs = _fishsEasy;
+				break;
+			case 1:
+				_fishs = _fishsNormal;
+				break;
+			case 2:
+				_fishs = _fishsHard;
 		}
 		if (_fishs == null)
 		{
@@ -135,14 +137,14 @@ public class FishTable
 				continue;
 			if (f.getType() != type)
 				continue;
-
+			
 			result.add(f);
 		}
 		if (result.size() == 0)
 			_log.warn("FishTable: Fishes are not definied for Lvl " + lvl + " type " + type + " group " + group);
 		return result;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

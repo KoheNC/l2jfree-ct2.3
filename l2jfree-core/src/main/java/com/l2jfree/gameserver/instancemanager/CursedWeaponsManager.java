@@ -58,43 +58,43 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class CursedWeaponsManager
 {
-	private static final Log			_log	= LogFactory.getLog(CursedWeaponsManager.class);
-
+	private static final Log _log = LogFactory.getLog(CursedWeaponsManager.class);
+	
 	public static final CursedWeaponsManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
-	private FastMap<Integer, CursedWeapon>	_cursedWeapons;
-
+	
+	private FastMap<Integer, CursedWeapon> _cursedWeapons;
+	
 	private CursedWeaponsManager()
 	{
 		_cursedWeapons = new FastMap<Integer, CursedWeapon>();
 		load();
 	}
-
+	
 	public final void reload()
 	{
 		_cursedWeapons = new FastMap<Integer, CursedWeapon>();
 		load();
 	}
-
+	
 	private final void load()
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setValidating(true);
 			factory.setIgnoringComments(true);
-
+			
 			File file = new File(Config.DATAPACK_ROOT, "data/cursedWeapons.xml");
 			if (!file.exists())
 				throw new IOException();
-
+			
 			Document doc = factory.newDocumentBuilder().parse(file);
-
+			
 			for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling())
 			{
 				if ("list".equalsIgnoreCase(n.getNodeName()))
@@ -107,9 +107,9 @@ public class CursedWeaponsManager
 							int id = Integer.parseInt(attrs.getNamedItem("id").getNodeValue());
 							int skillId = Integer.parseInt(attrs.getNamedItem("skillId").getNodeValue());
 							String name = attrs.getNamedItem("name").getNodeValue();
-
+							
 							CursedWeapon cw = new CursedWeapon(id, skillId, name);
-
+							
 							int val;
 							for (Node cd = d.getFirstChild(); cd != null; cd = cd.getNextSibling())
 							{
@@ -150,22 +150,23 @@ public class CursedWeaponsManager
 									cw.setTransformId(val);
 								}
 							}
-
+							
 							// Store cursed weapon
 							_cursedWeapons.put(id, cw);
 						}
 					}
 				}
 			}
-
+			
 			// Retrieve the L2PcInstance from the characters table of the database
 			con = L2DatabaseFactory.getInstance().getConnection();
-
+			
 			if (Config.ALLOW_CURSED_WEAPONS)
 			{
-				PreparedStatement statement = con.prepareStatement("SELECT itemId, charId, playerKarma, playerPkKills, nbKills, endTime FROM cursed_weapons");
+				PreparedStatement statement =
+						con.prepareStatement("SELECT itemId, charId, playerKarma, playerPkKills, nbKills, endTime FROM cursed_weapons");
 				ResultSet rset = statement.executeQuery();
-
+				
 				while (rset.next())
 				{
 					int itemId = rset.getInt("itemId");
@@ -174,7 +175,7 @@ public class CursedWeaponsManager
 					int playerPkKills = rset.getInt("playerPkKills");
 					int nbKills = rset.getInt("nbKills");
 					long endTime = rset.getLong("endTime");
-
+					
 					CursedWeapon cw = _cursedWeapons.get(itemId);
 					cw.setPlayerId(playerId);
 					cw.setPlayerKarma(playerKarma);
@@ -183,7 +184,7 @@ public class CursedWeaponsManager
 					cw.setEndTime(endTime);
 					cw.reActivate();
 				}
-
+				
 				rset.close();
 				statement.close();
 			}
@@ -194,17 +195,17 @@ public class CursedWeaponsManager
 				rset.close();
 				statement.close();
 			}
-
+			
 			//L2DatabaseFactory.close(con);
-
+			
 			// Retrieve the L2PcInstance from the characters table of the database
 			//con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			for (CursedWeapon cw : _cursedWeapons.values())
 			{
 				if (cw.isActivated())
 					continue;
-
+				
 				// Do an item check to be sure that the cursed weapon isn't hold by someone
 				int itemId = cw.getItemId();
 				try
@@ -212,15 +213,17 @@ public class CursedWeaponsManager
 					PreparedStatement statement = con.prepareStatement("SELECT owner_id FROM items WHERE item_id=?");
 					statement.setInt(1, itemId);
 					ResultSet rset = statement.executeQuery();
-
+					
 					if (rset.next())
 					{
 						// A player has the cursed weapon in his inventory ...
 						int playerId = rset.getInt("owner_id");
-						_log.info("PROBLEM : Player " + playerId + " owns the cursed weapon " + itemId + " but he shouldn't.");
-
+						_log.info("PROBLEM : Player " + playerId + " owns the cursed weapon " + itemId
+								+ " but he shouldn't.");
+						
 						// Delete the item
-						PreparedStatement statement2 = con.prepareStatement("DELETE FROM items WHERE owner_id=? AND item_id=?");
+						PreparedStatement statement2 =
+								con.prepareStatement("DELETE FROM items WHERE owner_id=? AND item_id=?");
 						statement2.setInt(1, playerId);
 						statement2.setInt(2, itemId);
 						if (statement2.executeUpdate() != 1)
@@ -228,7 +231,7 @@ public class CursedWeaponsManager
 							_log.warn("Error while deleting cursed weapon " + itemId + " from userId " + playerId);
 						}
 						statement2.close();
-
+						
 						// Delete the skill
 						/*
 						statement = con.prepareStatement("DELETE FROM character_skills WHERE charId=? AND skill_id=");
@@ -269,30 +272,31 @@ public class CursedWeaponsManager
 		{
 			L2DatabaseFactory.close(con);
 		}
-
+		
 		_log.info("CursedWeaponsManager: loaded " + _cursedWeapons.size() + " cursed weapon(s).");
 	}
-
+	
 	public synchronized void checkDrop(L2Attackable attackable, L2PcInstance player)
 	{
 		if (Config.ALLOW_CURSED_WEAPONS)
 		{
-			if (attackable instanceof L2SiegeGuardInstance || attackable instanceof L2RiftInvaderInstance || attackable instanceof L2FestivalMonsterInstance
-					|| attackable instanceof L2GuardInstance || attackable instanceof L2Boss || attackable instanceof L2FeedableBeastInstance
+			if (attackable instanceof L2SiegeGuardInstance || attackable instanceof L2RiftInvaderInstance
+					|| attackable instanceof L2FestivalMonsterInstance || attackable instanceof L2GuardInstance
+					|| attackable instanceof L2Boss || attackable instanceof L2FeedableBeastInstance
 					|| attackable instanceof L2FortSiegeGuardInstance || attackable instanceof L2FortCommanderInstance)
 				return;
-
+			
 			for (CursedWeapon cw : _cursedWeapons.values())
 			{
 				if (cw.isActive())
 					continue;
-
+				
 				if (cw.checkDrop(attackable, player))
 					break;
 			}
 		}
 	}
-
+	
 	public boolean activate(L2PcInstance player, L2ItemInstance item)
 	{
 		if (Config.ALLOW_CURSED_WEAPONS)
@@ -317,44 +321,44 @@ public class CursedWeaponsManager
 		else
 			return false;
 	}
-
+	
 	public void drop(int itemId, L2Character killer)
 	{
 		CursedWeapon cw = _cursedWeapons.get(itemId);
-
+		
 		cw.dropIt(killer);
 	}
-
+	
 	public void increaseKills(int itemId)
 	{
 		CursedWeapon cw = _cursedWeapons.get(itemId);
-
+		
 		cw.increaseKills();
 	}
-
+	
 	public int getLevel(int itemId)
 	{
 		CursedWeapon cw = _cursedWeapons.get(itemId);
-
+		
 		return cw.getLevel();
 	}
-
+	
 	public static void announce(SystemMessage sm)
 	{
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 		{
 			if (player == null)
 				continue;
-
+			
 			player.sendPacket(sm);
 		}
 	}
-
+	
 	public void onEnter(L2PcInstance player)
 	{
 		if (player == null)
 			return;
-
+		
 		for (CursedWeapon cw : _cursedWeapons.values())
 		{
 			if (cw.isActivated() && player.getObjectId() == cw.getPlayerId())
@@ -363,24 +367,24 @@ public class CursedWeaponsManager
 				cw.setItem(player.getInventory().getItemByItemId(cw.getItemId()));
 				cw.giveSkill();
 				player.setCursedWeaponEquippedId(cw.getItemId());
-
+				
 				SystemMessage sm = new SystemMessage(SystemMessageId.S2_MINUTE_OF_USAGE_TIME_ARE_LEFT_FOR_S1);
 				sm.addString(cw.getName());
 				//sm.addItemName(cw.getItemId());
-				sm.addNumber((int) ((cw.getEndTime() - System.currentTimeMillis()) / 60000));
+				sm.addNumber((int)((cw.getEndTime() - System.currentTimeMillis()) / 60000));
 				player.sendPacket(sm);
 			}
 		}
 	}
-
+	
 	public void onExit(L2PcInstance player)
 	{
-		if(player == null)
+		if (player == null)
 			return;
-
+		
 		for (CursedWeapon cw : _cursedWeapons.values())
 		{
-			if(cw.isActivated() && player.getObjectId() == cw.getPlayerId())
+			if (cw.isActivated() && player.getObjectId() == cw.getPlayerId())
 			{
 				cw.setPlayer(null);
 				cw.setItem(null);
@@ -394,12 +398,12 @@ public class CursedWeaponsManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			// Delete datas
 			PreparedStatement statement = con.prepareStatement("DELETE FROM cursed_weapons WHERE itemId = ?");
 			statement.setInt(1, itemId);
 			statement.executeUpdate();
-
+			
 			statement.close();
 		}
 		catch (SQLException e)
@@ -411,7 +415,7 @@ public class CursedWeaponsManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public void saveData()
 	{
 		for (CursedWeapon cw : _cursedWeapons.values())
@@ -419,27 +423,27 @@ public class CursedWeaponsManager
 			cw.saveData();
 		}
 	}
-
+	
 	public boolean isCursed(int itemId)
 	{
 		return _cursedWeapons.containsKey(itemId);
 	}
-
+	
 	public Collection<CursedWeapon> getCursedWeapons()
 	{
 		return _cursedWeapons.values();
 	}
-
+	
 	public Set<Integer> getCursedWeaponsIds()
 	{
 		return _cursedWeapons.keySet();
 	}
-
+	
 	public CursedWeapon getCursedWeapon(int itemId)
 	{
 		return _cursedWeapons.get(itemId);
 	}
-
+	
 	public void givePassive(int itemId)
 	{
 		try
@@ -451,7 +455,7 @@ public class CursedWeaponsManager
 			_log.warn("", e);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

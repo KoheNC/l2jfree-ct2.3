@@ -256,16 +256,16 @@ public abstract class L2Thread extends Thread
 		DecimalFormat df2 = new DecimalFormat(" # 'KB'");
 		
 		return new String[] {
-			"+----",// ...
-			"| Global Memory Informations at " + sdf.format(new Date()) + ":", // ...
-			"|    |", // ...
-			"| Allowed Memory:" + df2.format(max),
-			"|    |= Allocated Memory:" + df2.format(allocated) + df.format(allocated / max * 100),
-			"|    |= Non-Allocated Memory:" + df2.format(nonAllocated) + df.format(nonAllocated / max * 100),
-			"| Allocated Memory:" + df2.format(allocated),
-			"|    |= Used Memory:" + df2.format(used) + df.format(used / max * 100),
-			"|    |= Unused (cached) Memory:" + df2.format(cached) + df.format(cached / max * 100),
-			"| Useable Memory:" + df2.format(useable) + df.format(useable / max * 100), // ...
-			"+----" };
+				"+----",// ...
+				"| Global Memory Informations at " + sdf.format(new Date()) + ":", // ...
+				"|    |", // ...
+				"| Allowed Memory:" + df2.format(max),
+				"|    |= Allocated Memory:" + df2.format(allocated) + df.format(allocated / max * 100),
+				"|    |= Non-Allocated Memory:" + df2.format(nonAllocated) + df.format(nonAllocated / max * 100),
+				"| Allocated Memory:" + df2.format(allocated),
+				"|    |= Used Memory:" + df2.format(used) + df.format(used / max * 100),
+				"|    |= Unused (cached) Memory:" + df2.format(cached) + df.format(cached / max * 100),
+				"| Useable Memory:" + df2.format(useable) + df.format(useable / max * 100), // ...
+				"+----" };
 	}
 }

@@ -17,7 +17,6 @@ package com.l2jfree.gameserver.model.zone.form;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.tools.random.Rnd;
 
-
 /**
  * @author  Crion
  */
@@ -44,46 +43,61 @@ public class ShapeRect extends Shape
 	{
 		return x >= _xMin && x <= _xMax && y >= _yMin && y <= _yMax;
 	}
-
+	
 	@Override
 	public int getMiddleX()
 	{
 		return (_xMin + _xMax) / 2;
 	}
-
+	
 	@Override
 	public int getMiddleY()
 	{
 		return (_yMin + _yMax) / 2;
 	}
-
+	
 	@Override
 	public boolean intersectsRectangle(int axMin, int axMax, int ayMin, int ayMax)
 	{
 		// Check if any point inside this rectangle
-		if (contains(axMin, ayMin)) return true;
-		if (contains(axMin, ayMax)) return true;
-		if (contains(axMax, ayMin)) return true;
-		if (contains(axMax, ayMax)) return true;
+		if (contains(axMin, ayMin))
+			return true;
+		if (contains(axMin, ayMax))
+			return true;
+		if (contains(axMax, ayMin))
+			return true;
+		if (contains(axMax, ayMax))
+			return true;
 		
 		// Check if any point from this rectangle is inside the other one
-		if (_xMin > axMin && _xMin < axMax && _yMin > ayMin && _yMin < ayMax) return true;
-		if (_xMin > axMin && _xMin < axMax && _yMax > ayMin && _yMax < ayMax) return true;
-		if (_xMax > axMin && _xMax < axMax && _yMin > ayMin && _yMin < ayMax) return true;
-		if (_xMax > axMin && _xMax < axMax && _yMax > ayMin && _yMax < ayMax) return true;
+		if (_xMin > axMin && _xMin < axMax && _yMin > ayMin && _yMin < ayMax)
+			return true;
+		if (_xMin > axMin && _xMin < axMax && _yMax > ayMin && _yMax < ayMax)
+			return true;
+		if (_xMax > axMin && _xMax < axMax && _yMin > ayMin && _yMin < ayMax)
+			return true;
+		if (_xMax > axMin && _xMax < axMax && _yMax > ayMin && _yMax < ayMax)
+			return true;
 		
 		// Horizontal lines may intersect vertical lines
-		if (lineSegmentsIntersect(_xMin, _yMin, _xMax, _yMin, axMin, ayMin, axMin, ayMax)) return true;
-		if (lineSegmentsIntersect(_xMin, _yMin, _xMax, _yMin, axMax, ayMin, axMax, ayMax)) return true;
-		if (lineSegmentsIntersect(_xMin, _yMax, _xMax, _yMax, axMin, ayMin, axMin, ayMax)) return true;
-		if (lineSegmentsIntersect(_xMin, _yMax, _xMax, _yMax, axMax, ayMin, axMax, ayMax)) return true;
+		if (lineSegmentsIntersect(_xMin, _yMin, _xMax, _yMin, axMin, ayMin, axMin, ayMax))
+			return true;
+		if (lineSegmentsIntersect(_xMin, _yMin, _xMax, _yMin, axMax, ayMin, axMax, ayMax))
+			return true;
+		if (lineSegmentsIntersect(_xMin, _yMax, _xMax, _yMax, axMin, ayMin, axMin, ayMax))
+			return true;
+		if (lineSegmentsIntersect(_xMin, _yMax, _xMax, _yMax, axMax, ayMin, axMax, ayMax))
+			return true;
 		
 		// Vertical lines may intersect horizontal lines
-		if (lineSegmentsIntersect(_xMin, _yMin, _xMin, _yMax, axMin, ayMin, axMax, ayMin)) return true;
-		if (lineSegmentsIntersect(_xMin, _yMin, _xMin, _yMax, axMin, ayMax, axMax, ayMax)) return true;
-		if (lineSegmentsIntersect(_xMax, _yMin, _xMax, _yMax, axMin, ayMin, axMax, ayMin)) return true;
-        return lineSegmentsIntersect(_xMax, _yMin, _xMax, _yMax, axMin, ayMax, axMax, ayMax);
-    }
+		if (lineSegmentsIntersect(_xMin, _yMin, _xMin, _yMax, axMin, ayMin, axMax, ayMin))
+			return true;
+		if (lineSegmentsIntersect(_xMin, _yMin, _xMin, _yMax, axMin, ayMax, axMax, ayMax))
+			return true;
+		if (lineSegmentsIntersect(_xMax, _yMin, _xMax, _yMax, axMin, ayMin, axMax, ayMin))
+			return true;
+		return lineSegmentsIntersect(_xMax, _yMin, _xMax, _yMax, axMin, ayMax, axMax, ayMax);
+	}
 	
 	@Override
 	public double getDistanceToZone(int x, int y)
@@ -93,7 +107,7 @@ public class ShapeRect extends Shape
 		
 		return Math.sqrt(diffX * diffX + diffY * diffY);
 	}
-
+	
 	@Override
 	public Location getRandomLocation()
 	{
@@ -101,16 +115,16 @@ public class ShapeRect extends Shape
 		int y = Rnd.get(_yMin, _yMax);
 		return new Location(x, y, _zMin);
 	}
-
+	
 	@Override
 	protected Shape prepare(int zoneId)
 	{
 		if (_points.size() != 2)
 		{
-			_log.error("Invalid point amount in zone"+zoneId+", must be 2");
+			_log.error("Invalid point amount in zone" + zoneId + ", must be 2");
 			return null;
 		}
-
+		
 		if (_points.get(0).x < _points.get(1).x)
 		{
 			_xMin = _points.get(0).x;

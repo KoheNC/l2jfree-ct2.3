@@ -16,20 +16,20 @@ package com.l2jfree.gameserver.network.clientpackets;
 
 public final class BrGamePoint extends L2GameClientPacket
 {
-	private static final String	_C__BRGAMEPOINT = "[C] D0:65 BR_GamePoint ch";
-
+	private static final String _C__BRGAMEPOINT = "[C] D0:65 BR_GamePoint ch";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		// normally server doesn't respond to this packet
 	}
-
+	
 	@Override
 	public String getType()
 	{

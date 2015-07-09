@@ -32,17 +32,11 @@ import com.l2jfree.gameserver.network.serverpackets.SetupGauge;
  */
 public class AdminPolymorph implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_polymorph",
-			"admin_unpolymorph",
-			"admin_polymorph_menu",
-			"admin_unpolymorph_menu",
-			"admin_transform",
-			"admin_untransform",
-			"admin_transform_menu",
-			"admin_untransform_menu"				};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_polymorph", "admin_unpolymorph", "admin_polymorph_menu",
+			"admin_unpolymorph_menu", "admin_transform", "admin_untransform", "admin_transform_menu",
+			"admin_untransform_menu" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (activeChar.isMounted())
@@ -50,13 +44,13 @@ public class AdminPolymorph implements IAdminCommandHandler
 			activeChar.sendMessage("You can't transform while mounted, please dismount and try again.");
 			return false;
 		}
-
+		
 		if (command.startsWith("admin_untransform"))
 		{
 			L2Object obj = activeChar.getTarget();
 			if (obj instanceof L2Character)
 			{
-				((L2Character) obj).stopTransformation(true);
+				((L2Character)obj).stopTransformation(true);
 			}
 			else
 			{
@@ -66,13 +60,13 @@ public class AdminPolymorph implements IAdminCommandHandler
 		else if (command.startsWith("admin_transform"))
 		{
 			L2Object obj = activeChar.getTarget();
-
+			
 			String[] parts = command.split(" ");
 			if (parts.length == 2)
 			{
 				if (obj instanceof L2PcInstance)
 				{
-					final L2PcInstance cha = (L2PcInstance) obj;
+					final L2PcInstance cha = (L2PcInstance)obj;
 					try
 					{
 						final int id = Integer.parseInt(parts[1]);
@@ -133,12 +127,13 @@ public class AdminPolymorph implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	private void doPolymorph(L2PcInstance activeChar, L2Object obj, String id, String type)
 	{
@@ -152,7 +147,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 			//animation
 			if (obj instanceof L2Character)
 			{
-				L2Character Char = (L2Character) obj;
+				L2Character Char = (L2Character)obj;
 				MagicSkillUse msk = new MagicSkillUse(Char, 1008, 1, 4000, 0);
 				Char.broadcastPacket(msk);
 				SetupGauge sg = new SetupGauge(0, 4000);
@@ -166,7 +161,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 		else
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 	}
-
+	
 	/**
 	 * @param activeChar
 	 * @param target
@@ -183,7 +178,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 		else
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 	}
-
+	
 	private void showMainPage(L2PcInstance activeChar, String command)
 	{
 		if (command.contains("transform"))

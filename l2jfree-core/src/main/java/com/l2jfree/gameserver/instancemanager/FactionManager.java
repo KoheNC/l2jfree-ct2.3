@@ -50,12 +50,12 @@ public class FactionManager
 		_log.info("Initializing FactionManager");
 		load();
 	}
-
+	
 	// =========================================================
 	// Data Field
-	private FastList<Faction>	_factions;
-	private FastList<String>	_listTitles	= new FastList<String>();
-
+	private FastList<Faction> _factions;
+	private FastList<String> _listTitles = new FastList<String>();
+	
 	// =========================================================
 	// Method - Public
 	public void reload()
@@ -64,7 +64,7 @@ public class FactionManager
 		getFactionTitles().clear();
 		load();
 	}
-
+	
 	// =========================================================
 	// Method - Private
 	private final void load()
@@ -74,23 +74,24 @@ public class FactionManager
 		{
 			PreparedStatement statement;
 			ResultSet rs;
-
+			
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			statement = con.prepareStatement("Select id from factions order by id");
 			rs = statement.executeQuery();
-
+			
 			while (rs.next())
 			{
 				Faction faction = new Faction(rs.getInt("id"));
 				getFactions().add(faction);
-				for (FastMap.Entry<Integer, String> e = faction.getTitle().head(), end = faction.getTitle().tail(); (e = e.getNext()) != end;)
+				for (FastMap.Entry<Integer, String> e = faction.getTitle().head(), end = faction.getTitle().tail(); (e =
+						e.getNext()) != end;)
 					_listTitles.add(e.getValue().toLowerCase());
 				faction = null;
 			}
-
+			
 			statement.close();
-
+			
 			_log.info("Loaded: " + getFactions().size() + " faction(s)");
 		}
 		catch (Exception e)
@@ -102,7 +103,7 @@ public class FactionManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	// =========================================================
 	// Property - Public
 	public final Faction getFactions(int FactionId)
@@ -112,7 +113,7 @@ public class FactionManager
 			return getFactions().get(index);
 		return null;
 	}
-
+	
 	public final int getFactionIndex(int FactionId)
 	{
 		Faction faction;
@@ -124,14 +125,14 @@ public class FactionManager
 		}
 		return -1;
 	}
-
+	
 	public final FastList<Faction> getFactions()
 	{
 		if (_factions == null)
 			_factions = new FastList<Faction>();
 		return _factions;
 	}
-
+	
 	public final FastList<String> getFactionTitles()
 	{
 		if (_listTitles == null)

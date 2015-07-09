@@ -41,26 +41,30 @@ public class Recall extends ISkillConditionChecker
 			L2PcInstance player = (L2PcInstance)activeChar;
 			
 			// If Alternate rule Karma punishment is set to true, forbid skill Return to player with Karma
-			if (skill.getSkillType() == L2SkillType.RECALL && !Config.ALT_GAME_KARMA_PLAYER_CAN_TELEPORT && player.getKarma() > 0)
+			if (skill.getSkillType() == L2SkillType.RECALL && !Config.ALT_GAME_KARMA_PLAYER_CAN_TELEPORT
+					&& player.getKarma() > 0)
 			{
 				player.sendMessage("You can't teleport with karma!");
 				return false;
 			}
 			
-			if (!player.canTeleport(player.hasSkill(skill.getId()) ? TeleportMode.RECALL : TeleportMode.SCROLL_OF_ESCAPE, true))
+			if (!player.canTeleport(player.hasSkill(skill.getId()) ? TeleportMode.RECALL
+					: TeleportMode.SCROLL_OF_ESCAPE, true))
 				return false;
 		}
 		
 		return super.checkConditions(activeChar, skill);
 	}
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (activeChar instanceof L2PcInstance)
 		{
 			L2PcInstance player = (L2PcInstance)activeChar;
 			
-			if (!player.canTeleport(player.hasSkill(skill.getId()) ? TeleportMode.RECALL : TeleportMode.SCROLL_OF_ESCAPE, true))
+			if (!player.canTeleport(player.hasSkill(skill.getId()) ? TeleportMode.RECALL
+					: TeleportMode.SCROLL_OF_ESCAPE, true))
 			{
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 				return;
@@ -125,6 +129,7 @@ public class Recall extends ISkillConditionChecker
 		}
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

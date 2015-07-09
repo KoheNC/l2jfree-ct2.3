@@ -25,7 +25,7 @@ import com.l2jfree.mmocore.network.SendablePacket;
  * @author KenM
  */
 public abstract class L2LoginServerPacket extends
-	SendablePacket<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket>
+		SendablePacket<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket>
 {
 	protected static final Log _log = LogFactory.getLog(L2LoginServerPacket.class);
 	

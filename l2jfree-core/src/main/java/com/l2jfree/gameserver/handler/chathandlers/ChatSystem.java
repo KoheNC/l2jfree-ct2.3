@@ -25,27 +25,28 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class ChatSystem implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_System };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_System };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatTypes()
 	 */
+	@Override
 	public SystemChatChannelId[] getChatTypes()
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
+	@Override
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		//TODO: Find out what this channel is original intended for
 		//      For me it is my emotechannel, because normal all-chan is affected
 		//      by a language skill system. This one is readable by everyone.
 		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName() + "'s Emote", text);
-
+		
 		for (L2PcInstance player : activeChar.getKnownList().getKnownPlayers().values())
 		{
 			if (player != null && activeChar.isInsideRadius(player, 1250, false, true))
@@ -53,7 +54,7 @@ public class ChatSystem implements IChatHandler
 				player.sendPacket(cs);
 			}
 		}
-
+		
 		activeChar.sendPacket(cs);
 	}
 }

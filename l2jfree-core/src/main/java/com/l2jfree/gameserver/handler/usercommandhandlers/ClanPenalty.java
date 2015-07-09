@@ -27,12 +27,12 @@ import com.l2jfree.lang.L2TextBuilder;
  */
 public class ClanPenalty implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 100 };
-
+	private static final int[] COMMAND_IDS = { 100 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		boolean penalty = false;
@@ -42,20 +42,23 @@ public class ClanPenalty implements IUserCommandHandler
 		htmlContent.append("<tr><td width=170>Penalty</td>");
 		htmlContent.append("<td width=100 align=center>Expiration Date</td></tr>");
 		htmlContent.append("</table><table width=270 border=0><tr>");
-
+		
 		if (activeChar.getClanJoinExpiryTime() > System.currentTimeMillis())
 		{
 			htmlContent.append("<td width=170>Unable to join a clan.</td>");
-			htmlContent.append("<td width=100 align=center>"+format.format(activeChar.getClanJoinExpiryTime())+"</td>");
+			htmlContent.append("<td width=100 align=center>" + format.format(activeChar.getClanJoinExpiryTime())
+					+ "</td>");
 			penalty = true;
 		}
 		if (activeChar.getClanCreateExpiryTime() > System.currentTimeMillis())
 		{
 			htmlContent.append("<td width=170>Unable to create a clan.</td>");
-			htmlContent.append("<td width=100 align=center>"+format.format(activeChar.getClanCreateExpiryTime())+"</td>");
+			htmlContent.append("<td width=100 align=center>" + format.format(activeChar.getClanCreateExpiryTime())
+					+ "</td>");
 			penalty = true;
 		}
-		if (activeChar.getClan() != null && activeChar.getClan().getCharPenaltyExpiryTime() > System.currentTimeMillis())
+		if (activeChar.getClan() != null
+				&& activeChar.getClan().getCharPenaltyExpiryTime() > System.currentTimeMillis())
 		{
 			htmlContent.append("<td width=170>Unable to invite a clan member.</td>");
 			htmlContent.append("<td width=100 align=center>");
@@ -63,7 +66,7 @@ public class ClanPenalty implements IUserCommandHandler
 			htmlContent.append("</td>");
 			penalty = true;
 		}
-	 	 		 
+		
 		if (!penalty)
 		{
 			htmlContent.append("<td width=170>No penalty is imposed.</td>");
@@ -72,17 +75,18 @@ public class ClanPenalty implements IUserCommandHandler
 		
 		htmlContent.append("</tr></table><img src=\"L2UI.SquareWhite\" width=270 height=1>");
 		htmlContent.append("</center></body></html>");
-
+		
 		NpcHtmlMessage penaltyHtml = new NpcHtmlMessage(0);
 		penaltyHtml.setHtml(htmlContent.moveToString());
 		activeChar.sendPacket(penaltyHtml);
-
+		
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

@@ -35,25 +35,26 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class RequestPrivateStoreSell extends L2GameClientPacket
 {
-	private static final String	_C__96_REQUESTPRIVATESTORESELL	= "[C] 96 RequestPrivateStoreSell";
-
-	private static final int	BATCH_LENGTH					= 20;								// length of the one item
-	private static final int	BATCH_LENGTH_FINAL				= 28;
-
-	private int					_storePlayerId;
-	private ItemRequest[]		_items							= null;
-
+	private static final String _C__96_REQUESTPRIVATESTORESELL = "[C] 96 RequestPrivateStoreSell";
+	
+	private static final int BATCH_LENGTH = 20; // length of the one item
+	private static final int BATCH_LENGTH_FINAL = 28;
+	
+	private int _storePlayerId;
+	private ItemRequest[] _items = null;
+	
 	@Override
 	protected void readImpl()
 	{
 		_storePlayerId = readD();
 		int count = readD();
-		if (count <= 0 || count > Config.MAX_ITEM_IN_PACKET || count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
+		if (count <= 0 || count > Config.MAX_ITEM_IN_PACKET
+				|| count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
 		{
 			return;
 		}
 		_items = new ItemRequest[count];
-
+		
 		for (int i = 0; i < count; i++)
 		{
 			int objectId = readD();
@@ -62,7 +63,7 @@ public class RequestPrivateStoreSell extends L2GameClientPacket
 			readH(); //TODO: analyse this
 			long cnt = readCompQ();
 			long price = readCompQ();
-
+			
 			if (objectId < 1 || itemId < 1 || cnt < 1 || price < 0)
 			{
 				_items = null;
@@ -71,7 +72,7 @@ public class RequestPrivateStoreSell extends L2GameClientPacket
 			_items[i] = new ItemRequest(objectId, itemId, cnt, price);
 		}
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -80,77 +81,78 @@ public class RequestPrivateStoreSell extends L2GameClientPacket
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))
 			return;
-
+		
 		if (_items == null)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (Shutdown.isActionDisabled(DisableType.TRANSACTION))
 		{
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-
+		
 		L2Object object = null;
-
+		
 		// Get object from target
 		if (player.getTargetId() == _storePlayerId)
 			object = player.getTarget();
-
+		
 		// Get object from world
 		if (object == null)
 			object = L2World.getInstance().getPlayer(_storePlayerId);
-
+		
 		if (!(object instanceof L2PcInstance))
 		{
 			requestFailed(SystemMessageId.TARGET_IS_INCORRECT);
 			return;
 		}
-
-		L2PcInstance storePlayer = (L2PcInstance) object;
-
+		
+		L2PcInstance storePlayer = (L2PcInstance)object;
+		
 		if (!player.isInsideRadius(storePlayer, INTERACTION_DISTANCE, true, false))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (storePlayer.getPrivateStoreType() != L2PcInstance.STORE_PRIVATE_BUY)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		TradeList storeList = storePlayer.getBuyList();
 		if (storeList == null)
 		{
 			sendAF();
 			return;
 		}
-
-		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN && player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+		
+		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{
 			requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
 			return;
 		}
-
+		
 		if (!storeList.privateStoreSell(player, _items))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (storeList.getItemCount() == 0)
 		{
 			storePlayer.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
 			storePlayer.broadcastUserInfo();
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

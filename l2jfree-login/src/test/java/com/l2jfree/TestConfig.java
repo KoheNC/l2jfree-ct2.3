@@ -32,7 +32,7 @@ public class TestConfig extends TestCase
 			fail(e.getMessage());
 		}
 	}
-
+	
 	/**
 	 * test that db properties are in system properties
 	 */
@@ -50,7 +50,7 @@ public class TestConfig extends TestCase
 		assertNotNull(System.getProperty("com.l2jfree.db.urldb"));
 		assertNotNull(System.getProperty("com.l2jfree.db.user"));
 		assertNotNull(System.getProperty("com.l2jfree.db.password"));
-
+		
 	}
-
+	
 }

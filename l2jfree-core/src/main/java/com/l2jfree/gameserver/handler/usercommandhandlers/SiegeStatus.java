@@ -24,7 +24,8 @@ import com.l2jfree.gameserver.network.serverpackets.SiegeInfo;
 public class SiegeStatus implements IUserCommandHandler
 {
 	private static final int[] COMMAND_IDS = { 99 };
-
+	
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		if (!activeChar.isNoble())
@@ -38,7 +39,8 @@ public class SiegeStatus implements IUserCommandHandler
 			activeChar.sendPacket(new SiegeInfo(c));
 		return true;
 	}
-
+	
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

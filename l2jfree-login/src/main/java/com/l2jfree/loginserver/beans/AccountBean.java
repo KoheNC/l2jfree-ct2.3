@@ -31,19 +31,21 @@ import com.l2jfree.tools.codec.Base64;
  */
 public class AccountBean implements Serializable
 {
-	private static final Log	_log				= LogFactory.getLog(AccountBean.class);
-	private static final long	serialVersionUID	= 4402116860273590029L;
-
-	private String				login;
-	private String				password;
-	private BigDecimal			lastactive;
-	private Integer				accessLevel;
-	private Integer				lastServerId;
-	private String				lastIp;
-
+	private static final Log _log = LogFactory.getLog(AccountBean.class);
+	private static final long serialVersionUID = 4402116860273590029L;
+	
+	private String login;
+	private String password;
+	private BigDecimal lastactive;
+	private Integer accessLevel;
+	private Integer lastServerId;
+	private String lastIp;
+	
 	/** Default constructor? */
-	public AccountBean() {}
-
+	public AccountBean()
+	{
+	}
+	
 	/**
 	 * Simple constructor - self explanatory
 	 * @param login
@@ -52,7 +54,7 @@ public class AccountBean implements Serializable
 	{
 		this.login = login;
 	}
-
+	
 	/**
 	 * Full constructor - self explanatory
 	 * @param login
@@ -61,8 +63,8 @@ public class AccountBean implements Serializable
 	 * @param accessLevel
 	 * @param lastServerId
 	 */
-	public AccountBean(String login, String password, BigDecimal lastactive,
-			Integer accessLevel, Integer lastServerId, String lastIp)
+	public AccountBean(String login, String password, BigDecimal lastactive, Integer accessLevel, Integer lastServerId,
+			String lastIp)
 	{
 		this(login);
 		this.password = password;
@@ -71,27 +73,27 @@ public class AccountBean implements Serializable
 		this.lastServerId = lastServerId;
 		this.lastIp = lastIp;
 	}
-
+	
 	public final String getLogin()
 	{
 		return login;
 	}
-
+	
 	public final void setLogin(String login)
 	{
 		this.login = login;
 	}
-
+	
 	public final String getPassword()
 	{
 		return password;
 	}
-
+	
 	public final void setPassword(String password)
 	{
 		this.password = password;
 	}
-
+	
 	public final void setPlainPassword(String password)
 	{
 		try
@@ -105,42 +107,42 @@ public class AccountBean implements Serializable
 			_log.error("Cannot encrypt password!", e);
 		}
 	}
-
+	
 	public final BigDecimal getLastactive()
 	{
 		return lastactive;
 	}
-
+	
 	public final void setLastactive(BigDecimal lastactive)
 	{
 		this.lastactive = lastactive;
 	}
-
+	
 	public final Integer getAccessLevel()
 	{
 		return accessLevel;
 	}
-
+	
 	public final void setAccessLevel(Integer accessLevel)
 	{
 		this.accessLevel = accessLevel;
 	}
-
+	
 	public final Integer getLastServerId()
 	{
 		return lastServerId;
 	}
-
+	
 	public final void setLastServerId(Integer lastServerId)
 	{
 		this.lastServerId = lastServerId;
 	}
-
+	
 	public final String getLastIp()
 	{
 		return lastIp;
 	}
-
+	
 	public final void setLastIp(String lastIp)
 	{
 		this.lastIp = lastIp;

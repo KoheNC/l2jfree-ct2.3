@@ -18,11 +18,11 @@ public class ExOpenMPCC extends StaticPacket
 {
 	private static final String _S__EXOPENMPCC = "[S] FE:12 ExOpenMPCC ch";
 	public static final ExOpenMPCC STATIC_PACKET = new ExOpenMPCC();
-
+	
 	private ExOpenMPCC()
 	{
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -32,7 +32,7 @@ public class ExOpenMPCC extends StaticPacket
 		writeC(0xfe);
 		writeH(0x12);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

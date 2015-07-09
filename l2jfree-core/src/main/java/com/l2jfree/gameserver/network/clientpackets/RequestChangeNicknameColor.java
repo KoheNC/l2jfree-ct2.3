@@ -29,7 +29,7 @@ public class RequestChangeNicknameColor extends L2GameClientPacket
 	public static final int COLOR_NAME_1 = 13021;
 	public static final int COLOR_NAME_2 = 13307;
 	private static final int[] COLOR_CHOICES = {
-	// colors harvested from client, do not modify
+			// colors harvested from client, do not modify
 			0x9292fc, // pink
 			0x7c49fc, // rose pink
 			0x98f8fc, // lemon yellow
@@ -40,7 +40,7 @@ public class RequestChangeNicknameColor extends L2GameClientPacket
 			0x7797ad, // yellow ochre
 			0x4a669d, // chocolate
 			0x999a9a // silver
-	};
+			};
 	
 	// Name Color
 	private int _color;

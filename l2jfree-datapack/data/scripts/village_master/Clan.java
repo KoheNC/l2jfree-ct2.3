@@ -24,12 +24,12 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public final class Clan extends VillageMaster
 {
 	private static final String CLAN = "9000_clan";
-
+	
 	public Clan(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -38,22 +38,22 @@ public final class Clan extends VillageMaster
 			if (!player.isClanLeader())
 				return event.replace(".", "-no.");
 		}
-		else if (event.endsWith("07.htm") || event.endsWith("06a.htm") || event.endsWith("12a.htm") ||
-				event.endsWith("13a.htm") || event.endsWith("13b.htm") || event.endsWith("14a.htm") ||
-				event.endsWith("15.htm"))
+		else if (event.endsWith("07.htm") || event.endsWith("06a.htm") || event.endsWith("12a.htm")
+				|| event.endsWith("13a.htm") || event.endsWith("13b.htm") || event.endsWith("14a.htm")
+				|| event.endsWith("15.htm"))
 		{
 			if (!player.isClanLeader())
 				return "9000-07-no.htm";
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
 		return "9000-01.htm";
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new Clan(-1, CLAN, "village_master");

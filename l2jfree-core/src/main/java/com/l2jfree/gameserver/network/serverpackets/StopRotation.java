@@ -21,16 +21,16 @@ package com.l2jfree.gameserver.network.serverpackets;
  */
 public class StopRotation extends L2GameServerPacket
 {
-	private static final String	_S__78_STOPROTATION	= "[S] 61 StopRotation";
-	private final int					_charObjId, _degree, _speed;
-
+	private static final String _S__78_STOPROTATION = "[S] 61 StopRotation";
+	private final int _charObjId, _degree, _speed;
+	
 	public StopRotation(int objectId, int degree, int speed)
 	{
 		_charObjId = objectId;
 		_degree = degree;
 		_speed = speed;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -40,7 +40,7 @@ public class StopRotation extends L2GameServerPacket
 		writeD(_speed);
 		writeC(0); // ?
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

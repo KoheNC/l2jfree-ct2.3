@@ -42,7 +42,6 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 import com.l2jfree.gameserver.script.DateRange;
 import com.l2jfree.lang.L2TextBuilder;
 
-
 /**
  * This class ...
  * 
@@ -51,20 +50,20 @@ import com.l2jfree.lang.L2TextBuilder;
 public class Announcements
 {
 	private final static Log _log = LogFactory.getLog(Announcements.class);
-
+	
 	private final List<String> _announcements = new ArrayList<String>();
 	private final List<List<Object>> _eventAnnouncements = new ArrayList<List<Object>>();
-
+	
 	private Announcements()
 	{
 		loadAnnouncements();
 	}
-
+	
 	public static Announcements getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	public void loadAnnouncements()
 	{
 		_announcements.clear();
@@ -78,23 +77,25 @@ public class Announcements
 			_log.info("data/announcements.txt doesn't exist");
 		}
 	}
-
+	
 	public void showAnnouncements(L2PcInstance activeChar)
 	{
 		for (int i = 0; i < _announcements.size(); i++)
 		{
-			CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Announce, activeChar.getName(), _announcements.get(i).replace("%name%", activeChar.getName()));
+			CreatureSay cs =
+					new CreatureSay(0, SystemChatChannelId.Chat_Announce, activeChar.getName(), _announcements.get(i)
+							.replace("%name%", activeChar.getName()));
 			activeChar.sendPacket(cs);
 		}
-
+		
 		Date currentDate = new Date();
 		for (int i = 0; i < _eventAnnouncements.size(); i++)
 		{
 			List<Object> entry = _eventAnnouncements.get(i);
-
-			DateRange validDateRange = (DateRange) entry.get(0);
-			String[] msg = (String[]) entry.get(1);
-
+			
+			DateRange validDateRange = (DateRange)entry.get(0);
+			String[] msg = (String[])entry.get(1);
+			
 			if (validDateRange.isValid() && validDateRange.isWithinRange(currentDate))
 			{
 				SystemMessage sm = new SystemMessage(SystemMessageId.S1);
@@ -104,7 +105,7 @@ public class Announcements
 			}
 		}
 	}
-
+	
 	public void addEventAnnouncement(DateRange validDateRange, String[] msg)
 	{
 		ArrayList<Object> entry = new ArrayList<Object>();
@@ -113,7 +114,7 @@ public class Announcements
 		entry.trimToSize();
 		_eventAnnouncements.add(entry);
 	}
-
+	
 	public void listAnnouncements(L2PcInstance activeChar)
 	{
 		String content = HtmCache.getInstance().getHtmForce("data/html/admin/announce.htm");
@@ -132,19 +133,19 @@ public class Announcements
 		adminReply.replace("%announces%", replyMSG.moveToString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public void addAnnouncement(String text)
 	{
 		_announcements.add(text);
 		saveToDisk();
 	}
-
+	
 	public void delAnnouncement(int line)
 	{
 		_announcements.remove(line);
 		saveToDisk();
 	}
-
+	
 	private void readFromDisk(File file)
 	{
 		BufferedReader lnr = null;
@@ -160,7 +161,7 @@ public class Announcements
 				{
 					String announcement = st.nextToken();
 					_announcements.add(announcement);
-
+					
 					i++;
 				}
 			}
@@ -171,14 +172,25 @@ public class Announcements
 		{
 			_log.fatal("Error reading announcements", e1);
 		}
-		finally { try { if (lnr != null) lnr.close(); } catch (Exception e) { e.printStackTrace(); } }
+		finally
+		{
+			try
+			{
+				if (lnr != null)
+					lnr.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
-
+	
 	private void saveToDisk()
 	{
 		File file = new File("data/announcements.txt");
 		FileWriter save = null;
-
+		
 		try
 		{
 			save = new FileWriter(file);
@@ -204,20 +216,20 @@ public class Announcements
 			}
 		}
 	}
-
+	
 	public void announceToAll(String text)
 	{
 		CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Announce, "", text);
-
+		
 		if (Config.IRC_ENABLED && Config.IRC_ANNOUNCE)
 			IrcManager.getInstance().getConnection().sendChan("10Announce: " + text);
-
+		
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 		{
 			player.sendPacket(cs);
 		}
 	}
-
+	
 	public void announceToAll(L2GameServerPacket gsp)
 	{
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
@@ -252,14 +264,14 @@ public class Announcements
 			String text = command.substring(lengthToTrim);
 			announceToAll(text);
 		}
-
+		
 		// No body cares!
 		catch (StringIndexOutOfBoundsException e)
 		{
 			// empty message.. ignore
 		}
 	}
-
+	
 	/**
 	 * Announce to players.<BR>
 	 * <BR>
@@ -273,7 +285,7 @@ public class Announcements
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 			player.sendMessage(message);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

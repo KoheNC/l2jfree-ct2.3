@@ -30,12 +30,12 @@ import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 public final class LawEnforcement extends QuestJython
 {
 	private static final String LAW_ENFORCEMENT = "61_LawEnforcement";
-
+	
 	// Quest NPCs
 	private static final int LIANE = 32222;
 	private static final int KEKROPUS = 32138;
 	private static final int EINDBURGH = 32469;
-
+	
 	private LawEnforcement(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
@@ -44,7 +44,7 @@ public final class LawEnforcement extends QuestJython
 		addTalkId(KEKROPUS);
 		addTalkId(EINDBURGH);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -53,7 +53,7 @@ public final class LawEnforcement extends QuestJython
 			return NO_QUEST;
 		else if (qs.isCompleted())
 			return QUEST_DONE;
-
+		
 		if (event.equals("32222-05.htm"))
 		{
 			qs.set(CONDITION, 1);
@@ -75,17 +75,17 @@ public final class LawEnforcement extends QuestJython
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
 		QuestState qs = talker.getQuestState(LAW_ENFORCEMENT);
 		if (qs == null)
 			return NO_QUEST;
-
+		
 		int npcId = npc.getNpcId();
 		int cond = qs.getInt(CONDITION);
-
+		
 		if (npcId == LIANE)
 		{
 			if (cond == 0)
@@ -114,7 +114,7 @@ public final class LawEnforcement extends QuestJython
 			return "32469-01.htm";
 		return NO_QUEST;
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new LawEnforcement(61, LAW_ENFORCEMENT, "Law Enforcement");

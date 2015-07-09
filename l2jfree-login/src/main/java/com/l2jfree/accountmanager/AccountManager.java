@@ -35,21 +35,19 @@ import com.l2jfree.loginserver.services.exception.AccountModificationException;
  */
 public final class AccountManager extends Config
 {
-	private static final String[] CMD = {
-		"register", "change", "setlevel", "cancel", "list", "quit"
-	};
+	private static final String[] CMD = { "register", "change", "setlevel", "cancel", "list", "quit" };
 	private static final String SPACE = " ";
 	private final AccountsServices accountService;
 	private final GameserversServices gameService;
-
+	
 	private AccountManager()
 	{
 		Config.load();
 		L2Registry.loadRegistry("spring.xml");
-		accountService = (AccountsServices) L2Registry.getBean("AccountsServices");
-		gameService = (GameserversServices) L2Registry.getBean("GameserversServicesXml");
+		accountService = (AccountsServices)L2Registry.getBean("AccountsServices");
+		gameService = (GameserversServices)L2Registry.getBean("GameserversServicesXml");
 	}
-
+	
 	private final int[] parseBirth(String s)
 	{
 		int[] result = { 1900, 1, 1 };
@@ -66,7 +64,7 @@ public final class AccountManager extends Config
 		}
 		return result;
 	}
-
+	
 	private final int parseInt(String s, String param)
 	{
 		try
@@ -79,7 +77,7 @@ public final class AccountManager extends Config
 		}
 		return 0;
 	}
-
+	
 	private final void handleRequest(String cmd)
 	{
 		if (cmd.startsWith(CMD[0]))
@@ -153,44 +151,44 @@ public final class AccountManager extends Config
 		}
 		else if (cmd.startsWith(CMD[2]))
 			try
-		{
+			{
 				String acc = cmd.split(SPACE)[1];
 				String level = cmd.split(SPACE)[2];
 				accountService.changeAccountLevel(acc, level);
 				_log.info("Account " + acc + " has been leveled to " + level + ".");
-		}
-		catch (ArrayIndexOutOfBoundsException e)
-		{
-			_log.warn("You must specify an account name and the new access level.");
-		}
-		catch (AccountModificationException e)
-		{
-			_log.error(e.getMessage(), e);
-		}
+			}
+			catch (ArrayIndexOutOfBoundsException e)
+			{
+				_log.warn("You must specify an account name and the new access level.");
+			}
+			catch (AccountModificationException e)
+			{
+				_log.error(e.getMessage(), e);
+			}
 		else if (cmd.startsWith(CMD[3]))
 			try
-		{
+			{
 				String acc = cmd.split(SPACE)[1];
 				accountService.deleteAccount(acc);
 				_log.info("Account " + acc + " has been cancelled.");
-		}
-		catch (ArrayIndexOutOfBoundsException e)
-		{
-			_log.warn("You must specify an account name to cancel registration.");
-		}
-		catch (AccountModificationException e)
-		{
-			_log.error(e.getMessage(), e);
-		}
+			}
+			catch (ArrayIndexOutOfBoundsException e)
+			{
+				_log.warn("You must specify an account name to cancel registration.");
+			}
+			catch (AccountModificationException e)
+			{
+				_log.error(e.getMessage(), e);
+			}
 		else if (cmd.equals(CMD[4]))
 		{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 			List<Accounts> list = accountService.getAccountsInfo();
 			for (Accounts a : list)
 				if (a.getLastactive() != null)
-					_log.info(a.getLogin() + " (lvl " + a.getAccessLevel() + ") last active " +
-							sdf.format(new Date(a.getLastactive().longValue())) + " from IP " +
-							a.getLastIp() + " in server " +	getGameserverName(a.getLastServerId()));
+					_log.info(a.getLogin() + " (lvl " + a.getAccessLevel() + ") last active "
+							+ sdf.format(new Date(a.getLastactive().longValue())) + " from IP " + a.getLastIp()
+							+ " in server " + getGameserverName(a.getLastServerId()));
 				else
 					_log.info(a.getLogin() + " (lvl " + a.getAccessLevel() + ")");
 			_log.info("Total accounts: " + list.size() + ".");
@@ -200,14 +198,15 @@ public final class AccountManager extends Config
 		else
 			_log.warn("Invalid command. Try again.");
 	}
-
-	private final String getGameserverName(int id) {
+	
+	private final String getGameserverName(int id)
+	{
 		if (id > 0)
 			return gameService.getGameserverName(id);
 		else
 			return null;
 	}
-
+	
 	/**
 	 * @param args
 	 * @throws IOException
@@ -221,7 +220,8 @@ public final class AccountManager extends Config
 		_log.info("Available commands:");
 		_log.info(CMD[0] + " [account name] [password] [access level] {-b Year/Month/Day} {-gs last gameserver id}");
 		_log.info("EXAMPLE: " + CMD[0] + " me mypass 200 -b 99/2/22 -gs 1");
-		_log.info(CMD[1] + " [account name] {-p new password} {-a new access level} {-b new birth date} {-gs last gameserver id}");
+		_log.info(CMD[1]
+				+ " [account name] {-p new password} {-a new access level} {-b new birth date} {-gs last gameserver id}");
 		_log.info(CMD[2] + " [account name] [new level]");
 		_log.info(CMD[3] + " [account name]");
 		_log.info(CMD[4] + " - list all registered accounts");

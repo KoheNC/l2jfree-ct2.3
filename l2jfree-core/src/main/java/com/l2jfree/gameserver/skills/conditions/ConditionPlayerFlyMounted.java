@@ -24,15 +24,15 @@ import com.l2jfree.gameserver.skills.Env;
 final class ConditionPlayerFlyMounted extends Condition
 {
 	private final boolean _val;
-
+	
 	public ConditionPlayerFlyMounted(boolean val)
 	{
 		_val = val;
 	}
-
+	
 	@Override
 	public boolean testImpl(Env env)
 	{
-		return (env.player instanceof L2PcInstance) ? ((L2PcInstance) env.player).isFlyingMounted() == _val : true;
+		return (env.player instanceof L2PcInstance) ? ((L2PcInstance)env.player).isFlyingMounted() == _val : true;
 	}
 }

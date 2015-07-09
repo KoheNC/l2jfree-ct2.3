@@ -98,7 +98,7 @@ public final class VIPRestriction extends AbstractFunEventRestriction
 	{
 		VIPPlayerInfo info = activeChar.getPlayerInfo(VIPPlayerInfo.class);
 		
-		return info != null ? info._nameColourVIP: -1;
+		return info != null ? info._nameColourVIP : -1;
 	}
 	
 	@Override
@@ -142,6 +142,7 @@ public final class VIPRestriction extends AbstractFunEventRestriction
 				{
 					target.sendMessage("You will be revived and teleported to team spot in 20 seconds!");
 					ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+						@Override
 						public void run()
 						{
 							target.doRevive();

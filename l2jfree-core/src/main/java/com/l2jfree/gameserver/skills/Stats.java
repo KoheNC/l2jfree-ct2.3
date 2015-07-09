@@ -163,7 +163,7 @@ public enum Stats
 	ABSORB_MANA_DAMAGE_PERCENT("absorbDamMana"),
 	//ABSORB_CP_PERCENT("absorbCpPercent"),
 	SKILL_MASTERY("skillMastery"),
-
+	
 	// vitality
 	VITALITY_CONSUME_RATE("vitalityConsumeRate"),
 	
@@ -218,8 +218,7 @@ public enum Stats
 	SOULSHOT_COUNT("soulShotCount"),
 	
 	TALISMAN_SLOTS("talisman"),
-	CLOAK_SLOT("cloak"),
-	;
+	CLOAK_SLOT("cloak"), ;
 	
 	private final String _value;
 	
@@ -250,7 +249,7 @@ public enum Stats
 	{
 		switch (this)
 		{
-			// defensive
+		// defensive
 			case FIRE_RES:
 			case WIND_RES:
 			case WATER_RES:
@@ -277,7 +276,7 @@ public enum Stats
 	{
 		switch (this)
 		{
-			// defensive
+		// defensive
 			case BLEED_VULN:
 			case POISON_VULN:
 			case STUN_VULN:

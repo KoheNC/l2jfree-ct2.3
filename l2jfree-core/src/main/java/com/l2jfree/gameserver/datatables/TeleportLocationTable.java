@@ -34,36 +34,37 @@ import com.l2jfree.gameserver.model.L2TeleportLocation;
  */
 public class TeleportLocationTable
 {
-	private final static Log						_log	= LogFactory.getLog(TeleportLocationTable.class);
-
-	private FastMap<Integer, L2TeleportLocation>	_teleports;
-
+	private final static Log _log = LogFactory.getLog(TeleportLocationTable.class);
+	
+	private FastMap<Integer, L2TeleportLocation> _teleports;
+	
 	public static TeleportLocationTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private TeleportLocationTable()
 	{
 		reloadAll();
 	}
-
+	
 	public void reloadAll()
 	{
 		_teleports = new FastMap<Integer, L2TeleportLocation>();
-
+		
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT Description, id, loc_x, loc_y, loc_z, price, fornoble FROM teleport");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT Description, id, loc_x, loc_y, loc_z, price, fornoble FROM teleport");
 			ResultSet rset = statement.executeQuery();
 			L2TeleportLocation teleport;
-
+			
 			while (rset.next())
 			{
 				teleport = new L2TeleportLocation();
-
+				
 				teleport.setTeleId(rset.getInt("id"));
 				teleport.setLocX(rset.getInt("loc_x"));
 				teleport.setLocY(rset.getInt("loc_y"));
@@ -73,13 +74,13 @@ public class TeleportLocationTable
 				else
 					teleport.setPrice(rset.getInt("price"));
 				teleport.setIsForNoble(rset.getInt("fornoble") == 1);
-
+				
 				_teleports.put(teleport.getTeleId(), teleport);
 			}
-
+			
 			rset.close();
 			statement.close();
-
+			
 			_log.info("TeleportLocationTable: Loaded " + _teleports.size() + " Teleport Location Templates.");
 		}
 		catch (Exception e)
@@ -91,7 +92,7 @@ public class TeleportLocationTable
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * @param template id
 	 * @return
@@ -100,7 +101,7 @@ public class TeleportLocationTable
 	{
 		return _teleports.get(id);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

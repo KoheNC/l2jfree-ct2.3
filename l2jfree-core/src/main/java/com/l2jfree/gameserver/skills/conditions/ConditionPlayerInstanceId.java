@@ -28,14 +28,14 @@ import com.l2jfree.gameserver.skills.Env;
 public class ConditionPlayerInstanceId extends Condition
 {
 	private final int[] _instanceIds;
-
+	
 	public ConditionPlayerInstanceId(List<Integer> instanceIds)
 	{
 		_instanceIds = ArrayUtils.toPrimitive(instanceIds.toArray(new Integer[instanceIds.size()]), 0);
-
+		
 		Arrays.sort(_instanceIds);
 	}
-
+	
 	@Override
 	public boolean testImpl(Env env)
 	{
@@ -44,7 +44,7 @@ public class ConditionPlayerInstanceId extends Condition
 		L2PcInstance player = env.player.getActingPlayer();
 		if (!player.isInInstance())
 			return false;
-
+		
 		int templateId = -1;
 		Instance dyn = InstanceManager.getInstance().getDynamicInstance(player);
 		if (dyn != null)
@@ -54,10 +54,10 @@ public class ConditionPlayerInstanceId extends Condition
 			InstanceWorld world = InstanceManager.getInstance().getPlayerWorld(player);
 			if (world != null && player.isSameInstance(world.instanceId))
 				templateId = world.templateId;
-		}		
+		}
 		if (templateId == -1)
 			return false;
-
+		
 		return Arrays.binarySearch(_instanceIds, templateId) >= 0;
 	}
 }

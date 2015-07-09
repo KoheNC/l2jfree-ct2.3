@@ -19,10 +19,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class ExJumpToLocation extends L2GameServerPacket
 {
 	private static final String _S__EXJUMPTOLOCATION = "[S] FE:88 ExJumpToLocation ch[ddddddd]";
-
+	
 	private final int _objectId, _x, _y, _z;
 	private final int _tx, _ty, _tz;
-
+	
 	public ExJumpToLocation(L2PcInstance player, int tx, int ty, int tz)
 	{
 		_objectId = player.getObjectId();
@@ -33,7 +33,7 @@ public class ExJumpToLocation extends L2GameServerPacket
 		_ty = player.getY();
 		_tz = player.getZ();
 	}
-
+	
 	public ExJumpToLocation(L2PcInstance player)
 	{
 		_objectId = player.getObjectId();
@@ -44,13 +44,13 @@ public class ExJumpToLocation extends L2GameServerPacket
 		_ty = _y;
 		_tz = _z;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x88);
-
+		
 		writeD(_objectId);
 		writeD(_x);
 		writeD(_y);
@@ -59,7 +59,7 @@ public class ExJumpToLocation extends L2GameServerPacket
 		writeD(_ty);
 		writeD(_tz);
 	}
-
+	
 	@Override
 	public String getType()
 	{

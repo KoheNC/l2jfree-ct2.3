@@ -23,50 +23,49 @@ import com.l2jfree.gameserver.skills.conditions.ConditionLogicOr;
 
 public class TestFuncTemplate extends TestCase
 {
-    public void testInstantiateGoodFunc ()
-    {
-        Condition clo = new ConditionLogicOr();
-        try
-        {
-            new FuncTemplate(clo,"Add",Stats.MAX_HP, 1, 2);
-        }
-        catch (RuntimeException e)
-        {
-            fail (e.getMessage());
-        }
-    }
-    
-    public void testInstantiateInexistantFunc ()
-    {
-        Condition clo = new ConditionLogicOr();
-        try
-        {
-            new FuncTemplate(clo,"FuncNotExistant",Stats.MAX_HP, 1, 2);
-            fail ("Function should be not found");
-        }
-        catch (RuntimeException e)
-        {
-            assertNotNull(e);
-        }
-    }
+	public void testInstantiateGoodFunc()
+	{
+		Condition clo = new ConditionLogicOr();
+		try
+		{
+			new FuncTemplate(clo, "Add", Stats.MAX_HP, 1, 2);
+		}
+		catch (RuntimeException e)
+		{
+			fail(e.getMessage());
+		}
+	}
 	
-    
-    public void testExecuteFuncWithNoConditions ()
-    {
-        Condition clo = null;
-        try
-        {
-            FuncTemplate fa = new FuncTemplate(clo,"Add",Stats.MAX_HP, 1, 2);
-            Env env = new Env();
-            env.value=1;
-            Func f = fa.getFunc(null);
-            f.calc(env);
-            assertEquals(3.0,env.value);
-        }
-        catch (RuntimeException e)
-        {
-            fail (e.getMessage());
-        }
-    }
-
+	public void testInstantiateInexistantFunc()
+	{
+		Condition clo = new ConditionLogicOr();
+		try
+		{
+			new FuncTemplate(clo, "FuncNotExistant", Stats.MAX_HP, 1, 2);
+			fail("Function should be not found");
+		}
+		catch (RuntimeException e)
+		{
+			assertNotNull(e);
+		}
+	}
+	
+	public void testExecuteFuncWithNoConditions()
+	{
+		Condition clo = null;
+		try
+		{
+			FuncTemplate fa = new FuncTemplate(clo, "Add", Stats.MAX_HP, 1, 2);
+			Env env = new Env();
+			env.value = 1;
+			Func f = fa.getFunc(null);
+			f.calc(env);
+			assertEquals(3.0, env.value);
+		}
+		catch (RuntimeException e)
+		{
+			fail(e.getMessage());
+		}
+	}
+	
 }

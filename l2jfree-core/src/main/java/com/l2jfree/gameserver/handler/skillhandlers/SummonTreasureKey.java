@@ -27,18 +27,18 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class SummonTreasureKey implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.SUMMON_TREASURE_KEY };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SUMMON_TREASURE_KEY };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		int item_id = 0;
-
+		
 		switch (skill.getLevel())
 		{
 			case 1:
@@ -66,7 +66,8 @@ public class SummonTreasureKey implements ISkillHandler
 		if (item_id != 0)
 			player.addItem("Skill", item_id, Rnd.get(2, 3), player, false);
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

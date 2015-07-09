@@ -59,10 +59,10 @@ import com.mchange.v2.c3p0.PooledDataSource;
  */
 public class L2Registry
 {
-	private static final Log			_log	= LogFactory.getLog(L2Registry.class);
-
-	private static ApplicationContext	__ctx	= null;
-
+	private static final Log _log = LogFactory.getLog(L2Registry.class);
+	
+	private static ApplicationContext __ctx = null;
+	
 	/**
 	 * Load registry from spring
 	 * The registry is a facade behind ApplicationContext from spring.
@@ -83,12 +83,12 @@ public class L2Registry
 			throw new Error("Unable to load registry, check that you update xml file in config folder !", e);
 		}
 	}
-
+	
 	public static void loadRegistry(String path)
 	{
 		loadRegistry(new String[] { path });
 	}
-
+	
 	/**
 	 * Retrieve a bean from registry
 	 * @param bean - the bean name
@@ -116,22 +116,23 @@ public class L2Registry
 			_log.fatal("Unable to load bean : " + bean + " = " + e.getMessage(), e);
 			return null;
 		}
-
+		
 	}
-
+	
 	// =========================================================
 	// Data Field
-	private static L2Registry	_instance;
-
+	private static L2Registry _instance;
+	
 	// =========================================================
 	// Constructor
 	private L2Registry()
 	{
 	}
-
+	
 	// =========================================================
 	// Method - Public
-	public final String prepQuerySelect(String[] fields, String tableName, String whereClause, boolean returnOnlyTopRecord)
+	public final String prepQuerySelect(String[] fields, String tableName, String whereClause,
+			boolean returnOnlyTopRecord)
 	{
 		String msSqlTop1 = "";
 		String mySqlTop1 = "";
@@ -139,16 +140,18 @@ public class L2Registry
 		{
 			mySqlTop1 = " Limit 1 ";
 		}
-		String query = "SELECT " + msSqlTop1 + safetyString(fields) + " FROM " + tableName + " WHERE " + whereClause + mySqlTop1;
+		String query =
+				"SELECT " + msSqlTop1 + safetyString(fields) + " FROM " + tableName + " WHERE " + whereClause
+						+ mySqlTop1;
 		return query;
 	}
-
+	
 	public final String safetyString(String[] whatToCheck)
 	{
 		// NOTE: Use brace as a safty percaution just incase name is a reserved word
 		String braceLeft = "`";
 		String braceRight = "`";
-
+		
 		String result = "";
 		for (String word : whatToCheck)
 		{
@@ -158,7 +161,7 @@ public class L2Registry
 		}
 		return result;
 	}
-
+	
 	// =========================================================
 	// Property - Public
 	public static L2Registry getInstance()
@@ -169,7 +172,7 @@ public class L2Registry
 		}
 		return _instance;
 	}
-
+	
 	/**
 	 * if con is not null, return the same connection
 	 * dev have to close it !
@@ -182,7 +185,7 @@ public class L2Registry
 		{
 			try
 			{
-				con = ((DataSource) __ctx.getBean("dataSource")).getConnection();
+				con = ((DataSource)__ctx.getBean("dataSource")).getConnection();
 			}
 			catch (BeansException e)
 			{
@@ -195,12 +198,12 @@ public class L2Registry
 		}
 		return con;
 	}
-
+	
 	public static ApplicationContext getApplicationContext()
 	{
 		return __ctx;
 	}
-
+	
 	/**
 	 * Give ability to overload application context (for test purpose)
 	 * @param ctx
@@ -209,15 +212,15 @@ public class L2Registry
 	{
 		__ctx = ctx;
 	}
-
+	
 	public int getBusyConnectionCount() throws SQLException
 	{
-		return ((PooledDataSource) __ctx.getBean("dataSource")).getNumBusyConnectionsDefaultUser();
+		return ((PooledDataSource)__ctx.getBean("dataSource")).getNumBusyConnectionsDefaultUser();
 	}
-
+	
 	public int getIdleConnectionCount() throws SQLException
 	{
-		return ((PooledDataSource) __ctx.getBean("dataSource")).getNumIdleConnectionsDefaultUser();
+		return ((PooledDataSource)__ctx.getBean("dataSource")).getNumIdleConnectionsDefaultUser();
 	}
-
+	
 }

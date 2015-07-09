@@ -35,15 +35,15 @@ import com.l2jfree.lang.L2Math;
  */
 public class L2PartyRoom
 {
-	private final int						_id;
-	private final FastList<L2PcInstance>	_members;
-	private int								_minLevel;
-	private int								_maxLevel;
-	private int								_lootDist;
-	private int								_maxMembers;
-	private String							_title;
-	private L2Party							_party;
-
+	private final int _id;
+	private final FastList<L2PcInstance> _members;
+	private int _minLevel;
+	private int _maxLevel;
+	private int _lootDist;
+	private int _maxMembers;
+	private String _title;
+	private L2Party _party;
+	
 	public L2PartyRoom(int id, int minLevel, int maxLevel, int maxMembers, int lootDist, String title)
 	{
 		_id = id;
@@ -55,17 +55,17 @@ public class L2PartyRoom
 		_members = new FastList<L2PcInstance>();
 		_party = null;
 	}
-
+	
 	public final FastList<L2PcInstance> getMembers()
 	{
 		return _members;
 	}
-
+	
 	public int getMemberCount()
 	{
 		return getMembers().size();
 	}
-
+	
 	public L2PcInstance getLeader()
 	{
 		if (_party == null || _party.getLeader() == null)
@@ -73,7 +73,7 @@ public class L2PartyRoom
 		else
 			return _party.getLeader();
 	}
-
+	
 	/**
 	 * Verifies is player is eligible to join this party room.<BR>
 	 * Does not specify a reason, does not send a message.
@@ -83,15 +83,14 @@ public class L2PartyRoom
 	 */
 	public final boolean canJoin(L2PcInstance activeChar)
 	{
-		return (activeChar.getPartyRoom() == null && activeChar.getParty() == null &&
-				checkLevel(activeChar.getLevel()) && getMemberCount() < getMaxMembers());
+		return (activeChar.getPartyRoom() == null && activeChar.getParty() == null && checkLevel(activeChar.getLevel()) && getMemberCount() < getMaxMembers());
 	}
-
+	
 	public void addMember(L2PcInstance player)
 	{
 		if (getMembers().contains(player))
 			return;
-
+		
 		PartyRoomManager.getInstance().removeFromWaitingList(player);
 		broadcastPacket(new ExManagePartyRoomMember(ExManagePartyRoomMember.ADDED, player));
 		broadcastPacket(new SystemMessage(SystemMessageId.C1_ENTERED_PARTY_ROOM).addPcName(player));
@@ -101,7 +100,7 @@ public class L2PartyRoom
 		player.sendPacket(new PartyRoomInfo(this));
 		player.sendPacket(new ExPartyRoomMember(this, getMemberCount() == 1));
 	}
-
+	
 	public void addMembers(L2Party party)
 	{
 		for (L2PcInstance player : party.getPartyMembersWithoutLeader())
@@ -111,20 +110,20 @@ public class L2PartyRoom
 		}
 		updateRoomStatus(true);
 	}
-
+	
 	public void removeMember(L2PcInstance member, boolean oust)
 	{
 		// the last member (leader) cannot be removed
 		if (getMemberCount() == 1 || !getMembers().remove(member))
 			return;
-
+		
 		member.setPartyRoom(null);
 		member.sendPacket(ExClosePartyRoom.STATIC_PACKET);
 		if (oust)
 			member.sendPacket(SystemMessageId.OUSTED_FROM_PARTY_ROOM);
 		else
 			member.sendPacket(SystemMessageId.PARTY_ROOM_EXITED);
-
+		
 		SystemMessage sm;
 		if (oust)
 			sm = new SystemMessage(SystemMessageId.C1_KICKED_FROM_PARTY_ROOM);
@@ -135,13 +134,13 @@ public class L2PartyRoom
 		broadcastPacket(sm);
 		updateRoomStatus(false);
 	}
-
+	
 	public void broadcastPacket(L2GameServerPacket packet)
 	{
 		for (L2PcInstance player : getMembers())
 			player.sendPacket(packet);
 	}
-
+	
 	public void broadcastPacket(L2GameServerPacket toLeader, L2GameServerPacket toMember)
 	{
 		L2PcInstance leader = getLeader();
@@ -151,7 +150,7 @@ public class L2PartyRoom
 			else
 				player.sendPacket(toMember);
 	}
-
+	
 	/** Broadcasts PartyRoomInfo and ExPartyRoomMember packets */
 	public void updateRoomStatus(boolean playerList)
 	{
@@ -159,42 +158,42 @@ public class L2PartyRoom
 		if (playerList)
 			broadcastPacket(new ExPartyRoomMember(this, true), new ExPartyRoomMember(this));
 	}
-
+	
 	public int getId()
 	{
 		return _id;
 	}
-
+	
 	public int getMinLevel()
 	{
 		return _minLevel;
 	}
-
+	
 	public int getMaxLevel()
 	{
 		return _maxLevel;
 	}
-
+	
 	public int getMaxMembers()
 	{
 		return _maxMembers;
 	}
-
+	
 	public int getLootDist()
 	{
 		return _lootDist;
 	}
-
+	
 	public String getTitle()
 	{
 		return _title;
 	}
-
+	
 	public L2Party getParty()
 	{
 		return _party;
 	}
-
+	
 	public void setParty(L2Party party)
 	{
 		_party = party;
@@ -207,40 +206,40 @@ public class L2PartyRoom
 			addMembers(party);
 		// otherwise party members already in room
 	}
-
+	
 	public void setMinLevel(int minLevel)
 	{
 		_minLevel = L2Math.limit(1, minLevel, 85);
 	}
-
+	
 	public void setMaxLevel(int maxLevel)
 	{
 		_maxLevel = L2Math.limit(1, maxLevel, 85);
 	}
-
+	
 	public void setMaxMembers(int maxMembers)
 	{
 		_maxMembers = L2Math.limit(2, maxMembers, 12);
 	}
-
+	
 	public void setLootDist(int lootDist)
 	{
 		_lootDist = lootDist;
 		if (getParty() != null)
 			getParty().setLootDistribution(lootDist);
 	}
-
+	
 	public void setTitle(String title)
 	{
 		_title = title;
 	}
-
+	
 	/** @return L2 region ID (1-15) */
 	public int getLocation()
 	{
 		return MapRegionManager.getInstance().getL2Region(getLeader());
 	}
-
+	
 	/**
 	 * @param restrict whether player enabled level restriction
 	 * @param level player's level
@@ -253,16 +252,16 @@ public class L2PartyRoom
 		else
 			return true;
 	}
-
+	
 	/**
 	 * @param level player's level
 	 * @return whether a player is able to join
 	 */
 	public boolean checkLevel(int level)
 	{
-		return (level >= getMinLevel() && level <= getMaxLevel()); 
+		return (level >= getMinLevel() && level <= getMaxLevel());
 	}
-
+	
 	/**
 	 * Verifies if player can join the given party room and either adds the player to the
 	 * party room or sends a message why the player could not join the room.<BR>
@@ -276,7 +275,7 @@ public class L2PartyRoom
 	{
 		if (activeChar == null)
 			return false;
-
+		
 		if (checkForParty)
 		{
 			if (activeChar.getPartyRoom() != null || activeChar.getParty() != null)
@@ -285,7 +284,7 @@ public class L2PartyRoom
 				return false;
 			}
 		}
-
+		
 		if (room == null)
 		{
 			activeChar.sendPacket(SystemMessageId.PARTY_ROOM_FORBIDDEN);
@@ -304,7 +303,7 @@ public class L2PartyRoom
 		room.addMember(activeChar);
 		return true;
 	}
-
+	
 	public static final int getPartyRoomState(L2PcInstance player)
 	{
 		L2PartyRoom room = player.getPartyRoom();

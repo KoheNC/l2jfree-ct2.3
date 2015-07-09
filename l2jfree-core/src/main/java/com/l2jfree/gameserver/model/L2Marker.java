@@ -21,15 +21,15 @@ import com.l2jfree.gameserver.network.serverpackets.RadarControl;
 
 public final class L2Marker
 {
-	private final L2PcInstance			_player;
-	private final FastList<MapMarker>	_markers;
-
+	private final L2PcInstance _player;
+	private final FastList<MapMarker> _markers;
+	
 	public L2Marker(L2PcInstance player)
 	{
 		_player = player;
 		_markers = new FastList<MapMarker>();
 	}
-
+	
 	/**
 	 * Adds a red flag to the world map (mini-map) at given coordinates.
 	 * Doesn't check if a flag is already present.
@@ -42,7 +42,7 @@ public final class L2Marker
 		_markers.add(new MapMarker(x, y, z));
 		_player.sendPacket(new RadarControl(RadarControl.MARKER_ADD, RadarControl.FLAG_1, x, y, z));
 	}
-
+	
 	/**
 	 * Removes a red flag from the world map (mini-map) at given coordinates if it's present.
 	 * @param x
@@ -55,25 +55,25 @@ public final class L2Marker
 		_markers.remove(newMarker);
 		_player.sendPacket(new RadarControl(RadarControl.MARKER_REMOVE, RadarControl.FLAG_1, x, y, z));
 	}
-
+	
 	public void removeAllMarkers()
 	{
 		_markers.clear();
 		_player.sendPacket(RadarControl.REMOVE_ALL);
 	}
-
+	
 	public void loadMarkers()
 	{
 		_player.sendPacket(RadarControl.REMOVE_ALL);
 		for (MapMarker mark : _markers)
 			_player.sendPacket(new RadarControl(RadarControl.MARKER_ADD, RadarControl.FLAG_1, mark._x, mark._y, mark._z));
 	}
-
+	
 	public static class MapMarker
 	{
 		// Simple class to model radar points.
 		public int _type, _x, _y, _z;
-
+		
 		public MapMarker(int type, int x, int y, int z)
 		{
 			_type = type;
@@ -81,7 +81,7 @@ public final class L2Marker
 			_y = y;
 			_z = z;
 		}
-
+		
 		public MapMarker(int x, int y, int z)
 		{
 			_type = RadarControl.FLAG_1;
@@ -89,7 +89,7 @@ public final class L2Marker
 			_y = y;
 			_z = z;
 		}
-
+		
 		/**
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -104,7 +104,7 @@ public final class L2Marker
 			result = prime * result + _z;
 			return result;
 		}
-
+		
 		/**
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -117,7 +117,7 @@ public final class L2Marker
 				return false;
 			if (!(obj instanceof MapMarker))
 				return false;
-			final MapMarker other = (MapMarker) obj;
+			final MapMarker other = (MapMarker)obj;
 			if (_type != other._type)
 				return false;
 			if (_x != other._x)

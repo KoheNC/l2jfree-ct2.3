@@ -31,70 +31,70 @@ import com.l2jfree.gameserver.network.serverpackets.ExEnchantSkillInfoDetail;
  */
 public final class RequestExEnchantSkillInfoDetail extends L2GameClientPacket
 {
-    private static final int TYPE_NORMAL_ENCHANT = 0;
-    private static final int TYPE_SAFE_ENCHANT = 1;
-    private static final int TYPE_UNTRAIN_ENCHANT = 2;
-    private static final int TYPE_CHANGE_ENCHANT = 3;
-
-    private int _type;
-    //private int _skillId;
-    private int _skillLvl;
-
+	private static final int TYPE_NORMAL_ENCHANT = 0;
+	private static final int TYPE_SAFE_ENCHANT = 1;
+	private static final int TYPE_UNTRAIN_ENCHANT = 2;
+	private static final int TYPE_CHANGE_ENCHANT = 3;
+	
+	private int _type;
+	//private int _skillId;
+	private int _skillLvl;
+	
 	@Override
-    protected void readImpl()
+	protected void readImpl()
 	{
-        _type = readD();
+		_type = readD();
 		/*_skillId = */readD();
 		_skillLvl = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-        if (activeChar == null) return;
-
-        int bookId = 0;
-        long reqCount = 0;
-        // require book for first level
-        int enchantLevel = _skillLvl % 100;
-        // if going to first level
-        // OR going to Original level(untraining)
-        // OR changing route - then require book
-        if ((_skillLvl > 100 && enchantLevel == 1) || (_skillLvl < 100) ||
-        		_type == TYPE_CHANGE_ENCHANT || _type == TYPE_SAFE_ENCHANT ||
-        		_type == TYPE_UNTRAIN_ENCHANT)
-        {
-            switch (_type)
-            {
-                case TYPE_NORMAL_ENCHANT:
-                    bookId = SkillTreeTable.NORMAL_ENCHANT_BOOK;
-                    reqCount = 1;
-                    break;
-                case TYPE_SAFE_ENCHANT:
-                    bookId = SkillTreeTable.SAFE_ENCHANT_BOOK;
-                    reqCount = 1;
-                    break;
-                case TYPE_UNTRAIN_ENCHANT:
-                    bookId = SkillTreeTable.UNTRAIN_ENCHANT_BOOK;
-                    reqCount = 1;
-                    break;
-                case TYPE_CHANGE_ENCHANT:
-                    bookId = SkillTreeTable.CHANGE_ENCHANT_BOOK;
-                    reqCount = 1;
-                    break;
-                default:
-                    _log.fatal("Unknown skill enchant type: "+_type);
-                	sendPacket(ActionFailed.STATIC_PACKET);
-                	return;
-            }
-        }
-
-        // send skill enchantment detail
-        sendPacket(new ExEnchantSkillInfoDetail(bookId, reqCount));
-        sendPacket(ActionFailed.STATIC_PACKET);
+		if (activeChar == null)
+			return;
+		
+		int bookId = 0;
+		long reqCount = 0;
+		// require book for first level
+		int enchantLevel = _skillLvl % 100;
+		// if going to first level
+		// OR going to Original level(untraining)
+		// OR changing route - then require book
+		if ((_skillLvl > 100 && enchantLevel == 1) || (_skillLvl < 100) || _type == TYPE_CHANGE_ENCHANT
+				|| _type == TYPE_SAFE_ENCHANT || _type == TYPE_UNTRAIN_ENCHANT)
+		{
+			switch (_type)
+			{
+				case TYPE_NORMAL_ENCHANT:
+					bookId = SkillTreeTable.NORMAL_ENCHANT_BOOK;
+					reqCount = 1;
+					break;
+				case TYPE_SAFE_ENCHANT:
+					bookId = SkillTreeTable.SAFE_ENCHANT_BOOK;
+					reqCount = 1;
+					break;
+				case TYPE_UNTRAIN_ENCHANT:
+					bookId = SkillTreeTable.UNTRAIN_ENCHANT_BOOK;
+					reqCount = 1;
+					break;
+				case TYPE_CHANGE_ENCHANT:
+					bookId = SkillTreeTable.CHANGE_ENCHANT_BOOK;
+					reqCount = 1;
+					break;
+				default:
+					_log.fatal("Unknown skill enchant type: " + _type);
+					sendPacket(ActionFailed.STATIC_PACKET);
+					return;
+			}
+		}
+		
+		// send skill enchantment detail
+		sendPacket(new ExEnchantSkillInfoDetail(bookId, reqCount));
+		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

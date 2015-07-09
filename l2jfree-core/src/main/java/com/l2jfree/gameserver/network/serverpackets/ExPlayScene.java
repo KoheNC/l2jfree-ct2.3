@@ -20,14 +20,14 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ExPlayScene extends L2GameServerPacket
 {
 	private static final String _S__FE_5c_EXSHOWSLIDESHOWKAMAEL = "[S] FE:5c ExPlayScene []";
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x5c);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -14,8 +14,6 @@
  */
 package com.l2jfree.gameserver.network.serverpackets;
 
-
-
 /**
  *
  * sample
@@ -33,24 +31,24 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class AskJoinAlly extends L2GameServerPacket
 {
 	private static final String _S__BB_ASKJOINALLY = "[S] bb AskJoinAlly [ds]";
-
+	
 	private final String _requestorName;
-    private final int _requestorObjId;
-
+	private final int _requestorObjId;
+	
 	/**
 	 *
 	 */
 	public AskJoinAlly(int requestorObjId, String requestorName)
 	{
 		_requestorName = requestorName;
-    	_requestorObjId = requestorObjId;
+		_requestorObjId = requestorObjId;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xbb);
-    	writeD(_requestorObjId);
+		writeD(_requestorObjId);
 		writeS(_requestorName);
 	}
 	

@@ -26,6 +26,7 @@ public class MoveToLocationInVehicle extends L2GameServerPacket
 	private final L2PcInstance _activeChar;
 	private final L2CharPosition _destination;
 	private final L2CharPosition _origin;
+	
 	/**
 	 * @param actor
 	 * @param destination
@@ -36,19 +37,19 @@ public class MoveToLocationInVehicle extends L2GameServerPacket
 		_activeChar = player;
 		_destination = destination;
 		_origin = origin;
-	/*	_pci.sendMessage("_destination : x " + x +" y " + y + " z " + z);
-		_pci.sendMessage("_boat : x " + _pci.getBoat().getX() +" y " + _pci.getBoat().getY() + " z " + _pci.getBoat().getZ());
-		_pci.sendMessage("-----------");*/
+		/*	_pci.sendMessage("_destination : x " + x +" y " + y + " z " + z);
+			_pci.sendMessage("_boat : x " + _pci.getBoat().getX() +" y " + _pci.getBoat().getY() + " z " + _pci.getBoat().getZ());
+			_pci.sendMessage("-----------");*/
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
-	protected
-	void writeImpl()
+	protected void writeImpl()
 	{
-		if (_activeChar.getBoat() == null) return;
+		if (_activeChar.getBoat() == null)
+			return;
 		
 		writeC(0x7e);
 		writeD(_activeChar.getObjectId());
@@ -60,7 +61,7 @@ public class MoveToLocationInVehicle extends L2GameServerPacket
 		writeD(_origin.y);
 		writeD(_origin.z);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

@@ -66,8 +66,7 @@ public final class CoreInfo
 	
 	public static String[] getFullVersionInfo()
 	{
-		return new String[] {
-				"l2jfree-core :    " + coreVersion.fullVersionInfo,
+		return new String[] { "l2jfree-core :    " + coreVersion.fullVersionInfo,
 				"l2j-commons  :    " + commonsVersion.fullVersionInfo,
 				"l2j-mmocore  :    " + mmocoreVersion.fullVersionInfo };
 	}

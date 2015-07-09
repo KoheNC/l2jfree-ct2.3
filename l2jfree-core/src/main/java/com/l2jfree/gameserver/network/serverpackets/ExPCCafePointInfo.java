@@ -44,7 +44,7 @@ public class ExPCCafePointInfo extends L2GameServerPacket
 		writeD(_unk4); // period hours left
 		writeC(_unk5); // points inc display color(0=yellow,1=cyan-blue,2=red,all other black)
 	}
-
+	
 	@Override
 	public String getType()
 	{

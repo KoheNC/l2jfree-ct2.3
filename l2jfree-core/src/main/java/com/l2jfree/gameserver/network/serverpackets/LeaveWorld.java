@@ -21,19 +21,19 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class LeaveWorld extends StaticPacket
 {
 	private static final String _S__96_LEAVEWORLD = "[S] 7e LeaveWorld";
-
+	
 	public static final LeaveWorld STATIC_PACKET = new LeaveWorld();
-
+	
 	private LeaveWorld()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x84);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -28,7 +28,7 @@ public class GetOffVehicle extends L2GameServerPacket
 	private final int _z;
 	private final L2PcInstance _activeChar;
 	private final L2BoatInstance _boat;
-
+	
 	/**
 	 * @param activeChar
 	 * @param boat
@@ -47,24 +47,25 @@ public class GetOffVehicle extends L2GameServerPacket
 		if (_activeChar != null)
 			_activeChar.setBoat(null);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
 	protected void writeImpl()
 	{
-		if (_boat == null || _activeChar == null) return;
-
+		if (_boat == null || _activeChar == null)
+			return;
+		
 		writeC(0x6f);
 		writeD(_activeChar.getObjectId());
 		writeD(_boat.getObjectId());
 		writeD(_x);
 		writeD(_y);
 		writeD(_z);
-
+		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

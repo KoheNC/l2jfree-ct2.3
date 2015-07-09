@@ -22,15 +22,16 @@ import com.l2jfree.Config;
  */
 public class ExPutCommissionResultForVariationMake extends L2GameServerPacket
 {
-	private static final String S_FE_55_EXPUTCOMMISSIONRESULTFORVARIATIONMAKE = "[S] FE:55 ExPutCommissionResultForVariationMake";
-
+	private static final String S_FE_55_EXPUTCOMMISSIONRESULTFORVARIATIONMAKE =
+			"[S] FE:55 ExPutCommissionResultForVariationMake";
+	
 	private final int _gemstoneObjId;
 	private final int _itemId;
 	private final long _gemstoneCount;
 	private final int _unk1;
 	private final int _unk2;
 	private final int _unk3;
-
+	
 	public ExPutCommissionResultForVariationMake(int gemstoneObjId, long count, int itemId)
 	{
 		_gemstoneObjId = gemstoneObjId;
@@ -40,7 +41,7 @@ public class ExPutCommissionResultForVariationMake extends L2GameServerPacket
 		_unk2 = 1;
 		_unk3 = 1;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -54,10 +55,10 @@ public class ExPutCommissionResultForVariationMake extends L2GameServerPacket
 		writeCompQ(_gemstoneCount);
 		writeD(_unk1);
 		writeD(_unk2);
-		if(Config.PACKET_FINAL)
+		if (Config.PACKET_FINAL)
 			writeD(_unk3);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

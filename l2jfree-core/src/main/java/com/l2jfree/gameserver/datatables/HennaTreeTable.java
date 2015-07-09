@@ -32,7 +32,7 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public class HennaTreeTable
 {
 	private static final Log _log = LogFactory.getLog(HennaTreeTable.class);
-
+	
 	private final Map<Integer, L2Henna[]> _hennaTrees = new FastMap<Integer, L2Henna[]>();
 	
 	public static HennaTreeTable getInstance()
@@ -56,7 +56,8 @@ public class HennaTreeTable
 				classId = classlist.getInt("id");
 				FastList<L2Henna> list = new FastList<L2Henna>();
 				
-				PreparedStatement statement2 = con.prepareStatement("SELECT symbol_id FROM henna_trees where class_id=?");
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT symbol_id FROM henna_trees where class_id=?");
 				statement2.setInt(1, classId);
 				ResultSet hennatree = statement2.executeQuery();
 				
@@ -101,7 +102,7 @@ public class HennaTreeTable
 	{
 		return _hennaTrees.get(player.getClassId().getId());
 	}
-
+	
 	/**
 	 * Prevents henna drawing exploit:
 	 * 1) talk to L2SymbolMakerInstance
@@ -116,13 +117,13 @@ public class HennaTreeTable
 	{
 		if (player == null)
 			return false;
-
+		
 		for (L2Henna h : getAvailableHenna(player))
 			if (h.getSymbolId() == symbolId)
 				return true;
 		return false;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

@@ -41,22 +41,22 @@ import com.l2jfree.gameserver.model.entity.Castle;
  */
 public class MerchantPriceConfigTable implements InstanceListManager
 {
-	private static final Log				_log	= LogFactory.getLog(MerchantPriceConfigTable.class);
-
+	private static final Log _log = LogFactory.getLog(MerchantPriceConfigTable.class);
+	
 	public static MerchantPriceConfigTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
-	private static final String					MPCS_FILE	= "MerchantPriceConfig.xml";
-
-	private final Map<Integer, MerchantPriceConfig>	_mpcs		= new FastMap<Integer, MerchantPriceConfig>();
-	private MerchantPriceConfig					_defaultMpc;
-
+	
+	private static final String MPCS_FILE = "MerchantPriceConfig.xml";
+	
+	private final Map<Integer, MerchantPriceConfig> _mpcs = new FastMap<Integer, MerchantPriceConfig>();
+	private MerchantPriceConfig _defaultMpc;
+	
 	private MerchantPriceConfigTable()
 	{
 	}
-
+	
 	/**
 	 * @param npc
 	 */
@@ -73,12 +73,12 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		*/
 		return _defaultMpc;
 	}
-
+	
 	public MerchantPriceConfig getMerchantPriceConfig(int id)
 	{
 		return _mpcs.get(id);
 	}
-
+	
 	public void loadXML() throws SAXException, IOException, ParserConfigurationException
 	{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -89,16 +89,16 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			int defaultPriceConfigId;
 			Document doc = factory.newDocumentBuilder().parse(file);
-
+			
 			Node n = doc.getDocumentElement();
 			Node dpcNode = n.getAttributes().getNamedItem("defaultPriceConfig");
 			if (dpcNode == null)
 			{
 				throw new IllegalStateException("merchantPriceConfig must define an 'defaultPriceConfig'");
 			}
-
+			
 			defaultPriceConfigId = Integer.parseInt(dpcNode.getNodeValue());
-
+			
 			MerchantPriceConfig mpc;
 			for (n = n.getFirstChild(); n != null; n = n.getNextSibling())
 			{
@@ -108,7 +108,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 					_mpcs.put(mpc.getId(), mpc);
 				}
 			}
-
+			
 			MerchantPriceConfig defaultMpc = this.getMerchantPriceConfig(defaultPriceConfigId);
 			if (defaultMpc == null)
 			{
@@ -117,7 +117,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 			_defaultMpc = defaultMpc;
 		}
 	}
-
+	
 	private MerchantPriceConfig parseMerchantPriceConfig(Node n)
 	{
 		if (n.getNodeName().equals("priceConfig"))
@@ -127,48 +127,49 @@ public class MerchantPriceConfigTable implements InstanceListManager
 			int castleId = -1;
 			int zoneId = -1;
 			final String name;
-
+			
 			Node node = n.getAttributes().getNamedItem("id");
 			if (node == null)
 			{
 				throw new IllegalStateException("Must define the priceConfig 'id'");
 			}
-
+			
 			id = Integer.parseInt(node.getNodeValue());
-
+			
 			node = n.getAttributes().getNamedItem("name");
 			if (node == null)
 			{
 				throw new IllegalStateException("Must define the priceConfig 'name'");
 			}
-
+			
 			name = node.getNodeValue();
-
+			
 			node = n.getAttributes().getNamedItem("baseTax");
 			if (node == null)
 			{
 				throw new IllegalStateException("Must define the priceConfig 'baseTax'");
 			}
-
+			
 			baseTax = Integer.parseInt(node.getNodeValue());
-
+			
 			node = n.getAttributes().getNamedItem("castleId");
 			if (node != null)
 			{
 				castleId = Integer.parseInt(node.getNodeValue());
 			}
-
+			
 			node = n.getAttributes().getNamedItem("zoneId");
 			if (node != null)
 			{
 				zoneId = Integer.parseInt(node.getNodeValue());
 			}
-
+			
 			return new MerchantPriceConfig(id, name, baseTax, castleId, zoneId);
 		}
 		return null;
 	}
-
+	
+	@Override
 	public void loadInstances()
 	{
 		try
@@ -181,7 +182,8 @@ public class MerchantPriceConfigTable implements InstanceListManager
 			_log.fatal("Failed loading MerchantPriceConfigTable. Reason: " + e.getMessage(), e);
 		}
 	}
-
+	
+	@Override
 	public void updateReferences()
 	{
 		for (final MerchantPriceConfig mpc : _mpcs.values())
@@ -189,11 +191,12 @@ public class MerchantPriceConfigTable implements InstanceListManager
 			mpc.updateReferences();
 		}
 	}
-
+	
+	@Override
 	public void activateInstances()
 	{
 	}
-
+	
 	/**
 	 * 
 	 *
@@ -201,14 +204,15 @@ public class MerchantPriceConfigTable implements InstanceListManager
 	 */
 	public static final class MerchantPriceConfig
 	{
-		private final int		_id;
-		private final String	_name;
-		private final int		_baseTax;
-		private final int		_castleId;
-		private Castle			_castle;
-		private final int		_zoneId;
-
-		public MerchantPriceConfig(final int id, final String name, final int baseTax, final int castleId, final int zoneId)
+		private final int _id;
+		private final String _name;
+		private final int _baseTax;
+		private final int _castleId;
+		private Castle _castle;
+		private final int _zoneId;
+		
+		public MerchantPriceConfig(final int id, final String name, final int baseTax, final int castleId,
+				final int zoneId)
 		{
 			_id = id;
 			_name = name;
@@ -216,7 +220,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 			_castleId = castleId;
 			_zoneId = zoneId;
 		}
-
+		
 		/**
 		 * @return Returns the id.
 		 */
@@ -224,7 +228,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			return _id;
 		}
-
+		
 		/**
 		 * @return Returns the name.
 		 */
@@ -232,7 +236,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			return _name;
 		}
-
+		
 		/**
 		 * @return Returns the baseTax.
 		 */
@@ -240,7 +244,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			return _baseTax;
 		}
-
+		
 		/**
 		 * @return Returns the baseTax / 100.0.
 		 */
@@ -248,7 +252,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			return _baseTax / 100.0;
 		}
-
+		
 		/**
 		 * @return Returns the castle.
 		 */
@@ -256,7 +260,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			return _castle;
 		}
-
+		
 		/**
 		 * @return Returns the zoneId.
 		 */
@@ -264,33 +268,33 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		{
 			return _zoneId;
 		}
-
+		
 		public boolean hasCastle()
 		{
 			return getCastle() != null;
 		}
-
+		
 		public double getCastleTaxRate()
 		{
 			return hasCastle() ? getCastle().getTaxRate() : 0.0;
 		}
-
+		
 		public int getTotalTax()
 		{
 			return hasCastle() ? (getCastle().getTaxPercent() + getBaseTax()) : getBaseTax();
 		}
-
+		
 		public double getTotalTaxRate()
 		{
 			return getTotalTax() / 100.0;
 		}
-
+		
 		public void updateReferences()
 		{
 			_castle = CastleManager.getInstance().getCastleById(_castleId);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

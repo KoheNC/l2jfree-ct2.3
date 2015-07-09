@@ -51,7 +51,7 @@ public final class L2SkillLearn
 	{
 		return _id;
 	}
-
+	
 	/**
 	 * @return Returns the level.
 	 */
@@ -59,7 +59,7 @@ public final class L2SkillLearn
 	{
 		return _level;
 	}
-
+	
 	/**
 	 * @return Returns the minLevel.
 	 */
@@ -67,7 +67,7 @@ public final class L2SkillLearn
 	{
 		return _minLevel;
 	}
-
+	
 	/**
 	 * @return Returns the name.
 	 */
@@ -75,7 +75,7 @@ public final class L2SkillLearn
 	{
 		return _name;
 	}
-
+	
 	/**
 	 * @return Returns the spCost.
 	 */
@@ -83,10 +83,12 @@ public final class L2SkillLearn
 	{
 		return _spCost;
 	}
+	
 	public int getIdCost()
 	{
 		return _costid;
 	}
+	
 	public int getCostCount()
 	{
 		return _costcount;

@@ -40,16 +40,16 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public class L2OlympiadManagerInstance extends L2Npc
 {
-	private static final int	GATE_PASS	= Config.ALT_OLY_BATTLE_REWARD_ITEM;
-
+	private static final int GATE_PASS = Config.ALT_OLY_BATTLE_REWARD_ITEM;
+	
 	private static final String FEWER_THAN = "Fewer than" + String.valueOf(Config.ALT_OLY_REG_DISPLAY);
 	private static final String MORE_THAN = "More than" + String.valueOf(Config.ALT_OLY_REG_DISPLAY);
-
+	
 	public L2OlympiadManagerInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -63,11 +63,11 @@ public class L2OlympiadManagerInstance extends L2Npc
 		{
 			if (!player.isNoble() || player.getClassId().level() < 3)
 				return;
-
+			
 			int passes;
 			int val = Integer.parseInt(command.substring(14));
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-
+			
 			switch (val)
 			{
 				case 1:
@@ -77,7 +77,7 @@ public class L2OlympiadManagerInstance extends L2Npc
 					int classed = 0;
 					int nonClassed = 0;
 					int[] array = Olympiad.getInstance().getWaitingList();
-
+					
 					if (array != null)
 					{
 						classed = array[0];
@@ -88,7 +88,8 @@ public class L2OlympiadManagerInstance extends L2Npc
 					{
 						html.replace("%listClassed%", classed < Config.ALT_OLY_REG_DISPLAY ? FEWER_THAN : MORE_THAN);
 						html.replace("%listNonClassedTeam%", FEWER_THAN);
-						html.replace("%listNonClassed%", nonClassed < Config.ALT_OLY_REG_DISPLAY ? FEWER_THAN : MORE_THAN);
+						html.replace("%listNonClassed%", nonClassed < Config.ALT_OLY_REG_DISPLAY ? FEWER_THAN
+								: MORE_THAN);
 					}
 					else
 					{
@@ -144,12 +145,13 @@ public class L2OlympiadManagerInstance extends L2Npc
 					passes = Olympiad.getInstance().getNoblessePasses(player, true);
 					if (passes > 0)
 					{
-						L2ItemInstance item = player.getInventory().addItem("Olympiad", GATE_PASS, passes, player, this);
-
+						L2ItemInstance item =
+								player.getInventory().addItem("Olympiad", GATE_PASS, passes, player, this);
+						
 						InventoryUpdate iu = new InventoryUpdate();
 						iu.addModifiedItem(item);
 						player.sendPacket(iu);
-
+						
 						SystemMessage sm = new SystemMessage(SystemMessageId.EARNED_S2_S1_S);
 						sm.addItemName(item);
 						sm.addItemNumber(passes);
@@ -167,7 +169,7 @@ public class L2OlympiadManagerInstance extends L2Npc
 			String[] params = command.split(" ");
 			int skillId = Integer.parseInt(params[1]);
 			int skillLvl;
-
+			
 			// Oly buff whitelist prevents bypass exploiters -.-
 			HashMap<Integer, Integer> buffList = new HashMap<Integer, Integer>();
 			buffList.put(4357, 2); // Haste Lv2
@@ -180,28 +182,29 @@ public class L2OlympiadManagerInstance extends L2Npc
 			buffList.put(4359, 3); // Focus Lv3
 			buffList.put(4360, 3); // Death Whisper Lv3
 			buffList.put(4352, 2); // Berserk Spirit Lv2
-
+			
 			// Lets check on our oly buff whitelist
 			if (!buffList.containsKey(skillId))
 				return;
-
+			
 			// Get skilllevel from the hashmap
 			skillLvl = buffList.get(skillId);
-
+			
 			L2Skill skill = SkillTable.getInstance().getInfo(skillId, skillLvl);
-
+			
 			setTarget(player);
-
+			
 			if (player.olyBuff > 0)
 			{
 				broadcastPacket(new MagicSkillUse(this, player, skill, 0, 0));
 				skill.getEffects(player, player);
 				player.olyBuff--;
 			}
-
+			
 			if (player.olyBuff > 0)
 			{
-				html.setFile( Olympiad.OLYMPIAD_HTML_PATH + (player.olyBuff == 5 ?"olympiad_buffs.htm" : "olympiad_5buffs.htm"));
+				html.setFile(Olympiad.OLYMPIAD_HTML_PATH
+						+ (player.olyBuff == 5 ? "olympiad_buffs.htm" : "olympiad_5buffs.htm"));
 				html.replace("%objectId%", String.valueOf(getObjectId()));
 				player.sendPacket(html);
 			}
@@ -216,21 +219,21 @@ public class L2OlympiadManagerInstance extends L2Npc
 		else if (command.startsWith("Olympiad"))
 		{
 			int val = Integer.parseInt(command.substring(9, 10));
-
+			
 			NpcHtmlMessage reply = new NpcHtmlMessage(getObjectId());
-
+			
 			switch (val)
 			{
 				case 1:
 					FastMap<Integer, String> matches = Olympiad.getInstance().getMatchList();
 					reply.setFile(Olympiad.OLYMPIAD_HTML_PATH + "olympiad_observe1.htm");
-
+					
 					for (int i = 0; i < Olympiad.getStadiumCount(); i++)
 					{
 						int arenaID = i + 1;
-
+						
 						// &$906; -> \\&\\$906;
-						reply.replace("%title"+arenaID+"%", matches.containsKey(i) ? matches.get(i) : "\\&\\$906;");
+						reply.replace("%title" + arenaID + "%", matches.containsKey(i) ? matches.get(i) : "\\&\\$906;");
 					}
 					reply.replace("%objectId%", String.valueOf(getObjectId()));
 					player.sendPacket(reply);
@@ -242,22 +245,22 @@ public class L2OlympiadManagerInstance extends L2Npc
 					{
 						FastList<String> names = Olympiad.getInstance().getClassLeaderBoard(classId);
 						reply.setFile(Olympiad.OLYMPIAD_HTML_PATH + "olympiad_ranking.htm");
-
+						
 						int index = 1;
 						for (String name : names)
 						{
-							reply.replace("%place"+index+"%", String.valueOf(index));
-							reply.replace("%rank"+index+"%", name);
+							reply.replace("%place" + index + "%", String.valueOf(index));
+							reply.replace("%rank" + index + "%", name);
 							index++;
 							if (index > 10)
 								break;
 						}
 						for (; index <= 10; index++)
 						{
-							reply.replace("%place"+index+"%", "");
-							reply.replace("%rank"+index+"%", "");
+							reply.replace("%place" + index + "%", "");
+							reply.replace("%rank" + index + "%", "");
 						}
-
+						
 						reply.replace("%objectId%", String.valueOf(getObjectId()));
 						player.sendPacket(reply);
 					}
@@ -274,17 +277,17 @@ public class L2OlympiadManagerInstance extends L2Npc
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	private void showChatWindow(L2PcInstance player, int val, String suffix)
 	{
 		String filename = Olympiad.OLYMPIAD_HTML_PATH;
-
+		
 		filename += "noble_desc" + val;
 		filename += (suffix != null) ? suffix + ".htm" : ".htm";
-
+		
 		if (filename.equals(Olympiad.OLYMPIAD_HTML_PATH + "noble_desc0.htm"))
 			filename = Olympiad.OLYMPIAD_HTML_PATH + "noble_main.htm";
-
+		
 		showChatWindow(player, filename);
 	}
 }

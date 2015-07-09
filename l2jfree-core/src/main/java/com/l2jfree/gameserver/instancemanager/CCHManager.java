@@ -50,28 +50,28 @@ public final class CCHManager
 	{
 		return SingletonHolder.INSTANCE;
 	}
-
+	
 	/** Return true if object is inside zone */
 	public final boolean checkIfInZone(L2Object obj)
 	{
 		return (getSiege(obj) != null);
 	}
-
+	
 	/** Return true if object is inside zone */
 	public final boolean checkIfInZone(int x, int y, int z)
 	{
 		return (getSiege(x, y, z) != null);
 	}
-
+	
 	public static boolean checkIfOkToPlaceFlag(L2PcInstance player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		L2Clan clan = player.getClan();
 		CCHSiege siege = getInstance().getSiege(player);
 		ClanHall hideout = (siege == null) ? null : siege.getHideout();
-
+		
 		SystemMessageId sm = null;
-
+		
 		if (siege == null || !siege.getIsInProgress())
 			sm = SystemMessageId.ONLY_DURING_SIEGE;
 		else if (clan == null || clan.getLeaderId() != player.getObjectId() || siege.getAttackerClan(clan) == null)
@@ -82,19 +82,19 @@ public final class CCHManager
 			sm = SystemMessageId.NOT_ANOTHER_HEADQUARTERS;
 		else
 			return true;
-
+		
 		if (!isCheckOnly)
 			player.sendPacket(sm);
 		return false;
 	}
-
+	
 	public static boolean checkIfOkToUseStriderSiegeAssault(L2PcInstance player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		CCHSiege siege = getInstance().getSiege(player);
-
+		
 		SystemMessageId sm = null;
-
+		
 		if (siege == null)
 			sm = SystemMessageId.YOU_ARE_NOT_IN_SIEGE;
 		else if (!siege.getIsInProgress())
@@ -105,31 +105,32 @@ public final class CCHManager
 			sm = SystemMessageId.CANNOT_USE_ON_YOURSELF;
 		else
 			return true;
-
+		
 		if (!isCheckOnly)
 			player.sendPacket(sm);
 		return false;
 	}
-
+	
 	public final boolean checkIsRegistered(L2Clan clan)
 	{
 		return (checkIsRegistered(clan, 34) || checkIsRegistered(clan, 64));
 	}
-
+	
 	public final boolean checkIsRegistered(L2Clan clan, int hallid)
 	{
 		if (clan == null)
 			return false;
-
+		
 		if (clan.getHasHideout() > 0)
 			return true;
-
+		
 		Connection con = null;
 		boolean register = false;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT clan_id FROM siege_clans WHERE clan_id=? AND castle_id=?");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT clan_id FROM siege_clans WHERE clan_id=? AND castle_id=?");
 			statement.setInt(1, clan.getClanId());
 			statement.setInt(2, hallid);
 			register = statement.executeQuery().next();
@@ -143,15 +144,15 @@ public final class CCHManager
 		{
 			L2DatabaseFactory.close(con);
 		}
-
+		
 		return register;
 	}
-
+	
 	public final CCHSiege getSiege(L2Object activeObject)
 	{
 		return getSiege(activeObject.getX(), activeObject.getY(), activeObject.getZ());
 	}
-
+	
 	/** * get active siege for clan ** */
 	public final CCHSiege getSiege(L2Clan clan)
 	{
@@ -165,7 +166,7 @@ public final class CCHManager
 		}
 		return null;
 	}
-
+	
 	public final CCHSiege getSiege(int x, int y, int z)
 	{
 		for (ClanHall hideout : ClanHallManager.getInstance().getAllClanHalls().values())
@@ -178,7 +179,7 @@ public final class CCHManager
 		}
 		return null;
 	}
-
+	
 	public final List<CCHSiege> getSieges()
 	{
 		FastList<CCHSiege> sieges = new FastList<CCHSiege>();

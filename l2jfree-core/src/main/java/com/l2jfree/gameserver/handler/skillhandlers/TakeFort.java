@@ -31,55 +31,59 @@ import com.l2jfree.gameserver.util.Util;
  */
 public class TakeFort implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.TAKEFORT };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.TAKEFORT };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		L2Object target = player.getTarget();
-
+		
 		if (player.getClan() == null)
 			return;
-
+		
 		if (target == null)
 			return;
-
+		
 		Fort fort = FortManager.getInstance().getFort(player);
 		if (fort == null || !checkIfOkToCastFlagDisplay(player, fort, true, skill, target))
 			return;
-
+		
 		fort.endOfSiege(player.getClan());
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;
 	}
-
+	
 	/**
 	 * Return true if character clan place a flag<BR><BR>
 	 *
 	 * @param activeChar The L2Character of the character placing the flag
 	 *
 	 */
-	public static boolean checkIfOkToCastFlagDisplay(L2Character activeChar, boolean isCheckOnly, L2Skill skill, L2Object target)
+	public static boolean checkIfOkToCastFlagDisplay(L2Character activeChar, boolean isCheckOnly, L2Skill skill,
+			L2Object target)
 	{
-		return checkIfOkToCastFlagDisplay(activeChar, FortManager.getInstance().getFort(activeChar), isCheckOnly, skill, target);
+		return checkIfOkToCastFlagDisplay(activeChar, FortManager.getInstance().getFort(activeChar), isCheckOnly,
+				skill, target);
 	}
-
-	public static boolean checkIfOkToCastFlagDisplay(L2Character activeChar, Fort fort, boolean isCheckOnly,L2Skill skill, L2Object target)
+	
+	public static boolean checkIfOkToCastFlagDisplay(L2Character activeChar, Fort fort, boolean isCheckOnly,
+			L2Skill skill, L2Object target)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;
-
+		
 		SystemMessage sm;
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		if (fort == null || fort.getFortId() <= 0)
 		{
 			sm = new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED);
@@ -103,10 +107,11 @@ public class TakeFort implements ISkillHandler
 		else
 		{
 			if (!isCheckOnly)
-				fort.getSiege().announceToPlayer(new SystemMessage(SystemMessageId.S1_TRYING_RAISE_FLAG), player.getClan().getName());
+				fort.getSiege().announceToPlayer(new SystemMessage(SystemMessageId.S1_TRYING_RAISE_FLAG),
+						player.getClan().getName());
 			return true;
 		}
-
+		
 		if (!isCheckOnly)
 		{
 			player.sendPacket(sm);

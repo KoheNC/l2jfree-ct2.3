@@ -23,8 +23,8 @@ public class AccountWrongPasswordException extends Exception
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -9080179050086340310L;
-
+	private static final long serialVersionUID = -9080179050086340310L;
+	
 	/**
 	 * Default constructor
 	 */
@@ -32,7 +32,7 @@ public class AccountWrongPasswordException extends Exception
 	{
 		super();
 	}
-
+	
 	/**
 	 * constructor with reason
 	 */
@@ -40,7 +40,7 @@ public class AccountWrongPasswordException extends Exception
 	{
 		super("Wrong password for user " + reason);
 	}
-
+	
 	/**
 	 * Copy constructor
 	 */
@@ -48,7 +48,7 @@ public class AccountWrongPasswordException extends Exception
 	{
 		super(e);
 	}
-
+	
 	/**
 	 * Copy constructor
 	 */
@@ -56,5 +56,5 @@ public class AccountWrongPasswordException extends Exception
 	{
 		super("Wrong password for user " + reason, e);
 	}
-
+	
 }

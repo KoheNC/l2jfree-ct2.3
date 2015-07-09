@@ -53,10 +53,12 @@ public class IrcManager
 			_IrcConnection.disconnect();
 			_IrcConnection = null;
 		}
-
+		
 		try
 		{
-			_IrcConnection = new L2IrcClient(Config.IRC_SERVER, Config.IRC_PORT, Config.IRC_PASS, Config.IRC_NICK, Config.IRC_USER, Config.IRC_NAME, Config.IRC_SSL, Config.IRC_CHANNEL);
+			_IrcConnection =
+					new L2IrcClient(Config.IRC_SERVER, Config.IRC_PORT, Config.IRC_PASS, Config.IRC_NICK,
+							Config.IRC_USER, Config.IRC_NAME, Config.IRC_SSL, Config.IRC_CHANNEL);
 			_IrcConnection.connect();
 		}
 		catch (Exception e)
@@ -64,22 +66,24 @@ public class IrcManager
 			e.printStackTrace();
 		}
 	}
-
+	
 	public L2IrcClient getConnection()
 	{
 		return _IrcConnection;
 	}
-
+	
 	public void removeConnection()
 	{
 		_IrcConnection.disconnect();
 		_IrcConnection = null;
 	}
-
+	
 	private final void load()
 	{
-		_IrcConnection = new L2IrcClient(Config.IRC_SERVER, Config.IRC_PORT, Config.IRC_PASS, Config.IRC_NICK, Config.IRC_USER, Config.IRC_NAME, Config.IRC_SSL, Config.IRC_CHANNEL);
-
+		_IrcConnection =
+				new L2IrcClient(Config.IRC_SERVER, Config.IRC_PORT, Config.IRC_PASS, Config.IRC_NICK, Config.IRC_USER,
+						Config.IRC_NAME, Config.IRC_SSL, Config.IRC_CHANNEL);
+		
 		try
 		{
 			_IrcConnection.connect();

@@ -24,6 +24,7 @@ import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2SiegeClan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
+
 /**
  * Populates the Siege Defender List in the SiegeInfo Window<BR>
  * <BR>
@@ -58,29 +59,29 @@ public class SiegeDefenderList extends L2GameServerPacket
 	private final int _siegeableID;
 	private final Set<L2SiegeClan> _defenders;
 	private final Set<L2SiegeClan> _waiting;
-
+	
 	public SiegeDefenderList(Castle castle)
 	{
 		_siegeableID = castle.getCastleId();
 		_defenders = castle.getSiege().getDefenderClans();
 		_waiting = castle.getSiege().getDefenderWaitingClans();
 	}
-
+	
 	public SiegeDefenderList(ClanHall hideout)
 	{
 		_siegeableID = hideout.getId();
 		_defenders = null;
 		_waiting = null;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xcb);
 		writeD(_siegeableID);
-		writeD(0x00);  //0
-		writeD(0x01);  //1
-		writeD(0x00);  //0
+		writeD(0x00); //0
+		writeD(0x01); //1
+		writeD(0x00); //0
 		int size = 0;
 		if (_defenders != null)
 			size += _defenders.size();
@@ -91,21 +92,22 @@ public class SiegeDefenderList extends L2GameServerPacket
 		if (size > 0)
 		{
 			L2Clan clan;
-
+			
 			// Listing the Lord and the approved clans
 			if (_defenders != null)
 			{
 				for (L2SiegeClan siegeclan : _defenders)
 				{
 					clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
-					if (clan == null) continue;
-
+					if (clan == null)
+						continue;
+					
 					writeD(clan.getClanId());
 					writeS(clan.getName());
 					writeS(clan.getLeaderName());
 					writeD(clan.getCrestId());
 					writeD(0x00); //signed time (seconds) (not storated by L2J)
-					switch(siegeclan.getType())
+					switch (siegeclan.getType())
 					{
 						case OWNER:
 							writeD(0x01); //owner
@@ -119,7 +121,7 @@ public class SiegeDefenderList extends L2GameServerPacket
 							break;
 						default:
 							writeD(0x00);
-						break;
+							break;
 					}
 					writeD(clan.getAllyId());
 					writeS(clan.getAllyName());
@@ -131,7 +133,7 @@ public class SiegeDefenderList extends L2GameServerPacket
 			{
 				for (L2SiegeClan siegeclan : _waiting)
 				{
-					clan = ClanTable.getInstance().getClan(siegeclan.getClanId());  
+					clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
 					writeD(clan.getClanId());
 					writeS(clan.getName());
 					writeS(clan.getLeaderName());
@@ -146,7 +148,7 @@ public class SiegeDefenderList extends L2GameServerPacket
 			}
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

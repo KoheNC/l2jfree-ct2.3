@@ -51,8 +51,7 @@ public final class SkillList extends L2GameServerPacket
 			writeD(s.getDisplayId());
 			// as currently this isn't used in retail?
 			// it will serve us better like this
-			writeC(s.getSkillType() == L2SkillType.NOTDONE
-					|| s.getTargetType() == SkillTargetType.TARGET_NONE);
+			writeC(s.getSkillType() == L2SkillType.NOTDONE || s.getTargetType() == SkillTargetType.TARGET_NONE);
 		}
 	}
 	

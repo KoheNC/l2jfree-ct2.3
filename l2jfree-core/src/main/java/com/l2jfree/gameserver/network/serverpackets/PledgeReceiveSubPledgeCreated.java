@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.model.L2Clan.SubPledge;
+import com.l2jfree.gameserver.model.L2ClanMember;
 
 /**
  *
@@ -24,10 +24,10 @@ import com.l2jfree.gameserver.model.L2Clan.SubPledge;
  */
 public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 {
-	private static final String	_S__FE_3F_PLEDGERECEIVESUBPLEDGECREATED	= "[S] FE:3F PledgeReceiveSubPledgeCreated";
-	private final SubPledge			_subPledge;
-	private final L2Clan				_clan;
-
+	private static final String _S__FE_3F_PLEDGERECEIVESUBPLEDGECREATED = "[S] FE:3F PledgeReceiveSubPledgeCreated";
+	private final SubPledge _subPledge;
+	private final L2Clan _clan;
+	
 	/**
 	 * @param member
 	 */
@@ -36,7 +36,7 @@ public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 		_subPledge = subPledge;
 		_clan = clan;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -45,7 +45,7 @@ public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x40);
-
+		
 		writeD(0x01);
 		writeD(_subPledge.getId());
 		writeS(_subPledge.getName());
@@ -64,10 +64,11 @@ public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 		if (leader != null)
 			return leader.getName();
 		
-		_log.warn("SubPledgeLeader: " + leaderId + " is missing from clan: " + _clan.getName() + "[" + _clan.getClanId() + "]");
+		_log.warn("SubPledgeLeader: " + leaderId + " is missing from clan: " + _clan.getName() + "["
+				+ _clan.getClanId() + "]");
 		return "";
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -76,5 +77,5 @@ public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 	{
 		return _S__FE_3F_PLEDGERECEIVESUBPLEDGECREATED;
 	}
-
+	
 }

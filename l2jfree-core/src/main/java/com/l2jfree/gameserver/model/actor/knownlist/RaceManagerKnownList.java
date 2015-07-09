@@ -24,14 +24,14 @@ public class RaceManagerKnownList extends NpcKnownList
 {
 	// =========================================================
 	// Data Field
-
+	
 	// =========================================================
 	// Constructor
 	public RaceManagerKnownList(L2RaceManagerInstance activeChar)
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	@Override
@@ -39,7 +39,7 @@ public class RaceManagerKnownList extends NpcKnownList
 	{
 		if (!super.removeKnownObject(object))
 			return false;
-
+		
 		if (object instanceof L2PcInstance)
 		{
 			//_log.debugr("Sending delete monsrac info.");
@@ -47,21 +47,21 @@ public class RaceManagerKnownList extends NpcKnownList
 			for (int i = 0; i < 8; i++)
 			{
 				obj = new DeleteObject(MonsterRace.getInstance().getMonsters()[i]);
-				((L2PcInstance) object).sendPacket(obj);
+				((L2PcInstance)object).sendPacket(obj);
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2RaceManagerInstance getActiveChar()
 	{
-		return (L2RaceManagerInstance) _activeChar;
+		return (L2RaceManagerInstance)_activeChar;
 	}
 }

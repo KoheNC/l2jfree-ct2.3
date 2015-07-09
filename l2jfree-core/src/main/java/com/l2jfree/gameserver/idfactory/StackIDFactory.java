@@ -33,38 +33,38 @@ import com.l2jfree.L2DatabaseFactory;
  */
 public class StackIDFactory extends IdFactory
 {
-	private final static Log	_log			= LogFactory.getLog(IdFactory.class);
-
-	private int					_curOID;
-	private int					_tempOID;
-
-	private final Stack<Integer>		_freeOIDStack	= new Stack<Integer>();
-
+	private final static Log _log = LogFactory.getLog(IdFactory.class);
+	
+	private int _curOID;
+	private int _tempOID;
+	
+	private final Stack<Integer> _freeOIDStack = new Stack<Integer>();
+	
 	protected StackIDFactory()
 	{
 		super();
 		_curOID = FIRST_OID;
 		_tempOID = FIRST_OID;
-
+		
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
 			//con.createStatement().execute("drop table if exists tmp_obj_id");
-
+			
 			int[] tmp_obj_ids = extractUsedObjectIDTable();
 			if (tmp_obj_ids.length > 0)
 			{
 				_curOID = tmp_obj_ids[tmp_obj_ids.length - 1];
 			}
 			_log.debug("Max Id = " + _curOID);
-
+			
 			int N = tmp_obj_ids.length;
 			for (int idx = 0; idx < N; idx++)
 			{
 				N = insertUntil(tmp_obj_ids, idx, N, con);
 			}
-
+			
 			_curOID++;
 			_log.info("IdFactory: Next usable Object ID is: " + _curOID);
 			_initialized = true;
@@ -78,7 +78,7 @@ public class StackIDFactory extends IdFactory
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private int insertUntil(int[] tmp_obj_ids, int idx, int N, Connection con) throws SQLException
 	{
 		int id = tmp_obj_ids[idx];
@@ -107,7 +107,7 @@ public class StackIDFactory extends IdFactory
 				ps.close();
 			}
 		}
-
+		
 		//int hole = id - _curOID;
 		int hole = id - _tempOID;
 		if (hole > N - idx)
@@ -123,12 +123,12 @@ public class StackIDFactory extends IdFactory
 			_tempOID++;
 		return N - hole;
 	}
-
+	
 	public static IdFactory getInstance()
 	{
 		return _instance;
 	}
-
+	
 	@Override
 	public synchronized int getNextId()
 	{
@@ -142,7 +142,7 @@ public class StackIDFactory extends IdFactory
 		}
 		return id;
 	}
-
+	
 	/**
 	 * return a used Object ID back to the pool
 	 * @param id
@@ -152,13 +152,13 @@ public class StackIDFactory extends IdFactory
 	{
 		_freeOIDStack.push(id);
 	}
-
+	
 	@Override
 	public int size()
 	{
 		return FREE_OBJECT_ID_SIZE - _curOID + FIRST_OID + _freeOIDStack.size();
 	}
-
+	
 	@Override
 	public int getCurrentId()
 	{

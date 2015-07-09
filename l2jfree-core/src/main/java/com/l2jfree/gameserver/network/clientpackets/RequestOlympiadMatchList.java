@@ -24,8 +24,8 @@ import com.l2jfree.gameserver.model.olympiad.Olympiad;
  */
 public class RequestOlympiadMatchList extends L2GameClientPacket
 {
-	private static final String	_C__D0_13_REQUESTOLYMPIADMATCHLIST	= "[C] D0:13 RequestOlympiadMatchList";
-
+	private static final String _C__D0_13_REQUESTOLYMPIADMATCHLIST = "[C] D0:13 RequestOlympiadMatchList";
+	
 	/**
 	 * @param buf
 	 * @param client
@@ -34,7 +34,7 @@ public class RequestOlympiadMatchList extends L2GameClientPacket
 	protected void readImpl()
 	{
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.clientpackets.ClientBasePacket#runImpl()
 	 */
@@ -47,7 +47,7 @@ public class RequestOlympiadMatchList extends L2GameClientPacket
 		if (activeChar.inObserverMode())
 			Olympiad.sendMatchList(activeChar);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

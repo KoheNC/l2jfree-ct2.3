@@ -27,10 +27,10 @@ import com.l2jfree.gameserver.templates.item.L2Item;
 
 public class RequestPetUseItem extends L2GameClientPacket
 {
-	private static final String	_C__8A_REQUESTPETUSEITEM	= "[C] 8a RequestPetUseItem";
-
-	private int					_objectId;
-
+	private static final String _C__8A_REQUESTPETUSEITEM = "[C] 8a RequestPetUseItem";
+	
+	private int _objectId;
+	
 	/**
 	 * packet type id 0x8a
 	 * format:      cd
@@ -43,34 +43,34 @@ public class RequestPetUseItem extends L2GameClientPacket
 		//readQ();
 		//readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
-		L2PetInstance pet = (L2PetInstance) activeChar.getPet();
+		
+		L2PetInstance pet = (L2PetInstance)activeChar.getPet();
 		if (pet == null)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		L2ItemInstance item = pet.getInventory().getItemByObjectId(_objectId);
 		if (item == null)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (item.isWear())
 		{
 			requestFailed(SystemMessageId.PET_CANNOT_USE_ITEM);
 			return;
 		}
-
+		
 		if (activeChar.isAlikeDead() || pet.isDead())
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED);
@@ -78,16 +78,16 @@ public class RequestPetUseItem extends L2GameClientPacket
 			activeChar.sendPacket(sm);
 			return;
 		}
-
+		
 		if (_log.isDebugEnabled())
 			_log.debug(activeChar.getObjectId() + ": pet use item " + _objectId);
-
+		
 		if (!item.isEquipped())
 		{
 			if (!item.getItem().checkCondition(pet))
 				return;
 		}
-
+		
 		if (item.getItem().getBodyPart() == L2Item.SLOT_NECK)
 		{
 			if (item.getItem().getItemType() == L2ArmorType.PET)
@@ -96,7 +96,7 @@ public class RequestPetUseItem extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		//check if the item matches the pet
 		if ((PetDataTable.isWolf(pet.getNpcId()) && item.getItem().isForWolf())
 				|| (PetDataTable.isHatchling(pet.getNpcId()) && item.getItem().isForHatchling())
@@ -108,7 +108,7 @@ public class RequestPetUseItem extends L2GameClientPacket
 			useItem(pet, item, activeChar);
 			return;
 		}
-
+		
 		if (ItemHandler.getInstance().hasItemHandler(item.getItemId(), item))
 		{
 			useItem(pet, item, activeChar);
@@ -118,7 +118,7 @@ public class RequestPetUseItem extends L2GameClientPacket
 			activeChar.sendPacket(SystemMessageId.PET_CANNOT_USE_ITEM);
 		}
 	}
-
+	
 	private synchronized void useItem(L2PetInstance pet, L2ItemInstance item, L2PcInstance activeChar)
 	{
 		if (item.isEquipable())
@@ -155,10 +155,10 @@ public class RequestPetUseItem extends L2GameClientPacket
 						break;
 				}
 			}
-
+			
 			PetItemList pil = new PetItemList(pet);
 			activeChar.sendPacket(pil);
-
+			
 			pet.broadcastFullInfo();
 		}
 		else
@@ -169,7 +169,7 @@ public class RequestPetUseItem extends L2GameClientPacket
 			}
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.clientpackets.ClientBasePacket#getType()
 	 */

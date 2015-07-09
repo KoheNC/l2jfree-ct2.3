@@ -32,13 +32,13 @@ public class L2FortSiegeNpcInstance extends L2NpcWalkerInstance
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -61,16 +61,19 @@ public class L2FortSiegeNpcInstance extends L2NpcWalkerInstance
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		String par = "";
-		if (st.countTokens() >= 1) {par = st.nextToken();}
-
+		if (st.countTokens() >= 1)
+		{
+			par = st.nextToken();
+		}
+		
 		if (actualCommand.equalsIgnoreCase("Chat"))
 		{
 			int val = 0;
@@ -78,8 +81,12 @@ public class L2FortSiegeNpcInstance extends L2NpcWalkerInstance
 			{
 				val = Integer.parseInt(par);
 			}
-			catch (IndexOutOfBoundsException ioobe){}
-			catch (NumberFormatException nfe){}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+			}
+			catch (NumberFormatException nfe)
+			{
+			}
 			showMessageWindow(player, val);
 		}
 		else if (actualCommand.equalsIgnoreCase("register"))
@@ -96,23 +103,23 @@ public class L2FortSiegeNpcInstance extends L2NpcWalkerInstance
 			super.onBypassFeedback(player, command);
 		}
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player)
 	{
 		showMessageWindow(player, 0);
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player, int val)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
-
+		
 		String filename;
-
+		
 		if (val == 0)
 			filename = "data/html/fortress/merchant.htm";
 		else
 			filename = "data/html/fortress/merchant-" + val + ".htm";
-
+		
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));
@@ -124,7 +131,7 @@ public class L2FortSiegeNpcInstance extends L2NpcWalkerInstance
 		
 		player.sendPacket(html);
 	}
-
+	
 	@Override
 	public boolean hasRandomAnimation()
 	{

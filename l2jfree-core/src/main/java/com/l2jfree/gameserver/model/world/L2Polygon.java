@@ -83,7 +83,7 @@ public class L2Polygon implements Serializable
 		for (int i = 0; i < _nPoints - 1; i++)
 		{
 			if (((_yPoints[i] <= y) && (_yPoints[i + 1] > y)) // an upward crossing
-				|| ((_yPoints[i] > y) && (_yPoints[i + 1] <= y)))
+					|| ((_yPoints[i] > y) && (_yPoints[i + 1] <= y)))
 			{ // a downward crossing
 				// compute the actual edge-ray intersect x-coordinate
 				float vt = (float)(y - _yPoints[i]) / (_yPoints[i + 1] - _yPoints[i]);

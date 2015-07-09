@@ -27,24 +27,24 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class RequestConfirmRefinerItem extends AbstractRefinePacket
 {
 	private static final String _C__D0_2A_REQUESTCONFIRMREFINERITEM = "[C] D0:2A RequestConfirmRefinerItem";
-
+	
 	private int _targetItemObjId;
 	private int _refinerItemObjId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_targetItemObjId = readD();
 		_refinerItemObjId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2ItemInstance targetItem = activeChar.getInventory().getItemByObjectId(_targetItemObjId);
 		L2ItemInstance refinerItem = activeChar.getInventory().getItemByObjectId(_refinerItemObjId);
 		if (targetItem == null || refinerItem == null)
@@ -52,7 +52,7 @@ public class RequestConfirmRefinerItem extends AbstractRefinePacket
 			requestFailed(SystemMessageId.AUGMENTATION_FAILED_DUE_TO_INAPPROPRIATE_CONDITIONS);
 			return;
 		}
-
+		
 		if (!isValid(activeChar))
 		{
 			sendAF();
@@ -63,7 +63,7 @@ public class RequestConfirmRefinerItem extends AbstractRefinePacket
 			requestFailed(SystemMessageId.THIS_IS_NOT_A_SUITABLE_ITEM);
 			return;
 		}
-
+		
 		final int refinerItemId = refinerItem.getItem().getItemId();
 		final int grade = targetItem.getItem().getItemGrade();
 		final LifeStone ls = getLifeStone(refinerItemId);
@@ -72,13 +72,13 @@ public class RequestConfirmRefinerItem extends AbstractRefinePacket
 		SystemMessage sm = new SystemMessage(SystemMessageId.REQUIRES_S1_S2);
 		sm.addItemNumber(gemStoneCount);
 		sm.addItemName(gemStoneId);
-
+		
 		sendPacket(new ExPutIntensiveResultForVariationMake(_refinerItemObjId, refinerItemId, gemStoneId, gemStoneCount));
 		sendPacket(sm);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

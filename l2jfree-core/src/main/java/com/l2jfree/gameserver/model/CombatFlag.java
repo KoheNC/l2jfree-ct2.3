@@ -24,36 +24,36 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 
 public class CombatFlag
 {
-	protected L2PcInstance	_player		= null;
-	public int				playerId	= 0;
-	private L2ItemInstance	_item		= null;
-
-	private final Location		_location;
-	public L2ItemInstance	itemInstance;
-
-	private final int				_itemId;
-
-//	private final int				_heading;
-//	private final int				_fortId;
-
+	protected L2PcInstance _player = null;
+	public int playerId = 0;
+	private L2ItemInstance _item = null;
+	
+	private final Location _location;
+	public L2ItemInstance itemInstance;
+	
+	private final int _itemId;
+	
+	//	private final int				_heading;
+	//	private final int				_fortId;
+	
 	// =========================================================
 	// Constructor
 	public CombatFlag(int fort_id, int x, int y, int z, int heading, int item_id)
 	{
-//		_fortId = fort_id;
-		_location = new Location(x,y,z,heading);
-//		_heading = heading;
+		//		_fortId = fort_id;
+		_location = new Location(x, y, z, heading);
+		//		_heading = heading;
 		_itemId = item_id;
 	}
-
+	
 	public synchronized void spawnMe()
 	{
 		// Init the dropped L2ItemInstance and add it in the world as a visible object at the position where mob was last
 		L2ItemInstance i = ItemTable.getInstance().createItem("Combat", _itemId, 1, null, null);
-		i.spawnMe(_location.getX(), _location.getY(),  _location.getZ());
+		i.spawnMe(_location.getX(), _location.getY(), _location.getZ());
 		itemInstance = i;
 	}
-
+	
 	public synchronized void unSpawnMe()
 	{
 		if (_player != null)
@@ -64,7 +64,7 @@ public class CombatFlag
 			itemInstance.decayMe();
 		}
 	}
-
+	
 	public boolean activate(L2PcInstance player, L2ItemInstance item)
 	{
 		if (player.isMounted())
@@ -72,19 +72,19 @@ public class CombatFlag
 			player.sendPacket(SystemMessageId.NO_CONDITION_TO_EQUIP);
 			return false;
 		}
-
+		
 		// Player holding it data
 		_player = player;
 		playerId = _player.getObjectId();
 		itemInstance = null;
-
+		
 		// Equip with the weapon
 		_item = item;
 		_player.getInventory().equipItemAndRecord(_item);
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1_EQUIPPED);
 		sm.addItemName(_item);
 		_player.sendPacket(sm);
-
+		
 		// Refresh inventory
 		if (!Config.FORCE_INVENTORY_UPDATE)
 		{
@@ -98,10 +98,10 @@ public class CombatFlag
 		// Refresh player stats
 		_player.broadcastUserInfo();
 		_player.setCombatFlagEquipped(true);
-
+		
 		return true;
 	}
-
+	
 	public void dropIt()
 	{
 		// Reset player stats

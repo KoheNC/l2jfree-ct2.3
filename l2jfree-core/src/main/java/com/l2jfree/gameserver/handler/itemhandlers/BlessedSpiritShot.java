@@ -21,15 +21,16 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public final class BlessedSpiritShot implements IItemHandler
 {
-	private static final int[]	ITEM_IDS	=
-											{ 3947, 3948, 3949, 3950, 3951, 3952, 22072, 22073, 22074, 22075, 22076 };
-
+	private static final int[] ITEM_IDS = { 3947, 3948, 3949, 3950, 3951, 3952, 22072, 22073, 22074, 22075, 22076 };
+	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (playable instanceof L2PcInstance)
 			playable.getShots().chargeBlessedSpiritshot(item);
 	}
-
+	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

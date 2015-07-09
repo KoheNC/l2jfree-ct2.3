@@ -31,15 +31,15 @@ import com.l2jfree.loginserver.dao.GameserversDAO;
  */
 public class GameserversServices
 {
-	private static Log		_log	= LogFactory.getLog(GameserversServices.class);
-
-	private GameserversDAO	__dao	= null;
-
+	private static Log _log = LogFactory.getLog(GameserversServices.class);
+	
+	private GameserversDAO __dao = null;
+	
 	public void setGameserversDAO(GameserversDAO dao)
 	{
 		__dao = dao;
 	}
-
+	
 	/**
 	 * Return list of gameservers
 	 * @return
@@ -57,7 +57,7 @@ public class GameserversServices
 			return new ArrayList<Gameservers>();
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param id - the server id
@@ -75,7 +75,7 @@ public class GameserversServices
 			return null;
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param gs
@@ -93,7 +93,7 @@ public class GameserversServices
 			return -1;
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param id
@@ -109,7 +109,7 @@ public class GameserversServices
 			_log.warn("Error while deleting gameserver :" + e, e);
 		}
 	}
-
+	
 	/**
 	 * @param entities
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeAll()

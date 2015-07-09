@@ -17,18 +17,18 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class EnchantResult extends L2GameServerPacket
 {
 	private static final String _S__87_ENCHANTRESULT = "[S] 87 EnchantResult";
-
+	
 	private final int _result;
 	private final int _crystal;
 	private final long _count;
-
+	
 	public EnchantResult(int result, int crystal, long count)
 	{
 		_result = result;
 		_crystal = crystal;
 		_count = count;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -37,7 +37,7 @@ public class EnchantResult extends L2GameServerPacket
 		writeD(_crystal);
 		writeCompQ(_count);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

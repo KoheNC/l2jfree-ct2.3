@@ -23,12 +23,13 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class GetOnVehicle extends L2GameServerPacket
 {
-
+	
 	private final int _x;
 	private final int _y;
 	private final int _z;
 	private final L2PcInstance _activeChar;
 	private final L2BoatInstance _boat;
+	
 	/**
 	 * @param activeChar
 	 * @param boat
@@ -46,7 +47,7 @@ public class GetOnVehicle extends L2GameServerPacket
 		
 		_activeChar.setBoat(_boat);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -56,12 +57,12 @@ public class GetOnVehicle extends L2GameServerPacket
 		writeC(0x6e);
 		writeD(_activeChar.getObjectId());
 		writeD(_boat.getObjectId());
-        writeD(_x);
-        writeD(_y);
-        writeD(_z);
+		writeD(_x);
+		writeD(_y);
+		writeD(_z);
 		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

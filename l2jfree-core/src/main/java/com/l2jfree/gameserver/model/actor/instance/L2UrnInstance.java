@@ -35,7 +35,7 @@ public final class L2UrnInstance extends L2NpcInstance
 	{
 		super(objectId, template);
 	}
-
+	
 	protected static int _ingredient1;
 	protected static int _ingCount1;
 	protected static int _ingredient2;
@@ -45,12 +45,13 @@ public final class L2UrnInstance extends L2NpcInstance
 	protected static int _mixTemp;
 	protected static int mixChance;
 	protected static int tempChance;
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
-		if (!canTarget(player)) return;
-
+		if (!canTarget(player))
+			return;
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -72,25 +73,25 @@ public final class L2UrnInstance extends L2NpcInstance
 		}
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		String val = "";
 		if (st.countTokens() >= 1)
 		{
 			val = st.nextToken();
 		}
-
+		
 		if (actualCommand.equalsIgnoreCase("make_low"))
 		{
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			if (!val.isEmpty())
 			{
-				String filename = "data/html/urn/low" +val+ ".htm";
+				String filename = "data/html/urn/low" + val + ".htm";
 				NpcHtmlMessage html = new NpcHtmlMessage(1);
 				html.setFile(filename);
 				html.replace("%objectId%", String.valueOf(getObjectId()));
@@ -98,7 +99,7 @@ public final class L2UrnInstance extends L2NpcInstance
 				player.sendPacket(html);
 				return;
 			}
-
+			
 			String filename = "data/html/urn/low.htm";
 			NpcHtmlMessage html = new NpcHtmlMessage(1);
 			html.setFile(filename);
@@ -111,7 +112,7 @@ public final class L2UrnInstance extends L2NpcInstance
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			if (!val.isEmpty())
 			{
-				String filename = "data/html/urn/high" +val+ ".htm";
+				String filename = "data/html/urn/high" + val + ".htm";
 				NpcHtmlMessage html = new NpcHtmlMessage(1);
 				html.setFile(filename);
 				html.replace("%objectId%", String.valueOf(getObjectId()));
@@ -119,7 +120,7 @@ public final class L2UrnInstance extends L2NpcInstance
 				player.sendPacket(html);
 				return;
 			}
-
+			
 			String filename = "data/html/urn/high.htm";
 			NpcHtmlMessage html = new NpcHtmlMessage(1);
 			html.setFile(filename);
@@ -139,10 +140,10 @@ public final class L2UrnInstance extends L2NpcInstance
 				html.replace("%objectId%", String.valueOf(getObjectId()));
 				html.replace("%npcname%", getName());
 				player.sendPacket(html);
-
+				
 				return;
 			}
-
+			
 			String filename = "data/html/urn/nostone.htm";
 			NpcHtmlMessage html = new NpcHtmlMessage(1);
 			html.setFile(filename);
@@ -177,7 +178,7 @@ public final class L2UrnInstance extends L2NpcInstance
 				val = st.nextToken();
 				String prodName1 = val;
 				runUrnMix(player, ingId1, ingCount1, ingId2, ingCount2, prodId, tempSet, mixLvl, prodName1);
-
+				
 			}
 		}
 		else if (actualCommand.equalsIgnoreCase("urn_main"))
@@ -185,14 +186,15 @@ public final class L2UrnInstance extends L2NpcInstance
 			showMessageWindow(player);
 		}
 	}
-
-	protected void runUrnMix(L2PcInstance player, int ingId1, long ingCount1, int ingId2, long ingCount2, int prodId, int tempSet, boolean mixLvl, String prodName2)
+	
+	protected void runUrnMix(L2PcInstance player, int ingId1, long ingCount1, int ingId2, long ingCount2, int prodId,
+			int tempSet, boolean mixLvl, String prodName2)
 	{
 		boolean correctMix1 = false;
 		boolean correctMix2 = false;
 		int ingHas1 = getUrnItemsCount(player, ingId1);
 		int ingHas2 = getUrnItemsCount(player, ingId2);
-
+		
 		// See if they have the correct components, first ing1 then ing2
 		if (ingHas1 >= ingCount1)
 		{
@@ -214,7 +216,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		{
 			takeUrnItems(player, ingId2, ingHas2);
 		}
-
+		
 		// Check if mix is successful
 		if (checkUrnSuccess(tempSet) && correctMix1 && correctMix2)
 		{
@@ -226,41 +228,41 @@ public final class L2UrnInstance extends L2NpcInstance
 			showFailureWindow(player);
 		}
 	}
-
+	
 	public void takeUrnItems(L2PcInstance player, int itemId, long count)
 	{
 		// Get object item from player's inventory list
 		L2ItemInstance item = player.getInventory().getItemByItemId(itemId);
-
+		
 		if (item == null)
 			return;
-
+		
 		// Tests on count value in order not to have negative value
 		if (count < 0 || count > item.getCount())
 			count = item.getCount();
-
+		
 		// Destroy the quantity of items wanted
 		if (itemId == PcInventory.ADENA_ID)
 			player.reduceAdena("Quest", count, player, true);
 		else
 			player.destroyItemByItemId("Quest", itemId, count, player, true);
 	}
-
+	
 	public void giveUrnItems(L2PcInstance player, int itemId, long count, int enchantlevel)
 	{
 		if (count <= 0)
 			return;
-
+		
 		// Set quantity of item
-
+		
 		// Add items to player's inventory
 		L2ItemInstance item = player.getInventory().addItem("Quest", itemId, count, player, player.getTarget());
-
+		
 		if (item == null)
 			return;
 		if (enchantlevel > 0)
 			item.setEnchantLevel(enchantlevel);
-
+		
 		// If item for reward is gold, send message of gold reward to client
 		if (itemId == PcInventory.ADENA_ID)
 		{
@@ -286,22 +288,22 @@ public final class L2UrnInstance extends L2NpcInstance
 			}
 		}
 	}
-
+	
 	public void playSound(L2PcInstance player, String sound)
 	{
 		player.sendPacket(new PlaySound(0, sound));
 	}
-
+	
 	public int getUrnItemsCount(L2PcInstance player, int itemId)
 	{
 		int count = 0;
-
-		for (L2ItemInstance item: player.getInventory().getItems())
+		
+		for (L2ItemInstance item : player.getInventory().getItems())
 			if (item.getItemId() == itemId)
 				count += item.getCount();
 		return count;
 	}
-
+	
 	protected boolean checkUrnSuccess(int urnTemperature)
 	{
 		int mixFail = Config.ALT_URN_TEMP_FAIL;
@@ -310,13 +312,13 @@ public final class L2UrnInstance extends L2NpcInstance
 			mixFail = 10;
 		else if (mixFail > 40)
 			mixFail = 40;
-
+		
 		mixChance = (Rnd.get(100));
 		tempChance = (100 - (mixTemperature * mixFail));
-
+		
 		return (mixChance < tempChance);
 	}
-
+	
 	public void showSuccessWindow(L2PcInstance player, boolean urnLvl, String prodName3, int prodNum3)
 	{
 		String rankName = "";
@@ -338,31 +340,31 @@ public final class L2UrnInstance extends L2NpcInstance
 		{
 			urnEffect = "Black smoke billows forth from the urn and with a loud bang you are knocked to the floor.";
 		}
-
+		
 		if (urnLvl)
 		{
 			rankName = "Apprentice Alchemist";
 		}
 		else
 			rankName = "Master Alchemist";
-
+		
 		L2TextBuilder msg = L2TextBuilder.newInstance("<html><body>");
 		msg.append("%npcname%:<br><br>");
 		msg.append(urnEffect + "<BR>");
 		msg.append("You peer into the urn to see " + prodName3 + " (" + prodNum3 + ") !<br>");
 		msg.append("<font color=\"LEVEL\">Success!</font><br>");
-		msg.append("You may yet become a " +rankName+ " !<br>");
+		msg.append("You may yet become a " + rankName + " !<br>");
 		msg.append("<table width=200>");
 		msg.append("<tr><td><button value=\"Back\" action=\"bypass -h npc_%objectId%_urn_main\" width=80 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		msg.append("</table>");
 		msg.append("</body></html>");
-
+		
 		sendHtmlMessage(player, msg.moveToString());
 	}
-
+	
 	public void showFailureWindow(L2PcInstance player)
 	{
-
+		
 		L2TextBuilder msg = L2TextBuilder.newInstance("<html><body>");
 		msg.append("%npcname%:<br><br>");
 		msg.append("The contents burble and boil, smoke and steam rise from the urn.<BR>");
@@ -372,10 +374,10 @@ public final class L2UrnInstance extends L2NpcInstance
 		msg.append("<tr><td><button value=\"Back\" action=\"bypass -h npc_%objectId%_urn_main\" width=80 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		msg.append("</table>");
 		msg.append("</body></html>");
-
+		
 		sendHtmlMessage(player, msg.moveToString());
 	}
-
+	
 	public void showMessageWindow(L2PcInstance player)
 	{
 		L2TextBuilder msg = L2TextBuilder.newInstance("<html><body>");
@@ -385,10 +387,10 @@ public final class L2UrnInstance extends L2NpcInstance
 		msg.append("<tr><td><a action=\"bypass -h npc_%objectId%_urn_stone\">Insert Stone</a></td></tr>");
 		msg.append("</table>");
 		msg.append("</body></html>");
-
+		
 		sendHtmlMessage(player, msg.moveToString());
 	}
-
+	
 	private void sendHtmlMessage(L2PcInstance player, String htmlMessage)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);

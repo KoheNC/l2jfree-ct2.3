@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.skills.Env;
 final class ConditionTargetRace extends Condition
 {
 	private final Race _race;
-
+	
 	public ConditionTargetRace(Race race)
 	{
 		_race = race;
@@ -33,6 +33,6 @@ final class ConditionTargetRace extends Condition
 		if (!(env.target instanceof L2PcInstance))
 			return false;
 		
-		return ((L2PcInstance) env.target).getRace() == _race;
+		return ((L2PcInstance)env.target).getRace() == _race;
 	}
 }

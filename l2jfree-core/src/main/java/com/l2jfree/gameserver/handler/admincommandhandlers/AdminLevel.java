@@ -20,36 +20,32 @@ import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 public class AdminLevel implements IAdminCommandHandler
 {
-	private static final String[][]	ADMIN_COMMANDS	=
-													{
-													{ "admin_remlevel", // remove level amount from your target
-
-			"Remove amount of levels from your target (player or pet).",
-			"Usage: addlevel <num>",
-			"Options:",
-			"num - amount of levels to add/remove", },
-													{ "admin_addlevel", // add a level amount to your target
-
-			"Add a level amount to your target (player or pet).",
-			"Usage: addlevel <num>",
-			"Options:",
-			"num - amount of levels to add/remove", },
-													{ "admin_setlevel", // set level of your target
-
-			"Set level of your target (player or pet).",
-			"Usage: setlevel <num>",
-			"Options:",
-			"num - level to set",					} };
-
+	private static final String[][] ADMIN_COMMANDS = {
+			{
+					"admin_remlevel", // remove level amount from your target
+					
+					"Remove amount of levels from your target (player or pet).", "Usage: addlevel <num>", "Options:",
+					"num - amount of levels to add/remove", },
+			{
+					"admin_addlevel", // add a level amount to your target
+					
+					"Add a level amount to your target (player or pet).", "Usage: addlevel <num>", "Options:",
+					"num - amount of levels to add/remove", },
+			{
+					"admin_setlevel", // set level of your target
+					
+					"Set level of your target (player or pet).", "Usage: setlevel <num>", "Options:",
+					"num - level to set", } };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
-
+		
 		String cmd = st.nextToken(); // get command
-
+		
 		if (cmd.equals("admin_addlevel") || cmd.equals("admin_setlevel") || cmd.equals("admin_remlevel"))
 		{
 			int reslevel = 0;
@@ -57,36 +53,38 @@ public class AdminLevel implements IAdminCommandHandler
 			long xpcur = 0;
 			long xpres = 0;
 			int lvl = 0;
-
+			
 			try
 			{
 				lvl = Integer.parseInt(st.nextToken());
-
+				
 			}
 			catch (Exception e)
 			{
 			}
-
+			
 			L2Playable target;
-
+			
 			if (activeChar.getTarget() instanceof L2Playable && lvl > 0)
 			{
-				target = (L2Playable) activeChar.getTarget();
-
+				target = (L2Playable)activeChar.getTarget();
+				
 				curlevel = target.getLevel();
-
-				reslevel = cmd.equals("admin_addlevel") ? (curlevel + lvl) : cmd.equals("admin_remlevel") ? (curlevel - lvl) : lvl;
-
+				
+				reslevel =
+						cmd.equals("admin_addlevel") ? (curlevel + lvl) : cmd.equals("admin_remlevel")
+								? (curlevel - lvl) : lvl;
+				
 				try
 				{
 					xpcur = target.getStat().getExp();
 					xpres = target.getStat().getExpForLevel(reslevel);
-
+					
 					if (xpcur > xpres)
 						target.getStat().removeExp(xpcur - xpres);
 					else
 						target.getStat().addExp(xpres - xpcur);
-
+					
 				}
 				catch (Exception e)
 				{
@@ -100,7 +98,7 @@ public class AdminLevel implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	/**
 	 * Show tips about command usage and syntax.
 	 * @param command admin command name
@@ -116,7 +114,8 @@ public class AdminLevel implements IAdminCommandHandler
 			}
 		}
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		String[] _adminCommandsOnly = new String[ADMIN_COMMANDS.length];

@@ -26,28 +26,28 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExPartyRoomMember extends L2GameServerPacket
 {
-	private static final String	_S__FE_08_EXPARTYROOMMEMBER = "[S] FE:08 ExPartyRoomMember";
-
-	private final L2PartyRoom	_room;
-	private final boolean		_leader;
-
+	private static final String _S__FE_08_EXPARTYROOMMEMBER = "[S] FE:08 ExPartyRoomMember";
+	
+	private final L2PartyRoom _room;
+	private final boolean _leader;
+	
 	public ExPartyRoomMember(L2PartyRoom room)
 	{
 		this(room, false);
 	}
-
+	
 	public ExPartyRoomMember(L2PartyRoom room, boolean leader)
 	{
 		_room = room;
 		_leader = leader;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x08);
-
+		
 		writeD(_leader);
 		writeD(_room.getMemberCount());
 		L2PcInstance leader = _room.getLeader();
@@ -67,7 +67,7 @@ public class ExPartyRoomMember extends L2GameServerPacket
 				writeD(0x00);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

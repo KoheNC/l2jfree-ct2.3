@@ -22,10 +22,10 @@ import com.l2jfree.gameserver.network.serverpackets.QuestList;
 
 public class RequestQuestAbort extends L2GameClientPacket
 {
-	private static final String	_C__64_REQUESTQUESTABORT	= "[C] 64 RequestQuestAbort";
-
-	private int					_questId;
-
+	private static final String _C__64_REQUESTQUESTABORT = "[C] 64 RequestQuestAbort";
+	
+	private int _questId;
+	
 	/**
 	 * packet type id 0x64<p>
 	 */
@@ -34,14 +34,14 @@ public class RequestQuestAbort extends L2GameClientPacket
 	{
 		_questId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		Quest qe = QuestManager.getInstance().getQuest(_questId);
 		if (qe != null)
 		{
@@ -57,18 +57,19 @@ public class RequestQuestAbort extends L2GameClientPacket
 			else
 			{
 				if (_log.isDebugEnabled())
-					_log.debug("Player '"+activeChar.getName()+"' try to abort quest "+qe.getName()+" but he didn't have it started.");
+					_log.debug("Player '" + activeChar.getName() + "' try to abort quest " + qe.getName()
+							+ " but he didn't have it started.");
 			}
 		}
 		else
 		{
 			if (_log.isDebugEnabled())
-				_log.warn("Quest (id='"+_questId+"') not found.");
+				_log.warn("Quest (id='" + _questId + "') not found.");
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -38,7 +38,7 @@ public final class KnownListUpdateTaskManager extends AbstractPeriodicTaskManage
 		for (L2Object obj : L2World.getInstance().getAllVisibleObjects())
 			obj.getKnownList().tryRemoveObjects();
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

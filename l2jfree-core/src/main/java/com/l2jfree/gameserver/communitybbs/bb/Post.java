@@ -33,21 +33,21 @@ import com.l2jfree.gameserver.communitybbs.Manager.PostBBSManager;
  */
 public class Post
 {
-	private final static Log	_log	= LogFactory.getLog(Post.class);
-
+	private final static Log _log = LogFactory.getLog(Post.class);
+	
 	public class CPost
 	{
-		public int		postId;
-		public String	postOwner;
-		public int		postOwnerId;
-		public long		postDate;
-		public int		postTopicId;
-		public int		postForumId;
-		public String	postTxt;
+		public int postId;
+		public String postOwner;
+		public int postOwnerId;
+		public long postDate;
+		public int postTopicId;
+		public int postForumId;
+		public String postTxt;
 	}
-
-	private final List<CPost>	_post;
-
+	
+	private final List<CPost> _post;
+	
 	/**
 	 * @param restore
 	 * @param t
@@ -66,17 +66,17 @@ public class Post
 		cp.postTxt = txt;
 		_post.add(cp);
 		insertindb(cp);
-
+		
 	}
-
+	
 	public void insertindb(CPost cp)
 	{
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO posts (post_id,post_owner_name,post_ownerid,post_date,post_topic_id,post_forum_id,post_txt) values (?,?,?,?,?,?,?)");
+			PreparedStatement statement =
+					con.prepareStatement("INSERT INTO posts (post_id,post_owner_name,post_ownerid,post_date,post_topic_id,post_forum_id,post_txt) values (?,?,?,?,?,?,?)");
 			statement.setInt(1, cp.postId);
 			statement.setString(2, cp.postOwner);
 			statement.setInt(3, cp.postOwnerId);
@@ -96,13 +96,13 @@ public class Post
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public Post(Topic t)
 	{
 		_post = new FastList<CPost>();
 		load(t);
 	}
-
+	
 	public CPost getCPost(int id)
 	{
 		int i = 0;
@@ -115,7 +115,7 @@ public class Post
 		}
 		return null;
 	}
-
+	
 	public void deleteme(Topic t)
 	{
 		PostBBSManager.getInstance().delPostByTopic(t);
@@ -123,7 +123,8 @@ public class Post
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("DELETE FROM posts WHERE post_forum_id=? AND post_topic_id=?");
+			PreparedStatement statement =
+					con.prepareStatement("DELETE FROM posts WHERE post_forum_id=? AND post_topic_id=?");
 			statement.setInt(1, t.getForumID());
 			statement.setInt(2, t.getID());
 			statement.execute();
@@ -138,7 +139,7 @@ public class Post
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * @param t
 	 */
@@ -148,7 +149,8 @@ public class Post
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT * FROM posts WHERE post_forum_id=? AND post_topic_id=? ORDER BY post_id ASC");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT * FROM posts WHERE post_forum_id=? AND post_topic_id=? ORDER BY post_id ASC");
 			statement.setInt(1, t.getForumID());
 			statement.setInt(2, t.getID());
 			ResultSet result = statement.executeQuery();
@@ -176,7 +178,7 @@ public class Post
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * @param i
 	 */
@@ -187,7 +189,8 @@ public class Post
 		{
 			CPost cp = getCPost(i);
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("UPDATE posts SET post_txt=? WHERE post_id=? AND post_topic_id=? AND post_forum_id=?");
+			PreparedStatement statement =
+					con.prepareStatement("UPDATE posts SET post_txt=? WHERE post_id=? AND post_topic_id=? AND post_forum_id=?");
 			statement.setString(1, cp.postTxt);
 			statement.setInt(2, cp.postId);
 			statement.setInt(3, cp.postTopicId);

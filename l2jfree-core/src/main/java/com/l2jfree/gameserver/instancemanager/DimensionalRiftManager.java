@@ -51,32 +51,34 @@ import com.l2jfree.tools.random.Rnd;
 */
 public class DimensionalRiftManager
 {
-	protected static Log										_log							= LogFactory.getLog(DimensionalRiftManager.class);
-
-	private final FastMap<Byte, FastMap<Byte, DimensionalRiftRoom>>	_rooms							= new FastMap<Byte, FastMap<Byte, DimensionalRiftRoom>>();
-	private final static int									DIMENSIONAL_FRAGMENT_ITEM_ID	= 7079;
-	private final static int									MAX_PARTY_PER_AREA				= 3;
-
+	protected static Log _log = LogFactory.getLog(DimensionalRiftManager.class);
+	
+	private final FastMap<Byte, FastMap<Byte, DimensionalRiftRoom>> _rooms =
+			new FastMap<Byte, FastMap<Byte, DimensionalRiftRoom>>();
+	private final static int DIMENSIONAL_FRAGMENT_ITEM_ID = 7079;
+	private final static int MAX_PARTY_PER_AREA = 3;
+	
 	public static DimensionalRiftManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private DimensionalRiftManager()
 	{
 		new Quest(635, "RiftQuest", "Dummy Quest shown in players' questlist when inside the rift");
 		load();
 	}
-
+	
 	public DimensionalRiftRoom getRoom(byte type, byte room)
 	{
 		return _rooms.get(type) == null ? null : _rooms.get(type).get(room);
 	}
-
+	
 	public boolean isAreaAvailable(byte area)
 	{
 		FastMap<Byte, DimensionalRiftRoom> tmap = _rooms.get(area);
-		if (tmap == null) return false;
+		if (tmap == null)
+			return false;
 		int used = 0;
 		for (DimensionalRiftRoom room : tmap.values())
 		{
@@ -85,14 +87,14 @@ public class DimensionalRiftManager
 		}
 		return used <= MAX_PARTY_PER_AREA;
 	}
-
+	
 	public boolean isRoomAvailable(byte area, byte room)
 	{
 		if (_rooms.get(area) == null || _rooms.get(area).get(room) == null)
 			return false;
 		return !_rooms.get(area).get(room).isUsed();
 	}
-
+	
 	public void load()
 	{
 		int countGood = 0, countBad = 0;
@@ -101,11 +103,11 @@ public class DimensionalRiftManager
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setValidating(true);
 			factory.setIgnoringComments(true);
-
+			
 			File file = new File(Config.DATAPACK_ROOT, "data/dimensionalRift.xml");
 			if (!file.exists())
 				throw new IOException();
-
+			
 			Document doc = factory.newDocumentBuilder().parse(file);
 			NamedNodeMap attrs;
 			byte type, roomId;
@@ -114,7 +116,7 @@ public class DimensionalRiftManager
 			L2NpcTemplate template;
 			int xMin = 0, xMax = 0, yMin = 0, yMax = 0, zMin = 0, zMax = 0, xT = 0, yT = 0, zT = 0;
 			boolean isBossRoom;
-
+			
 			for (Node rift = doc.getFirstChild(); rift != null; rift = rift.getNextSibling())
 			{
 				if ("rift".equalsIgnoreCase(rift.getNodeName()))
@@ -125,7 +127,7 @@ public class DimensionalRiftManager
 						{
 							attrs = area.getAttributes();
 							type = Byte.parseByte(attrs.getNamedItem("type").getNodeValue());
-
+							
 							for (Node room = area.getFirstChild(); room != null; room = room.getNextSibling())
 							{
 								if ("room".equalsIgnoreCase(room.getNodeName()))
@@ -134,8 +136,9 @@ public class DimensionalRiftManager
 									roomId = Byte.parseByte(attrs.getNamedItem("id").getNodeValue());
 									Node boss = attrs.getNamedItem("isBossRoom");
 									isBossRoom = boss != null && Boolean.parseBoolean(boss.getNodeValue());
-
-									for (Node coord = room.getFirstChild(); coord != null; coord = coord.getNextSibling())
+									
+									for (Node coord = room.getFirstChild(); coord != null; coord =
+											coord.getNextSibling())
 									{
 										if ("teleport".equalsIgnoreCase(coord.getNodeName()))
 										{
@@ -155,14 +158,17 @@ public class DimensionalRiftManager
 											zMax = Integer.parseInt(attrs.getNamedItem("zMax").getNodeValue());
 										}
 									}
-
+									
 									if (!_rooms.containsKey(type))
 										_rooms.put(type, new FastMap<Byte, DimensionalRiftRoom>());
-
-									_rooms.get(type).put(roomId,
-											new DimensionalRiftRoom(type, roomId, xMin, xMax, yMin, yMax, zMin, zMax, xT, yT, zT, isBossRoom));
-
-									for (Node spawn = room.getFirstChild(); spawn != null; spawn = spawn.getNextSibling())
+									
+									_rooms.get(type).put(
+											roomId,
+											new DimensionalRiftRoom(type, roomId, xMin, xMax, yMin, yMax, zMin, zMax,
+													xT, yT, zT, isBossRoom));
+									
+									for (Node spawn = room.getFirstChild(); spawn != null; spawn =
+											spawn.getNextSibling())
 									{
 										if ("spawn".equalsIgnoreCase(spawn.getNodeName()))
 										{
@@ -170,7 +176,7 @@ public class DimensionalRiftManager
 											mobId = Integer.parseInt(attrs.getNamedItem("mobId").getNodeValue());
 											delay = Integer.parseInt(attrs.getNamedItem("delay").getNodeValue());
 											count = Integer.parseInt(attrs.getNamedItem("count").getNodeValue());
-
+											
 											template = NpcTable.getInstance().getTemplate(mobId);
 											if (template == null)
 											{
@@ -184,15 +190,16 @@ public class DimensionalRiftManager
 											{
 												_log.warn("Room " + roomId + " in Type " + type + " not found!");
 											}
-
+											
 											for (int i = 0; i < count; i++)
 											{
 												DimensionalRiftRoom riftRoom = _rooms.get(type).get(roomId);
 												x = riftRoom.getRandomX();
 												y = riftRoom.getRandomY();
 												z = riftRoom.getTeleportCoords()[2];
-
-												if (template != null && _rooms.containsKey(type) && _rooms.get(type).containsKey(roomId))
+												
+												if (template != null && _rooms.containsKey(type)
+														&& _rooms.get(type).containsKey(roomId))
 												{
 													spawnDat = new L2Spawn(template);
 													spawnDat.setAmount(1);
@@ -225,14 +232,14 @@ public class DimensionalRiftManager
 		}
 		int typeSize = _rooms.keySet().size();
 		int roomSize = 0;
-
+		
 		for (Byte b : _rooms.keySet())
 			roomSize += _rooms.get(b).keySet().size();
-
+		
 		_log.info("DimensionalRiftManager: Loaded " + typeSize + " room types with " + roomSize + " rooms.");
 		_log.info("DimensionalRiftManager: Loaded " + countGood + " dimensional rift spawns, " + countBad + " errors.");
 	}
-
+	
 	public void reload()
 	{
 		for (Byte b : _rooms.keySet())
@@ -246,32 +253,33 @@ public class DimensionalRiftManager
 		_rooms.clear();
 		load();
 	}
-
+	
 	public boolean checkIfInRiftZone(int x, int y, int z, boolean excludePeaceZone)
 	{
 		if (excludePeaceZone)
-			return _rooms.get((byte) 0).get((byte) 1).checkIfInZone(x, y, z) && !_rooms.get((byte) 0).get((byte) 0).checkIfInZone(x, y, z);
-
-		return _rooms.get((byte) 0).get((byte) 1).checkIfInZone(x, y, z);
+			return _rooms.get((byte)0).get((byte)1).checkIfInZone(x, y, z)
+					&& !_rooms.get((byte)0).get((byte)0).checkIfInZone(x, y, z);
+		
+		return _rooms.get((byte)0).get((byte)1).checkIfInZone(x, y, z);
 	}
-
+	
 	public boolean checkIfInPeaceZone(int x, int y, int z)
 	{
-		return _rooms.get((byte) 0).get((byte) 0).checkIfInZone(x, y, z);
+		return _rooms.get((byte)0).get((byte)0).checkIfInZone(x, y, z);
 	}
-
+	
 	public void teleportToWaitingRoom(L2PcInstance player)
 	{
-		int[] coords = getRoom((byte) 0, (byte) 0).getTeleportCoords();
+		int[] coords = getRoom((byte)0, (byte)0).getTeleportCoords();
 		player.teleToLocation(coords[0], coords[1], coords[2]);
 	}
-
+	
 	public Location getWaitingRoomTeleport()
 	{
-		int[] coords = getRoom((byte) 0, (byte) 0).getTeleportCoords();
+		int[] coords = getRoom((byte)0, (byte)0).getTeleportCoords();
 		return new Location(coords[0], coords[1], coords[2]);
 	}
-
+	
 	public void start(L2PcInstance player, byte type, L2Npc npc)
 	{
 		boolean canPass = true;
@@ -280,19 +288,19 @@ public class DimensionalRiftManager
 			showHtmlFile(player, "data/html/seven_signs/rift/NoParty.htm", npc);
 			return;
 		}
-
+		
 		if (player.getParty().getPartyLeaderOID() != player.getObjectId())
 		{
 			showHtmlFile(player, "data/html/seven_signs/rift/NotPartyLeader.htm", npc);
 			return;
 		}
-
+		
 		if (player.getParty().isInDimensionalRift())
 		{
 			handleCheat(player, npc);
 			return;
 		}
-
+		
 		if (player.getParty().getMemberCount() < Config.ALT_RIFT_MIN_PARTY_SIZE)
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
@@ -302,33 +310,33 @@ public class DimensionalRiftManager
 			player.sendPacket(html);
 			return;
 		}
-
+		
 		for (L2PcInstance p : player.getParty().getPartyMembers())
 			if (!checkIfInPeaceZone(p.getX(), p.getY(), p.getZ()))
 				canPass = false;
-
+		
 		if (!canPass)
 		{
 			showHtmlFile(player, "data/html/seven_signs/rift/NotInWaitingRoom.htm", npc);
 			return;
 		}
-
+		
 		L2ItemInstance i;
 		for (L2PcInstance p : player.getParty().getPartyMembers())
 		{
 			i = p.getInventory().getItemByItemId(DIMENSIONAL_FRAGMENT_ITEM_ID);
-
+			
 			if (i == null)
 			{
 				canPass = false;
 				break;
 			}
-
+			
 			if (i.getCount() > 0)
 				if (i.getCount() < getNeededItems(type))
 					canPass = false;
 		}
-
+		
 		if (!canPass)
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
@@ -338,53 +346,54 @@ public class DimensionalRiftManager
 			player.sendPacket(html);
 			return;
 		}
-
+		
 		for (L2PcInstance p : player.getParty().getPartyMembers())
 		{
 			i = p.getInventory().getItemByItemId(DIMENSIONAL_FRAGMENT_ITEM_ID);
 			p.destroyItem("RiftEntrance", i.getObjectId(), getNeededItems(type), null, false);
 		}
-
-		new DimensionalRift(player.getParty(), type, (byte) Rnd.get(1, 9));
+		
+		new DimensionalRift(player.getParty(), type, (byte)Rnd.get(1, 9));
 	}
-
+	
 	public void killRift(DimensionalRift d)
 	{
 		if (d.getTeleportTimerTask() != null)
 			d.getTeleportTimerTask().cancel();
 		d.setTeleportTimerTask(null);
-
+		
 		if (d.getTeleportTimer() != null)
 			d.getTeleportTimer().cancel();
 		d.setTeleportTimer(null);
-
+		
 		if (d.getSpawnTimerTask() != null)
 			d.getSpawnTimerTask().cancel();
 		d.setSpawnTimerTask(null);
-
+		
 		if (d.getSpawnTimer() != null)
 			d.getSpawnTimer().cancel();
 		d.setSpawnTimer(null);
 	}
-
+	
 	public class DimensionalRiftRoom
 	{
-		protected final byte					_type;
-		protected final byte					_room;
-		private final int						_xMin;
-		private final int						_xMax;
-		private final int						_yMin;
-		private final int						_yMax;
-		private final int						_zMin;
-		private final int						_zMax;
-		private final int[]						_teleportCoords;
-		private final Shape						_s;
-		private final boolean					_isBossRoom;
-		private final FastList<L2Spawn>			_roomSpawns;
-		protected final FastList<L2Npc>	_roomMobs;
-		private boolean							_isUsed = false;
-
-		public DimensionalRiftRoom(byte type, byte room, int xMin, int xMax, int yMin, int yMax, int zMin, int zMax, int xT, int yT, int zT, boolean isBossRoom)
+		protected final byte _type;
+		protected final byte _room;
+		private final int _xMin;
+		private final int _xMax;
+		private final int _yMin;
+		private final int _yMax;
+		private final int _zMin;
+		private final int _zMax;
+		private final int[] _teleportCoords;
+		private final Shape _s;
+		private final boolean _isBossRoom;
+		private final FastList<L2Spawn> _roomSpawns;
+		protected final FastList<L2Npc> _roomMobs;
+		private boolean _isUsed = false;
+		
+		public DimensionalRiftRoom(byte type, byte room, int xMin, int xMax, int yMin, int yMax, int zMin, int zMax,
+				int xT, int yT, int zT, boolean isBossRoom)
 		{
 			_type = type;
 			_room = room;
@@ -394,31 +403,28 @@ public class DimensionalRiftManager
 			_yMax = (yMax - 128);
 			_zMin = zMin;
 			_zMax = zMax;
-			_teleportCoords = new int[]
-			{ xT, yT, zT };
+			_teleportCoords = new int[] { xT, yT, zT };
 			_isBossRoom = isBossRoom;
 			_roomSpawns = new FastList<L2Spawn>();
 			_roomMobs = new FastList<L2Npc>();
-			_s = new Polygon(new int[]
-			{ xMin, xMax, xMax, xMin }, new int[]
-			{ yMin, yMin, yMax, yMax }, 4);
+			_s = new Polygon(new int[] { xMin, xMax, xMax, xMin }, new int[] { yMin, yMin, yMax, yMax }, 4);
 		}
-
+		
 		public int getRandomX()
 		{
 			return Rnd.get(_xMin, _xMax);
 		}
-
+		
 		public int getRandomY()
 		{
 			return Rnd.get(_yMin, _yMax);
 		}
-
+		
 		public int[] getTeleportCoords()
 		{
 			return _teleportCoords;
 		}
-
+		
 		public boolean checkIfInZone(L2Object obj)
 		{
 			return checkIfInZone(obj.getX(), obj.getY(), obj.getZ());
@@ -428,17 +434,17 @@ public class DimensionalRiftManager
 		{
 			return _s.contains(x, y) && z >= _zMin && z <= _zMax;
 		}
-
+		
 		public boolean isBossRoom()
 		{
 			return _isBossRoom;
 		}
-
+		
 		public FastList<L2Spawn> getSpawns()
 		{
 			return _roomSpawns;
 		}
-
+		
 		public void spawn()
 		{
 			for (L2Spawn spawn : _roomSpawns)
@@ -447,7 +453,7 @@ public class DimensionalRiftManager
 				spawn.startRespawn();
 			}
 		}
-
+		
 		public void unspawn()
 		{
 			for (L2Spawn spawn : _roomSpawns)
@@ -458,39 +464,39 @@ public class DimensionalRiftManager
 			}
 			_isUsed = false;
 		}
-
+		
 		public void setUsed()
 		{
 			_isUsed = true;
 		}
-
+		
 		public boolean isUsed()
 		{
 			return _isUsed;
 		}
 	}
-
+	
 	private int getNeededItems(byte type)
 	{
 		switch (type)
 		{
-		case 1:
-			return Config.ALT_RIFT_ENTER_COST_RECRUIT;
-		case 2:
-			return Config.ALT_RIFT_ENTER_COST_SOLDIER;
-		case 3:
-			return Config.ALT_RIFT_ENTER_COST_OFFICER;
-		case 4:
-			return Config.ALT_RIFT_ENTER_COST_CAPTAIN;
-		case 5:
-			return Config.ALT_RIFT_ENTER_COST_COMMANDER;
-		case 6:
-			return Config.ALT_RIFT_ENTER_COST_HERO;
-		default:
-			return 999999;
+			case 1:
+				return Config.ALT_RIFT_ENTER_COST_RECRUIT;
+			case 2:
+				return Config.ALT_RIFT_ENTER_COST_SOLDIER;
+			case 3:
+				return Config.ALT_RIFT_ENTER_COST_OFFICER;
+			case 4:
+				return Config.ALT_RIFT_ENTER_COST_CAPTAIN;
+			case 5:
+				return Config.ALT_RIFT_ENTER_COST_COMMANDER;
+			case 6:
+				return Config.ALT_RIFT_ENTER_COST_HERO;
+			default:
+				return 999999;
 		}
 	}
-
+	
 	public void showHtmlFile(L2PcInstance player, String file, L2Npc npc)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
@@ -498,17 +504,19 @@ public class DimensionalRiftManager
 		html.replace("%npc_name%", npc.getName());
 		player.sendPacket(html);
 	}
-
+	
 	public void handleCheat(L2PcInstance player, L2Npc npc)
 	{
 		showHtmlFile(player, "data/html/seven_signs/rift/Cheater.htm", npc);
 		if (!player.isGM())
 		{
-			_log.warn("Player " + player.getName() + "(" + player.getObjectId() + ") was cheating in dimension rift area!");
-			Util.handleIllegalPlayerAction(player, "Warning! Character " + player.getName() + " tried to cheat in dimensional rift.", Config.DEFAULT_PUNISH);
+			_log.warn("Player " + player.getName() + "(" + player.getObjectId()
+					+ ") was cheating in dimension rift area!");
+			Util.handleIllegalPlayerAction(player, "Warning! Character " + player.getName()
+					+ " tried to cheat in dimensional rift.", Config.DEFAULT_PUNISH);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

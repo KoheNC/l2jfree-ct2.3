@@ -18,18 +18,18 @@ public class ExClosePartyRoom extends StaticPacket
 {
 	private static final String _S__EXCLOSEPARTYROOM = "[S] FE:09 ExClosePartyRoom ch";
 	public static final ExClosePartyRoom STATIC_PACKET = new ExClosePartyRoom();
-
+	
 	private ExClosePartyRoom()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x09);
 	}
-
+	
 	@Override
 	public String getType()
 	{

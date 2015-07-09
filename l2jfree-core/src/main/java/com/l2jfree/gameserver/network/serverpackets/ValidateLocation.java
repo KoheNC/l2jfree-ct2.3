@@ -53,7 +53,7 @@ public class ValidateLocation extends L2GameServerPacket
 		writeD(_z);
 		writeD(_heading);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

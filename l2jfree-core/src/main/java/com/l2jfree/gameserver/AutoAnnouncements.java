@@ -68,7 +68,7 @@ public final class AutoAnnouncements
 			conn = L2DatabaseFactory.getInstance().getConnection();
 			
 			PreparedStatement statement =
-				conn.prepareStatement("SELECT initial, delay, cycle, memo FROM auto_announcements");
+					conn.prepareStatement("SELECT initial, delay, cycle, memo FROM auto_announcements");
 			ResultSet data = statement.executeQuery();
 			
 			while (data.next())
@@ -133,7 +133,7 @@ public final class AutoAnnouncements
 				cancel();
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

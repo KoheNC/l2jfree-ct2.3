@@ -136,7 +136,8 @@ public final class ZoneManager
 						if (_zones[zone.getType().ordinal()] == null)
 							_zones[zone.getType().ordinal()] = new L2Zone[] { zone };
 						else
-							_zones[zone.getType().ordinal()] = (L2Zone[])ArrayUtils.add(_zones[zone.getType().ordinal()], zone);
+							_zones[zone.getType().ordinal()] =
+									(L2Zone[])ArrayUtils.add(_zones[zone.getType().ordinal()], zone);
 						
 						// Register the zone to any intersecting world region
 						int ax, ay, bx, by;

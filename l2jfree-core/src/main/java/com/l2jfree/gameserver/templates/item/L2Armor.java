@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.templates.StatsSet;
  */
 public final class L2Armor extends L2Equip
 {
-	private final int	_avoidModifier;
-	private final int	_pDef;
-	private final int	_mDef;
-	private final int	_mpBonus;
-	private final int	_hpBonus;
-
+	private final int _avoidModifier;
+	private final int _pDef;
+	private final int _mDef;
+	private final int _mpBonus;
+	private final int _hpBonus;
+	
 	/**
 	 * Constructor for Armor.<BR><BR>
 	 * <U><I>Variables filled :</I></U><BR>
@@ -50,7 +50,7 @@ public final class L2Armor extends L2Equip
 		_mpBonus = set.getInteger("mp_bonus", 0);
 		_hpBonus = set.getInteger("hp_bonus", 0);
 	}
-
+	
 	/**
 	 * Returns the type of the armor.
 	 * @return L2ArmorType
@@ -58,9 +58,9 @@ public final class L2Armor extends L2Equip
 	@Override
 	public L2ArmorType getItemType()
 	{
-		return (L2ArmorType) super._type;
+		return (L2ArmorType)super._type;
 	}
-
+	
 	/**
 	 * Returns the ID of the item after applying the mask.
 	 * @return int : ID of the item
@@ -70,7 +70,7 @@ public final class L2Armor extends L2Equip
 	{
 		return getItemType().mask();
 	}
-
+	
 	/**
 	 * Returns the magical defense of the armor
 	 * @return int : value of the magic defense
@@ -79,7 +79,7 @@ public final class L2Armor extends L2Equip
 	{
 		return _mDef;
 	}
-
+	
 	/**
 	 * Returns the physical defense of the armor
 	 * @return int : value of the physical defense
@@ -88,7 +88,7 @@ public final class L2Armor extends L2Equip
 	{
 		return _pDef;
 	}
-
+	
 	/**
 	 * Returns avoid modifier given by the armor
 	 * @return int : avoid modifier
@@ -97,7 +97,7 @@ public final class L2Armor extends L2Equip
 	{
 		return _avoidModifier;
 	}
-
+	
 	/**
 	 * Returns magical bonus given by the armor
 	 * @return int : value of the magical bonus
@@ -106,7 +106,7 @@ public final class L2Armor extends L2Equip
 	{
 		return _mpBonus;
 	}
-
+	
 	/**
 	 * Returns physical bonus given by the armor
 	 * @return int : value of the physical bonus

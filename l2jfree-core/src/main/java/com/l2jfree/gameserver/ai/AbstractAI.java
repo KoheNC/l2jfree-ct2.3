@@ -237,6 +237,7 @@ public abstract class AbstractAI implements Ctrl
 	 * Return the L2Character managed by this Accessor AI.<BR>
 	 * <BR>
 	 */
+	@Override
 	public L2Character getActor()
 	{
 		return _actor;
@@ -246,6 +247,7 @@ public abstract class AbstractAI implements Ctrl
 	 * Return the current Intention.<BR>
 	 * <BR>
 	 */
+	@Override
 	public final CtrlIntention getIntention()
 	{
 		return _intention;
@@ -253,7 +255,7 @@ public abstract class AbstractAI implements Ctrl
 	
 	public final SkillUsageRequest getCurrentSkill()
 	{
-		return _intention == CtrlIntention.AI_INTENTION_CAST ? (SkillUsageRequest)_intentionArg0 :  null;
+		return _intention == CtrlIntention.AI_INTENTION_CAST ? (SkillUsageRequest)_intentionArg0 : null;
 	}
 	
 	public final L2Skill getCastSkill()
@@ -278,7 +280,7 @@ public abstract class AbstractAI implements Ctrl
 	 */
 	public final L2Character getCastTarget()
 	{
-		return _intention == CtrlIntention.AI_INTENTION_CAST ? (L2Character)_intentionArg1 :  null;
+		return _intention == CtrlIntention.AI_INTENTION_CAST ? (L2Character)_intentionArg1 : null;
 	}
 	
 	public final synchronized void setAttackTarget(L2Character target)
@@ -293,9 +295,10 @@ public abstract class AbstractAI implements Ctrl
 	 * Return current attack target.<BR>
 	 * <BR>
 	 */
+	@Override
 	public final L2Character getAttackTarget()
 	{
-		return _intention == CtrlIntention.AI_INTENTION_ATTACK ? (L2Character)_intentionArg0 :  null;
+		return _intention == CtrlIntention.AI_INTENTION_ATTACK ? (L2Character)_intentionArg0 : null;
 	}
 	
 	/**
@@ -337,6 +340,7 @@ public abstract class AbstractAI implements Ctrl
 	 * 
 	 * @param intention The new Intention to set to the AI
 	 */
+	@Override
 	public final void setIntention(CtrlIntention intention)
 	{
 		setIntention(intention, null, null);
@@ -351,6 +355,7 @@ public abstract class AbstractAI implements Ctrl
 	 * @param intention The new Intention to set to the AI
 	 * @param arg0 The first parameter of the Intention (optional target)
 	 */
+	@Override
 	public final void setIntention(CtrlIntention intention, Object arg0)
 	{
 		setIntention(intention, arg0, null);
@@ -366,6 +371,7 @@ public abstract class AbstractAI implements Ctrl
 	 * @param arg0 The first parameter of the Intention (optional target)
 	 * @param arg1 The second parameter of the Intention (optional target)
 	 */
+	@Override
 	public final void setIntention(CtrlIntention intention, Object arg0, Object arg1)
 	{
 		if (_actor.isInProtectedAction())
@@ -384,7 +390,7 @@ public abstract class AbstractAI implements Ctrl
 		 if (Config.DEBUG)
 		 _log.warning("AbstractAI: setIntention -> " + intention + " " + arg0 + " " + arg1);
 		 */
-
+		
 		// Stop the follow mode if necessary
 		if (intention != AI_INTENTION_FOLLOW && intention != AI_INTENTION_ATTACK)
 			stopFollow();
@@ -494,6 +500,7 @@ public abstract class AbstractAI implements Ctrl
 	 * 
 	 * @param evt The event whose the AI must be notified
 	 */
+	@Override
 	public final void notifyEvent(CtrlEvent evt)
 	{
 		notifyEvent(evt, null, null);
@@ -509,6 +516,7 @@ public abstract class AbstractAI implements Ctrl
 	 * @param evt The event whose the AI must be notified
 	 * @param arg0 The first parameter of the Event (optional target)
 	 */
+	@Override
 	public final void notifyEvent(CtrlEvent evt, Object arg0)
 	{
 		notifyEvent(evt, arg0, null);
@@ -525,6 +533,7 @@ public abstract class AbstractAI implements Ctrl
 	 * @param arg0 The first parameter of the Event (optional target)
 	 * @param arg1 The second parameter of the Event (optional target)
 	 */
+	@Override
 	public final void notifyEvent(CtrlEvent evt, Object arg0, Object arg1)
 	{
 		if (!_actor.isVisible() || !_actor.hasAI())
@@ -534,7 +543,7 @@ public abstract class AbstractAI implements Ctrl
 		 if (Config.DEBUG)
 		 _log.warning("AbstractAI: notifyEvent -> " + evt + " " + arg0 + " " + arg1);
 		 */
-
+		
 		switch (evt)
 		{
 			case EVT_THINK:
@@ -725,7 +734,7 @@ public abstract class AbstractAI implements Ctrl
 			_clientMovingToPawnOffset = offset;
 			setTarget(pawn);
 			_moveToPawnTimeout = GameTimeController.getGameTicks();
-			_moveToPawnTimeout += /*1000*/ 200 / GameTimeController.MILLIS_IN_TICK;
+			_moveToPawnTimeout += /*1000*/200 / GameTimeController.MILLIS_IN_TICK;
 			
 			if (pawn == null || _accessor == null)
 				return;
@@ -838,7 +847,7 @@ public abstract class AbstractAI implements Ctrl
 			 */
 			// Send a Server->Client packet CharMoveToLocation to the actor and all L2PcInstance in its _knownPlayers
 			//CharMoveToLocation msg = new CharMoveToLocation(_actor);
-			if (((L2PcInstance) _actor).getAirShip() != null)
+			if (((L2PcInstance)_actor).getAirShip() != null)
 			{
 				ExMoveToLocationInAirShip msg = new ExMoveToLocationInAirShip((L2PcInstance)_actor, destination);
 				_actor.broadcastPacket(msg);
@@ -864,7 +873,7 @@ public abstract class AbstractAI implements Ctrl
 		 if (Config.DEBUG)
 		 _log.warning("clientStopMoving();");
 		 */
-
+		
 		// Stop movement of the L2Character
 		if (_actor.isMoving())
 			_accessor.stopMove(pos);
@@ -936,7 +945,7 @@ public abstract class AbstractAI implements Ctrl
 		{
 			if (_actor instanceof L2PcInstance && ((L2PcInstance)_actor).getPet() != null)
 				((L2PcInstance)_actor).getPet().broadcastPacket(
-					new AutoAttackStart(((L2PcInstance)_actor).getPet().getObjectId()));
+						new AutoAttackStart(((L2PcInstance)_actor).getPet().getObjectId()));
 			// Send a Server->Client packet AutoAttackStart to the actor and all L2PcInstance in its _knownPlayers
 			_actor.broadcastPacket(new AutoAttackStart(_actor.getObjectId()));
 			setAutoAttacking(true);

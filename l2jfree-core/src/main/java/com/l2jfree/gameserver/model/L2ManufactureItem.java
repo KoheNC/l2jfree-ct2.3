@@ -21,7 +21,7 @@ public class L2ManufactureItem
 	private final int _recipeId;
 	private final long _cost;
 	private final boolean _isDwarven;
-
+	
 	public L2ManufactureItem(int recipeId, long cost)
 	{
 		_recipeId = recipeId;
@@ -29,17 +29,17 @@ public class L2ManufactureItem
 		
 		_isDwarven = RecipeController.getInstance().getRecipeList(_recipeId).isDwarvenRecipe();
 	}
-
+	
 	public int getRecipeId()
 	{
 		return _recipeId;
 	}
-
+	
 	public long getCost()
 	{
 		return _cost;
 	}
-
+	
 	public boolean isDwarven()
 	{
 		return _isDwarven;

@@ -31,33 +31,35 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
-
+		
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		String filename = SevenSigns.SEVEN_SIGNS_HTML_PATH;
 		int sealAvariceOwner = SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_AVARICE);
 		int sealGnosisOwner = SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_GNOSIS);
 		int playerCabal = SevenSigns.getInstance().getPlayerCabal(player);
 		boolean isSealValidationPeriod = SevenSigns.getInstance().isSealValidationPeriod();
 		int compWinner = SevenSigns.getInstance().getCabalHighestScore();
-
+		
 		if (actualCommand.startsWith("necro"))
 		{
 			boolean canPort = true;
 			if (isSealValidationPeriod)
 			{
-				if (compWinner == SevenSigns.CABAL_DAWN && (playerCabal != SevenSigns.CABAL_DAWN || sealAvariceOwner != SevenSigns.CABAL_DAWN))
+				if (compWinner == SevenSigns.CABAL_DAWN
+						&& (playerCabal != SevenSigns.CABAL_DAWN || sealAvariceOwner != SevenSigns.CABAL_DAWN))
 				{
 					player.sendPacket(SystemMessageId.CAN_BE_USED_BY_DAWN);
 					canPort = false;
 				}
-				else if (compWinner == SevenSigns.CABAL_DUSK && (playerCabal != SevenSigns.CABAL_DUSK || sealAvariceOwner != SevenSigns.CABAL_DUSK))
+				else if (compWinner == SevenSigns.CABAL_DUSK
+						&& (playerCabal != SevenSigns.CABAL_DUSK || sealAvariceOwner != SevenSigns.CABAL_DUSK))
 				{
 					player.sendPacket(SystemMessageId.CAN_BE_USED_BY_DUSK);
 					canPort = false;
@@ -72,7 +74,7 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 				if (playerCabal == SevenSigns.CABAL_NULL)
 					canPort = false;
 			}
-
+			
 			if (!canPort)
 			{
 				NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
@@ -91,12 +93,14 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 			boolean canPort = true;
 			if (isSealValidationPeriod)
 			{
-				if (compWinner == SevenSigns.CABAL_DAWN && (playerCabal != SevenSigns.CABAL_DAWN || sealGnosisOwner != SevenSigns.CABAL_DAWN))
+				if (compWinner == SevenSigns.CABAL_DAWN
+						&& (playerCabal != SevenSigns.CABAL_DAWN || sealGnosisOwner != SevenSigns.CABAL_DAWN))
 				{
 					player.sendPacket(SystemMessageId.CAN_BE_USED_BY_DAWN);
 					canPort = false;
 				}
-				else if (compWinner == SevenSigns.CABAL_DUSK && (playerCabal != SevenSigns.CABAL_DUSK || sealGnosisOwner != SevenSigns.CABAL_DUSK))
+				else if (compWinner == SevenSigns.CABAL_DUSK
+						&& (playerCabal != SevenSigns.CABAL_DUSK || sealGnosisOwner != SevenSigns.CABAL_DUSK))
 				{
 					player.sendPacket(SystemMessageId.CAN_BE_USED_BY_DUSK);
 					canPort = false;
@@ -111,7 +115,7 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 				if (playerCabal == SevenSigns.CABAL_NULL)
 					canPort = false;
 			}
-
+			
 			if (!canPort)
 			{
 				NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
@@ -137,7 +141,7 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	private void doTeleport(L2PcInstance player, int val)
 	{
 		L2TeleportLocation list = TeleportLocationTable.getInstance().getTemplate(val);
@@ -145,15 +149,15 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 		{
 			if (player.isAlikeDead())
 				return;
-
+			
 			player.teleToLocation(list.getLocX(), list.getLocY(), list.getLocZ(), true);
 		}
 		else
 			_log.warn("No teleport destination with id:" + val);
-
+		
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
@@ -162,7 +166,7 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 			pom = "" + npcId;
 		else
 			pom = npcId + "-" + val;
-
+		
 		return "data/html/teleporter/" + pom + ".htm";
 	}
 }

@@ -22,13 +22,13 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public final class RequestExCleftEnter extends L2GameClientPacket
 {
 	private int _unk1; // Cleft ID?
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_unk1 = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{

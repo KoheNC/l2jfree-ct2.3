@@ -25,48 +25,48 @@ import com.l2jfree.gameserver.model.quest.QuestState;
 public class GMViewQuestInfo extends L2GameServerPacket
 {
 	private static final String S_99_GMVIEWQUESTINFO = "[S] 99 GMViewQuestInfo";
-
-    private final L2PcInstance _activeChar;
-
+	
+	private final L2PcInstance _activeChar;
+	
 	public GMViewQuestInfo(L2PcInstance cha)
 	{
 		_activeChar = cha;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x99);
 		writeS(_activeChar.getName());
-
-        Quest[] questList = _activeChar.getAllActiveQuests();
-
-        if (questList.length == 0)
-        {
-            writeC(0);
-            writeH(0);
-            writeH(0);
-            return;
-        }
-
-        writeH(questList.length); // quest count
-
-        for (Quest q : questList)
-        {
-            writeD(q.getQuestIntId());
-
-            QuestState qs = _activeChar.getQuestState(q.getName());
-
-            if (qs == null)
-            {
-                writeD(0);
-                continue;
-            }
-
-            writeD(qs.getInt("cond"));   // stage of quest progress
-        }
+		
+		Quest[] questList = _activeChar.getAllActiveQuests();
+		
+		if (questList.length == 0)
+		{
+			writeC(0);
+			writeH(0);
+			writeH(0);
+			return;
+		}
+		
+		writeH(questList.length); // quest count
+		
+		for (Quest q : questList)
+		{
+			writeD(q.getQuestIntId());
+			
+			QuestState qs = _activeChar.getQuestState(q.getName());
+			
+			if (qs == null)
+			{
+				writeD(0);
+				continue;
+			}
+			
+			writeD(qs.getInt("cond")); // stage of quest progress
+		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -29,26 +29,15 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
 
 public class AdminSHEngine implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	= {
-			/** Main Page Commands */
-			"admin_sh",
-			"admin_sh_title",
-			"admin_sh_desc",
-			"admin_sh_loc",
-			"admin_sh_announce_name",
-			"admin_sh_npc_pos",
-			"admin_sh_npc",
-			"admin_sh_add_item",
-			"admin_sh_rem_item",
-			"admin_sh_edit_item",
-			"admin_sh_add_prize",
-			"admin_sh_rem_prize",
-			"admin_sh_edit_prize",
-			"admin_sh_start",
-			"admin_sh_end"							};
-
-	private static final int		REQUIRED_LEVEL	= 100;
-
+	private static final String[] ADMIN_COMMANDS = {
+	/** Main Page Commands */
+	"admin_sh", "admin_sh_title", "admin_sh_desc", "admin_sh_loc", "admin_sh_announce_name", "admin_sh_npc_pos",
+			"admin_sh_npc", "admin_sh_add_item", "admin_sh_rem_item", "admin_sh_edit_item", "admin_sh_add_prize",
+			"admin_sh_rem_prize", "admin_sh_edit_prize", "admin_sh_start", "admin_sh_end" };
+	
+	private static final int REQUIRED_LEVEL = 100;
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (!(checkLevel(activeChar.getAccessLevel()) && activeChar.isGM()))
@@ -136,22 +125,23 @@ public class AdminSHEngine implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private boolean checkLevel(int level)
 	{
 		return (level >= REQUIRED_LEVEL);
 	}
-
+	
 	public void showMainPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
-
+		
 		replyMSG.append("<title>[Scavenger Hunt Engine]</title>");
 		replyMSG.append("<center><font color=\"LEVEL\">[Main Page]</font></center><br><br>");
 		replyMSG.append("<table width=\"260\"><tr>");
@@ -172,7 +162,8 @@ public class AdminSHEngine implements IAdminCommandHandler
 		replyMSG.append("<td width=\"170\">Event Loc Name: " + SH.getLocation() + "</td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_sh_npc_pos\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-		replyMSG.append("<td width=\"170\">Location: " + SH.getNpcX() + "," + SH.getNpcY() + "," + SH.getNpcZ() + "</td>");
+		replyMSG.append("<td width=\"170\">Location: " + SH.getNpcX() + "," + SH.getNpcY() + "," + SH.getNpcZ()
+				+ "</td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_sh_npc $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Join Npc: " + SH.getNpcId() + "</td>");
@@ -196,9 +187,13 @@ public class AdminSHEngine implements IAdminCommandHandler
 		for (int i = 0; i < SH.getItems().size(); i++)
 		{
 			replyMSG.append("<tr>");
-			replyMSG.append("<td width=\"170\">(" + SH.getItems().get(i).getCount() + ") " + SH.getItems().get(i).getItem().getName() + "</td>");
-			replyMSG.append("<td width=\"50\"><button value=\"Edit\" action=\"bypass -h admin_sh_edit_item " + i + " $input2 $input3\" width=50 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-			replyMSG.append("<td width=\"70\"><button value=\"Remove\" action=\"bypass -h admin_sh_rem_item " + i + "\" width=70 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+			replyMSG.append("<td width=\"170\">(" + SH.getItems().get(i).getCount() + ") "
+					+ SH.getItems().get(i).getItem().getName() + "</td>");
+			replyMSG.append("<td width=\"50\"><button value=\"Edit\" action=\"bypass -h admin_sh_edit_item "
+					+ i
+					+ " $input2 $input3\" width=50 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+			replyMSG.append("<td width=\"70\"><button value=\"Remove\" action=\"bypass -h admin_sh_rem_item " + i
+					+ "\" width=70 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 			replyMSG.append("</tr>");
 		}
 		replyMSG.append("</table>");
@@ -211,9 +206,13 @@ public class AdminSHEngine implements IAdminCommandHandler
 		for (int i = 0; i < SH.getPrizes().size(); i++)
 		{
 			replyMSG.append("<tr>");
-			replyMSG.append("<td width=\"170\">[" + SH.suffixTool(i + 1) + "] (" + SH.getPrizes().get(i).getCount() + ") " + SH.getPrizes().get(i).getItem().getName() + "</td>");
-			replyMSG.append("<td width=\"50\"><button value=\"Edit\" action=\"bypass -h admin_sh_edit_prize " + i + " $input2 $input3\" width=50 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-			replyMSG.append("<td width=\"70\"><button value=\"Remove\" action=\"bypass -h admin_sh_rem_prize " + i + "\" width=70 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+			replyMSG.append("<td width=\"170\">[" + SH.suffixTool(i + 1) + "] (" + SH.getPrizes().get(i).getCount()
+					+ ") " + SH.getPrizes().get(i).getItem().getName() + "</td>");
+			replyMSG.append("<td width=\"50\"><button value=\"Edit\" action=\"bypass -h admin_sh_edit_prize "
+					+ i
+					+ " $input2 $input3\" width=50 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+			replyMSG.append("<td width=\"70\"><button value=\"Remove\" action=\"bypass -h admin_sh_rem_prize " + i
+					+ "\" width=70 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 			replyMSG.append("</tr>");
 		}
 		replyMSG.append("</table>");

@@ -23,30 +23,30 @@ public class ExReplyRegisterDominion extends L2GameServerPacket
 	private final boolean _joining;
 	private final int _clanReq = 0x00;
 	private final int _mercReq = 0x00;
-
+	
 	public ExReplyRegisterDominion(int terrId, boolean joining)
 	{
 		_territoryId = terrId;
 		_joining = joining;
 	}
-
-    @Override
-    public String getType()
-    {
-        return "[S] FE:91 ExReplyRegisterDominion";
-    }
-
-    @Override
-    protected void writeImpl()
-    {
-        writeC(0xfe);
-        writeH(0x91);
-
-        writeD(_territoryId); // Current Territory Id
-        writeD(0x00); // unknown
-        writeD(_joining);
-        writeD(0x01); // unknown
-        writeD(_clanReq); // Clan Request
-        writeD(_mercReq); // Merc Request
-    }
+	
+	@Override
+	public String getType()
+	{
+		return "[S] FE:91 ExReplyRegisterDominion";
+	}
+	
+	@Override
+	protected void writeImpl()
+	{
+		writeC(0xfe);
+		writeH(0x91);
+		
+		writeD(_territoryId); // Current Territory Id
+		writeD(0x00); // unknown
+		writeD(_joining);
+		writeD(0x01); // unknown
+		writeD(_clanReq); // Clan Request
+		writeD(_mercReq); // Merc Request
+	}
 }

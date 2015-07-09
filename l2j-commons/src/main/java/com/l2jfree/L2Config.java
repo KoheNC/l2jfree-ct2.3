@@ -22,6 +22,8 @@ import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -245,7 +247,8 @@ public abstract class L2Config
 	{
 	}
 	
-	private static final HandlerRegistry<String, ConfigLoader> _loaders = new HandlerRegistry<String, ConfigLoader>(true) {
+	private static final HandlerRegistry<String, ConfigLoader> _loaders = new HandlerRegistry<String, ConfigLoader>(
+			true) {
 		@Override
 		public String standardizeKey(String key)
 		{
@@ -371,5 +374,10 @@ public abstract class L2Config
 		}
 		
 		protected abstract void loadImpl(L2Properties properties);
+	}
+	
+	public static boolean isIDEMode()
+	{
+		return Files.exists(Paths.get("pom.xml"));
 	}
 }

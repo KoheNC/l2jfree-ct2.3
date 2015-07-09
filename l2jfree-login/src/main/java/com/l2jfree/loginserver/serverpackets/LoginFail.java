@@ -96,9 +96,9 @@ public final class LoginFail extends L2LoginServerPacket
 	public static final int REASON_ACCOUNT_LIMITATION = 42;
 	/** The master account of your account has been restricted. */
 	public static final int REASON_MASTER_ACCOUNT_RESTRICTED = 43;
-
+	
 	private final int _reason;
-
+	
 	public LoginFail(int reason, boolean accessLevel)
 	{
 		if (!accessLevel)
@@ -106,61 +106,61 @@ public final class LoginFail extends L2LoginServerPacket
 		else
 			_reason = getReasonFromBan(reason);
 	}
-
+	
 	public LoginFail(int reason)
 	{
 		this(reason, false);
 	}
-
+	
 	@Override
 	protected void write(L2LoginClient client)
 	{
 		writeC(0x01);
 		writeC(_reason);
 	}
-
+	
 	/**
 	 * Returns LoginFail code from a given access level.
 	 * @param accessLevel current banned account's accessLevel
 	 * @return reason
 	 */
 	public static final int getReasonFromBan(int accessLevel)
-    {
-    	switch (accessLevel)
-    	{
-    	// 1-10: automatic bans
-    	// These bans should be done straight from your website
-    	case -1:
-    		return REASON_SUSPENDED_INACTIVITY;
-    	case -2:
-    		return REASON_CHANGE_TEMP_PASSWORD;
-    	case -3:
-    		return REASON_CHANGE_PASSWORD_AND_QUIZ;
-    	case -4:
-    		return REASON_MASTER_ACCOUNT_RESTRICTED;
-    	// 10-20: specific bans
-    	case -10:
-    		return REASON_ACCOUNT_INFO_INCORRECT;
-    	case -11:
-    		return REASON_AGE_LIMITATION;
-    	case -12:
-    		return REASON_GUARDIANS_CONSENT_NEEDED;
-    	case -13:
-    		return REASON_GAME_TIME_EXPIRED;
-    	case -14:
-    		return REASON_NO_TIME_LEFT;
-    	case -15:
-    		return REASON_WEEK_TIME_FINISHED;
-    	case -16:
-    		return REASON_INCORRECT_COUPON_FOR_SERVER;
-    	case -17:
-    		return REASON_PENDING_WITHDRAWL_REQUEST;
-    	case -18:
-    		return REASON_ACCESS_FAILED;
-    	case -19:
-    		return REASON_IGNORE;
-    	default:
-    		return REASON_SUSPENDED_PHONE_CC;
-    	}
-    }
+	{
+		switch (accessLevel)
+		{
+		// 1-10: automatic bans
+		// These bans should be done straight from your website
+			case -1:
+				return REASON_SUSPENDED_INACTIVITY;
+			case -2:
+				return REASON_CHANGE_TEMP_PASSWORD;
+			case -3:
+				return REASON_CHANGE_PASSWORD_AND_QUIZ;
+			case -4:
+				return REASON_MASTER_ACCOUNT_RESTRICTED;
+				// 10-20: specific bans
+			case -10:
+				return REASON_ACCOUNT_INFO_INCORRECT;
+			case -11:
+				return REASON_AGE_LIMITATION;
+			case -12:
+				return REASON_GUARDIANS_CONSENT_NEEDED;
+			case -13:
+				return REASON_GAME_TIME_EXPIRED;
+			case -14:
+				return REASON_NO_TIME_LEFT;
+			case -15:
+				return REASON_WEEK_TIME_FINISHED;
+			case -16:
+				return REASON_INCORRECT_COUPON_FOR_SERVER;
+			case -17:
+				return REASON_PENDING_WITHDRAWL_REQUEST;
+			case -18:
+				return REASON_ACCESS_FAILED;
+			case -19:
+				return REASON_IGNORE;
+			default:
+				return REASON_SUSPENDED_PHONE_CC;
+		}
+	}
 }

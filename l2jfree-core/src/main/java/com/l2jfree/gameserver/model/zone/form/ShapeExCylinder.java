@@ -18,7 +18,6 @@ import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.tools.random.Rnd;
 
-
 /**
  * @author  Crion
  */
@@ -29,64 +28,73 @@ public class ShapeExCylinder extends Shape
 	private long _innerRadSq;
 	private long _outerRadSq;
 	private int _x, _y;
-
+	
 	@Override
 	public boolean contains(int x, int y)
 	{
 		long dist = L2Math.calculateDistanceSq(_x, _y, x, y);
 		return dist <= _outerRadSq && dist >= _innerRadSq;
 	}
-
+	
 	@Override
 	public int getMiddleX()
 	{
 		return _x;
 	}
-
+	
 	@Override
 	public int getMiddleY()
 	{
 		return _y;
 	}
-
+	
 	@Override
 	public boolean intersectsRectangle(int ax1, int ax2, int ay1, int ay2)
 	{
 		// Circles point inside the rectangle?
-		if (_x > ax1 && _x < ax2 && _y > ay1 && _y < ay2) return true;
+		if (_x > ax1 && _x < ax2 && _y > ay1 && _y < ay2)
+			return true;
 		
 		// Any point of the rectangle intersecting the Circle?
-		long dist = L2Math.pow(ax1-_x, 2) + L2Math.pow(ay1-_y, 2);
-		if (dist < _outerRadSq && dist > _innerRadSq) return true;
-		dist = L2Math.pow(ax1-_x, 2) + L2Math.pow(ay2-_y, 2);
-		if (dist < _outerRadSq && dist > _innerRadSq) return true;
-		dist = L2Math.pow(ax2-_x, 2) + L2Math.pow(ay1-_y, 2);
-		if (dist < _outerRadSq && dist > _innerRadSq) return true;
-		dist = L2Math.pow(ax2-_x, 2) + L2Math.pow(ay2-_y, 2);
-		if (dist < _outerRadSq && dist > _innerRadSq) return true;
+		long dist = L2Math.pow(ax1 - _x, 2) + L2Math.pow(ay1 - _y, 2);
+		if (dist < _outerRadSq && dist > _innerRadSq)
+			return true;
+		dist = L2Math.pow(ax1 - _x, 2) + L2Math.pow(ay2 - _y, 2);
+		if (dist < _outerRadSq && dist > _innerRadSq)
+			return true;
+		dist = L2Math.pow(ax2 - _x, 2) + L2Math.pow(ay1 - _y, 2);
+		if (dist < _outerRadSq && dist > _innerRadSq)
+			return true;
+		dist = L2Math.pow(ax2 - _x, 2) + L2Math.pow(ay2 - _y, 2);
+		if (dist < _outerRadSq && dist > _innerRadSq)
+			return true;
 		
 		// Collision on any side of the rectangle?
 		if (_x > ax1 && _x < ax2)
 		{
-			if (Math.abs(_y-ay2) < _outerRad && Math.abs(_y-ay2) > _innerRad ) return true;
-			if (Math.abs(_y-ay1) < _outerRad && Math.abs(_y-ay1) > _innerRad) return true;
+			if (Math.abs(_y - ay2) < _outerRad && Math.abs(_y - ay2) > _innerRad)
+				return true;
+			if (Math.abs(_y - ay1) < _outerRad && Math.abs(_y - ay1) > _innerRad)
+				return true;
 		}
 		if (_y > ay1 && _y < ay2)
 		{
-			if (Math.abs(_x-ax2) < _outerRad && Math.abs(_x-ax2) > _innerRad) return true;
-			if (Math.abs(_x-ax1) < _outerRad && Math.abs(_x-ax1) > _innerRad) return true;
+			if (Math.abs(_x - ax2) < _outerRad && Math.abs(_x - ax2) > _innerRad)
+				return true;
+			if (Math.abs(_x - ax1) < _outerRad && Math.abs(_x - ax1) > _innerRad)
+				return true;
 		}
 		
 		return false;
 	}
-
+	
 	@Override
 	public double getDistanceToZone(int x, int y)
 	{
 		double dist = L2Math.calculateDistance(_x, _y, x, y);
 		return (_innerRad > dist ? _innerRad - dist : dist - _outerRad);
 	}
-
+	
 	@Override
 	public Location getRandomLocation()
 	{
@@ -96,7 +104,7 @@ public class ShapeExCylinder extends Shape
 		int y = _y + (int)(Math.cos(angle) * range);
 		return new Location(x, y, _zMin);
 	}
-
+	
 	public void setRadius(int inner, int outer)
 	{
 		_innerRad = inner;
@@ -104,31 +112,31 @@ public class ShapeExCylinder extends Shape
 		_outerRad = outer;
 		_outerRadSq = outer * outer;
 	}
-
+	
 	@Override
 	protected Shape prepare(int zoneId)
 	{
 		if (_points.size() != 1)
 		{
-			_log.error("Invalid point amount in zone"+zoneId+", must be 1");
+			_log.error("Invalid point amount in zone" + zoneId + ", must be 1");
 			return null;
 		}
 		if (_innerRad <= 0)
 		{
-			_log.error("Inner radius must be > 0 in zone "+zoneId);
+			_log.error("Inner radius must be > 0 in zone " + zoneId);
 			return null;
 		}
 		if (_outerRad <= 0)
 		{
-			_log.error("Outer radius must be > 0 in zone "+zoneId);
+			_log.error("Outer radius must be > 0 in zone " + zoneId);
 			return null;
 		}
 		if (_outerRad <= _innerRad)
 		{
-			_log.error("Outer radius must be > inner radius in zone "+zoneId);
+			_log.error("Outer radius must be > inner radius in zone " + zoneId);
 			return null;
 		}
-
+		
 		_x = _points.get(0).x;
 		_y = _points.get(0).y;
 		return this;

@@ -140,7 +140,7 @@ public enum L2SkillType
 	EXTRACTABLE,
 	LEARN_SKILL(L2SkillLearnSkill.class),
 	CANCEL_STATS,
-
+	
 	AGATHION(L2SkillAgathion.class),
 	MOUNT(L2SkillMount.class),
 	CHANGEWEAPON(L2SkillChangeWeapon.class),
@@ -164,32 +164,31 @@ public enum L2SkillType
 	TELEPORT(L2SkillTeleport.class),
 	CHANGE_APPEARANCE(L2SkillAppearance.class),
 	OPEN_DOOR,
-	ZAKEN_TELEPORT,
-	;
-
+	ZAKEN_TELEPORT, ;
+	
 	private final Class<? extends L2Skill> _clazz;
 	private final Constructor<? extends L2Skill> _constructor;
 	private final L2SkillType _parent;
-
+	
 	private L2SkillType()
 	{
 		this(null, null);
 	}
-
+	
 	private L2SkillType(L2SkillType parent)
 	{
 		this(null, parent);
 	}
-
+	
 	private L2SkillType(Class<? extends L2Skill> clazz)
 	{
 		this(clazz, null);
 	}
-
+	
 	private L2SkillType(Class<? extends L2Skill> clazz, L2SkillType parent)
 	{
 		_parent = parent;
-
+		
 		if (_parent == null)
 		{
 			_clazz = (clazz == null ? L2Skill.class : clazz);
@@ -215,7 +214,7 @@ public enum L2SkillType
 					_clazz = clazz;
 				else
 					throw new IllegalStateException();
-
+				
 				try
 				{
 					_constructor = _clazz.getConstructor(StatsSet.class);
@@ -227,17 +226,17 @@ public enum L2SkillType
 			}
 		}
 	}
-
+	
 	public L2Skill makeSkill(StatsSet set) throws Exception
 	{
 		return _constructor.newInstance(set);
 	}
-
+	
 	public L2SkillType getRoot()
 	{
 		if (_parent == null)
 			return this;
-
+		
 		return _parent.getRoot();
 	}
 }

@@ -26,17 +26,17 @@ import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 public final class Thifiell extends QuestJython
 {
 	private static final String THIFIELL_OCCUPATION = "30358_thifiell_occupation_change";
-
+	
 	//Quest NPCs
 	private static final int THIFIELL = 30358;
-
+	
 	public Thifiell(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		addStartNpc(THIFIELL);
 		addTalkId(THIFIELL);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -45,7 +45,7 @@ public final class Thifiell extends QuestJython
 		else
 			return event;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
@@ -53,20 +53,20 @@ public final class Thifiell extends QuestJython
 			return "30358-11.htm";
 		switch (talker.getClassId())
 		{
-		case DarkFighter:
-			return "30358-01.htm";
-		case DarkMystic:
-			return "30358-02.htm";
-		case DarkWizard:
-		case ShillienOracle:
-		case PalusKnight:
-		case Assassin:
-			return "30358-12.htm";
-		default:
-			return "30358-13.htm";
+			case DarkFighter:
+				return "30358-01.htm";
+			case DarkMystic:
+				return "30358-02.htm";
+			case DarkWizard:
+			case ShillienOracle:
+			case PalusKnight:
+			case Assassin:
+				return "30358-12.htm";
+			default:
+				return "30358-13.htm";
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new Thifiell(-1, THIFIELL_OCCUPATION, "village_master");

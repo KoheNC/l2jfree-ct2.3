@@ -22,40 +22,41 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class VoteSociality extends L2GameClientPacket
 {
-    private static final String _C__VOTESOCIALITY = "[C] C2 VoteSociality c[d]";
-
-    private int _targetId;
-
-    @Override
-    protected void readImpl()
-    {
-        _targetId = readD();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	L2PcInstance activeChar = getClient().getActiveChar();
-    	if (activeChar == null) return;
-
-    	L2Object target = null;
-    	// Get object from target
+	private static final String _C__VOTESOCIALITY = "[C] C2 VoteSociality c[d]";
+	
+	private int _targetId;
+	
+	@Override
+	protected void readImpl()
+	{
+		_targetId = readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null)
+			return;
+		
+		L2Object target = null;
+		// Get object from target
 		if (activeChar.getTargetId() == _targetId)
 			target = activeChar.getTarget();
 		if (target == null)
 			target = L2World.getInstance().findObject(_targetId);
-
-    	if (target instanceof L2PcInstance)
-    		RecommendationManager.getInstance().recommend(activeChar, target.getActingPlayer());
-    	else
-    		sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
-
-    	sendAF();
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__VOTESOCIALITY;
-    }
+		
+		if (target instanceof L2PcInstance)
+			RecommendationManager.getInstance().recommend(activeChar, target.getActingPlayer());
+		else
+			sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
+		
+		sendAF();
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__VOTESOCIALITY;
+	}
 }

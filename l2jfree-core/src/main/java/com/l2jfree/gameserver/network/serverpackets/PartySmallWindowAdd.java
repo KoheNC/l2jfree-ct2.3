@@ -52,7 +52,7 @@ public class PartySmallWindowAdd extends L2GameServerPacket
 		writeD(0x00);//writeD(0x01); ??
 		writeD(0x00);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

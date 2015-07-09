@@ -20,23 +20,23 @@ import com.l2jfree.gameserver.network.serverpackets.ExShowFortressInfo;
 public class RequestAllFortressInfo extends L2GameClientPacket
 {
 	private static final String _C__REQUESTALLFORTRESSINFO = "[C] D0:3D RequestAllFortressInfo ch";
-
-    @Override
-    protected void readImpl()
-    {
-    	// trigger packet
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	if (getActiveChar() != null)
-    		sendPacket(ExShowFortressInfo.PACKET);
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__REQUESTALLFORTRESSINFO;
-    }
+	
+	@Override
+	protected void readImpl()
+	{
+		// trigger packet
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		if (getActiveChar() != null)
+			sendPacket(ExShowFortressInfo.PACKET);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__REQUESTALLFORTRESSINFO;
+	}
 }

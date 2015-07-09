@@ -28,8 +28,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
+import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.SkillsEngine;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillLearnSkill;
 import com.l2jfree.lang.L2Integer;
@@ -228,7 +228,9 @@ public final class SkillTable
 				if (enchantLevels.isEmpty())
 					continue;
 				
-				final String s = "Skill ID: " + skillId + " - EnchantType: enchant" + enchantType + " - Levels: " + enchantLevels.size();
+				final String s =
+						"Skill ID: " + skillId + " - EnchantType: enchant" + enchantType + " - Levels: "
+								+ enchantLevels.size();
 				
 				boolean valid = true;
 				
@@ -271,7 +273,9 @@ public final class SkillTable
 				if (route == null)
 					continue;
 				
-				final String s = "Skill ID: " + skillId + " - EnchantType: enchant" + (indexingEnchantType + 1) + " - Levels: " + route.size();
+				final String s =
+						"Skill ID: " + skillId + " - EnchantType: enchant" + (indexingEnchantType + 1) + " - Levels: "
+								+ route.size();
 				
 				if (route.size() != 30 && route.size() != 15)
 					_log.warn("Invalid skill enchant data in database for " + s);
@@ -305,7 +309,9 @@ public final class SkillTable
 				if (route == null)
 					continue;
 				
-				final String s = "Skill ID: " + skillId + " - EnchantType: enchant" + (indexingEnchantType + 1) + " - Levels: " + route.size();
+				final String s =
+						"Skill ID: " + skillId + " - EnchantType: enchant" + (indexingEnchantType + 1) + " - Levels: "
+								+ route.size();
 				
 				int index = 1;
 				int expectedMinSkillLevel = maxLevel;

@@ -24,29 +24,29 @@ import com.l2jfree.gameserver.network.serverpackets.RecipeShopSellList;
  */
 public class RequestRecipeShopSellList extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTRECIPESHOPSELLLIST	= "[C] 0C RequestRecipeShopSellList c[d]";
-
+	private static final String _C__REQUESTRECIPESHOPSELLLIST = "[C] 0C RequestRecipeShopSellList c[d]";
+	
 	private int _targetId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_targetId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (player.isAlikeDead())
 		{
 			sendAF();
 			return;
 		}
-
+		
 		final L2PcInstance manufacturer;
 		if (player.getTargetId() == _targetId)
 			manufacturer = player.getTarget(L2PcInstance.class);
@@ -54,10 +54,10 @@ public class RequestRecipeShopSellList extends L2GameClientPacket
 			manufacturer = L2World.getInstance().findPlayer(_targetId);
 		if (manufacturer != null)
 			sendPacket(new RecipeShopSellList(player, manufacturer));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

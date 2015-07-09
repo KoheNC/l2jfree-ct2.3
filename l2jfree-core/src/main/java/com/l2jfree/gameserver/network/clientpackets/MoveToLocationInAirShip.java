@@ -23,7 +23,6 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 import com.l2jfree.gameserver.templates.item.L2WeaponType;
 import com.l2jfree.tools.geometry.Point3D;
 
-
 /**
  * format: ddddddd
  * X:%d Y:%d Z:%d OriginX:%d OriginY:%d OriginZ:%d
@@ -32,10 +31,10 @@ import com.l2jfree.tools.geometry.Point3D;
 public class MoveToLocationInAirShip extends L2GameClientPacket
 {
 	private static final String _C__D0_20_MOVETOLOCATIONINAIRSHIP = "[C] D0:20 MoveToLocationInAirShip";
-
+	
 	private int _shipId;
-	private final Point3D _pos = new Point3D(0,0,0);
-	private final Point3D _origin_pos = new Point3D(0,0,0);
+	private final Point3D _pos = new Point3D(0, 0, 0);
+	private final Point3D _origin_pos = new Point3D(0, 0, 0);
 	
 	@Override
 	protected void readImpl()
@@ -51,14 +50,15 @@ public class MoveToLocationInAirShip extends L2GameClientPacket
 		_z = readD();
 		_origin_pos.setXYZ(_x, _y, _z);
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-		else if (activeChar.isAttackingNow() && activeChar.getActiveWeaponItem() != null && (activeChar.getActiveWeaponItem().getItemType() == L2WeaponType.BOW))
+		else if (activeChar.isAttackingNow() && activeChar.getActiveWeaponItem() != null
+				&& (activeChar.getActiveWeaponItem().getItemType() == L2WeaponType.BOW))
 		{
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 		}
@@ -69,10 +69,12 @@ public class MoveToLocationInAirShip extends L2GameClientPacket
 				return;
 			activeChar.setAirShip(airShip);
 			activeChar.setInAirShipPosition(_pos);
-			activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO_IN_AIR_SHIP, new L2CharPosition(_pos.getX(),_pos.getY(), _pos.getZ(), 0), new L2CharPosition(_origin_pos.getX(),_origin_pos.getY(),_origin_pos.getZ(), 0));
+			activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO_IN_AIR_SHIP,
+					new L2CharPosition(_pos.getX(), _pos.getY(), _pos.getZ(), 0),
+					new L2CharPosition(_origin_pos.getX(), _origin_pos.getY(), _origin_pos.getZ(), 0));
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */

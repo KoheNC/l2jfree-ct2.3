@@ -38,10 +38,10 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class FortManager implements InstanceListManager
 {
-	protected static final Log	_log	= LogFactory.getLog(FortManager.class);
-
+	protected static final Log _log = LogFactory.getLog(FortManager.class);
+	
 	// =========================================================
-
+	
 	protected FastMap<Integer, Integer> _envoyCastles = new FastMap<Integer, Integer>();
 	protected FastMap<Integer, FastList<L2Spawn>> _npcCommanders = new FastMap<Integer, FastList<L2Spawn>>();
 	protected FastMap<Integer, FastList<L2Spawn>> _siegeNpcs = new FastMap<Integer, FastList<L2Spawn>>();
@@ -50,28 +50,28 @@ public class FortManager implements InstanceListManager
 	protected FastList<L2Spawn> _siegeNpcsSpawns;
 	protected FastList<L2Spawn> _specialEnvoysSpawns;
 	protected int _respawnTime;
-
+	
 	public static final FortManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	// =========================================================
 	// Data Field
 	private Fort _fort;
-	private List<Fort>	_forts;
-
+	private List<Fort> _forts;
+	
 	// =========================================================
 	// Constructor
 	private FortManager()
 	{
 	}
-
+	
 	public FortManager(Fort fort)
 	{
 		_fort = fort;
 	}
-
+	
 	public void initNpcs()
 	{
 		spawnNpcs(); // load and spawn npcs
@@ -83,13 +83,14 @@ public class FortManager implements InstanceListManager
 		if (_fort.getOwnerClan() != null && _fort.getFortState() == 0)
 		{
 			spawnSpecialEnvoys();
-			ThreadPoolManager.getInstance().scheduleGeneral(_fort.new ScheduleSpecialEnvoysDeSpawn(_fort), 1*60*60*1000); // Prepare 1hr task for special envoys despawn
+			ThreadPoolManager.getInstance().scheduleGeneral(_fort.new ScheduleSpecialEnvoysDeSpawn(_fort),
+					1 * 60 * 60 * 1000); // Prepare 1hr task for special envoys despawn
 		}
 	}
-
+	
 	// =========================================================
 	// Method - Public
-
+	
 	public final int findNearestFortIndex(L2Object obj)
 	{
 		int index = getFortIndex(obj);
@@ -97,7 +98,7 @@ public class FortManager implements InstanceListManager
 		{
 			double closestDistance = Double.MAX_VALUE;
 			double distance;
-
+			
 			for (Fort fort : getForts())
 			{
 				if (fort == null)
@@ -112,9 +113,10 @@ public class FortManager implements InstanceListManager
 		}
 		return index;
 	}
-
+	
 	// =========================================================
 	// Method - Private
+	@Override
 	public void loadInstances()
 	{
 		_log.info("Initializing FortManager");
@@ -123,20 +125,20 @@ public class FortManager implements InstanceListManager
 		{
 			PreparedStatement statement;
 			ResultSet rs;
-
+			
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			statement = con.prepareStatement("SELECT id FROM fort ORDER BY id");
 			rs = statement.executeQuery();
-
+			
 			while (rs.next())
 			{
 				getForts().add(new Fort(rs.getInt("id")));
 			}
-
+			
 			rs.close();
 			statement.close();
-
+			
 			_log.info("Loaded: " + getForts().size() + " fortress(es)");
 		}
 		catch (Exception e)
@@ -148,7 +150,7 @@ public class FortManager implements InstanceListManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	// =========================================================
 	// Property - Public
 	public final Fort getFortById(int fortId)
@@ -160,7 +162,7 @@ public class FortManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final Fort getFortByOwner(L2Clan clan)
 	{
 		for (Fort f : getForts())
@@ -170,7 +172,7 @@ public class FortManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final Fort getFort(String name)
 	{
 		for (Fort f : getForts())
@@ -180,7 +182,7 @@ public class FortManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final Fort getFort(int x, int y, int z)
 	{
 		for (Fort f : getForts())
@@ -190,12 +192,12 @@ public class FortManager implements InstanceListManager
 		}
 		return null;
 	}
-
+	
 	public final Fort getFort(L2Object activeObject)
 	{
 		return getFort(activeObject.getX(), activeObject.getY(), activeObject.getZ());
 	}
-
+	
 	public final int getFortIndex(int fortId)
 	{
 		Fort fort;
@@ -207,12 +209,12 @@ public class FortManager implements InstanceListManager
 		}
 		return -1;
 	}
-
+	
 	public final int getFortIndex(L2Object activeObject)
 	{
 		return getFortIndex(activeObject.getX(), activeObject.getY(), activeObject.getZ());
 	}
-
+	
 	public final int getFortIndex(int x, int y, int z)
 	{
 		Fort fort;
@@ -224,14 +226,14 @@ public class FortManager implements InstanceListManager
 		}
 		return -1;
 	}
-
+	
 	public final List<Fort> getForts()
 	{
 		if (_forts == null)
 			_forts = new FastList<Fort>();
 		return _forts;
 	}
-
+	
 	public final Fort getFort()
 	{
 		return _fort;
@@ -240,11 +242,12 @@ public class FortManager implements InstanceListManager
 	private void spawnNpcs()
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT * FROM fort_spawnlist Where fortId = ? and spawnType = ? ");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT * FROM fort_spawnlist Where fortId = ? and spawnType = ? ");
 			statement.setInt(1, getFort().getFortId());
 			statement.setInt(2, 0);
 			ResultSet rset = statement.executeQuery();
@@ -270,8 +273,7 @@ public class FortManager implements InstanceListManager
 				}
 				else
 				{
-					_log.warn("FortManager.spawnNpcs: Data missing in NPC table for ID: "
-							+ rset.getInt("npcId") + ".");
+					_log.warn("FortManager.spawnNpcs: Data missing in NPC table for ID: " + rset.getInt("npcId") + ".");
 				}
 			}
 			
@@ -281,14 +283,14 @@ public class FortManager implements InstanceListManager
 		catch (Exception e)
 		{
 			// problem with initializing spawn, go to next one
-			_log.warn("FortManager.spawnNpcs: Spawn could not be initialized: "+ e.getMessage(), e);
+			_log.warn("FortManager.spawnNpcs: Spawn could not be initialized: " + e.getMessage(), e);
 		}
 		finally
 		{
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void initNpcCommanders()
 	{
 		Connection con = null;
@@ -296,15 +298,17 @@ public class FortManager implements InstanceListManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement1 = con.prepareStatement("SELECT Distinct fortId FROM fort_spawnlist Where spawnType = ? ORDER BY fortId");
-
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT Distinct fortId FROM fort_spawnlist Where spawnType = ? ORDER BY fortId");
+			
 			statement1.setInt(1, 1);
 			ResultSet rset1 = statement1.executeQuery();
-
+			
 			while (rset1.next())
 			{
 				int fortId = rset1.getInt("fortId");
-				PreparedStatement statement2 = con.prepareStatement("SELECT id, npcId, x, y, z, heading FROM fort_spawnlist Where fortId = ? and spawnType = ? ORDER BY id");
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, npcId, x, y, z, heading FROM fort_spawnlist Where fortId = ? and spawnType = ? ORDER BY id");
 				statement2.setInt(1, getFort().getFortId());
 				statement2.setInt(2, 1);
 				ResultSet rset2 = statement2.executeQuery();
@@ -329,7 +333,7 @@ public class FortManager implements InstanceListManager
 					else
 					{
 						_log.warn("FortManager.initNpcCommanders: Data missing in NPC table for ID: "
-							+ rset2.getInt("npcId") + ".");
+								+ rset2.getInt("npcId") + ".");
 					}
 				}
 				rset2.close();
@@ -342,15 +346,14 @@ public class FortManager implements InstanceListManager
 		catch (Exception e)
 		{
 			// problem with initializing spawn, go to next one
-			_log.warn("FortManager.initNpcCommanders: Spawn could not be initialized: "
-					+ e.getMessage(), e);
+			_log.warn("FortManager.initNpcCommanders: Spawn could not be initialized: " + e.getMessage(), e);
 		}
 		finally
 		{
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void initSiegeNpcs()
 	{
 		Connection con = null;
@@ -358,15 +361,17 @@ public class FortManager implements InstanceListManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement1 = con.prepareStatement("SELECT Distinct fortId FROM fort_spawnlist Where spawnType = ? ORDER BY fortId");
-
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT Distinct fortId FROM fort_spawnlist Where spawnType = ? ORDER BY fortId");
+			
 			statement1.setInt(1, 2);
 			ResultSet rset1 = statement1.executeQuery();
-
+			
 			while (rset1.next())
 			{
 				int fortId = rset1.getInt("fortId");
-				PreparedStatement statement2 = con.prepareStatement("SELECT id, npcId, x, y, z, heading FROM fort_spawnlist Where fortId = ? and spawnType = ? ORDER BY id");
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, npcId, x, y, z, heading FROM fort_spawnlist Where fortId = ? and spawnType = ? ORDER BY id");
 				statement2.setInt(1, getFort().getFortId());
 				statement2.setInt(2, 2);
 				ResultSet rset2 = statement2.executeQuery();
@@ -391,7 +396,7 @@ public class FortManager implements InstanceListManager
 					else
 					{
 						_log.warn("FortManager.initSiegeNpcs: Data missing in NPC table for ID: "
-							+ rset2.getInt("npcId") + ".");
+								+ rset2.getInt("npcId") + ".");
 					}
 				}
 				rset2.close();
@@ -404,15 +409,14 @@ public class FortManager implements InstanceListManager
 		catch (Exception e)
 		{
 			// problem with initializing spawn, go to next one
-			_log.warn("FortManager.initSiegeNpcs: Spawn could not be initialized: "
-					+ e.getMessage(), e);
+			_log.warn("FortManager.initSiegeNpcs: Spawn could not be initialized: " + e.getMessage(), e);
 		}
 		finally
 		{
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void initSpecialEnvoys()
 	{
 		Connection con = null;
@@ -421,15 +425,17 @@ public class FortManager implements InstanceListManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement1 = con.prepareStatement("SELECT Distinct fortId FROM fort_spawnlist Where spawnType = ? ORDER BY fortId");
-
+			PreparedStatement statement1 =
+					con.prepareStatement("SELECT Distinct fortId FROM fort_spawnlist Where spawnType = ? ORDER BY fortId");
+			
 			statement1.setInt(1, 3);
 			ResultSet rset1 = statement1.executeQuery();
-
+			
 			while (rset1.next())
 			{
 				int fortId = rset1.getInt("fortId");
-				PreparedStatement statement2 = con.prepareStatement("SELECT id, npcId, x, y, z, heading, castleId FROM fort_spawnlist Where fortId = ? and spawnType = ? ORDER BY id");
+				PreparedStatement statement2 =
+						con.prepareStatement("SELECT id, npcId, x, y, z, heading, castleId FROM fort_spawnlist Where fortId = ? and spawnType = ? ORDER BY id");
 				statement2.setInt(1, getFort().getFortId());
 				statement2.setInt(2, 3);
 				ResultSet rset2 = statement2.executeQuery();
@@ -457,7 +463,7 @@ public class FortManager implements InstanceListManager
 					else
 					{
 						_log.warn("FortManager.initSpecialEnvoys: Data missing in NPC table for ID: "
-							+ rset2.getInt("npcId") + ".");
+								+ rset2.getInt("npcId") + ".");
 					}
 				}
 				rset2.close();
@@ -470,15 +476,14 @@ public class FortManager implements InstanceListManager
 		catch (Exception e)
 		{
 			// problem with initializing spawn, go to next one
-			_log.warn("FortManager.initSpecialEnvoys: Spawn could not be initialized: "
-					+ e.getMessage(), e);
+			_log.warn("FortManager.initSpecialEnvoys: Spawn could not be initialized: " + e.getMessage(), e);
 		}
 		finally
 		{
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public void spawnNpcCommanders()
 	{
 		FastList<L2Spawn> monsterList = _npcCommanders.get(getFort().getFortId());
@@ -491,7 +496,7 @@ public class FortManager implements InstanceListManager
 			}
 		}
 	}
-
+	
 	public void despawnNpcCommanders()
 	{
 		FastList<L2Spawn> monsterList = _npcCommanders.get(getFort().getFortId());
@@ -504,7 +509,7 @@ public class FortManager implements InstanceListManager
 			}
 		}
 	}
-
+	
 	public void spawnSuspiciousMerchant()
 	{
 		FastList<L2Spawn> monsterList = _siegeNpcs.get(getFort().getFortId());
@@ -517,7 +522,7 @@ public class FortManager implements InstanceListManager
 			}
 		}
 	}
-
+	
 	public void despawnSuspiciousMerchant()
 	{
 		FastList<L2Spawn> monsterList = _siegeNpcs.get(getFort().getFortId());
@@ -530,7 +535,7 @@ public class FortManager implements InstanceListManager
 			}
 		}
 	}
-
+	
 	public void spawnSpecialEnvoys()
 	{
 		FastList<L2Spawn> monsterList = _specialEnvoys.get(getFort().getFortId());
@@ -543,7 +548,7 @@ public class FortManager implements InstanceListManager
 			}
 		}
 	}
-
+	
 	public void despawnSpecialEnvoys()
 	{
 		FastList<L2Spawn> monsterList = _specialEnvoys.get(getFort().getFortId());
@@ -556,16 +561,18 @@ public class FortManager implements InstanceListManager
 			}
 		}
 	}
-
+	
 	public int getEnvoyCastle(int npcId)
 	{
 		return _envoyCastles.get(npcId);
 	}
-
+	
+	@Override
 	public void updateReferences()
 	{
 	}
-
+	
+	@Override
 	public void activateInstances()
 	{
 		for (final Fort fort : _forts)
@@ -573,7 +580,7 @@ public class FortManager implements InstanceListManager
 			fort.activateInstance();
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

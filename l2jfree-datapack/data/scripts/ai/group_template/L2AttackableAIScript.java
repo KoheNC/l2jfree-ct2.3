@@ -61,7 +61,7 @@ public class L2AttackableAIScript extends QuestJython
 			addEventId(id, Quest.QuestEventType.ON_ARRIVED);
 		}
 	}
-
+	
 	/**
 	 * This is used simply for convenience of replacing
 	 * jython 'element in list' boolean method.
@@ -70,39 +70,39 @@ public class L2AttackableAIScript extends QuestJython
 	{
 		return ArrayUtils.contains(array, obj);
 	}
-
+	
 	public static boolean contains(int[] array, int obj)
 	{
 		return ArrayUtils.contains(array, obj);
 	}
-
+	
 	public L2AttackableAIScript(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		return null;
 	}
-
+	
 	@Override
 	public String onSpellFinished(L2Npc npc, L2PcInstance player, L2Skill skill)
 	{
 		return null;
 	}
-
+	
 	@Override
 	public String onSkillSee(L2Npc npc, L2PcInstance caster, L2Skill skill, L2Object[] targets, boolean isPet)
 	{
 		if (caster == null)
 			return null;
-
+		
 		if (!(npc instanceof L2Attackable))
 			return null;
-
-		L2Attackable attackable = (L2Attackable) npc;
+		
+		L2Attackable attackable = (L2Attackable)npc;
 		int skillAggroPoints = skill.getAggroPoints();
 		if (caster.getPet() != null)
 		{
@@ -112,7 +112,7 @@ public class L2AttackableAIScript extends QuestJython
 		if (skillAggroPoints > 0)
 		{
 			skillAggroPoints /= Config.ALT_BUFFER_HATE;
-
+			
 			if (attackable.hasAI() && (attackable.getAI().getIntention() == AI_INTENTION_ATTACK))
 			{
 				L2Object npcTarget = attackable.getTarget();
@@ -121,78 +121,79 @@ public class L2AttackableAIScript extends QuestJython
 					if (npcTarget == skillTarget || npc == skillTarget)
 					{
 						L2Character originalCaster = isPet ? caster.getPet() : caster;
-						attackable.addDamageHate(originalCaster, 0, (skillAggroPoints * 150) / (attackable.getLevel() + 7));
+						attackable.addDamageHate(originalCaster, 0, (skillAggroPoints * 150)
+								/ (attackable.getLevel() + 7));
 					}
 				}
 			}
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onFactionCall(L2Npc npc, L2Npc caller, L2PcInstance attacker, boolean isPet)
 	{
-		L2Character originalAttackTarget = (isPet ? attacker.getPet(): attacker);
-
-		if (attacker.isInParty()
-				&& attacker.getParty().isInDimensionalRift())
+		L2Character originalAttackTarget = (isPet ? attacker.getPet() : attacker);
+		
+		if (attacker.isInParty() && attacker.getParty().isInDimensionalRift())
 		{
 			byte riftType = attacker.getParty().getDimensionalRift().getType();
 			byte riftRoom = attacker.getParty().getDimensionalRift().getCurrentRoom();
-
+			
 			if (caller instanceof L2RiftInvaderInstance
-					&& !DimensionalRiftManager.getInstance().getRoom(riftType, riftRoom).checkIfInZone(npc.getX(), npc.getY(), npc.getZ()))
+					&& !DimensionalRiftManager.getInstance().getRoom(riftType, riftRoom)
+							.checkIfInZone(npc.getX(), npc.getY(), npc.getZ()))
 			{
 				return null;
 			}
 		}
-
+		
 		// By default, when a faction member calls for help, attack the caller's attacker.
 		// Notify the AI with EVT_AGGRESSION
 		FactionAggressionNotificationQueue.add(npc.getFactionId(), npc, originalAttackTarget);
 		
 		return null;
 	}
-
+	
 	@Override
 	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
 		L2Character target = isPet ? player.getPet() : player;
-
-		((L2Attackable) npc).addDamageHate(target, 0, 1);
-
+		
+		((L2Attackable)npc).addDamageHate(target, 0, 1);
+		
 		// Set the intention to the L2Attackable to AI_INTENTION_ACTIVE
 		if (npc.getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
 			npc.getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE);
 		return null;
 	}
-
+	
 	@Override
 	public String onSpawn(L2Npc npc)
 	{
 		return null;
 	}
-
+	
 	@Override
 	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
 	{
 		if (attacker != null && (npc instanceof L2Attackable))
 		{
-			L2Attackable attackable = (L2Attackable) npc;
-
+			L2Attackable attackable = (L2Attackable)npc;
+			
 			L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
 			attackable.getAI().notifyEvent(CtrlEvent.EVT_ATTACKED, originalAttacker);
 			attackable.addDamageHate(originalAttacker, damage, (damage * 100) / (attackable.getLevel() + 7));
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
 		return null;
 	}
-
+	
 	public static void main(String[] args)
 	{
 		L2AttackableAIScript ai = new L2AttackableAIScript(-1, "L2AttackableAIScript", "L2AttackableAIScript");

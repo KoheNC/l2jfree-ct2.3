@@ -29,7 +29,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExCubeGameExtendedChangePoints extends L2GameServerPacket
 {
-	private static final String _S__FE_98_00_EXCUBEGAMEEXTENDEDCHANGEPOINTS = "[S] FE:98:00 ExCubeGameExtendedChangePoints";
+	private static final String _S__FE_98_00_EXCUBEGAMEEXTENDEDCHANGEPOINTS =
+			"[S] FE:98:00 ExCubeGameExtendedChangePoints";
 	int _timeLeft;
 	int _bluePoints;
 	int _redPoints;
@@ -37,8 +38,8 @@ public class ExCubeGameExtendedChangePoints extends L2GameServerPacket
 	L2PcInstance _player;
 	int _playerPoints;
 	
-	public ExCubeGameExtendedChangePoints(int timeLeft, int bluePoints, int redPoints,
-			boolean isRedTeam, L2PcInstance player, int playerPoints)
+	public ExCubeGameExtendedChangePoints(int timeLeft, int bluePoints, int redPoints, boolean isRedTeam,
+			L2PcInstance player, int playerPoints)
 	{
 		_timeLeft = timeLeft;
 		_bluePoints = bluePoints;
@@ -47,7 +48,7 @@ public class ExCubeGameExtendedChangePoints extends L2GameServerPacket
 		_player = player;
 		_playerPoints = playerPoints;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -66,7 +67,7 @@ public class ExCubeGameExtendedChangePoints extends L2GameServerPacket
 		writeD(_player.getObjectId());
 		writeD(_playerPoints);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
@@ -75,5 +76,5 @@ public class ExCubeGameExtendedChangePoints extends L2GameServerPacket
 	{
 		return _S__FE_98_00_EXCUBEGAMEEXTENDEDCHANGEPOINTS;
 	}
-
+	
 }

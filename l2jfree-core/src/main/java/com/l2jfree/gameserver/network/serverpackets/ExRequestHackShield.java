@@ -22,7 +22,7 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ExRequestHackShield extends L2GameServerPacket
 {
 	private static final String _S__FE_48_EXREQUESTHACKSHIELD = "[S] FE:48 ExRequestHackShield";
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -32,7 +32,7 @@ public class ExRequestHackShield extends L2GameServerPacket
 		writeC(0xfe);
 		writeH(0x49);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -41,5 +41,5 @@ public class ExRequestHackShield extends L2GameServerPacket
 	{
 		return _S__FE_48_EXREQUESTHACKSHIELD;
 	}
-
+	
 }

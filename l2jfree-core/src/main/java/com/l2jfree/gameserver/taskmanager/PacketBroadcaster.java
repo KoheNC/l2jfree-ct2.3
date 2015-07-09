@@ -129,7 +129,7 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2C
 			for (BroadcastMode mode : VALUES)
 				mode.trySendPacket(cha, mask);
 	}
-
+	
 	@Override
 	protected String getCalledMethodName()
 	{

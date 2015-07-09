@@ -23,7 +23,6 @@ public class ExAirShipInfo extends L2GameServerPacket
 	
 	private final int _x, _y, _z, _heading, _objectId, _speed1, _speed2;
 	
-	
 	public ExAirShipInfo(L2AirShipInstance ship)
 	{
 		_x = ship.getX();
@@ -34,40 +33,39 @@ public class ExAirShipInfo extends L2GameServerPacket
 		_speed1 = ship.getSpeed1();
 		_speed2 = ship.getSpeed2();
 	}
-
+	
 	@Override
-    protected void writeImpl()
-    {
-	    writeC(0xfe);
-	    writeH(0x60);
-	    
-	    writeD(_objectId);
-	    writeD(_x);
-	    writeD(_y);
-	    writeD(_z);
-	    writeD(_heading);
-	    
-	    
-	    writeD(0x00); // object id of player who control ship
-	    writeD(_speed1);
-	    writeD(_speed2);
-	    
-	    // clan airship related info
-	    writeD(0x00); // owner object id?
-	    writeD(0x00); // 366?
-	    writeD(0x00); // 0
-	    writeD(0x00); // 107:
-	    writeD(0x00); // 348?
-	    writeD(0x00); // 0?
-	    writeD(0x00); // 105?
-	    writeD(0x00); // current fuel
-	    writeD(0x00); // max fuel
+	protected void writeImpl()
+	{
+		writeC(0xfe);
+		writeH(0x60);
+		
+		writeD(_objectId);
+		writeD(_x);
+		writeD(_y);
+		writeD(_z);
+		writeD(_heading);
+		
+		writeD(0x00); // object id of player who control ship
+		writeD(_speed1);
+		writeD(_speed2);
+		
+		// clan airship related info
+		writeD(0x00); // owner object id?
+		writeD(0x00); // 366?
+		writeD(0x00); // 0
+		writeD(0x00); // 107:
+		writeD(0x00); // 348?
+		writeD(0x00); // 0?
+		writeD(0x00); // 105?
+		writeD(0x00); // current fuel
+		writeD(0x00); // max fuel
 	}
-
+	
 	@Override
-    public String getType()
-    {
-	    return _S__FE_60_EXAIRSHIPINFO;
-    }
+	public String getType()
+	{
+		return _S__FE_60_EXAIRSHIPINFO;
+	}
 	
 }

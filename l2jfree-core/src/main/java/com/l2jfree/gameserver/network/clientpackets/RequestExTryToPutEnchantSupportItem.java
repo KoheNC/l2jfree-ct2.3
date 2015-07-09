@@ -20,40 +20,40 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.ExPutEnchantSupportItemResult;
 
-
 /**
  * @author evill33t
  * 
  */
 public class RequestExTryToPutEnchantSupportItem extends AbstractEnchantPacket
 {
-	private static final String	_C__D0_80_REQUESTEXTRYTOPUTENCHANTSUPPORTITEM	= "[C] D0 50 RequestExTryToPutEnchantSupportItem";
-
+	private static final String _C__D0_80_REQUESTEXTRYTOPUTENCHANTSUPPORTITEM =
+			"[C] D0 50 RequestExTryToPutEnchantSupportItem";
+	
 	private int _supportObjectId;
 	private int _enchantObjectId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_supportObjectId = readD();
 		_enchantObjectId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (activeChar.isEnchanting())
 		{
-			L2ItemInstance item = (L2ItemInstance) L2World.getInstance().findObject(_enchantObjectId);
-			L2ItemInstance support = (L2ItemInstance) L2World.getInstance().findObject(_supportObjectId);
-
+			L2ItemInstance item = (L2ItemInstance)L2World.getInstance().findObject(_enchantObjectId);
+			L2ItemInstance support = (L2ItemInstance)L2World.getInstance().findObject(_supportObjectId);
+			
 			if (item == null || support == null)
 				return;
-
+			
 			EnchantItem supportTemplate = getSupportItem(support);
 			if (supportTemplate == null || !supportTemplate.isValid(item))
 			{
@@ -67,7 +67,7 @@ public class RequestExTryToPutEnchantSupportItem extends AbstractEnchantPacket
 			activeChar.sendPacket(new ExPutEnchantSupportItemResult(_supportObjectId));
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{
