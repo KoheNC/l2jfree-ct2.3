@@ -96,6 +96,7 @@ public class JavaCompiler
 		options.add("-Xlint:all");
 		options.add("-g");
 		options.add("-deprecation");
+		options.add("-1.8");
 		if (sourcePath != null)
 		{
 			options.add("-sourcepath");

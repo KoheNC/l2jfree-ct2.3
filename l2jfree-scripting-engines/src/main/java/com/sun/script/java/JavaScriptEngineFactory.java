@@ -48,7 +48,7 @@ public class JavaScriptEngineFactory implements ScriptEngineFactory
 	
 	public String getEngineVersion()
 	{
-		return "1.6";
+		return "1.8";
 	}
 	
 	public List<String> getExtensions()
@@ -63,7 +63,7 @@ public class JavaScriptEngineFactory implements ScriptEngineFactory
 	
 	public String getLanguageVersion()
 	{
-		return "1.6";
+		return "1.8";
 	}
 	
 	public String getMethodCallSyntax(String obj, String m, String... args)
