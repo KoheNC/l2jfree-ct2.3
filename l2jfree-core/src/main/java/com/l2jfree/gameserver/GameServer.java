@@ -16,6 +16,8 @@ package com.l2jfree.gameserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -165,6 +167,8 @@ public class GameServer extends Config
 		long serverLoadStart = System.currentTimeMillis();
 		
 		Config.load();
+		
+		Files.createDirectories(Paths.get("cache"));
 		
 		Util.printSection("Database");
 		L2DatabaseFactory.getInstance();

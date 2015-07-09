@@ -30,6 +30,8 @@ public final class ConsoleLog
 		public Handler()
 		{
 			super();
+			
+			setOutputStream(System.out);
 		}
 	}
 	
