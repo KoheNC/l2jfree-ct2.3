@@ -442,6 +442,7 @@ public class BaylorManager extends BossLair
 			_npcId = npcId;
 		}
 		
+		@Override
 		public void run()
 		{
 			switch (_npcId)
@@ -525,6 +526,7 @@ public class BaylorManager extends BossLair
 	// Spawn teleport cube.
 	private class CubeSpawn implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			spawnCube();
@@ -541,6 +543,7 @@ public class BaylorManager extends BossLair
 			_mob = npc;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (!_mob.isDead())
@@ -557,6 +560,7 @@ public class BaylorManager extends BossLair
 	// Interval end.
 	private class IntervalEnd implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			_state.setState(GrandBossState.StateEnum.NOTSPAWN);
@@ -576,6 +580,7 @@ public class BaylorManager extends BossLair
 			_action = actionId;
 		}
 		
+		@Override
 		public void run()
 		{
 			SocialAction sa = new SocialAction(_npc.getObjectId(), _action);

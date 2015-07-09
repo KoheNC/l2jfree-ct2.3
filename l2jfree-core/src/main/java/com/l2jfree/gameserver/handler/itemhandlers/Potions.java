@@ -35,6 +35,7 @@ public class Potions implements IItemHandler
 	private static final int[] ITEM_IDS = { 725, 726, 727, 1061, 1060, 1073, 10410, 10411, 20393, 20394, 4416, 7061,
 			8515, 8516, 8517, 8518, 8519, 8520, 10143, 10144, 10145, 10146, 10147, 10148 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		L2PcInstance activeChar; // use activeChar only for L2PcInstance checks where cannot be used PetInstance
@@ -270,6 +271,7 @@ public class Potions implements IItemHandler
 		return false;
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

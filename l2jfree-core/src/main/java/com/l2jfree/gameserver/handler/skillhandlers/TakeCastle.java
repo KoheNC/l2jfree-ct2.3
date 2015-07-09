@@ -31,6 +31,7 @@ public class TakeCastle implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.TAKECASTLE };
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
@@ -49,6 +50,7 @@ public class TakeCastle implements ISkillHandler
 			castle.engrave(player.getClan(), targets[0].getObjectId());
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

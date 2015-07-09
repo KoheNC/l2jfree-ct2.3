@@ -38,6 +38,7 @@ public class EnchantScrolls implements IItemHandler
 			// S grade
 			959, 960, 961, 962, 6577, 6578 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -73,6 +74,7 @@ public class EnchantScrolls implements IItemHandler
 			activeChar.sendPacket(new ChooseInventoryItem(itemId));
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

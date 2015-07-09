@@ -29,6 +29,7 @@ public class SpecialXMas implements IItemHandler
 	// All the item IDs that this handler knows.
 	private static final int[] ITEM_IDS = { 5555 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -40,6 +41,7 @@ public class SpecialXMas implements IItemHandler
 	/**
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#getItemIds()
 	 */
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

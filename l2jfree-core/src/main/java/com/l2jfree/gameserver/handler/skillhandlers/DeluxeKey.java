@@ -27,6 +27,7 @@ public class DeluxeKey implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.DELUXE_KEY_UNLOCK };
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (_log.isDebugEnabled())
@@ -36,6 +37,7 @@ public class DeluxeKey implements ISkillHandler
 		// since the AI responce onSkillUse handles the rest.
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

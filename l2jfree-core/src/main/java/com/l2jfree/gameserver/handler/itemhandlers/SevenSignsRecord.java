@@ -26,6 +26,7 @@ public class SevenSignsRecord implements IItemHandler
 	// All the item IDs that this handler knows.
 	private static final int[] ITEM_IDS = { SevenSigns.RECORD_SEVEN_SIGNS_ID };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (playable instanceof L2PcInstance)
@@ -35,6 +36,7 @@ public class SevenSignsRecord implements IItemHandler
 		}
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

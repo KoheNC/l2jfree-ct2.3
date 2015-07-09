@@ -23,6 +23,7 @@ public class IrcStatus implements IIrcCommandHandler
 {
 	private static final String[] IRC_COMMANDS = { "!status" };
 	
+	@Override
 	public boolean useIrcCommand(String command, String gm, String target, boolean authed)
 	{
 		if (!authed)
@@ -60,6 +61,7 @@ public class IrcStatus implements IIrcCommandHandler
 		return GmListTable.getAllGms(true).size();
 	}
 	
+	@Override
 	public String[] getIrcCommandList()
 	{
 		return IRC_COMMANDS;

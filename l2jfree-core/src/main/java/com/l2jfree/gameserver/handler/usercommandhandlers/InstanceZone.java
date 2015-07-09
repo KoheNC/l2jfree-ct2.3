@@ -29,11 +29,13 @@ public class InstanceZone implements IUserCommandHandler
 {
 	private static final int[] COMMAND_IDS = { 114 };
 	
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;
 	}
 	
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		if (id != COMMAND_IDS[0])

@@ -28,6 +28,7 @@ public class AdminGeodata implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_geo_z", "admin_geo_type", "admin_geo_nswe",
 			"admin_geo_los", "admin_geo_position", "admin_geo_bug", "admin_geo_load", "admin_geo_unload" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (Config.GEODATA < 1)
@@ -145,6 +146,7 @@ public class AdminGeodata implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

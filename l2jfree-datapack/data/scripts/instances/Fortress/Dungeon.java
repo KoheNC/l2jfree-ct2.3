@@ -173,6 +173,7 @@ public class Dungeon extends QuestJython
 		
 		private class ReEntrenceTimerTask implements Runnable
 		{
+			@Override
 			public void run()
 			{
 				_canEnter = true;
@@ -181,6 +182,7 @@ public class Dungeon extends QuestJython
 		
 		private class PrisonSpawnTask implements Runnable
 		{
+			@Override
 			public void run()
 			{
 				switch (getState())

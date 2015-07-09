@@ -241,6 +241,7 @@ public class AntharasManager extends BossLair
 			_antharas = antharas;
 		}
 		
+		@Override
 		public void run()
 		{
 			int npcId;
@@ -501,6 +502,7 @@ public class AntharasManager extends BossLair
 			_interval = interval;
 		}
 		
+		@Override
 		public void run()
 		{
 			L2NpcTemplate template1;
@@ -552,6 +554,7 @@ public class AntharasManager extends BossLair
 			_interval = interval;
 		}
 		
+		@Override
 		public void run()
 		{
 			int npcId = Rnd.get(29070, 29076);
@@ -610,6 +613,7 @@ public class AntharasManager extends BossLair
 			_bomber = bomber;
 		}
 		
+		@Override
 		public void run()
 		{
 			L2Skill skill = null;
@@ -635,6 +639,7 @@ public class AntharasManager extends BossLair
 	// At end of activity time.
 	private class ActivityTimeEnd implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			setUnspawn();
@@ -737,6 +742,7 @@ public class AntharasManager extends BossLair
 	// At end of interval.
 	private class IntervalEnd implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			_state.setState(GrandBossState.StateEnum.NOTSPAWN);
@@ -756,6 +762,7 @@ public class AntharasManager extends BossLair
 	// Do spawn teleport cube.
 	private class CubeSpawn implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			spawnCube();
@@ -772,6 +779,7 @@ public class AntharasManager extends BossLair
 			_boss = boss;
 		}
 		
+		@Override
 		public void run()
 		{
 			_boss.setIsImmobilized(false);
@@ -798,6 +806,7 @@ public class AntharasManager extends BossLair
 			_pos = pos;
 		}
 		
+		@Override
 		public void run()
 		{
 			_npc.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);

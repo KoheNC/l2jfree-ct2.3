@@ -47,6 +47,7 @@ public class AdminDoorControl implements IAdminCommandHandler
 	private static Log _log = LogFactory.getLog(AdminDoorControl.class);
 	private static final String[] ADMIN_COMMANDS = { "admin_open", "admin_close", "admin_openall", "admin_closeall" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		try
@@ -133,6 +134,7 @@ public class AdminDoorControl implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

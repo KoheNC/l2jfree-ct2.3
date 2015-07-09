@@ -47,6 +47,7 @@ public final class HtmCache
 	private static final Log _log = LogFactory.getLog(HtmCache.class);
 	
 	private static final FileFilter HTM_FILTER = new FileFilter() {
+		@Override
 		public boolean accept(File file)
 		{
 			return file.isDirectory() || file.getName().endsWith(".htm") || file.getName().endsWith(".html");

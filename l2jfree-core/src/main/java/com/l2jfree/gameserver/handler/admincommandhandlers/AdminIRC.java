@@ -28,6 +28,7 @@ public class AdminIRC implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_ircc", "admin_ircm" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		String text = command.substring(10);
@@ -46,6 +47,7 @@ public class AdminIRC implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

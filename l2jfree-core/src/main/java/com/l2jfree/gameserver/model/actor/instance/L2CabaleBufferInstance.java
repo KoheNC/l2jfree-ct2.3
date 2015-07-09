@@ -69,6 +69,7 @@ public class L2CabaleBufferInstance extends L2Npc
 			_caster = caster;
 		}
 		
+		@Override
 		public void run()
 		{
 			boolean isBuffAWinner = false;

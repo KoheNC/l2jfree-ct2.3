@@ -579,6 +579,7 @@ public abstract class L2Object implements L2Entity<Integer>
 		return new Location(getX(), getY(), getZ(), 0);
 	}
 	
+	@Override
 	public Integer getPrimaryKey()
 	{
 		return getObjectId();

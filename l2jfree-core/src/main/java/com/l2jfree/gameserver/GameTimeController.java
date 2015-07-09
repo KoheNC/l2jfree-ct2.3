@@ -147,6 +147,7 @@ public final class GameTimeController
 	
 	private final class MinuteCounter implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			final boolean isNight = isNowNight();
@@ -171,6 +172,7 @@ public final class GameTimeController
 					DoorTable.getInstance().getDoor(21240006).openMe();
 					
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+						@Override
 						public void run()
 						{
 							DoorTable.getInstance().getDoor(21240006).closeMe();

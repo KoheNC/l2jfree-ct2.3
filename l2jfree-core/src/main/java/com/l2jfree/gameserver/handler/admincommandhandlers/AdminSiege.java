@@ -49,6 +49,7 @@ public class AdminSiege implements IAdminCommandHandler
 			"admin_removecastle", "admin_clanhall", "admin_clanhallset", "admin_clanhalldel",
 			"admin_clanhallopendoors", "admin_clanhallclosedoors", "admin_clanhallteleportself" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
@@ -367,6 +368,7 @@ public class AdminSiege implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

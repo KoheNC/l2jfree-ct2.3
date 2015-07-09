@@ -168,11 +168,13 @@ public class L2IrcClient extends Thread
 	{
 		private X509Certificate[] _chain;
 		
+		@Override
 		public X509Certificate[] getAcceptedIssuers()
 		{
 			return _chain != null ? _chain : new X509Certificate[0];
 		}
 		
+		@Override
 		public boolean isTrusted(X509Certificate[] chain)
 		{
 			_chain = chain;
@@ -189,6 +191,7 @@ public class L2IrcClient extends Thread
 		
 		private boolean isconnected;
 		
+		@Override
 		public void onRegistered()
 		{
 			_log.info("IRC: Connected");
@@ -205,6 +208,7 @@ public class L2IrcClient extends Thread
 			isconnected = true;
 		}
 		
+		@Override
 		public void onDisconnected()
 		{
 			_log.info("IRC: Disconnected");
@@ -221,6 +225,7 @@ public class L2IrcClient extends Thread
 				_logChat.info("IRC: Disconnected");
 		}
 		
+		@Override
 		public void onError(String msg)
 		{
 			_log.info("IRC: Error: " + msg);
@@ -229,6 +234,7 @@ public class L2IrcClient extends Thread
 				_logChat.info("IRC: Error: " + msg);
 		}
 		
+		@Override
 		public void onError(int num, String msg)
 		{
 			_log.info("IRC: Error #" + num + ": " + msg);
@@ -245,36 +251,42 @@ public class L2IrcClient extends Thread
 			}
 		}
 		
+		@Override
 		public void onInvite(String chan, IRCUser u, String nickPass)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC: " + chan + "> " + u.getNick() + " invites " + nickPass);
 		}
 		
+		@Override
 		public void onJoin(String chan, IRCUser u)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC: " + chan + "> " + u.getNick() + " joins");
 		}
 		
+		@Override
 		public void onKick(String chan, IRCUser u, String nickPass, String msg)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC: " + chan + "> " + u.getNick() + " kicks " + nickPass);
 		}
 		
+		@Override
 		public void onMode(IRCUser u, String nickPass, String mode)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC Mode: " + u.getNick() + " sets modes " + mode + " " + nickPass);
 		}
 		
+		@Override
 		public void onMode(String chan, IRCUser u, IRCModeParser mp)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC: " + chan + "> " + u.getNick() + " sets mode: " + mp.getLine());
 		}
 		
+		@Override
 		public void onNick(IRCUser u, String nickNew)
 		{
 			removeAccount(u.getUsername(), u.getHost());
@@ -282,12 +294,14 @@ public class L2IrcClient extends Thread
 				_logChat.info("IRC Nick: " + u.getNick() + " is now known as " + nickNew);
 		}
 		
+		@Override
 		public void onNotice(String target, IRCUser u, String msg)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("Irc " + target + "> " + u.getNick() + " (notice): " + msg);
 		}
 		
+		@Override
 		public void onPart(String chan, IRCUser u, String msg)
 		{
 			removeAccount(u.getUsername(), u.getHost());
@@ -295,6 +309,7 @@ public class L2IrcClient extends Thread
 				_logChat.info("IRC: " + chan + "> " + u.getNick() + " parts");
 		}
 		
+		@Override
 		public void onPrivmsg(String chan, IRCUser u, String msg)
 		{
 			
@@ -410,6 +425,7 @@ public class L2IrcClient extends Thread
 			}
 		}
 		
+		@Override
 		public void onQuit(IRCUser u, String msg)
 		{
 			removeAccount(u.getUsername(), u.getHost());
@@ -417,18 +433,21 @@ public class L2IrcClient extends Thread
 				_logChat.info("IRC Quit: " + u.getNick());
 		}
 		
+		@Override
 		public void onReply(int num, String value, String msg)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC REPLY #" + num + ": " + value + " " + msg);
 		}
 		
+		@Override
 		public void onTopic(String chan, IRCUser u, String topic)
 		{
 			if (Config.IRC_LOG_CHAT)
 				_logChat.info("IRC: " + chan + "> " + u.getNick() + " changes topic into: " + topic);
 		}
 		
+		@Override
 		public void onPing(String p)
 		{
 			if (_log.isDebugEnabled())
@@ -438,6 +457,7 @@ public class L2IrcClient extends Thread
 			conn.doPong(p);
 		}
 		
+		@Override
 		public void unknown(String a, String b, String c, String d)
 		{
 			_log.warn("IRC UNKNOWN: " + a + " " + b + " " + c + " " + d);

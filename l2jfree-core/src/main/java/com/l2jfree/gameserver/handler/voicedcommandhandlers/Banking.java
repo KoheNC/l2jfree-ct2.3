@@ -33,6 +33,7 @@ public class Banking implements IVoicedCommandHandler
 	 * 
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(java.lang.String, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance, java.lang.String)
 	 */
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (!Config.BANKING_SYSTEM_ENABLED)
@@ -98,6 +99,7 @@ public class Banking implements IVoicedCommandHandler
 	 * 
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
 	 */
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return _voicedCommands;

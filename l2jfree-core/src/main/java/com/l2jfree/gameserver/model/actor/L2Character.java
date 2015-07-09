@@ -772,6 +772,7 @@ public abstract class L2Character extends L2Object
 		disableAllSkills();
 		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				L2Character.this.enableAllSkills();
@@ -832,6 +833,7 @@ public abstract class L2Character extends L2Object
 			_fallHeight = fallHeight;
 		}
 		
+		@Override
 		public void run()
 		{
 			isFalling(true, _fallHeight);
@@ -2783,6 +2785,7 @@ public abstract class L2Character extends L2Object
 			_miss = miss;
 		}
 		
+		@Override
 		public void run()
 		{
 			onHitTimer(_hitTarget, _damage, _crit, _miss, 1.0);
@@ -2852,6 +2855,7 @@ public abstract class L2Character extends L2Object
 			_magicEnv = magicEnv;
 		}
 		
+		@Override
 		public void run()
 		{
 			try
@@ -2879,6 +2883,7 @@ public abstract class L2Character extends L2Object
 			_magicEnv = magicEnv;
 		}
 		
+		@Override
 		public void run()
 		{
 			try
@@ -2906,6 +2911,7 @@ public abstract class L2Character extends L2Object
 			_magicEnv = magicEnv;
 		}
 		
+		@Override
 		public void run()
 		{
 			try
@@ -2934,6 +2940,7 @@ public abstract class L2Character extends L2Object
 			_evt = evt;
 		}
 		
+		@Override
 		public void run()
 		{
 			getAI().notifyEvent(_evt, null);
@@ -6227,6 +6234,7 @@ public abstract class L2Character extends L2Object
 			_skillId = skillId;
 		}
 		
+		@Override
 		public void run()
 		{
 			enableSkill(_skillId);
@@ -6869,6 +6877,7 @@ public abstract class L2Character extends L2Object
 			_skill = skill;
 		}
 		
+		@Override
 		public void run()
 		{
 			broadcastPacket(new FlyToLocation(L2Character.this, _flyTarget, _skill.getFlyType()));
@@ -6887,6 +6896,7 @@ public abstract class L2Character extends L2Object
 			_skill = skill;
 		}
 		
+		@Override
 		public void run()
 		{
 			doSimultaneousCast(_skill);

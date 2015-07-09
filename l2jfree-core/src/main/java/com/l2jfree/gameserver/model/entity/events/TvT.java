@@ -438,6 +438,7 @@ public class TvT
 		
 		setUserData();
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				TvT.sit();
@@ -506,6 +507,7 @@ public class TvT
 		
 		setUserData();
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				TvT.sit();
@@ -1585,6 +1587,7 @@ public class TvT
 		AnnounceToPlayers(false, _eventName + "(TvT): Teleport back to participation NPC in 20 seconds!");
 		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (L2PcInstance player : _players)
@@ -1670,6 +1673,7 @@ public class TvT
 	{
 		summon.getOwner().sendMessage("Your pet will be revived in " + Config.TVT_REVIVE_DELAY / 1000 + " seconds!");
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				summon.doRevive();

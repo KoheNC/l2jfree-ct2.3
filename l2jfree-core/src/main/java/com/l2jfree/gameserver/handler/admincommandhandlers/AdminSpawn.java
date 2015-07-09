@@ -110,6 +110,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	
 	public static Log _log = LogFactory.getLog(AdminSpawn.class);
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
@@ -350,6 +351,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */
+	@Override
 	public String[] getAdminCommandList()
 	{
 		String[] _adminCommandsOnly = new String[ADMIN_COMMANDS.length];

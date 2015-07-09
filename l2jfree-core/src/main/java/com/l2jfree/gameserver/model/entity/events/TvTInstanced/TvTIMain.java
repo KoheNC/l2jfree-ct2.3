@@ -185,6 +185,7 @@ public class TvTIMain
 	private static void joinNpcSkillTask()
 	{
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				if (_isNpcSpawned)
@@ -502,6 +503,7 @@ public class TvTIMain
 		player.sendMessage("You will be revived and teleported to spot in " + Config.TVTI_REVIVE_DELAY / 1000
 				+ " seconds!");
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (TVTInstance i : _instances)
@@ -519,6 +521,7 @@ public class TvTIMain
 	{
 		summon.getOwner().sendMessage("Your pet will be revived in " + Config.TVTI_REVIVE_DELAY / 1000 + " seconds!");
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (TVTInstance i : _instances)

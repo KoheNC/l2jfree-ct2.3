@@ -47,6 +47,7 @@ public class Wedding implements IVoicedCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(String, com.l2jfree.gameserver.model.L2PcInstance), String)
 	 */
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (!Config.ALLOW_WEDDING)
@@ -373,6 +374,7 @@ public class Wedding implements IVoicedCommandHandler
 			_to7sDungeon = to7sDungeon;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (checkGoToLoveState(_activeChar) == null)
@@ -386,6 +388,7 @@ public class Wedding implements IVoicedCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
 	 */
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

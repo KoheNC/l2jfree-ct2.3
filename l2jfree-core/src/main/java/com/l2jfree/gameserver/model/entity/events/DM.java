@@ -180,6 +180,7 @@ public class DM
 		
 		setUserData();
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				DM.sit();
@@ -718,6 +719,7 @@ public class DM
 		
 		removeUserData();
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (L2PcInstance player : _players)

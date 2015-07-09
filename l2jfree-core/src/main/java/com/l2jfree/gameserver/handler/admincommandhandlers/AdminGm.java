@@ -34,6 +34,7 @@ public class AdminGm implements IAdminCommandHandler
 	private final static Log _log = LogFactory.getLog(AdminGm.class);
 	private static final String[] ADMIN_COMMANDS = { "admin_gm" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_gm"))
@@ -42,6 +43,7 @@ public class AdminGm implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

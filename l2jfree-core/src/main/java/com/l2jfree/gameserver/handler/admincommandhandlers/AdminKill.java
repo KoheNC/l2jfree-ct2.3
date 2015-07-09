@@ -43,6 +43,7 @@ public class AdminKill implements IAdminCommandHandler
 	private final static Log _log = LogFactory.getLog(AdminKill.class);
 	private static final String[] ADMIN_COMMANDS = { "admin_kill", "admin_kill_monster" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_kill"))
@@ -146,6 +147,7 @@ public class AdminKill implements IAdminCommandHandler
 					+ target.getObjectId());
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

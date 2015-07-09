@@ -52,6 +52,7 @@ public class Seed implements IItemHandler
 			8252, 8253, 8254, 8255, 8256, 8257, 8258, 8259, 8260, 8261, 8262, 8263, 8264, 8265, 8266, 8267, 8268, 8269,
 			8270, 8271, 8272, 8521, 8522, 8523, 8524, 8525, 8526 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -113,6 +114,7 @@ public class Seed implements IItemHandler
 		return (L2Manor.getInstance().getCastleIdForSeed(seedId) == castleId);
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

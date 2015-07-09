@@ -26,6 +26,7 @@ public class Birthday implements IUserCommandHandler
 	// 161714928 in Gracia P2
 	private static final int[] COMMAND_IDS = { 126 };
 	
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		Calendar bDay = activeChar.getCreationDate();
@@ -40,6 +41,7 @@ public class Birthday implements IUserCommandHandler
 		return true;
 	}
 	
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

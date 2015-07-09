@@ -29,6 +29,7 @@ public class AdminGeoEditor implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_ge_status", "admin_ge_mode", "admin_ge_join",
 			"admin_ge_leave" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (!Config.ACCEPT_GEOEDITOR_CONN)
@@ -98,6 +99,7 @@ public class AdminGeoEditor implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

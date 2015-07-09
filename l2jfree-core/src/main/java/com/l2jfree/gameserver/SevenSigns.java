@@ -1341,6 +1341,7 @@ public class SevenSigns
 	 */
 	protected class SevenSignsPeriodChange implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			/*

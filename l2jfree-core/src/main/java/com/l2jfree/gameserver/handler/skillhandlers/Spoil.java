@@ -45,6 +45,7 @@ public class Spoil extends ISkillConditionChecker
 		return super.checkConditions(activeChar, skill, target);
 	}
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
@@ -82,6 +83,7 @@ public class Spoil extends ISkillConditionChecker
 		}
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

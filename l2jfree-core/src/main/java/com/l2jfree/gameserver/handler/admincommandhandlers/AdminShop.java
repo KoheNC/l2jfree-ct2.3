@@ -36,6 +36,7 @@ public class AdminShop implements IAdminCommandHandler
 	
 	private static final String[] ADMIN_COMMANDS = { "admin_buy", "admin_gmshop" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_buy"))
@@ -56,6 +57,7 @@ public class AdminShop implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

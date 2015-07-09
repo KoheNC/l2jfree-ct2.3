@@ -30,6 +30,7 @@ public class EnchantAttribute implements IItemHandler
 			9558, 9559, 9560, 9561, 9562, 9563, 9564, 9565, 9566, 9567, 9568, 9569, 10521, 10522, 10523, 10524, 10525,
 			10526 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -51,6 +52,7 @@ public class EnchantAttribute implements IItemHandler
 		activeChar.sendPacket(new ExChooseInventoryAttributeItem(item.getItemId()));
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

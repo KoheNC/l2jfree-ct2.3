@@ -32,11 +32,13 @@ public class AdminCache implements IAdminCommandHandler
 			"admin_cache_reload_path", "admin_cache_reload_file", "admin_cache_crest_rebuild",
 			"admin_cache_crest_reload" };
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_cache_htm_rebuild") || command.equals("admin_cache_htm_reload"))

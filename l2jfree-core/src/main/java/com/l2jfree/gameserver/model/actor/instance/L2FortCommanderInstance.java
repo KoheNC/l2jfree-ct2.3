@@ -146,6 +146,7 @@ public class L2FortCommanderInstance extends L2FortSiegeGuardInstance
 	
 	private class ScheduleTalkTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			setCanTalk(true);

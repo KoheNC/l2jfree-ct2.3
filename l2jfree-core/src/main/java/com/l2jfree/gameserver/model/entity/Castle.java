@@ -183,6 +183,7 @@ public class Castle extends Siegeable<Siege>
 				_cwh = cwh;
 			}
 			
+			@Override
 			public void run()
 			{
 				if (getOwnerId() <= 0)

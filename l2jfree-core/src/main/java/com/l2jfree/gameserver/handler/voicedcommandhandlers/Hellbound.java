@@ -28,6 +28,7 @@ public class Hellbound implements IVoicedCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(String, com.l2jfree.gameserver.model.L2PcInstance), String)
 	 */
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.startsWith("trust"))
@@ -45,6 +46,7 @@ public class Hellbound implements IVoicedCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
 	 */
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

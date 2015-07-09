@@ -324,6 +324,7 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 			_tamedBeast = tamedBeast;
 		}
 		
+		@Override
 		public void run()
 		{
 			int foodTypeSkillId = _tamedBeast.getFoodType();
@@ -382,6 +383,7 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 			_numBuffs = numBuffs;
 		}
 		
+		@Override
 		public void run()
 		{
 			L2PcInstance owner = _tamedBeast.getOwner();

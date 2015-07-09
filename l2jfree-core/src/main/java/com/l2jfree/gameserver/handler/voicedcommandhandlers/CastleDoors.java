@@ -26,6 +26,7 @@ public class CastleDoors implements IVoicedCommandHandler
 {
 	private static final String[] VOICED_COMMANDS = { "open", "close" };
 	
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.startsWith("open") && target.equals("doors") && (activeChar.isClanLeader()))
@@ -68,6 +69,7 @@ public class CastleDoors implements IVoicedCommandHandler
 		return false;
 	}
 	
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

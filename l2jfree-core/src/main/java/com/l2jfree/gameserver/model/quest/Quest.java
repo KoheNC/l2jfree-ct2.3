@@ -1577,6 +1577,7 @@ public class Quest extends ManagedScript
 			_npc = npc;
 		}
 		
+		@Override
 		public void run()
 		{
 			_npc.onDecay();

@@ -26,6 +26,7 @@ public class ColorName implements IItemHandler
 	private static final int[] ITEM_IDS = { RequestChangeNicknameColor.COLOR_NAME_1,
 			RequestChangeNicknameColor.COLOR_NAME_2 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -34,6 +35,7 @@ public class ColorName implements IItemHandler
 		playable.sendPacket(ExChangeNicknameNColor.PACKET);
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

@@ -855,6 +855,7 @@ public final class L2PcInstance extends L2Playable
 			_player = player;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (_player == null)
@@ -4067,6 +4068,7 @@ public final class L2PcInstance extends L2Playable
 		/**
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public void run()
 		{
 			L2GameClient client = getClient();
@@ -6543,6 +6545,7 @@ public final class L2PcInstance extends L2Playable
 		RecordTable.getInstance().update();
 		
 		SQLQueue.getInstance().add(new SQLQuery() {
+			@Override
 			public void execute(Connection con)
 			{
 				try
@@ -8594,6 +8597,7 @@ public final class L2PcInstance extends L2Playable
 	
 	class InventoryEnable implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			_inventoryDisabled = false;
@@ -8686,6 +8690,7 @@ public final class L2PcInstance extends L2Playable
 	
 	class WarnUserTakeBreak implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			sendPacket(SystemMessageId.PLAYING_FOR_LONG_TIME);
@@ -8694,6 +8699,7 @@ public final class L2PcInstance extends L2Playable
 	
 	class RentPetTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			stopRentPet();
@@ -8702,6 +8708,7 @@ public final class L2PcInstance extends L2Playable
 	
 	class WaterTask implements Runnable
 	{
+		@Override
 		@SuppressWarnings("deprecation")
 		public void run()
 		{
@@ -8735,6 +8742,7 @@ public final class L2PcInstance extends L2Playable
 			_isUpperGrade = isUpperGrade;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (System.currentTimeMillis() >= _endTaskTime)
@@ -9578,6 +9586,7 @@ public final class L2PcInstance extends L2Playable
 	/** Section for mounted pets */
 	class FeedTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			try
@@ -9727,6 +9736,7 @@ public final class L2PcInstance extends L2Playable
 	
 	public class dismount implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			dismount();
@@ -12175,6 +12185,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private class JailTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			setInJail(false, 0);
@@ -12363,6 +12374,7 @@ public final class L2PcInstance extends L2Playable
 	
 	public class ChargeTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			clearCharges();
@@ -12516,6 +12528,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private class SoulTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			clearSouls();
@@ -12582,6 +12595,7 @@ public final class L2PcInstance extends L2Playable
 			_value = value;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (isDead() && !Config.ALT_FAME_FOR_DEAD_PLAYERS)
@@ -13178,6 +13192,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private final class AutoSave implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			long period = Config.CHAR_STORE_INTERVAL * 60000L;

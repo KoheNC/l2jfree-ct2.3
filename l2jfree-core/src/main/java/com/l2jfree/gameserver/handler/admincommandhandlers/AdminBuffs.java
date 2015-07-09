@@ -29,6 +29,7 @@ public class AdminBuffs implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_getbuffs", "admin_stopbuff", "admin_stopallbuffs",
 			"admin_areacancel" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_getbuffs"))
@@ -120,6 +121,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

@@ -63,6 +63,7 @@ public class AdminSkill implements IAdminCommandHandler
 	
 	private static L2Skill[] adminSkills;
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_show_skills"))
@@ -214,6 +215,7 @@ public class AdminSkill implements IAdminCommandHandler
 		activeChar.sendSkillList();
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

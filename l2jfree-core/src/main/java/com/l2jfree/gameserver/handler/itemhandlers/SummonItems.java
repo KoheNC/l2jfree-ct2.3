@@ -45,6 +45,7 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class SummonItems implements IItemHandler
 {
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -173,6 +174,7 @@ public class SummonItems implements IItemHandler
 			_petSummon = petSummon;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (_petSummon.getCurrentFed() <= 0)
@@ -196,6 +198,7 @@ public class SummonItems implements IItemHandler
 			_item = item;
 		}
 		
+		@Override
 		public void run()
 		{
 			_activeChar.sendPacket(new MagicSkillLaunched(_activeChar, 2046, 1));
@@ -298,6 +301,7 @@ public class SummonItems implements IItemHandler
 		}
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return SummonItemsData.getInstance().itemIDs();

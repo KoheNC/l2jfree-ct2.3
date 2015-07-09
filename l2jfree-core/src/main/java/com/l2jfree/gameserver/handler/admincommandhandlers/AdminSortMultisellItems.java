@@ -221,6 +221,7 @@ public class AdminSortMultisellItems implements IAdminCommandHandler
 	
 	private List<Integer> spellItemList = null;
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_sortmulti"))
@@ -267,6 +268,7 @@ public class AdminSortMultisellItems implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

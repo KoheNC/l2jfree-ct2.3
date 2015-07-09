@@ -80,6 +80,7 @@ public final class LeakTaskManager
 	
 	private final class Cleanup implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			synchronized (LeakTaskManager.this)

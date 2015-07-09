@@ -39,6 +39,7 @@ public class AdminLevel implements IAdminCommandHandler
 					"Set level of your target (player or pet).", "Usage: setlevel <num>", "Options:",
 					"num - level to set", } };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
@@ -114,6 +115,7 @@ public class AdminLevel implements IAdminCommandHandler
 		}
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		String[] _adminCommandsOnly = new String[ADMIN_COMMANDS.length];

@@ -72,6 +72,7 @@ public class L2TownPetInstance extends L2Npc
 	
 	public class RandomWalkTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			if (!isInActiveRegion())

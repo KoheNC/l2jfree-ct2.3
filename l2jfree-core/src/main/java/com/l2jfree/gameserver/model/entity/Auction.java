@@ -115,6 +115,7 @@ public class Auction
 	/** Task Sheduler for endAuction */
 	public class AutoEndTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			endAuction();

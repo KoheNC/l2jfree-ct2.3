@@ -36,12 +36,14 @@ public class AdminChangeAccessLevel implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_changelvl" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		handleChangeLevel(command, activeChar);
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

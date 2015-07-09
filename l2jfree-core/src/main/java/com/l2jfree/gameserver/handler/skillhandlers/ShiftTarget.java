@@ -31,6 +31,7 @@ public class ShiftTarget implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SHIFT_TARGET };
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		L2Attackable attackerChar = null;
@@ -90,6 +91,7 @@ public class ShiftTarget implements ISkillHandler
 		}
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

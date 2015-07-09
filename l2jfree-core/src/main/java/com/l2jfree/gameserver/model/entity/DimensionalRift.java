@@ -338,6 +338,7 @@ public class DimensionalRift
 		if (_party.getMemberCount() == deadPlayers.size())
 		{
 			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+				@Override
 				public void run()
 				{
 					for (L2PcInstance p : _party.getPartyMembers())
@@ -366,6 +367,7 @@ public class DimensionalRift
 		if (_party.getMemberCount() - revivedInWaitingRoom.size() < Config.ALT_RIFT_MIN_PARTY_SIZE)
 		{
 			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+				@Override
 				public void run()
 				{
 					for (L2PcInstance p : _party.getPartyMembers())

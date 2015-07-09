@@ -29,6 +29,7 @@ public class Book implements IItemHandler
 			7087, 7088, 7089, 7090, 7091, 7092, 7093, 7094, 7095, 7096, 7097, 7098, 7099, 7100, 7101, 7102, 7103, 7104,
 			7105, 7106, 7107, 7108, 7109, 7110, 7111, 7112, 8059, 13130, 13131, 13132, 13133, 13134, 13135, 13136 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
@@ -57,6 +58,7 @@ public class Book implements IItemHandler
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

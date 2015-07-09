@@ -151,6 +151,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 				_cwh = cwh;
 			}
 			
+			@Override
 			public void run()
 			{
 				try
@@ -615,6 +616,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 		{
 		}
 		
+		@Override
 		public void run()
 		{
 			try

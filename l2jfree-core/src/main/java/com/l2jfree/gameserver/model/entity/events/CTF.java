@@ -653,6 +653,7 @@ public class CTF
 			_myTarget = target;
 		}
 		
+		@Override
 		public void run()
 		{
 			if (_me == null || _me.isOnline() == 0)
@@ -1038,6 +1039,7 @@ public class CTF
 		
 		setUserData();
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				CTF.sit();
@@ -1105,6 +1107,7 @@ public class CTF
 		
 		setUserData();
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				sit();
@@ -2217,6 +2220,7 @@ public class CTF
 	{
 		AnnounceToPlayers(false, _eventName + "(CTF): Teleport back to participation NPC in 20 seconds!");
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (L2PcInstance player : _players)

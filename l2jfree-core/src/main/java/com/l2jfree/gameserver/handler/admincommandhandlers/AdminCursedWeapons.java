@@ -41,6 +41,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 			"admin_cw_reload", "admin_cw_add", "admin_cw_info_menu" };
 	private int itemId;
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		CursedWeaponsManager cwm = CursedWeaponsManager.getInstance();
@@ -201,6 +202,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

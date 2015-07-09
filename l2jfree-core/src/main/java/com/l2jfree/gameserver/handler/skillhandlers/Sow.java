@@ -35,6 +35,7 @@ public class Sow implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SOW };
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
@@ -133,6 +134,7 @@ public class Sow implements ISkillHandler
 		return (rate < basicSuccess);
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

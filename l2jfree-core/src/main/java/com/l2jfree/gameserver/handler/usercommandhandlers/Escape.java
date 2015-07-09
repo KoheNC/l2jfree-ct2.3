@@ -30,6 +30,7 @@ public class Escape implements IUserCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		if (!activeChar.canTeleport(TeleportMode.UNSTUCK))
@@ -81,6 +82,7 @@ public class Escape implements IUserCommandHandler
 			_activeChar = activeChar;
 		}
 		
+		@Override
 		public void run()
 		{
 			_activeChar.setIsIn7sDungeon(false);
@@ -92,6 +94,7 @@ public class Escape implements IUserCommandHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

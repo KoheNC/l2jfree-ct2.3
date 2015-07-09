@@ -48,6 +48,7 @@ public class AccountsDAOMock implements AccountsDAO
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public Accounts getAccountById(String id)
 	{
 		if (!referential.containsKey(id))
@@ -60,6 +61,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createAccount(java.lang.Object)
 	 */
+	@Override
 	public String createAccount(Object obj)
 	{
 		Accounts acc = (Accounts)obj;
@@ -70,6 +72,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createOrUpdate(java.lang.Object)
 	 */
+	@Override
 	public void createOrUpdate(Object obj)
 	{
 		createAccount(obj);
@@ -79,6 +82,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createOrUpdateAll(java.util.Collection)
 	 */
+	@Override
 	public void createOrUpdateAll(Collection<?> entities)
 	{
 		Iterator<?> it = entities.iterator();
@@ -91,6 +95,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#getAllAccounts()
 	 */
+	@Override
 	public List<Accounts> getAllAccounts()
 	{
 		return new ArrayList<Accounts>(referential.values());
@@ -99,6 +104,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAccount(java.lang.Object)
 	 */
+	@Override
 	public void removeAccount(Object obj)
 	{
 		referential.remove(((Accounts)obj).getLogin());
@@ -108,6 +114,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAccountById(java.io.Serializable)
 	 */
+	@Override
 	public void removeAccountById(String login)
 	{
 		referential.remove(login);
@@ -116,6 +123,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAll(java.util.Collection)
 	 */
+	@Override
 	public void removeAll(Collection<?> entities)
 	{
 		Iterator<?> it = entities.iterator();
@@ -128,6 +136,7 @@ public class AccountsDAOMock implements AccountsDAO
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#update(java.lang.Object)
 	 */
+	@Override
 	public void update(Object obj)
 	{
 		Accounts acc = (Accounts)obj;

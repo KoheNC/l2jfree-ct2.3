@@ -118,6 +118,7 @@ public class L2Request
 		_isRequestor = isRequestor;
 		_isAnswerer = !isRequestor;
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				clear();

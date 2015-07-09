@@ -301,6 +301,7 @@ public class CastleManorManager
 		if (_log.isDebugEnabled())
 			_log.info("ManorSystem: Manor refresh updated");
 		_scheduledManorRefresh = ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				if (!isDisabled())
@@ -309,6 +310,7 @@ public class CastleManorManager
 					_log.info("ManorSystem: Under maintenance mode started");
 					
 					_scheduledMaintenanceEnd = ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+						@Override
 						public void run()
 						{
 							_log.info("ManorSystem: Next period started");
@@ -334,6 +336,7 @@ public class CastleManorManager
 	{
 		_log.info("ManorSystem: Manor period approve updated");
 		_scheduledNextPeriodapprove = ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				if (!isDisabled())

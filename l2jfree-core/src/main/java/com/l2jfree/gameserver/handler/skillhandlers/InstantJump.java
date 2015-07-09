@@ -63,6 +63,7 @@ public class InstantJump extends ISkillConditionChecker
 		return super.checkConditions(activeChar, skill);
 	}
 	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (targets.length == 0 || targets[0] == null)
@@ -122,6 +123,7 @@ public class InstantJump extends ISkillConditionChecker
 		}
 	}
 	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

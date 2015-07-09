@@ -44,6 +44,7 @@ public class WrappedPack implements IItemHandler
 			14272, 14273, 14274, 14275, 14276, 14277, 14278, 14279, 14280, 14281, 14282, 14283, 14284, 14285, 14286,
 			14287, 14288, 14289, 14290, 14291, 14530 };
 	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance) || item == null)

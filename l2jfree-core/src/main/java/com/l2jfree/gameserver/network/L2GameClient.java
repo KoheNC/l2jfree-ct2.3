@@ -440,6 +440,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 			ThreadPoolManager.getInstance().schedule(this, Config.ENTERWORLD_TICK);
 		}
 		
+		@Override
 		public void run()
 		{
 			synchronized (L2GameClient.this)

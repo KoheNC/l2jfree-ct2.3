@@ -97,6 +97,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 		return (TrapKnownList)_knownList;
 	}
 	
+	@Override
 	public void run()
 	{
 		_timeRemaining -= 1000;

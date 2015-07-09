@@ -34,6 +34,7 @@ public class AdminInvul implements IAdminCommandHandler
 	private final static Log _log = LogFactory.getLog(AdminInvul.class);
 	private static final String[] ADMIN_COMMANDS = { "admin_invul", "admin_setinvul" };
 	
+	@Override
 	public boolean useAdminCommand(String command0, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command0, " ");
@@ -62,6 +63,7 @@ public class AdminInvul implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

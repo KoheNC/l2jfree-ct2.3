@@ -2454,6 +2454,7 @@ public class L2Attackable extends L2Npc
 		/**
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public void run()
 		{
 			setCommandChannelTimer(null);

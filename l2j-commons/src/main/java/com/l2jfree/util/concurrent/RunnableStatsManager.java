@@ -175,6 +175,7 @@ public final class RunnableStatsManager
 		}
 		
 		private final Comparator<MethodStat> _comparator = new Comparator<MethodStat>() {
+			@Override
 			public int compare(MethodStat o1, MethodStat o2)
 			{
 				final Comparable c1 = getComparableValueOf(o1);

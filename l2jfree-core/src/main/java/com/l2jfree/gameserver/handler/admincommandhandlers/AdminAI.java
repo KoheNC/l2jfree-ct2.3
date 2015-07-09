@@ -33,6 +33,7 @@ public class AdminAI implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_show_ai" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
@@ -99,6 +100,7 @@ public class AdminAI implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

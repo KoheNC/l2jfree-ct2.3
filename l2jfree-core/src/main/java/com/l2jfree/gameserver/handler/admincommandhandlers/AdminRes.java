@@ -37,6 +37,7 @@ public class AdminRes implements IAdminCommandHandler
 	private final static Log _log = LogFactory.getLog(AdminRes.class);
 	private static final String[] ADMIN_COMMANDS = { "admin_res", "admin_res_monster" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_res "))
@@ -51,6 +52,7 @@ public class AdminRes implements IAdminCommandHandler
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

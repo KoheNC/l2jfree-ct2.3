@@ -535,6 +535,7 @@ public class VIP
 		spawnJoinNPC();
 		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				_joining = false;
@@ -582,6 +583,7 @@ public class VIP
 		spawnJoinNPC();
 		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				_joining = false;
@@ -611,6 +613,7 @@ public class VIP
 			Announcements.getInstance().announceToAll("Players will be teleported to their locations in 20 seconds.");
 			
 			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+				@Override
 				public void run()
 				{
 					teleportPlayers();
@@ -621,6 +624,7 @@ public class VIP
 					spawnEndNPC();
 					
 					ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+						@Override
 						public void run()
 						{
 							Announcements
@@ -637,6 +641,7 @@ public class VIP
 							VIP.sit();
 							
 							ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+								@Override
 								public void run()
 								{
 									endEventTime();
@@ -824,6 +829,7 @@ public class VIP
 				"Teleporting VIP players back to the Registration area in 20 seconds.");
 		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (L2PcInstance player : _playersVIP)

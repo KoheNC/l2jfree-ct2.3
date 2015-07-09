@@ -1045,6 +1045,7 @@ class OlympiadGameTask implements Runnable
 		return _game._playerOneDefaulted || _game._playerTwoDefaulted;
 	}
 	
+	@Override
 	public void run()
 	{
 		_started = true;

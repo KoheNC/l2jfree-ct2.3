@@ -1035,6 +1035,7 @@ public class MercTicketManager
 			merc.spawnMe(x, y, (z + 20));
 			AutoChatHandler.getInstance().registerChat(merc, MercTicketManager.MESSAGES, 0);
 			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+				@Override
 				public void run()
 				{
 					merc.deleteMe();

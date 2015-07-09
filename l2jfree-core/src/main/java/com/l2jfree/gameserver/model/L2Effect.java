@@ -233,6 +233,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	private static final FIFORunnableQueue<Runnable> EFFECT_QUEUE = new FIFORunnableQueue<Runnable>() {};
 	
 	private final Runnable ON_START = new Runnable() {
+		@Override
 		public void run()
 		{
 			_startConditionsCorrect = onStart();
@@ -255,6 +256,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	};
 	
 	private final Runnable ON_ACTION_TIME = new Runnable() {
+		@Override
 		public void run()
 		{
 			if (_startConditionsCorrect)
@@ -276,6 +278,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	};
 	
 	private final Runnable ON_EXIT = new Runnable() {
+		@Override
 		public void run()
 		{
 			if (_startConditionsCorrect)
@@ -518,6 +521,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	{
 	}
 	
+	@Override
 	public final void run()
 	{
 		synchronized (this)
@@ -613,11 +617,13 @@ public abstract class L2Effect implements FuncOwner, Runnable
 		return _template;
 	}
 	
+	@Override
 	public final String getFuncOwnerName()
 	{
 		return _skill.getFuncOwnerName();
 	}
 	
+	@Override
 	public final L2Skill getFuncOwnerSkill()
 	{
 		return _skill.getFuncOwnerSkill();

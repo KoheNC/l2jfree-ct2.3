@@ -63,6 +63,7 @@ public class RequestWearItem extends L2GameClientPacket
 	
 	private class RemoveWearItemsTask implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			_activeChar.destroyWearedItems("Wear", null, true);

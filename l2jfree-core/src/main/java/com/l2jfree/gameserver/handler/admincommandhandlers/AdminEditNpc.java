@@ -68,6 +68,7 @@ public class AdminEditNpc implements IAdminCommandHandler
 			"admin_load_npc", "admin_editCustomShopItem", "admin_delCustomShopItem", "admin_addCustomShopItem",
 			"admin_showCustomShop", "admin_showCustomShopList" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_showShop "))
@@ -1231,6 +1232,7 @@ public class AdminEditNpc implements IAdminCommandHandler
 		return tradeLists;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
