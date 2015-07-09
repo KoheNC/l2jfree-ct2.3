@@ -38,7 +38,7 @@ public final class ExRpItemLink extends L2GameServerPacket
 	{
 		return S_FE_6C_EXPRPITEMLINK;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
 	 */
@@ -54,11 +54,11 @@ public final class ExRpItemLink extends L2GameServerPacket
 		writeH(_item.getItem().getType2());
 		writeD(_item.getItem().getBodyPart());
 		writeH(_item.getEnchantLevel());
-		writeH(_item.getCustomType2());  // item type3
+		writeH(_item.getCustomType2()); // item type3
 		writeH(0x00); // ??
 		writeD(_item.isAugmented() ? _item.getAugmentation().getAugmentationId() : 0x00);
 		writeD(_item.getMana());
-
+		
 		// T1
 		writeElementalInfo(_item);
 	}

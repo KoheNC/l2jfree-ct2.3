@@ -30,88 +30,117 @@ import com.l2jfree.network.ServerStatusAttributes;
  */
 public class AdminLogin implements IAdminCommandHandler
 {
-	private static final String[] LOGIN_COMMANDS = {
-		"admin_login", "admin_login_conn", "admin_login_status", "admin_login_toggle",
-		"admin_login_age"
-	};
-
+	private static final String[] LOGIN_COMMANDS = { "admin_login", "admin_login_conn", "admin_login_status",
+			"admin_login_toggle", "admin_login_age" };
+	
 	private static final String HTML_ROOT = "data/html/admin/";
-
+	
 	private static final String ON = "ON";
 	private static final String OFF = "OFF";
 	private static final String ENABLE = "1";
 	private static final String DISABLE = "0";
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance GM)
 	{
 		StringTokenizer st;
-
+		
 		if (command.equalsIgnoreCase(LOGIN_COMMANDS[0]))
 			showMenu(GM);
 		else if (command.startsWith(LOGIN_COMMANDS[1]))
 		{
-			st = new StringTokenizer(command, " "); st.nextToken();
+			st = new StringTokenizer(command, " ");
+			st.nextToken();
 			int connCount;
-			try { connCount = Integer.parseInt(st.nextToken()); }
-			catch (Exception e) { showMenu(GM); return false; }
+			try
+			{
+				connCount = Integer.parseInt(st.nextToken());
+			}
+			catch (Exception e)
+			{
+				showMenu(GM);
+				return false;
+			}
 			LoginServerThread.getInstance().setMaxPlayers(connCount);
 		}
 		else if (command.startsWith(LOGIN_COMMANDS[2]))
 		{
-			st = new StringTokenizer(command, " "); st.nextToken();
+			st = new StringTokenizer(command, " ");
+			st.nextToken();
 			int newStatus;
-			try { newStatus = Integer.parseInt(st.nextToken()); }
-			catch (Exception e) { showMenu(GM); return false; }
+			try
+			{
+				newStatus = Integer.parseInt(st.nextToken());
+			}
+			catch (Exception e)
+			{
+				showMenu(GM);
+				return false;
+			}
 			LoginServerThread.getInstance().setServerStatus(newStatus);
 		}
 		else if (command.startsWith(LOGIN_COMMANDS[3]))
 		{
-			st = new StringTokenizer(command, " "); st.nextToken();
-			int attrib; int value;
+			st = new StringTokenizer(command, " ");
+			st.nextToken();
+			int attrib;
+			int value;
 			try
 			{
 				attrib = Integer.parseInt(st.nextToken());
 				value = Integer.parseInt(st.nextToken());
 			}
-			catch (Exception e) { showMenu(GM); return false; }
+			catch (Exception e)
+			{
+				showMenu(GM);
+				return false;
+			}
 			LoginServerThread.getInstance().changeAttribute(attrib, value);
 		}
 		else if (command.startsWith(LOGIN_COMMANDS[4]))
 		{
-			st = new StringTokenizer(command, " "); st.nextToken();
+			st = new StringTokenizer(command, " ");
+			st.nextToken();
 			int age;
-			try { age = Integer.parseInt(st.nextToken()); }
-			catch (Exception e) { showMenu(GM); return false; }
+			try
+			{
+				age = Integer.parseInt(st.nextToken());
+			}
+			catch (Exception e)
+			{
+				showMenu(GM);
+				return false;
+			}
 			LoginServerThread.getInstance().changeAttribute(ServerStatusAttributes.SERVER_AGE_LIMITATION, age);
 		}
 		else
 			return false;
-
+		
 		showMenu(GM);
 		return true;
 	}
-
+	
 	private void showMenu(L2PcInstance GM)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setFile(HTML_ROOT + "LoginMenu.html");
 		switch (LoginServerThread.getInstance().getServerStatus())
 		{
-		case STATUS_DOWN:
-			html.replace("%statusCol%", "EE0000");
-			html.replace("%statusStr%", OFF);
-			break;
-		case STATUS_GM_ONLY:
-			html.replace("%statusCol%", "EEEE00");
-			html.replace("%statusStr%", "MAINTENANCE");
-			break;
-		default:
-			html.replace("%statusCol%", "00EE00");
-			html.replace("%statusStr%", ON);
-			break;
+			case STATUS_DOWN:
+				html.replace("%statusCol%", "EE0000");
+				html.replace("%statusStr%", OFF);
+				break;
+			case STATUS_GM_ONLY:
+				html.replace("%statusCol%", "EEEE00");
+				html.replace("%statusStr%", "MAINTENANCE");
+				break;
+			default:
+				html.replace("%statusCol%", "00EE00");
+				html.replace("%statusStr%", ON);
+				break;
 		}
 		html.replace("%statusB1%", Config.SERVER_BIT_1 ? ON : OFF);
 		html.replace("%statusB2%", Config.SERVER_LIST_CLOCK ? ON : OFF);
@@ -124,12 +153,14 @@ public class AdminLogin implements IAdminCommandHandler
 		html.replace("%statusBr%", Config.SERVER_LIST_BRACKET ? ON : OFF);
 		html.replace("%br%", Config.SERVER_LIST_BRACKET ? DISABLE : ENABLE);
 		html.replace("%maxConn%", String.valueOf(LoginServerThread.getInstance().getMaxPlayer()));
-		GM.sendPacket(html); html = null;
+		GM.sendPacket(html);
+		html = null;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return LOGIN_COMMANDS;

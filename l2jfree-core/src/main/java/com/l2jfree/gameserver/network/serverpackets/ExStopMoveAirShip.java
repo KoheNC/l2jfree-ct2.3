@@ -15,38 +15,38 @@
 package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.actor.instance.L2AirShipInstance;
+
 /**
  * @authos kerberos
  *
  */
 public class ExStopMoveAirShip extends L2GameServerPacket
 {
-    private final L2AirShipInstance _ship;
-
-
-    public ExStopMoveAirShip(L2AirShipInstance ship)
-    {
-    	_ship = ship;
-    }
-
-    @Override
+	private final L2AirShipInstance _ship;
+	
+	public ExStopMoveAirShip(L2AirShipInstance ship)
+	{
+		_ship = ship;
+	}
+	
+	@Override
 	protected final void writeImpl()
-    {
-        writeC(0xfe);
-        writeH(0x66);
-        writeD(_ship.getObjectId());
-        writeD(_ship.getX());
-        writeD(_ship.getY());
-        writeD(_ship.getZ());
-        writeD(_ship.getHeading());
-    }
-
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
+	{
+		writeC(0xfe);
+		writeH(0x66);
+		writeD(_ship.getObjectId());
+		writeD(_ship.getX());
+		writeD(_ship.getY());
+		writeD(_ship.getZ());
+		writeD(_ship.getHeading());
+	}
+	
+	/* (non-Javadoc)
+	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
 	public String getType()
-    {
-        return "[S] FE:66 ExStopMoveAirShip";
-    }
+	{
+		return "[S] FE:66 ExStopMoveAirShip";
+	}
 }

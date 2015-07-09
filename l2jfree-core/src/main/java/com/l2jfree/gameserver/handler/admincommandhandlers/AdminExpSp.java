@@ -34,11 +34,12 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminExpSp implements IAdminCommandHandler
 {
-	private final static Log		_log			= LogFactory.getLog(AdminExpSp.class);
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_add_exp_sp_to_character", "admin_add_exp_sp", "admin_remove_exp_sp" };
-
+	private final static Log _log = LogFactory.getLog(AdminExpSp.class);
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_add_exp_sp_to_character", "admin_add_exp_sp",
+			"admin_remove_exp_sp" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_add_exp_sp"))
@@ -70,18 +71,19 @@ public class AdminExpSp implements IAdminCommandHandler
 		addExpSp(activeChar);
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void addExpSp(L2PcInstance activeChar)
 	{
 		L2Object target = activeChar.getTarget();
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
-			player = (L2PcInstance) target;
+			player = (L2PcInstance)target;
 		else
 		{
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
@@ -96,14 +98,14 @@ public class AdminExpSp implements IAdminCommandHandler
 		adminReply.replace("%class%", player.getTemplate().getClassName());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	private boolean adminAddExpSp(L2PcInstance activeChar, String ExpSp)
 	{
 		L2Object target = activeChar.getTarget();
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
 		{
-			player = (L2PcInstance) target;
+			player = (L2PcInstance)target;
 		}
 		else
 		{
@@ -113,7 +115,7 @@ public class AdminExpSp implements IAdminCommandHandler
 		StringTokenizer st = new StringTokenizer(ExpSp);
 		if (st.countTokens() != 2)
 			return false;
-
+		
 		String exp = st.nextToken();
 		String sp = st.nextToken();
 		long expval = 0;
@@ -135,19 +137,19 @@ public class AdminExpSp implements IAdminCommandHandler
 			//Admin information
 			activeChar.sendMessage("Added " + expval + " xp and " + spval + " sp to " + player.getName() + ".");
 			if (_log.isDebugEnabled())
-				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") added " + expval + " xp and " + spval + " sp to "
-						+ player.getObjectId() + ".");
+				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") added " + expval
+						+ " xp and " + spval + " sp to " + player.getObjectId() + ".");
 		}
 		return true;
 	}
-
+	
 	private boolean adminRemoveExpSP(L2PcInstance activeChar, String ExpSp)
 	{
 		L2Object target = activeChar.getTarget();
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
 		{
-			player = (L2PcInstance) target;
+			player = (L2PcInstance)target;
 		}
 		else
 		{
@@ -157,7 +159,7 @@ public class AdminExpSp implements IAdminCommandHandler
 		StringTokenizer st = new StringTokenizer(ExpSp);
 		if (st.countTokens() != 2)
 			return false;
-
+		
 		String exp = st.nextToken();
 		String sp = st.nextToken();
 		long expval = 0;
@@ -179,8 +181,8 @@ public class AdminExpSp implements IAdminCommandHandler
 			//Admin information
 			activeChar.sendMessage("Removed " + expval + " xp and " + spval + " sp from " + player.getName() + ".");
 			if (_log.isDebugEnabled())
-				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") removed " + expval + " xp and " + spval + " sp from "
-						+ player.getObjectId() + ".");
+				_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") removed " + expval
+						+ " xp and " + spval + " sp from " + player.getObjectId() + ".");
 		}
 		return true;
 	}

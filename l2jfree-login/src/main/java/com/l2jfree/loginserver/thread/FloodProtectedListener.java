@@ -110,8 +110,8 @@ public abstract class FloodProtectedListener extends Thread
 			fConnection.connectionNumber += 1;
 			
 			if ((fConnection.connectionNumber > Config.FAST_CONNECTION_LIMIT && (System.currentTimeMillis() - fConnection.lastConnection) < Config.NORMAL_CONNECTION_TIME)
-				|| (System.currentTimeMillis() - fConnection.lastConnection) < Config.FAST_CONNECTION_TIME
-				|| fConnection.connectionNumber > Config.MAX_CONNECTION_PER_IP)
+					|| (System.currentTimeMillis() - fConnection.lastConnection) < Config.FAST_CONNECTION_TIME
+					|| fConnection.connectionNumber > Config.MAX_CONNECTION_PER_IP)
 			{
 				fConnection.connectionNumber -= 1;
 				fConnection.lastConnection = System.currentTimeMillis();

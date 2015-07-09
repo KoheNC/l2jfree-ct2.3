@@ -32,15 +32,15 @@ public class L2PetManagerInstance extends L2MerchantInstance
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		player.setLastFolkNPC(this);
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -63,11 +63,11 @@ public class L2PetManagerInstance extends L2MerchantInstance
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player)
 	{
 		String filename = "data/html/petmanager/" + getNpcId() + ".htm";
-
+		
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		if (Config.ALLOW_RENTPET && Config.LIST_PET_RENT_NPC.contains(getNpcId()))
@@ -76,7 +76,7 @@ public class L2PetManagerInstance extends L2MerchantInstance
 		html.replace("%npcname%", getName());
 		player.sendPacket(html);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
@@ -89,7 +89,7 @@ public class L2PetManagerInstance extends L2MerchantInstance
 		
 		return "data/html/petmanager/" + pom + ".htm";
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -99,15 +99,15 @@ public class L2PetManagerInstance extends L2MerchantInstance
 			int val = Integer.parseInt(params[1]);
 			switch (val)
 			{
-			case 1:
-				exchange(player, 7585, 6650);
-				break;
-			case 2:
-				exchange(player, 7583, 6648);
-				break;
-			case 3:
-				exchange(player, 7584, 6649);
-				break;
+				case 1:
+					exchange(player, 7585, 6650);
+					break;
+				case 2:
+					exchange(player, 7583, 6648);
+					break;
+				case 3:
+					exchange(player, 7584, 6649);
+					break;
 			}
 		}
 		else if (command.startsWith("evolve"))
@@ -119,21 +119,21 @@ public class L2PetManagerInstance extends L2MerchantInstance
 			{
 			// Info evolve(player, "curent pet summon item", "new pet summon item", "lvl required to evolve")
 			// To ignore evolve just put value 0 where do you like example: evolve(player, 0, 9882, 55);
-			case 1:
-				ok = Evolve.doEvolve(player, this, 2375, 9882, 55);
-				break;
-			case 2:
-				ok = Evolve.doEvolve(player, this, 9882, 10426, 70);
-				break;
-			case 3:
-				ok = Evolve.doEvolve(player, this, 6648, 10311, 55);
-				break;
-			case 4:
-				ok = Evolve.doEvolve(player, this, 6650, 10313, 55);
-				break;
-			case 5:
-				ok = Evolve.doEvolve(player, this, 6649, 10312, 55);
-				break;
+				case 1:
+					ok = Evolve.doEvolve(player, this, 2375, 9882, 55);
+					break;
+				case 2:
+					ok = Evolve.doEvolve(player, this, 9882, 10426, 70);
+					break;
+				case 3:
+					ok = Evolve.doEvolve(player, this, 6648, 10311, 55);
+					break;
+				case 4:
+					ok = Evolve.doEvolve(player, this, 6650, 10313, 55);
+					break;
+				case 5:
+					ok = Evolve.doEvolve(player, this, 6649, 10312, 55);
+					break;
 			}
 			if (!ok)
 			{
@@ -150,21 +150,21 @@ public class L2PetManagerInstance extends L2MerchantInstance
 			switch (val)
 			{
 			// Info evolve(player, "curent pet summon item", "new pet summon item", "lvl required to evolve")
-			case 1:
-				ok = Evolve.doEvolve(player, this, 10307, 9882, 55);
-				break;
-			case 2:
-				ok = Evolve.doEvolve(player, this, 10611, 10426, 70);
-				break;
-			case 3:
-				ok = Evolve.doEvolve(player, this, 10308, 4422, 55);
-				break;
-			case 4:
-				ok = Evolve.doEvolve(player, this, 10309, 4423, 55);
-				break;
-			case 5:
-				ok = Evolve.doEvolve(player, this, 10310, 4424, 55);
-				break;
+				case 1:
+					ok = Evolve.doEvolve(player, this, 10307, 9882, 55);
+					break;
+				case 2:
+					ok = Evolve.doEvolve(player, this, 10611, 10426, 70);
+					break;
+				case 3:
+					ok = Evolve.doEvolve(player, this, 10308, 4422, 55);
+					break;
+				case 4:
+					ok = Evolve.doEvolve(player, this, 10309, 4423, 55);
+					break;
+				case 5:
+					ok = Evolve.doEvolve(player, this, 10310, 4424, 55);
+					break;
 			}
 			if (!ok)
 			{
@@ -176,7 +176,7 @@ public class L2PetManagerInstance extends L2MerchantInstance
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	public final void exchange(L2PcInstance player, int itemIdtake, int itemIdgive)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());

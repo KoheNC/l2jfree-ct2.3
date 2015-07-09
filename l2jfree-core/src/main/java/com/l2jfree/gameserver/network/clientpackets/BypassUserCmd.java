@@ -21,32 +21,32 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class BypassUserCmd extends L2GameClientPacket
 {
-	private static final String	_C__BYPASSUSERCMD = "[C] B3 BypassUserCmd c[d]";
-
-	private int					_command;
-
+	private static final String _C__BYPASSUSERCMD = "[C] B3 BypassUserCmd c[d]";
+	
+	private int _command;
+	
 	@Override
 	protected void readImpl()
 	{
 		_command = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		IUserCommandHandler handler = UserCommandHandler.getInstance().getUserCommandHandler(_command);
 		if (handler == null)
 			sendPacket(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 		else
 			handler.useUserCommand(_command, player);
-
+		
 		// no AF here
 	}
-
+	
 	@Override
 	public String getType()
 	{

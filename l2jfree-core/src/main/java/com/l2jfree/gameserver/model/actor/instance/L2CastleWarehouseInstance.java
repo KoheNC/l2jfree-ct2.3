@@ -21,9 +21,9 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.serverpackets.SortedWareHouseWithdrawalList;
+import com.l2jfree.gameserver.network.serverpackets.SortedWareHouseWithdrawalList.WarehouseListType;
 import com.l2jfree.gameserver.network.serverpackets.WareHouseDepositList;
 import com.l2jfree.gameserver.network.serverpackets.WareHouseWithdrawalList;
-import com.l2jfree.gameserver.network.serverpackets.SortedWareHouseWithdrawalList.WarehouseListType;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.util.IllegalPlayerAction;
 import com.l2jfree.gameserver.util.Util;
@@ -36,7 +36,7 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 	protected static final int COND_ALL_FALSE = 0;
 	protected static final int COND_BUSY_BECAUSE_OF_SIEGE = 1;
 	protected static final int COND_OWNER = 2;
-
+	
 	/**
 	 * @param template
 	 */
@@ -44,39 +44,40 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public boolean isWarehouse()
 	{
 		return true;
 	}
-
+	
 	private void showRetrieveWindow(L2PcInstance player, WarehouseListType itemtype, byte sortorder)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		player.setActiveWarehouse(player.getWarehouse());
-
+		
 		if (player.getActiveWarehouse().getSize() == 0)
 		{
 			player.sendPacket(SystemMessageId.NO_ITEM_DEPOSITED_IN_WH);
 			return;
 		}
-
+		
 		if (itemtype != null)
-			player.sendPacket(new SortedWareHouseWithdrawalList(player, WareHouseWithdrawalList.PRIVATE, itemtype, sortorder));
+			player.sendPacket(new SortedWareHouseWithdrawalList(player, WareHouseWithdrawalList.PRIVATE, itemtype,
+					sortorder));
 		else
 			player.sendPacket(new WareHouseWithdrawalList(player, WareHouseWithdrawalList.PRIVATE));
 	}
-
+	
 	private void showDepositWindow(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		player.setActiveWarehouse(player.getWarehouse());
 		player.tempInventoryDisable();
-
+		
 		player.sendPacket(new WareHouseDepositList(player, WareHouseDepositList.PRIVATE));
 	}
-
+	
 	private void showDepositWindowClan(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
@@ -96,7 +97,7 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 			}
 		}
 	}
-
+	
 	private void showWithdrawWindowClan(L2PcInstance player, WarehouseListType itemtype, byte sortorder)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
@@ -105,7 +106,7 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 			player.sendPacket(SystemMessageId.YOU_DO_NOT_HAVE_THE_RIGHT_TO_USE_CLAN_WAREHOUSE);
 			return;
 		}
-
+		
 		if (player.getClan().getLevel() == 0)
 		{
 			player.sendPacket(SystemMessageId.ONLY_LEVEL_1_CLAN_OR_HIGHER_CAN_USE_WAREHOUSE);
@@ -114,23 +115,25 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 		{
 			player.setActiveWarehouse(player.getClan().getWarehouse());
 			if (itemtype != null)
-				player.sendPacket(new SortedWareHouseWithdrawalList(player, WareHouseWithdrawalList.CLAN, itemtype, sortorder));
+				player.sendPacket(new SortedWareHouseWithdrawalList(player, WareHouseWithdrawalList.CLAN, itemtype,
+						sortorder));
 			else
 				player.sendPacket(new WareHouseWithdrawalList(player, WareHouseWithdrawalList.CLAN));
 		}
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
 		if (player.getActiveEnchantItem() != null)
 		{
-			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " trying to use enchant exploit, ban this player!", IllegalPlayerAction.PUNISH_KICK);
+			Util.handleIllegalPlayerAction(player, "Player " + player.getName()
+					+ " trying to use enchant exploit, ban this player!", IllegalPlayerAction.PUNISH_KICK);
 			return;
 		}
-
+		
 		String param[] = command.split("_");
-
+		
 		if (command.startsWith("WithdrawP"))
 		{
 			if (Config.ENABLE_WAREHOUSESORTING_PRIVATE)
@@ -150,18 +153,20 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 				}
 			}
 			else
-				showRetrieveWindow(player, null, (byte) 0);
+				showRetrieveWindow(player, null, (byte)0);
 		}
 		else if (command.startsWith("WithdrawSortedP") && Config.ENABLE_WAREHOUSESORTING_PRIVATE)
 		{
 			if (param.length > 2)
-				showRetrieveWindow(player, WarehouseListType.valueOf(param[1]), SortedWareHouseWithdrawalList.getOrder(param[2]));
+				showRetrieveWindow(player, WarehouseListType.valueOf(param[1]),
+						SortedWareHouseWithdrawalList.getOrder(param[2]));
 			else if (param.length > 1)
 				showRetrieveWindow(player, WarehouseListType.valueOf(param[1]), SortedWareHouseWithdrawalList.A2Z);
 			else
 				showRetrieveWindow(player, WarehouseListType.ALL, SortedWareHouseWithdrawalList.A2Z);
 		}
-		else if (command.equals("DepositP")) {
+		else if (command.equals("DepositP"))
+		{
 			showDepositWindow(player);
 		}
 		else if (command.equals("WithdrawC"))
@@ -183,12 +188,13 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 				}
 			}
 			else
-				showWithdrawWindowClan(player, null, (byte) 0);
+				showWithdrawWindowClan(player, null, (byte)0);
 		}
 		else if (command.startsWith("WithdrawSortedC") && Config.ENABLE_WAREHOUSESORTING_CLAN)
 		{
 			if (param.length > 2)
-				showWithdrawWindowClan(player, WarehouseListType.valueOf(param[1]), SortedWareHouseWithdrawalList.getOrder(param[2]));
+				showWithdrawWindowClan(player, WarehouseListType.valueOf(param[1]),
+						SortedWareHouseWithdrawalList.getOrder(param[2]));
 			else if (param.length > 1)
 				showWithdrawWindowClan(player, WarehouseListType.valueOf(param[1]), SortedWareHouseWithdrawalList.A2Z);
 			else
@@ -203,10 +209,14 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 			int val = 0;
 			try
 			{
-			   val = Integer.parseInt(command.substring(5));
+				val = Integer.parseInt(command.substring(5));
 			}
-			catch (IndexOutOfBoundsException ioobe) {}
-			catch (NumberFormatException nfe) {}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+			}
+			catch (NumberFormatException nfe)
+			{
+			}
 			showChatWindow(player, val);
 		}
 		else
@@ -214,19 +224,19 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 			super.onBypassFeedback(player, command);
 		}
 	}
-
+	
 	@Override
 	public void showChatWindow(L2PcInstance player, int val)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		String filename = "data/html/castlewarehouse/castlewarehouse-no.htm";
-
+		
 		int condition = validateCondition(player);
 		if (condition > COND_ALL_FALSE)
 		{
 			if (condition == COND_BUSY_BECAUSE_OF_SIEGE)
 				filename = "data/html/castlewarehouse/castlewarehouse-busy.htm"; // Busy because of siege
-			else if (condition == COND_OWNER) 									 // Clan owns castle
+			else if (condition == COND_OWNER) // Clan owns castle
 			{
 				if (val == 0)
 					filename = "data/html/castlewarehouse/castlewarehouse.htm";
@@ -234,23 +244,24 @@ public class L2CastleWarehouseInstance extends L2NpcInstance
 					filename = "data/html/castlewarehouse/castlewarehouse-" + val + ".htm";
 			}
 		}
-
+		
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));
 		html.replace("%npcname%", getName());
 		player.sendPacket(html);
 	}
-
+	
 	protected int validateCondition(L2PcInstance player)
 	{
-		if (player.isGM()) return COND_OWNER;
+		if (player.isGM())
+			return COND_OWNER;
 		if (getCastle() != null && getCastle().getCastleId() > 0)
 		{
 			if (player.getClan() != null)
 			{
 				if (getCastle().getSiege().getIsInProgress())
-					return COND_BUSY_BECAUSE_OF_SIEGE;                   // Busy because of siege
+					return COND_BUSY_BECAUSE_OF_SIEGE; // Busy because of siege
 				else if (getCastle().getOwnerId() == player.getClanId()) // Clan owns castle
 					return COND_OWNER;
 			}

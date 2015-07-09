@@ -35,7 +35,7 @@ public class ExDuelEnd extends L2GameServerPacket
 		
 		writeD(_unk1);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -44,5 +44,5 @@ public class ExDuelEnd extends L2GameServerPacket
 	{
 		return _S__FE_4F_EXDUELEND;
 	}
-
+	
 }

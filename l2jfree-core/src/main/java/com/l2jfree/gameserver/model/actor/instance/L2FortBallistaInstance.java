@@ -35,13 +35,13 @@ public class L2FortBallistaInstance extends L2Npc
 	{
 		return true;
 	}
-
+	
 	@Override
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
 			return false;
-
+		
 		if (getFort().getSiege().getIsInProgress())
 		{
 			if (killer instanceof L2PcInstance)
@@ -49,7 +49,8 @@ public class L2FortBallistaInstance extends L2Npc
 				L2PcInstance player = ((L2PcInstance)killer);
 				if (player.getClan() != null && player.getClan().getLevel() >= 5)
 				{
-					player.getClan().setReputationScore(player.getClan().getReputationScore() + Config.BALLISTA_POINTS, true);
+					player.getClan().setReputationScore(player.getClan().getReputationScore() + Config.BALLISTA_POINTS,
+							true);
 				}
 				player.sendPacket(SystemMessageId.BALLISTA_DESTROYED_CLAN_REPU_INCREASED);
 			}
@@ -57,13 +58,13 @@ public class L2FortBallistaInstance extends L2Npc
 		
 		return true;
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -89,7 +90,7 @@ public class L2FortBallistaInstance extends L2Npc
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public boolean hasRandomAnimation()
 	{

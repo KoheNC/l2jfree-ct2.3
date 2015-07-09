@@ -23,15 +23,15 @@ import com.l2jfree.gameserver.network.serverpackets.JoinParty;
 public class RequestAnswerJoinParty extends L2GameClientPacket
 {
 	private static final String _C__REQUESTANSWERPARTY = "[C] 43 RequestAnswerJoinParty c[d]";
-
+	
 	private int _response;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_response = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -39,12 +39,12 @@ public class RequestAnswerJoinParty extends L2GameClientPacket
 		if (player == null)
 			return;
 		L2PcInstance requestor = player.getActiveRequester();
-        if (requestor == null)
-        {
-        	sendAF();
-        	return;
-        }
-
+		if (requestor == null)
+		{
+			sendAF();
+			return;
+		}
+		
 		if (_response == 1)
 		{
 			requestor.sendPacket(JoinParty.ACCEPTED);
@@ -63,7 +63,7 @@ public class RequestAnswerJoinParty extends L2GameClientPacket
 		{
 			requestor.sendPacket(JoinParty.DECLINED);
 			requestor.sendPacket(SystemMessageId.PLAYER_DECLINED_PARTY);
-
+			
 			L2Party party = requestor.getParty();
 			//activate garbage collection if there are no other members in party (happens when we were creating a new one)
 			if (party != null && party.getMemberCount() == 1)
@@ -75,15 +75,15 @@ public class RequestAnswerJoinParty extends L2GameClientPacket
 				requestor.setParty(null);
 			}
 		}
-
+		
 		sendAF();
-
+		
 		if (requestor.getParty() != null)
 			requestor.getParty().setPendingInvitation(false); // if party is null, there is no need of decreasing
 		player.setActiveRequester(null);
 		requestor.onTransactionResponse();
 	}
-
+	
 	@Override
 	public String getType()
 	{

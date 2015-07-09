@@ -32,27 +32,28 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 public class RequestAnswerJoinAlly extends L2GameClientPacket
 {
 	private static final String _C__83_REQUESTANSWERJOINALLY = "[C] 83 RequestAnswerJoinAlly";
-
+	
 	private int _response;
-
-    @Override
-    protected void readImpl()
-    {
-        _response = readD();
-    }
-
-    @Override
-    protected void runImpl()
+	
+	@Override
+	protected void readImpl()
+	{
+		_response = readD();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
+		if (activeChar == null)
+			return;
 		L2PcInstance requestor = activeChar.getRequest().getPartner();
-        if (requestor == null)
-        {
-        	sendPacket(ActionFailed.STATIC_PACKET);
-        	return;
-        }
-
+		if (requestor == null)
+		{
+			sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
 		if (_response == 0)
 		{
 			sendPacket(SystemMessageId.YOU_DID_NOT_RESPOND_TO_ALLY_INVITATION);
@@ -60,36 +61,36 @@ public class RequestAnswerJoinAlly extends L2GameClientPacket
 		}
 		else
 		{
-	        if (!(requestor.getRequest().getRequestPacket() instanceof RequestJoinAlly))
-	        {
-	        	sendPacket(ActionFailed.STATIC_PACKET);
-	        	return; // hax
-	        }
-
-	        L2Clan clan = requestor.getClan();
+			if (!(requestor.getRequest().getRequestPacket() instanceof RequestJoinAlly))
+			{
+				sendPacket(ActionFailed.STATIC_PACKET);
+				return; // hax
+			}
+			
+			L2Clan clan = requestor.getClan();
 			// we must double check this cause of hack
 			if (L2Clan.checkAllyJoinCondition(requestor, activeChar))
-	        {
+			{
 				requestor.sendPacket(SystemMessageId.YOU_INVITED_FOR_ALLIANCE);
 				sendPacket(SystemMessageId.YOU_ACCEPTED_ALLIANCE);
-
+				
 				activeChar.getClan().setAllyId(clan.getAllyId());
 				activeChar.getClan().setAllyName(clan.getAllyName());
 				activeChar.getClan().setAllyPenaltyExpiryTime(0, 0);
 				activeChar.getClan().setAllyCrestId(clan.getAllyCrestId());
 				activeChar.getClan().updateClanInDB();
-
+				
 				// Added to set the Alliance Crest when a clan joins an ally.
 				activeChar.getClan().setAllyCrestId(requestor.getClan().getAllyCrestId());
 				for (L2PcInstance member : activeChar.getClan().getOnlineMembers(0))
 					member.broadcastUserInfo();
-	        }
+			}
 		}
-
+		
 		activeChar.getRequest().onRequestResponse();
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

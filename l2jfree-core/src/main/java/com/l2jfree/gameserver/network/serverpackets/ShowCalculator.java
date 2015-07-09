@@ -26,7 +26,7 @@ public class ShowCalculator extends L2GameServerPacket
 {
 	private static final String _S__DC_SHOWCALCULATOR = "[S] dc ShowCalculator";
 	private final int _calculatorId;
-
+	
 	/**
 	 */
 	public ShowCalculator(int calculatorId)
@@ -40,7 +40,7 @@ public class ShowCalculator extends L2GameServerPacket
 		writeC(0xe2);
 		writeD(_calculatorId);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

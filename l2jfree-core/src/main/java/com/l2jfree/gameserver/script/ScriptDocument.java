@@ -32,16 +32,16 @@ import org.xml.sax.SAXException;
  */
 public class ScriptDocument
 {
-	private final static Log	_log		= LogFactory.getLog(ScriptDocument.class);
-	private Document			_document	= null;
-	private String				_name		= null;
-
+	private final static Log _log = LogFactory.getLog(ScriptDocument.class);
+	private Document _document = null;
+	private String _name = null;
+	
 	public ScriptDocument(String name, InputStream input)
 	{
 		if (input == null)
 			return;
 		_name = name;
-
+		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try
 		{
@@ -64,12 +64,12 @@ public class ScriptDocument
 			_log.error(ioe.getMessage(), ioe);
 		}
 	}
-
+	
 	public Document getDocument()
 	{
 		return _document;
 	}
-
+	
 	/**
 	 * @return Returns the _name.
 	 */
@@ -77,11 +77,11 @@ public class ScriptDocument
 	{
 		return _name;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return _name;
 	}
-
+	
 }

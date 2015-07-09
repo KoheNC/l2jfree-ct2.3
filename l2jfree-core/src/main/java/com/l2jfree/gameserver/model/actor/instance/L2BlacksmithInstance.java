@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public class L2BlacksmithInstance extends L2NpcInstance
 {
-
+	
 	public L2BlacksmithInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -38,9 +38,9 @@ public class L2BlacksmithInstance extends L2NpcInstance
 			L2Multisell.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
 		}
 		else
-			super.onBypassFeedback(player,command);
+			super.onBypassFeedback(player, command);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
@@ -53,7 +53,7 @@ public class L2BlacksmithInstance extends L2NpcInstance
 		{
 			pom = npcId + "-" + val;
 		}
-
+		
 		return "data/html/blacksmith/" + pom + ".htm";
 	}
 }

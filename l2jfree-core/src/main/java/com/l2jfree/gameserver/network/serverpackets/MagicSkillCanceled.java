@@ -24,8 +24,8 @@ public class MagicSkillCanceled extends L2GameServerPacket
 	private static final String _S__5B_MAGICSKILLCANCELD = "[S] 49 MagicSkillCanceld";
 	
 	private final int _objectId;
-
-	public MagicSkillCanceled (int objectId)
+	
+	public MagicSkillCanceled(int objectId)
 	{
 		_objectId = objectId;
 	}

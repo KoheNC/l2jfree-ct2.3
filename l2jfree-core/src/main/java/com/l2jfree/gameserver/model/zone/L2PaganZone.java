@@ -23,7 +23,7 @@ public class L2PaganZone extends L2Zone
 {
 	private static final int MARK = 8064;
 	private static final int FADED_MARK = 8065;
-
+	
 	@Override
 	protected void onEnter(L2Character character)
 	{
@@ -32,7 +32,8 @@ public class L2PaganZone extends L2Zone
 			if (character.destroyItemByItemId("Pagan Zone", MARK, 1, character, false))
 			{
 				character.getInventory().addItem("Pagan Zone", FADED_MARK, 1, null, character);
-				character.getActingPlayer().sendPacket(new SystemMessage(SystemMessageId.EARNED_S1).addItemName(FADED_MARK));
+				character.getActingPlayer().sendPacket(
+						new SystemMessage(SystemMessageId.EARNED_S1).addItemName(FADED_MARK));
 			}
 		}
 	}

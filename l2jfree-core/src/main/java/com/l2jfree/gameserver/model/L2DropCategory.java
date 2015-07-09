@@ -32,7 +32,7 @@ public class L2DropCategory
 	private int _categoryChance; // a sum of chances for calculating if an item will be dropped from this category
 	private int _categoryBalancedChance; // sum for balancing drop selection inside categories in high rate servers
 	private final int _categoryType;
-
+	
 	public L2DropCategory(int categoryType)
 	{
 		_categoryType = categoryType;
@@ -40,14 +40,14 @@ public class L2DropCategory
 		_categoryChance = 0;
 		_categoryBalancedChance = 0;
 	}
-
+	
 	public void addDropData(L2DropData drop)
 	{
 		if (drop.isQuestDrop())
 		{
-	//          if (_questDrops == null)
-	//              _questDrops = new FastList<L2DropData>(0);
-	//          _questDrops.add(drop);
+			//          if (_questDrops == null)
+			//              _questDrops = new FastList<L2DropData>(0);
+			//          _questDrops.add(drop);
 		}
 		else
 		{
@@ -57,22 +57,22 @@ public class L2DropCategory
 			_categoryBalancedChance += Math.min((drop.getChance() * Config.RATE_DROP_ITEMS), L2DropData.MAX_CHANCE);
 		}
 	}
-
+	
 	public List<L2DropData> getAllDrops()
 	{
 		return _drops;
 	}
-
+	
 	public void clearAllDrops()
 	{
 		_drops.clear();
 	}
-
+	
 	public boolean isSweep()
 	{
-		return getCategoryType()== -1;
+		return getCategoryType() == -1;
 	}
-
+	
 	// this returns the chance for the category to be visited in order to check if
 	// drops might come from it.  Category -1 (spoil) must always be visited
 	// (but may return 0 or many drops)
@@ -80,23 +80,23 @@ public class L2DropCategory
 	{
 		if (getCategoryType() >= 0)
 			return _categoryChance;
-
+		
 		return L2DropData.MAX_CHANCE;
 	}
-
+	
 	public int getCategoryBalancedChance()
 	{
 		if (getCategoryType() >= 0)
 			return _categoryBalancedChance;
-
+		
 		return L2DropData.MAX_CHANCE;
 	}
-
+	
 	public int getCategoryType()
 	{
 		return _categoryType;
 	}
-
+	
 	/**
 	 * useful for seeded conditions...the category will attempt to drop only among
 	 * items that are allowed to be dropped when a mob is seeded.
@@ -127,18 +127,18 @@ public class L2DropCategory
 		for (L2DropData drop : drops)
 		{
 			sum += drop.getChance();
-
-			if (sum > randomIndex)       // drop this item and exit the function
+			
+			if (sum > randomIndex) // drop this item and exit the function
 			{
 				drops.clear();
 				drops = null;
 				return drop;
 			}
 		}
-		  // since it is still within category, only drop one of the acceptable drops from the results.
+		// since it is still within category, only drop one of the acceptable drops from the results.
 		return null;
 	}
-
+	
 	/**
 	* ONE of the drops in this category is to be dropped now.
 	* to see which one will be dropped, weight all items' chances such that
@@ -173,8 +173,8 @@ public class L2DropCategory
 		for (L2DropData drop : getAllDrops())
 		{
 			sum += Math.min((drop.getChance() * Config.RATE_DROP_ITEMS), L2DropData.MAX_CHANCE);
-
-			if (sum >= randomIndex)       // drop this item and exit the function
+			
+			if (sum >= randomIndex) // drop this item and exit the function
 				return drop;
 		}
 		return null;

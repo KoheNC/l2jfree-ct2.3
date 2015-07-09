@@ -21,16 +21,16 @@ import org.w3c.dom.Node;
 public class Tupel
 {
 	protected static Log _log = LogFactory.getLog(Tupel.class);
-
+	
 	public int x = 0;
 	public int y = 0;
-
+	
 	public static Tupel parseTupel(Node n, int zoneId)
 	{
-		if (n.getAttributes().getNamedItem("x") == null ||
-				n.getAttributes().getNamedItem("y") == null) {
+		if (n.getAttributes().getNamedItem("x") == null || n.getAttributes().getNamedItem("y") == null)
+		{
 			
-			_log.error("x or y value missing in zone "+zoneId);
+			_log.error("x or y value missing in zone " + zoneId);
 			return null;
 		}
 		
@@ -41,9 +41,9 @@ public class Tupel
 			t.y = Integer.parseInt(n.getAttributes().getNamedItem("y").getNodeValue());
 			return t;
 		}
-		catch(NumberFormatException nfe)
+		catch (NumberFormatException nfe)
 		{
-			_log.error("x or y value not a number in zone "+zoneId);
+			_log.error("x or y value not a number in zone " + zoneId);
 		}
 		return null;
 	}

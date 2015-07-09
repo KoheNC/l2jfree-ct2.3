@@ -40,16 +40,16 @@ import com.l2jfree.gameserver.script.ScriptPackage;
  */
 public class FaenorScriptEngine extends ScriptEngine
 {
-	private static Log					_log				= LogFactory.getLog(GameServer.class);
-	public static String				PACKAGE_DIRECTORY	= "data/faenor/";
-
-	private LinkedList<ScriptDocument>	_scripts;
-
+	private static Log _log = LogFactory.getLog(GameServer.class);
+	public static String PACKAGE_DIRECTORY = "data/faenor/";
+	
+	private LinkedList<ScriptDocument> _scripts;
+	
 	public static FaenorScriptEngine getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private FaenorScriptEngine()
 	{
 		_log.info("FaenorScriptEngine: initialized");
@@ -57,31 +57,31 @@ public class FaenorScriptEngine extends ScriptEngine
 		loadPackages();
 		parsePackages();
 	}
-
+	
 	public void reloadPackages()
 	{
 		_scripts.clear();
 		_scripts = new LinkedList<ScriptDocument>();
 		parsePackages();
 	}
-
+	
 	private void loadPackages()
 	{
 		File packDirectory = new File(Config.DATAPACK_ROOT, PACKAGE_DIRECTORY);
-
-		FileFilter fileFilter = new FileFilter()
-		{
+		
+		FileFilter fileFilter = new FileFilter() {
+			@Override
 			public boolean accept(File file)
 			{
 				return file.getName().endsWith(".zip");
 			}
 		};
-
+		
 		File[] files = packDirectory.listFiles(fileFilter);
 		if (files == null)
 			return;
 		ZipFile zipPack;
-
+		
 		for (File element : files)
 		{
 			try
@@ -98,15 +98,15 @@ public class FaenorScriptEngine extends ScriptEngine
 				_log.error(e.getMessage(), e);
 				continue;
 			}
-
+			
 			ScriptPackage module = new ScriptPackage(zipPack);
-
+			
 			List<ScriptDocument> scripts = module.getScriptFiles();
 			for (ScriptDocument script : scripts)
 			{
 				_scripts.add(script);
 			}
-
+			
 			try
 			{
 				zipPack.close();
@@ -116,7 +116,7 @@ public class FaenorScriptEngine extends ScriptEngine
 			}
 		}
 	}
-
+	
 	public void parsePackages()
 	{
 		for (ScriptDocument script : _scripts)
@@ -124,15 +124,15 @@ public class FaenorScriptEngine extends ScriptEngine
 			parseScript(script);
 		}
 	}
-
+	
 	public void parseScript(ScriptDocument script)
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Parsing Script: " + script.getName());
-
+		
 		Node node = script.getDocument().getFirstChild();
 		String parserClass = "faenor.Faenor" + node.getNodeName() + "Parser";
-
+		
 		Parser parser = null;
 		try
 		{
@@ -142,13 +142,13 @@ public class FaenorScriptEngine extends ScriptEngine
 		{
 			_log.warn("ERROR: No parser registered for Script: " + parserClass, e);
 		}
-
+		
 		if (parser == null)
 		{
 			_log.warn("Unknown Script Type: " + script.getName());
 			return;
 		}
-
+		
 		try
 		{
 			parser.parseScript(node);
@@ -160,22 +160,22 @@ public class FaenorScriptEngine extends ScriptEngine
 			_log.warn("Script Parsing Failed.", e);
 		}
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		if (_scripts.isEmpty())
 			return "No Packages Loaded.";
-
+		
 		String out = "Script Packages currently loaded:\n";
-
+		
 		for (ScriptDocument script : _scripts)
 		{
 			out += script;
 		}
 		return out;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

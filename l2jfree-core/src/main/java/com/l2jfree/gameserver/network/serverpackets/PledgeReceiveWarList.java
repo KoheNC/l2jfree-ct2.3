@@ -32,7 +32,7 @@ public class PledgeReceiveWarList extends L2GameServerPacket
 		_clan = clan;
 		_tab = tab;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -48,14 +48,15 @@ public class PledgeReceiveWarList extends L2GameServerPacket
 		for (Integer i : _tab == 0 ? _clan.getWarList() : _clan.getAttackerList())
 		{
 			L2Clan clan = ClanTable.getInstance().getClan(i);
-			if (clan == null) continue;
+			if (clan == null)
+				continue;
 			
 			writeS(clan.getName());
 			writeD(_tab); //??
 			writeD(_tab); //??
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

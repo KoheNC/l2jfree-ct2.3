@@ -95,7 +95,7 @@ public final class L2Multisell
 	 * 3) apply taxes: Uses the "taxIngredient" entry in order to add a certain amount of adena to the ingredients
 	 */
 	private MultiSellListContainer generateMultiSell(int listId, boolean inventoryOnly, L2PcInstance player, int npcId,
-		double taxRate)
+			double taxRate)
 	{
 		MultiSellListContainer listTemplate = getList(listId);
 		MultiSellListContainer list = new MultiSellListContainer();
@@ -125,8 +125,9 @@ public final class L2Multisell
 				if (!item.isEquipped() && (item.getItem() instanceof L2Armor || item.getItem() instanceof L2Weapon))
 				{
 					enchantLevel = (listTemplate.getMaintainEnchantment() ? item.getEnchantLevel() : 0);
-					augmentId = (listTemplate.getMaintainEnchantment() ? (item.getAugmentation() != null ? item
-						.getAugmentation().getAugmentationId() : 0) : 0);
+					augmentId =
+							(listTemplate.getMaintainEnchantment() ? (item.getAugmentation() != null ? item
+									.getAugmentation().getAugmentationId() : 0) : 0);
 					elementId = (listTemplate.getMaintainEnchantment() ? item.getAttackElementType() : -2);
 					elementValue = (listTemplate.getMaintainEnchantment() ? item.getAttackElementPower() : 0);
 					fireVal = (listTemplate.getMaintainEnchantment() ? item.getElementDefAttr(Elementals.FIRE) : 0);
@@ -155,9 +156,9 @@ public final class L2Multisell
 						// manipulate the ingredients of the template entry for this particular instance shown
 						// i.e: Assign enchant levels and/or apply taxes as needed.
 						if (doInclude)
-							list.addEntry(prepareEntry(ent, listTemplate.getApplyTaxes(), listTemplate
-								.getMaintainEnchantment(), enchantLevel, augmentId, elementId, elementValue, fireVal,
-								waterVal, windVal, earthVal, holyVal, darkVal, mana, taxRate));
+							list.addEntry(prepareEntry(ent, listTemplate.getApplyTaxes(),
+									listTemplate.getMaintainEnchantment(), enchantLevel, augmentId, elementId,
+									elementValue, fireVal, waterVal, windVal, earthVal, holyVal, darkVal, mana, taxRate));
 					}
 				}
 			} // end for each inventory item.
@@ -168,7 +169,7 @@ public final class L2Multisell
 			// if no taxes are applied, no modifications are needed
 			for (MultiSellEntry ent : listTemplate.getEntries())
 				list.addEntry(prepareEntry(ent, listTemplate.getApplyTaxes(), false, 0, 0, -2, 0, 0, 0, 0, 0, 0, 0,
-					0/*guess*/, taxRate));
+						0/*guess*/, taxRate));
 		}
 		
 		return list;
@@ -181,8 +182,8 @@ public final class L2Multisell
 	// c) If the entry already has adena as an entry, the taxIngredient is used in order to increase
 	//	  the count for the existing adena ingredient
 	private MultiSellEntry prepareEntry(MultiSellEntry templateEntry, boolean applyTaxes, boolean maintainEnchantment,
-		int enchantLevel, int augmentId, int elementId, int elementValue, int fireValue, int waterValue, int windValue,
-		int earthValue, int holyValue, int darkValue, int mana, double taxRate)
+			int enchantLevel, int augmentId, int elementId, int elementValue, int fireValue, int waterValue,
+			int windValue, int earthValue, int holyValue, int darkValue, int mana, double taxRate)
 	{
 		MultiSellEntry newEntry = new MultiSellEntry(templateEntry.getEntryId() * 100000 + enchantLevel);
 		
@@ -354,7 +355,7 @@ public final class L2Multisell
 	public static final class MultiSellIngredient
 	{
 		private int _itemId, _enchantmentLevel, _manaLeft, _element, _elementVal, _augment, _fireVal, _waterVal,
-			_windVal, _earthVal, _holyVal, _darkVal;
+				_windVal, _earthVal, _holyVal, _darkVal;
 		private long _itemCount;
 		private boolean _isTaxIngredient, _maintainIngredient;
 		
@@ -369,8 +370,8 @@ public final class L2Multisell
 		}
 		
 		public MultiSellIngredient(int itemId, long itemCount, int enchantmentLevel, int augmentId, int elementId,
-			int elementVal, int fireVal, int waterVal, int windVal, int earthVal, int holyVal, int darkVal,
-			int manaLeft, boolean isTaxIngredient, boolean maintainIngredient)
+				int elementVal, int fireVal, int waterVal, int windVal, int earthVal, int holyVal, int darkVal,
+				int manaLeft, boolean isTaxIngredient, boolean maintainIngredient)
 		{
 			setItemId(itemId);
 			setItemCount(itemCount);

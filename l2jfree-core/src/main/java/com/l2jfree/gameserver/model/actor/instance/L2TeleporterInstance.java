@@ -40,18 +40,18 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public final class L2TeleporterInstance extends L2Npc
 {
-	private static final int	COND_ALL_FALSE				= 0;
-	private static final int	COND_BUSY_BECAUSE_OF_SIEGE	= 1;
-	private static final int	COND_OWNER					= 2;
-	private static final int	COND_REGULAR				= 3;
-
-	private static final int	BIRTHDAY_HELPER				= 32600;
-
+	private static final int COND_ALL_FALSE = 0;
+	private static final int COND_BUSY_BECAUSE_OF_SIEGE = 1;
+	private static final int COND_OWNER = 2;
+	private static final int COND_REGULAR = 3;
+	
+	private static final int BIRTHDAY_HELPER = 32600;
+	
 	public L2TeleporterInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -60,57 +60,57 @@ public final class L2TeleporterInstance extends L2Npc
 			player.sendMessage("You cannot teleport due to a restriction.");
 			return;
 		}
-
+		
 		int condition = validateCondition(player);
-
+		
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		if (actualCommand.equalsIgnoreCase("goto"))
 		{
 			int npcId = getTemplate().getNpcId();
-
+			
 			switch (npcId)
 			{
-			case 31095: //
-			case 31096: //
-			case 31097: //
-			case 31098: // Enter Necropolises
-			case 31099: //
-			case 31100: //
-			case 31101: //
-			case 31102: //
-
-			case 31114: //
-			case 31115: //
-			case 31116: // Enter Catacombs
-			case 31117: //
-			case 31118: //
-			case 31119: //
-				player.setIsIn7sDungeon(true);
-				break;
-			case 31103: //
-			case 31104: //
-			case 31105: //
-			case 31106: // Exit Necropolises
-			case 31107: //
-			case 31108: //
-			case 31109: //
-			case 31110: //
-
-			case 31120: //
-			case 31121: //
-			case 31122: // Exit Catacombs
-			case 31123: //
-			case 31124: //
-			case 31125: //
-				player.setIsIn7sDungeon(false);
-				break;
+				case 31095: //
+				case 31096: //
+				case 31097: //
+				case 31098: // Enter Necropolises
+				case 31099: //
+				case 31100: //
+				case 31101: //
+				case 31102: //
+					
+				case 31114: //
+				case 31115: //
+				case 31116: // Enter Catacombs
+				case 31117: //
+				case 31118: //
+				case 31119: //
+					player.setIsIn7sDungeon(true);
+					break;
+				case 31103: //
+				case 31104: //
+				case 31105: //
+				case 31106: // Exit Necropolises
+				case 31107: //
+				case 31108: //
+				case 31109: //
+				case 31110: //
+					
+				case 31120: //
+				case 31121: //
+				case 31122: // Exit Catacombs
+				case 31123: //
+				case 31124: //
+				case 31125: //
+					player.setIsIn7sDungeon(false);
+					break;
 			}
-
+			
 			if (st.countTokens() <= 0)
 				return;
-
+			
 			int whereTo = Integer.parseInt(st.nextToken());
 			if (condition == COND_REGULAR)
 			{
@@ -157,7 +157,7 @@ public final class L2TeleporterInstance extends L2Npc
 				spawn.setAmount(1);
 				spawn.setHeading(65535 - player.getHeading());
 				spawn.setInstanceId(player.getInstanceId());
-				L2BirthdayHelperInstance helper = (L2BirthdayHelperInstance) spawn.spawnOne(false);
+				L2BirthdayHelperInstance helper = (L2BirthdayHelperInstance)spawn.spawnOne(false);
 				spawn.stopRespawn();
 				helper.setOwner(player);
 			}
@@ -171,7 +171,7 @@ public final class L2TeleporterInstance extends L2Npc
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
@@ -180,15 +180,15 @@ public final class L2TeleporterInstance extends L2Npc
 			pom = String.valueOf(npcId);
 		else
 			pom = npcId + "-" + val;
-
+		
 		return "data/html/teleporter/" + pom + ".htm";
 	}
-
+	
 	@Override
 	public void showChatWindow(L2PcInstance player)
 	{
 		String filename = "data/html/teleporter/castleteleporter-no.htm";
-
+		
 		int condition = validateCondition(player);
 		if (condition == COND_REGULAR)
 		{
@@ -202,14 +202,14 @@ public final class L2TeleporterInstance extends L2Npc
 			else if (condition == COND_OWNER) // Clan owns castle
 				filename = getHtmlPath(getNpcId(), 0); // Owner message window
 		}
-
+		
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));
 		html.replace("%npcname%", getName());
 		player.sendPacket(html);
 	}
-
+	
 	private void doTeleport(L2PcInstance player, int val)
 	{
 		L2TeleportLocation list = TeleportLocationTable.getInstance().getTemplate(val);
@@ -241,32 +241,37 @@ public final class L2TeleporterInstance extends L2Npc
 			}
 			if (player.isAlikeDead())
 				return;
-
+			
 			Calendar cal = Calendar.getInstance();
 			int price = list.getPrice();
 			// From CT2 all players lvl 40 or below (quote) have all ports for free
 			if (player.getLevel() <= 40 && !getTemplate().isCustom())
 				price = 0;
-
+			
 			// At weekend evening hours, teleport costs are / 2
 			// But only adena teleports
 			else if (!list.isForNoble())
 			{
 				if (cal.get(Calendar.HOUR_OF_DAY) >= 20 && cal.get(Calendar.HOUR_OF_DAY) <= 23
-							&& (cal.get(Calendar.DAY_OF_WEEK) == 1 || cal.get(Calendar.DAY_OF_WEEK) == 7))
+						&& (cal.get(Calendar.DAY_OF_WEEK) == 1 || cal.get(Calendar.DAY_OF_WEEK) == 7))
 					price /= 2;
 			}
-
-			if (!list.isForNoble() && (Config.ALT_GAME_FREE_TELEPORT || player.reduceAdena("Teleport", price, this, true)))
+			
+			if (!list.isForNoble()
+					&& (Config.ALT_GAME_FREE_TELEPORT || player.reduceAdena("Teleport", price, this, true)))
 			{
 				if (_log.isDebugEnabled())
-					_log.debug("Teleporting player " + player.getName() + " to new location: " + list.getLocX() + ":" + list.getLocY() + ":" + list.getLocZ());
+					_log.debug("Teleporting player " + player.getName() + " to new location: " + list.getLocX() + ":"
+							+ list.getLocY() + ":" + list.getLocZ());
 				player.teleToLocation(list.getLocX(), list.getLocY(), list.getLocZ(), true);
 			}
-			else if (list.isForNoble() && (Config.ALT_GAME_FREE_TELEPORT || player.destroyItemByItemId("Noble Teleport", 13722, list.getPrice(), this, true)))
+			else if (list.isForNoble()
+					&& (Config.ALT_GAME_FREE_TELEPORT || player.destroyItemByItemId("Noble Teleport", 13722,
+							list.getPrice(), this, true)))
 			{
 				if (_log.isDebugEnabled())
-					_log.debug("Teleporting player " + player.getName() + " to new location: " + list.getLocX() + ":" + list.getLocY() + ":" + list.getLocZ());
+					_log.debug("Teleporting player " + player.getName() + " to new location: " + list.getLocX() + ":"
+							+ list.getLocY() + ":" + list.getLocZ());
 				player.teleToLocation(list.getLocX(), list.getLocY(), list.getLocZ());
 			}
 		}
@@ -275,7 +280,7 @@ public final class L2TeleporterInstance extends L2Npc
 			_log.warn("No teleport destination with id:" + val);
 		}
 	}
-
+	
 	private int validateCondition(L2PcInstance player)
 	{
 		if (CastleManager.getInstance().getCastle(this) == null) // Teleporter isn't on castle ground
@@ -287,7 +292,7 @@ public final class L2TeleporterInstance extends L2Npc
 			if (getCastle().getOwnerId() == player.getClanId()) // Clan owns castle
 				return COND_OWNER; // Owner
 		}
-
+		
 		return COND_ALL_FALSE;
 	}
 }

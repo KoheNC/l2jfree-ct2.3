@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
-
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
@@ -28,25 +27,23 @@ import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
  */
 public class Banking implements IVoicedCommandHandler
 {
-	private static final String[] _voicedCommands =
-	{
-		"bank",
-		"withdraw",
-		"deposit"
-	};
-
+	private static final String[] _voicedCommands = { "bank", "withdraw", "deposit" };
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(java.lang.String, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance, java.lang.String)
 	 */
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (!Config.BANKING_SYSTEM_ENABLED)
 			return false;
-
+		
 		if (command.equalsIgnoreCase("bank"))
 		{
-			activeChar.sendMessage(".deposit (" + Config.BANKING_SYSTEM_ADENA + " Adena = " + Config.BANKING_SYSTEM_GOLDBARS + " Goldbar) / .withdraw (" + Config.BANKING_SYSTEM_GOLDBARS + " Goldbar = " + Config.BANKING_SYSTEM_ADENA + " Adena)");
+			activeChar.sendMessage(".deposit (" + Config.BANKING_SYSTEM_ADENA + " Adena = "
+					+ Config.BANKING_SYSTEM_GOLDBARS + " Goldbar) / .withdraw (" + Config.BANKING_SYSTEM_GOLDBARS
+					+ " Goldbar = " + Config.BANKING_SYSTEM_ADENA + " Adena)");
 			return true;
 		}
 		else if (command.equalsIgnoreCase("deposit"))
@@ -56,16 +53,18 @@ public class Banking implements IVoicedCommandHandler
 				InventoryUpdate iu = new InventoryUpdate();
 				activeChar.getInventory().reduceAdena("Goldbar", Config.BANKING_SYSTEM_ADENA, activeChar, null);
 				activeChar.getInventory().addItem("Goldbar", 3470, Config.BANKING_SYSTEM_GOLDBARS, activeChar, null);
-
+				
 				// No need to update every item in the inventory
 				//activeChar.getInventory().updateDatabase();
-
+				
 				activeChar.sendPacket(iu);
-				activeChar.sendMessage("Thank you, you now have " + Config.BANKING_SYSTEM_GOLDBARS + " Goldbar(s), and " + Config.BANKING_SYSTEM_ADENA + " less adena.");
+				activeChar.sendMessage("Thank you, you now have " + Config.BANKING_SYSTEM_GOLDBARS
+						+ " Goldbar(s), and " + Config.BANKING_SYSTEM_ADENA + " less adena.");
 			}
 			else
 			{
-				activeChar.sendMessage("You do not have enough Adena to convert to Goldbar(s), you need " + Config.BANKING_SYSTEM_ADENA + " Adena.");
+				activeChar.sendMessage("You do not have enough Adena to convert to Goldbar(s), you need "
+						+ Config.BANKING_SYSTEM_ADENA + " Adena.");
 			}
 			return true;
 		}
@@ -74,29 +73,33 @@ public class Banking implements IVoicedCommandHandler
 			if (activeChar.getInventory().getInventoryItemCount(3470, 0) >= Config.BANKING_SYSTEM_GOLDBARS)
 			{
 				InventoryUpdate iu = new InventoryUpdate();
-				activeChar.getInventory().destroyItemByItemId("Adena", 3470, Config.BANKING_SYSTEM_GOLDBARS, activeChar, null);
+				activeChar.getInventory().destroyItemByItemId("Adena", 3470, Config.BANKING_SYSTEM_GOLDBARS,
+						activeChar, null);
 				activeChar.getInventory().addAdena("Adena", Config.BANKING_SYSTEM_ADENA, activeChar, null);
-
+				
 				// No need to update every item in the inventory
 				//activeChar.getInventory().updateDatabase();
-
+				
 				activeChar.sendPacket(iu);
-				activeChar.sendMessage("Thank you, you now have " + Config.BANKING_SYSTEM_ADENA + " Adena, and " + Config.BANKING_SYSTEM_GOLDBARS + " less Goldbar(s).");
+				activeChar.sendMessage("Thank you, you now have " + Config.BANKING_SYSTEM_ADENA + " Adena, and "
+						+ Config.BANKING_SYSTEM_GOLDBARS + " less Goldbar(s).");
 			}
 			else
 			{
-				activeChar.sendMessage("You do not have any Goldbars to turn into " + Config.BANKING_SYSTEM_ADENA + " Adena.");
+				activeChar.sendMessage("You do not have any Goldbars to turn into " + Config.BANKING_SYSTEM_ADENA
+						+ " Adena.");
 			}
 			return true;
 		}
-
+		
 		return false;
 	}
-
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
 	 */
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return _voicedCommands;

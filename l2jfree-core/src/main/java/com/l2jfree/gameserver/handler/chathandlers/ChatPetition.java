@@ -26,20 +26,22 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class ChatPetition implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_GM_Pet, SystemChatChannelId.Chat_User_Pet };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_GM_Pet,
+			SystemChatChannelId.Chat_User_Pet };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatTypes()
 	 */
+	@Override
 	public SystemChatChannelId[] getChatTypes()
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
+	@Override
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		//TODO: Maybe next time I port my Petition System, but there are a lot of changes to do about it. Is there some other guy, like to rewrite it?
@@ -48,7 +50,7 @@ public class ChatPetition implements IChatHandler
 			activeChar.sendPacket(SystemMessageId.YOU_ARE_NOT_IN_PETITION_CHAT);
 			return;
 		}
-
+		
 		PetitionManager.getInstance().sendActivePetitionMessage(activeChar, text);
 	}
 }

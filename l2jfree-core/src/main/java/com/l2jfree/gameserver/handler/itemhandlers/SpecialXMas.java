@@ -27,20 +27,21 @@ import com.l2jfree.gameserver.network.serverpackets.ShowXMasSeal;
 public class SpecialXMas implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int[]	ITEM_IDS	=
-											{ 5555 };
-
+	private static final int[] ITEM_IDS = { 5555 };
+	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-
+		
 		playable.broadcastPacket(new ShowXMasSeal(item.getItemId()));
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#getItemIds()
 	 */
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

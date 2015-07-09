@@ -21,19 +21,19 @@ package com.l2jfree.gameserver.network.clientpackets;
 public final class NotifyStartMiniGame extends L2GameClientPacket
 {
 	private static final String _C__NOTIFYSTARTMINIGAME = "[C] D0:56 NotifyStartMiniGame ch";
-
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		// No idea what should the server do about that
 	}
-
+	
 	@Override
 	public String getType()
 	{

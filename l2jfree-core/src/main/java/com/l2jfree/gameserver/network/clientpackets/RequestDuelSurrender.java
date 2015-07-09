@@ -25,19 +25,19 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 public final class RequestDuelSurrender extends L2GameClientPacket
 {
 	private static final String _C__D0_30_REQUESTDUELSURRENDER = "[C] D0:30 RequestDuelSurrender";
-
+	
 	@Override
 	protected void readImpl()
 	{
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		DuelManager.getInstance().doSurrender(getClient().getActiveChar());
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -26,7 +26,8 @@ import com.l2jfree.gameserver.skills.AbnormalEffect;
 
 public final class CharInfo extends L2GameServerPacket
 {
-	private static final String _S__31_CHARINFO = "[S] 31 CharInfo [dddddsddd dddddddddddd dddddddd hhhh d hhhhhhhhhhhh d hhhh hhhhhhhhhhhhhhhh dddddd dddddddd ffff ddd s ddddd ccccccc h c d c h ddd cc d ccc ddddddddddd]";
+	private static final String _S__31_CHARINFO =
+			"[S] 31 CharInfo [dddddsddd dddddddddddd dddddddd hhhh d hhhhhhhhhhhh d hhhh hhhhhhhhhhhhhhhh dddddd dddddddd ffff ddd s ddddd ccccccc h c d c h ddd cc d ccc ddddddddddd]";
 	
 	private final L2PcInstance _activeChar;
 	private final PcLikeView _view;
@@ -234,7 +235,8 @@ public final class CharInfo extends L2GameServerPacket
 			//if (_activeChar == activeChar)
 			//	return true;
 		}
-		else //if (_view instanceof PcView)
+		else
+		//if (_view instanceof PcView)
 		{
 			// self
 			if (_activeChar == activeChar)

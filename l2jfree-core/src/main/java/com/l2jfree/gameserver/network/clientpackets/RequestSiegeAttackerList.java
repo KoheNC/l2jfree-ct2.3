@@ -27,16 +27,16 @@ import com.l2jfree.gameserver.network.serverpackets.SiegeAttackerList;
  */
 public class RequestSiegeAttackerList extends L2GameClientPacket
 {
-	private static final String	_C__A2_RequestSiegeAttackerList	= "[C] a2 RequestSiegeAttackerList";
-
-	private int					_siegeableID;
-
+	private static final String _C__A2_RequestSiegeAttackerList = "[C] a2 RequestSiegeAttackerList";
+	
+	private int _siegeableID;
+	
 	@Override
 	protected void readImpl()
 	{
 		_siegeableID = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -52,10 +52,10 @@ public class RequestSiegeAttackerList extends L2GameClientPacket
 			sal = new SiegeAttackerList(castle);
 		if (sal != null)
 			sendPacket(sal);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

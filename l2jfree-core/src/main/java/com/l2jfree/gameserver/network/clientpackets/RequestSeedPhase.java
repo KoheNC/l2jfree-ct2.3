@@ -24,25 +24,25 @@ import com.l2jfree.gameserver.network.serverpackets.ExShowSeedMapInfo;
  */
 public final class RequestSeedPhase extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTSEEDPHASE	= "[C] D0:63 RequestSeedPhase ch";
-
+	private static final String _C__REQUESTSEEDPHASE = "[C] D0:63 RequestSeedPhase ch";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		// should be sent only in Gracia
 		sendPacket(ExShowSeedMapInfo.PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

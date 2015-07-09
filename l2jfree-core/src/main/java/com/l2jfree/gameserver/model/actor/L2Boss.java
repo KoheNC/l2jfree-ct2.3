@@ -28,31 +28,31 @@ import com.l2jfree.tools.random.Rnd;
 
 public abstract class L2Boss extends L2MonsterInstance
 {
-	private static final int	BOSS_MAINTENANCE_INTERVAL	= 10000;
-	public static final int		BOSS_INTERACTION_DISTANCE	= 500;
-	public static final int		BOSS_PENALTY_SILENCE		= 4215;
-	public static final int		BOSS_PENALTY_PETRIFICATION	= 4515;
-	public static final int		BOSS_PENALTY_RESISTANCE		= 5479;
-
+	private static final int BOSS_MAINTENANCE_INTERVAL = 10000;
+	public static final int BOSS_INTERACTION_DISTANCE = 500;
+	public static final int BOSS_PENALTY_SILENCE = 4215;
+	public static final int BOSS_PENALTY_PETRIFICATION = 4515;
+	public static final int BOSS_PENALTY_RESISTANCE = 5479;
+	
 	public L2Boss(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 	}
-
-	private BossSpawnManager.StatusEnum	_raidStatus;
-
+	
+	private BossSpawnManager.StatusEnum _raidStatus;
+	
 	@Override
 	protected int getMaintenanceInterval()
 	{
 		return BOSS_MAINTENANCE_INTERVAL;
 	}
-
+	
 	@Override
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
 			return false;
-
+		
 		L2PcInstance player = killer.getActingPlayer();
 		if (player != null)
 		{
@@ -67,7 +67,7 @@ public abstract class L2Boss extends L2MonsterInstance
 		}
 		return true;
 	}
-
+	
 	private void rewardRaidPoints(L2PcInstance player)
 	{
 		int points = (getLevel() / 2) + Rnd.get(-5, 5);
@@ -76,30 +76,30 @@ public abstract class L2Boss extends L2MonsterInstance
 		sm.addNumber(points);
 		player.sendPacket(sm);
 	}
-
+	
 	@Override
 	public boolean hasRandomAnimation()
 	{
 		return false;
 	}
-
+	
 	@Override
 	public boolean canInteract(L2PcInstance player)
 	{
 		// TODO: NPC busy check etc...
 		return isInsideRadius(player, BOSS_INTERACTION_DISTANCE, false, false);
 	}
-
+	
 	public void setRaidStatus(BossSpawnManager.StatusEnum status)
 	{
 		_raidStatus = status;
 	}
-
+	
 	public BossSpawnManager.StatusEnum getRaidStatus()
 	{
 		return _raidStatus;
 	}
-
+	
 	/**
 	 * Spawn all minions at a regular interval
 	 * if minions are not near the raid boss, teleport them
@@ -111,7 +111,8 @@ public abstract class L2Boss extends L2MonsterInstance
 		if (_minionList != null)
 			_minionList.spawnMinions();
 		
-		_maintenanceTask  = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+		_maintenanceTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+			@Override
 			public void run()
 			{
 				checkAndReturnToSpawn();
@@ -129,7 +130,7 @@ public abstract class L2Boss extends L2MonsterInstance
 		
 		switch (getNpcId())
 		{
-				// Gordon does not have permanent spawn
+		// Gordon does not have permanent spawn
 			case 29095:
 				// Antharas lair is very big so just ignore
 			case 29068:

@@ -38,55 +38,64 @@ import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
  */
 public class AdminRegion implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_region_check" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_region_check" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken();
-
+		
 		if (actualCommand.equalsIgnoreCase("admin_region_check"))
 		{
 			L2MapRegion region = MapRegionManager.getInstance().getRegion(activeChar);
-
+			
 			if (region != null)
 			{
-				L2MapRegionRestart restart = MapRegionManager.getInstance().getRestartLocation(region.getRestartId(activeChar));
-
+				L2MapRegionRestart restart =
+						MapRegionManager.getInstance().getRestartLocation(region.getRestartId(activeChar));
+				
 				//activeChar.sendMessage("Actual region: " + region.getId());
-				activeChar.sendMessage("Respawn position will be: " + restart.getName() + " (" + restart.getLocName() + ")");
-
+				activeChar.sendMessage("Respawn position will be: " + restart.getName() + " (" + restart.getLocName()
+						+ ")");
+				
 				if (restart.getBannedRace() != null)
 				{
-					L2MapRegionRestart redirect = MapRegionManager.getInstance().getRestartLocation(restart.getRedirectId());
+					L2MapRegionRestart redirect =
+							MapRegionManager.getInstance().getRestartLocation(restart.getRedirectId());
 					activeChar.sendMessage("Banned race: " + restart.getBannedRace().name());
 					activeChar.sendMessage("Redirect To: " + redirect.getName() + " (" + redirect.getLocName() + ")");
 				}
-
+				
 				Location loc;
 				loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.Castle);
-				activeChar.sendMessage("TeleToLocation (Castle): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+				activeChar.sendMessage("TeleToLocation (Castle): x:" + loc.getX() + " y:" + loc.getY() + " z:"
+						+ loc.getZ());
+				
 				loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.ClanHall);
-				activeChar.sendMessage("TeleToLocation (ClanHall): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+				activeChar.sendMessage("TeleToLocation (ClanHall): x:" + loc.getX() + " y:" + loc.getY() + " z:"
+						+ loc.getZ());
+				
 				loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.SiegeFlag);
-				activeChar.sendMessage("TeleToLocation (SiegeFlag): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+				activeChar.sendMessage("TeleToLocation (SiegeFlag): x:" + loc.getX() + " y:" + loc.getY() + " z:"
+						+ loc.getZ());
+				
 				loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.Town);
-				activeChar.sendMessage("TeleToLocation (Town): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+				activeChar.sendMessage("TeleToLocation (Town): x:" + loc.getX() + " y:" + loc.getY() + " z:"
+						+ loc.getZ());
+				
 				String nearestTown = TownManager.getInstance().getClosestTownName(activeChar);
-				Announcements.getInstance().announceToAll(activeChar.getName() + " has tried spawn-announce near " + nearestTown + "!");
+				Announcements.getInstance().announceToAll(
+						activeChar.getName() + " has tried spawn-announce near " + nearestTown + "!");
 			}
 		}
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

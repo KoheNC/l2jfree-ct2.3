@@ -19,29 +19,29 @@ import com.l2jfree.gameserver.network.serverpackets.ExBrBuyProduct;
 
 public final class BrBuyProduct extends L2GameClientPacket
 {
-	private static final String	_C__BRBUYPRODUCT = "[C] D0:68 BR_BuyProduct ch[dd]";
-
+	private static final String _C__BRBUYPRODUCT = "[C] D0:68 BR_BuyProduct ch[dd]";
+	
 	//private int				_unk1, _unk2;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		/*_unk1 = */readD();
 		/*_unk2 = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		sendPacket(new ExBrBuyProduct(ExBrBuyProduct.RESULT_WRONG_PRODUCT));
-
+		
 		// no AF here
 	}
-
+	
 	@Override
 	public String getType()
 	{

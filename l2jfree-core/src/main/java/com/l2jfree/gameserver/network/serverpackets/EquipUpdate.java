@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.serverpackets;
 
-
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.templates.item.L2Item;
 
@@ -25,7 +24,6 @@ public class EquipUpdate extends L2GameServerPacket
 	private final L2ItemInstance _item;
 	private final int _change;
 	
-
 	public EquipUpdate(L2ItemInstance item, int change)
 	{
 		_item = item;
@@ -91,10 +89,11 @@ public class EquipUpdate extends L2GameServerPacket
 				break;
 		}
 		
-		if (_log.isDebugEnabled()) _log.info("body:" +bodypart);
+		if (_log.isDebugEnabled())
+			_log.info("body:" + bodypart);
 		writeD(bodypart);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

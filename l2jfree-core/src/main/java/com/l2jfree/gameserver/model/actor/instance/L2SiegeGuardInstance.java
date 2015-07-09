@@ -85,20 +85,21 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 			return false;
 		if (player.getClan() == null)
 			return true;
-
-		boolean isCastle = (getCastle() != null && getCastle().getSiege().getIsInProgress()
-				&& !getCastle().getSiege().checkIsDefender(player.getClan()));
-
+		
+		boolean isCastle =
+				(getCastle() != null && getCastle().getSiege().getIsInProgress() && !getCastle().getSiege()
+						.checkIsDefender(player.getClan()));
+		
 		// Attackable during siege by all except defenders ( Castle or Fort )
 		return isCastle;
 	}
-
+	
 	@Override
 	public boolean hasRandomAnimation()
 	{
 		return false;
 	}
-
+	
 	/**
 	 * This method forces guard to return to home location previously set
 	 * 
@@ -107,19 +108,20 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 	{
 		if (getStat().getWalkSpeed() <= 0)
 			return;
-
+		
 		if (getSpawn() != null && !isInsideRadius(getSpawn().getLocx(), getSpawn().getLocy(), 40, false))
 		{
 			if (_log.isDebugEnabled())
 				_log.debug(getObjectId() + ": moving home");
 			setisReturningToSpawnPoint(true);
 			clearAggroList();
-
+			
 			if (hasAI())
-				getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(getSpawn().getLocx(), getSpawn().getLocy(), getSpawn().getLocz(), 0));
+				getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO,
+						new L2CharPosition(getSpawn().getLocx(), getSpawn().getLocy(), getSpawn().getLocz(), 0));
 		}
 	}
-
+	
 	/**
 	 * Custom onAction behaviour. Note that super() is not called because guards
 	 * need extra check to see if a player should interact or ATTACK them when
@@ -129,7 +131,7 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 	@Override
 	public void onAction(L2PcInstance player)
 	{
-		if(Config.SIEGE_ONLY_REGISTERED)
+		if (Config.SIEGE_ONLY_REGISTERED)
 		{
 			boolean opp = false;
 			Siege siege = SiegeManager.getInstance().getSiege(player);
@@ -141,18 +143,18 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 				for (L2SiegeClan clan : siege.getAttackerClans())
 				{
 					L2Clan cl = ClanTable.getInstance().getClan(clan.getClanId());
-	
+					
 					if (cl == oppClan || cl.getAllyId() == player.getAllyId())
 					{
 						opp = true;
 						break;
 					}
 				}
-	
+				
 				for (L2SiegeClan clan : siege.getDefenderClans())
 				{
 					L2Clan cl = ClanTable.getInstance().getClan(clan.getClanId());
-	
+					
 					if (cl == oppClan || cl.getAllyId() == player.getAllyId())
 					{
 						opp = true;
@@ -166,7 +168,7 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 				for (L2SiegeClan clan : fortSiege.getAttackerClans())
 				{
 					L2Clan cl = ClanTable.getInstance().getClan(clan.getClanId());
-	
+					
 					if (cl == oppClan || cl.getAllyId() == player.getAllyId())
 					{
 						opp = true;
@@ -175,25 +177,25 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 				}
 			}
 			
-			if(!opp)
+			if (!opp)
 				return;
 		}
-			
+		
 		if (!canTarget(player))
 			return;
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
 			if (_log.isDebugEnabled())
 				_log.debug("new target selected:" + getObjectId());
-
+			
 			// Set the target of the L2PcInstance player
 			player.setTarget(this);
-
+			
 			// Send a Server->Client packet StatusUpdate of the L2NpcInstance to the L2PcInstance to update its HP bar
 			StatusUpdate su = new StatusUpdate(getObjectId());
-			su.addAttribute(StatusUpdate.CUR_HP, (int) getStatus().getCurrentHp());
+			su.addAttribute(StatusUpdate.CUR_HP, (int)getStatus().getCurrentHp());
 			su.addAttribute(StatusUpdate.MAX_HP, getMaxHp());
 			player.sendPacket(su);
 		}
@@ -227,13 +229,13 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 			}
 		}
 	}
-
+	
 	@Override
 	public void addDamageHate(L2Character attacker, int damage, int aggro)
 	{
 		if (attacker == null)
 			return;
-
+		
 		if (!(attacker instanceof L2SiegeGuardInstance))
 		{
 			super.addDamageHate(attacker, damage, aggro);

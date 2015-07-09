@@ -68,38 +68,18 @@ import com.l2jfree.lang.L2TextBuilder;
  */
 public class AdminAdmin implements IAdminCommandHandler
 {
-	private final static Log		_log			= LogFactory.getLog(AdminAdmin.class);
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_admin",
-			"admin_admin1",
-			"admin_admin2",
-			"admin_admin3",
-			"admin_admin4",
-			"admin_admin5",
-			"admin_gmliston",
-			"admin_gmlistoff",
-			"admin_silence",
-			"admin_diet",
-			"admin_tradeoff",
-			"admin_reload",
-			"admin_set",
-			"admin_set_menu",
-			"admin_set_mod",
-			"admin_saveolymp",
+	private final static Log _log = LogFactory.getLog(AdminAdmin.class);
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_admin", "admin_admin1", "admin_admin2", "admin_admin3",
+			"admin_admin4", "admin_admin5", "admin_gmliston", "admin_gmlistoff", "admin_silence", "admin_diet",
+			"admin_tradeoff", "admin_reload", "admin_set", "admin_set_menu", "admin_set_mod", "admin_saveolymp",
 			"admin_endolympiad",
 			// L2J-FREE
-			"admin_reload_config",
-			"admin_config_server",
+			"admin_reload_config", "admin_config_server",
 			//"admin_summon",
-			"admin_summon_npc",
-			"admin_unsummon",
-			"admin_memusage",
-			"admin_process_auction",
-			"admin_debug"
-													};
-
+			"admin_summon_npc", "admin_unsummon", "admin_memusage", "admin_process_auction", "admin_debug" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_admin"))
@@ -136,7 +116,7 @@ public class AdminAdmin implements IAdminCommandHandler
 				activeChar.setMessageRefusal(true);
 				activeChar.sendPacket(SystemMessageId.MESSAGE_REFUSAL_MODE);
 			}
-
+			
 		}
 		else if (command.startsWith("admin_reload_config"))
 		{
@@ -406,10 +386,11 @@ public class AdminAdmin implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage:  //reload <multisell|skill|npc|htm|item|instancemanager|teleport|tradelist|zone|mapregion|siege|fortsiege|chsiege|door>");
+				activeChar
+						.sendMessage("Usage:  //reload <multisell|skill|npc|htm|item|instancemanager|teleport|tradelist|zone|mapregion|siege|fortsiege|chsiege|door>");
 			}
 		}
-
+		
 		else if (command.startsWith("admin_set"))
 		{
 			StringTokenizer st = new StringTokenizer(command);
@@ -454,15 +435,16 @@ public class AdminAdmin implements IAdminCommandHandler
 			_log.info("A GM requested debug information for player " + command.substring(12));
 			activeChar.sendPacket(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 		}
-
+		
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	public void showMainPage(L2PcInstance activeChar, String command)
 	{
 		int mode = 0;
@@ -476,162 +458,157 @@ public class AdminAdmin implements IAdminCommandHandler
 		}
 		switch (mode)
 		{
-		case 1:
-			filename = "main";
-			break;
-		case 2:
-			filename = "game";
-			break;
-		case 3:
-			filename = "effects";
-			break;
-		case 4:
-			filename = "server";
-			break;
-		case 5:
-			filename = "mods";
-			break;
-		default:
-			if (Config.GM_ADMIN_MENU_STYLE.equals("modern"))
+			case 1:
 				filename = "main";
-			else
-				filename = "classic";
-			break;
+				break;
+			case 2:
+				filename = "game";
+				break;
+			case 3:
+				filename = "effects";
+				break;
+			case 4:
+				filename = "server";
+				break;
+			case 5:
+				filename = "mods";
+				break;
+			default:
+				if (Config.GM_ADMIN_MENU_STYLE.equals("modern"))
+					filename = "main";
+				else
+					filename = "classic";
+				break;
 		}
 		AdminHelpPage.showHelpPage(activeChar, filename + "_menu.htm");
 	}
-
+	
 	public void showConfigPage2(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(activeChar.getObjectId());
-
+		
 		L2TextBuilder replyMSG = L2TextBuilder.newInstance("<html><body>");
-		replyMSG
-				.append("<center><table width=270><tr><td width=60><button value=\"Admin\" action=\"bypass -h admin_admin\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=150><font color=\"LEVEL\">Config Server Panel</font></td><td width=60><button value=\"Panel1\" action=\"bypass -h admin_config_server\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table></center><br>");
+		replyMSG.append("<center><table width=270><tr><td width=60><button value=\"Admin\" action=\"bypass -h admin_admin\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=150><font color=\"LEVEL\">Config Server Panel</font></td><td width=60><button value=\"Panel1\" action=\"bypass -h admin_config_server\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table></center><br>");
 		replyMSG.append("<center><table width=260>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Show GM Login</font> = " + Config.SHOW_GM_LOGIN + "</td><td></td><td><button value=\""
-				+ !Config.SHOW_GM_LOGIN + "\" action=\"bypass -h admin_set ShowGMLogin " + !Config.SHOW_GM_LOGIN
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Show GM Login</font> = " + Config.SHOW_GM_LOGIN
+				+ "</td><td></td><td><button value=\"" + !Config.SHOW_GM_LOGIN
+				+ "\" action=\"bypass -h admin_set ShowGMLogin " + !Config.SHOW_GM_LOGIN
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Spawn Siege Guard</font> = " + Config.ALT_SPAWN_SIEGE_GUARD + "</td><td></td><td><button value=\""
-				+ !Config.ALT_SPAWN_SIEGE_GUARD + "\" action=\"bypass -h admin_set SpawnSiegeGuard " + !Config.ALT_SPAWN_SIEGE_GUARD
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Spawn Siege Guard</font> = " + Config.ALT_SPAWN_SIEGE_GUARD
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_SPAWN_SIEGE_GUARD
+				+ "\" action=\"bypass -h admin_set SpawnSiegeGuard " + !Config.ALT_SPAWN_SIEGE_GUARD
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Auto Loot</font> = " + Config.ALT_AUTO_LOOT + "</td><td></td><td><button value=\"" + !Config.ALT_AUTO_LOOT
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Auto Loot</font> = " + Config.ALT_AUTO_LOOT
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_AUTO_LOOT
 				+ "\" action=\"bypass -h admin_set AutoLoot " + !Config.ALT_AUTO_LOOT
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Magic Failures</font> = " + Config.ALT_GAME_MAGICFAILURES + "</td><td></td><td><button value=\""
-				+ !Config.ALT_GAME_MAGICFAILURES + "\" action=\"bypass -h admin_set MagicFailures " + !Config.ALT_GAME_MAGICFAILURES
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Magic Failures</font> = " + Config.ALT_GAME_MAGICFAILURES
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_GAME_MAGICFAILURES
+				+ "\" action=\"bypass -h admin_set MagicFailures " + !Config.ALT_GAME_MAGICFAILURES
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Book Needed</font> = " + Config.ALT_SP_BOOK_NEEDED + "</td><td></td><td><button value=\""
-				+ !Config.ALT_SP_BOOK_NEEDED + "\" action=\"bypass -h admin_set SpBookNeeded " + !Config.ALT_SP_BOOK_NEEDED
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Book Needed</font> = " + Config.ALT_SP_BOOK_NEEDED
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_SP_BOOK_NEEDED
+				+ "\" action=\"bypass -h admin_set SpBookNeeded " + !Config.ALT_SP_BOOK_NEEDED
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Learn Other Skill</font> = " + Config.ALT_GAME_SKILL_LEARN + "</td><td></td><td><button value=\""
-				+ !Config.ALT_GAME_SKILL_LEARN + "\" action=\"bypass -h admin_set AltGameSkillLearn " + !Config.ALT_GAME_SKILL_LEARN
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Learn Other Skill</font> = " + Config.ALT_GAME_SKILL_LEARN
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_GAME_SKILL_LEARN
+				+ "\" action=\"bypass -h admin_set AltGameSkillLearn " + !Config.ALT_GAME_SKILL_LEARN
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Shield Block From All</font> = " + Config.ALT_GAME_SHIELD_BLOCKS + "</td><td></td><td><button value=\""
-				+ !Config.ALT_GAME_SHIELD_BLOCKS + "\" action=\"bypass -h admin_set AltShieldBlocks " + !Config.ALT_GAME_SHIELD_BLOCKS
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Shield Block From All</font> = " + Config.ALT_GAME_SHIELD_BLOCKS
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_GAME_SHIELD_BLOCKS
+				+ "\" action=\"bypass -h admin_set AltShieldBlocks " + !Config.ALT_GAME_SHIELD_BLOCKS
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Free Teleport</font> = " + Config.ALT_GAME_FREE_TELEPORT + "</td><td></td><td><button value=\""
-				+ !Config.ALT_GAME_FREE_TELEPORT + "\" action=\"bypass -h admin_set AltFreeTeleporting " + !Config.ALT_GAME_FREE_TELEPORT
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Free Teleport</font> = " + Config.ALT_GAME_FREE_TELEPORT
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_GAME_FREE_TELEPORT
+				+ "\" action=\"bypass -h admin_set AltFreeTeleporting " + !Config.ALT_GAME_FREE_TELEPORT
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Can Discard Items</font> = " + Config.ALLOW_DISCARDITEM + "</td><td></td><td><button value=\""
-				+ !Config.ALLOW_DISCARDITEM + "\" action=\"bypass -h admin_set AllowDiscardItem " + !Config.ALLOW_DISCARDITEM
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Can Discard Items</font> = " + Config.ALLOW_DISCARDITEM
+				+ "</td><td></td><td><button value=\"" + !Config.ALLOW_DISCARDITEM
+				+ "\" action=\"bypass -h admin_set AllowDiscardItem " + !Config.ALLOW_DISCARDITEM
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Global Chat</font> = "
-						+ Config.DEFAULT_GLOBAL_CHAT
-						+ "</td><td><edit var=\"menu_command1\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set GlobalChat $menu_command1\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Coord Synchronize</font> = "
-						+ Config.COORD_SYNCHRONIZE
-						+ "</td><td><edit var=\"menu_command2\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set CoordSynchronize $menu_command2\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Global Chat</font> = "
+				+ Config.DEFAULT_GLOBAL_CHAT
+				+ "</td><td><edit var=\"menu_command1\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set GlobalChat $menu_command1\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Coord Synchronize</font> = "
+				+ Config.COORD_SYNCHRONIZE
+				+ "</td><td><edit var=\"menu_command2\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set CoordSynchronize $menu_command2\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		replyMSG.append("</table></body></html>");
-
+		
 		adminReply.setHtml(replyMSG.moveToString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public void showConfigPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-
+		
 		L2TextBuilder replyMSG = L2TextBuilder.newInstance("<html><body>");
-		replyMSG
-				.append("<center><table width=270><tr><td width=60><button value=\"Admin\" action=\"bypass -h admin_admin\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=150><font color=\"LEVEL\">Config Server Panel</font></td><td width=60><button value=\"Panel2\" action=\"bypass -h admin_config_server2\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table></center><br>");
+		replyMSG.append("<center><table width=270><tr><td width=60><button value=\"Admin\" action=\"bypass -h admin_admin\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=150><font color=\"LEVEL\">Config Server Panel</font></td><td width=60><button value=\"Panel2\" action=\"bypass -h admin_config_server2\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table></center><br>");
 		replyMSG.append("<center><table width=260>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Auto loot</font> = " + Config.ALT_AUTO_LOOT + "</td><td></td><td><button value=\"" + !Config.ALT_AUTO_LOOT
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Auto loot</font> = " + Config.ALT_AUTO_LOOT
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_AUTO_LOOT
 				+ "\" action=\"bypass -h admin_set AutoLoot " + !Config.ALT_AUTO_LOOT
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Allow Discard Item</font> = " + Config.ALLOW_DISCARDITEM + "</td><td></td><td><button value=\""
-				+ !Config.ALLOW_DISCARDITEM + "\" action=\"bypass -h admin_set AllowDiscardItem " + !Config.ALLOW_DISCARDITEM
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Allow Discard Item</font> = " + Config.ALLOW_DISCARDITEM
+				+ "</td><td></td><td><button value=\"" + !Config.ALLOW_DISCARDITEM
+				+ "\" action=\"bypass -h admin_set AllowDiscardItem " + !Config.ALLOW_DISCARDITEM
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Deep Blue Mobs Drop Rule</font> = " + Config.DEEPBLUE_DROP_RULES + "</td><td></td><td><button value=\""
-				+ !Config.DEEPBLUE_DROP_RULES + "\" action=\"bypass -h admin_set UseDeepBlueDropRules " + !Config.DEEPBLUE_DROP_RULES
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Deep Blue Mobs Drop Rule</font> = " + Config.DEEPBLUE_DROP_RULES
+				+ "</td><td></td><td><button value=\"" + !Config.DEEPBLUE_DROP_RULES
+				+ "\" action=\"bypass -h admin_set UseDeepBlueDropRules " + !Config.DEEPBLUE_DROP_RULES
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Auto Destroy Item aft. sec.</font> = "
-						+ Config.AUTODESTROY_ITEM_AFTER
-						+ "</td><td><edit var=\"menu_command\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set AutoDestroyDroppedItemAfter $menu_command\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate EXP</font> = "
-						+ Config.RATE_XP
-						+ "</td><td><edit var=\"menu_command1\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateXP $menu_command1\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate SP</font> = "
-						+ Config.RATE_SP
-						+ "</td><td><edit var=\"menu_command2\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateSP $menu_command2\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Drop Adena</font> = "
-						+ Config.RATE_DROP_ADENA
-						+ "</td><td><edit var=\"menu_command3\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateDropAdena $menu_command3\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Drop Items</font> = "
-						+ Config.RATE_DROP_ITEMS
-						+ "</td><td><edit var=\"menu_command4\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateDropItems $menu_command4\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Drop Spoil</font> = "
-						+ Config.RATE_DROP_SPOIL
-						+ "</td><td><edit var=\"menu_command5\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateDropSpoil $menu_command5\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Quest Reward Exp/Sp</font> = "
-						+ Config.RATE_QUESTS_REWARD_EXPSP
-						+ "</td><td><edit var=\"menu_command6\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateQuestsReward $menu_command6\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Quest Reward Adena</font> = "
-						+ Config.RATE_QUESTS_REWARD_ADENA
-						+ "</td><td><edit var=\"menu_command6\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateQuestsReward $menu_command6\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Quest Reward Items</font> = "
-						+ Config.RATE_QUESTS_REWARD_ITEMS
-						+ "</td><td><edit var=\"menu_command6\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateQuestsReward $menu_command6\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Raid Regen HP</font> = "
-						+ Config.RAID_HP_REGEN_MULTIPLIER
-						+ "</td><td><edit var=\"menu_command7\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidHpRegenMultiplier $menu_command7\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Raid Regen MP</font> = "
-						+ Config.RAID_MP_REGEN_MULTIPLIER
-						+ "</td><td><edit var=\"menu_command8\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidMpRegenMultiplier $menu_command8\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Raid PDefence</font> = "
-						+ Config.RAID_PDEFENCE_MULTIPLIER
-						+ "</td><td><edit var=\"menu_command9\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidPDefenceMultiplier $menu_command9\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Rate Raid MDefence</font> = "
-						+ Config.RAID_MDEFENCE_MULTIPLIER
-						+ "</td><td><edit var=\"menu_command10\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidMDefenceMultiplier $menu_command10\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG
-				.append("<tr><td><font color=\"LEVEL\">Alt Buff Time</font> = "
-						+ Config.ALT_BUFF_TIME
-						+ "</td><td><edit var=\"menu_command11\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set AltBuffTime $menu_command11\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Alt game creation</font> = " + Config.ALT_GAME_CREATION + "</td><td></td><td><button value=\""
-				+ !Config.ALT_GAME_CREATION + "\" action=\"bypass -h admin_set AltGameCreation " + !Config.ALT_GAME_CREATION
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Auto Destroy Item aft. sec.</font> = "
+				+ Config.AUTODESTROY_ITEM_AFTER
+				+ "</td><td><edit var=\"menu_command\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set AutoDestroyDroppedItemAfter $menu_command\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate EXP</font> = "
+				+ Config.RATE_XP
+				+ "</td><td><edit var=\"menu_command1\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateXP $menu_command1\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate SP</font> = "
+				+ Config.RATE_SP
+				+ "</td><td><edit var=\"menu_command2\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateSP $menu_command2\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Adena</font> = "
+				+ Config.RATE_DROP_ADENA
+				+ "</td><td><edit var=\"menu_command3\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateDropAdena $menu_command3\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Items</font> = "
+				+ Config.RATE_DROP_ITEMS
+				+ "</td><td><edit var=\"menu_command4\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateDropItems $menu_command4\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Spoil</font> = "
+				+ Config.RATE_DROP_SPOIL
+				+ "</td><td><edit var=\"menu_command5\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateDropSpoil $menu_command5\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Quest Reward Exp/Sp</font> = "
+				+ Config.RATE_QUESTS_REWARD_EXPSP
+				+ "</td><td><edit var=\"menu_command6\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateQuestsReward $menu_command6\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Quest Reward Adena</font> = "
+				+ Config.RATE_QUESTS_REWARD_ADENA
+				+ "</td><td><edit var=\"menu_command6\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateQuestsReward $menu_command6\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Quest Reward Items</font> = "
+				+ Config.RATE_QUESTS_REWARD_ITEMS
+				+ "</td><td><edit var=\"menu_command6\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RateQuestsReward $menu_command6\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Raid Regen HP</font> = "
+				+ Config.RAID_HP_REGEN_MULTIPLIER
+				+ "</td><td><edit var=\"menu_command7\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidHpRegenMultiplier $menu_command7\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Raid Regen MP</font> = "
+				+ Config.RAID_MP_REGEN_MULTIPLIER
+				+ "</td><td><edit var=\"menu_command8\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidMpRegenMultiplier $menu_command8\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Raid PDefence</font> = "
+				+ Config.RAID_PDEFENCE_MULTIPLIER
+				+ "</td><td><edit var=\"menu_command9\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidPDefenceMultiplier $menu_command9\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Raid MDefence</font> = "
+				+ Config.RAID_MDEFENCE_MULTIPLIER
+				+ "</td><td><edit var=\"menu_command10\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set RaidMDefenceMultiplier $menu_command10\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Alt Buff Time</font> = "
+				+ Config.ALT_BUFF_TIME
+				+ "</td><td><edit var=\"menu_command11\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_set AltBuffTime $menu_command11\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Alt game creation</font> = " + Config.ALT_GAME_CREATION
+				+ "</td><td></td><td><button value=\"" + !Config.ALT_GAME_CREATION
+				+ "\" action=\"bypass -h admin_set AltGameCreation " + !Config.ALT_GAME_CREATION
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		replyMSG.append("</table></body></html>");
-
+		
 		adminReply.setHtml(replyMSG.moveToString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	//[L2J_JP_ADD]
 	public void adminSummon(L2PcInstance activeChar, int npcId)
 	{
@@ -639,10 +616,11 @@ public class AdminAdmin implements IAdminCommandHandler
 		{
 			activeChar.getPet().unSummon(activeChar);
 		}
-
+		
 		L2NpcTemplate summonTemplate = NpcTable.getInstance().getTemplate(npcId);
-		L2SummonInstance summon = new L2SummonInstance(IdFactory.getInstance().getNextId(), summonTemplate, activeChar, null);
-
+		L2SummonInstance summon =
+				new L2SummonInstance(IdFactory.getInstance().getNextId(), summonTemplate, activeChar, null);
+		
 		summon.setTitle(activeChar.getName());
 		summon.setExpPenalty(0);
 		if (summon.getLevel() >= Experience.LEVEL.length)
@@ -659,10 +637,10 @@ public class AdminAdmin implements IAdminCommandHandler
 		summon.setHeading(activeChar.getHeading());
 		summon.setRunning();
 		activeChar.setPet(summon);
-
+		
 		L2World.getInstance().storeObject(summon);
 		summon.spawnMe(activeChar.getX() + 50, activeChar.getY() + 100, activeChar.getZ());
-
+		
 		summon.setFollowStatus(true);
 		summon.setShowSummonAnimation(false); // addVisibleObject created the info packets with summon animation
 		// if someone comes into range now, the animation shouldn't show any more

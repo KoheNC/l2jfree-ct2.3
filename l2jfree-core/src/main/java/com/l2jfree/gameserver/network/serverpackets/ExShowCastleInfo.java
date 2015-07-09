@@ -25,11 +25,11 @@ public class ExShowCastleInfo extends StaticPacket
 {
 	private static final String _S__EXSHOWCASTLEINFO = "[S] FE:14 ExShowCastleInfo ch[d (dsdd)]";
 	public static final ExShowCastleInfo PACKET = new ExShowCastleInfo();
-
+	
 	private ExShowCastleInfo()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -47,17 +47,18 @@ public class ExShowCastleInfo extends StaticPacket
 					writeS(owner.getName());
 				else
 				{
-					_log.warn("Castle owner with no clan! Castle: " + castle.getName() + " has an ownerId=" + castle.getOwnerId() + " which doesn't have a L2Clan!");
+					_log.warn("Castle owner with no clan! Castle: " + castle.getName() + " has an ownerId="
+							+ castle.getOwnerId() + " which doesn't have a L2Clan!");
 					writeS("");
 				}
 			}
 			else
 				writeS("");
 			writeD(castle.getTaxPercent());
-			writeD((int) (castle.getSiege().getSiegeDate().getTimeInMillis() / 1000));
+			writeD((int)(castle.getSiege().getSiegeDate().getTimeInMillis() / 1000));
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

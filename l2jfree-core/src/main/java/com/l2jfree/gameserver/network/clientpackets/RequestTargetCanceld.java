@@ -23,10 +23,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class RequestTargetCanceld extends L2GameClientPacket
 {
-	private static final String	_C__37_REQUESTTARGETCANCELD	= "[C] 37 RequestTargetCanceld";
-
-	private int					_unselect;
-
+	private static final String _C__37_REQUESTTARGETCANCELD = "[C] 37 RequestTargetCanceld";
+	
+	private int _unselect;
+	
 	/**
 	 * packet type id 0x37
 	 * packet format rev656  ch
@@ -37,20 +37,20 @@ public class RequestTargetCanceld extends L2GameClientPacket
 	{
 		_unselect = readH();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (!activeChar.canChangeLockedTarget(null))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (_unselect == 0)
 		{
 			if (activeChar.isCastingNow())
@@ -60,10 +60,10 @@ public class RequestTargetCanceld extends L2GameClientPacket
 		}
 		else if (activeChar.getTarget() != null)
 			activeChar.setTarget(null);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

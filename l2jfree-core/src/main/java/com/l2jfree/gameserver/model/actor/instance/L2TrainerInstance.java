@@ -23,27 +23,27 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public final class L2TrainerInstance extends L2NpcInstance
 {
-    /**
-     * @param template
-     */
-    public L2TrainerInstance(int objectId, L2NpcTemplate template)
-    {
-        super(objectId, template);
-    }
-
-    @Override
-    public String getHtmlPath(int npcId, int val)
-    {
-        String pom = "";
-        if (val == 0)
-        {
-            pom = "" + npcId;
-        }
-        else
-        {
-            pom = npcId + "-" + val;
-        }
-
-        return "data/html/trainer/" + pom + ".htm";
-    }
+	/**
+	 * @param template
+	 */
+	public L2TrainerInstance(int objectId, L2NpcTemplate template)
+	{
+		super(objectId, template);
+	}
+	
+	@Override
+	public String getHtmlPath(int npcId, int val)
+	{
+		String pom = "";
+		if (val == 0)
+		{
+			pom = "" + npcId;
+		}
+		else
+		{
+			pom = npcId + "-" + val;
+		}
+		
+		return "data/html/trainer/" + pom + ".htm";
+	}
 }

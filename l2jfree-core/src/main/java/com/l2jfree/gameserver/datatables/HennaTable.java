@@ -29,21 +29,22 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 
 public class HennaTable
 {
-	private static final Log	_log = LogFactory.getLog(HennaTable.class);
-	private static final String LOAD_HENNA = "SELECT symbol_id,symbol_name,dye_id,dye_amount,price,mod_INT,mod_STR,mod_CON,mod_MEN,mod_DEX,mod_WIT FROM henna";
-
+	private static final Log _log = LogFactory.getLog(HennaTable.class);
+	private static final String LOAD_HENNA =
+			"SELECT symbol_id,symbol_name,dye_id,dye_amount,price,mod_INT,mod_STR,mod_CON,mod_MEN,mod_DEX,mod_WIT FROM henna";
+	
 	private final FastMap<Integer, L2Henna> _henna = new FastMap<Integer, L2Henna>().setShared(true);
-
+	
 	public static HennaTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private HennaTable()
 	{
 		restoreHennaData();
 	}
-
+	
 	private void restoreHennaData()
 	{
 		Connection con = null;
@@ -65,13 +66,13 @@ public class HennaTable
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void fillHennaTable(ResultSet hennaData) throws Exception
 	{
 		while (hennaData.next())
 		{
 			int id = hennaData.getInt("symbol_id");
-
+			
 			StatsSet hennaDat = new StatsSet();
 			hennaDat.set("symbol_id", id);
 			hennaDat.set("symbol_name", hennaData.getString("symbol_name"));
@@ -84,17 +85,17 @@ public class HennaTable
 			hennaDat.set("mod_MEN", hennaData.getInt("mod_MEN"));
 			hennaDat.set("mod_DEX", hennaData.getInt("mod_DEX"));
 			hennaDat.set("mod_WIT", hennaData.getInt("mod_WIT"));
-
+			
 			_henna.put(id, new L2Henna(hennaDat));
 		}
 		_log.info("HennaTable: Loaded " + _henna.size() + " Templates.");
 	}
-
+	
 	public L2Henna getTemplate(int id)
 	{
 		return _henna.get(id);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

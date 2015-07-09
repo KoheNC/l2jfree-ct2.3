@@ -32,7 +32,7 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2TransformManagerInstance extends L2MerchantInstance
 {
-    /**
+	/**
 	 * @param objectId
 	 * @param template
 	 */
@@ -40,20 +40,20 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
 		String pom = "";
-
+		
 		if (val == 0)
 			pom = "" + npcId;
 		else
 			pom = npcId + "-" + val;
-
+		
 		return "data/html/default/" + pom + ".htm";
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -78,7 +78,7 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 			}
 			else
 			{
-				showChatWindow(player,"data/html/default/32323-10.htm");
+				showChatWindow(player, "data/html/default/32323-10.htm");
 				return;
 			}
 		}
@@ -86,7 +86,9 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 		{
 			if (!player.isSubClassActive())
 			{
-				int subclassItemIds[] = {10280,10281,10282,10283,10284,10285,10286,10287,10288,10289,10290,10291,10292,10293,10294,10612};
+				int subclassItemIds[] =
+						{ 10280, 10281, 10282, 10283, 10284, 10285, 10286, 10287, 10288, 10289, 10290, 10291, 10292,
+								10293, 10294, 10612 };
 				
 				if (player.reduceAdena("Subclass Certification Removal", 10000000, player, true))
 				{
@@ -100,14 +102,16 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 					{
 						L2ItemInstance item = player.getInventory().getItemByItemId(itemId);
 						if (item != null)
-							player.destroyItemByItemId("Subclass Certification Removal", itemId, item.getCount(), player, true);
-
+							player.destroyItemByItemId("Subclass Certification Removal", itemId, item.getCount(),
+									player, true);
+						
 						item = player.getWarehouse().getItemByItemId(itemId);
 						if (item != null)
-							player.getWarehouse().destroyItemByItemId("Subclass Certification Removal", itemId, item.getCount(), player, null);
+							player.getWarehouse().destroyItemByItemId("Subclass Certification Removal", itemId,
+									item.getCount(), player, null);
 					}
 					player.deleteSubclassCertifications();
-
+					
 					NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 					html.setHtml("<html><body>Ok, your certifications have been removed!</body></html>");
 					player.sendPacket(html);
@@ -121,7 +125,7 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 			}
 			else
 			{
-				showChatWindow(player,"data/html/default/32323-13.htm");
+				showChatWindow(player, "data/html/default/32323-13.htm");
 				return;
 			}
 		}
@@ -130,7 +134,7 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 			super.onBypassFeedback(player, command);
 		}
 	}
-
+	
 	/**
 	 * this displays TransformationSkillList to the player.
 	 * @param player
@@ -140,26 +144,27 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 		L2TransformSkillLearn[] skills = SkillTreeTable.getInstance().getAvailableTransformSkills(player);
 		AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.SkillType.Usual);
 		int counts = 0;
-
-		for (L2TransformSkillLearn s: skills)
+		
+		for (L2TransformSkillLearn s : skills)
 		{
 			L2Skill sk = SkillTable.getInstance().getInfo(s.getId(), s.getLevel());
 			if (sk == null)
 				continue;
-
+			
 			counts++;
-
+			
 			asl.addSkill(s.getId(), s.getLevel(), s.getLevel(), s.getSpCost(), 0);
 		}
-
+		
 		if (counts == 0)
 		{
 			int minlevel = SkillTreeTable.getInstance().getMinLevelForNewTransformSkill(player);
-
+			
 			if (minlevel > 0)
 			{
 				// No more skills to learn, come back when you level.
-				SystemMessage sm = new SystemMessage(SystemMessageId.DO_NOT_HAVE_FURTHER_SKILLS_TO_LEARN_COME_BACK_WHEN_REACHED_S1);
+				SystemMessage sm =
+						new SystemMessage(SystemMessageId.DO_NOT_HAVE_FURTHER_SKILLS_TO_LEARN_COME_BACK_WHEN_REACHED_S1);
 				sm.addNumber(minlevel);
 				player.sendPacket(sm);
 			}
@@ -169,65 +174,65 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 				html.setHtml("<html><body>You've learned all skills.<br></body></html>");
 				player.sendPacket(html);
 			}
-            if (closable)
-            	player.sendPacket(AcquireSkillDone.PACKET);
+			if (closable)
+				player.sendPacket(AcquireSkillDone.PACKET);
 		}
 		else
 		{
 			player.sendPacket(asl);
 		}
-
+		
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	public void showCertificationSkillsList(L2PcInstance player, boolean closable)
 	{
 		if (player.isTransformed())
 			return;
-
+		
 		L2CertificationSkillsLearn[] skills = SkillTreeTable.getInstance().getAvailableCertificationSkills(player);
 		AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.SkillType.Usual);
 		int counts = 0;
-
-		for (L2CertificationSkillsLearn s: skills)
+		
+		for (L2CertificationSkillsLearn s : skills)
 		{
 			L2Skill sk = SkillTable.getInstance().getInfo(s.getId(), s.getLevel());
 			if (sk == null)
 				continue;
-
+			
 			counts++;
-
+			
 			asl.addSkill(s.getId(), s.getLevel(), 1, 0, 0);
 		}
-
+		
 		if (counts == 0)
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 			html.setHtml("<html><body>You've learned all skills.<br></body></html>");
 			player.sendPacket(html);
-            if (closable)
-            	player.sendPacket(AcquireSkillDone.PACKET);
+			if (closable)
+				player.sendPacket(AcquireSkillDone.PACKET);
 		}
 		else
 		{
 			player.sendPacket(asl);
 		}
-
+		
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	public void showHtmlFile(L2PcInstance player, String file)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile("data/html/default/" + file);
 		player.sendPacket(html);
 	}
-
+	
 	public boolean testQuestTransformation(L2PcInstance player)
 	{
 		if (player == null)
 			return false;
-
+		
 		String _questName = "136_MoreThanMeetsTheEye";
 		QuestState qs = player.getQuestState(_questName);
 		if (qs == null)

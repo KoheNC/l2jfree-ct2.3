@@ -25,13 +25,13 @@ public final class RequestInfoItemAuction extends L2GameClientPacket
 {
 	@SuppressWarnings("unused")
 	private int _auctionId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_auctionId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{

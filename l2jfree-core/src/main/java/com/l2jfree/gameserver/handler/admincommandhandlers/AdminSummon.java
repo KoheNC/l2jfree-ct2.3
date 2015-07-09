@@ -27,16 +27,17 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class AdminSummon implements IAdminCommandHandler
 {
-	protected static Log			_log			= LogFactory.getLog(AdminSummon.class);
-
-	public static final String[]	ADMIN_COMMANDS	=
-													{ "admin_summon" };
-
+	protected static Log _log = LogFactory.getLog(AdminSummon.class);
+	
+	public static final String[] ADMIN_COMMANDS = { "admin_summon" };
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		int id;
@@ -55,7 +56,7 @@ public class AdminSummon implements IAdminCommandHandler
 			activeChar.sendMessage("Incorrect format for command 'summon'");
 			return false;
 		}
-
+		
 		String subCommand;
 		if (id < 1000000)
 		{

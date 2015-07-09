@@ -24,21 +24,21 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class RequestSiegeInfo extends L2GameClientPacket
 {
-	private static final String	_C__47_REQUESTSIEGEINFO	= "[C] 0x47 RequestSiegeInfo";
-
+	private static final String _C__47_REQUESTSIEGEINFO = "[C] 0x47 RequestSiegeInfo";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		// TODO this
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

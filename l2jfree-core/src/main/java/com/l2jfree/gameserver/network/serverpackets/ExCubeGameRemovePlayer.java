@@ -35,7 +35,7 @@ public class ExCubeGameRemovePlayer extends L2GameServerPacket
 		_player = player;
 		_isRedTeam = isRedTeam;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -51,7 +51,7 @@ public class ExCubeGameRemovePlayer extends L2GameServerPacket
 		writeD(_isRedTeam ? 0x01 : 0x00);
 		writeD(_player.getObjectId());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
@@ -60,5 +60,5 @@ public class ExCubeGameRemovePlayer extends L2GameServerPacket
 	{
 		return _S__FE_97_02_EXCUBEGAMEREMOVEPLAYER;
 	}
-
+	
 }

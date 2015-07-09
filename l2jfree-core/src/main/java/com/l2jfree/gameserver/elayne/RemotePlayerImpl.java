@@ -18,77 +18,83 @@ import java.rmi.RemoteException;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * 
  * @author polbat02
  */
 public class RemotePlayerImpl implements IRemotePlayer
 {
-
-	private L2PcInstance	_player;
-
+	
+	private L2PcInstance _player;
+	
 	public RemotePlayerImpl(L2PcInstance character)
 	{
 		_player = character;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getAccessLevel()
 	 */
+	@Override
 	public int getAccessLevel() throws RemoteException
 	{
 		return _player.getAccessLevel();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getAccount()
 	 */
+	@Override
 	public String getAccount() throws RemoteException
 	{
 		return _player.getAccountName();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getLevel()
 	 */
+	@Override
 	public int getLevel() throws RemoteException
 	{
 		return _player.getLevel();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getName()
 	 */
+	@Override
 	public String getName() throws RemoteException
 	{
 		return _player.getName();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getObjectId()
 	 */
+	@Override
 	public int getObjectId() throws RemoteException
 	{
 		return _player.getObjectId();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getSex()
 	 */
+	@Override
 	public int getSex() throws RemoteException
 	{
 		if (_player.getAppearance().getSex())
 			return 1;
 		return 0;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#online()
 	 */
+	@Override
 	public int online() throws RemoteException
 	{
 		return _player.isOnline();
 	}
-
+	
 }

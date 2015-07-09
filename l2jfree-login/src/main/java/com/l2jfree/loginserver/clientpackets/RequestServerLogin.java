@@ -32,10 +32,10 @@ import com.l2jfree.loginserver.thread.GameServerListener;
  */
 public class RequestServerLogin extends L2LoginClientPacket
 {
-	private int	_skey1;
-	private int	_skey2;
-	private int	_serverId;
-
+	private int _skey1;
+	private int _skey2;
+	private int _serverId;
+	
 	/**
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public class RequestServerLogin extends L2LoginClientPacket
 	{
 		return _skey1;
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public class RequestServerLogin extends L2LoginClientPacket
 	{
 		return _skey2;
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -59,7 +59,7 @@ public class RequestServerLogin extends L2LoginClientPacket
 	{
 		return _serverId;
 	}
-
+	
 	@Override
 	protected int getMinimumLength()
 	{
@@ -81,7 +81,7 @@ public class RequestServerLogin extends L2LoginClientPacket
 		*/
 		skip(22);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.ReceivablePacket#run()
 	 */
@@ -90,13 +90,13 @@ public class RequestServerLogin extends L2LoginClientPacket
 	{
 		L2LoginClient client = getClient();
 		SessionKey sk = client.getSessionKey();
-
+		
 		if (Config.SECURITY_CARD_LOGIN && !client.isCardAuthed())
 		{
 			client.closeLoginGame(LoginFail.REASON_IGNORE);
 			return;
 		}
-
+		
 		// if we didn't show the license we can't check these values
 		if (!Config.SHOW_LICENCE || sk.checkLoginPair(_skey1, _skey2))
 		{

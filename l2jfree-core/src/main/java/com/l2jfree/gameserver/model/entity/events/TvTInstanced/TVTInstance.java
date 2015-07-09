@@ -39,32 +39,32 @@ import com.l2jfree.tools.random.Rnd;
 
 public class TVTInstance
 {
-	private final Log				_log			= LogFactory.getLog(TVTInstance.class);
-
-	private String					_instanceName	= new String();
-
-	private int						_instanceId		= 0;
-
-	private int						_rewardId		= 0;
-	private int						_rewardAmount	= 0;
-	private int						_minLvl			= 0;
-	private int						_maxLvl			= 0;
-	private int						_joinTime		= 0;
-	private int						_eventTime		= 0;
-	private int						_minPlayers		= 0;
-	private int						_maxPlayers		= 0;
-
-	private boolean					_joining		= false;
-	private boolean					_teleport		= false;
-	private boolean					_started		= false;
-	private boolean					_tie			= false;
-
-	private TvTITeam				_winner			= null;
-
-	private final CopyOnWriteArrayList<TvTITeam>		_teams			= new CopyOnWriteArrayList<TvTITeam>();
-
-	private final CopyOnWriteArrayList<L2PcInstance>	_tempJoinList	= new CopyOnWriteArrayList<L2PcInstance>();
-
+	private final Log _log = LogFactory.getLog(TVTInstance.class);
+	
+	private String _instanceName = new String();
+	
+	private int _instanceId = 0;
+	
+	private int _rewardId = 0;
+	private int _rewardAmount = 0;
+	private int _minLvl = 0;
+	private int _maxLvl = 0;
+	private int _joinTime = 0;
+	private int _eventTime = 0;
+	private int _minPlayers = 0;
+	private int _maxPlayers = 0;
+	
+	private boolean _joining = false;
+	private boolean _teleport = false;
+	private boolean _started = false;
+	private boolean _tie = false;
+	
+	private TvTITeam _winner = null;
+	
+	private final CopyOnWriteArrayList<TvTITeam> _teams = new CopyOnWriteArrayList<TvTITeam>();
+	
+	private final CopyOnWriteArrayList<L2PcInstance> _tempJoinList = new CopyOnWriteArrayList<L2PcInstance>();
+	
 	public TVTInstance()
 	{
 		try
@@ -76,25 +76,26 @@ public class TVTInstance
 			_log.error("TvTi Engine: Faild creating instance - ", e);
 		}
 	}
-
+	
 	public void announceToInstance(String announce)
 	{
 		if (TvTIMain.getAnnounceName().equals(""))
 			TvTIMain.setAnnounceName("TvTi");
-
-		CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Inner_Partymaster, TvTIMain.getAnnounceName(), announce);
+		
+		CreatureSay cs =
+				new CreatureSay(0, SystemChatChannelId.Chat_Inner_Partymaster, TvTIMain.getAnnounceName(), announce);
 		for (TvTITeam t : _teams)
 			for (L2PcInstance player : t.getPlayers())
 				player.sendPacket(cs);
 	}
-
+	
 	public void teleportStart()
 	{
 		if (!_joining || _started || _teleport)
 			return;
-
+		
 		removeOfflinePlayers();
-
+		
 		if (checkMinPlayers(_tempJoinList.size()))
 		{
 			int idxPlayer = 0;
@@ -102,7 +103,7 @@ public class TVTInstance
 			int teamSize = 0;
 			int splitSize = 0;
 			L2PcInstance tempPlayer;
-
+			
 			switch (Config.TVTI_SORT_TEAMS)
 			{
 				case 0: // Random
@@ -142,20 +143,22 @@ public class TVTInstance
 					getPlayers().clear();
 					break;
 			}
-
+			
 		}
 		else
 		{
-			announceToInstance("Not enough players for event. Min Requested : " + _minPlayers + ", Participating : " + _tempJoinList.size());
+			announceToInstance("Not enough players for event. Min Requested : " + _minPlayers + ", Participating : "
+					+ _tempJoinList.size());
 			_tempJoinList.clear();
 			cleanInstance(false);
 			return;
 		}
 		_joining = false;
-
+		
 		announceToInstance("Teleporting to team spawn in 20 seconds!");
-
+		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (TvTITeam t : _teams)
@@ -172,14 +175,14 @@ public class TVTInstance
 		}, 20000);
 		_teleport = true;
 	}
-
+	
 	public boolean teleportAutoStart()
 	{
 		if (!_joining || _started || _teleport)
 			return false;
-
+		
 		removeOfflinePlayers();
-
+		
 		if (checkMinPlayers(_tempJoinList.size()))
 		{
 			int idxPlayer = 0;
@@ -187,7 +190,7 @@ public class TVTInstance
 			int teamSize = 0;
 			int splitSize = 0;
 			L2PcInstance tempPlayer;
-
+			
 			switch (Config.TVTI_SORT_TEAMS)
 			{
 				case 0: // Random
@@ -227,20 +230,22 @@ public class TVTInstance
 					getPlayers().clear();
 					break;
 			}
-
+			
 		}
 		else
 		{
-			announceToInstance("Not enough players for event. Min Requested : " + _minPlayers + ", Participating : " + _tempJoinList.size());
+			announceToInstance("Not enough players for event. Min Requested : " + _minPlayers + ", Participating : "
+					+ _tempJoinList.size());
 			_tempJoinList.clear();
 			return false;
 		}
-
+		
 		_joining = false;
-
+		
 		announceToInstance("Teleporting to team spawn in 20 seconds!");
-
+		
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (TvTITeam t : _teams)
@@ -258,7 +263,7 @@ public class TVTInstance
 		_teleport = true;
 		return true;
 	}
-
+	
 	public void startEvent()
 	{
 		if (_joining || !_teleport || _started)
@@ -274,7 +279,7 @@ public class TVTInstance
 		announceToInstance("Go to kill your enemies!");
 		_started = true;
 	}
-
+	
 	public boolean startAutoEvent()
 	{
 		if (_joining || !_teleport || _started)
@@ -291,16 +296,16 @@ public class TVTInstance
 		_started = true;
 		return true;
 	}
-
+	
 	public void finishEvent()
 	{
 		if (!_started)
 			return;
-
+		
 		_started = false;
-
+		
 		processTopTeam();
-
+		
 		if (_winner.getTeamScore() == 0)
 			announceToInstance("No team wins the match(nobody killed).");
 		else if (_tie)
@@ -316,14 +321,14 @@ public class TVTInstance
 			rewardTeam(_winner);
 			playAnimation(false);
 		}
-
+		
 		if (Config.TVTI_ANNOUNCE_TEAM_STATS)
 		{
 			announceToInstance(getInstanceName() + " Team Statistics:");
 			for (TvTITeam t : _teams)
 				announceToInstance("Team: " + t.getTeamName() + " - Points: " + t.getTeamScore());
 		}
-
+		
 		if (Config.TVTI_SHOW_STATS_PAGE)
 		{
 			for (TvTITeam t : _teams)
@@ -331,13 +336,14 @@ public class TVTInstance
 		}
 		teleportFinish();
 	}
-
+	
 	public void teleportFinish()
 	{
 		announceToInstance(" Teleporting back to participation NPC in 20 seconds!");
 		for (TvTITeam t : _teams)
 			t.setUserData(1);
 		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				for (TvTITeam t : _teams)
@@ -345,25 +351,26 @@ public class TVTInstance
 					t.setInstance(0);
 					t.teleportToFinish();
 				}
-
+				
 				_log.info("TvT: Teleport done.");
 				cleanInstance(false);
 			}
 		}, 20000);
 	}
-
+	
 	public void autoEvent()
 	{
 		ThreadPoolManager.getInstance().scheduleGeneral(new AutoEventTask(), 0);
 	}
-
+	
 	public class AutoEventTask implements Runnable
 	{
-
+		
 		public AutoEventTask()
 		{
 		}
-
+		
+		@Override
 		public void run()
 		{
 			if (_joinTime > 0)
@@ -388,17 +395,17 @@ public class TVTInstance
 				abortEvent();
 		}
 	}
-
+	
 	private void waiter(long interval)
 	{
 		long startWaiterTime = System.currentTimeMillis();
-		int seconds = (int) (interval / 1000);
-
+		int seconds = (int)(interval / 1000);
+		
 		while (startWaiterTime + interval > System.currentTimeMillis())
 		{
 			seconds--; // here because we don't want to see two time announce at
 						// the same time
-
+			
 			if (_joining || _started || _teleport)
 			{
 				switch (seconds)
@@ -425,7 +432,7 @@ public class TVTInstance
 						}
 						else if (_started)
 							announceToInstance(seconds / 60 + " minute(s) till event ends!");
-
+						
 						break;
 					case 30: // 30 seconds left
 					case 10: // 10 seconds left
@@ -438,13 +445,13 @@ public class TVTInstance
 							announceToInstance(seconds + " seconds(s) till fight starts!");
 						else if (_started)
 							announceToInstance(seconds + " second(s) till event ends!");
-
+						
 						break;
 				}
 			}
-
+			
 			long startOneSecondWaiterStartTime = System.currentTimeMillis();
-
+			
 			// only the try catch with Thread.sleep(1000) give bad countdown on
 			// high wait times
 			while (startOneSecondWaiterStartTime + 1000 > System.currentTimeMillis())
@@ -459,7 +466,7 @@ public class TVTInstance
 			}
 		}
 	}
-
+	
 	public void abortEvent()
 	{
 		if (!_joining && !_teleport && !_started)
@@ -477,7 +484,7 @@ public class TVTInstance
 		announceToInstance(" Match aborted!");
 		teleportFinish();
 	}
-
+	
 	public void cleanInstance(boolean delTeams)
 	{
 		_log.info("TvT : Cleaning players.");
@@ -492,7 +499,7 @@ public class TVTInstance
 			if (!t.getPlayers().isEmpty())
 				t.getPlayers().clear();
 		}
-
+		
 		if (delTeams)
 		{
 			_log.info("TvT : Cleaning teams.");
@@ -502,14 +509,14 @@ public class TVTInstance
 		setJoining(false);
 		setTeleport(false);
 		setStarted(false);
-
+		
 		if (TvTIMain.canUnspawnEventNpc())
 			TvTIMain.unspawnEventNpc();
-
+		
 		_tempJoinList.clear();
 		_log.info("Cleaning TvT done.");
 	}
-
+	
 	public void processTopTeam()
 	{
 		for (TvTITeam t : _teams)
@@ -528,7 +535,7 @@ public class TVTInstance
 				_winner = t;
 		}
 	}
-
+	
 	public void rewardTeam(TvTITeam t)
 	{
 		for (L2PcInstance player : t.getPlayers())
@@ -538,12 +545,14 @@ public class TVTInstance
 				{
 					if (_tie)
 					{
-						player.addItem("TvTi Event: " + TvTIMain.getEventTitle(), _rewardId, (_rewardAmount / 2) + (_rewardAmount % 2), player, true, true);
+						player.addItem("TvTi Event: " + TvTIMain.getEventTitle(), _rewardId, (_rewardAmount / 2)
+								+ (_rewardAmount % 2), player, true, true);
 						player.sendMessage("The event has resulted in a tie, prizes are split. Look in your inventory for your reward.");
 					}
 					else
 					{
-						player.addItem("TvTi Event: " + TvTIMain.getEventTitle(), _rewardId, _rewardAmount, player, true, true);
+						player.addItem("TvTi Event: " + TvTIMain.getEventTitle(), _rewardId, _rewardAmount, player,
+								true, true);
 						player.sendMessage("Your team wins the event. Look in your inventory for your reward.");
 					}
 				}
@@ -556,17 +565,17 @@ public class TVTInstance
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 	}
-
+	
 	public void showStats(TvTITeam t)
 	{
 		for (L2PcInstance player : t.getPlayers())
 			if (player != null && player.isOnline() != 0 && player._inEventTvTi)
 			{
 				boolean bg = false;
-
+				
 				NpcHtmlMessage nhm = new NpcHtmlMessage(5);
 				L2TextBuilder replyMSG = L2TextBuilder.newInstance("");
-
+				
 				replyMSG.append("<html><body>");
 				replyMSG.append("<title>Team vs Team Instanced</title>");
 				replyMSG.append("Your team stats:<br>");
@@ -594,16 +603,16 @@ public class TVTInstance
 				}
 				replyMSG.append("</tr></table>");
 				replyMSG.append("</body></html>");
-
+				
 				nhm.setHtml(replyMSG.moveToString());
 				player.sendPacket(nhm);
-
+				
 				// Send a Server->Client ActionFailed to the L2PcInstance in
 				// order to avoid that the client wait another packet
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 	}
-
+	
 	public void playAnimation(boolean tie)
 	{
 		for (TvTITeam t : _teams)
@@ -616,49 +625,49 @@ public class TVTInstance
 						player.broadcastPacket(new SocialAction(player.getObjectId(), 3));
 				}
 	}
-
+	
 	public boolean checkMaxLevel(int maxlvl)
 	{
 		if (_minLvl >= maxlvl)
 			return false;
 		return true;
 	}
-
+	
 	public boolean checkMinLevel(int minlvl)
 	{
 		if (_maxLvl <= minlvl)
 			return false;
 		return true;
 	}
-
+	
 	public boolean checkMinPlayers(int players)
 	{
 		if (_minPlayers <= players)
 			return true;
 		return false;
 	}
-
+	
 	public boolean checkMaxPlayers(int players)
 	{
 		if (_maxPlayers > players)
 			return true;
 		return false;
 	}
-
+	
 	public boolean checkTeamOk()
 	{
 		if (_started || _teleport || _joining)
 			return false;
 		return true;
 	}
-
+	
 	public void removeOfflinePlayers()
 	{
 		for (L2PcInstance player : _tempJoinList)
 			if (player.isOnline() == 0)
 				_tempJoinList.remove(player);
 	}
-
+	
 	public boolean isSetUp()
 	{
 		if (_teams.size() < 2 || _maxPlayers == 0 || _maxLvl == 0 || _rewardId == 0 || _rewardAmount == 0)
@@ -668,176 +677,178 @@ public class TVTInstance
 				return false;
 		return true;
 	}
-
+	
 	public void createInstance()
 	{
 		_instanceId = InstanceManager.getInstance().createDynamicInstance(Config.TVTI_INSTANCE_XML);
 	}
-
+	
 	public void destroyInstance()
 	{
 		InstanceManager.getInstance().destroyInstance(_instanceId);
 	}
-
+	
 	public int createTeam(String teamName)
 	{
 		TvTITeam t = new TvTITeam(teamName);
 		getTeams().add(t);
 		return getTeams().indexOf(t);
 	}
-
-	public void createTeam(String teamName, String teamColor, int spawnLocX, int spawnLocY, int spawnLocZ, int spawnRadius)
+	
+	public void createTeam(String teamName, String teamColor, int spawnLocX, int spawnLocY, int spawnLocZ,
+			int spawnRadius)
 	{
 		TvTITeam t = new TvTITeam(teamName, teamColor, spawnLocX, spawnLocY, spawnLocZ, spawnRadius);
 		getTeams().add(t);
 	}
-
-	public void createTeam(String teamName, int teamColor, int spawnLocX, int spawnLocY, int spawnLocZ, int spawnRadius)
+	
+	public void
+			createTeam(String teamName, int teamColor, int spawnLocX, int spawnLocY, int spawnLocZ, int spawnRadius)
 	{
 		TvTITeam t = new TvTITeam(teamName, teamColor, spawnLocX, spawnLocY, spawnLocZ, spawnRadius);
 		getTeams().add(t);
 	}
-
+	
 	public int getInstanceId()
 	{
 		return _instanceId;
 	}
-
+	
 	public void setInstanceName(String name)
 	{
 		_instanceName = name;
 	}
-
+	
 	public String getInstanceName()
 	{
 		return _instanceName;
 	}
-
+	
 	public void setRewardId(int rewardId)
 	{
 		_rewardId = rewardId;
 	}
-
+	
 	public int getRewardId()
 	{
 		return _rewardId;
 	}
-
+	
 	public void setRewardAmount(int amount)
 	{
 		_rewardAmount = amount;
 	}
-
+	
 	public int getRewardAmount()
 	{
 		return _rewardAmount;
 	}
-
+	
 	public void setMinLvl(int lvl)
 	{
 		_minLvl = lvl;
 	}
-
+	
 	public int getMinLvl()
 	{
 		return _minLvl;
 	}
-
+	
 	public void setMaxLvl(int lvl)
 	{
 		_maxLvl = lvl;
 	}
-
+	
 	public int getMaxLvl()
 	{
 		return _maxLvl;
 	}
-
+	
 	public void setJoinTime(int time)
 	{
 		_joinTime = time;
 	}
-
+	
 	public int getJoinTime()
 	{
 		return _joinTime;
 	}
-
+	
 	public void setEventTime(int time)
 	{
 		_eventTime = time;
 	}
-
+	
 	public int getEventTime()
 	{
 		return _eventTime;
 	}
-
+	
 	public void setMinPlayers(int amount)
 	{
 		_minPlayers = amount;
 	}
-
+	
 	public int getMinPlayers()
 	{
 		return _minPlayers;
 	}
-
+	
 	public void setMaxPlayers(int amount)
 	{
 		_maxPlayers = amount;
 	}
-
+	
 	public int getMaxPlayers()
 	{
 		return _maxPlayers;
 	}
-
+	
 	public void setJoining(boolean joining)
 	{
 		_joining = joining;
 	}
-
+	
 	public boolean isJoining()
 	{
 		return _joining;
 	}
-
+	
 	public void setTeleport(boolean teleport)
 	{
 		_teleport = teleport;
 	}
-
+	
 	public boolean isTeleport()
 	{
 		return _teleport;
 	}
-
+	
 	public void setStarted(boolean started)
 	{
 		_started = started;
 	}
-
+	
 	public boolean isStarted()
 	{
 		return _started;
 	}
-
+	
 	public void addPlayer(L2PcInstance player)
 	{
 		_tempJoinList.add(player);
 	}
-
+	
 	public void removePlayer(L2PcInstance player)
 	{
 		_tempJoinList.remove(player);
 	}
-
+	
 	public CopyOnWriteArrayList<L2PcInstance> getPlayers()
 	{
 		return _tempJoinList;
 	}
-
+	
 	public CopyOnWriteArrayList<TvTITeam> getTeams()
 	{
 		return _teams;

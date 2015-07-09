@@ -33,19 +33,22 @@ import com.l2jfree.loginserver.dao.AccountsDAO;
  */
 public class AccountsDAOMock implements AccountsDAO
 {
-	private final Map<String, Accounts>	referential	= new HashMap<String, Accounts>();
-
+	private final Map<String, Accounts> referential = new HashMap<String, Accounts>();
+	
 	public AccountsDAOMock()
 	{
-		referential.put("player1", new Accounts("player1", "UqW5IPUACYelC13kW52+69qJwxQ=", new BigDecimal(0), new Integer(100), 0, 1900, 1, 1, "127.0.0.1"));
-		referential.put("player2", new Accounts("player2", "UqW5IPUACYelC13kW52+69qJwxQ=", new BigDecimal(0), new Integer(-1), 0, 1900, 1, 1, "127.0.0.2"));
+		referential.put("player1", new Accounts("player1", "UqW5IPUACYelC13kW52+69qJwxQ=", new BigDecimal(0),
+				new Integer(100), 0, 1900, 1, 1, "127.0.0.1"));
+		referential.put("player2", new Accounts("player2", "UqW5IPUACYelC13kW52+69qJwxQ=", new BigDecimal(0),
+				new Integer(-1), 0, 1900, 1, 1, "127.0.0.2"));
 	}
-
+	
 	/**
 	 * Search by id
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public Accounts getAccountById(String id)
 	{
 		if (!referential.containsKey(id))
@@ -54,29 +57,32 @@ public class AccountsDAOMock implements AccountsDAO
 		}
 		return referential.get(id);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createAccount(java.lang.Object)
 	 */
+	@Override
 	public String createAccount(Object obj)
 	{
-		Accounts acc = (Accounts) obj;
+		Accounts acc = (Accounts)obj;
 		referential.put(acc.getLogin(), acc);
 		return acc.getLogin();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createOrUpdate(java.lang.Object)
 	 */
+	@Override
 	public void createOrUpdate(Object obj)
 	{
 		createAccount(obj);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createOrUpdateAll(java.util.Collection)
 	 */
+	@Override
 	public void createOrUpdateAll(Collection<?> entities)
 	{
 		Iterator<?> it = entities.iterator();
@@ -85,35 +91,39 @@ public class AccountsDAOMock implements AccountsDAO
 			createAccount(it.next());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#getAllAccounts()
 	 */
+	@Override
 	public List<Accounts> getAllAccounts()
 	{
 		return new ArrayList<Accounts>(referential.values());
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAccount(java.lang.Object)
 	 */
+	@Override
 	public void removeAccount(Object obj)
 	{
-		referential.remove(((Accounts) obj).getLogin());
-
+		referential.remove(((Accounts)obj).getLogin());
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAccountById(java.io.Serializable)
 	 */
+	@Override
 	public void removeAccountById(String login)
 	{
 		referential.remove(login);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAll(java.util.Collection)
 	 */
+	@Override
 	public void removeAll(Collection<?> entities)
 	{
 		Iterator<?> it = entities.iterator();
@@ -122,15 +132,16 @@ public class AccountsDAOMock implements AccountsDAO
 			removeAccount(it.next());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#update(java.lang.Object)
 	 */
+	@Override
 	public void update(Object obj)
 	{
-		Accounts acc = (Accounts) obj;
+		Accounts acc = (Accounts)obj;
 		removeAccountById(acc.getLogin());
 		createAccount(obj);
-
+		
 	}
 }

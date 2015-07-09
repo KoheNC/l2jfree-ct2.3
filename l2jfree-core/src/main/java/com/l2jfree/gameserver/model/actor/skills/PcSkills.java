@@ -72,8 +72,8 @@ public final class PcSkills
 			
 			if (oldLevel != null)
 			{
-				PreparedStatement statement = con
-						.prepareStatement("UPDATE character_skills SET skill_level=? WHERE skill_id=? AND charId=? AND class_index=?");
+				PreparedStatement statement =
+						con.prepareStatement("UPDATE character_skills SET skill_level=? WHERE skill_id=? AND charId=? AND class_index=?");
 				statement.setInt(1, skill.getLevel());
 				statement.setInt(2, skill.getId());
 				statement.setInt(3, getOwner().getObjectId());
@@ -83,8 +83,8 @@ public final class PcSkills
 			}
 			else
 			{
-				PreparedStatement statement = con
-						.prepareStatement("INSERT INTO character_skills (charId,skill_id,skill_level,class_index) VALUES (?,?,?,?)");
+				PreparedStatement statement =
+						con.prepareStatement("INSERT INTO character_skills (charId,skill_id,skill_level,class_index) VALUES (?,?,?,?)");
 				statement.setInt(1, getOwner().getObjectId());
 				statement.setInt(2, skill.getId());
 				statement.setInt(3, skill.getLevel());
@@ -118,8 +118,8 @@ public final class PcSkills
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con
-					.prepareStatement("DELETE FROM character_skills WHERE skill_id=? AND charId=? AND class_index=?");
+			PreparedStatement statement =
+					con.prepareStatement("DELETE FROM character_skills WHERE skill_id=? AND charId=? AND class_index=?");
 			statement.setInt(1, skill.getId());
 			statement.setInt(2, getOwner().getObjectId());
 			statement.setInt(3, getOwner().getClassIndex());
@@ -161,8 +161,8 @@ public final class PcSkills
 	
 	public void deleteSkills(Connection con, int classIndex) throws SQLException
 	{
-		PreparedStatement statement = con
-				.prepareStatement("DELETE FROM character_skills WHERE charId=? AND class_index=?");
+		PreparedStatement statement =
+				con.prepareStatement("DELETE FROM character_skills WHERE charId=? AND class_index=?");
 		statement.setInt(1, getOwner().getObjectId());
 		statement.setInt(2, classIndex);
 		statement.execute();
@@ -190,8 +190,8 @@ public final class PcSkills
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con
-					.prepareStatement("SELECT skill_id,skill_level FROM character_skills WHERE charId=? AND class_index=?");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT skill_id,skill_level FROM character_skills WHERE charId=? AND class_index=?");
 			statement.setInt(1, getOwner().getObjectId());
 			statement.setInt(2, classIndex);
 			

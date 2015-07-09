@@ -38,10 +38,9 @@ import com.l2jfree.gameserver.util.TableOptimizer.ItemRelatedTable;
  */
 public abstract class IdFactory
 {
-	private final static Log		_log				= LogFactory.getLog(IdFactory.class);
-
-	protected static final String[]	ID_UPDATES			=
-														{
+	private final static Log _log = LogFactory.getLog(IdFactory.class);
+	
+	protected static final String[] ID_UPDATES = {
 			"UPDATE items                 SET owner_id = ?    WHERE owner_id = ?",
 			"UPDATE items                 SET object_id = ?   WHERE object_id = ?",
 			"UPDATE character_quests      SET charId = ?      WHERE charId = ?",
@@ -89,9 +88,8 @@ public abstract class IdFactory
 			"UPDATE cursed_weapons           SET playerId = ?       WHERE playerId = ?",
 			"UPDATE forums                   SET forum_owner_id = ? WHERE forum_owner_id = ?",
 			"UPDATE heroes                   SET charId = ?         WHERE charId = ?" };
-
-	protected static final String[]	ID_CHECKS			=
-														{
+	
+	protected static final String[] ID_CHECKS = {
 			"SELECT owner_id    FROM items                 WHERE object_id >= ?   AND object_id < ?",
 			"SELECT object_id   FROM items                 WHERE object_id >= ?   AND object_id < ?",
 			"SELECT charId      FROM character_quests      WHERE charId >= ?      AND charId < ?",
@@ -116,46 +114,44 @@ public abstract class IdFactory
 			// Added by DaDummy
 			"SELECT charId      FROM seven_signs           WHERE charId >= ?      AND charId < ?",
 			"SELECT object_id   FROM itemsonground         WHERE object_id >= ?   AND object_id < ?" };
-
-	private static final String[] TIMESTAMPS_CLEAN = {
-		"DELETE FROM character_instance_time WHERE time <= ?",
-		"DELETE FROM character_skill_reuses WHERE expiration <= ?"
-	};
-
-	protected boolean				_initialized;
-
-	public static final int			FIRST_OID			= 0x10000000;
-	public static final int			LAST_OID			= 0x7FFFFFFF;
-	public static final int			FREE_OBJECT_ID_SIZE	= LAST_OID - FIRST_OID;
-
-	protected static IdFactory		_instance			= null;
-
+	
+	private static final String[] TIMESTAMPS_CLEAN = { "DELETE FROM character_instance_time WHERE time <= ?",
+			"DELETE FROM character_skill_reuses WHERE expiration <= ?" };
+	
+	protected boolean _initialized;
+	
+	public static final int FIRST_OID = 0x10000000;
+	public static final int LAST_OID = 0x7FFFFFFF;
+	public static final int FREE_OBJECT_ID_SIZE = LAST_OID - FIRST_OID;
+	
+	protected static IdFactory _instance = null;
+	
 	protected IdFactory()
 	{
 		setAllCharacterOffline();
 		cleanUpDB();
 		cleanUpTimeStamps();
 	}
-
+	
 	static
 	{
 		switch (Config.IDFACTORY_TYPE)
 		{
-		case BitSet:
-			_instance = new BitSetIDFactory();
-			break;
-		case Stack:
-			_instance = new StackIDFactory();
-			break;
-		case Increment:
-			_instance = new IncrementIDFactory();
-			break;
-		case Rebuild:
-			_instance = new BitSetRebuildFactory();
-			break;
+			case BitSet:
+				_instance = new BitSetIDFactory();
+				break;
+			case Stack:
+				_instance = new StackIDFactory();
+				break;
+			case Increment:
+				_instance = new IncrementIDFactory();
+				break;
+			case Rebuild:
+				_instance = new BitSetRebuildFactory();
+				break;
 		}
 	}
-
+	
 	/**
 	 * Sets all character offline
 	 */
@@ -180,7 +176,7 @@ public abstract class IdFactory
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * Cleans up Database
 	 */
@@ -203,18 +199,28 @@ public abstract class IdFactory
 				cleanCount += stmt.executeUpdate(table.getCleanQuery());
 			}
 			
-			cleanCount += stmt.executeUpdate("DELETE FROM clan_data WHERE clan_data.leader_id NOT IN (SELECT charId FROM characters) AND clan_data.clan_id != 6619248;");
-			cleanCount += stmt.executeUpdate("DELETE FROM items WHERE loc <> 'clanwh' and items.owner_id NOT IN (SELECT charId FROM characters);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM clan_data WHERE clan_data.leader_id NOT IN (SELECT charId FROM characters) AND clan_data.clan_id != 6619248;");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM items WHERE loc <> 'clanwh' and items.owner_id NOT IN (SELECT charId FROM characters);");
 			
 			// If a clan not exists
-			cleanCount += stmt.executeUpdate("DELETE FROM auction_bid WHERE auction_bid.bidderId NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM clan_privs WHERE clan_privs.clan_id NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM clan_skills WHERE clan_skills.clan_id NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM clan_subpledges WHERE clan_subpledges.clan_id NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM clan_wars WHERE clan_wars.clan1 NOT IN (SELECT clan_id FROM clan_data) OR clan_wars.clan2 NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM forums WHERE forum_owner_id <> 0 AND forums.forum_owner_id NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM items WHERE loc = 'clanwh' AND items.owner_id NOT IN (SELECT clan_id FROM clan_data);");
-			cleanCount += stmt.executeUpdate("DELETE FROM siege_clans WHERE siege_clans.clan_id NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM auction_bid WHERE auction_bid.bidderId NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM clan_privs WHERE clan_privs.clan_id NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM clan_skills WHERE clan_skills.clan_id NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM clan_subpledges WHERE clan_subpledges.clan_id NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM clan_wars WHERE clan_wars.clan1 NOT IN (SELECT clan_id FROM clan_data) OR clan_wars.clan2 NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM forums WHERE forum_owner_id <> 0 AND forums.forum_owner_id NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM items WHERE loc = 'clanwh' AND items.owner_id NOT IN (SELECT clan_id FROM clan_data);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM siege_clans WHERE siege_clans.clan_id NOT IN (SELECT clan_id FROM clan_data);");
 			
 			stmt.executeUpdate("UPDATE characters SET `clanid`='0', `clan_privs`='0', `clan_join_expiry_time`='0', `clan_create_expiry_time`='0' WHERE characters.clanid NOT IN (SELECT clan_id FROM clan_data);");
 			stmt.executeUpdate("UPDATE clan_subpledges SET leader_id=0 WHERE clan_subpledges.leader_id NOT IN (SELECT charId FROM characters) AND leader_id > 0;");
@@ -222,11 +228,14 @@ public abstract class IdFactory
 			stmt.executeUpdate("UPDATE clanhall SET ownerId=0, paidUntil=0, paid=0 WHERE clanhall.ownerId NOT IN (SELECT clan_id FROM clan_data);");
 			
 			// If the clanhall isn't free
-			cleanCount += stmt.executeUpdate("DELETE FROM auction WHERE auction.id IN (SELECT id FROM clanhall WHERE ownerId <> 0) AND auction.sellerId = 0;");
-			cleanCount += stmt.executeUpdate("DELETE FROM auction_bid WHERE auction_bid.auctionId IN (SELECT id FROM clanhall WHERE ownerId <> 0);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM auction WHERE auction.id IN (SELECT id FROM clanhall WHERE ownerId <> 0) AND auction.sellerId = 0;");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM auction_bid WHERE auction_bid.auctionId IN (SELECT id FROM clanhall WHERE ownerId <> 0);");
 			stmt.executeUpdate("UPDATE clan_data SET auction_bid_at = 0 WHERE auction_bid_at NOT IN (SELECT auctionId FROM auction_bid);");
 			// If the clanhall is free
-			cleanCount += stmt.executeUpdate("DELETE FROM clanhall_functions WHERE clanhall_functions.hall_id NOT IN (SELECT id FROM clanhall WHERE ownerId <> 0);");
+			cleanCount +=
+					stmt.executeUpdate("DELETE FROM clanhall_functions WHERE clanhall_functions.hall_id NOT IN (SELECT id FROM clanhall WHERE ownerId <> 0);");
 			
 			// If an item not exists
 			for (ItemRelatedTable table : TableOptimizer.getItemRelatedTables())
@@ -246,7 +255,7 @@ public abstract class IdFactory
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void cleanUpTimeStamps()
 	{
 		Connection con = null;
@@ -262,7 +271,7 @@ public abstract class IdFactory
 				cleanCount += stmt.executeUpdate();
 				stmt.close();
 			}
-
+			
 			_log.info("Cleaned " + cleanCount + " expired timestamps from database.");
 		}
 		catch (SQLException e)
@@ -273,7 +282,7 @@ public abstract class IdFactory
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * @return
 	 * @throws SQLException
@@ -341,26 +350,26 @@ public abstract class IdFactory
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public boolean isInitialized()
 	{
 		return _initialized;
 	}
-
+	
 	public static IdFactory getInstance()
 	{
 		return _instance;
 	}
-
+	
 	public abstract int getNextId();
-
+	
 	/**
 	 * return a used Object ID back to the pool
 	 * @param id ID
 	 */
 	public abstract void releaseId(int id);
-
+	
 	public abstract int getCurrentId();
-
+	
 	public abstract int size();
 }

@@ -20,29 +20,29 @@ import com.l2jfree.gameserver.network.serverpackets.ExJumpToLocation;
 public final class RequestJump extends L2GameClientPacket
 {
 	private static final String _C__REQUESTJUMP = "[C] D0:53 RequestJump ch";
-
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (player.tryJump())
 			sendPacket(new ExJumpToLocation(player));
 		else
 			sendAF();
 	}
-
-    @Override
-    public String getType()
-    {
-        return _C__REQUESTJUMP;
-    }
+	
+	@Override
+	public String getType()
+	{
+		return _C__REQUESTJUMP;
+	}
 }

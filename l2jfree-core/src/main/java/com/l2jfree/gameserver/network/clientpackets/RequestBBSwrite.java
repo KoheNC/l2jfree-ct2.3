@@ -30,13 +30,13 @@ public class RequestBBSwrite extends L2GameClientPacket
 	private String _arg3;
 	private String _arg4;
 	private String _arg5;
-
+	
 	/**
 	 * Format SSSSSS
 	 */
-    @Override
-    protected void readImpl()
-    {
+	@Override
+	protected void readImpl()
+	{
 		_url = readS();
 		_arg1 = readS();
 		_arg2 = readS();
@@ -44,14 +44,14 @@ public class RequestBBSwrite extends L2GameClientPacket
 		_arg4 = readS();
 		_arg5 = readS();
 	}
-
+	
 	@Override
-    protected void runImpl()
+	protected void runImpl()
 	{
 		CommunityBoard.handleWriteCommands(getClient(), _url, _arg1, _arg2, _arg3, _arg4, _arg5);
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

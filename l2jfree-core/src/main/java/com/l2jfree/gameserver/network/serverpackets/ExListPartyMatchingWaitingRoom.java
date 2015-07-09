@@ -28,25 +28,25 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExListPartyMatchingWaitingRoom extends L2GameServerPacket
 {
-	private static final String	_S__FE_36_EXLISTPARTYMATCHINGWAITINGROOM = "[S] FE:36 ExListPartyMatchingWaitingRoom";
-
-	private final List<L2PcInstance>	_waiting;
-	private final int					_offset;
-	private final int					_last;
-
+	private static final String _S__FE_36_EXLISTPARTYMATCHINGWAITINGROOM = "[S] FE:36 ExListPartyMatchingWaitingRoom";
+	
+	private final List<L2PcInstance> _waiting;
+	private final int _offset;
+	private final int _last;
+	
 	public ExListPartyMatchingWaitingRoom(int minLevel, int maxLevel, int page)
 	{
 		_waiting = PartyRoomManager.getInstance().getWaitingList(minLevel, maxLevel);
 		_offset = (page - 1) * ENTRIES_PER_PAGE;
 		_last = _offset + Math.min(_waiting.size() - _offset, ENTRIES_PER_PAGE);
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x36);
-
+		
 		writeD(_waiting.size() / 64 + 1); // total pages
 		writeD(_last - _offset); // players in this page
 		for (int i = _offset; i < _last; i++)
@@ -57,7 +57,7 @@ public class ExListPartyMatchingWaitingRoom extends L2GameServerPacket
 			writeD(player.getLevel());
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

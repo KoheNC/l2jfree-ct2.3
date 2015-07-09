@@ -27,14 +27,14 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 
 public class Loc implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 0 };
-
+	private static final int[] COMMAND_IDS = { 0 };
+	
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		L2MapRegionRestart restart = null;
 		SystemMessageId msg = SystemMessageId.LOC_ADEN_S1_S2_S3;
-
+		
 		// Standard Town
 		Town town = TownManager.getInstance().getTown(Config.ALT_DEFAULT_RESTARTTOWN);
 		if (town != null && town.getMapRegion() != null)
@@ -43,7 +43,7 @@ public class Loc implements IUserCommandHandler
 			if (restart != null)
 				msg = SystemMessageId.getSystemMessageId(restart.getLocName());
 		}
-
+		
 		L2MapRegion region = MapRegionManager.getInstance().getRegion(activeChar);
 		if (region != null)
 		{
@@ -51,13 +51,13 @@ public class Loc implements IUserCommandHandler
 			restart = MapRegionManager.getInstance().getRestartLocation(restartId);
 			msg = SystemMessageId.getSystemMessageId(restart.getLocName());
 		}
-
+		
 		SystemMessage sm = new SystemMessage(msg);
 		sm.addNumber(activeChar.getX());
 		sm.addNumber(activeChar.getY());
 		sm.addNumber(activeChar.getZ());
 		activeChar.sendPacket(sm);
-
+		
 		if (Config.ALT_SHOW_RESTART_TOWN && restart != null)
 		{
 			if (restart.getLocName() < 1222)
@@ -66,7 +66,8 @@ public class Loc implements IUserCommandHandler
 				{
 					activeChar.sendPacket(SystemMessageId.getSystemMessageId(msg.getId() + 31));
 				}
-				else // system message has a typo
+				else
+					// system message has a typo
 					activeChar.sendMessage("Restart at the Town of Gludio.");
 			}
 			else
@@ -89,10 +90,11 @@ public class Loc implements IUserCommandHandler
 					activeChar.sendMessage("Restart at Kamael Village.");
 			}
 		}
-
+		
 		return true;
 	}
-
+	
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

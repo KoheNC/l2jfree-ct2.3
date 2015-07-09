@@ -20,8 +20,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.SocialAction;
 import com.l2jfree.gameserver.util.FloodProtector;
-import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.gameserver.util.FloodProtector.Protected;
+import com.l2jfree.gameserver.util.Util;
 
 /**
  * This class ...
@@ -30,11 +30,11 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class RequestSocialAction extends L2GameClientPacket
 {
-	private static final String	_C__1B_REQUESTSOCIALACTION	= "[C] 1B RequestSocialAction";
-
+	private static final String _C__1B_REQUESTSOCIALACTION = "[C] 1B RequestSocialAction";
+	
 	// format  cd
-	private int					_actionId;
-
+	private int _actionId;
+	
 	/**
 	 * packet type id 0x1b
 	 * format:		cd
@@ -45,46 +45,47 @@ public class RequestSocialAction extends L2GameClientPacket
 	{
 		_actionId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (!FloodProtector.tryPerformAction(activeChar, Protected.SOCIAL))
 			return;
-
+		
 		// check if its the actionId is allowed
 		else if (_actionId < 2 || _actionId > 14)
 		{
-			Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName()
-					+ " requested an internal Social Action.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account "
+					+ activeChar.getAccountName() + " requested an internal Social Action.", Config.DEFAULT_PUNISH);
 			sendAF();
 			return;
 		}
-
+		
 		// You cannot do anything else while fishing
 		else if (activeChar.isFishing())
 		{
 			requestFailed(SystemMessageId.CANNOT_DO_WHILE_FISHING_3);
 			return;
 		}
-
-		else if (activeChar.isSitting() || activeChar.getActiveRequester() != null || activeChar.isAlikeDead() || activeChar.isCastingNow()
-				|| activeChar.isCastingSimultaneouslyNow() || activeChar.getAI().getIntention() != CtrlIntention.AI_INTENTION_IDLE
+		
+		else if (activeChar.isSitting() || activeChar.getActiveRequester() != null || activeChar.isAlikeDead()
+				|| activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow()
+				|| activeChar.getAI().getIntention() != CtrlIntention.AI_INTENTION_IDLE
 				|| (activeChar.isAllSkillsDisabled() && !activeChar.isInDuel()))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		activeChar.broadcastPacket(new SocialAction(activeChar.getObjectId(), _actionId));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

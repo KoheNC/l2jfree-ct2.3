@@ -38,7 +38,7 @@ public final class L2SiegeTeleporterInstance extends L2Npc
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -48,23 +48,28 @@ public final class L2SiegeTeleporterInstance extends L2Npc
 			player.sendMessage("You cannot teleport due to a restriction.");
 			return;
 		}
-		if (getCastle() == null || !getCastle().getSiege().getIsInProgress() ||
-				player.getClanId() != getCastle().getOwnerId())
+		if (getCastle() == null || !getCastle().getSiege().getIsInProgress()
+				|| player.getClanId() != getCastle().getOwnerId())
 		{
 			showChatWindow(player);
 			return;
 		}
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-		if (actualCommand.equals("goto")) {
-			if (st.countTokens() <= 0) {
+		if (actualCommand.equals("goto"))
+		{
+			if (st.countTokens() <= 0)
+			{
 				showChatWindow(player);
 				return;
 			}
 			int where = -1;
-			try {
+			try
+			{
 				where = Integer.parseInt(st.nextToken());
-			} catch (NumberFormatException e) {
+			}
+			catch (NumberFormatException e)
+			{
 			}
 			if (where == -1 || player.isAlikeDead())
 				return;
@@ -72,18 +77,19 @@ public final class L2SiegeTeleporterInstance extends L2Npc
 			player.teleToLocation(list.getLocX(), list.getLocY(), list.getLocZ(), true);
 		}
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
 		return "data/html/teleporter/" + npcId + ".htm";
 	}
-
+	
 	@Override
 	public void showChatWindow(L2PcInstance player, int val)
 	{
 		String filename = "data/html/npcdefault.htm";
-		if (getCastle() != null && getCastle().getSiege().getIsInProgress()) {
+		if (getCastle() != null && getCastle().getSiege().getIsInProgress())
+		{
 			if (player.getClanId() == getCastle().getOwnerId())
 				filename = getHtmlPath(getNpcId(), val);
 			else

@@ -24,20 +24,20 @@ import com.l2jfree.gameserver.model.L2PartyRoom;
  */
 public class PartyRoomInfo extends L2GameServerPacket
 {
-	private static final String	_S__9D_PARTYROOMINFO = "[S] 9D PartyRoomInfo";
-
+	private static final String _S__9D_PARTYROOMINFO = "[S] 9D PartyRoomInfo";
+	
 	private final L2PartyRoom _room;
-
+	
 	public PartyRoomInfo(L2PartyRoom room)
 	{
 		_room = room;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x9d);
-
+		
 		writeD(_room.getId());
 		writeD(_room.getMaxMembers());
 		writeD(_room.getMinLevel());
@@ -46,7 +46,7 @@ public class PartyRoomInfo extends L2GameServerPacket
 		writeD(_room.getLocation()); // region
 		writeS(_room.getTitle());
 	}
-
+	
 	@Override
 	public String getType()
 	{

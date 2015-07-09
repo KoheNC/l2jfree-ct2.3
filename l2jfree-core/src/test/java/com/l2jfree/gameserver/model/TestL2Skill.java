@@ -27,57 +27,57 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class TestL2Skill extends TestCase
 {
-    /**
-     * StatsSet used for test
-     */
-    private StatsSet statsSetForTest = null;
-    private StatsSet statsSetForTestNpc = null;
-    
-    /**
-     * @see junit.framework.TestCase#setUp()
-     */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-        
-        // Initialize stats set with mandatory value
-        statsSetForTest = new StatsSet();
-        statsSetForTest.set("skill_id",1);
-        statsSetForTest.set("level",1);
-        statsSetForTest.set("name","Skill test");
-        statsSetForTest.set("operateType",SkillOpType.OP_PASSIVE);
-        statsSetForTest.set("target",SkillTargetType.TARGET_ALLY);
-        statsSetForTest.set("skillType",L2SkillType.BLEED);
-        
-        statsSetForTestNpc = new StatsSet();
-        statsSetForTestNpc.set("baseSTR",1);
-        statsSetForTestNpc.set("baseCON",1);
-        statsSetForTestNpc.set("baseDEX",1);
-        statsSetForTestNpc.set("baseINT",1);
-        statsSetForTestNpc.set("baseWIT",1);
-        statsSetForTestNpc.set("baseMEN",1);
-        statsSetForTestNpc.set("baseHpMax",1);
-        statsSetForTestNpc.set("baseCpMax",1);
-        statsSetForTestNpc.set("baseMpMax",1);
-        statsSetForTestNpc.set("baseHpReg",1);
-        statsSetForTestNpc.set("baseCpReg",1);
-        statsSetForTestNpc.set("baseMpReg",1);
-        statsSetForTestNpc.set("basePAtk",1);
-        statsSetForTestNpc.set("baseMAtk",1);
-        statsSetForTestNpc.set("basePDef",1);
-        statsSetForTestNpc.set("baseMDef",1);
-        statsSetForTestNpc.set("basePAtkSpd",1);
-        statsSetForTestNpc.set("baseMAtkSpd",1);
-        statsSetForTestNpc.set("baseShldDef",1);
-        statsSetForTestNpc.set("baseAtkRange",1);
-        statsSetForTestNpc.set("baseShldRate",1);
-        statsSetForTestNpc.set("baseCritRate",1);
-        statsSetForTestNpc.set("baseRunSpd",1);
-        statsSetForTestNpc.set("baseWalkSpd",1);
-        statsSetForTestNpc.set("collision_radius",1);
-        statsSetForTestNpc.set("collision_height",1);
-        statsSetForTestNpc.set("fcollision_radius",1);
-        statsSetForTestNpc.set("fcollision_height",1);
-    }
+	/**
+	 * StatsSet used for test
+	 */
+	private StatsSet statsSetForTest = null;
+	private StatsSet statsSetForTestNpc = null;
+	
+	/**
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		
+		// Initialize stats set with mandatory value
+		statsSetForTest = new StatsSet();
+		statsSetForTest.set("skill_id", 1);
+		statsSetForTest.set("level", 1);
+		statsSetForTest.set("name", "Skill test");
+		statsSetForTest.set("operateType", SkillOpType.OP_PASSIVE);
+		statsSetForTest.set("target", SkillTargetType.TARGET_ALLY);
+		statsSetForTest.set("skillType", L2SkillType.BLEED);
+		
+		statsSetForTestNpc = new StatsSet();
+		statsSetForTestNpc.set("baseSTR", 1);
+		statsSetForTestNpc.set("baseCON", 1);
+		statsSetForTestNpc.set("baseDEX", 1);
+		statsSetForTestNpc.set("baseINT", 1);
+		statsSetForTestNpc.set("baseWIT", 1);
+		statsSetForTestNpc.set("baseMEN", 1);
+		statsSetForTestNpc.set("baseHpMax", 1);
+		statsSetForTestNpc.set("baseCpMax", 1);
+		statsSetForTestNpc.set("baseMpMax", 1);
+		statsSetForTestNpc.set("baseHpReg", 1);
+		statsSetForTestNpc.set("baseCpReg", 1);
+		statsSetForTestNpc.set("baseMpReg", 1);
+		statsSetForTestNpc.set("basePAtk", 1);
+		statsSetForTestNpc.set("baseMAtk", 1);
+		statsSetForTestNpc.set("basePDef", 1);
+		statsSetForTestNpc.set("baseMDef", 1);
+		statsSetForTestNpc.set("basePAtkSpd", 1);
+		statsSetForTestNpc.set("baseMAtkSpd", 1);
+		statsSetForTestNpc.set("baseShldDef", 1);
+		statsSetForTestNpc.set("baseAtkRange", 1);
+		statsSetForTestNpc.set("baseShldRate", 1);
+		statsSetForTestNpc.set("baseCritRate", 1);
+		statsSetForTestNpc.set("baseRunSpd", 1);
+		statsSetForTestNpc.set("baseWalkSpd", 1);
+		statsSetForTestNpc.set("collision_radius", 1);
+		statsSetForTestNpc.set("collision_height", 1);
+		statsSetForTestNpc.set("fcollision_radius", 1);
+		statsSetForTestNpc.set("fcollision_height", 1);
+	}
 }

@@ -19,13 +19,12 @@ import java.util.StringTokenizer;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 public class TopBBSManager extends BaseBBSManager
 {
 	private TopBBSManager()
 	{
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
 	 */
@@ -37,7 +36,8 @@ public class TopBBSManager extends BaseBBSManager
 			String content = HtmCache.getInstance().getHtm("data/html/CommunityBoard/index.htm");
 			if (content == null)
 			{
-				content = "<html><body><br><br><center>404 :File Not foud: 'data/html/CommunityBoard/index.htm' </center></body></html>";
+				content =
+						"<html><body><br><br><center>404 :File Not foud: 'data/html/CommunityBoard/index.htm' </center></body></html>";
 			}
 			separateAndSend(content, activeChar);
 		}
@@ -46,7 +46,8 @@ public class TopBBSManager extends BaseBBSManager
 			String content = HtmCache.getInstance().getHtm("data/html/CommunityBoard/index.htm");
 			if (content == null)
 			{
-				content = "<html><body><br><br><center>404 :File Not foud: 'data/html/CommunityBoard/index.htm' </center></body></html>";
+				content =
+						"<html><body><br><br><center>404 :File Not foud: 'data/html/CommunityBoard/index.htm' </center></body></html>";
 			}
 			separateAndSend(content, activeChar);
 		}
@@ -58,7 +59,9 @@ public class TopBBSManager extends BaseBBSManager
 			String content = HtmCache.getInstance().getHtm("data/html/CommunityBoard/" + idp + ".htm");
 			if (content == null)
 			{
-				content = "<html><body><br><br><center>404 :File Not foud: 'data/html/CommunityBoard/" + idp + ".htm' </center></body></html>";
+				content =
+						"<html><body><br><br><center>404 :File Not foud: 'data/html/CommunityBoard/" + idp
+								+ ".htm' </center></body></html>";
 			}
 			separateAndSend(content, activeChar);
 		}
@@ -67,7 +70,7 @@ public class TopBBSManager extends BaseBBSManager
 			notImplementedYet(activeChar, command);
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
 	 */
@@ -75,9 +78,9 @@ public class TopBBSManager extends BaseBBSManager
 	public void parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2PcInstance activeChar)
 	{
 		// TODO Auto-generated method stub
-
+		
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -85,7 +88,7 @@ public class TopBBSManager extends BaseBBSManager
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

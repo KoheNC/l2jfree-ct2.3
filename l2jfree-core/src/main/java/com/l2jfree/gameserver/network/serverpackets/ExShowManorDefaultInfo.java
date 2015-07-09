@@ -18,7 +18,6 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.model.L2Manor;
 
-
 /**
  * format(packet 0xFE)
  * ch cd [ddddcdcd]
@@ -46,12 +45,12 @@ public class ExShowManorDefaultInfo extends L2GameServerPacket
 	private static final String _S__FE_1C_EXSHOWSEEDINFO = "[S] FE:1E ExShowManorDefaultInfo";
 	
 	private FastList<Integer> _crops = null;
-
+	
 	public ExShowManorDefaultInfo()
 	{
 		_crops = L2Manor.getInstance().getAllCrops();
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -62,16 +61,16 @@ public class ExShowManorDefaultInfo extends L2GameServerPacket
 		for (int cropId : _crops)
 		{
 			writeD(cropId); // crop Id
-			writeD(L2Manor.getInstance().getSeedLevelByCrop(cropId));	   // level
+			writeD(L2Manor.getInstance().getSeedLevelByCrop(cropId)); // level
 			writeD(L2Manor.getInstance().getSeedBasicPriceByCrop(cropId)); // seed price
-			writeD(L2Manor.getInstance().getCropBasicPrice(cropId));	   // crop price
+			writeD(L2Manor.getInstance().getCropBasicPrice(cropId)); // crop price
 			writeC(1); // rewrad 1 Type
-			writeD(L2Manor.getInstance().getRewardItem(cropId,1)); // Reward 1 Type Item Id
+			writeD(L2Manor.getInstance().getRewardItem(cropId, 1)); // Reward 1 Type Item Id
 			writeC(1); // rewrad 2 Type
-			writeD(L2Manor.getInstance().getRewardItem(cropId,2)); // Reward 2 Type Item Id
+			writeD(L2Manor.getInstance().getRewardItem(cropId, 2)); // Reward 2 Type Item Id
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -54,7 +54,8 @@ public class L2SkillDecoy extends L2Skill
 			return;
 		
 		L2NpcTemplate DecoyTemplate = NpcTable.getInstance().getTemplate(_npcId);
-		final L2DecoyInstance Decoy = new L2DecoyInstance(IdFactory.getInstance().getNextId(), DecoyTemplate, activeChar, this);
+		final L2DecoyInstance Decoy =
+				new L2DecoyInstance(IdFactory.getInstance().getNextId(), DecoyTemplate, activeChar, this);
 		Decoy.getStatus().setCurrentHp(Decoy.getMaxHp());
 		Decoy.getStatus().setCurrentMp(Decoy.getMaxMp());
 		Decoy.setHeading(activeChar.getHeading());

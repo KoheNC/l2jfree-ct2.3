@@ -93,7 +93,7 @@ final class ConditionSiegeZone extends Condition
 		else if (castle.getSiege().getDefenderClan(player.getClan()) != null && (value & COND_CAST_DEFEND) != 0)
 			return true;
 		else if (castle.getSiege().getAttackerClan(player.getClan()) == null
-			&& castle.getSiege().getDefenderClan(player.getClan()) == null && (value & COND_CAST_NEUTRAL) != 0)
+				&& castle.getSiege().getDefenderClan(player.getClan()) == null && (value & COND_CAST_NEUTRAL) != 0)
 			return true;
 		
 		return false;
@@ -121,7 +121,7 @@ final class ConditionSiegeZone extends Condition
 		else if (fort.getOwnerClan() == player.getClan() && (value & COND_FORT_DEFEND) != 0)
 			return true;
 		else if (fort.getSiege().getAttackerClan(player.getClan()) == null && fort.getOwnerClan() != player.getClan()
-			&& (value & COND_FORT_NEUTRAL) != 0)
+				&& (value & COND_FORT_NEUTRAL) != 0)
 			return true;
 		
 		return false;
@@ -149,7 +149,7 @@ final class ConditionSiegeZone extends Condition
 		else if (ch.getSiege().getDefenderClan(player.getClan()) != null && (value & COND_CAST_DEFEND) != 0)
 			return true;
 		else if (ch.getSiege().getAttackerClan(player.getClan()) == null
-			&& ch.getSiege().getDefenderClan(player.getClan()) == null && (value & COND_CAST_NEUTRAL) != 0)
+				&& ch.getSiege().getDefenderClan(player.getClan()) == null && (value & COND_CAST_NEUTRAL) != 0)
 			return true;
 		
 		return false;

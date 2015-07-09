@@ -37,7 +37,7 @@ public class OrfenAI extends L2AttackableAI
 	{
 		super.thinkActive();
 		
-		OrfenInstance actor = (OrfenInstance) _actor;
+		OrfenInstance actor = (OrfenInstance)_actor;
 		if (actor.getCurrentHp() == actor.getMaxHp() && actor.getPos() == Position.NEST)
 		{
 			actor.setPos(Position.FIELD);
@@ -49,25 +49,26 @@ public class OrfenAI extends L2AttackableAI
 	protected void thinkAttack()
 	{
 		super.thinkAttack();
-
-		OrfenInstance actor = (OrfenInstance) _actor;
+		
+		OrfenInstance actor = (OrfenInstance)_actor;
 		if (actor.getCurrentHp() < (actor.getMaxHp() / 2) && actor.getPos() == Position.FIELD)
 		{
 			actor.setPos(Position.NEST);
 			actor.teleToLocation(OrfenInstance.NEST_POS, false);
 		}
 	}
-
+	
 	@Override
 	protected void onEvtAttacked(L2Character attacker)
 	{
 		super.onEvtAttacked(attacker);
 		
-		OrfenInstance actor = (OrfenInstance) _actor;
+		OrfenInstance actor = (OrfenInstance)_actor;
 		double distance = Util.calculateDistance(actor, attacker, true);
 		if (distance > 300D && Rnd.get(100) < 10)
 		{
-			actor.broadcastPacket(new NpcSay(actor, OrfenInstance.MESSAGES[Rnd.get(OrfenInstance.MESSAGES.length)].replace("%s", attacker.getName())));
+			actor.broadcastPacket(new NpcSay(actor, OrfenInstance.MESSAGES[Rnd.get(OrfenInstance.MESSAGES.length)]
+					.replace("%s", attacker.getName())));
 			attacker.teleToLocation(actor.getLoc(), true);
 		}
 	}

@@ -38,7 +38,8 @@ public abstract class SiegeableEntityZone extends L2Zone
 			givenIdCount++;
 		
 		if (givenIdCount > 1)
-			throw new IllegalArgumentException("Invalid castleId: " + getCastleId() + ", fortId: " + getFortId() + " and clanhallId: " + getClanhallId());
+			throw new IllegalArgumentException("Invalid castleId: " + getCastleId() + ", fortId: " + getFortId()
+					+ " and clanhallId: " + getClanhallId());
 		
 		if (getCastleId() > 0)
 			return initCastle();
@@ -93,7 +94,7 @@ public abstract class SiegeableEntityZone extends L2Zone
 		if (_entity.getSiege() != null)
 			return _entity.getSiege().getIsInProgress();
 		else
-		// TODO: Not siegeable, but rather contested differently
+			// TODO: Not siegeable, but rather contested differently
 			return false;
 	}
 }

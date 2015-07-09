@@ -21,14 +21,14 @@ import com.l2jfree.gameserver.skills.Stats;
 
 public class TestFuncSet extends TestCase
 {
-    public void testFuncDivCalc()
-    {
-        FuncSet fa = new FuncSet(Stats.MAX_HP, 1, null, 45, null);
-
-        Env env = new Env();
-        env.value = 1;
-        fa.calc(env);
-        assertEquals(45.0, env.value);
-    }
-
+	public void testFuncDivCalc()
+	{
+		FuncSet fa = new FuncSet(Stats.MAX_HP, 1, null, 45, null);
+		
+		Env env = new Env();
+		env.value = 1;
+		fa.calc(env);
+		assertEquals(45.0, env.value);
+	}
+	
 }

@@ -25,17 +25,17 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class ChannelDelete implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 93 };
-
+	private static final int[] COMMAND_IDS = { 93 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		if (id != COMMAND_IDS[0])
 			return false;
-
+		
 		if (activeChar.isInParty())
 		{
 			if (activeChar.getParty().isLeader(activeChar) && activeChar.getParty().isInCommandChannel()
@@ -46,16 +46,17 @@ public class ChannelDelete implements IUserCommandHandler
 				channel.disbandChannel();
 				return true;
 			}
-
+			
 			activeChar.sendPacket(SystemMessageId.ONLY_PARTY_LEADER_CAN_LEAVE_CHANNEL);
 		}
-
+		
 		return false;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

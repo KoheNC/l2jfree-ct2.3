@@ -27,9 +27,9 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class ZakenTeleport implements ISkillHandler
 {
-	private static final L2SkillType[] SKILL_IDS =
-		{ L2SkillType.ZAKEN_TELEPORT };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.ZAKEN_TELEPORT };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill0, L2Character... targets)
 	{
 		for (L2Character c : activeChar.getKnownList().getKnownCharacters())
@@ -41,42 +41,32 @@ public class ZakenTeleport implements ISkillHandler
 		teleport(targets);
 		activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		if (activeChar instanceof L2MonsterInstance)
-			((L2MonsterInstance) activeChar).clearAggroList();
+			((L2MonsterInstance)activeChar).clearAggroList();
 	}
-
+	
 	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;
 	}
-
+	
 	protected void teleport(L2Character... targets)
 	{
 		final int loc[][] =
-			{
-				{ 54228, 220136, -3496 },
-				{ 56315, 220127, -3496 },
-				{ 56285, 218078, -3496 },
-				{ 54238, 218066, -3496 },
-				{ 55259, 219107, -3496 },
-				{ 56295, 218078, -3224 },
-				{ 56283, 220133, -3224 },
-				{ 54241, 220127, -3224 },
-				{ 54238, 218077, -3224 },
-				{ 55268, 219090, -3224 },
-				{ 56284, 218078, -2952 },
-				{ 54252, 220135, -2952 },
-				{ 54244, 218095, -2952 },
-				{ 55270, 219086, -2952 } };
-
+				{ { 54228, 220136, -3496 }, { 56315, 220127, -3496 }, { 56285, 218078, -3496 },
+						{ 54238, 218066, -3496 }, { 55259, 219107, -3496 }, { 56295, 218078, -3224 },
+						{ 56283, 220133, -3224 }, { 54241, 220127, -3224 }, { 54238, 218077, -3224 },
+						{ 55268, 219090, -3224 }, { 56284, 218078, -2952 }, { 54252, 220135, -2952 },
+						{ 54244, 218095, -2952 }, { 55270, 219086, -2952 } };
+		
 		for (L2Character target : targets)
 		{
 			if (target == null)
 				continue;
-
+			
 			target.abortAttack();
 			target.setTarget(null);
-
+			
 			int location = Rnd.get(14);
 			int x = Rnd.get(-400, 400);
 			int y = Rnd.get(-400, 400);

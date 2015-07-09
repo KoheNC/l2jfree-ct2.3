@@ -123,7 +123,8 @@ public final class MovementController extends AbstractPeriodicTaskManager
 			}
 			finally
 			{
-				RunnableStatsManager.handleStats(cha.getClass(), "notifyEvent(CtrlEvent.EVT_ARRIVED)", System.nanoTime() - begin);
+				RunnableStatsManager.handleStats(cha.getClass(), "notifyEvent(CtrlEvent.EVT_ARRIVED)",
+						System.nanoTime() - begin);
 			}
 		}
 	}
@@ -147,7 +148,8 @@ public final class MovementController extends AbstractPeriodicTaskManager
 			}
 			finally
 			{
-				RunnableStatsManager.handleStats(cha.getClass(), "notifyEvent(CtrlEvent.EVT_ARRIVED_REVALIDATE)", System.nanoTime() - begin);
+				RunnableStatsManager.handleStats(cha.getClass(), "notifyEvent(CtrlEvent.EVT_ARRIVED_REVALIDATE)",
+						System.nanoTime() - begin);
 			}
 		}
 	}

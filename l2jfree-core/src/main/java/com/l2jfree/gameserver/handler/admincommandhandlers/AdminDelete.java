@@ -31,36 +31,37 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class AdminDelete implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_delete" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_delete" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_delete"))
 			handleDelete(activeChar);
-
+		
 		return true;
-
+		
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleDelete(L2PcInstance activeChar)
 	{
 		L2Object obj = activeChar.getTarget();
 		if ((obj != null) && (obj instanceof L2Npc))
 		{
-			L2Npc target = (L2Npc) obj;
+			L2Npc target = (L2Npc)obj;
 			target.deleteMe();
-
+			
 			L2Spawn spawn = target.getSpawn();
 			if (spawn != null)
 			{
 				spawn.stopRespawn();
-
+				
 				if (RaidBossSpawnManager.getInstance().isDefined(spawn.getNpcId()))
 					RaidBossSpawnManager.getInstance().deleteSpawn(spawn, true);
 				else if (GrandBossSpawnManager.getInstance().isDefined(spawn.getNpcId()))
@@ -68,7 +69,7 @@ public class AdminDelete implements IAdminCommandHandler
 				else
 					SpawnTable.getInstance().deleteSpawn(spawn, true);
 			}
-
+			
 			activeChar.sendMessage("Deleted " + target.getName() + " from " + target.getObjectId() + ".");
 		}
 		else

@@ -33,11 +33,11 @@ import com.l2jfree.tools.random.Rnd;
 public final class PathToRogue extends QuestJython
 {
 	private static final String PATH_TO_ROGUE = "403_PathToRogue";
-
+	
 	// Quest NPCs
 	private static final int BEZIQUE = 30379;
 	private static final int NETI = 30425;
-
+	
 	// Quest items
 	private static final int BEZIQUES_LETTER = 1180;
 	private static final int NETIS_BOW = 1181;
@@ -46,33 +46,27 @@ public final class PathToRogue extends QuestJython
 	private static final int SPARTOI_BONE_COUNT = 10;
 	private static final int HORSESHOE_OF_LIGHT = 1184;
 	private static final int WANTED_BILL = 1185;
-
+	
 	private static final int STOLEN_JEWELRY = 1186;
 	private static final int STOLEN_TOMES = 1187;
 	private static final int STOLEN_RING = 1188;
 	private static final int STOLEN_NECKLACE = 1189;
-	private static final int[] STOLEN_ITEMS = {
-		STOLEN_JEWELRY, STOLEN_TOMES, STOLEN_RING, STOLEN_NECKLACE
-	};
-
+	private static final int[] STOLEN_ITEMS = { STOLEN_JEWELRY, STOLEN_TOMES, STOLEN_RING, STOLEN_NECKLACE };
+	
 	private static final int BEZIQUES_RECOMMENDATION = 1190;
-
+	
 	// Quest monsters
-	private static final int[] SPARTOI = {
-		20035, 20042, 20045, 20051, 20054, 20060
-	};
+	private static final int[] SPARTOI = { 20035, 20042, 20045, 20051, 20054, 20060 };
 	private static final int CATS_EYE_BANDIT = 27038;
 	private static final String BANDIT_ATTACKED = "You childish fool, do you think you can catch me?";
 	private static final String BANDIT_KILLED = "I must do something about this shameful incident...";
-
+	
 	private PathToRogue(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
-		questItemIds = new int[] {
-			BEZIQUES_LETTER, NETIS_BOW, NETIS_DAGGER, SPARTOIS_BONES, HORSESHOE_OF_LIGHT,
-			WANTED_BILL, STOLEN_JEWELRY, STOLEN_TOMES, STOLEN_RING, STOLEN_NECKLACE,
-			BEZIQUES_RECOMMENDATION
-		};
+		questItemIds =
+				new int[] { BEZIQUES_LETTER, NETIS_BOW, NETIS_DAGGER, SPARTOIS_BONES, HORSESHOE_OF_LIGHT, WANTED_BILL,
+						STOLEN_JEWELRY, STOLEN_TOMES, STOLEN_RING, STOLEN_NECKLACE, BEZIQUES_RECOMMENDATION };
 		addStartNpc(BEZIQUE);
 		addTalkId(BEZIQUE);
 		addTalkId(NETI);
@@ -84,35 +78,34 @@ public final class PathToRogue extends QuestJython
 		addAttackId(CATS_EYE_BANDIT);
 		addKillId(CATS_EYE_BANDIT);
 	}
-
+	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet,
-			L2Skill skill)
+	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		int weaponId = attacker.getInventory().getPaperdollItemId(Inventory.PAPERDOLL_RHAND);
 		switch (npc.getQuestAttackStatus())
 		{
-		case ATTACK_NOONE:
-			npc.setQuestFirstAttacker(attacker);
-			if (weaponId == NETIS_BOW || weaponId == NETIS_DAGGER)
-			{
-				if (npc.getNpcId() == CATS_EYE_BANDIT)
-					npc.broadcastPacket(new NpcSay(npc, BANDIT_ATTACKED));
-				npc.setQuestAttackStatus(ATTACK_SINGLE);
-			}
-			else
-				npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			break;
-		case ATTACK_SINGLE:
-			if (weaponId != NETIS_BOW && weaponId != NETIS_DAGGER)
-				npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			if (attacker != npc.getQuestFirstAttacker())
-				npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			break;
+			case ATTACK_NOONE:
+				npc.setQuestFirstAttacker(attacker);
+				if (weaponId == NETIS_BOW || weaponId == NETIS_DAGGER)
+				{
+					if (npc.getNpcId() == CATS_EYE_BANDIT)
+						npc.broadcastPacket(new NpcSay(npc, BANDIT_ATTACKED));
+					npc.setQuestAttackStatus(ATTACK_SINGLE);
+				}
+				else
+					npc.setQuestAttackStatus(ATTACK_MULTIPLE);
+				break;
+			case ATTACK_SINGLE:
+				if (weaponId != NETIS_BOW && weaponId != NETIS_DAGGER)
+					npc.setQuestAttackStatus(ATTACK_MULTIPLE);
+				if (attacker != npc.getQuestFirstAttacker())
+					npc.setQuestAttackStatus(ATTACK_MULTIPLE);
+				break;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -160,7 +153,7 @@ public final class PathToRogue extends QuestJython
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -170,10 +163,9 @@ public final class PathToRogue extends QuestJython
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(PATH_TO_ROGUE);
-		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) == 0
-				|| npc.getQuestAttackStatus() != ATTACK_SINGLE)
+		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) == 0 || npc.getQuestAttackStatus() != ATTACK_SINGLE)
 			return null;
-
+		
 		int npcId = npc.getNpcId();
 		if (npcId == CATS_EYE_BANDIT)
 		{
@@ -207,18 +199,18 @@ public final class PathToRogue extends QuestJython
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
 		QuestState qs = talker.getQuestState(PATH_TO_ROGUE);
 		if (qs == null)
 			return NO_QUEST;
-
+		
 		int npcId = npc.getNpcId();
 		int state = qs.getState();
 		int cond = qs.getInt(CONDITION);
-
+		
 		if (npcId == BEZIQUE)
 		{
 			if (cond == 0)
@@ -242,8 +234,7 @@ public final class PathToRogue extends QuestJython
 				}
 				else if (qs.getQuestItemsCount(BEZIQUES_LETTER) != 0)
 					return "30379-07.htm";
-				else if (qs.getQuestItemsCount(NETIS_BOW) != 0
-						&& qs.getQuestItemsCount(NETIS_DAGGER) != 0
+				else if (qs.getQuestItemsCount(NETIS_BOW) != 0 && qs.getQuestItemsCount(NETIS_DAGGER) != 0
 						&& qs.getQuestItemsCount(WANTED_BILL) == 0)
 					return "30379-10.htm";
 				else
@@ -278,15 +269,13 @@ public final class PathToRogue extends QuestJython
 				return "30425-06.htm";
 		}
 	}
-
+	
 	private static final boolean allStolenItems(QuestState qs)
 	{
-		return (qs.getQuestItemsCount(STOLEN_JEWELRY) +
-				qs.getQuestItemsCount(STOLEN_TOMES) +
-				qs.getQuestItemsCount(STOLEN_RING) +
-				qs.getQuestItemsCount(STOLEN_NECKLACE) == 4);
+		return (qs.getQuestItemsCount(STOLEN_JEWELRY) + qs.getQuestItemsCount(STOLEN_TOMES)
+				+ qs.getQuestItemsCount(STOLEN_RING) + qs.getQuestItemsCount(STOLEN_NECKLACE) == 4);
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new PathToRogue(403, PATH_TO_ROGUE, "Path to Rogue");

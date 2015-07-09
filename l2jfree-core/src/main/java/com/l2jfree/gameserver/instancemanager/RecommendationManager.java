@@ -38,24 +38,28 @@ import com.l2jfree.gameserver.network.serverpackets.UserInfo;
  */
 public final class RecommendationManager
 {
-	private static final String	ADD_RECOMMENDATION_INFO						= "INSERT INTO character_recommend_data (charId,lastUpdate) VALUES (?,?)";
-	private static final String	UPDATE_RECOMMENDATION_INFO					= "UPDATE character_recommend_data SET evaluationAble = ?,evaluationPoints = ?,lastUpdate=? WHERE charId=?";
-	private static final String	RESTORE_RECOMMENDATION_INFO					= "SELECT evaluationAble,evaluationPoints,lastUpdate FROM character_recommend_data WHERE charId=?";
-	private static final String	ADD_RECOMMENDATION_RESTRICTION				= "INSERT INTO character_recommends VALUES (?,?)";
-	private static final String	REMOVE_RECOMMENDATION_RESTRICTIONS			= "TRUNCATE TABLE character_recommends";
-	private static final String	RESTORE_RECOMMENDATION_RESTRICTIONS			= "SELECT target_id FROM character_recommends WHERE charId=?";
-
-	private static final Log	_log										= LogFactory.getLog(RecommendationManager.class);
-	private static final long	DAY											= 24 * 3600 * 1000;
-
-	private long				nextUpdate;
-
+	private static final String ADD_RECOMMENDATION_INFO =
+			"INSERT INTO character_recommend_data (charId,lastUpdate) VALUES (?,?)";
+	private static final String UPDATE_RECOMMENDATION_INFO =
+			"UPDATE character_recommend_data SET evaluationAble = ?,evaluationPoints = ?,lastUpdate=? WHERE charId=?";
+	private static final String RESTORE_RECOMMENDATION_INFO =
+			"SELECT evaluationAble,evaluationPoints,lastUpdate FROM character_recommend_data WHERE charId=?";
+	private static final String ADD_RECOMMENDATION_RESTRICTION = "INSERT INTO character_recommends VALUES (?,?)";
+	private static final String REMOVE_RECOMMENDATION_RESTRICTIONS = "TRUNCATE TABLE character_recommends";
+	private static final String RESTORE_RECOMMENDATION_RESTRICTIONS =
+			"SELECT target_id FROM character_recommends WHERE charId=?";
+	
+	private static final Log _log = LogFactory.getLog(RecommendationManager.class);
+	private static final long DAY = 24 * 3600 * 1000;
+	
+	private long nextUpdate;
+	
 	/** @return the only instance of this manager */
 	public static RecommendationManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private RecommendationManager()
 	{
 		Calendar update = Calendar.getInstance();
@@ -66,7 +70,7 @@ public final class RecommendationManager
 		ThreadPoolManager.getInstance().schedule(new RecommendationUpdater(), nextUpdate - System.currentTimeMillis());
 		_log.info("RecommendationManager: initialized.");
 	}
-
+	
 	/**
 	 * <B>Tries to recommend a player</B>.<BR>
 	 * Sends a system message both on failure and success. Adds a session restriction
@@ -78,7 +82,7 @@ public final class RecommendationManager
 	{
 		if (evaluator == null)
 			return;
-
+		
 		SystemMessageId smi = null;
 		if (evaluator.getLevel() < 10)
 			smi = SystemMessageId.ONLY_LEVEL_SUP_10_CAN_RECOMMEND;
@@ -95,7 +99,7 @@ public final class RecommendationManager
 			evaluator.sendPacket(smi);
 			return;
 		}
-
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		try
@@ -116,7 +120,8 @@ public final class RecommendationManager
 			//changed available evaluation count, notify ONLY the evaluator
 			//don't remove this again!
 			evaluator.sendPacket(new UserInfo(evaluator));
-			SystemMessage sm = new SystemMessage(SystemMessageId.YOU_HAVE_RECOMMENDED_C1_YOU_HAVE_S2_RECOMMENDATIONS_LEFT);
+			SystemMessage sm =
+					new SystemMessage(SystemMessageId.YOU_HAVE_RECOMMENDED_C1_YOU_HAVE_S2_RECOMMENDATIONS_LEFT);
 			sm.addPcName(evaluated);
 			sm.addNumber(evaluator.getEvaluations());
 			evaluator.sendPacket(sm);
@@ -134,7 +139,7 @@ public final class RecommendationManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * <B>Create an entry in `character_recommend_data`</B>.<BR>
 	 * Called just after character creation, but may be also called when restoring player's
@@ -162,7 +167,7 @@ public final class RecommendationManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * Called whenever the character is loaded (<I>{@link L2PcInstance#load(int)}</I> is called.
 	 * <LI>Restore player's evaluation data, <I>create entry if necessary</I></LI>
@@ -220,7 +225,7 @@ public final class RecommendationManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * Set the new player's evaluation points and save to database.
 	 * @param player Player being evaluated
@@ -230,7 +235,7 @@ public final class RecommendationManager
 	{
 		update(player, player.getEvaluations(), evalPoints);
 	}
-
+	
 	private void update(L2PcInstance player, int recomLeft, int evalPoints)
 	{
 		Connection con = null;
@@ -257,7 +262,7 @@ public final class RecommendationManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private int getDailyRecommendations(int level)
 	{
 		if (level >= 40)
@@ -267,17 +272,17 @@ public final class RecommendationManager
 		else
 			return 3;
 	}
-
+	
 	private int getDailyLostPoints(int level)
 	{
 		return getDailyRecommendations(level) / 3;
 	}
-
+	
 	private int getNewEvalPoints(L2PcInstance player)
 	{
 		return getNewEvalPointsQuick(player.getEvalPoints(), getDailyLostPoints(player.getLevel()));
 	}
-
+	
 	private int getNewEvalPointsQuick(int current, int lost)
 	{
 		if ((lost = (current - lost)) > 0)
@@ -285,7 +290,7 @@ public final class RecommendationManager
 		else
 			return 0;
 	}
-
+	
 	/**
 	 * Updates online player evaluation data each day at 1PM.
 	 * Deletes all evaluation restrictions from the database.
@@ -329,7 +334,7 @@ public final class RecommendationManager
 			{
 				L2DatabaseFactory.close(con);
 			}
-
+			
 			Calendar update = Calendar.getInstance();
 			if (update.get(Calendar.HOUR_OF_DAY) >= 13)
 				update.add(Calendar.DAY_OF_MONTH, 1);
@@ -338,10 +343,10 @@ public final class RecommendationManager
 			ThreadPoolManager.getInstance().schedule(this, nextUpdate - System.currentTimeMillis());
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{
-		protected static final RecommendationManager	_instance	= new RecommendationManager();
+		protected static final RecommendationManager _instance = new RecommendationManager();
 	}
 }

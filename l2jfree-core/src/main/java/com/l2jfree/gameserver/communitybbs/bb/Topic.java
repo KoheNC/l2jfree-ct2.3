@@ -25,21 +25,21 @@ import com.l2jfree.gameserver.communitybbs.Manager.TopicBBSManager;
 
 public class Topic
 {
-
-	private final static Log	_log	= LogFactory.getLog(Topic.class);
-
-	public static final int		MORMAL	= 0;
-	public static final int		MEMO	= 1;
-
-	private final int					_id;
-	private final int					_forumId;
-	private final String				_topicName;
-	private final long				_date;
-	private final String				_ownerName;
-	private final int					_ownerId;
-	private final int					_type;
-	private final int					_cReply;
-
+	
+	private final static Log _log = LogFactory.getLog(Topic.class);
+	
+	public static final int MORMAL = 0;
+	public static final int MEMO = 1;
+	
+	private final int _id;
+	private final int _forumId;
+	private final String _topicName;
+	private final long _date;
+	private final String _ownerName;
+	private final int _ownerId;
+	private final int _type;
+	private final int _cReply;
+	
 	/**
 	 * @param restaure
 	 * @param i
@@ -51,7 +51,8 @@ public class Topic
 	 * @param m
 	 * @param n
 	 */
-	public Topic(ConstructorType ct, int id, int fid, String name, long date, String oname, int oid, int type, int Creply)
+	public Topic(ConstructorType ct, int id, int fid, String name, long date, String oname, int oid, int type,
+			int Creply)
 	{
 		_id = id;
 		_forumId = fid;
@@ -62,14 +63,14 @@ public class Topic
 		_type = type;
 		_cReply = Creply;
 		TopicBBSManager.getInstance().addTopic(this);
-
+		
 		if (ct == ConstructorType.CREATE)
 		{
-
+			
 			insertindb();
 		}
 	}
-
+	
 	/**
 	 *
 	 */
@@ -79,8 +80,8 @@ public class Topic
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO topic (topic_id,topic_forum_id,topic_name,topic_date,topic_ownername,topic_ownerid,topic_type,topic_reply) values (?,?,?,?,?,?,?,?)");
+			PreparedStatement statement =
+					con.prepareStatement("INSERT INTO topic (topic_id,topic_forum_id,topic_name,topic_date,topic_ownername,topic_ownerid,topic_type,topic_reply) values (?,?,?,?,?,?,?,?)");
 			statement.setInt(1, _id);
 			statement.setInt(2, _forumId);
 			statement.setString(3, _topicName);
@@ -91,7 +92,7 @@ public class Topic
 			statement.setInt(8, _cReply);
 			statement.execute();
 			statement.close();
-
+			
 		}
 		catch (Exception e)
 		{
@@ -102,12 +103,13 @@ public class Topic
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public enum ConstructorType
 	{
-		RESTORE, CREATE
+		RESTORE,
+		CREATE
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -115,12 +117,12 @@ public class Topic
 	{
 		return _id;
 	}
-
+	
 	public int getForumID()
 	{
 		return _forumId;
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -129,13 +131,13 @@ public class Topic
 		// TODO Auto-generated method stub
 		return _topicName;
 	}
-
+	
 	public String getOwnerName()
 	{
 		// TODO Auto-generated method stub
 		return _ownerName;
 	}
-
+	
 	/**
 	 *
 	 */
@@ -147,7 +149,8 @@ public class Topic
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("DELETE FROM topic WHERE topic_id=? AND topic_forum_id=?");
+			PreparedStatement statement =
+					con.prepareStatement("DELETE FROM topic WHERE topic_id=? AND topic_forum_id=?");
 			statement.setInt(1, getID());
 			statement.setInt(2, f.getID());
 			statement.execute();
@@ -162,7 +165,7 @@ public class Topic
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * @return
 	 */

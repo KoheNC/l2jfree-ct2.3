@@ -30,23 +30,24 @@ import com.l2jfree.gameserver.scripting.ScriptManager;
 
 public class QuestManager extends ScriptManager<Quest>
 {
-	protected static Log		_log	= LogFactory.getLog(QuestManager.class);
+	protected static Log _log = LogFactory.getLog(QuestManager.class);
+	
 	public static final QuestManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	// =========================================================
 	// Data Field
 	private final Map<String, Quest> _quests = new FastMap<String, Quest>().setShared(true);
-
+	
 	// =========================================================
 	// Constructor
 	private QuestManager()
 	{
 		_log.info("Initializing QuestManager");
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	public final boolean reload(String questFolder)
@@ -58,7 +59,7 @@ public class QuestManager extends ScriptManager<Quest>
 		}
 		return q.reload();
 	}
-
+	
 	/**
 	 * Reloads a the quest given by questId.<BR>
 	 * <B>NOTICE: Will only work if the quest name is equal the quest folder
@@ -76,7 +77,7 @@ public class QuestManager extends ScriptManager<Quest>
 		}
 		return q.reload();
 	}
-
+	
 	public final void reloadAllQuests()
 	{
 		_log.info("Reloading Server Scripts");
@@ -88,7 +89,7 @@ public class QuestManager extends ScriptManager<Quest>
 				if (quest != null)
 					quest.unload();
 			}
-
+			
 			// now load all scripts
 			File scripts = new File(Config.DATAPACK_ROOT, "data/scripts.cfg");
 			L2ScriptEngineManager.getInstance().executeScriptList(scripts);
@@ -99,12 +100,12 @@ public class QuestManager extends ScriptManager<Quest>
 			_log.warn("Failed loading scripts.cfg, no script going to be loaded");
 		}
 	}
-
+	
 	public final void report()
 	{
 		_log.info("Loaded: " + _quests.size() + " quests");
 	}
-
+	
 	public final void save()
 	{
 		for (Quest q : _quests.values())
@@ -112,14 +113,14 @@ public class QuestManager extends ScriptManager<Quest>
 			q.saveGlobalData();
 		}
 	}
-
+	
 	// =========================================================
 	// Property - Public
 	public final Quest getQuest(String name)
 	{
 		return _quests.get(name);
 	}
-
+	
 	public final Quest getQuest(int questId)
 	{
 		for (Quest q : _quests.values())
@@ -129,7 +130,7 @@ public class QuestManager extends ScriptManager<Quest>
 		}
 		return null;
 	}
-
+	
 	public final void addQuest(Quest newQuest)
 	{
 		if (newQuest == null)
@@ -137,7 +138,7 @@ public class QuestManager extends ScriptManager<Quest>
 			throw new IllegalArgumentException("Quest argument cannot be null");
 		}
 		Quest old = _quests.get(newQuest.getName());
-
+		
 		// FIXME: unloading the old quest at this point is a tad too late.
 		// the new quest has already initialized itself and read the data, starting
 		// an unpredictable number of tasks with that data.  The old quest will now
@@ -154,12 +155,12 @@ public class QuestManager extends ScriptManager<Quest>
 		}
 		_quests.put(newQuest.getName(), newQuest);
 	}
-
+	
 	public final boolean removeQuest(Quest q)
 	{
 		return _quests.remove(q.getName()) != null;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.scripting.ScriptManager#getAllManagedScripts()
 	 */
@@ -168,7 +169,7 @@ public class QuestManager extends ScriptManager<Quest>
 	{
 		return _quests.values();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.scripting.ScriptManager#unload(com.l2jfree.gameserver.scripting.ManagedScript)
 	 */
@@ -178,7 +179,7 @@ public class QuestManager extends ScriptManager<Quest>
 		ms.saveGlobalData();
 		return removeQuest(ms);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.scripting.ScriptManager#getScriptManagerName()
 	 */
@@ -187,7 +188,7 @@ public class QuestManager extends ScriptManager<Quest>
 	{
 		return "QuestManager";
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

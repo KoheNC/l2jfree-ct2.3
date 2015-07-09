@@ -32,7 +32,7 @@ public class L2FriendlyMobInstance extends L2Attackable
 	public L2FriendlyMobInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
-		getKnownList();	// init knownlist
+		getKnownList(); // init knownlist
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class L2FriendlyMobInstance extends L2Attackable
 	{
 		return (FriendlyMobKnownList)_knownList;
 	}
-
+	
 	@Override
 	public boolean isAutoAttackable(L2Character attacker)
 	{

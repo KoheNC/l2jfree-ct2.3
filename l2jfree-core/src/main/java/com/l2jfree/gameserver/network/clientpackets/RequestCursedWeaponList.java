@@ -22,22 +22,22 @@ import com.l2jfree.gameserver.network.serverpackets.ExCursedWeaponList;
  */
 public class RequestCursedWeaponList extends L2GameClientPacket
 {
-    private static final String _C__D0_22_REQUESTCURSEDWEAPONLIST = "[C] D0:22 RequestCursedWeaponList";
-
-    @Override
-    protected void readImpl()
-    {
-    }
-
-    @Override
-    protected void runImpl()
-    {
-        sendPacket(new ExCursedWeaponList());
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__D0_22_REQUESTCURSEDWEAPONLIST;
-    }
+	private static final String _C__D0_22_REQUESTCURSEDWEAPONLIST = "[C] D0:22 RequestCursedWeaponList";
+	
+	@Override
+	protected void readImpl()
+	{
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		sendPacket(new ExCursedWeaponList());
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__D0_22_REQUESTCURSEDWEAPONLIST;
+	}
 }

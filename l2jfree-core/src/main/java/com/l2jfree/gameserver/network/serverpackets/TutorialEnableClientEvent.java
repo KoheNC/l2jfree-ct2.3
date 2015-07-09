@@ -23,30 +23,30 @@ package com.l2jfree.gameserver.network.serverpackets;
  */
 public class TutorialEnableClientEvent extends L2GameServerPacket
 {
-    private static final String _S__A2_TUTORIALENABLECLIENTEVENT = "[S] a2 TutorialEnableClientEvent";
-    private final int _event;
-    
-    public TutorialEnableClientEvent(int event)
-    {
-        _event = event;
-    }
-    
-    /**
-     * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-     */
-    @Override
-    protected final void writeImpl()
-    {
-        writeC(0xA8);
-        writeD(_event);
-    }
-
-    /**
-     * @see com.l2jfree.gameserver.network.BasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _S__A2_TUTORIALENABLECLIENTEVENT;
-    }
+	private static final String _S__A2_TUTORIALENABLECLIENTEVENT = "[S] a2 TutorialEnableClientEvent";
+	private final int _event;
+	
+	public TutorialEnableClientEvent(int event)
+	{
+		_event = event;
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
+	 */
+	@Override
+	protected final void writeImpl()
+	{
+		writeC(0xA8);
+		writeD(_event);
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.network.BasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _S__A2_TUTORIALENABLECLIENTEVENT;
+	}
 }

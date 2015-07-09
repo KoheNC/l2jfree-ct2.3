@@ -42,11 +42,11 @@ public final class L2SiegeFlagInstance extends L2Npc
 	private final CCHSiege _contSiege;
 	private final boolean _isAdvanced;
 	private long _talkProtectionTime;
-
+	
 	public L2SiegeFlagInstance(L2PcInstance player, int objectId, L2NpcTemplate template, boolean advanced)
 	{
 		super(objectId, template);
-
+		
 		_isAdvanced = advanced;
 		_player = player;
 		_clan = player == null ? null : player.getClan();
@@ -60,13 +60,13 @@ public final class L2SiegeFlagInstance extends L2Npc
 			deleteMe();
 			return;
 		}
-
+		
 		if (_siege == null && _fortSiege == null && _contSiege == null)
 		{
 			deleteMe();
 			return;
 		}
-
+		
 		L2SiegeClan sc = null;
 		if (_siege != null && _fortSiege == null && _contSiege == null)
 			sc = _siege.getAttackerClan(_player.getClan());
@@ -74,33 +74,33 @@ public final class L2SiegeFlagInstance extends L2Npc
 			sc = _fortSiege.getAttackerClan(_player.getClan());
 		else if (_siege == null && _fortSiege == null && _contSiege != null)
 			sc = _contSiege.getAttackerClan(_player.getClan());
-
+		
 		if (sc == null)
 			deleteMe();
 		else
 			sc.addFlag(this);
-
+		
 		setIsInvul(false);
 	}
-
+	
 	@Override
 	public boolean isAttackable()
 	{
 		return true;
 	}
-
+	
 	@Override
 	public boolean isAutoAttackable(L2Character attacker)
 	{
 		return true;
 	}
-
+	
 	@Override
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
 			return false;
-
+		
 		L2SiegeClan sc = null;
 		if (_siege != null)
 			sc = _siege.getAttackerClan(_player.getClan());
@@ -108,38 +108,38 @@ public final class L2SiegeFlagInstance extends L2Npc
 			sc = _fortSiege.getAttackerClan(_player.getClan());
 		else if (_contSiege != null)
 			sc = _contSiege.getAttackerClan(_player.getClan());
-
+		
 		if (sc != null)
 			sc.removeFlag(this);
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public void onForcedAttack(L2PcInstance player)
 	{
 		onAction(player);
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
-		if(!_player.canBeTargetedByAtSiege(player) && Config.SIEGE_ONLY_REGISTERED)
+		if (!_player.canBeTargetedByAtSiege(player) && Config.SIEGE_ONLY_REGISTERED)
 			return;
 		
 		if (player == null || !canTarget(player))
 			return;
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
 			// Set the target of the L2PcInstance player
 			player.setTarget(this);
-
+			
 			// Send a Server->Client packet StatusUpdate of the L2NpcInstance to the L2PcInstance to update its HP bar
 			StatusUpdate su = new StatusUpdate(getObjectId());
-			su.addAttribute(StatusUpdate.CUR_HP, (int)getStatus().getCurrentHp() );
-			su.addAttribute(StatusUpdate.MAX_HP, getMaxHp() );
+			su.addAttribute(StatusUpdate.CUR_HP, (int)getStatus().getCurrentHp());
+			su.addAttribute(StatusUpdate.MAX_HP, getMaxHp());
 			player.sendPacket(su);
 		}
 		else
@@ -153,7 +153,7 @@ public final class L2SiegeFlagInstance extends L2Npc
 			}
 		}
 	}
-
+	
 	public void flagAttacked()
 	{
 		// send warning to owners of headquarters that theirs base is under attack

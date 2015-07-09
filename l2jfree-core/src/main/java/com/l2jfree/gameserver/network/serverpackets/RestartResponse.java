@@ -18,23 +18,23 @@ public class RestartResponse extends L2GameServerPacket
 {
 	private static final String _S__RESTARTRESPONSE = "[S] 71 RestartResponse c[ds]";
 	public static final RestartResponse PACKET = new RestartResponse();
-
+	
 	private final String _message;
-
+	
 	private RestartResponse()
 	{
 		_message = "ok merong~ khaha";
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x71);
-
+		
 		writeD(0x01); // 1 - OK
 		writeS(_message);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

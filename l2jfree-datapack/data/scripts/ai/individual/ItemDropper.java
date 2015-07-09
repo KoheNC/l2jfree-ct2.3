@@ -29,7 +29,7 @@ public abstract class ItemDropper extends QuestJython
 	{
 		super(questId, name, descr);
 	}
-
+	
 	protected void dropItem(L2Npc dropper, int itemId, long count)
 	{
 		L2ItemInstance item = ItemTable.getInstance().createItem(getName(), itemId, count, null, dropper);

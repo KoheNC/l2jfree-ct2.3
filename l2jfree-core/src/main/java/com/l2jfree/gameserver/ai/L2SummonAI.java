@@ -21,8 +21,8 @@ import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Summon;
 import com.l2jfree.gameserver.model.actor.L2Character.AIAccessor;
+import com.l2jfree.gameserver.model.actor.L2Summon;
 import com.l2jfree.gameserver.model.actor.instance.L2MerchantSummonInstance;
 
 public class L2SummonAI extends L2CharacterAI

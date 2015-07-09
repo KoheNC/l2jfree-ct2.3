@@ -21,17 +21,17 @@ public class AcquireSkillDone extends StaticPacket
 {
 	private static final String _S__94_AQUIRESKILLDONE = "[S] 91 AquireSkillDone";
 	public static final AcquireSkillDone PACKET = new AcquireSkillDone();
-
+	
 	private AcquireSkillDone()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x94);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

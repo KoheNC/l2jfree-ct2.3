@@ -25,18 +25,18 @@ public final class ExNotifyBirthDay extends StaticPacket
 {
 	private static final String _S__EXNOTIFYBIRTHDAY = "[S] FE:8F ExNotifyBirthDay ch";
 	public static final ExNotifyBirthDay PACKET = new ExNotifyBirthDay();
-
+	
 	private ExNotifyBirthDay()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x8f);
 	}
-
+	
 	@Override
 	public String getType()
 	{

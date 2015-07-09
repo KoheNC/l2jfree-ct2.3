@@ -23,42 +23,32 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExBasicActionList extends L2GameServerPacket
 {
-	private static final String				_S__FE_5E_EXBASICACTIONLIST	= "[S] FE:5F ExBasicActionList";
-
-	private final int[]						_actionIds;
-
-	private static final int[]				DEFAULT_ACTIONS				= {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-		21, 22, 23, 24, 25, 26, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-		41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
-		60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
-
-		1000, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013,
-		1014, 1015, 1016, 1017, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038,
-		1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050,
-		1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062,
-		1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074,
-		1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086,
-		1087, 1088
-	};
-
-	private static final int[]				TRANSFORMED_ACTIONS			= {
-		2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 16, 17, 18, 19, 21, 22, 23, 32, 36, 39,
-		40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 52, 53, 54, 55, 56, 57, 63, 64,
-		65,
-
-		1000, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013,
-		1014, 1015, 1016, 1017, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038,
-		1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050,
-		1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062,
-		1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074,
-		1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086,
-		1087, 1088
-	};
-
-	private static final ExBasicActionList	DEFAULT_ACTION_LIST			= new ExBasicActionList(DEFAULT_ACTIONS);
-	private static final ExBasicActionList	TRANSFORMED_ACTION_LIST		= new ExBasicActionList(TRANSFORMED_ACTIONS);
-
+	private static final String _S__FE_5E_EXBASICACTIONLIST = "[S] FE:5F ExBasicActionList";
+	
+	private final int[] _actionIds;
+	
+	private static final int[] DEFAULT_ACTIONS = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+			19, 21, 22, 23, 24, 25, 26, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+			48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+			
+			1000, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1031, 1032,
+			1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050,
+			1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068,
+			1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086,
+			1087, 1088 };
+	
+	private static final int[] TRANSFORMED_ACTIONS = { 2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 16, 17, 18, 19, 21, 22, 23, 32,
+			36, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 52, 53, 54, 55, 56, 57, 63, 64, 65,
+			
+			1000, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1031, 1032,
+			1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050,
+			1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068,
+			1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086,
+			1087, 1088 };
+	
+	private static final ExBasicActionList DEFAULT_ACTION_LIST = new ExBasicActionList(DEFAULT_ACTIONS);
+	private static final ExBasicActionList TRANSFORMED_ACTION_LIST = new ExBasicActionList(TRANSFORMED_ACTIONS);
+	
 	/*
 	0 - Sit/Stand
 	1 - Walk/Run
@@ -212,12 +202,12 @@ public class ExBasicActionList extends L2GameServerPacket
 	1087 - Panther Dark Claw (Dark Panther)
 	1088 - Panther Fatal Claw (Dark Panther)
 	*/
-
+	
 	private ExBasicActionList(int... actionIds)
 	{
 		_actionIds = actionIds;
 	}
-
+	
 	/**
 	* @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
 	*/
@@ -232,7 +222,7 @@ public class ExBasicActionList extends L2GameServerPacket
 			writeD(finalActionId);
 		}
 	}
-
+	
 	/**
 	* @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
 	*/
@@ -241,7 +231,7 @@ public class ExBasicActionList extends L2GameServerPacket
 	{
 		return _S__FE_5E_EXBASICACTIONLIST;
 	}
-
+	
 	public static void sendTo(L2PcInstance player)
 	{
 		L2Transformation trans = player.getTransformation();

@@ -22,12 +22,12 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 public class L2SymbolMakerInstance extends L2Npc
 {
 	private static final String HTML_PATH = "data/html/symbolmaker/SymbolMaker.htm";
-
+	
 	public L2SymbolMakerInstance(int objectID, L2NpcTemplate template)
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -39,7 +39,7 @@ public class L2SymbolMakerInstance extends L2Npc
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{

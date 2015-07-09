@@ -23,13 +23,13 @@ import com.l2jfree.Config.IdFactoryType;
  */
 public class ConfigHelper
 {
-    /**
-     * Default configuration
-     */
-    public static void configure ()
-    {
-        // Set a increment id factory for test purpose
-        Config.IDFACTORY_TYPE = IdFactoryType.Increment;
-        Config.THREAD_POOL_SIZE = 50;
-    }
+	/**
+	 * Default configuration
+	 */
+	public static void configure()
+	{
+		// Set a increment id factory for test purpose
+		Config.IDFACTORY_TYPE = IdFactoryType.Increment;
+		Config.THREAD_POOL_SIZE = 50;
+	}
 }

@@ -23,7 +23,7 @@ public class ExFishingStartCombat extends L2GameServerPacket
 {
 	private static final String _S__FE_27_EXFISHINGSTARTCOMBAT = "[S] FE:27 ExFishingStartCombat [ddd ccc]";
 	private final L2Character _activeChar;
-	private final int _time,_hp;
+	private final int _time, _hp;
 	private final int _lureType, _deceptiveMode, _mode;
 	
 	public ExFishingStartCombat(L2Character character, int time, int hp, int mode, int lureType, int deceptiveMode)
@@ -35,10 +35,9 @@ public class ExFishingStartCombat extends L2GameServerPacket
 		_lureType = lureType;
 		_deceptiveMode = deceptiveMode;
 	}
-
+	
 	@Override
-	protected
-	void writeImpl()
+	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x27);
@@ -50,7 +49,7 @@ public class ExFishingStartCombat extends L2GameServerPacket
 		writeC(_lureType); // 0 = newbie lure, 1 = normal lure, 2 = night lure
 		writeC(_deceptiveMode); // Fish Deceptive Mode: 0 = no, 1 = yes
 	}
-
+	
 	@Override
 	public String getType()
 	{

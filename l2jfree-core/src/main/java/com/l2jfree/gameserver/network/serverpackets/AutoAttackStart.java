@@ -18,7 +18,7 @@ public class AutoAttackStart extends L2GameServerPacket
 {
 	private static final String _S__25_AUTOATTACKSTART = "[S] 25 AutoAttackStart [d]";
 	private final int _targetObjId;
-
+	
 	/**
 	 * @param _characters
 	 */
@@ -33,7 +33,7 @@ public class AutoAttackStart extends L2GameServerPacket
 		writeC(0x25);
 		writeD(_targetObjId);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

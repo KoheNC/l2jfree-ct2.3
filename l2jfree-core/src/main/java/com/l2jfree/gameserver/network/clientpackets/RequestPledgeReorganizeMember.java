@@ -25,12 +25,12 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class RequestPledgeReorganizeMember extends L2GameClientPacket
 {
 	private static final String _C__D0_24_REQUESTPLEDGEREORGANIZEMEMBER = "[C] D0:24 RequestPledgeReorganizeMember";
-
+	
 	private int _isMemberSelected;
 	private String _memberName;
 	private int _newPledgeType;
 	private String _selectedMember;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -39,7 +39,7 @@ public class RequestPledgeReorganizeMember extends L2GameClientPacket
 		_newPledgeType = readD();
 		_selectedMember = readS();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
 	 */
@@ -48,7 +48,7 @@ public class RequestPledgeReorganizeMember extends L2GameClientPacket
 	{
 		if (_isMemberSelected == 0)
 			return;
-
+		
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;

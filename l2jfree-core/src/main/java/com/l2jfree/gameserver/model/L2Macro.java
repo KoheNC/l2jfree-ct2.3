@@ -24,14 +24,14 @@ public class L2Macro
 	public final static int CMD_TYPE_SKILL = 1;
 	public final static int CMD_TYPE_ACTION = 3;
 	public final static int CMD_TYPE_SHORTCUT = 4;
-
+	
 	public int id;
 	public final int icon;
 	public final String name;
 	public final String descr;
 	public final String acronym;
 	public final L2MacroCmd[] commands;
-
+	
 	public static class L2MacroCmd
 	{
 		public final int entry;
@@ -39,7 +39,7 @@ public class L2Macro
 		public final int d1; // skill_id or page for shortcuts
 		public final int d2; // shortcut
 		public final String cmd;
-
+		
 		public L2MacroCmd(int pEntry, int pType, int pD1, int pD2, String pCmd)
 		{
 			entry = pEntry;
@@ -49,7 +49,7 @@ public class L2Macro
 			cmd = pCmd;
 		}
 	}
-
+	
 	/**
 	 * 
 	 */

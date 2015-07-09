@@ -18,11 +18,11 @@ public class ExCloseMPCC extends StaticPacket
 {
 	private static final String _S__EXCLOSEMPCC = "[S] FE:13 ExCloseMPCC ch";
 	public static final ExCloseMPCC STATIC_PACKET = new ExCloseMPCC();
-
+	
 	private ExCloseMPCC()
 	{
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -32,7 +32,7 @@ public class ExCloseMPCC extends StaticPacket
 		writeC(0xFE);
 		writeH(0x13);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

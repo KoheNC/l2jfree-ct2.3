@@ -29,82 +29,83 @@ import com.l2jfree.gameserver.network.serverpackets.SiegeDefenderList;
  * 
  * @version $Revision: 1.3.4.2 $ $Date: 2005/03/27 15:29:30 $
  */
-public class RequestConfirmSiegeWaitingList extends L2GameClientPacket{
-    
-    private static final String _C__A5_RequestConfirmSiegeWaitingList = "[C] a5 RequestConfirmSiegeWaitingList";
-
-    private int _approved;
-    private int _castleId;
-    private int _clanId;
-
-    @Override
-    protected void readImpl()
-    {
-        _castleId = readD();
-        _clanId = readD();
-        _approved = readD();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-        L2PcInstance activeChar = getClient().getActiveChar();
-        if (activeChar == null)
-        	return;
-
-        L2Clan clan = ClanTable.getInstance().getClan(_clanId);
-        // Check if the player has a clan
-        if (clan == null || !L2Clan.checkPrivileges(activeChar, L2Clan.CP_CS_MANAGE_SIEGE))
-        {
-        	requestFailed(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
-        	return;
-        }
-
-        Castle castle = CastleManager.getInstance().getCastleById(_castleId);
-        if (castle == null)
-        {
-        	requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
-        	return;
-        }
-        // Check if leader of the clan who owns the castle?
-        else if (castle.getOwnerId() != activeChar.getClanId())
-        {
-        	sendAF();
-        	return;
-        }
-
-        if (!castle.getSiege().getIsRegistrationOver())
-        {
-            if (_approved == 1)
-            {
-                if (!castle.getSiege().checkIsDefenderWaiting(clan))
-                {
-                	sendPacket(ActionFailed.STATIC_PACKET);
-                	return;
-                }
-                else
-                	castle.getSiege().approveSiegeDefenderClan(_clanId);
-            }
-            else
-            {
-                if ((castle.getSiege().checkIsDefenderWaiting(clan)) || (castle.getSiege().checkIsDefender(clan)))
-                    castle.getSiege().removeSiegeClan(_clanId);
-        	}
-    	}
-        else
-        {
-        	requestFailed(SystemMessageId.NOT_SIEGE_REGISTRATION_TIME1);
-        	return;
-        }
-
-        //Update the defender list
-        sendPacket(new SiegeDefenderList(castle));
-        sendAF();
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__A5_RequestConfirmSiegeWaitingList;
-    }
+public class RequestConfirmSiegeWaitingList extends L2GameClientPacket
+{
+	
+	private static final String _C__A5_RequestConfirmSiegeWaitingList = "[C] a5 RequestConfirmSiegeWaitingList";
+	
+	private int _approved;
+	private int _castleId;
+	private int _clanId;
+	
+	@Override
+	protected void readImpl()
+	{
+		_castleId = readD();
+		_clanId = readD();
+		_approved = readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null)
+			return;
+		
+		L2Clan clan = ClanTable.getInstance().getClan(_clanId);
+		// Check if the player has a clan
+		if (clan == null || !L2Clan.checkPrivileges(activeChar, L2Clan.CP_CS_MANAGE_SIEGE))
+		{
+			requestFailed(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
+			return;
+		}
+		
+		Castle castle = CastleManager.getInstance().getCastleById(_castleId);
+		if (castle == null)
+		{
+			requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
+			return;
+		}
+		// Check if leader of the clan who owns the castle?
+		else if (castle.getOwnerId() != activeChar.getClanId())
+		{
+			sendAF();
+			return;
+		}
+		
+		if (!castle.getSiege().getIsRegistrationOver())
+		{
+			if (_approved == 1)
+			{
+				if (!castle.getSiege().checkIsDefenderWaiting(clan))
+				{
+					sendPacket(ActionFailed.STATIC_PACKET);
+					return;
+				}
+				else
+					castle.getSiege().approveSiegeDefenderClan(_clanId);
+			}
+			else
+			{
+				if ((castle.getSiege().checkIsDefenderWaiting(clan)) || (castle.getSiege().checkIsDefender(clan)))
+					castle.getSiege().removeSiegeClan(_clanId);
+			}
+		}
+		else
+		{
+			requestFailed(SystemMessageId.NOT_SIEGE_REGISTRATION_TIME1);
+			return;
+		}
+		
+		//Update the defender list
+		sendPacket(new SiegeDefenderList(castle));
+		sendAF();
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__A5_RequestConfirmSiegeWaitingList;
+	}
 }

@@ -20,26 +20,30 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public class HennaRemoveList extends L2GameServerPacket
 {
 	private static final String _S__E2_HennaRemoveList = "[S] ee HennaRemoveList";
-
+	
 	private L2PcInstance _player;
-
+	
 	public HennaRemoveList(L2PcInstance player)
 	{
 		_player = player;
 	}
-
+	
 	private final int getHennaUsedSlots()
 	{
 		switch (_player.getHennaEmptySlots())
 		{
-		case 0: return 3;
-		case 1: return 2;
-		case 2: return 1;
-		//case 3: return 0;
-		default: return 0;
+			case 0:
+				return 3;
+			case 1:
+				return 2;
+			case 2:
+				return 1;
+				//case 3: return 0;
+			default:
+				return 0;
 		}
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -47,7 +51,7 @@ public class HennaRemoveList extends L2GameServerPacket
 		writeCompQ(_player.getAdena());
 		writeD(0x00);
 		writeD(getHennaUsedSlots());
-
+		
 		for (int i = 1; i <= 3; i++)
 		{
 			L2Henna henna = _player.getHenna(i);
@@ -63,7 +67,7 @@ public class HennaRemoveList extends L2GameServerPacket
 			}
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

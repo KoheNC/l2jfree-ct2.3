@@ -16,23 +16,23 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 public class RadarControl extends L2GameServerPacket
 {
-	private static final String	_S__RADARCONTROL	= "[S] F1 RadarControl c[ddddd]";
-
-	public static final int MARKER_ADD				= 0;
-	public static final int MARKER_REMOVE			= 1;
-	private static final int MARKER_REMOVE_ALL		= 2;
-	public static final RadarControl REMOVE_ALL		= new RadarControl(MARKER_REMOVE_ALL, 0, 0, 0, 0);
-
+	private static final String _S__RADARCONTROL = "[S] F1 RadarControl c[ddddd]";
+	
+	public static final int MARKER_ADD = 0;
+	public static final int MARKER_REMOVE = 1;
+	private static final int MARKER_REMOVE_ALL = 2;
+	public static final RadarControl REMOVE_ALL = new RadarControl(MARKER_REMOVE_ALL, 0, 0, 0, 0);
+	
 	// Identical
-	public static final int FLAG_1					= 1;
-	public static final int FLAG_2					= 2;
-
+	public static final int FLAG_1 = 1;
+	public static final int FLAG_2 = 2;
+	
 	private final int _marker;
 	private final int _flag;
 	private final int _x;
 	private final int _y;
 	private final int _z;
-
+	
 	public RadarControl(int marker, int flag, int x, int y, int z)
 	{
 		_marker = marker;
@@ -41,7 +41,7 @@ public class RadarControl extends L2GameServerPacket
 		_y = y;
 		_z = z;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -52,7 +52,7 @@ public class RadarControl extends L2GameServerPacket
 		writeD(_y);
 		writeD(_z);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

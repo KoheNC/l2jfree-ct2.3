@@ -23,14 +23,14 @@ public class RequestSaveKeyMapping extends L2GameClientPacket
 	{
 		// trigger (no data)
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		// TODO
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

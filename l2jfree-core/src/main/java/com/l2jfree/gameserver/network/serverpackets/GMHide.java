@@ -19,21 +19,21 @@ public class GMHide extends StaticPacket
 	private static final String _S__GMHIDE = "[S] 93 GMHide c[d]";
 	public static final GMHide ENABLE = new GMHide(0x01);
 	public static final GMHide DISABLE = new GMHide(0x00);
-
+	
 	private final int _mode;
-
+	
 	private GMHide(int mode)
 	{
 		_mode = mode;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x93);
 		writeD(_mode);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

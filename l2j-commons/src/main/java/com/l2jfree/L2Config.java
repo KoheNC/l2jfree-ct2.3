@@ -245,7 +245,8 @@ public abstract class L2Config
 	{
 	}
 	
-	private static final HandlerRegistry<String, ConfigLoader> _loaders = new HandlerRegistry<String, ConfigLoader>(true) {
+	private static final HandlerRegistry<String, ConfigLoader> _loaders = new HandlerRegistry<String, ConfigLoader>(
+			true) {
 		@Override
 		public String standardizeKey(String key)
 		{

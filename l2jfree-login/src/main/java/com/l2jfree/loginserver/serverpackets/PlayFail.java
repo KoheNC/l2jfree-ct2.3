@@ -23,7 +23,7 @@ import com.l2jfree.loginserver.L2LoginClient;
 public final class PlayFail extends L2LoginServerPacket
 {
 	private final int _reason;
-
+	
 	/**
 	 * @param reason Taken from LoginFail (the messages are always the same)
 	 */
@@ -31,7 +31,7 @@ public final class PlayFail extends L2LoginServerPacket
 	{
 		_reason = reason;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.SendablePacket#write()
 	 */

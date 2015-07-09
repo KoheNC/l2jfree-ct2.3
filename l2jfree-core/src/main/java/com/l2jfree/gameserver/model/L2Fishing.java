@@ -37,28 +37,29 @@ public class L2Fishing implements Runnable
 	
 	// =========================================================
 	// Data Field
-	private L2PcInstance	_fisher;
-	private int				_time;
-	private int				_stop			= 0;
-	private int				_goodUse		= 0;
-	private int				_anim			= 0;
-	private int				_mode			= 0;
-	private int				_deceptiveMode	= 0;
-	private Future<?>		_fishAiTask;
-	private boolean			_thinking;
+	private L2PcInstance _fisher;
+	private int _time;
+	private int _stop = 0;
+	private int _goodUse = 0;
+	private int _anim = 0;
+	private int _mode = 0;
+	private int _deceptiveMode = 0;
+	private Future<?> _fishAiTask;
+	private boolean _thinking;
 	// Fish datas
-	private final int				_fishId;
-	private final int				_fishMaxHp;
-	private int				_fishCurHp;
-	private final double			_regenHp;
-	private final boolean			_isUpperGrade;
-	private int				_lureType;
-
+	private final int _fishId;
+	private final int _fishMaxHp;
+	private int _fishCurHp;
+	private final double _regenHp;
+	private final boolean _isUpperGrade;
+	private int _lureType;
+	
+	@Override
 	public void run()
 	{
 		if (_fisher == null)
 			return;
-
+		
 		if (_fishCurHp >= _fishMaxHp * 2)
 		{
 			// The fish got away
@@ -74,7 +75,7 @@ public class L2Fishing implements Runnable
 		else
 			aiTask();
 	}
-
+	
 	// =========================================================
 	public L2Fishing(L2PcInstance fisher, FishData fish, boolean isNoob, boolean isUpperGrade)
 	{
@@ -96,27 +97,29 @@ public class L2Fishing implements Runnable
 			_lureType = isNoob ? 0 : 1;
 		}
 		_mode = Rnd.get(100) >= 80 ? 1 : 0;
-
-		ExFishingStartCombat efsc = new ExFishingStartCombat(_fisher, _time, _fishMaxHp, _mode, _lureType, _deceptiveMode);
+		
+		ExFishingStartCombat efsc =
+				new ExFishingStartCombat(_fisher, _time, _fishMaxHp, _mode, _lureType, _deceptiveMode);
 		_fisher.broadcastPacket(efsc);
-
+		
 		// Succeeded in getting a bite
 		_fisher.sendPacket(SystemMessageId.GOT_A_BITE);
-
+		
 		if (_fishAiTask == null)
 		{
 			_fishAiTask = ThreadPoolManager.getInstance().scheduleEffectAtFixedRate(this, 1000, 1000);
 		}
-
+		
 	}
-
+	
 	public void changeHp(int hp, int pen)
 	{
 		_fishCurHp -= hp;
 		if (_fishCurHp < 0)
 			_fishCurHp = 0;
-
-		ExFishingHpRegen efhr = new ExFishingHpRegen(_fisher, _time, _fishCurHp, _mode, _goodUse, _anim, pen, _deceptiveMode);
+		
+		ExFishingHpRegen efhr =
+				new ExFishingHpRegen(_fisher, _time, _fishCurHp, _mode, _goodUse, _anim, pen, _deceptiveMode);
 		_fisher.broadcastPacket(efhr);
 		_anim = 0;
 		if (_fishCurHp > _fishMaxHp * 2)
@@ -129,7 +132,7 @@ public class L2Fishing implements Runnable
 			doDie(true);
 		}
 	}
-
+	
 	public synchronized void doDie(boolean win)
 	{
 		if (_fishAiTask != null)
@@ -137,10 +140,10 @@ public class L2Fishing implements Runnable
 			_fishAiTask.cancel(false);
 			_fishAiTask = null;
 		}
-
+		
 		if (_fisher == null)
 			return;
-
+		
 		if (win)
 		{
 			int check = Rnd.get(100);
@@ -162,25 +165,25 @@ public class L2Fishing implements Runnable
 		_fisher.endFishing(win);
 		_fisher = null;
 	}
-
+	
 	protected void aiTask()
 	{
 		if (_thinking)
 			return;
 		_thinking = true;
 		_time--;
-
+		
 		try
 		{
 			if (_mode == 1)
 			{
 				if (_deceptiveMode == 0)
-					_fishCurHp += (int) _regenHp;
+					_fishCurHp += (int)_regenHp;
 			}
 			else
 			{
 				if (_deceptiveMode == 1)
-					_fishCurHp += (int) _regenHp;
+					_fishCurHp += (int)_regenHp;
 			}
 			if (_stop == 0)
 			{
@@ -205,14 +208,15 @@ public class L2Fishing implements Runnable
 		finally
 		{
 			_thinking = false;
-			ExFishingHpRegen efhr = new ExFishingHpRegen(_fisher, _time, _fishCurHp, _mode, 0, _anim, 0, _deceptiveMode);
+			ExFishingHpRegen efhr =
+					new ExFishingHpRegen(_fisher, _time, _fishCurHp, _mode, 0, _anim, 0, _deceptiveMode);
 			if (_anim != 0)
 				_fisher.broadcastPacket(efhr);
 			else
 				_fisher.sendPacket(efhr);
 		}
 	}
-
+	
 	public void useRealing(int dmg, int pen)
 	{
 		_anim = 2;
@@ -280,7 +284,7 @@ public class L2Fishing implements Runnable
 			}
 		}
 	}
-
+	
 	public void usePomping(int dmg, int pen)
 	{
 		_anim = 1;
@@ -348,44 +352,44 @@ public class L2Fishing implements Runnable
 			}
 		}
 	}
-
+	
 	private void spawnPenaltyMonster()
 	{
-		int lvl = (int) Math.round(_fisher.getLevel() * 0.1);
+		int lvl = (int)Math.round(_fisher.getLevel() * 0.1);
 		int npcid;
-
+		
 		_fisher.sendPacket(SystemMessageId.YOU_CAUGHT_SOMETHING_SMELLY_THROW_IT_BACK);
 		switch (lvl)
 		{
-		case 0:
-		case 1:
-			npcid = 18319;
-			break;
-		case 2:
-			npcid = 18320;
-			break;
-		case 3:
-			npcid = 18321;
-			break;
-		case 4:
-			npcid = 18322;
-			break;
-		case 5:
-			npcid = 18323;
-			break;
-		case 6:
-			npcid = 18324;
-			break;
-		case 7:
-			npcid = 18325;
-			break;
-		case 8:
-		case 9:
-			npcid = 18326;
-			break;
-		default:
-			npcid = 18319;
-			break;
+			case 0:
+			case 1:
+				npcid = 18319;
+				break;
+			case 2:
+				npcid = 18320;
+				break;
+			case 3:
+				npcid = 18321;
+				break;
+			case 4:
+				npcid = 18322;
+				break;
+			case 5:
+				npcid = 18323;
+				break;
+			case 6:
+				npcid = 18324;
+				break;
+			case 7:
+				npcid = 18325;
+				break;
+			case 8:
+			case 9:
+				npcid = 18326;
+				break;
+			default:
+				npcid = 18319;
+				break;
 		}
 		L2NpcTemplate temp;
 		temp = NpcTable.getInstance().getTemplate(npcid);
@@ -400,7 +404,7 @@ public class L2Fishing implements Runnable
 				spawn.setAmount(1);
 				spawn.setHeading(_fisher.getHeading());
 				spawn.stopRespawn();
-				((L2PenaltyMonsterInstance) spawn.doSpawn()).setPlayerToKill(_fisher);
+				((L2PenaltyMonsterInstance)spawn.doSpawn()).setPlayerToKill(_fisher);
 			}
 			catch (RuntimeException e)
 			{

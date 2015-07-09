@@ -18,18 +18,18 @@ public class ExSearchOrc extends StaticPacket
 {
 	private static final String _S__EXSEARCHORC = "[S] FE:45 ExSearchOrc ch";
 	public static final ExSearchOrc PACKET = new ExSearchOrc();
-
+	
 	private ExSearchOrc()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x45);
 	}
-
+	
 	@Override
 	public String getType()
 	{

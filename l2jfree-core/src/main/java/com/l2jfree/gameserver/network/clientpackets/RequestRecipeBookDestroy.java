@@ -21,10 +21,10 @@ import com.l2jfree.gameserver.network.serverpackets.RecipeBookItemList;
 
 public class RequestRecipeBookDestroy extends L2GameClientPacket
 {
-	private static final String	_C__AC_REQUESTRECIPEBOOKDESTROY	= "[C] AD RequestRecipeBookDestroy";
-
-	private int					_recipeId;
-
+	private static final String _C__AC_REQUESTRECIPEBOOKDESTROY = "[C] AD RequestRecipeBookDestroy";
+	
+	private int _recipeId;
+	
 	/**
 	* Unknown Packet:ad
 	* 0000: ad 02 00 00 00
@@ -34,7 +34,7 @@ public class RequestRecipeBookDestroy extends L2GameClientPacket
 	{
 		_recipeId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -53,12 +53,12 @@ public class RequestRecipeBookDestroy extends L2GameClientPacket
 			response.addRecipes(activeChar.getDwarvenRecipeBook());
 		else
 			response.addRecipes(activeChar.getCommonRecipeBook());
-
+		
 		sendPacket(response);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

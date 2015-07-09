@@ -24,8 +24,8 @@ public class PetDelete extends L2GameServerPacket
 	
 	public PetDelete(int petId, int petObjId)
 	{
-		_petId = petId;		// summonType?
-		_petObjId = petObjId;	//objectId
+		_petId = petId; // summonType?
+		_petObjId = petObjId; //objectId
 	}
 	
 	@Override

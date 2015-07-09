@@ -33,27 +33,27 @@ public class NpcKnownList extends CharKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2Npc getActiveChar()
 	{
-		return (L2Npc) _activeChar;
+		return (L2Npc)_activeChar;
 	}
-
+	
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
 		return 2 * getDistanceToWatchObject(object);
 	}
-
+	
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{

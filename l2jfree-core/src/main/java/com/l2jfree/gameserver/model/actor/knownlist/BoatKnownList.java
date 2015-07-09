@@ -18,14 +18,13 @@ import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * @author Maktakien
  *
  */
 public class BoatKnownList extends CharKnownList
 {
-
+	
 	/**
 	 * @param activeChar
 	 */
@@ -33,7 +32,7 @@ public class BoatKnownList extends CharKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
@@ -41,7 +40,7 @@ public class BoatKnownList extends CharKnownList
 			return 0;
 		return 8000;
 	}
-
+	
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{
@@ -49,5 +48,5 @@ public class BoatKnownList extends CharKnownList
 			return 0;
 		return 4000;
 	}
-
+	
 }

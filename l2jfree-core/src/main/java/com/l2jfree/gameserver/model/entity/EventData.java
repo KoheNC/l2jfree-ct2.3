@@ -19,18 +19,18 @@ import java.util.List;
 
 public class EventData
 {
-	public int			eventX;
-	public int			eventY;
-	public int			eventZ;
-	public int			eventKarma;
-	public int			eventPvpKills;
-	public int			eventPkKills;
-	public String		eventTitle;
-	public List<String>	kills			= new LinkedList<String>();
-	public boolean		eventSitForced	= false;
-
-	public EventData(int pEventX, int pEventY, int pEventZ, int pEventkarma, int pEventpvpkills, int pEventpkkills, String pEventTitle, List<String> pKills,
-			boolean pEventSitForced)
+	public int eventX;
+	public int eventY;
+	public int eventZ;
+	public int eventKarma;
+	public int eventPvpKills;
+	public int eventPkKills;
+	public String eventTitle;
+	public List<String> kills = new LinkedList<String>();
+	public boolean eventSitForced = false;
+	
+	public EventData(int pEventX, int pEventY, int pEventZ, int pEventkarma, int pEventpvpkills, int pEventpkkills,
+			String pEventTitle, List<String> pKills, boolean pEventSitForced)
 	{
 		eventX = pEventX;
 		eventY = pEventY;

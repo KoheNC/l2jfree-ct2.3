@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.clientpackets;
 
-
 /**
  * Format: (ch) S
  * @author  -Wooden-
@@ -22,36 +21,36 @@ package com.l2jfree.gameserver.network.clientpackets;
  */
 public class RequestPCCafeCouponUse extends L2GameClientPacket
 {
-    private static final String _C__D0_20_REQUESTPCCAFECOUPONUSE = "[C] D0:?? RequestPCCafeCouponUse";
-    
-    private String _str;
-
-    /**
-     * @param buf
-     * @param client
-     */
-    @Override
-    protected void readImpl()
-    {
-        _str = readS();
-    }
-
-    /**
-     * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
-     */
-    @Override
-    protected void runImpl()
-    {
-        //TODO: implementation missing
-        _log.debug("C5: RequestPCCafeCouponUse: S: "+_str);
-    }
-
-    /**
-     * @see com.l2jfree.gameserver.network.BasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _C__D0_20_REQUESTPCCAFECOUPONUSE;
-    }
+	private static final String _C__D0_20_REQUESTPCCAFECOUPONUSE = "[C] D0:?? RequestPCCafeCouponUse";
+	
+	private String _str;
+	
+	/**
+	 * @param buf
+	 * @param client
+	 */
+	@Override
+	protected void readImpl()
+	{
+		_str = readS();
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
+	 */
+	@Override
+	protected void runImpl()
+	{
+		//TODO: implementation missing
+		_log.debug("C5: RequestPCCafeCouponUse: S: " + _str);
+	}
+	
+	/**
+	 * @see com.l2jfree.gameserver.network.BasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _C__D0_20_REQUESTPCCAFECOUPONUSE;
+	}
 }

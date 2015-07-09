@@ -30,35 +30,35 @@ import com.l2jfree.gameserver.util.Util;
 public class RequestExRqItemLink extends L2GameClientPacket
 {
 	private static final String _C__D0_1E_REQUESTEXRQITEMLINK = "[C] DO:1E RequestExRqItemLink";
-
-    private int _objectId;
-
-    @Override
-    protected void readImpl()
-    {
-        _objectId = readD();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	L2PcInstance player = getClient().getActiveChar();
-    	if (player == null)
-    		return;
-
-        L2Object object = L2World.getInstance().findObject(_objectId);
-        if (object instanceof L2ItemInstance)
-        	sendPacket(new ExRpItemLink((L2ItemInstance) object));
-        else if (object != null && Config.BAN_CLIENT_EMULATORS)
-        	Util.handleIllegalPlayerAction(player, "Fake item link packet! " + player,
+	
+	private int _objectId;
+	
+	@Override
+	protected void readImpl()
+	{
+		_objectId = readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance player = getClient().getActiveChar();
+		if (player == null)
+			return;
+		
+		L2Object object = L2World.getInstance().findObject(_objectId);
+		if (object instanceof L2ItemInstance)
+			sendPacket(new ExRpItemLink((L2ItemInstance)object));
+		else if (object != null && Config.BAN_CLIENT_EMULATORS)
+			Util.handleIllegalPlayerAction(player, "Fake item link packet! " + player,
 					IllegalPlayerAction.PUNISH_KICKBAN);
-
-        sendAF();
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__D0_1E_REQUESTEXRQITEMLINK;
-    }
+		
+		sendAF();
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__D0_1E_REQUESTEXRQITEMLINK;
+	}
 }

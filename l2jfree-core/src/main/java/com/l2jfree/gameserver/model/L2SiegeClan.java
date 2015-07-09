@@ -23,7 +23,7 @@ public final class L2SiegeClan
 	private final int _clanId;
 	private final L2FastSet<L2Npc> _flags = new L2FastSet<L2Npc>().setShared(true);
 	private SiegeClanType _type;
-
+	
 	public enum SiegeClanType
 	{
 		OWNER,
@@ -31,23 +31,23 @@ public final class L2SiegeClan
 		ATTACKER,
 		DEFENDER_PENDING
 	}
-
+	
 	public L2SiegeClan(int clanId, SiegeClanType type)
 	{
 		_clanId = clanId;
 		_type = type;
 	}
-
+	
 	public int getNumFlags()
 	{
 		return getFlag().size();
 	}
-
+	
 	public void addFlag(L2Npc flag)
 	{
 		getFlag().add(flag);
 	}
-
+	
 	public boolean removeFlag(L2Npc flag)
 	{
 		if (flag == null)
@@ -57,33 +57,33 @@ public final class L2SiegeClan
 		
 		return getFlag().remove(flag);
 	}
-
+	
 	public void removeFlags()
 	{
-		for (L2Npc flag: getFlag())
+		for (L2Npc flag : getFlag())
 			removeFlag(flag);
 	}
-
+	
 	public int getClanId()
 	{
 		return _clanId;
 	}
-
+	
 	public L2FastSet<L2Npc> getFlag()
 	{
 		return _flags;
 	}
-
+	
 	/*** get nearest Flag to Object ***/
 	public L2Npc getClosestFlag(L2Object obj)
 	{
 		double closestDistance = Double.MAX_VALUE;
 		double distance;
 		L2Npc _flag = null;
-
-		for (L2Npc flag: getFlag())
+		
+		for (L2Npc flag : getFlag())
 		{
-			if (flag  == null)
+			if (flag == null)
 				continue;
 			distance = Util.calculateDistance(obj, flag, true);
 			if (closestDistance > distance)

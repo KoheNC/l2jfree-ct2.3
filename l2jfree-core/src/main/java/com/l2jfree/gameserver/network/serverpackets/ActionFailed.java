@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.serverpackets;
 
-
 /**
  * This class ...
  * 
@@ -24,7 +23,7 @@ public final class ActionFailed extends StaticPacket
 {
 	private static final String _S__1f_ACTIONFAILED = "[S] 1f ActionFailed []";
 	public static final ActionFailed STATIC_PACKET = new ActionFailed();
-
+	
 	private ActionFailed()
 	{
 	}
@@ -34,7 +33,7 @@ public final class ActionFailed extends StaticPacket
 	{
 		writeC(0x1f);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -37,22 +37,21 @@ import com.l2jfree.gameserver.model.Location;
 public class ExShowSeedMapInfo extends StaticPacket
 {
 	private static final String _S__EXSHOWSEEDMAPINFO = "[S] FE:A1 ExShowSeedMapInfo";
-	private static final Location[] ENTRANCES = {
-		new Location(-246857, 251960, 4331, 2771), // Seed of Destruction
-		new Location(-213770, 210760, 4400, 2766), // Seed of Immortality
+	private static final Location[] ENTRANCES = { new Location(-246857, 251960, 4331, 2771), // Seed of Destruction
+			new Location(-213770, 210760, 4400, 2766), // Seed of Immortality
 	};
 	public static final ExShowSeedMapInfo PACKET = new ExShowSeedMapInfo();
-
+	
 	private ExShowSeedMapInfo()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0xA1);
-
+		
 		writeD(ENTRANCES.length);
 		for (Location loc : ENTRANCES)
 		{
@@ -62,7 +61,7 @@ public class ExShowSeedMapInfo extends StaticPacket
 			writeD(loc.getHeading());
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -31,8 +31,8 @@ import com.l2jfree.Config;
 import com.l2jfree.util.concurrent.ExecuteWrapper;
 import com.l2jfree.util.concurrent.L2RejectedExecutionHandler;
 import com.l2jfree.util.concurrent.RunnableStatsManager;
-import com.l2jfree.util.concurrent.ScheduledFutureWrapper;
 import com.l2jfree.util.concurrent.RunnableStatsManager.SortBy;
+import com.l2jfree.util.concurrent.ScheduledFutureWrapper;
 
 /**
  * @author -Wooden-, NB4L1
@@ -62,13 +62,14 @@ public final class ThreadPoolManager
 		_scheduledPool.setRejectedExecutionHandler(new L2RejectedExecutionHandler());
 		_scheduledPool.prestartAllCoreThreads();
 		
-		_instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS,
-			new ArrayBlockingQueue<Runnable>(100000));
+		_instantPool =
+				new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS,
+						new ArrayBlockingQueue<Runnable>(100000));
 		_instantPool.setRejectedExecutionHandler(new L2RejectedExecutionHandler());
 		_instantPool.prestartAllCoreThreads();
 		
-		_longRunningPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
-			new SynchronousQueue<Runnable>());
+		_longRunningPool =
+				new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 		_longRunningPool.setRejectedExecutionHandler(new L2RejectedExecutionHandler());
 		_longRunningPool.prestartAllCoreThreads();
 		
@@ -81,7 +82,8 @@ public final class ThreadPoolManager
 		}, 60000, 60000);
 		
 		_log.info("ThreadPoolManager: Initialized with " + _scheduledPool.getPoolSize() + " scheduler, "
-			+ _instantPool.getPoolSize() + " instant, " + _longRunningPool.getPoolSize() + " long running thread(s).");
+				+ _instantPool.getPoolSize() + " instant, " + _longRunningPool.getPoolSize()
+				+ " long running thread(s).");
 	}
 	
 	private final long validate(long delay)
@@ -304,7 +306,7 @@ public final class ThreadPoolManager
 		_instantPool.purge();
 		_longRunningPool.purge();
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

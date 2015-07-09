@@ -19,7 +19,7 @@ public class ExAutoSoulShot extends L2GameServerPacket
 	private static final String _S__FE_0C_EXAUTOSOULSHOT = "[S] FE:0c ExAutoSoulShot [dd]";
 	private final int _itemId;
 	private final int _type;
-
+	
 	/**
 	 * 0xfe:0x12 ExAutoSoulShot         (ch)dd
 	 */
@@ -38,7 +38,7 @@ public class ExAutoSoulShot extends L2GameServerPacket
 		writeD(_itemId);
 		writeD(_type);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

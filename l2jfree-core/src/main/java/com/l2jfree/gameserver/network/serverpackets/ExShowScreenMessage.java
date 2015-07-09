@@ -31,8 +31,8 @@ public class ExShowScreenMessage extends L2GameServerPacket
 	private final boolean _effect;
 	private final String _text;
 	private final int _time;
-
-	public ExShowScreenMessage (String text, int time)
+	
+	public ExShowScreenMessage(String text, int time)
 	{
 		_type = 1;
 		_sysMessageId = -1;
@@ -46,8 +46,9 @@ public class ExShowScreenMessage extends L2GameServerPacket
 		_size = 0;
 		_effect = false;
 	}
-
-	public ExShowScreenMessage (int type, int messageId, int position, int unk1, int size, int unk2, int unk3,boolean showEffect, int time,int unk4, String text)
+	
+	public ExShowScreenMessage(int type, int messageId, int position, int unk1, int size, int unk2, int unk3,
+			boolean showEffect, int time, int unk4, String text)
 	{
 		_type = type;
 		_sysMessageId = messageId;
@@ -61,14 +62,13 @@ public class ExShowScreenMessage extends L2GameServerPacket
 		_size = size;
 		_effect = showEffect;
 	}
-
 	
 	@Override
 	public String getType()
 	{
 		return "[S]FE:39 ExShowScreenMessage";
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{

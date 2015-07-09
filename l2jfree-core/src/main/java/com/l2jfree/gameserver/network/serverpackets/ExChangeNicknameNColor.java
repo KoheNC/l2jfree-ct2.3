@@ -25,18 +25,18 @@ public final class ExChangeNicknameNColor extends StaticPacket
 {
 	private static final String _S__EXCHANGENICKNAMENCOLOR = "[S] FE:83 ExChangeNicknameNColor";
 	public static final ExChangeNicknameNColor PACKET = new ExChangeNicknameNColor();
-
+	
 	private ExChangeNicknameNColor()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl(L2GameClient client, L2PcInstance activeChar)
 	{
 		writeC(0xFE);
 		writeH(0x83);
 	}
-
+	
 	@Override
 	public String getType()
 	{

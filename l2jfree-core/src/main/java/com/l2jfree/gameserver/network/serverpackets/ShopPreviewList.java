@@ -21,7 +21,6 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2TradeList;
 import com.l2jfree.gameserver.templates.item.L2Item;
 
-
 public class ShopPreviewList extends L2GameServerPacket
 {
 	private static final String S_F5_SHOPPREVIEWLIST = "[S] F5 ShopPreviewList";
@@ -29,7 +28,7 @@ public class ShopPreviewList extends L2GameServerPacket
 	private final L2ItemInstance[] _list;
 	private final long _money;
 	private int _expertise;
-
+	
 	public ShopPreviewList(L2TradeList list, long currentMoney, int expertiseIndex)
 	{
 		_listId = list.getListId();
@@ -50,13 +49,13 @@ public class ShopPreviewList extends L2GameServerPacket
 	protected final void writeImpl()
 	{
 		writeC(0xf5);
-		writeC(0xc0);	// ?
-		writeC(0x13);	// ?
-		writeC(0x00);	// ?
-		writeC(0x00);	// ?
-		writeCompQ(_money);	// current money
+		writeC(0xc0); // ?
+		writeC(0x13); // ?
+		writeC(0x00); // ?
+		writeC(0x00); // ?
+		writeCompQ(_money); // current money
 		writeD(_listId);
-		 
+		
 		int newlength = 0;
 		for (L2ItemInstance item : _list)
 		{
@@ -70,21 +69,21 @@ public class ShopPreviewList extends L2GameServerPacket
 			if (item.getItem().getCrystalType() <= _expertise && item.isEquipable())
 			{
 				writeD(item.getItemDisplayId());
-				writeH(item.getItem().getType2());	// item type2
-
+				writeH(item.getItem().getType2()); // item type2
+				
 				if (item.getItem().getType1() != L2Item.TYPE1_ITEM_QUESTITEM_ADENA)
 				{
-					writeH(item.getItem().getBodyPart());	// rev 415  slot    0006-lr.ear  0008-neck  0030-lr.finger  0040-head  0080-??  0100-l.hand  0200-gloves  0400-chest  0800-pants  1000-feet  2000-??  4000-r.hand  8000-r.hand
+					writeH(item.getItem().getBodyPart()); // rev 415  slot    0006-lr.ear  0008-neck  0030-lr.finger  0040-head  0080-??  0100-l.hand  0200-gloves  0400-chest  0800-pants  1000-feet  2000-??  4000-r.hand  8000-r.hand
 				}
 				else
 				{
-					writeH(0x00);	// rev 415  slot    0006-lr.ear  0008-neck  0030-lr.finger  0040-head  0080-??  0100-l.hand  0200-gloves  0400-chest  0800-pants  1000-feet  2000-??  4000-r.hand  8000-r.hand
+					writeH(0x00); // rev 415  slot    0006-lr.ear  0008-neck  0030-lr.finger  0040-head  0080-??  0100-l.hand  0200-gloves  0400-chest  0800-pants  1000-feet  2000-??  4000-r.hand  8000-r.hand
 				}
 				writeCompQ(Config.WEAR_PRICE);
 			}
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

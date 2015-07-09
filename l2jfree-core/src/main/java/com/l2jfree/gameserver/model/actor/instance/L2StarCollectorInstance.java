@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2StarCollectorInstance extends L2MerchantInstance
 {
-    /**
+	/**
 	 * @param objectId
 	 * @param template
 	 */
@@ -34,20 +34,20 @@ public class L2StarCollectorInstance extends L2MerchantInstance
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public String getHtmlPath(int npcId, int val)
 	{
 		String pom = "";
-
+		
 		if (val == 0)
 			pom = "" + npcId;
 		else
 			pom = npcId + "-" + val;
-
+		
 		return "data/html/default/" + pom + ".htm";
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -56,37 +56,38 @@ public class L2StarCollectorInstance extends L2MerchantInstance
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	public void showCollectionSkillList(L2PcInstance player, boolean closable)
 	{
 		if (player.getLevel() < 75)
 		{
-			SystemMessage sm = new SystemMessage(SystemMessageId.DO_NOT_HAVE_FURTHER_SKILLS_TO_LEARN_COME_BACK_WHEN_REACHED_S1);
+			SystemMessage sm =
+					new SystemMessage(SystemMessageId.DO_NOT_HAVE_FURTHER_SKILLS_TO_LEARN_COME_BACK_WHEN_REACHED_S1);
 			sm.addNumber(75);
 			player.sendPacket(sm);
 			return;
 		}
-
+		
 		L2SkillLearn[] skills = SkillTreeTable.getInstance().getAvailableSpecialSkills(player);
 		AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.SkillType.Collection);
 		int counts = 0;
-
+		
 		for (L2SkillLearn s : skills)
 		{
 			L2Skill sk = SkillTable.getInstance().getInfo(s.getId(), s.getLevel());
 			if (sk == null)
 				continue;
-
+			
 			counts++;
-
+			
 			asl.addSkill(s.getId(), s.getLevel(), s.getLevel(), 0, 0);
 		}
-
+		
 		if (counts == 0)
 		{
 			player.sendPacket(SystemMessageId.NO_MORE_SKILLS_TO_LEARN);
-            if (closable)
-            	player.sendPacket(AcquireSkillDone.PACKET);
+			if (closable)
+				player.sendPacket(AcquireSkillDone.PACKET);
 		}
 		else
 			player.sendPacket(asl);

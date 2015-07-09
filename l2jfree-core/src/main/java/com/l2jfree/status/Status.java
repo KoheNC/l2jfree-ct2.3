@@ -28,14 +28,14 @@ import com.l2jfree.tools.random.Rnd;
 
 public class Status extends Thread
 {
-	private static final Log	_log	= LogFactory.getLog(Status.class);
-
-	private final ServerSocket		statusServerSocket;
-
-	private final long				_uptime;
-	private final int					_statusPort;
-	private String				_statusPw;
-
+	private static final Log _log = LogFactory.getLog(Status.class);
+	
+	private final ServerSocket statusServerSocket;
+	
+	private final long _uptime;
+	private final int _statusPort;
+	private String _statusPw;
+	
 	@Override
 	public void run()
 	{
@@ -45,7 +45,7 @@ public class Status extends Thread
 			try
 			{
 				Socket connection = statusServerSocket.accept();
-
+				
 				new GameStatusThread(connection, _uptime, _statusPw);
 				if (isInterrupted())
 				{
@@ -77,12 +77,12 @@ public class Status extends Thread
 			}
 		}
 	}
-
+	
 	public Status() throws IOException
 	{
 		super("Status");
 		L2Properties telnetSettings = new L2Properties(L2Config.TELNET_FILE);
-
+		
 		_statusPort = Integer.parseInt(telnetSettings.getProperty("StatusPort", "12345"));
 		_statusPw = telnetSettings.getProperty("StatusPW");
 		if (_statusPw == null)
@@ -96,7 +96,7 @@ public class Status extends Thread
 		statusServerSocket = new ServerSocket(_statusPort);
 		_uptime = System.currentTimeMillis();
 	}
-
+	
 	private String generateRandomPassword(int length)
 	{
 		L2TextBuilder password = L2TextBuilder.newInstance();
@@ -108,15 +108,15 @@ public class Status extends Thread
 			int charSet = Rnd.nextInt(3);
 			switch (charSet)
 			{
-			case 0:
-				password.append(lowerChar.charAt(Rnd.nextInt(lowerChar.length() - 1)));
-				break;
-			case 1:
-				password.append(upperChar.charAt(Rnd.nextInt(upperChar.length() - 1)));
-				break;
-			case 2:
-				password.append(digits.charAt(Rnd.nextInt(digits.length() - 1)));
-				break;
+				case 0:
+					password.append(lowerChar.charAt(Rnd.nextInt(lowerChar.length() - 1)));
+					break;
+				case 1:
+					password.append(upperChar.charAt(Rnd.nextInt(upperChar.length() - 1)));
+					break;
+				case 2:
+					password.append(digits.charAt(Rnd.nextInt(digits.length() - 1)));
+					break;
 			}
 		}
 		return password.moveToString();

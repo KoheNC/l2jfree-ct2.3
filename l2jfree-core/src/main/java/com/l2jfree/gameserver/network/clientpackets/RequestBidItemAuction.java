@@ -26,14 +26,14 @@ public final class RequestBidItemAuction extends L2GameClientPacket
 {
 	private int _auctionId;
 	private long _bid;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_auctionId = readD();
 		_bid = readCompQ();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{

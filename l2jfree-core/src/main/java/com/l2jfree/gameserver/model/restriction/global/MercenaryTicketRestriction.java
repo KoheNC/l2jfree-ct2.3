@@ -31,7 +31,7 @@ public class MercenaryTicketRestriction extends AbstractRestriction
 			return true;
 		else if (!MercTicketManager.getInstance().canPickUp(activeChar, item))
 			return false;
-
+		
 		activeChar.leaveParty();
 		return true;
 	}

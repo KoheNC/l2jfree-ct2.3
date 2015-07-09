@@ -50,22 +50,22 @@ import com.l2jfree.gameserver.model.entity.ClanHall;
  */
 public class SiegeAttackerList extends L2GameServerPacket
 {
-	private static final String	_S__CA_SiegeAttackerList	= "[S] ca SiegeAttackerList";
+	private static final String _S__CA_SiegeAttackerList = "[S] ca SiegeAttackerList";
 	private final int _siegeableID;
 	private final Set<L2SiegeClan> _attackers;
-
+	
 	public SiegeAttackerList(Castle castle)
 	{
 		_siegeableID = castle.getCastleId();
 		_attackers = castle.getSiege().getAttackerClans();
 	}
-
+	
 	public SiegeAttackerList(ClanHall hideout)
 	{
 		_siegeableID = hideout.getId();
 		_attackers = hideout.getSiege().getAttackerClans();
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -85,7 +85,7 @@ public class SiegeAttackerList extends L2GameServerPacket
 				clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
 				if (clan == null)
 					continue;
-
+				
 				writeD(clan.getClanId());
 				writeS(clan.getName());
 				writeS(clan.getLeaderName());
@@ -98,7 +98,7 @@ public class SiegeAttackerList extends L2GameServerPacket
 			}
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

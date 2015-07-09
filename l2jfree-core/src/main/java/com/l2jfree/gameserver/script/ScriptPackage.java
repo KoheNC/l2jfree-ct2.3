@@ -37,18 +37,18 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ScriptPackage
 {
-	private final static Log		_log	= LogFactory.getLog(ScriptPackage.class);
-
-	private final List<ScriptDocument>	_scriptFiles;
-	private final String					_name;
-
+	private final static Log _log = LogFactory.getLog(ScriptPackage.class);
+	
+	private final List<ScriptDocument> _scriptFiles;
+	private final String _name;
+	
 	public ScriptPackage(ZipFile pack)
 	{
 		_scriptFiles = new FastList<ScriptDocument>();
 		_name = pack.getName();
 		addFiles(pack);
 	}
-
+	
 	/**
 	 * @return Returns the scriptFiles.
 	 */
@@ -56,7 +56,7 @@ public class ScriptPackage
 	{
 		return _scriptFiles;
 	}
-
+	
 	/**
 	 * @param scriptFiles The scriptFiles to set.
 	 */
@@ -83,7 +83,7 @@ public class ScriptPackage
 			}
 		}
 	}
-
+	
 	/**
 	 * @return Returns the name.
 	 */
@@ -91,15 +91,15 @@ public class ScriptPackage
 	{
 		return _name;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		if (getScriptFiles().isEmpty())
 			return "Empty script Package.";
-
+		
 		String out = "Package Name: " + getName() + "\n";
-
+		
 		if (!getScriptFiles().isEmpty())
 		{
 			out += "Xml Script Files...\n";

@@ -35,23 +35,24 @@ import com.l2jfree.gameserver.templates.item.L2Item;
 public class RequestCrystallizeItem extends L2GameClientPacket
 {
 	private static final String _C__72_REQUESTDCRYSTALLIZEITEM = "[C] 72 RequestCrystallizeItem";
-
+	
 	private int _objectId;
 	private long _count;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 		_count = readCompQ();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
-
+		if (activeChar == null)
+			return;
+		
 		if (Shutdown.isActionDisabled(DisableType.CREATEITEM))
 		{
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
@@ -67,30 +68,29 @@ public class RequestCrystallizeItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANNOT_TRADE_DISCARD_DROP_ITEM_WHILE_IN_SHOPMODE);
 			return;
 		}
-
+		
 		int skillLevel = activeChar.getSkillLevel(L2Skill.SKILL_CRYSTALLIZE);
 		if (skillLevel < 1)
 		{
 			requestFailed(SystemMessageId.CRYSTALLIZE_LEVEL_TOO_LOW);
 			return;
 		}
-
+		
 		PcInventory inventory = activeChar.getInventory();
 		L2ItemInstance item = inventory.getItemByObjectId(_objectId);
-
+		
 		int grade;
-		if (item == null || item.isWear() || item.isShadowItem() || item.isTimeLimitedItem() || item.isHeroItem() ||
-				!item.getItem().isCrystallizable() ||
-				item.getItem().getCrystalCount() <= 0 ||
-				(grade = item.getItem().getItemGradeSPlus()) == L2Item.CRYSTAL_NONE)
+		if (item == null || item.isWear() || item.isShadowItem() || item.isTimeLimitedItem() || item.isHeroItem()
+				|| !item.getItem().isCrystallizable() || item.getItem().getCrystalCount() <= 0
+				|| (grade = item.getItem().getItemGradeSPlus()) == L2Item.CRYSTAL_NONE)
 		{
 			requestFailed(SystemMessageId.ITEM_CANNOT_CRYSTALLIZED);
 			return;
 		}
-
+		
 		if (_count > item.getCount())
 			_count = item.getCount();
-
+		
 		// Check if the char can crystallize items and return if false;
 		boolean canCrystallize = true;
 		switch (grade)
@@ -120,15 +120,15 @@ public class RequestCrystallizeItem extends L2GameClientPacket
 				break;
 			}
 		}
-
+		
 		if (!canCrystallize)
 		{
 			requestFailed(SystemMessageId.CRYSTALLIZE_LEVEL_TOO_LOW);
 			return;
 		}
-
+		
 		activeChar.setInCrystallize(true);
-
+		
 		//unequip if needed
 		if (item.isEquipped())
 		{
@@ -137,7 +137,7 @@ public class RequestCrystallizeItem extends L2GameClientPacket
 			for (L2ItemInstance element : unequiped)
 				iu.addModifiedItem(element);
 			sendPacket(iu);
-
+			
 			SystemMessage sm;
 			if (item.getEnchantLevel() > 0)
 			{
@@ -152,7 +152,7 @@ public class RequestCrystallizeItem extends L2GameClientPacket
 			}
 			sendPacket(sm);
 		}
-
+		
 		// remove from inventory
 		L2ItemInstance removedItem = inventory.destroyItem("Crystalize", _objectId, _count, activeChar, null);
 		if (removedItem == null)
@@ -160,33 +160,33 @@ public class RequestCrystallizeItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.NOT_ENOUGH_ITEMS);
 			return;
 		}
-
+		
 		// is this really so?
 		InventoryUpdate iu = new InventoryUpdate();
 		iu.addRemovedItem(removedItem);
 		activeChar.sendPacket(iu);
-
+		
 		// add crystals
 		int crystalId = item.getItem().getCrystalItemId();
 		long crystalAmount = item.getCrystalCount();
 		L2ItemInstance createditem = inventory.addItem("Crystalize", crystalId, crystalAmount, activeChar, activeChar);
-
+		
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1_CRYSTALLIZED);
 		sm.addItemName(removedItem);
 		sendPacket(sm);
-
+		
 		sm = new SystemMessage(SystemMessageId.EARNED_S2_S1_S);
 		sm.addItemName(createditem);
 		sm.addItemNumber(crystalAmount);
 		sendPacket(sm);
-
+		
 		L2World.getInstance().removeObject(removedItem);
 		activeChar.broadcastUserInfo();
 		activeChar.setInCrystallize(false);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

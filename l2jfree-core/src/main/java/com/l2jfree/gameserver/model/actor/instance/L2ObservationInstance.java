@@ -34,7 +34,7 @@ public final class L2ObservationInstance extends L2Npc
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -55,8 +55,9 @@ public final class L2ObservationInstance extends L2Npc
 			String val = command.substring(13);
 			StringTokenizer st = new StringTokenizer(val);
 			st.nextToken(); // Bypass cost
-
-			if (SiegeManager.getInstance().getSiege(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())) != null)
+			
+			if (SiegeManager.getInstance().getSiege(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
+					Integer.parseInt(st.nextToken())) != null)
 				doObserve(player, val);
 			else
 				player.sendPacket(SystemMessageId.ONLY_VIEW_SIEGE);
@@ -66,7 +67,7 @@ public final class L2ObservationInstance extends L2Npc
 			String val = command.substring(13);
 			StringTokenizer st = new StringTokenizer(val);
 			st.nextToken(); // Bypass cost
-
+			
 			doObserve(player, val);
 		}
 		else if (command.startsWith("observe"))
@@ -74,7 +75,7 @@ public final class L2ObservationInstance extends L2Npc
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	private void doObserve(L2PcInstance player, String val)
 	{
 		StringTokenizer st = new StringTokenizer(val);
@@ -82,7 +83,7 @@ public final class L2ObservationInstance extends L2Npc
 		int x = Integer.parseInt(st.nextToken());
 		int y = Integer.parseInt(st.nextToken());
 		int z = Integer.parseInt(st.nextToken());
-
+		
 		if (player.reduceAdena("Broadcast", cost, this, true))
 		{
 			// enter mode
@@ -91,12 +92,13 @@ public final class L2ObservationInstance extends L2Npc
 		}
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	public void showMessageWindow(L2PcInstance player, int val)
 	{
 		String filename = null;
-
-		if (isInsideRadius(-79884, 86529, 50, true) || isInsideRadius(-78858, 111358, 50, true) || isInsideRadius(-76973, 87136, 50, true) || isInsideRadius(-75850, 111968, 50, true))
+		
+		if (isInsideRadius(-79884, 86529, 50, true) || isInsideRadius(-78858, 111358, 50, true)
+				|| isInsideRadius(-76973, 87136, 50, true) || isInsideRadius(-75850, 111968, 50, true))
 		{
 			if (val == 0)
 				filename = "data/html/observation/" + getNpcId() + "-Oracle.htm";
@@ -110,19 +112,19 @@ public final class L2ObservationInstance extends L2Npc
 			else
 				filename = "data/html/observation/" + getNpcId() + "-" + val + ".htm";
 		}
-
+		
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));
 		player.sendPacket(html);
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		if (this != player.getTarget())
 		{
 			player.setTarget(this);

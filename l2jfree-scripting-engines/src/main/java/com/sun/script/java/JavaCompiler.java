@@ -110,8 +110,8 @@ public class JavaCompiler
 		}
 		
 		// create a compilation task
-		javax.tools.JavaCompiler.CompilationTask task = tool.getTask(err, manager, diagnostics, options, null,
-			compUnits);
+		javax.tools.JavaCompiler.CompilationTask task =
+				tool.getTask(err, manager, diagnostics, options, null, compUnits);
 		
 		if (task.call() == false)
 		{
@@ -126,7 +126,8 @@ public class JavaCompiler
 		
 		Map<String, byte[]> classBytes = manager.getClassBytes();
 		try
-		{			manager.close();
+		{
+			manager.close();
 		}
 		catch (IOException exp)
 		{

@@ -29,15 +29,16 @@ public class AdminRepairChar implements IAdminCommandHandler
 {
 	private final static Log _log = LogFactory.getLog(AdminRepairChar.class);
 	
-	private static final String[] ADMIN_COMMANDS =
-		{ "admin_restore", "admin_repair" };
+	private static final String[] ADMIN_COMMANDS = { "admin_restore", "admin_repair" };
 	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		handleRepair(command, activeChar);
 		return true;
 	}
 	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
@@ -59,7 +60,8 @@ public class AdminRepairChar implements IAdminCommandHandler
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con.prepareStatement("UPDATE characters SET x=17867, y=170259, z=-3450 WHERE charId=?");
+			PreparedStatement statement =
+					con.prepareStatement("UPDATE characters SET x=17867, y=170259, z=-3450 WHERE charId=?");
 			statement.setInt(1, objId);
 			statement.execute();
 			statement.close();
@@ -69,7 +71,8 @@ public class AdminRepairChar implements IAdminCommandHandler
 			statement.execute();
 			statement.close();
 			
-			statement = con.prepareStatement("UPDATE items SET loc=\"INVENTORY\" WHERE owner_id=? AND loc=\"PAPERDOLL\"");
+			statement =
+					con.prepareStatement("UPDATE items SET loc=\"INVENTORY\" WHERE owner_id=? AND loc=\"PAPERDOLL\"");
 			statement.setInt(1, objId);
 			statement.execute();
 			statement.close();

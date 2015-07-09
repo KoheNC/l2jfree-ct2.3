@@ -32,7 +32,7 @@ public class SiegeGuardKnownList extends AttackableKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	@Override
@@ -40,19 +40,20 @@ public class SiegeGuardKnownList extends AttackableKnownList
 	{
 		if (!super.addKnownObject(object))
 			return false;
-
+		
 		Castle castle = getActiveChar().getCastle();
 		// Check if siege is in progress
 		if (castle != null && castle.getSiege().getIsInProgress())
 		{
 			L2PcInstance player = null;
 			if (object instanceof L2PcInstance)
-				player = (L2PcInstance) object;
+				player = (L2PcInstance)object;
 			else if (object instanceof L2Summon)
 				player = ((L2Summon)object).getOwner();
-
+			
 			// Check if player is not the defender
-			if (player != null && (player.getClan() == null || castle.getSiege().getAttackerClan(player.getClan()) != null))
+			if (player != null
+					&& (player.getClan() == null || castle.getSiege().getAttackerClan(player.getClan()) != null))
 			{
 				if (getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
 					getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);//(L2Character)object);
@@ -63,12 +64,12 @@ public class SiegeGuardKnownList extends AttackableKnownList
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public final L2SiegeGuardInstance getActiveChar()
 	{
-		return (L2SiegeGuardInstance) _activeChar;
+		return (L2SiegeGuardInstance)_activeChar;
 	}
 }

@@ -35,22 +35,22 @@ import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 
 public class StaticObjects
 {
-	private final static Log						_log	= LogFactory.getLog(StaticObjects.class);
-
-	private final Map<Integer, L2StaticObjectInstance>	_staticObjects;
-
+	private final static Log _log = LogFactory.getLog(StaticObjects.class);
+	
+	private final Map<Integer, L2StaticObjectInstance> _staticObjects;
+	
 	public static StaticObjects getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private StaticObjects()
 	{
 		_staticObjects = new FastMap<Integer, L2StaticObjectInstance>();
 		parseData();
 		_log.info("StaticObject: Loaded " + _staticObjects.size() + " StaticObject Templates.");
 	}
-
+	
 	private void parseData()
 	{
 		LineNumberReader lnr = null;
@@ -58,13 +58,13 @@ public class StaticObjects
 		{
 			File doorData = new File(Config.DATAPACK_ROOT, "data/staticobjects.csv");
 			lnr = new LineNumberReader(new BufferedReader(new FileReader(doorData)));
-
+			
 			String line = null;
 			while ((line = lnr.readLine()) != null)
 			{
 				if (line.trim().length() == 0 || line.startsWith("#"))
 					continue;
-
+				
 				L2StaticObjectInstance obj = parse(line);
 				_staticObjects.put(obj.getStaticObjectId(), obj);
 			}
@@ -89,13 +89,13 @@ public class StaticObjects
 			}
 		}
 	}
-
+	
 	public static L2StaticObjectInstance parse(String line)
 	{
 		StringTokenizer st = new StringTokenizer(line, ";");
-
+		
 		st.nextToken(); //Pass over static object name (not used in server)
-
+		
 		int id = Integer.parseInt(st.nextToken());
 		int x = Integer.parseInt(st.nextToken());
 		int y = Integer.parseInt(st.nextToken());
@@ -104,25 +104,25 @@ public class StaticObjects
 		String texture = st.nextToken();
 		int map_x = Integer.parseInt(st.nextToken());
 		int map_y = Integer.parseInt(st.nextToken());
-
+		
 		StatsSet npcDat = new StatsSet();
 		npcDat.set("npcId", id);
 		npcDat.set("level", 0);
 		npcDat.set("jClass", "staticobject");
-
+		
 		npcDat.set("baseSTR", 0);
 		npcDat.set("baseCON", 0);
 		npcDat.set("baseDEX", 0);
 		npcDat.set("baseINT", 0);
 		npcDat.set("baseWIT", 0);
 		npcDat.set("baseMEN", 0);
-
+		
 		npcDat.set("baseShldDef", 0);
 		npcDat.set("baseShldRate", 0);
 		npcDat.set("baseAccCombat", 38);
 		npcDat.set("baseEvasRate", 38);
 		npcDat.set("baseCritRate", 38);
-
+		
 		//npcDat.set("name", "");
 		npcDat.set("collision_radius", 10);
 		npcDat.set("collision_height", 10);
@@ -151,22 +151,22 @@ public class StaticObjects
 		npcDat.set("baseMpReg", 3.e-3f);
 		npcDat.set("basePDef", 1);
 		npcDat.set("baseMDef", 1);
-
+		
 		L2CharTemplate template = new L2CharTemplate(npcDat);
 		L2StaticObjectInstance obj = new L2StaticObjectInstance(IdFactory.getInstance().getNextId(), template, id);
 		obj.setType(type);
 		obj.getPosition().setXYZ(x, y, z);
 		obj.setMap(texture, map_x, map_y);
 		obj.spawnMe();
-
+		
 		return obj;
 	}
-
+	
 	public void putObject(L2StaticObjectInstance obj)
 	{
 		_staticObjects.put(obj.getStaticObjectId(), obj);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

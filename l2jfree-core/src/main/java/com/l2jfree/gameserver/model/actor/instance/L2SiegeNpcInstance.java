@@ -30,7 +30,6 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 	{
 		super(objectID, template);
 	}
-
 	
 	/**
 	 * this is called when a player interacts with this NPC
@@ -41,9 +40,9 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		player.setLastFolkNPC(this);
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -66,7 +65,7 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	/**
 	 * If siege is in progress shows the Busy HTML<BR>
 	 * else Shows the SiegeInfo window
@@ -80,13 +79,13 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 			html.setFile("data/html/siege/" + getTemplate().getNpcId() + "-busy.htm");
-			html.replace("%castlename%",getCastle().getName());
-			html.replace("%objectId%",String.valueOf(getObjectId()));
+			html.replace("%castlename%", getCastle().getName());
+			html.replace("%objectId%", String.valueOf(getObjectId()));
 			player.sendPacket(html);
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 	}
-
+	
 	/**
 	 * @param player
 	 */

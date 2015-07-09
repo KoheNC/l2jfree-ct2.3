@@ -25,66 +25,22 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
 public class Book implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int[]	ITEM_IDS	=
-											{
-			5588,
-			6317,
-			7561,
-			7063,
-			7064,
-			7065,
-			7066,
-			7082,
-			7083,
-			7084,
-			7085,
-			7086,
-			7087,
-			7088,
-			7089,
-			7090,
-			7091,
-			7092,
-			7093,
-			7094,
-			7095,
-			7096,
-			7097,
-			7098,
-			7099,
-			7100,
-			7101,
-			7102,
-			7103,
-			7104,
-			7105,
-			7106,
-			7107,
-			7108,
-			7109,
-			7110,
-			7111,
-			7112,
-			8059,
-			13130,
-			13131,
-			13132,
-			13133,
-			13134,
-			13135,
-			13136								};
-
+	private static final int[] ITEM_IDS = { 5588, 6317, 7561, 7063, 7064, 7065, 7066, 7082, 7083, 7084, 7085, 7086,
+			7087, 7088, 7089, 7090, 7091, 7092, 7093, 7094, 7095, 7096, 7097, 7098, 7099, 7100, 7101, 7102, 7103, 7104,
+			7105, 7106, 7107, 7108, 7109, 7110, 7111, 7112, 8059, 13130, 13131, 13132, 13133, 13134, 13135, 13136 };
+	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-
-		L2PcInstance activeChar = (L2PcInstance) playable;
+		
+		L2PcInstance activeChar = (L2PcInstance)playable;
 		final int itemId = item.getItemId();
-
+		
 		String filename = "data/html/help/" + item.getItemId() + ".htm";
 		String content = HtmCache.getInstance().getHtm(filename);
-
+		
 		if (content == null)
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(1);
@@ -98,10 +54,11 @@ public class Book implements IItemHandler
 			itemReply.disableValidation();
 			activeChar.sendPacket(itemReply);
 		}
-
+		
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

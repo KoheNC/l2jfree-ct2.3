@@ -37,13 +37,12 @@ public final class TowerOfNaiaInstance extends Instance
 		@Override
 		public String[] getInstanceTemplates()
 		{
-			return new String[]
-				{ "TowerOfNaiaRoom.xml" };
+			return new String[] { "TowerOfNaiaRoom.xml" };
 		}
 	}
 	
-	private int 		_currentRoomId 		= -1;
-	private boolean 	_isInstanceStarted 	= false;
+	private int _currentRoomId = -1;
+	private boolean _isInstanceStarted = false;
 	
 	public TowerOfNaiaInstance(int id, String template)
 	{

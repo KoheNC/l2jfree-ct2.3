@@ -26,7 +26,7 @@ public class SocialAction extends L2GameServerPacket
 	private static final String _S__3D_SOCIALACTION = "[S] 2D SocialAction";
 	private final int _charObjId;
 	private final int _actionId;
-	public static final int		LEVEL_UP			= Config.PACKET_FINAL ? 2122 : 15;
+	public static final int LEVEL_UP = Config.PACKET_FINAL ? 2122 : 15;
 	
 	/**
 	 * 0x3d SocialAction         dd
@@ -45,7 +45,7 @@ public class SocialAction extends L2GameServerPacket
 		writeD(_charObjId);
 		writeD(_actionId);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -21,7 +21,8 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class FatigueTime implements IUserCommandHandler
 {
 	private static final int[] COMMAND_IDS = { 102 };
-
+	
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		// Fatigue system is not used in NA
@@ -29,7 +30,8 @@ public class FatigueTime implements IUserCommandHandler
 		activeChar.sendPacket(SystemMessageId.FATIGUE_TIME_NONE);
 		return true;
 	}
-
+	
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

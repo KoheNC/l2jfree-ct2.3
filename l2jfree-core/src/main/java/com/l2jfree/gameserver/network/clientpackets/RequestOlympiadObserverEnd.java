@@ -26,6 +26,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class RequestOlympiadObserverEnd extends L2GameClientPacket
 {
 	private static final String _C__D0_12_REQUESTOLYMPIADOBSERVEREND = "[C] D0:12 RequestOlympiadObserverEnd";
+	
 	/**
 	 * @param buf
 	 * @param client
@@ -35,8 +36,7 @@ public class RequestOlympiadObserverEnd extends L2GameClientPacket
 	{
 		// trigger
 	}
-
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.clientpackets.ClientBasePacket#runImpl()
 	 */
@@ -46,14 +46,14 @@ public class RequestOlympiadObserverEnd extends L2GameClientPacket
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-		if (activeChar.inObserverMode()) activeChar.leaveOlympiadObserverMode();
+		if (activeChar.inObserverMode())
+			activeChar.leaveOlympiadObserverMode();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
 	@Override
-
 	public String getType()
 	{
 		return _C__D0_12_REQUESTOLYMPIADOBSERVEREND;

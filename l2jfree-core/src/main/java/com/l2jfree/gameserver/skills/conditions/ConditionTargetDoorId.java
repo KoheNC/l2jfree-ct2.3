@@ -19,25 +19,25 @@ import com.l2jfree.gameserver.skills.Env;
 
 class ConditionTargetDoorId extends Condition
 {
-	private final int[]	_doorIds;
-
+	private final int[] _doorIds;
+	
 	public ConditionTargetDoorId(int[] id)
 	{
 		_doorIds = id;
 	}
-
+	
 	@Override
 	public boolean testImpl(Env env)
 	{
 		if (!(env.target instanceof L2DoorInstance))
 			return false;
-
+		
 		for (int id : _doorIds)
 		{
-			if (((L2DoorInstance) env.target).getDoorId() == id)
+			if (((L2DoorInstance)env.target).getDoorId() == id)
 				return true;
 		}
-
+		
 		return false;
 	}
 }

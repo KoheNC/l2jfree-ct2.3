@@ -26,36 +26,37 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class RequestPledgeSetMemberPowerGrade extends L2GameClientPacket
 {
-	private static final String	_C__D0_1C_REQUESTPLEDGESETMEMBERPOWERGRADE	= "[C] D0:1C RequestPledgeSetMemberPowerGrade";
-
-	private int					_pledgeRank;
-	private String				_member;
-
+	private static final String _C__D0_1C_REQUESTPLEDGESETMEMBERPOWERGRADE =
+			"[C] D0:1C RequestPledgeSetMemberPowerGrade";
+	
+	private int _pledgeRank;
+	private String _member;
+	
 	@Override
 	protected void readImpl()
 	{
 		_member = readS();
 		_pledgeRank = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Clan clan = activeChar.getClan();
 		L2ClanMember member = null;
 		if (clan != null)
 			member = clan.getClanMember(_member);
-
+		
 		if (clan == null || member == null)
 		{
 			requestFailed(SystemMessageId.YOU_ARE_NOT_A_CLAN_MEMBER);
 			return;
 		}
-
+		
 		if (member.getSubPledgeType() == L2Clan.SUBUNIT_ACADEMY)
 		{
 			// also checked from client side
@@ -63,13 +64,13 @@ public class RequestPledgeSetMemberPowerGrade extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		member.setPledgeRank(_pledgeRank);
 		clan.broadcastClanStatus();
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

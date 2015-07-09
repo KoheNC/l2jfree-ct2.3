@@ -29,7 +29,7 @@ public final class ServerObjectInfo extends L2GameServerPacket
 	private final int _x, _y, _z, _heading;
 	private final int _idTemplate;
 	private final double _collisionHeight, _collisionRadius;
-
+	
 	public ServerObjectInfo(L2Npc activeChar)
 	{
 		_activeChar = activeChar;
@@ -68,7 +68,7 @@ public final class ServerObjectInfo extends L2GameServerPacket
 		writeD(0x01); // object type
 		writeD(0x00); // special effects
 	}
-
+	
 	/**
 	 * @see net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket#getType()
 	 */

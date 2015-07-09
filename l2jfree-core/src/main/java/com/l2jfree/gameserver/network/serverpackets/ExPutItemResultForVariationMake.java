@@ -21,18 +21,18 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ExPutItemResultForVariationMake extends L2GameServerPacket
 {
 	private static final String _S__FE_53_EXPUTITEMRESULTFORVARIATIONMAKE = "[S] FE:53 ExPutItemResultForVariationMake";
-
+	
 	private final int _itemObjId;
 	private final int _unk1;
 	private final int _unk2;
-
+	
 	public ExPutItemResultForVariationMake(int itemObjId)
 	{
 		_itemObjId = itemObjId;
 		_unk1 = 1;
 		_unk2 = 1;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -45,7 +45,7 @@ public class ExPutItemResultForVariationMake extends L2GameServerPacket
 		writeD(_unk1);
 		writeD(_unk2);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -54,5 +54,5 @@ public class ExPutItemResultForVariationMake extends L2GameServerPacket
 	{
 		return _S__FE_53_EXPUTITEMRESULTFORVARIATIONMAKE;
 	}
-
+	
 }

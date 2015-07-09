@@ -35,12 +35,12 @@ import com.l2jfree.gameserver.model.entity.Castle;
  */
 public class ExShowCropSetting extends L2GameServerPacket
 {
-	private static final String	_S__FE_20_EXSHOWCROPSETTING	= "[S] FE:20 ExShowCropSetting";
-
-	private final int					_manorId;
-	private final int					_count;
-	private final long[]				_cropData;														// data to send, size:_count*14
-
+	private static final String _S__FE_20_EXSHOWCROPSETTING = "[S] FE:20 ExShowCropSetting";
+	
+	private final int _manorId;
+	private final int _count;
+	private final long[] _cropData; // data to send, size:_count*14
+	
 	public ExShowCropSetting(int manorId)
 	{
 		_manorId = manorId;
@@ -88,40 +88,40 @@ public class ExShowCropSetting extends L2GameServerPacket
 			i++;
 		}
 	}
-
+	
 	@Override
 	public void writeImpl()
 	{
 		writeC(0xFE); // Id
 		writeH(0x2b); // SubId
-
+		
 		writeD(_manorId); // manor id
 		writeD(_count); // size
-
+		
 		for (int i = 0; i < _count; i++)
 		{
-			writeD((int) _cropData[(i * 14)]); // crop id
-			writeD((int) _cropData[i * 14 + 1]); // seed level
+			writeD((int)_cropData[(i * 14)]); // crop id
+			writeD((int)_cropData[i * 14 + 1]); // seed level
 			writeC(1);
-			writeD((int) _cropData[i * 14 + 2]); // reward 1 id
+			writeD((int)_cropData[i * 14 + 2]); // reward 1 id
 			writeC(1);
-			writeD((int) _cropData[i * 14 + 3]); // reward 2 id
-
-			writeD((int) _cropData[i * 14 + 4]); // next sale limit
-			writeD((int) _cropData[i * 14 + 5]); // ???
-			writeD((int) _cropData[i * 14 + 6]); // min crop price
-			writeD((int) _cropData[i * 14 + 7]); // max crop price
-
+			writeD((int)_cropData[i * 14 + 3]); // reward 2 id
+			
+			writeD((int)_cropData[i * 14 + 4]); // next sale limit
+			writeD((int)_cropData[i * 14 + 5]); // ???
+			writeD((int)_cropData[i * 14 + 6]); // min crop price
+			writeD((int)_cropData[i * 14 + 7]); // max crop price
+			
 			writeCompQ(_cropData[i * 14 + 8]); // today buy
 			writeCompQ(_cropData[i * 14 + 9]); // today price
-			writeC((int) _cropData[i * 14 + 10]); // today reward
+			writeC((int)_cropData[i * 14 + 10]); // today reward
 			
 			writeCompQ(_cropData[i * 14 + 11]); // next buy
 			writeCompQ(_cropData[i * 14 + 12]); // next price
-			writeC((int) _cropData[i * 14 + 13]); // next reward
+			writeC((int)_cropData[i * 14 + 13]); // next reward
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

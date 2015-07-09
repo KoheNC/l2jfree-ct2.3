@@ -19,24 +19,24 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public final class SendL2ParamSetting extends L2GameClientPacket
 {
 	// currently server acts as opcode is ch?!
-	private static final String	_C__SENDL2PARAMSETTING	= "[C] 4A:03 SendL2ParamSetting cc[dd]";
-
+	private static final String _C__SENDL2PARAMSETTING = "[C] 4A:03 SendL2ParamSetting cc[dd]";
+	
 	private int _unk1, _unk2;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_unk1 = readD();
 		_unk2 = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		_log.info("SendL2ParamSetting, unk=" + _unk1 + ", unk=" + _unk2 + ", sent by " + getActiveChar());
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

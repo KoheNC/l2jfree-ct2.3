@@ -27,13 +27,13 @@ public class QueenAntLarvaStatus extends AttackableStatus
 	{
 		super(activeChar);
 	}
-
+	
 	@Override
 	public QueenAntLarvaInstance getActiveChar()
 	{
-		return (QueenAntLarvaInstance) _activeChar;
+		return (QueenAntLarvaInstance)_activeChar;
 	}
-
+	
 	@Override
 	void reduceHp0(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{

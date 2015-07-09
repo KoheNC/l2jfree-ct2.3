@@ -27,16 +27,16 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class FishingSkill implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.PUMPING, L2SkillType.REELING };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.PUMPING, L2SkillType.REELING };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		L2Fishing fish = player.getFishCombat();
 		if (fish == null)
 		{
@@ -62,7 +62,7 @@ public class FishingSkill implements ISkillHandler
 		if (weaponInst.isFishshotCharged())
 			SS = 2;
 		double gradebonus = 1 + weaponItem.getCrystalGrade() * 0.1;
-		int dmg = (int) (skill.getPower() * gradebonus * SS);
+		int dmg = (int)(skill.getPower() * gradebonus * SS);
 		if (player.getSkillLevel(1315) <= skill.getLevel() - 2) //1315 - Fish Expertise
 		{ //Penalty
 			player.sendPacket(SystemMessageId.REELING_PUMPING_3_LEVELS_HIGHER_THAN_FISHING_PENALTY);
@@ -86,7 +86,8 @@ public class FishingSkill implements ISkillHandler
 			fish.usePomping(dmg, pen);
 		}
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

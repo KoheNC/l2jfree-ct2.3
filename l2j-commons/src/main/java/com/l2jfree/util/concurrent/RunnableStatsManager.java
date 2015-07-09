@@ -175,6 +175,7 @@ public final class RunnableStatsManager
 		}
 		
 		private final Comparator<MethodStat> _comparator = new Comparator<MethodStat>() {
+			@Override
 			public int compare(MethodStat o1, MethodStat o2)
 			{
 				final Comparable c1 = getComparableValueOf(o1);
@@ -309,10 +310,12 @@ public final class RunnableStatsManager
 				{
 					case NAME:
 					case METHOD:
-						appendAttribute(sb, SortBy.NAME, values[SortBy.NAME.ordinal()][k], maxLength[SortBy.NAME.ordinal()]);
+						appendAttribute(sb, SortBy.NAME, values[SortBy.NAME.ordinal()][k],
+								maxLength[SortBy.NAME.ordinal()]);
 						set.remove(SortBy.NAME);
 						
-						appendAttribute(sb, SortBy.METHOD, values[SortBy.METHOD.ordinal()][k], maxLength[SortBy.METHOD.ordinal()]);
+						appendAttribute(sb, SortBy.METHOD, values[SortBy.METHOD.ordinal()][k],
+								maxLength[SortBy.METHOD.ordinal()]);
 						set.remove(SortBy.METHOD);
 						break;
 					default:

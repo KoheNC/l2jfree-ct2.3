@@ -48,7 +48,8 @@ public final class CharNameTable
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con.prepareStatement("SELECT charId, account_name, char_name FROM characters");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT charId, account_name, char_name FROM characters");
 			ResultSet rset = statement.executeQuery();
 			
 			while (rset.next())

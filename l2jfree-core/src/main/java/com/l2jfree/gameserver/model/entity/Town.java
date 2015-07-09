@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.model.zone.L2Zone;
 public class Town extends Entity
 {
 	private final L2MapRegion _region;
-
+	
 	public Town(L2Zone zone)
 	{
 		_region = findMapRegion(zone);
 	}
-
+	
 	public final Castle getCastle()
 	{
 		return CastleManager.getInstance().getCastles().get(getCastleId());
@@ -38,7 +38,7 @@ public class Town extends Entity
 	{
 		return TownManager.getInstance().getTownName(getTownId());
 	}
-
+	
 	public L2MapRegion getMapRegion()
 	{
 		return _region;
@@ -48,21 +48,21 @@ public class Town extends Entity
 	{
 		int middleX = zone.getMiddleX();
 		int middleY = zone.getMiddleY();
-
+		
 		L2MapRegion region = MapRegionManager.getInstance().getRegion(middleX, middleY);
 		
 		return region;
 	}
-
+	
 	public boolean hasCastleInSiege()
 	{
 		if (getCastleId() < 1)
 			return false;
-
+		
 		Castle castle = CastleManager.getInstance().getCastles().get(getCastleId());
 		if (castle == null)
 			return false;
-
+		
 		return castle.getSiege().getIsInProgress();
 	}
 }

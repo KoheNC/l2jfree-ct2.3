@@ -26,9 +26,9 @@ import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.MobGroup;
 import com.l2jfree.gameserver.model.MobGroupTable;
 import com.l2jfree.gameserver.model.actor.L2Character;
+import com.l2jfree.gameserver.model.actor.L2Character.AIAccessor;
 import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.L2Playable;
-import com.l2jfree.gameserver.model.actor.L2Character.AIAccessor;
 import com.l2jfree.gameserver.model.actor.instance.L2ControllableMobInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2NpcInstance;
@@ -142,7 +142,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 			for (L2Skill sk : skills)
 			{
 				if (Util.checkIfInRange(sk.getCastRange(), _actor, target, true) && !_actor.isSkillDisabled(sk.getId())
-					&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
+						&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
 				{
 					_accessor.doCast(sk);
 					return;
@@ -181,8 +181,9 @@ public class L2ControllableMobAI extends L2AttackableAI
 		
 		skills = _actor.getAllSkills();
 		dist2 = _actor.getPlanDistanceSq(target.getX(), target.getY());
-		range = _actor.getPhysicalAttackRange() + _actor.getTemplate().getCollisionRadius()
-			+ target.getTemplate().getCollisionRadius();
+		range =
+				_actor.getPhysicalAttackRange() + _actor.getTemplate().getCollisionRadius()
+						+ target.getTemplate().getCollisionRadius();
 		max_range = range;
 		
 		if (!_actor.isMuted() && dist2 > (range + 20) * (range + 20))
@@ -193,7 +194,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 				int castRange = sk.getCastRange();
 				
 				if (castRange * castRange >= dist2 && !_actor.isSkillDisabled(sk.getId())
-					&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
+						&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
 				{
 					_accessor.doCast(sk);
 					return;
@@ -232,8 +233,9 @@ public class L2ControllableMobAI extends L2AttackableAI
 		_actor.setTarget(target);
 		skills = _actor.getAllSkills();
 		dist2 = _actor.getPlanDistanceSq(target.getX(), target.getY());
-		range = _actor.getPhysicalAttackRange() + _actor.getTemplate().getCollisionRadius()
-			+ target.getTemplate().getCollisionRadius();
+		range =
+				_actor.getPhysicalAttackRange() + _actor.getTemplate().getCollisionRadius()
+						+ target.getTemplate().getCollisionRadius();
 		max_range = range;
 		
 		if (!_actor.isMuted() && dist2 > (range + 20) * (range + 20))
@@ -244,7 +246,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 				int castRange = sk.getCastRange();
 				
 				if (castRange * castRange >= dist2 && !_actor.isSkillDisabled(sk.getId())
-					&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
+						&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
 				{
 					_accessor.doCast(sk);
 					return;
@@ -294,7 +296,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 						continue;
 					
 					if (_actor.isInsideRadius(npc, npc.getFactionRange(), false, true)
-						&& Math.abs(target.getZ() - npc.getZ()) < 200)
+							&& Math.abs(target.getZ() - npc.getZ()) < 200)
 					{
 						npc.getAI().notifyEvent(CtrlEvent.EVT_AGGRESSION, target, 1);
 					}
@@ -309,8 +311,9 @@ public class L2ControllableMobAI extends L2AttackableAI
 			_actor.setTarget(target);
 			skills = _actor.getAllSkills();
 			dist2 = _actor.getPlanDistanceSq(target.getX(), target.getY());
-			range = _actor.getPhysicalAttackRange() + _actor.getTemplate().getCollisionRadius()
-				+ target.getTemplate().getCollisionRadius();
+			range =
+					_actor.getPhysicalAttackRange() + _actor.getTemplate().getCollisionRadius()
+							+ target.getTemplate().getCollisionRadius();
 			max_range = range;
 			
 			if (!_actor.isMuted() && dist2 > (range + 20) * (range + 20))
@@ -321,7 +324,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 					int castRange = sk.getCastRange();
 					
 					if (castRange * castRange >= dist2 && !_actor.isSkillDisabled(sk.getId())
-						&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
+							&& _actor.getStatus().getCurrentMp() > _actor.getStat().getMpConsume(sk))
 					{
 						_accessor.doCast(sk);
 						return;
@@ -358,7 +361,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 					int castRange = sk.getCastRange();
 					
 					if (castRange * castRange >= dist2 && !_actor.isSkillDisabled(sk.getId())
-						&& _actor.getStatus().getCurrentMp() < _actor.getStat().getMpConsume(sk))
+							&& _actor.getStatus().getCurrentMp() < _actor.getStat().getMpConsume(sk))
 					{
 						_accessor.doCast(sk);
 						return;
@@ -391,7 +394,7 @@ public class L2ControllableMobAI extends L2AttackableAI
 			return false;
 		
 		if (target.isAlikeDead() || !_actor.isInsideRadius(target, getActor().getAggroRange(), false, false)
-			|| Math.abs(_actor.getZ() - target.getZ()) > 100)
+				|| Math.abs(_actor.getZ() - target.getZ()) > 100)
 			return false;
 		
 		// Check if the target isn't invulnerable

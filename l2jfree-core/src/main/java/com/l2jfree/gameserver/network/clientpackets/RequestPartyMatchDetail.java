@@ -28,14 +28,15 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class RequestPartyMatchDetail extends L2GameClientPacket
 {
 	private static final String _C__81_REQUESTPARTYMATCHDETAIL = "[C] 81 RequestPartyMatchDetail";
-
+	
 	// manual join
-	private int		_roomId;
+	private int _roomId;
 	// auto join
-	private int		_region;
-	private boolean	_allLevels;
+	private int _region;
+	private boolean _allLevels;
+	
 	//private int		_data2;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -44,23 +45,23 @@ public class RequestPartyMatchDetail extends L2GameClientPacket
 		_allLevels = readD() == 1;
 		/*_data2 = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (activeChar.getPartyRoom() != null || activeChar.getParty() != null)
 		{
 			requestFailed(SystemMessageId.PARTY_ROOM_FORBIDDEN);
 			return;
 		}
-
+		
 		activeChar.setPartyMatchingRegion(_region);
 		activeChar.setPartyMatchingLevelRestriction(_allLevels);
-
+		
 		if (_roomId > 0)
 		{
 			L2PartyRoom room = PartyRoomManager.getInstance().getPartyRoom(_roomId);
@@ -78,10 +79,10 @@ public class RequestPartyMatchDetail extends L2GameClientPacket
 				}
 			}
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

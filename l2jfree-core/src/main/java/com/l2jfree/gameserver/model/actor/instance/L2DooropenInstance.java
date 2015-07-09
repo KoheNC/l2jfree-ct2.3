@@ -29,39 +29,39 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public class L2DooropenInstance extends L2NpcInstance
 {
-    /**
-     * @param template
-     */
-    public L2DooropenInstance(int objectID, L2NpcTemplate template)
-    {
-        super(objectID, template);
-    }
-
-    @Override
-    public void onBypassFeedback(L2PcInstance player, String command)
-    {
-        if (command.startsWith("Chat"))
-        {
-            showMessageWindow(player);
-            return;
-        }
-        else if (command.startsWith("open_doors"))
-        {
-            DoorTable doorTable = DoorTable.getInstance();
-            StringTokenizer st = new StringTokenizer(command.substring(10), ", ");
-
-            while (st.hasMoreTokens())
-            {
-                int _doorid = Integer.parseInt(st.nextToken());
-                doorTable.getDoor(_doorid).openMe();
-            }
-            return;
-
-        }
-        else
-            super.onBypassFeedback(player, command);
-    }
-
+	/**
+	 * @param template
+	 */
+	public L2DooropenInstance(int objectID, L2NpcTemplate template)
+	{
+		super(objectID, template);
+	}
+	
+	@Override
+	public void onBypassFeedback(L2PcInstance player, String command)
+	{
+		if (command.startsWith("Chat"))
+		{
+			showMessageWindow(player);
+			return;
+		}
+		else if (command.startsWith("open_doors"))
+		{
+			DoorTable doorTable = DoorTable.getInstance();
+			StringTokenizer st = new StringTokenizer(command.substring(10), ", ");
+			
+			while (st.hasMoreTokens())
+			{
+				int _doorid = Integer.parseInt(st.nextToken());
+				doorTable.getDoor(_doorid).openMe();
+			}
+			return;
+			
+		}
+		else
+			super.onBypassFeedback(player, command);
+	}
+	
 	/**
 	* this is called when a player interacts with this NPC
 	* @param player
@@ -69,8 +69,9 @@ public class L2DooropenInstance extends L2NpcInstance
 	@Override
 	public void onAction(L2PcInstance player)
 	{
-		if (!canTarget(player)) return;
-
+		if (!canTarget(player))
+			return;
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -93,16 +94,16 @@ public class L2DooropenInstance extends L2NpcInstance
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
-    public void showMessageWindow(L2PcInstance player)
-    {
-        //player.sendPacket(new ActionFailed());
-        String filename = "data/html/dooropen/" + getTemplate().getNpcId() + ".htm";
-
-        NpcHtmlMessage html = new NpcHtmlMessage(1);
-        html.setFile(filename);
-
-        html.replace("%objectId%", String.valueOf(getObjectId()));
-        player.sendPacket(html);
-    }
+	
+	public void showMessageWindow(L2PcInstance player)
+	{
+		//player.sendPacket(new ActionFailed());
+		String filename = "data/html/dooropen/" + getTemplate().getNpcId() + ".htm";
+		
+		NpcHtmlMessage html = new NpcHtmlMessage(1);
+		html.setFile(filename);
+		
+		html.replace("%objectId%", String.valueOf(getObjectId()));
+		player.sendPacket(html);
+	}
 }

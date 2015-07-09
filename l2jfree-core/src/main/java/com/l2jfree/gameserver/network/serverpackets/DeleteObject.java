@@ -20,7 +20,7 @@ public class DeleteObject extends L2GameServerPacket
 {
 	private static final String _S__08_DELETEOBJECT = "[S] 08 DeleteObject [dd]";
 	private final int _objectId;
-
+	
 	public DeleteObject(L2Object obj)
 	{
 		_objectId = obj.getObjectId();

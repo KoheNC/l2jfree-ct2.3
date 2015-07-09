@@ -35,7 +35,7 @@ public class SendTradeRequest extends L2GameServerPacket
 		writeC(0x70);
 		writeD(_senderID);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

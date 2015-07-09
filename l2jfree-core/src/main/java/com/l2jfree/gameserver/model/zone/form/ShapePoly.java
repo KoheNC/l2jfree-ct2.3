@@ -45,7 +45,8 @@ public class ShapePoly extends Shape
 		boolean inside = false;
 		for (int i = 0, j = _x.length - 1; i < _x.length; j = i++)
 		{
-			if ((((_y[i] <= y) && (y < _y[j])) || ((_y[j] <= y) && (y < _y[i]))) && (x < (double)(_x[j] - _x[i]) * (y - _y[i]) / (_y[j] - _y[i]) + _x[i]))
+			if ((((_y[i] <= y) && (y < _y[j])) || ((_y[j] <= y) && (y < _y[i])))
+					&& (x < (double)(_x[j] - _x[i]) * (y - _y[i]) / (_y[j] - _y[i]) + _x[i]))
 			{
 				inside = !inside;
 			}
@@ -71,10 +72,12 @@ public class ShapePoly extends Shape
 		int tX, tY, uX, uY;
 		
 		// First check if a point of the polygon lies inside the rectangle
-		if (_x[0] > ax1 && _x[0] < ax2 && _y[0] > ay1 && _y[0] < ay2) return true;
+		if (_x[0] > ax1 && _x[0] < ax2 && _y[0] > ay1 && _y[0] < ay2)
+			return true;
 		
 		// Or a point of the rectangle inside the polygon
-		if (contains(ax1, ay1)) return true;
+		if (contains(ax1, ay1))
+			return true;
 		
 		// If the first point wasn't inside the rectangle it might still have any line crossing any side
 		// of the rectangle
@@ -88,10 +91,14 @@ public class ShapePoly extends Shape
 			uY = _y[(i + 1) % _x.length];
 			
 			// Check if this line intersects any of the four sites of the rectangle
-			if (lineSegmentsIntersect(tX, tY, uX, uY, ax1, ay1, ax1, ay2)) return true;
-			if (lineSegmentsIntersect(tX, tY, uX, uY, ax1, ay1, ax2, ay1)) return true;
-			if (lineSegmentsIntersect(tX, tY, uX, uY, ax2, ay2, ax1, ay2)) return true;
-			if (lineSegmentsIntersect(tX, tY, uX, uY, ax2, ay2, ax2, ay1)) return true;
+			if (lineSegmentsIntersect(tX, tY, uX, uY, ax1, ay1, ax1, ay2))
+				return true;
+			if (lineSegmentsIntersect(tX, tY, uX, uY, ax1, ay1, ax2, ay1))
+				return true;
+			if (lineSegmentsIntersect(tX, tY, uX, uY, ax2, ay2, ax1, ay2))
+				return true;
+			if (lineSegmentsIntersect(tX, tY, uX, uY, ax2, ay2, ax2, ay1))
+				return true;
 		}
 		
 		return false;

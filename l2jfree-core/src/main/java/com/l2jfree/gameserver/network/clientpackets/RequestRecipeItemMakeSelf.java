@@ -25,10 +25,10 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class RequestRecipeItemMakeSelf extends L2GameClientPacket
 {
-	private static final String	_C__AF_REQUESTRECIPEITEMMAKESELF	= "[C] AF RequestRecipeItemMakeSelf";
-
-	private int					_id;
-
+	private static final String _C__AF_REQUESTRECIPEITEMMAKESELF = "[C] AF RequestRecipeItemMakeSelf";
+	
+	private int _id;
+	
 	/**
 	 * packet type id 0xac
 	 * format:		cd
@@ -39,14 +39,14 @@ public class RequestRecipeItemMakeSelf extends L2GameClientPacket
 	{
 		_id = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (Shutdown.isActionDisabled(DisableType.CREATEITEM))
 		{
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
@@ -63,12 +63,12 @@ public class RequestRecipeItemMakeSelf extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		RecipeController.getInstance().requestMakeItem(activeChar, _id);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

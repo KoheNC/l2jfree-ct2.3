@@ -30,30 +30,30 @@ public class ExGetOnAirShip extends L2GameClientPacket
 	private int _y;
 	private int _z;
 	private int _shipId;
-
-    @Override
-    protected void readImpl()
-    {
-    	_x = readD();
-    	_y = readD();
-    	_z = readD();
-    	_shipId = readD();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	//TODO: implement
-        System.out.println("[T1:ExGetOnAirShip] x: "+_x);
-        System.out.println("[T1:ExGetOnAirShip] y: "+_y);
-        System.out.println("[T1:ExGetOnAirShip] z: "+_z);
-        System.out.println("[T1:ExGetOnAirShip] ship ID: "+_shipId);
-        requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
-    }
-
-    @Override
-    public String getType()
-    {
-        return "[C] 0xD0:0x35 ExGetOnAirShip";
-    }
+	
+	@Override
+	protected void readImpl()
+	{
+		_x = readD();
+		_y = readD();
+		_z = readD();
+		_shipId = readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		//TODO: implement
+		System.out.println("[T1:ExGetOnAirShip] x: " + _x);
+		System.out.println("[T1:ExGetOnAirShip] y: " + _y);
+		System.out.println("[T1:ExGetOnAirShip] z: " + _z);
+		System.out.println("[T1:ExGetOnAirShip] ship ID: " + _shipId);
+		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return "[C] 0xD0:0x35 ExGetOnAirShip";
+	}
 }

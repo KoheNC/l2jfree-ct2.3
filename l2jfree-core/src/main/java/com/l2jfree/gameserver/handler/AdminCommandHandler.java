@@ -189,7 +189,8 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 		// Dynamic testing extensions
 		try
 		{
-			register((IAdminCommandHandler) Class.forName("com.l2jfree.gameserver.handler.admincommandhandlers.AdminRuntimeTest").newInstance());
+			register((IAdminCommandHandler)Class.forName(
+					"com.l2jfree.gameserver.handler.admincommandhandlers.AdminRuntimeTest").newInstance());
 		}
 		catch (Throwable t)
 		{
@@ -284,7 +285,8 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 					if (runtime < ThreadPoolManager.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING)
 						return;
 					
-					activeChar.sendMessage("The execution of '" + message + "' took " + Util.formatNumber(runtime) + " msec.");
+					activeChar.sendMessage("The execution of '" + message + "' took " + Util.formatNumber(runtime)
+							+ " msec.");
 				}
 			}
 		});
@@ -296,7 +298,8 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 		}
 		catch (Exception e)
 		{
-			activeChar.sendMessage("The execution of '" + message + "' takes more time than 1000 msec, so execution done asynchronusly.");
+			activeChar.sendMessage("The execution of '" + message
+					+ "' takes more time than 1000 msec, so execution done asynchronusly.");
 		}
 	}
 	

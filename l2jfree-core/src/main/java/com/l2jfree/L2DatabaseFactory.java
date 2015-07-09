@@ -21,18 +21,15 @@ import java.sql.SQLException;
 // import java.util.List;
 // import java.util.Map;
 
+// import com.l2jfree.sql.ConnectionWrapper;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 // import javax.persistence.EntityManager;
 // import javax.persistence.EntityManagerFactory;
 // import javax.persistence.Persistence;
-
 // import javolution.util.FastMap;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 // import org.eclipse.persistence.config.PersistenceUnitProperties;
-
-// import com.l2jfree.sql.ConnectionWrapper;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public final class L2DatabaseFactory
 {
@@ -71,6 +68,7 @@ public final class L2DatabaseFactory
 	
 	private final ProviderType _providerType;
 	private final ComboPooledDataSource _source;
+	
 	// private final EntityManagerFactory _entityManagerFactory;
 	
 	private L2DatabaseFactory()

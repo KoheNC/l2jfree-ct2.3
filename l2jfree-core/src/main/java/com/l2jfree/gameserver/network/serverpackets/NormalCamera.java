@@ -18,17 +18,17 @@ public class NormalCamera extends L2GameServerPacket
 {
 	private static final String _S__NORMALCAMERA = "[S] D7 NormalCamera c";
 	public static final NormalCamera PACKET = new NormalCamera();
-
+	
 	private NormalCamera()
 	{
 	}
-   
+	
 	@Override
 	public void writeImpl()
 	{
 		writeC(0xd7);
 	}
-   
+	
 	@Override
 	public String getType()
 	{

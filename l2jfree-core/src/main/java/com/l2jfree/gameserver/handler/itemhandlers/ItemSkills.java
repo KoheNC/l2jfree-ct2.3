@@ -28,6 +28,7 @@ import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 
 public final class ItemSkills implements IItemHandler
 {
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		L2PcInstance activeChar = playable.getActingPlayer();
@@ -75,7 +76,8 @@ public final class ItemSkills implements IItemHandler
 				{
 					playable.doSimultaneousCast(itemSkill);
 					// Summons should be affected by herbs too, self time effect is handled at L2Effect constructor
-					if (!isPet && item.getItemType() == L2EtcItemType.HERB && activeChar.getPet() instanceof L2SummonInstance)
+					if (!isPet && item.getItemType() == L2EtcItemType.HERB
+							&& activeChar.getPet() instanceof L2SummonInstance)
 						activeChar.getPet().doSimultaneousCast(itemSkill);
 				}
 				else
@@ -92,6 +94,7 @@ public final class ItemSkills implements IItemHandler
 		}
 	}
 	
+	@Override
 	public int[] getItemIds()
 	{
 		return null;

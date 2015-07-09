@@ -26,19 +26,16 @@ public class OrfenInstance extends L2GrandBossInstance
 {
 	public static enum Position
 	{
-		FIELD, NEST
+		FIELD,
+		NEST
 	}
 	
 	public static final Location FIELD_POS = new Location(55024, 17368, -5412, 0);
 	public static final Location NEST_POS = new Location(43728, 17220, -4342, 0);
 	
-	public static final String[] MESSAGES = 
-	{
-		"%s, stop kidding yourthis about your own powerlessness!",
-		"%s, I'll make you feel what true fear is!",
-		"You're really stupid to have challenged me. %s! Get ready!",
-		"%s, do you think that's going to work?!"
-	};
+	public static final String[] MESSAGES = { "%s, stop kidding yourthis about your own powerlessness!",
+			"%s, I'll make you feel what true fear is!", "You're really stupid to have challenged me. %s! Get ready!",
+			"%s, do you think that's going to work?!" };
 	
 	private Position _pos = Position.FIELD;
 	
@@ -60,6 +57,6 @@ public class OrfenInstance extends L2GrandBossInstance
 	
 	public void setPos(Position pos)
 	{
-		 _pos = pos;
+		_pos = pos;
 	}
 }

@@ -26,22 +26,23 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class AdminTarget implements IAdminCommandHandler
 {
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_target" };
-
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_target" };
+	
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_target"))
 			handleTarget(command, activeChar);
 		return true;
 	}
-
+	
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleTarget(String command, L2PcInstance activeChar)
 	{
 		try

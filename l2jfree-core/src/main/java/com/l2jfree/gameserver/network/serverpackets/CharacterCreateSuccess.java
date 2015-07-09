@@ -18,18 +18,18 @@ public class CharacterCreateSuccess extends StaticPacket
 {
 	private static final String _S__0F_CHARACTERCREATESUCCESS = "[S] 0F CharacterCreateSuccess c[d]";
 	public static final CharacterCreateSuccess PACKET = new CharacterCreateSuccess();
-
+	
 	private CharacterCreateSuccess()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x0F);
 		writeD(0x01);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

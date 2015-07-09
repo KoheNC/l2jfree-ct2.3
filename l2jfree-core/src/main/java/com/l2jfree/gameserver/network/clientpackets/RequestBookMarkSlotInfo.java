@@ -20,13 +20,13 @@ import com.l2jfree.gameserver.network.serverpackets.ExGetBookMarkInfoPacket;
 public final class RequestBookMarkSlotInfo extends L2GameClientPacket
 {
 	private static final String _C__REQUESTBOOKMARKSLOTINFO = "[C] D0:51:00 RequestBookMarkSlotInfo chd";
-
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -34,7 +34,7 @@ public final class RequestBookMarkSlotInfo extends L2GameClientPacket
 		if (player != null)
 			sendPacket(new ExGetBookMarkInfoPacket(player));
 	}
-
+	
 	@Override
 	public String getType()
 	{

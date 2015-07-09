@@ -25,27 +25,27 @@ import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 public class TowerOfNaia extends QuestJython
 {
 	@SuppressWarnings("unused")
-	private L2Npc 		_lock = null;
+	private L2Npc _lock = null;
 	@SuppressWarnings("unused")
-	private boolean 	_areWardsSpawned = false;
-
+	private boolean _areWardsSpawned = false;
+	
 	public TowerOfNaia(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
-
+		
 		addAttackId(TowerOfNaiaManager.ROOF_LOCK_ID);
-
+		
 		addSpawnId(TowerOfNaiaManager.ROOF_LOCK_ID);
 		addSpawnId(TowerOfNaiaManager.DARION_ID);
-
+		
 		addKillId(TowerOfNaiaManager.DARION_ID);
-
+		
 		addStartNpc(TowerOfNaiaManager.ROOF_CONTROLLER_ID);
 		addStartNpc(TowerOfNaiaManager.ROOM_CONTROLLER_ID);
 		addTalkId(TowerOfNaiaManager.ROOF_CONTROLLER_ID);
 		addTalkId(TowerOfNaiaManager.ROOM_CONTROLLER_ID);
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -53,10 +53,10 @@ public class TowerOfNaia extends QuestJython
 			TowerOfNaiaManager.getInstance().openEnteranceDoors();
 		else
 			TowerOfNaiaManager.getInstance().notifyMobKilled(npc.getInstanceId());
-
+		
 		return super.onKill(npc, killer, isPet);
 	}
-
+	
 	@Override
 	public String onSpawn(L2Npc npc)
 	{
@@ -64,10 +64,10 @@ public class TowerOfNaia extends QuestJython
 			_lock = npc;
 		else if (npc.getNpcId() == TowerOfNaiaManager.DARION_ID)
 			TowerOfNaiaManager.getInstance().closeEnteranceDoors();
-
+		
 		return super.onSpawn(npc);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -105,10 +105,10 @@ public class TowerOfNaia extends QuestJython
 			TowerOfNaiaManager.getInstance().startRoomInvasion(player.getInstanceId());
 			npc.decayMe();
 		}
-
+		
 		return super.onAdvEvent(event, npc, player);
 	}
-
+	
 	@Override
 	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
 	{
@@ -121,10 +121,10 @@ public class TowerOfNaia extends QuestJython
 		//				addSpawn(TowerOfNaiaManager.WARD_ID, npc);
 		//			}
 		//		}
-
+		
 		return super.onAttack(npc, attacker, damage, isPet);
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new TowerOfNaia(-1, "TowerOfNaia", "TowerOfNaia");

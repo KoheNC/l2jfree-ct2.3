@@ -18,12 +18,12 @@ public class ExDuelReady extends L2GameServerPacket
 {
 	private static final String _S__FE_4D_ExDuelAskStart = "[S] FE:4d ExDuelReady 0x4b [d]";
 	private final int _unk1;
-
-    public ExDuelReady()
-    {
-        _unk1 = 0;
-    }
-    
+	
+	public ExDuelReady()
+	{
+		_unk1 = 0;
+	}
+	
 	/**
 	 * @param int
 	 */
@@ -31,14 +31,14 @@ public class ExDuelReady extends L2GameServerPacket
 	{
 		_unk1 = unk1;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
-        writeH(0x4d);
-        
-        writeD(_unk1);
+		writeH(0x4d);
+		
+		writeD(_unk1);
 	}
 	
 	@Override

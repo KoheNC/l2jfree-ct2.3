@@ -50,16 +50,16 @@ import com.l2jfree.tools.random.Rnd;
 
 public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRemoteAdministration
 {
-	private final static Log				_log				= LogFactory.getLog(RemoteAdministrationImpl.class.getName());
-	private static final long				serialVersionUID	= -8523099127883669758L;
-	private static RemoteAdministrationImpl	_instance;
-	private IRemoteAdministration			_obj;
-
+	private final static Log _log = LogFactory.getLog(RemoteAdministrationImpl.class.getName());
+	private static final long serialVersionUID = -8523099127883669758L;
+	private static RemoteAdministrationImpl _instance;
+	private IRemoteAdministration _obj;
+	
 	@SuppressWarnings("unused")
-	private Registry						_lReg;
-	private String							_pass;
-	private int								_port;
-
+	private Registry _lReg;
+	private String _pass;
+	private int _port;
+	
 	public static RemoteAdministrationImpl getInstance()
 	{
 		if (_instance == null)
@@ -75,14 +75,14 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		}
 		return _instance;
 	}
-
+	
 	public RemoteAdministrationImpl() throws RemoteException
 	{
 		super();
 		_pass = Config.RMI_SERVER_PASSWORD;
 		_port = Config.RMI_SERVER_PORT;
 	}
-
+	
 	public void startServer()
 	{
 		if (Config.ALLOW_RMI_SERVER && _port != 0)
@@ -91,14 +91,14 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			{
 				_lReg = LocateRegistry.createRegistry(_port);
 				_obj = new RemoteAdministrationImpl();
-
+				
 				if (_pass.isEmpty())
 				{
 					_log.info("No password defined for RMI Server");
 					_pass = generateRandomPassword(10);
 					_log.info("A password has been automatically generated: " + _pass);
 				}
-
+				
 				Naming.rebind("//localhost:" + _port + "/Elayne", _obj);
 				_log.info("RMI Server started on port: " + _port + ", Password: " + _pass + ".");
 			}
@@ -111,20 +111,22 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		else
 			_log.info("RMI Server is currently disabled.");
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#getOnlineUsersCount()
 	 */
+	@Override
 	public int getOnlineUsersCount(String password) throws RemoteException
 	{
 		if (!password.equals(_pass))
 			return 0;
 		return L2World.getInstance().getAllPlayersCount();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#getPlayerInformation(java.lang.String)
 	 */
+	@Override
 	public IRemotePlayer getPlayerInformation(String password, String playerName) throws RemoteException
 	{
 		if (!password.equals(_pass))
@@ -134,29 +136,32 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			return new RemotePlayerImpl(player);
 		return null;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#announceToAll(java.lang.String)
 	 */
+	@Override
 	public void announceToAll(String password, String announcement) throws RemoteException
 	{
 		if (!password.equals(_pass))
 			return;
 		Announcements.getInstance().announceToAll(announcement);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#abortServerRestart()
 	 */
+	@Override
 	public void abortServerRestart(String password) throws RemoteException
 	{
 		if (password.equals(_pass))
 			Shutdown.abort("127.0.0.1");
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#kickPlayerFromServer(java.lang.String)
 	 */
+	@Override
 	public int kickPlayerFromServer(String password, String playerName) throws RemoteException
 	{
 		if (password.equals(_pass))
@@ -170,13 +175,14 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			}
 			return 2;
 		}
-
+		
 		return 3;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#reload(int)
 	 */
+	@Override
 	public void reload(String password, int reloadProcedure) throws RemoteException
 	{
 		if (password.equals(_pass))
@@ -217,29 +223,32 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			}
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#scheduleServerRestart(int)
 	 */
+	@Override
 	public void scheduleServerRestart(String password, int secondsUntilRestart) throws RemoteException
 	{
 		if (password.equals(_pass))
 			Shutdown.start("127.0.0.1", secondsUntilRestart, ShutdownMode.SHUTDOWN);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#scheduleServerShutDown(int)
 	 */
+	@Override
 	public void scheduleServerShutDown(String password, int secondsUntilShutDown) throws RemoteException
 	{
 		if (password.equals(_pass))
 			Shutdown.start("127.0.0.1", secondsUntilShutDown, ShutdownMode.RESTART);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#sendMessageToGms(java.lang.String)
 	 */
+	@Override
 	public int sendMessageToGms(String password, String message) throws RemoteException
 	{
 		if (!password.equals(_pass))
@@ -248,10 +257,11 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		GmListTable.broadcastToGMs(cs);
 		return GmListTable.getAllGms(true).size();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#sendPrivateMessage(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public int sendPrivateMessage(String password, String player, String message) throws RemoteException
 	{
 		if (!password.equals(_pass))
@@ -263,20 +273,21 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			reciever.sendPacket(cs);
 			return 1;
 		}
-
+		
 		return 2;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#getOnlinePlayersDetails(java.lang.String)
 	 */
+	@Override
 	public FastMap<String, IRemotePlayer> getOnlinePlayersDetails(String rmiPassword) throws RemoteException
 	{
 		if (!rmiPassword.equals(_pass))
 			return null;
 		return null;
 	}
-
+	
 	private String generateRandomPassword(int length)
 	{
 		L2TextBuilder password = L2TextBuilder.newInstance();

@@ -49,7 +49,8 @@ public class SkillTargetHandler extends EnumHandlerRegistry<SkillTargetType, ISk
 		registerAll(skillTargetList, skillTargetList.getSkillTargetTypes());
 	}
 	
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill, L2Character target)
+	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
+			L2Character target)
 	{
 		final List<L2Character> targets = GlobalRestrictions.getTargetList(type, activeChar, skill, target);
 		

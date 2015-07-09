@@ -32,16 +32,16 @@ import com.l2jfree.gameserver.model.entity.Castle;
  */
 public class ExShowProcureCropDetail extends L2GameServerPacket
 {
-	private static final String				_S__FE_22_EXSHOWPROCURECROPDETAIL	= "[S] FE:22 ExShowProcureCropDetail";
-
-	private final int								_cropId;
-	private final FastMap<Integer, CropProcure>	_castleCrops;
-
+	private static final String _S__FE_22_EXSHOWPROCURECROPDETAIL = "[S] FE:22 ExShowProcureCropDetail";
+	
+	private final int _cropId;
+	private final FastMap<Integer, CropProcure> _castleCrops;
+	
 	public ExShowProcureCropDetail(int cropId)
 	{
 		_cropId = cropId;
 		_castleCrops = new FastMap<Integer, CropProcure>();
-
+		
 		for (Castle c : CastleManager.getInstance().getCastles().values())
 		{
 			CropProcure cropItem = c.getCrop(_cropId, CastleManorManager.PERIOD_CURRENT);
@@ -49,16 +49,16 @@ public class ExShowProcureCropDetail extends L2GameServerPacket
 				_castleCrops.put(c.getCastleId(), cropItem);
 		}
 	}
-
+	
 	@Override
 	public void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x78);
-
+		
 		writeD(_cropId); // crop id
 		writeD(_castleCrops.size()); // size
-
+		
 		for (int manorId : _castleCrops.keySet())
 		{
 			CropProcure crop = _castleCrops.get(manorId);
@@ -68,7 +68,7 @@ public class ExShowProcureCropDetail extends L2GameServerPacket
 			writeC(crop.getReward()); // reward type
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

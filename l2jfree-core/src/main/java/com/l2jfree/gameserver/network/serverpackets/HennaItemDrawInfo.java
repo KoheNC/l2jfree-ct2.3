@@ -22,16 +22,16 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public class HennaItemDrawInfo extends L2GameServerPacket
 {
 	private static final String _S__E4_HennaItemDrawInfo = "[S] e4 HennaItemDrawInfo";
-
+	
 	private L2PcInstance _activeChar;
 	private L2Henna _henna;
-
+	
 	public HennaItemDrawInfo(L2Henna henna, L2PcInstance player)
 	{
 		_henna = henna;
 		_activeChar = player;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -51,13 +51,13 @@ public class HennaItemDrawInfo extends L2GameServerPacket
 		writeD(stats.getCON()); //current CON
 		writeC(stats.getCON() + _henna.getStatCON()); //equip CON
 		writeD(stats.getMEN()); //current MEM
-		writeC(stats.getMEN() + _henna.getStatMEM());	//equip MEM
+		writeC(stats.getMEN() + _henna.getStatMEM()); //equip MEM
 		writeD(stats.getDEX()); //current DEX
-		writeC(stats.getDEX() + _henna.getStatDEX());	//equip DEX
+		writeC(stats.getDEX() + _henna.getStatDEX()); //equip DEX
 		writeD(stats.getWIT()); //current WIT
 		writeC(stats.getWIT() + _henna.getStatWIT()); //equip WIT
 	}
-
+	
 	@Override
 	public String getType()
 	{

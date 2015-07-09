@@ -28,21 +28,21 @@ public class SummonStat extends PlayableStat
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
-
+	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2Summon getActiveChar()
 	{
-		return (L2Summon) _activeChar;
+		return (L2Summon)_activeChar;
 	}
-
+	
 	@Override
 	public byte getAttackElement()
 	{

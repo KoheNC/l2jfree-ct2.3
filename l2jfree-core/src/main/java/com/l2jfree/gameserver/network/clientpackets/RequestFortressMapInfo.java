@@ -23,28 +23,29 @@ import com.l2jfree.gameserver.network.serverpackets.ExShowFortressMapInfo;
  */
 public class RequestFortressMapInfo extends L2GameClientPacket
 {
-	private static final String	_C__D0_4B_REQUESTFORTRESSMAPINFO = "[C] D0:4B RequestFortressMapInfo";
-
-    private int _fortressId;
-
-    @Override
-    protected void readImpl()
-    {
-        _fortressId = readD();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	if (getActiveChar() == null) return;
-
-        sendPacket(new ExShowFortressMapInfo(FortManager.getInstance().getFortById(_fortressId)));
-        sendPacket(ActionFailed.STATIC_PACKET);
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__D0_4B_REQUESTFORTRESSMAPINFO;
-    }
+	private static final String _C__D0_4B_REQUESTFORTRESSMAPINFO = "[C] D0:4B RequestFortressMapInfo";
+	
+	private int _fortressId;
+	
+	@Override
+	protected void readImpl()
+	{
+		_fortressId = readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		if (getActiveChar() == null)
+			return;
+		
+		sendPacket(new ExShowFortressMapInfo(FortManager.getInstance().getFortById(_fortressId)));
+		sendPacket(ActionFailed.STATIC_PACKET);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__D0_4B_REQUESTFORTRESSMAPINFO;
+	}
 }

@@ -16,7 +16,6 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * This class ...
  * 
@@ -28,7 +27,6 @@ public class ObservationReturn extends L2GameServerPacket
 	private static final String _S__E0_OBSERVRETURN = "[S] E0 ObservationReturn";
 	private final L2PcInstance _activeChar;
 	
-
 	/**
 	 * @param _characters
 	 */
@@ -36,7 +34,7 @@ public class ObservationReturn extends L2GameServerPacket
 	{
 		_activeChar = observer;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{

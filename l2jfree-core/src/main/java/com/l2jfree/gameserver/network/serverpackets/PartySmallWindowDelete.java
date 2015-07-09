@@ -38,7 +38,7 @@ public class PartySmallWindowDelete extends L2GameServerPacket
 		writeD(_member.getObjectId());
 		writeS(_member.getName());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

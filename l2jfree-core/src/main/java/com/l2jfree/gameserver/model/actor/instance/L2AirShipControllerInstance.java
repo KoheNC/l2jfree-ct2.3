@@ -27,18 +27,19 @@ import com.l2jfree.gameserver.util.Broadcast;
  */
 public class L2AirShipControllerInstance extends L2NpcInstance
 {
-
+	
 	private boolean _isBoardAllowed = false;
-       /**
-     * @param objectId
-     * @param template
-     */
-    public L2AirShipControllerInstance(int objectId, L2NpcTemplate template)
-    {
-           super(objectId, template);
-           AirShipManager.getInstance().registerATC(this);
-    }
-    
+	
+	/**
+	* @param objectId
+	* @param template
+	*/
+	public L2AirShipControllerInstance(int objectId, L2NpcTemplate template)
+	{
+		super(objectId, template);
+		AirShipManager.getInstance().registerATC(this);
+	}
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -59,15 +60,15 @@ public class L2AirShipControllerInstance extends L2NpcInstance
 		else
 			super.onBypassFeedback(player, command);
 	}
-    
-    public void broadcastMessage(String message)
-    {
-       NpcSay say = new NpcSay(getObjectId(), 1, getNpcId(), message);
-       Broadcast.toKnownPlayersInRadius(this, say, 5000);
-    }
-    
-    public void setIsBoardAllowed(boolean val)
-    {
-    	_isBoardAllowed = val;
-    }
+	
+	public void broadcastMessage(String message)
+	{
+		NpcSay say = new NpcSay(getObjectId(), 1, getNpcId(), message);
+		Broadcast.toKnownPlayersInRadius(this, say, 5000);
+	}
+	
+	public void setIsBoardAllowed(boolean val)
+	{
+		_isBoardAllowed = val;
+	}
 }

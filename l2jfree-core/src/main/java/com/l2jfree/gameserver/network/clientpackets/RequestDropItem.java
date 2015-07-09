@@ -29,9 +29,9 @@ import com.l2jfree.gameserver.network.serverpackets.UserInfo;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.gameserver.util.FloodProtector;
+import com.l2jfree.gameserver.util.FloodProtector.Protected;
 import com.l2jfree.gameserver.util.IllegalPlayerAction;
 import com.l2jfree.gameserver.util.Util;
-import com.l2jfree.gameserver.util.FloodProtector.Protected;
 
 /**
  * This class represents a packet that is sent when a player is dropping an item
@@ -40,14 +40,14 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class RequestDropItem extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTDROPITEM	= "[C] 17 RequestDropItem c[dqddd]";
-
-	private int					_objectId;
-	private long				_count;
-	private int					_x;
-	private int					_y;
-	private int					_z;
-
+	private static final String _C__REQUESTDROPITEM = "[C] 17 RequestDropItem c[dqddd]";
+	
+	private int _objectId;
+	private long _count;
+	private int _x;
+	private int _y;
+	private int _z;
+	
 	@Override
 	protected void readImpl()
 	{
@@ -57,14 +57,14 @@ public class RequestDropItem extends L2GameClientPacket
 		_y = readD();
 		_z = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null || activeChar.isDead())
 			return;
-
+		
 		// Flood protect drop to avoid packet lag, do not add any messages here
 		if (!FloodProtector.tryPerformAction(activeChar, Protected.DROPITEM))
 			return;
@@ -73,12 +73,13 @@ public class RequestDropItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-		else if (Config.GM_DISABLE_TRANSACTION && activeChar.getAccessLevel() >= Config.GM_TRANSACTION_MIN && activeChar.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+		else if (Config.GM_DISABLE_TRANSACTION && activeChar.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+				&& activeChar.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{
 			requestFailed(SystemMessageId.ACCOUNT_CANT_DROP_ITEMS);
 			return;
 		}
-
+		
 		L2ItemInstance item = activeChar.checkItemManipulation(_objectId, _count, "Drop");
 		if (_count > item.getCount() || _count < 1)
 		{
@@ -88,7 +89,9 @@ public class RequestDropItem extends L2GameClientPacket
 		else if (!item.isStackable() && _count > 1)
 		{
 			sendAF();
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] count > 1 but item is not stackable! ban! oid: " + _objectId + " owner: " + activeChar.getName(), IllegalPlayerAction.PUNISH_KICK);
+			Util.handleIllegalPlayerAction(activeChar,
+					"[RequestDropItem] count > 1 but item is not stackable! ban! oid: " + _objectId + " owner: "
+							+ activeChar.getName(), IllegalPlayerAction.PUNISH_KICK);
 			return;
 		}
 		else if (!canDrop(item)) // TODO: merge to restriction
@@ -98,13 +101,14 @@ public class RequestDropItem extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		if (_log.isDebugEnabled())
 			_log.debug("requested drop item " + _objectId + "(" + item.getCount() + ") at " + _x + "/" + _y + "/" + _z);
-
+		
 		if (item.isEquipped())
 		{
-			L2ItemInstance[] unequiped = activeChar.getInventory().unEquipItemInBodySlotAndRecord(item.getItem().getBodyPart());
+			L2ItemInstance[] unequiped =
+					activeChar.getInventory().unEquipItemInBodySlotAndRecord(item.getItem().getBodyPart());
 			InventoryUpdate iu = new InventoryUpdate();
 			for (L2ItemInstance element : unequiped)
 				iu.addModifiedItem(element);
@@ -115,32 +119,34 @@ public class RequestDropItem extends L2GameClientPacket
 			
 			activeChar.broadcastUserInfo();
 		}
-
+		
 		if (MercTicketManager.getInstance().isTicket(item.getItemId()))
 		{
 			MercTicketManager.getInstance().reqPosition(activeChar, item);
 			sendAF();
 			return;
 		}
-
+		
 		L2ItemInstance dropedItem = activeChar.dropItem("Drop", _objectId, _count, _x, _y, _z, activeChar, false);
-
+		
 		sendAF();
-
+		
 		if (_log.isDebugEnabled())
 			_log.debug("dropping " + _objectId + " item(" + _count + ") at: " + _x + " " + _y + " " + _z);
 		if (dropedItem != null && dropedItem.getItemId() == PcInventory.ADENA_ID && dropedItem.getCount() >= 1000000)
 		{
-			String msg = "Character (" + activeChar.getName() + ") has dropped (" + dropedItem.getCount() + ")adena at (" + _x + "," + _y + "," + _z + ")";
+			String msg =
+					"Character (" + activeChar.getName() + ") has dropped (" + dropedItem.getCount() + ")adena at ("
+							+ _x + "," + _y + "," + _z + ")";
 			_log.warn(msg);
 			GmListTable.broadcastMessageToGMs(msg);
 		}
 	}
-
+	
 	private final boolean canDrop(L2ItemInstance item)
 	{
 		L2PcInstance activeChar = getActiveChar();
-
+		
 		if (activeChar.isProcessingTransaction() || activeChar.getPrivateStoreType() != 0)
 		{
 			requestFailed(SystemMessageId.CANNOT_TRADE_DISCARD_DROP_ITEM_WHILE_IN_SHOPMODE);
@@ -152,7 +158,8 @@ public class RequestDropItem extends L2GameClientPacket
 			return false;
 		}
 		// Cannot discard item that the skill is consuming
-		else if (activeChar.isCastingNow() && activeChar.getCurrentSkill() != null && activeChar.getCurrentSkill().getSkill().getItemConsumeId() == item.getItemId())
+		else if (activeChar.isCastingNow() && activeChar.getCurrentSkill() != null
+				&& activeChar.getCurrentSkill().getSkill().getItemConsumeId() == item.getItemId())
 		{
 			requestFailed(SystemMessageId.CANNOT_DISCARD_THIS_ITEM);
 			return false;
@@ -162,7 +169,8 @@ public class RequestDropItem extends L2GameClientPacket
 			sendAF();
 			return false;
 		}
-		else if (activeChar.isCastingSimultaneouslyNow() && activeChar.getLastSimultaneousSkillCast() != null && activeChar.getLastSimultaneousSkillCast().getItemConsumeId() == item.getItemId())
+		else if (activeChar.isCastingSimultaneouslyNow() && activeChar.getLastSimultaneousSkillCast() != null
+				&& activeChar.getLastSimultaneousSkillCast().getItemConsumeId() == item.getItemId())
 		{
 			requestFailed(SystemMessageId.CANNOT_DISCARD_THIS_ITEM);
 			return false;
@@ -172,7 +180,7 @@ public class RequestDropItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANNOT_DISCARD_DISTANCE_TOO_FAR);
 			return false;
 		}
-
+		
 		else if (item == null)
 		{
 			_log.warn("Error while droping item for char " + activeChar.getName() + " (validity check).");
@@ -209,10 +217,10 @@ public class RequestDropItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANNOT_DISCARD_EXCHANGE_ITEM);
 			return false;
 		}
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public String getType()
 	{

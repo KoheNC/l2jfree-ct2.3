@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.script.faenor;
 
-
 import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.script.Parser;
@@ -32,9 +31,9 @@ public class FaenorQuestParser extends FaenorParser
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Parsing Quest.");
-
+		
 		String questID = attribute(questNode, "ID");
-
+		
 		for (Node node = questNode.getFirstChild(); node != null; node = node.getNextSibling())
 		{
 			if (isNodeName(node, "DROPLIST"))
@@ -55,12 +54,12 @@ public class FaenorQuestParser extends FaenorParser
 			}
 		}
 	}
-
+	
 	private void parseQuestDropList(Node dropList, String questID) throws NullPointerException
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Parsing Droplist.");
-
+		
 		for (Node node = dropList.getFirstChild(); node != null; node = node.getNextSibling())
 		{
 			if (isNodeName(node, "DROP"))
@@ -69,12 +68,12 @@ public class FaenorQuestParser extends FaenorParser
 			}
 		}
 	}
-
+	
 	private void parseQuestDrop(Node drop, String questID)// throws NullPointerException
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Parsing Drop.");
-
+		
 		int npcID;
 		int itemID;
 		int min;
@@ -94,13 +93,13 @@ public class FaenorQuestParser extends FaenorParser
 		{
 			throw new NullPointerException("Incorrect Drop Data");
 		}
-
+		
 		if (_log.isDebugEnabled())
 			_log.debug("Adding Drop to NpcID: " + npcID);
-
+		
 		_bridge.addQuestDrop(npcID, itemID, min, max, chance, questID, states);
 	}
-
+	
 	static class FaenorQuestParserFactory extends ParserFactory
 	{
 		@Override
@@ -109,7 +108,7 @@ public class FaenorQuestParser extends FaenorParser
 			return (new FaenorQuestParser());
 		}
 	}
-
+	
 	static
 	{
 		ScriptEngine.getParserFactories().put(getParserName("Quest"), new FaenorQuestParserFactory());

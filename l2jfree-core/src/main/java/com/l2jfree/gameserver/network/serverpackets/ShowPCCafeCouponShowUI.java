@@ -18,18 +18,18 @@ public class ShowPCCafeCouponShowUI extends StaticPacket
 {
 	private static final String _S__SHOWPCCAFECOUPONSHOWUI = "[S] FE:44 ShowPCCafeCouponShowUI ch";
 	public static final ShowPCCafeCouponShowUI PACKET = new ShowPCCafeCouponShowUI();
-
+	
 	private ShowPCCafeCouponShowUI()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x44);
 	}
-
+	
 	@Override
 	public String getType()
 	{

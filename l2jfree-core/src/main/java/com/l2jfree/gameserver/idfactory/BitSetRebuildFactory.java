@@ -33,18 +33,18 @@ import com.l2jfree.tools.util.PrimeFinder;
  */
 public class BitSetRebuildFactory extends IdFactory
 {
-	private final static Log	_log	= LogFactory.getLog(BitSetRebuildFactory.class);
-
-	private BitSet				_freeIds;
-	private AtomicInteger		_freeIdCount;
-	private AtomicInteger		_nextFreeId;
-
+	private final static Log _log = LogFactory.getLog(BitSetRebuildFactory.class);
+	
+	private BitSet _freeIds;
+	private AtomicInteger _freeIdCount;
+	private AtomicInteger _nextFreeId;
+	
 	protected BitSetRebuildFactory()
 	{
 		super();
 		initialize();
 	}
-
+	
 	public synchronized void initialize()
 	{
 		_log.info("starting db rebuild, good luck");
@@ -58,9 +58,9 @@ public class BitSetRebuildFactory extends IdFactory
 			// first get all used ids
 			for (int usedObjectId : extractUsedObjectIDTable())
 				used_ids.add(usedObjectId);
-
+			
 			_nextFreeId = new AtomicInteger(_freeIds.nextClearBit(0));
-
+			
 			Connection con = null;
 			con = L2DatabaseFactory.getInstance().getConnection(con);
 			int nextid;
@@ -93,7 +93,7 @@ public class BitSetRebuildFactory extends IdFactory
 			System.exit(0);
 		}
 	}
-
+	
 	@Override
 	public synchronized void releaseId(int objectID)
 	{
@@ -105,16 +105,16 @@ public class BitSetRebuildFactory extends IdFactory
 		else
 			_log.warn("BitSet ID Factory: release objectID " + objectID + " failed (< " + FIRST_OID + ")");
 	}
-
+	
 	@Override
 	public synchronized int getNextId()
 	{
 		int newID = _nextFreeId.get();
 		_freeIds.set(newID);
 		_freeIdCount.decrementAndGet();
-
+		
 		int nextFree = _freeIds.nextClearBit(newID);
-
+		
 		if (nextFree < 0)
 		{
 			nextFree = _freeIds.nextClearBit(0);
@@ -130,35 +130,35 @@ public class BitSetRebuildFactory extends IdFactory
 				throw new IndexOutOfBoundsException("Ran out of valid Id's.");
 			}
 		}
-
+		
 		_nextFreeId.set(nextFree);
-
+		
 		return newID + FIRST_OID;
 	}
-
+	
 	@Override
 	public synchronized int size()
 	{
 		return _freeIdCount.get();
 	}
-
+	
 	protected synchronized int usedIdCount()
 	{
 		return (size() - FIRST_OID);
 	}
-
+	
 	protected synchronized boolean reachingBitSetCapacity()
 	{
 		return PrimeFinder.nextPrime(usedIdCount() * 11 / 10) > _freeIds.size();
 	}
-
+	
 	protected synchronized void increaseBitSetCapacity()
 	{
 		BitSet newBitSet = new BitSet(PrimeFinder.nextPrime(usedIdCount() * 11 / 10));
 		newBitSet.or(_freeIds);
 		_freeIds = newBitSet;
 	}
-
+	
 	@Override
 	public int getCurrentId()
 	{

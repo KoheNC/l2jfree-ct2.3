@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.serverpackets;
 
-
 /**
  * @author Kerberos
  */
@@ -22,13 +21,13 @@ public class ExBrBroadcastEventState extends L2GameServerPacket
 {
 	private final int _eventId;
 	private final int _eventState;
-
+	
 	public ExBrBroadcastEventState(int eventId, int eventState)
 	{
 		_eventId = eventId;
 		_eventState = eventState;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -37,7 +36,7 @@ public class ExBrBroadcastEventState extends L2GameServerPacket
 		writeD(_eventId);
 		writeD(_eventState);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

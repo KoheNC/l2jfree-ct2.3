@@ -21,23 +21,22 @@ public class ExMailArrived extends StaticPacket
 {
 	private static final String _S__FE_2E_EXMAILARRIVED = "[S] FE:2e ExMailArrived []";
 	public static final ExMailArrived STATIC_PACKET = new ExMailArrived();
-
+	
 	private ExMailArrived()
 	{
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
-	protected
-	void writeImpl()
+	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x2e);
 		writeD(0x01);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

@@ -23,9 +23,9 @@ import com.l2jfree.gameserver.model.actor.instance.L2BoatInstance;
 public class VehicleStarted extends L2GameServerPacket
 {
 	private final L2BoatInstance _boat;
-
+	
 	private final int _state;
-
+	
 	/**
 	 * @param instance
 	 */
@@ -34,7 +34,7 @@ public class VehicleStarted extends L2GameServerPacket
 		_boat = boat;
 		_state = state;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -47,7 +47,7 @@ public class VehicleStarted extends L2GameServerPacket
 		writeD(_boat.getObjectId());
 		writeD(_state);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

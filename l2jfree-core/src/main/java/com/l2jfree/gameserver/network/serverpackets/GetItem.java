@@ -29,10 +29,10 @@ public class GetItem extends L2GameServerPacket
 	private static final String _S__17_GETITEM = "[S] 0d GetItem";
 	private final L2ItemInstance _item;
 	private final int _playerId;
-
+	
 	public GetItem(L2ItemInstance item, int playerId)
 	{
-		_item=item;
+		_item = item;
 		_playerId = playerId;
 	}
 	

@@ -25,7 +25,8 @@ import com.l2jfree.gameserver.model.actor.L2Character;
  */
 public interface ISkillTargetHandler
 {
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill, L2Character target);
+	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
+			L2Character target);
 	
 	public SkillTargetType[] getSkillTargetTypes();
 }

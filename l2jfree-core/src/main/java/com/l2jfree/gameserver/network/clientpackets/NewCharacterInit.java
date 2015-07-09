@@ -24,22 +24,22 @@ import com.l2jfree.gameserver.network.serverpackets.NewCharacterSuccess;
 public class NewCharacterInit extends L2GameClientPacket
 {
 	private static final String _C__NEWCHARACTER = "[C] 13 NewCharacterPacket c";
-
-    @Override
-    protected void readImpl()
-    {
-    	// trigger packet
-    }
-
-    @Override
-    protected void runImpl()
+	
+	@Override
+	protected void readImpl()
+	{
+		// trigger packet
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("CreateNewChar");
-
+		
 		sendPacket(NewCharacterSuccess.PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

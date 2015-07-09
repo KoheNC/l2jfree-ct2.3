@@ -26,23 +26,24 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 public class RequestGmList extends L2GameClientPacket
 {
 	private static final String _C__81_REQUESTGMLIST = "[C] 81 RequestGmList";
-
+	
 	@Override
 	protected void readImpl()
 	{
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
-		if (player == null) return;
-
+		if (player == null)
+			return;
+		
 		GmListTable.sendListToPlayer(getClient().getActiveChar());
-
+		
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

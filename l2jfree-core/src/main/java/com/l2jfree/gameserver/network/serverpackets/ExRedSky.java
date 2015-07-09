@@ -27,19 +27,18 @@ public class ExRedSky extends L2GameServerPacket
 	{
 		_duration = duration;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
-	protected
-	void writeImpl()
+	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x41);
 		writeD(_duration);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -48,5 +47,5 @@ public class ExRedSky extends L2GameServerPacket
 	{
 		return _S__FE_40_EXREDSKYPACKET;
 	}
-
+	
 }

@@ -30,59 +30,47 @@ import com.l2jfree.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jfree.gameserver.network.serverpackets.SocialAction;
 import com.l2jfree.gameserver.util.Util;
 
-
 public class AdminTest implements IAdminCommandHandler
 {
-	private static final String[][]	ADMIN_COMMANDS	=
-													{
+	private static final String[][] ADMIN_COMMANDS = {
 			{ "admin_stats",
-
+			
 			"Shows server performance statistics.", "Usage: stats" },
-			{
-			"admin_docast",
-
-			"Test skill animation on target.",
-			"Usage: //docast <skill id> <skill level> <skill time>",
-			"Options:",
-			"skill id - Id of skill animation that you want to test",
-			"skill level - skill level of the skill you want to display",
-			"skill time - the duration of the casting animation" },
-			{
-			"admin_docastself",
-
-			"Test skill animation on oneself.",
-			"Usage: //docastself <skill id> <skill level> <skill time>",
-			"Options:",
-			"skill id - Id of skill animation that you want to test",
-			"skill level - skill level of the skill you want to display",
-			"skill time - the duration of the casting animation" },
-			{
-			"admin_targets",
-
-			"List skill targets (only multiple targets supported).",
-			"Usage: targets skillID <level>",
-			"Options:",
-			"skillID - Id of skill, target list you want to see",
-			"<level> - skill level, Default is 1", },
+			{ "admin_docast",
+			
+			"Test skill animation on target.", "Usage: //docast <skill id> <skill level> <skill time>", "Options:",
+					"skill id - Id of skill animation that you want to test",
+					"skill level - skill level of the skill you want to display",
+					"skill time - the duration of the casting animation" },
+			{ "admin_docastself",
+			
+			"Test skill animation on oneself.", "Usage: //docastself <skill id> <skill level> <skill time>",
+					"Options:", "skill id - Id of skill animation that you want to test",
+					"skill level - skill level of the skill you want to display",
+					"skill time - the duration of the casting animation" },
+			{ "admin_targets",
+			
+			"List skill targets (only multiple targets supported).", "Usage: targets skillID <level>", "Options:",
+					"skillID - Id of skill, target list you want to see", "<level> - skill level, Default is 1", },
 			{ "admin_mp",
-
-			"Enable/disable client-server packets monitor.", "Usage: mp |dump", "Options:", "dump - dump currently cuptured packets", },
-			{ "admin_known",
-
-			"Enable/disable knownlist ingame debug messages.", "Usage: knownlist", },
-			{ "admin_heading",
-
+			
+			"Enable/disable client-server packets monitor.", "Usage: mp |dump", "Options:",
+					"dump - dump currently cuptured packets", }, { "admin_known",
+			
+			"Enable/disable knownlist ingame debug messages.", "Usage: knownlist", }, { "admin_heading",
+			
 			"Show usefull info about target heading and angle.", "Usage: heading", } };
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
-
+		
 		String cmd = st.nextToken(); // get command
-
+		
 		if (cmd.equals("admin_stats"))
 		{
 			for (String line : ThreadPoolManager.getInstance().getStats())
@@ -100,9 +88,9 @@ public class AdminTest implements IAdminCommandHandler
 			}
 			else
 			{
-				caster = (L2Character) obj;
+				caster = (L2Character)obj;
 			}
-
+			
 			int skillId = 0, skillLevel = 0, skillTime = 0;
 			try
 			{
@@ -121,8 +109,8 @@ public class AdminTest implements IAdminCommandHandler
 				target = caster;
 			}
 			else
-				target = (L2Character) caster.getTarget();
-
+				target = (L2Character)caster.getTarget();
+			
 			caster.broadcastPacket(new MagicSkillUse(caster, target, skillId, skillLevel, skillTime, 0));
 			activeChar.sendMessage("Did a cast for skill: " + skillId + ", level: " + skillLevel);
 		}
@@ -140,7 +128,7 @@ public class AdminTest implements IAdminCommandHandler
 			L2Skill skill;
 			int skillId = 0;
 			int skillLvl = 1;
-
+			
 			try
 			{
 				skillId = Integer.parseInt(st.nextToken());
@@ -150,23 +138,23 @@ public class AdminTest implements IAdminCommandHandler
 			catch (Exception e)
 			{
 			}
-
+			
 			if (skillId > 0)
 			{
 				int skillLvlMax = SkillTable.getInstance().getMaxLevel(skillId);
-
+				
 				if (skillLvl > skillLvlMax)
 					skillLvl = skillLvlMax;
-
+				
 				skill = SkillTable.getInstance().getInfo(skillId, skillLvl);
 				if (skill != null)
 				{
 					L2Object[] targetList = skill.getTargetList(activeChar);
-
+					
 					if (targetList.length > 0)
 					{
 						activeChar.sendMessage("Targets list fo skill " + skill.getName() + ":");
-
+						
 						for (L2Object target : targetList)
 						{
 							if (target instanceof L2Npc)
@@ -176,7 +164,7 @@ public class AdminTest implements IAdminCommandHandler
 							if (target instanceof L2Summon)
 								activeChar.sendMessage("PET: " + target.getName());
 						}
-
+						
 						activeChar.sendMessage("Total targets: " + targetList.length);
 					}
 					else
@@ -193,21 +181,22 @@ public class AdminTest implements IAdminCommandHandler
 		else if (cmd.equals("admin_heading"))
 		{
 			L2Character charTarget = activeChar.getTarget(L2Character.class);
-
+			
 			if (charTarget != null)
 			{
 				double angleChar, angleTarget, angleDiff;
-
+				
 				angleChar = Util.calculateAngleFrom(charTarget, activeChar);
 				angleTarget = Util.convertHeadingToDegree(charTarget.getHeading());
 				angleDiff = angleChar - angleTarget;
-
+				
 				activeChar.sendMessage("Target heading " + charTarget.getHeading() + ".");
 				activeChar.sendMessage("Your heading " + activeChar.getHeading() + ".");
 				activeChar.sendMessage("Target angle " + angleTarget + ".");
 				activeChar.sendMessage("Your angle " + angleChar + ".");
 				activeChar.sendMessage("Angle difference before correction " + angleDiff + ".");
-				activeChar.sendMessage("Angle difference after correction " + Util.getAngleDifference(activeChar, charTarget) + ".");
+				activeChar.sendMessage("Angle difference after correction "
+						+ Util.getAngleDifference(activeChar, charTarget) + ".");
 				activeChar.sendMessage("Is Behind ? " + activeChar.isBehind(charTarget) + ".");
 			}
 			else
@@ -215,7 +204,7 @@ public class AdminTest implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	/**
 	 * Test social action or NPC animation
 	 * @param activeChar
@@ -224,16 +213,16 @@ public class AdminTest implements IAdminCommandHandler
 	public void adminTestSocial(L2PcInstance activeChar, int socId)
 	{
 		L2Object target;
-
+		
 		if (activeChar.getTarget() instanceof L2Character)
 			target = activeChar.getTarget();
 		else
 			target = activeChar;
-
+		
 		SocialAction sa = new SocialAction(target.getObjectId(), socId);
-		((L2Character) target).broadcastPacket(sa);
+		((L2Character)target).broadcastPacket(sa);
 	}
-
+	
 	/**
 	 * Show tips about command usage and syntax.
 	 * @param command admin command name
@@ -249,10 +238,11 @@ public class AdminTest implements IAdminCommandHandler
 			}
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */
+	@Override
 	public String[] getAdminCommandList()
 	{
 		String[] _adminCommandsOnly = new String[ADMIN_COMMANDS.length];
@@ -260,7 +250,7 @@ public class AdminTest implements IAdminCommandHandler
 		{
 			_adminCommandsOnly[i] = ADMIN_COMMANDS[i][0];
 		}
-
+		
 		return _adminCommandsOnly;
 	}
 }

@@ -20,23 +20,23 @@ import com.l2jfree.gameserver.network.serverpackets.ExShowAgitInfo;
 public class RequestAllAgitInfo extends L2GameClientPacket
 {
 	private static final String _C__REQUESTALLAGITINFO = "[C] D0:3E RequestAllAgitInfo ch";
-
-    @Override
-    protected void readImpl()
-    {
-    	// trigger packet
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	if (getActiveChar() != null)
-    		sendPacket(ExShowAgitInfo.PACKET);
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__REQUESTALLAGITINFO;
-    }
+	
+	@Override
+	protected void readImpl()
+	{
+		// trigger packet
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		if (getActiveChar() != null)
+			sendPacket(ExShowAgitInfo.PACKET);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__REQUESTALLAGITINFO;
+	}
 }

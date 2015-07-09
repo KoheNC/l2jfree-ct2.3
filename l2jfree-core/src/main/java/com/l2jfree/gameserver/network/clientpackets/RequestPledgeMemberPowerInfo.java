@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.clientpackets;
 
-
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.serverpackets.PledgeReceivePowerInfo;
@@ -27,36 +26,36 @@ import com.l2jfree.gameserver.network.serverpackets.PledgeReceivePowerInfo;
 public class RequestPledgeMemberPowerInfo extends L2GameClientPacket
 {
 	private static final String _C__24_REQUESTJOINPLEDGE = "[C] 24 RequestPledgeMemberPowerInfo";
-
-	@SuppressWarnings("unused")
-    private int _unk1;
-    private String _target;
 	
-    @Override
-    protected void readImpl()
-    {
-        _unk1 = readD();
-        _target = readS();
-    }
-
-    @Override
-    protected void runImpl()
+	@SuppressWarnings("unused")
+	private int _unk1;
+	private String _target;
+	
+	@Override
+	protected void readImpl()
+	{
+		_unk1 = readD();
+		_target = readS();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2Clan clan = getClient().getActiveChar().getClan();
-        if (clan != null)
-        {
-            L2ClanMember cm = clan.getClanMember(_target);
-            if (cm != null && cm.isOnline())
-            {
-                getClient().getActiveChar().sendPacket(new PledgeReceivePowerInfo(cm));
-                //_log.warn("Everything is Ok with this packet: "+_target);
-            }
-            //else
-                //_log.warn("Wtf is worng with this packet");
-        }
-        //_log.warn("Wtf is worng with this packet, no clan?!?!?!?!?");
+		if (clan != null)
+		{
+			L2ClanMember cm = clan.getClanMember(_target);
+			if (cm != null && cm.isOnline())
+			{
+				getClient().getActiveChar().sendPacket(new PledgeReceivePowerInfo(cm));
+				//_log.warn("Everything is Ok with this packet: "+_target);
+			}
+			//else
+			//_log.warn("Wtf is worng with this packet");
+		}
+		//_log.warn("Wtf is worng with this packet, no clan?!?!?!?!?");
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.clientpackets.ClientBasePacket#getType()
 	 */

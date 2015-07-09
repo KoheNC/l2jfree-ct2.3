@@ -58,13 +58,13 @@ public final class ProofOfClanAlliance extends QuestJython
 	private static final int SKILL_DEATH = 4083;
 	private static final int LOYALTY_TIMER = 4 * 1000;
 	private static final int CHEST_TIMER = 300 * 1000;
-
+	
 	// Quest NPCs
 	private static final int SIR_KRISTOF_RODEMAI = 30756;
 	private static final int STATUE_OF_OFFERING = 30757;
 	private static final int ATHREA = 30758;
 	private static final int KALIS = 30759;
-
+	
 	// Quest items
 	private static final int HERB_OF_HARIT = 3832;
 	private static final int HERB_OF_VANOR = 3833;
@@ -75,46 +75,35 @@ public final class ProofOfClanAlliance extends QuestJython
 	private static final int VOUCHER_OF_FAITH = 3873;
 	private static final int ALLIANCE_MANIFESTO = 3874;
 	private static final int POTION_OF_RECOVERY = 3889;
-
+	
 	// Quest monsters
 	private static final int OEL_MAHUM_WITCH_DOCTOR = 20576;
 	private static final int HARIT_LIZARDMAN_SHAMAN = 20644;
 	private static final int VANOR_SILENOS_SHAMAN = 20685;
-	private static final int[] CHEST = {
-		27173, 27174, 27175, 27176, 27177
-	};
+	private static final int[] CHEST = { 27173, 27174, 27175, 27176, 27177 };
 	private static final String CHEST_KILLED = "##########Bingo!##########";
-	private static final Location[] CHEST_POS = {
-		new Location(102273, 103433, -3512),
-		new Location(102190, 103379, -3524),
-		new Location(102107, 103325, -3533),
-		new Location(102024, 103271, -3500),
-		new Location(102327, 103350, -3511),
-		new Location(102244, 103296, -3518),
-		new Location(102161, 103242, -3529),
-		new Location(102078, 103188, -3500),
-		new Location(102381, 103267, -3538),
-		new Location(102298, 103213, -3532),
-		new Location(102215, 103159, -3520),
-		new Location(102132, 103105, -3513),
-		new Location(102435, 103184, -3515),
-		new Location(102352, 103130, -3522),
-		new Location(102269, 103076, -3533),
-		new Location(102186, 103022, -3541),
-	};
+	private static final Location[] CHEST_POS = { new Location(102273, 103433, -3512),
+			new Location(102190, 103379, -3524), new Location(102107, 103325, -3533),
+			new Location(102024, 103271, -3500), new Location(102327, 103350, -3511),
+			new Location(102244, 103296, -3518), new Location(102161, 103242, -3529),
+			new Location(102078, 103188, -3500), new Location(102381, 103267, -3538),
+			new Location(102298, 103213, -3532), new Location(102215, 103159, -3520),
+			new Location(102132, 103105, -3513), new Location(102435, 103184, -3515),
+			new Location(102352, 103130, -3522), new Location(102269, 103076, -3533),
+			new Location(102186, 103022, -3541), };
 	private static final int NEEDED_WINS = Math.min(4, CHEST_POS.length);
-
+	
 	private final FastMap<Integer, QuestClan> _questers;
 	private volatile QuestClan _minigame;
-
+	
 	private ProofOfClanAlliance(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
-		questItemIds = new int[] {
-			// can be reused - verified by NC customer support
-			/*HERB_OF_HARIT, HERB_OF_VANOR, HERB_OF_OEL_MAHUM,*/ BLOOD_OF_EVA, SYMBOL_OF_LOYALTY,
-			ANTIDOTE_RECIPE_LIST, VOUCHER_OF_FAITH, POTION_OF_RECOVERY
-		};
+		questItemIds =
+				new int[] {
+						// can be reused - verified by NC customer support
+						/*HERB_OF_HARIT, HERB_OF_VANOR, HERB_OF_OEL_MAHUM,*/BLOOD_OF_EVA, SYMBOL_OF_LOYALTY,
+						ANTIDOTE_RECIPE_LIST, VOUCHER_OF_FAITH, POTION_OF_RECOVERY };
 		_questers = new FastMap<Integer, QuestClan>().setShared(true);
 		_minigame = null;
 		addStartNpc(SIR_KRISTOF_RODEMAI);
@@ -129,7 +118,7 @@ public final class ProofOfClanAlliance extends QuestJython
 		for (int id : CHEST)
 			addKillId(id);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -217,8 +206,8 @@ public final class ProofOfClanAlliance extends QuestJython
 						{
 							//npc.getAI().setIntention(CtrlIntention.AI_INTENTION_CAST,
 							//		new SkillUsageRequest(skill));
-							npc.broadcastPacket(new MagicSkillUse(npc, player, skill, skill.getHitTime(),
-									skill.getReuseDelay()));
+							npc.broadcastPacket(new MagicSkillUse(npc, player, skill, skill.getHitTime(), skill
+									.getReuseDelay()));
 							npc.broadcastPacket(new MagicSkillLaunched(npc, skill, player));
 						}
 						player.doDie(npc);
@@ -257,7 +246,7 @@ public final class ProofOfClanAlliance extends QuestJython
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onDeath(L2Character killer, L2Character victim, QuestState qs)
 	{
@@ -284,7 +273,7 @@ public final class ProofOfClanAlliance extends QuestJython
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -295,8 +284,8 @@ public final class ProofOfClanAlliance extends QuestJython
 			{
 				if (ci.getWins() < NEEDED_WINS)
 				{
-					if ((ci.getKills() >= CHEST_POS.length - NEEDED_WINS && ci.getKills() - ci.getWins() == 12) ||
-							Rnd.get(NEEDED_WINS) == 0)
+					if ((ci.getKills() >= CHEST_POS.length - NEEDED_WINS && ci.getKills() - ci.getWins() == 12)
+							|| Rnd.get(NEEDED_WINS) == 0)
 					{
 						ci.incWins();
 						npc.broadcastPacket(new NpcSay(npc, CHEST_KILLED));
@@ -313,19 +302,19 @@ public final class ProofOfClanAlliance extends QuestJython
 		QuestState qs = killer.getQuestState(PROOF_OF_CLAN_ALLIANCE);
 		switch (npc.getNpcId())
 		{
-		case OEL_MAHUM_WITCH_DOCTOR:
-			qs.dropQuestItems(HERB_OF_OEL_MAHUM, 1, 1, 100000, true, false);
-			break;
-		case HARIT_LIZARDMAN_SHAMAN:
-			qs.dropQuestItems(HERB_OF_HARIT, 1, 1, 100000, true, false);
-			break;
-		case VANOR_SILENOS_SHAMAN:
-			qs.dropQuestItems(HERB_OF_VANOR, 1, 1, 100000, true, false);
-			break;
+			case OEL_MAHUM_WITCH_DOCTOR:
+				qs.dropQuestItems(HERB_OF_OEL_MAHUM, 1, 1, 100000, true, false);
+				break;
+			case HARIT_LIZARDMAN_SHAMAN:
+				qs.dropQuestItems(HERB_OF_HARIT, 1, 1, 100000, true, false);
+				break;
+			case VANOR_SILENOS_SHAMAN:
+				qs.dropQuestItems(HERB_OF_VANOR, 1, 1, 100000, true, false);
+				break;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
@@ -343,12 +332,12 @@ public final class ProofOfClanAlliance extends QuestJython
 				switch (npc.getNpcId())
 				{
 				// anyone may speak
-				case SIR_KRISTOF_RODEMAI:
-				case STATUE_OF_OFFERING:
-					break;
-				default:
-					if (!talker.isClanLeader())
-						return NO_QUEST;
+					case SIR_KRISTOF_RODEMAI:
+					case STATUE_OF_OFFERING:
+						break;
+					default:
+						if (!talker.isClanLeader())
+							return NO_QUEST;
 				}
 			}
 			else
@@ -372,139 +361,142 @@ public final class ProofOfClanAlliance extends QuestJython
 			return NO_QUEST;
 		switch (npc.getNpcId())
 		{
-		case SIR_KRISTOF_RODEMAI:
-			if (state == State.CREATED)
-			{
-				if (talker.isClanLeader())
+			case SIR_KRISTOF_RODEMAI:
+				if (state == State.CREATED)
 				{
-					switch (talker.getClan().getLevel())
+					if (talker.isClanLeader())
 					{
-					case 0: case 1: case 2: return buildReply(npc, 1);
-					case 3:
-						if (qs.getQuestItemsCount(ALLIANCE_MANIFESTO) > 0)
-							return buildReply(npc, 3);
-						else
-							return buildReply(npc, 4);
-					default:
-						return buildReply(npc, 2);
+						switch (talker.getClan().getLevel())
+						{
+							case 0:
+							case 1:
+							case 2:
+								return buildReply(npc, 1);
+							case 3:
+								if (qs.getQuestItemsCount(ALLIANCE_MANIFESTO) > 0)
+									return buildReply(npc, 3);
+								else
+									return buildReply(npc, 4);
+							default:
+								return buildReply(npc, 2);
+						}
 					}
+					else
+						return buildReply(npc, 5);
 				}
-				else
-					return buildReply(npc, 5);
-			}
-			else if (state == State.STARTED)
-			{
-				if (qs.getQuestItemsCount(VOUCHER_OF_FAITH) > 0)
+				else if (state == State.STARTED)
 				{
-					qs.takeItems(VOUCHER_OF_FAITH, -1);
-					qs.exitQuest(false);
-					qs.giveItems(ALLIANCE_MANIFESTO, 1);
-					qs.addExpAndSp(0, 120000);
-					talker.sendPacket(SND_FINISH);
-					talker.broadcastPacket(new SocialAction(talker.getObjectId(), 3));
-					return buildReply(npc, 9);
-				}
-				else
-					return buildReply(npc, 10);
-			}
-			break;
-		case KALIS:
-			if (qc == null)
-				return NO_QUEST;
-			else if (state == State.CREATED)
-			{
-				QuestState l = qc.getClan().getLeader().getPlayerInstance().getQuestState(PROOF_OF_CLAN_ALLIANCE);
-				if (l.getState() == State.STARTED)
-					return buildReply(npc, 12);
-			}
-			else if (state == State.STARTED)
-			{
-				int part = qc.getPart();
-				long symbols = qs.getQuestItemsCount(SYMBOL_OF_LOYALTY);
-				boolean poisoned = talker.getEffects().hasEffect(SKILL_POISON);
-				if (part == SIR_KRISTOF_RODEMAI)
-					return buildReply(npc, 1);
-				else if (part == STATUE_OF_OFFERING && symbols < NEEDED_MEMBERS)
-					return buildReply(npc, 5);
-				else if (symbols >= NEEDED_MEMBERS && !poisoned)
-					return buildReply(npc, 6);
-				else if (part == KALIS * 2 && qs.getQuestItemsCount(HERB_OF_HARIT) > 0 &&
-						qs.getQuestItemsCount(HERB_OF_OEL_MAHUM) > 0 &&
-						qs.getQuestItemsCount(HERB_OF_VANOR) > 0 && poisoned)
-				{
-					qs.takeItems(ANTIDOTE_RECIPE_LIST, -1);
-					qs.takeItems(BLOOD_OF_EVA, -1);
-					qs.takeItems(HERB_OF_HARIT, -1);
-					qs.takeItems(HERB_OF_OEL_MAHUM, -1);
-					qs.takeItems(HERB_OF_VANOR, -1);
-					qs.giveItems(VOUCHER_OF_FAITH, 1);
-					qs.giveItems(POTION_OF_RECOVERY, 1);
-					qs.set(CONDITION, 4);
-					qc.setPart(SIR_KRISTOF_RODEMAI * 2);
-					return buildReply(npc, 8);
-				}
-				else if (part % KALIS == 0 || part == ATHREA)
-				{
-					if (!poisoned)
+					if (qs.getQuestItemsCount(VOUCHER_OF_FAITH) > 0)
 					{
-						qc.setPart(SIR_KRISTOF_RODEMAI);
+						qs.takeItems(VOUCHER_OF_FAITH, -1);
+						qs.exitQuest(false);
+						qs.giveItems(ALLIANCE_MANIFESTO, 1);
+						qs.addExpAndSp(0, 120000);
+						talker.sendPacket(SND_FINISH);
+						talker.broadcastPacket(new SocialAction(talker.getObjectId(), 3));
 						return buildReply(npc, 9);
 					}
 					else
 						return buildReply(npc, 10);
 				}
-				else if (part == SIR_KRISTOF_RODEMAI * 2)
-					return buildReply(npc, 11);
-			}
-			break;
-		case STATUE_OF_OFFERING:
-			if (qc == null)
-				return NO_QUEST;
-			else if (qc.getPart() != STATUE_OF_OFFERING)
-				return buildReply(npc, 8);
-			else if (!talker.isClanLeader())
-			{
-				if (talker.getLevel() > 39)
+				break;
+			case KALIS:
+				if (qc == null)
+					return NO_QUEST;
+				else if (state == State.CREATED)
 				{
-					if (qc.isLoyal(talker))
-						return buildReply(npc, 3);
-					else
+					QuestState l = qc.getClan().getLeader().getPlayerInstance().getQuestState(PROOF_OF_CLAN_ALLIANCE);
+					if (l.getState() == State.STARTED)
+						return buildReply(npc, 12);
+				}
+				else if (state == State.STARTED)
+				{
+					int part = qc.getPart();
+					long symbols = qs.getQuestItemsCount(SYMBOL_OF_LOYALTY);
+					boolean poisoned = talker.getEffects().hasEffect(SKILL_POISON);
+					if (part == SIR_KRISTOF_RODEMAI)
 						return buildReply(npc, 1);
+					else if (part == STATUE_OF_OFFERING && symbols < NEEDED_MEMBERS)
+						return buildReply(npc, 5);
+					else if (symbols >= NEEDED_MEMBERS && !poisoned)
+						return buildReply(npc, 6);
+					else if (part == KALIS * 2 && qs.getQuestItemsCount(HERB_OF_HARIT) > 0
+							&& qs.getQuestItemsCount(HERB_OF_OEL_MAHUM) > 0 && qs.getQuestItemsCount(HERB_OF_VANOR) > 0
+							&& poisoned)
+					{
+						qs.takeItems(ANTIDOTE_RECIPE_LIST, -1);
+						qs.takeItems(BLOOD_OF_EVA, -1);
+						qs.takeItems(HERB_OF_HARIT, -1);
+						qs.takeItems(HERB_OF_OEL_MAHUM, -1);
+						qs.takeItems(HERB_OF_VANOR, -1);
+						qs.giveItems(VOUCHER_OF_FAITH, 1);
+						qs.giveItems(POTION_OF_RECOVERY, 1);
+						qs.set(CONDITION, 4);
+						qc.setPart(SIR_KRISTOF_RODEMAI * 2);
+						return buildReply(npc, 8);
+					}
+					else if (part % KALIS == 0 || part == ATHREA)
+					{
+						if (!poisoned)
+						{
+							qc.setPart(SIR_KRISTOF_RODEMAI);
+							return buildReply(npc, 9);
+						}
+						else
+							return buildReply(npc, 10);
+					}
+					else if (part == SIR_KRISTOF_RODEMAI * 2)
+						return buildReply(npc, 11);
+				}
+				break;
+			case STATUE_OF_OFFERING:
+				if (qc == null)
+					return NO_QUEST;
+				else if (qc.getPart() != STATUE_OF_OFFERING)
+					return buildReply(npc, 8);
+				else if (!talker.isClanLeader())
+				{
+					if (talker.getLevel() > 39)
+					{
+						if (qc.isLoyal(talker))
+							return buildReply(npc, 3);
+						else
+							return buildReply(npc, 1);
+					}
+					else
+						return buildReply(npc, 4);
 				}
 				else
-					return buildReply(npc, 4);
-			}
-			else
-				return buildReply(npc, 2);
-		case ATHREA:
-			if (qc == null)
-				return NO_QUEST;
-			int part = qc.getPart();
-			QuestState l = qc.getClan().getLeader().getPlayerInstance().getQuestState(PROOF_OF_CLAN_ALLIANCE);
-			if (part == KALIS && l.getQuestItemsCount(ANTIDOTE_RECIPE_LIST) > 0 &&
-					l.getQuestItemsCount(BLOOD_OF_EVA) == 0)
-				return buildReply(npc, 1);
-			else if (part == KALIS * 2)
-				return buildReply(npc, 10);
-			else if (part == ATHREA)
-			{
-				switch (qc.getChests().getState())
-				{
-				case ChestInfo.WON:
-					qs.giveItems(BLOOD_OF_EVA, 1);
-					qc.setPart(KALIS * 2);
-					return buildReply(npc, 9);
-				case ChestInfo.FAILED:
-					return buildReply(npc, 6);
-				default:
+					return buildReply(npc, 2);
+			case ATHREA:
+				if (qc == null)
+					return NO_QUEST;
+				int part = qc.getPart();
+				QuestState l = qc.getClan().getLeader().getPlayerInstance().getQuestState(PROOF_OF_CLAN_ALLIANCE);
+				if (part == KALIS && l.getQuestItemsCount(ANTIDOTE_RECIPE_LIST) > 0
+						&& l.getQuestItemsCount(BLOOD_OF_EVA) == 0)
+					return buildReply(npc, 1);
+				else if (part == KALIS * 2)
 					return buildReply(npc, 10);
+				else if (part == ATHREA)
+				{
+					switch (qc.getChests().getState())
+					{
+						case ChestInfo.WON:
+							qs.giveItems(BLOOD_OF_EVA, 1);
+							qc.setPart(KALIS * 2);
+							return buildReply(npc, 9);
+						case ChestInfo.FAILED:
+							return buildReply(npc, 6);
+						default:
+							return buildReply(npc, 10);
+					}
 				}
-			}
-			break;
+				break;
 		}
 		return NO_QUEST;
 	}
-
+	
 	private static final String buildReply(L2Npc npc, int answer)
 	{
 		L2TextBuilder tb = L2TextBuilder.newInstance();
@@ -516,26 +508,26 @@ public final class ProofOfClanAlliance extends QuestJython
 		tb.append(".htm");
 		return tb.moveToString();
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new ProofOfClanAlliance(501, PROOF_OF_CLAN_ALLIANCE, "Proof of Clan Alliance");
 	}
-
+	
 	private static class QuestClan
 	{
 		private final L2Clan _clan;
 		private final L2ClanMember[] _loyal;
 		private final ChestInfo _chests;
 		private int _part;
-
+		
 		public QuestClan(L2Clan clan)
 		{
 			_clan = clan;
 			_loyal = new L2ClanMember[NEEDED_MEMBERS];
 			_chests = new ChestInfo();
 		}
-
+		
 		public synchronized boolean addLoyalMember(L2PcInstance player)
 		{
 			L2ClanMember cm = getClan().getClanMember(player.getObjectId());
@@ -555,11 +547,10 @@ public final class ProofOfClanAlliance extends QuestJython
 				}
 			}
 			if (DEBUG)
-				_log.warn("Excess loyal member (" + player + ") can't be added to " + this,
-						new IllegalStateException());
+				_log.warn("Excess loyal member (" + player + ") can't be added to " + this, new IllegalStateException());
 			return false;
 		}
-
+		
 		public boolean checkLeader()
 		{
 			L2PcInstance leader = getClan().getLeader().getPlayerInstance();
@@ -571,7 +562,7 @@ public final class ProofOfClanAlliance extends QuestJython
 			else
 				return true;
 		}
-
+		
 		public boolean isLoyal(L2PcInstance player)
 		{
 			for (L2ClanMember cm : _loyal)
@@ -579,27 +570,27 @@ public final class ProofOfClanAlliance extends QuestJython
 					return true;
 			return false;
 		}
-
+		
 		public L2Clan getClan()
 		{
 			return _clan;
 		}
-
+		
 		public ChestInfo getChests()
 		{
 			return _chests;
 		}
-
+		
 		public int getPart()
 		{
 			return _part;
 		}
-
+		
 		public void setPart(int part)
 		{
 			_part = part;
 		}
-
+		
 		@Override
 		public boolean equals(Object obj)
 		{
@@ -608,13 +599,13 @@ public final class ProofOfClanAlliance extends QuestJython
 			else
 				return false;
 		}
-
+		
 		@Override
 		public int hashCode()
 		{
 			return getClan().getClanId();
 		}
-
+		
 		@Override
 		public String toString()
 		{
@@ -640,7 +631,7 @@ public final class ProofOfClanAlliance extends QuestJython
 			return tb.moveToString();
 		}
 	}
-
+	
 	private static class ChestInfo
 	{
 		private static final int NONE = 0;
@@ -649,45 +640,45 @@ public final class ProofOfClanAlliance extends QuestJython
 		private int _kills;
 		private int _wins;
 		private int _state;
-
+		
 		public ChestInfo()
 		{
 			reset();
 		}
-
+		
 		public int getKills()
 		{
 			return _kills;
 		}
-
+		
 		public void incKills()
 		{
 			_kills++;
 		}
-
+		
 		public int getWins()
 		{
 			return _wins;
 		}
-
+		
 		public void incWins()
 		{
 			_wins++;
 			if (getWins() == NEEDED_WINS)
 				_state = WON;
 		}
-
+		
 		public void timeout()
 		{
 			if (getState() == NONE)
 				_state = FAILED;
 		}
-
+		
 		public int getState()
 		{
 			return _state;
 		}
-
+		
 		public void reset()
 		{
 			_kills = 0;

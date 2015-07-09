@@ -44,7 +44,7 @@ public abstract class AbstractTeamBasedFunEvent<Team extends AbstractFunEventTea
 	 */
 	@Override
 	protected synchronized void setState(FunEventState expectedPrevState, FunEventState nextState)
-		throws IllegalStateException
+			throws IllegalStateException
 	{
 		super.setState(expectedPrevState, nextState);
 		

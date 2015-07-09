@@ -20,12 +20,12 @@ import com.l2jfree.gameserver.skills.Env;
 public class ConditionPlayerIsClanLeader extends Condition
 {
 	private final boolean _val;
-
+	
 	public ConditionPlayerIsClanLeader(boolean val)
 	{
 		_val = val;
 	}
-
+	
 	@Override
 	public boolean testImpl(Env env)
 	{

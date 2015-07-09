@@ -26,28 +26,28 @@ import com.l2jfree.gameserver.network.serverpackets.ExPutCommissionResultForVari
 public final class RequestConfirmGemStone extends AbstractRefinePacket
 {
 	private static final String _C__D0_2B_REQUESTCONFIRMGEMSTONE = "[C] D0:2B RequestConfirmGemStone";
-
+	
 	private int _targetItemObjId;
 	private int _refinerItemObjId;
 	private int _gemstoneItemObjId;
 	private long _gemStoneCount;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_targetItemObjId = readD();
 		_refinerItemObjId = readD();
 		_gemstoneItemObjId = readD();
-		_gemStoneCount= readCompQ();
+		_gemStoneCount = readCompQ();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2ItemInstance targetItem = activeChar.getInventory().getItemByObjectId(_targetItemObjId);
 		L2ItemInstance refinerItem = activeChar.getInventory().getItemByObjectId(_refinerItemObjId);
 		L2ItemInstance gemStoneItem = activeChar.getInventory().getItemByObjectId(_gemstoneItemObjId);
@@ -56,7 +56,7 @@ public final class RequestConfirmGemStone extends AbstractRefinePacket
 			requestFailed(SystemMessageId.AUGMENTATION_FAILED_DUE_TO_INAPPROPRIATE_CONDITIONS);
 			return;
 		}
-
+		
 		if (!isValid(activeChar))
 		{
 			sendAF();
@@ -68,24 +68,25 @@ public final class RequestConfirmGemStone extends AbstractRefinePacket
 			requestFailed(SystemMessageId.THIS_IS_NOT_A_SUITABLE_ITEM);
 			return;
 		}
-
+		
 		// Check for gemstone count
 		final LifeStone ls = getLifeStone(refinerItem.getItemId());
 		if (ls == null)
 			return;
-
+		
 		if (_gemStoneCount != getGemStoneCount(targetItem.getItem().getItemGrade(), ls.getGrade()))
 		{
 			requestFailed(SystemMessageId.GEMSTONE_QUANTITY_IS_INCORRECT);
 			return;
 		}
-
-		sendPacket(new ExPutCommissionResultForVariationMake(_gemstoneItemObjId, _gemStoneCount, gemStoneItem.getItemId()));
+		
+		sendPacket(new ExPutCommissionResultForVariationMake(_gemstoneItemObjId, _gemStoneCount,
+				gemStoneItem.getItemId()));
 		sendPacket(SystemMessageId.PRESS_THE_AUGMENT_BUTTON_TO_BEGIN);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

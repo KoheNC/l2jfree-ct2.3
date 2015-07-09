@@ -36,16 +36,17 @@ import com.l2jfree.gameserver.model.entity.ClanHall;
 public final class ContestableHideoutGuardManager
 {
 	private static final Log _log = LogFactory.getLog(ContestableHideoutGuardManager.class);
-	private static final String LOAD_SIEGE_GUARDS = "SELECT id,npcId,x,y,z,heading,respawnDelay FROM clanhall_siege_guards WHERE hallId=?";
+	private static final String LOAD_SIEGE_GUARDS =
+			"SELECT id,npcId,x,y,z,heading,respawnDelay FROM clanhall_siege_guards WHERE hallId=?";
 	private final ClanHall _hideout;
 	private L2Spawn[] _guardSpawn = new L2Spawn[0];
-
+	
 	public ContestableHideoutGuardManager(ClanHall hideout)
 	{
 		_hideout = hideout;
 		load();
 	}
-
+	
 	public final void load()
 	{
 		Connection con = null;
@@ -80,26 +81,27 @@ public final class ContestableHideoutGuardManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public final void spawnSiegeGuards()
 	{
 		for (L2Spawn s : _guardSpawn)
 			if (s != null)
 				s.init();
 	}
-
+	
 	public final void despawnSiegeGuards()
 	{
 		for (L2Spawn s : _guardSpawn)
 		{
-			if (s == null) continue;
+			if (s == null)
+				continue;
 			s.stopRespawn();
 			L2Npc guard = s.getLastSpawn();
 			if (guard != null)
 				guard.doDie(guard);
 		}
 	}
-
+	
 	public final ClanHall getContestableClanHall()
 	{
 		return _hideout;

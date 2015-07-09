@@ -16,24 +16,24 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 public class TradeDone extends StaticPacket
 {
-	private static final String	_S__TRADEDONE = "[S] 1C TradeDone c[d]";
+	private static final String _S__TRADEDONE = "[S] 1C TradeDone c[d]";
 	public static final TradeDone COMPLETED = new TradeDone(true);
 	public static final TradeDone CANCELLED = new TradeDone(false);
-
+	
 	private final boolean _completed;
-
+	
 	private TradeDone(boolean completed)
 	{
 		_completed = completed;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x1c);
 		writeD(_completed);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

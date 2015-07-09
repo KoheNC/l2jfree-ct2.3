@@ -26,8 +26,8 @@ import com.l2jfree.Config;
 public final class SubClass
 {
 	private static final byte _maxLevel = Config.ALT_MAX_SUBCLASS_LEVEL < Experience.MAX_LEVEL
-												? Config.ALT_MAX_SUBCLASS_LEVEL : Experience.MAX_LEVEL - 1;
-
+			? Config.ALT_MAX_SUBCLASS_LEVEL : Experience.MAX_LEVEL - 1;
+	
 	private ClassId _class;
 	private long _exp = Experience.LEVEL[40];
 	private int _sp = 0;
@@ -115,7 +115,7 @@ public final class SubClass
 			levelValue = _maxLevel;
 		else if (levelValue < 40)
 			levelValue = 40;
-			
+		
 		_level = levelValue;
 	}
 	

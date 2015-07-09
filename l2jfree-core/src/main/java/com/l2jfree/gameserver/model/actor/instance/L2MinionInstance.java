@@ -45,7 +45,7 @@ public class L2MinionInstance extends L2MonsterInstance
 	{
 		super(objectId, template);
 	}
-
+	
 	/**
 	 * Return the master of this L2MinionInstance.<BR><BR>
 	 */
@@ -53,7 +53,7 @@ public class L2MinionInstance extends L2MonsterInstance
 	{
 		return _master;
 	}
-
+	
 	@Override
 	public void onSpawn()
 	{
@@ -65,9 +65,9 @@ public class L2MinionInstance extends L2MonsterInstance
 			// Notify Leader that Minion has Spawned
 			getLeader().notifyMinionSpawned(this);
 		}
-
+		
 		// Check the region where this mob is, do not activate the AI if region is inactive.
-		L2WorldRegion region = L2World.getInstance().getRegion(getX(),getY());
+		L2WorldRegion region = L2World.getInstance().getRegion(getX(), getY());
 		if (region != null && !region.isActive())
 			getAI().stopAITask();
 		super.onSpawn();
@@ -82,7 +82,7 @@ public class L2MinionInstance extends L2MonsterInstance
 	{
 		_master = leader;
 	}
-    
+	
 	/**
 	 * Manages the doDie event for this L2MinionInstance.<BR><BR>
 	 *
@@ -103,7 +103,7 @@ public class L2MinionInstance extends L2MonsterInstance
 	{
 		deleteMe();
 	}
-
+	
 	@Override
 	public float getVitalityPoints(int damage)
 	{

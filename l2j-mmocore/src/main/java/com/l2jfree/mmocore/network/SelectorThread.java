@@ -42,7 +42,8 @@ public abstract class SelectorThread<T extends MMOConnection<T, RP, SP>, RP exte
 		_readWriteThreads = new ReadWriteThread[sc.getSelectorThreadCount()];
 		
 		for (int i = 0; i < _readWriteThreads.length; i++)
-			_readWriteThreads[i] = new ReadWriteThread<T, RP, SP>("ReadWriteThread-" + (i + 1), this, sc, packetHandler);
+			_readWriteThreads[i] =
+					new ReadWriteThread<T, RP, SP>("ReadWriteThread-" + (i + 1), this, sc, packetHandler);
 	}
 	
 	public final void openServerSocket(String address, int port) throws IOException

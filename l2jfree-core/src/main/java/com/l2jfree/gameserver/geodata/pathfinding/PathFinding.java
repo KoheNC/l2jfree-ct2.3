@@ -316,9 +316,8 @@ public abstract class PathFinding
 						{
 							i++;
 							n.setParent(node);
-							n.setCost(Math.abs(start_x - n.getNodeX())
-								+ Math.abs(start_y - n.getNodeY()) + Math.abs(end_x - n.getNodeX())
-								+ Math.abs(end_y - n.getNodeY()));
+							n.setCost(Math.abs(start_x - n.getNodeX()) + Math.abs(start_y - n.getNodeY())
+									+ Math.abs(end_x - n.getNodeX()) + Math.abs(end_y - n.getNodeY()));
 							to_visit.add(n);
 						}
 					}
@@ -431,9 +430,8 @@ public abstract class PathFinding
 				{
 					low = mid;
 				}
-				else if (GeoData.getInstance().canMoveFromToTarget(
-					lastValidNode.getX(), lastValidNode.getY(), lastValidNode.getZ(),
-					midNode.getX(), midNode.getY(), midNode.getZ(), 0))
+				else if (GeoData.getInstance().canMoveFromToTarget(lastValidNode.getX(), lastValidNode.getY(),
+						lastValidNode.getZ(), midNode.getX(), midNode.getY(), midNode.getZ(), 0))
 				{
 					low = mid;
 				}

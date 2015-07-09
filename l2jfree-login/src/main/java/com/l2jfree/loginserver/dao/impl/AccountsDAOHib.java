@@ -33,61 +33,68 @@ public class AccountsDAOHib extends BaseRootDAOHib implements AccountsDAO
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public Accounts getAccountById(String id)
 	{
-		Accounts account = (Accounts) get(Accounts.class, id);
+		Accounts account = (Accounts)get(Accounts.class, id);
 		if (account == null)
 			throw new ObjectRetrievalFailureException("Accounts", id);
 		return account;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createAccount(java.lang.Object)
 	 */
+	@Override
 	public String createAccount(Object obj)
 	{
-		return (String) save(obj);
+		return (String)save(obj);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createOrUpdate(java.lang.Object)
 	 */
+	@Override
 	public void createOrUpdate(Object obj)
 	{
 		saveOrUpdate(obj);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#createOrUpdateAll(java.util.Collection)
 	 */
+	@Override
 	public void createOrUpdateAll(Collection<?> entities)
 	{
 		saveOrUpdateAll(entities);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#getAllAccounts()
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Accounts> getAllAccounts()
 	{
 		return (List<Accounts>)findAll(Accounts.class);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAccount(java.lang.Object)
 	 */
+	@Override
 	public void removeAccount(Object obj)
 	{
 		delete(obj);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.AccountsDAO#removeAccountById(java.io.Serializable)
 	 */
+	@Override
 	public void removeAccountById(String login)
 	{
 		removeObject(Accounts.class, login);

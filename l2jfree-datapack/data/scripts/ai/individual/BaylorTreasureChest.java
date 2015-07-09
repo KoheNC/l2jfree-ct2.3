@@ -25,24 +25,22 @@ import com.l2jfree.tools.random.Rnd;
 public final class BaylorTreasureChest extends ItemDropper
 {
 	private static final String THIS = "BaylorTreasureChest";
-
+	
 	// Quest items
 	private static final int DYNASTY_EARRING = 9470;
 	private static final int BLESSED_ENCHANT_SCROLL = 6578;
 	private static final int SEALED_BOOTS_DESIGN = 6704;
-
+	
 	// Quest monsters
-	private static final int[] TREASURE_CHEST = {
-		29116, 29117
-	};
-
+	private static final int[] TREASURE_CHEST = { 29116, 29117 };
+	
 	public BaylorTreasureChest(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		for (int id : TREASURE_CHEST)
 			addKillId(id);
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -55,7 +53,7 @@ public final class BaylorTreasureChest extends ItemDropper
 			dropItem(npc, SEALED_BOOTS_DESIGN, 10);
 		return null;
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new BaylorTreasureChest(-1, THIS, "ai");

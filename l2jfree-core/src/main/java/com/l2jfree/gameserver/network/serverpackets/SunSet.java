@@ -17,19 +17,19 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class SunSet extends StaticPacket
 {
 	private static final String _S__SUNSET = "[S] 13 SunSet c";
-
+	
 	public static final SunSet STATIC_PACKET = new SunSet();
-
+	
 	private SunSet()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x13);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

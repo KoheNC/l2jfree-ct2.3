@@ -25,68 +25,70 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class RequestJoinPledge extends L2GameClientPacket
 {
 	private static final String _C__24_REQUESTJOINPLEDGE = "[C] 24 RequestJoinPledge";
-
+	
 	private int _objectId;
 	private int _pledgeType;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 		_pledgeType = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Clan clan = activeChar.getClan();
 		if (clan == null || !L2Clan.checkPrivileges(activeChar, L2Clan.CP_CL_JOIN_CLAN))
 		{
 			requestFailed(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
 			return;
 		}
-
+		
 		L2Object obj;
 		if (activeChar.getTargetId() == _objectId)
 			obj = activeChar.getTarget();
 		else
 			obj = L2World.getInstance().getPlayer(_objectId);
-
+		
 		if (obj == null)
 		{
 			requestFailed(SystemMessageId.FIRST_SELECT_USER_TO_INVITE_TO_CLAN);
 			return;
 		}
-
+		
 		L2PcInstance target = obj.getActingPlayer();
 		if (!clan.checkClanJoinCondition(activeChar, target, _pledgeType))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (!activeChar.getRequest().setRequest(target, this))
 		{
 			sendAF();
 			return;
 		}
-
-		String _subPledge = (activeChar.getClan().getSubPledge(_pledgeType) != null ? activeChar.getClan().getSubPledge(_pledgeType).getName() : null);
+		
+		String _subPledge =
+				(activeChar.getClan().getSubPledge(_pledgeType) != null ? activeChar.getClan()
+						.getSubPledge(_pledgeType).getName() : null);
 		target.sendPacket(new AskJoinPledge(activeChar.getObjectId(), _subPledge, _pledgeType, clan.getName()));
 		sendPacket(new SystemMessage(SystemMessageId.INVITED_C1_TO_CLAN).addPcName(target));
-
+		
 		sendAF();
 	}
-
+	
 	public int getSubPledgeType()
 	{
 		return _pledgeType;
 	}
-
+	
 	@Override
 	public String getType()
 	{

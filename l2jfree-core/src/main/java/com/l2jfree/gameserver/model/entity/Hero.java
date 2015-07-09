@@ -49,73 +49,71 @@ import com.l2jfree.gameserver.templates.StatsSet;
 
 public class Hero
 {
-	private final static Log				_log			= LogFactory.getLog(Hero.class);
-
+	private final static Log _log = LogFactory.getLog(Hero.class);
+	
 	private static final String GET_HEROES = "SELECT heroes.charId, "
 			+ "characters.char_name, heroes.class_id, heroes.count, heroes.played "
-			+ "FROM heroes, characters WHERE characters.charId = heroes.charId "
-			+ "AND heroes.played = 1";
+			+ "FROM heroes, characters WHERE characters.charId = heroes.charId " + "AND heroes.played = 1";
 	private static final String GET_ALL_HEROES = "SELECT heroes.charId, "
 			+ "characters.char_name, heroes.class_id, heroes.count, heroes.played "
 			+ "FROM heroes, characters WHERE characters.charId = heroes.charId";
 	private static final String UPDATE_ALL = "UPDATE heroes SET played = 0";
 	private static final String INSERT_HERO = "INSERT INTO heroes VALUES (?,?,?,?)";
-	private static final String UPDATE_HERO = "UPDATE heroes SET count = ?, "
-			+ "played = ?" + " WHERE charId = ?";
+	private static final String UPDATE_HERO = "UPDATE heroes SET count = ?, " + "played = ?" + " WHERE charId = ?";
 	private static final String GET_CLAN_ALLY = "SELECT characters.clanid "
 			+ "AS clanid, coalesce(clan_data.ally_Id, 0) AS allyId FROM characters "
-			+ "LEFT JOIN clan_data ON clan_data.clan_id = characters.clanid "
-			+ "WHERE characters.charId = ?";
+			+ "LEFT JOIN clan_data ON clan_data.clan_id = characters.clanid " + "WHERE characters.charId = ?";
 	private static final String GET_CLAN_NAME = "SELECT clan_name FROM clan_data "
 			+ "WHERE clan_id = (SELECT clanid FROM characters WHERE char_name = ?)";
 	// delete hero items
 	private static final String DELETE_ITEMS = "DELETE FROM items WHERE item_id IN "
 			+ "(6842, 6611, 6612, 6613, 6614, 6615, 6616, 6617, 6618, 6619, 6620, 6621, 9388, 9389, 9390) "
 			+ "AND owner_id NOT IN (SELECT charId FROM characters WHERE accesslevel > 0)";
-	private static final String DELETE_SKILLS = "DELETE FROM character_skills WHERE skill_id IN " + "(395, 396, 1374, 1375, 1376) "
+	private static final String DELETE_SKILLS = "DELETE FROM character_skills WHERE skill_id IN "
+			+ "(395, 396, 1374, 1375, 1376) "
 			+ "AND charId NOT IN (SELECT charId FROM characters WHERE accesslevel > 0)";
-
-	private static Map<Integer, StatsSet>	_heroes;
-	private static Map<Integer, StatsSet>	_completeHeroes;
-
-	public static final String				COUNT			= "count";
-	public static final String				PLAYED			= "played";
-	public static final String				CLAN_NAME		= "clan_name";
-	public static final String				CLAN_CREST		= "clan_crest";
-	public static final String				ALLY_NAME		= "ally_name";
-	public static final String				ALLY_CREST		= "ally_crest";
-
+	
+	private static Map<Integer, StatsSet> _heroes;
+	private static Map<Integer, StatsSet> _completeHeroes;
+	
+	public static final String COUNT = "count";
+	public static final String PLAYED = "played";
+	public static final String CLAN_NAME = "clan_name";
+	public static final String CLAN_CREST = "clan_crest";
+	public static final String ALLY_NAME = "ally_name";
+	public static final String ALLY_CREST = "ally_crest";
+	
 	public static Hero getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private Hero()
 	{
 		init();
 	}
-
+	
 	private void init()
 	{
 		_heroes = new FastMap<Integer, StatsSet>();
 		_completeHeroes = new FastMap<Integer, StatsSet>();
-
+		
 		Connection con = null;
 		Connection con2 = null;
-
+		
 		PreparedStatement statement;
 		PreparedStatement statement2;
-
+		
 		ResultSet rset;
 		ResultSet rset2;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
 			con2 = L2DatabaseFactory.getInstance().getConnection(con2);
 			statement = con.prepareStatement(GET_HEROES);
 			rset = statement.executeQuery();
-
+			
 			while (rset.next())
 			{
 				StatsSet hero = new StatsSet();
@@ -124,25 +122,25 @@ public class Hero
 				hero.set(Olympiad.CLASS_ID, rset.getInt(Olympiad.CLASS_ID));
 				hero.set(COUNT, rset.getInt(COUNT));
 				hero.set(PLAYED, rset.getInt(PLAYED));
-
+				
 				statement2 = con2.prepareStatement(GET_CLAN_ALLY);
 				statement2.setInt(1, charId);
 				rset2 = statement2.executeQuery();
-
+				
 				initRelationBetweenHeroAndClan(rset2, hero);
-
+				
 				rset2.close();
 				statement2.close();
-
+				
 				_heroes.put(charId, hero);
 			}
-
+			
 			rset.close();
 			statement.close();
-
+			
 			statement = con.prepareStatement(GET_ALL_HEROES);
 			rset = statement.executeQuery();
-
+			
 			while (rset.next())
 			{
 				StatsSet hero = new StatsSet();
@@ -151,19 +149,19 @@ public class Hero
 				hero.set(Olympiad.CLASS_ID, rset.getInt(Olympiad.CLASS_ID));
 				hero.set(COUNT, rset.getInt(COUNT));
 				hero.set(PLAYED, rset.getInt(PLAYED));
-
+				
 				statement2 = con2.prepareStatement(GET_CLAN_ALLY);
 				statement2.setInt(1, charId);
 				rset2 = statement2.executeQuery();
-
+				
 				initRelationBetweenHeroAndClan(rset2, hero);
-
+				
 				rset2.close();
 				statement2.close();
-
+				
 				_completeHeroes.put(charId, hero);
 			}
-
+			
 			rset.close();
 			statement.close();
 		}
@@ -176,11 +174,11 @@ public class Hero
 			L2DatabaseFactory.close(con);
 			L2DatabaseFactory.close(con2);
 		}
-
+		
 		_log.info("HeroSystem: Loaded " + _heroes.size() + " Heroes.");
 		_log.info("HeroSystem: Loaded " + _completeHeroes.size() + " all time Heroes.");
 	}
-
+	
 	/**
 	 * @param resultSet
 	 * @param hero
@@ -192,79 +190,82 @@ public class Hero
 		{
 			int clanId = resultSet.getInt("clanid");
 			int allyId = resultSet.getInt("allyId");
-
+			
 			String clanName = "";
 			String allyName = "";
 			int clanCrest = 0;
 			int allyCrest = 0;
-
+			
 			L2Clan clan = ClanTable.getInstance().getClan(clanId);
 			
-			if (clan != null) {
+			if (clan != null)
+			{
 				if (clanId > 0)
 				{
 					clanName = clan.getName();
 					clanCrest = clan.getCrestId();
-	
+					
 					if (allyId > 0)
 					{
 						allyName = clan.getAllyName();
 						allyCrest = clan.getAllyCrestId();
 					}
 				}
-
+				
 				hero.set(CLAN_CREST, clanCrest);
 				hero.set(CLAN_NAME, clanName);
 				hero.set(ALLY_CREST, allyCrest);
 				hero.set(ALLY_NAME, allyName);
-			} else if (hero.getInteger(PLAYED, 1)==1){
+			}
+			else if (hero.getInteger(PLAYED, 1) == 1)
+			{
 				_log.info("Hero: initRelationBetweenHeroAndClan: " + hero.getString(Olympiad.CHAR_NAME));
 			}
 		}
 	}
-
+	
 	public Map<Integer, StatsSet> getHeroes()
 	{
 		return _heroes;
 	}
-
+	
 	public synchronized void computeNewHeroes(List<StatsSet> newHeroes)
 	{
 		updateHeroes(true);
-
+		
 		if (!_heroes.isEmpty())
 		{
 			for (StatsSet hero : _heroes.values())
 			{
 				String name = hero.getString(Olympiad.CHAR_NAME);
-
+				
 				L2PcInstance player = L2World.getInstance().getPlayer(name);
-
+				
 				if (player == null)
 					continue;
 				try
 				{
 					player.setHero(false);
-
+					
 					for (int i = 0; i < Inventory.PAPERDOLL_TOTALSLOTS; i++)
 					{
 						L2ItemInstance equippedItem = player.getInventory().getPaperdollItem(i);
 						if (equippedItem != null && equippedItem.isHeroItem())
 							player.getInventory().unEquipItemInSlotAndRecord(i);
 					}
-
+					
 					for (L2ItemInstance item : player.getInventory().getAvailableItems(false, true))
 					{
 						if (item != null && item.isHeroItem())
 						{
 							player.destroyItem("Hero", item, null, true);
-
+							
 							InventoryUpdate iu = new InventoryUpdate();
 							iu.addRemovedItem(item);
 							player.sendPacket(iu);
 						}
 					}
-
+					
 					player.broadcastUserInfo();
 				}
 				catch (NullPointerException e)
@@ -273,26 +274,26 @@ public class Hero
 				}
 			}
 		}
-
+		
 		if (newHeroes.size() == 0)
 		{
 			_heroes.clear();
 			return;
 		}
-
+		
 		Map<Integer, StatsSet> heroes = new FastMap<Integer, StatsSet>();
-
+		
 		for (StatsSet hero : newHeroes)
 		{
 			int charId = hero.getInteger(Olympiad.CHAR_ID);
-
+			
 			if (_completeHeroes != null && _completeHeroes.containsKey(charId))
 			{
 				StatsSet oldHero = _completeHeroes.get(charId);
 				int count = oldHero.getInteger(COUNT);
 				oldHero.set(COUNT, count + 1);
 				oldHero.set(PLAYED, 1);
-
+				
 				heroes.put(charId, oldHero);
 			}
 			else
@@ -302,26 +303,26 @@ public class Hero
 				newHero.set(Olympiad.CLASS_ID, hero.getInteger(Olympiad.CLASS_ID));
 				newHero.set(COUNT, 1);
 				newHero.set(PLAYED, 1);
-
+				
 				heroes.put(charId, newHero);
 			}
 		}
-
+		
 		deleteItemsInDb();
 		deleteSkillsInDb();
-
+		
 		_heroes.clear();
 		_heroes.putAll(heroes);
 		heroes.clear();
-
+		
 		updateHeroes(false);
-
+		
 		for (StatsSet hero : _heroes.values())
 		{
 			String name = hero.getString(Olympiad.CHAR_NAME);
-
+			
 			L2PcInstance player = L2World.getInstance().getPlayer(name);
-
+			
 			if (player != null)
 			{
 				player.broadcastPacket(new SocialAction(player.getObjectId(), 16));
@@ -330,20 +331,22 @@ public class Hero
 				if (clan != null)
 				{
 					clan.setReputationScore(clan.getReputationScore() + Config.HERO_POINTS, true);
-					SystemMessage sm = new SystemMessage(SystemMessageId.CLAN_MEMBER_C1_BECAME_HERO_AND_GAINED_S2_REPUTATION_POINTS);
+					SystemMessage sm =
+							new SystemMessage(
+									SystemMessageId.CLAN_MEMBER_C1_BECAME_HERO_AND_GAINED_S2_REPUTATION_POINTS);
 					sm.addString(name);
 					sm.addNumber(Config.HERO_POINTS);
 					clan.broadcastToOnlineMembers(sm);
 				}
 				player.broadcastUserInfo();
-
+				
 				for (L2Skill skill : HeroSkillTable.getHeroSkills())
 					player.addSkill(skill);
 			}
 			else
 			{
 				Connection con = null;
-
+				
 				try
 				{
 					con = L2DatabaseFactory.getInstance().getConnection(con);
@@ -359,14 +362,16 @@ public class Hero
 							if (clan != null)
 							{
 								clan.setReputationScore(clan.getReputationScore() + Config.HERO_POINTS, true);
-								SystemMessage sm = new SystemMessage(SystemMessageId.CLAN_MEMBER_C1_BECAME_HERO_AND_GAINED_S2_REPUTATION_POINTS);
+								SystemMessage sm =
+										new SystemMessage(
+												SystemMessageId.CLAN_MEMBER_C1_BECAME_HERO_AND_GAINED_S2_REPUTATION_POINTS);
 								sm.addString(name);
 								sm.addNumber(Config.HERO_POINTS);
 								clan.broadcastToOnlineMembers(sm);
 							}
 						}
 					}
-
+					
 					rset.close();
 					statement.close();
 				}
@@ -381,7 +386,7 @@ public class Hero
 			}
 		}
 	}
-
+	
 	public void updateHeroes(boolean setDefault)
 	{
 		Connection con = null;
@@ -404,11 +409,11 @@ public class Hero
 			else
 			{
 				PreparedStatement statement;
-
+				
 				for (Integer heroId : _heroes.keySet())
 				{
 					StatsSet hero = _heroes.get(heroId);
-
+					
 					if (_completeHeroes == null || !_completeHeroes.containsKey(heroId))
 					{
 						try
@@ -424,15 +429,15 @@ public class Hero
 							PreparedStatement statement2 = con.prepareStatement(GET_CLAN_ALLY);
 							statement2.setInt(1, heroId);
 							ResultSet rset2 = statement2.executeQuery();
-
+							
 							initRelationBetweenHeroAndClan(rset2, hero);
-
+							
 							rset2.close();
 							statement2.close();
-
+							
 							_heroes.remove(heroId);
 							_heroes.put(heroId, hero);
-
+							
 							_completeHeroes.put(heroId, hero);
 						}
 						catch (SQLException e)
@@ -468,11 +473,11 @@ public class Hero
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void deleteItemsInDb()
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
@@ -489,11 +494,11 @@ public class Hero
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void deleteSkillsInDb()
 	{
 		Connection con = null;
-
+		
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
@@ -510,7 +515,7 @@ public class Hero
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

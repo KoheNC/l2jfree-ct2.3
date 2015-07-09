@@ -21,14 +21,14 @@ package com.l2jfree.gameserver.idfactory;
  */
 public class IncrementIDFactory extends IdFactory
 {
-	private int	_curId;
-
+	private int _curId;
+	
 	protected IncrementIDFactory()
 	{
 		super();
 		_curId = FIRST_OID;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.idfactory.IdFactory#getNextId()
 	 */
@@ -37,7 +37,7 @@ public class IncrementIDFactory extends IdFactory
 	{
 		return _curId++;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.idfactory.IdFactory#releaseId(int)
 	 */
@@ -46,7 +46,7 @@ public class IncrementIDFactory extends IdFactory
 	{
 		// Do nothing
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.idfactory.IdFactory#size()
 	 */
@@ -55,7 +55,7 @@ public class IncrementIDFactory extends IdFactory
 	{
 		return LAST_OID - _curId;
 	}
-
+	
 	/**
 	 * This class is for test purpose, we don't need to clean up the db
 	 * @see com.l2jfree.gameserver.idfactory.IdFactory#cleanUpDB()
@@ -65,7 +65,7 @@ public class IncrementIDFactory extends IdFactory
 	{
 		// Do nothing
 	}
-
+	
 	/**
 	 * This class is for test purpose, we don't need to set all character offline
 	 * @see com.l2jfree.gameserver.idfactory.IdFactory#setAllCharacterOffline()
@@ -75,7 +75,7 @@ public class IncrementIDFactory extends IdFactory
 	{
 		// Do nothing
 	}
-
+	
 	@Override
 	public int getCurrentId()
 	{

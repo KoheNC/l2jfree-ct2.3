@@ -27,10 +27,11 @@ import com.l2jfree.gameserver.util.Broadcast;
 public class FinishRotating extends L2GameClientPacket
 {
 	private static final String _C__4B_FINISHROTATING = "[C] 4B FinishRotating";
-
+	
 	private int _degree;
-//	private int _unknown;
-
+	
+	//	private int _unknown;
+	
 	/**
 	 * packet type id 0x4a
 	 * 
@@ -42,25 +43,26 @@ public class FinishRotating extends L2GameClientPacket
 	 * 
 	 * format:		cdd
 	 */
-    @Override
-    protected void readImpl()
-    {
-		_degree = readD();
-		/*_unknown =*/ readD();
-	}
-
-    @Override
-    protected void runImpl()
+	@Override
+	protected void readImpl()
 	{
-    	L2PcInstance player = getClient().getActiveChar();
-		if (player == null) return;
-
+		_degree = readD();
+		/*_unknown =*/readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance player = getClient().getActiveChar();
+		if (player == null)
+			return;
+		
 		StopRotation sr = new StopRotation(player.getObjectId(), _degree, 0);
 		Broadcast.toSelfAndKnownPlayers(player, sr);
 		sr = null;
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

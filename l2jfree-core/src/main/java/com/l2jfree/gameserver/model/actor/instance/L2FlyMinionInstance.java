@@ -18,16 +18,16 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public final class L2FlyMinionInstance extends L2MinionInstance
 {
-
+	
 	public L2FlyMinionInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 	}
-
-    @Override
+	
+	@Override
 	public void onSpawn()
-    {
-    	setIsFlying(true);
-    	super.onSpawn();
-    }
+	{
+		setIsFlying(true);
+		super.onSpawn();
+	}
 }

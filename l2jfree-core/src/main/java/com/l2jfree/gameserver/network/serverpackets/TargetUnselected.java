@@ -32,7 +32,7 @@ public class TargetUnselected extends L2GameServerPacket
 	private final int _x;
 	private final int _y;
 	private final int _z;
-
+	
 	/**
 	 * @param _characters
 	 */
@@ -54,7 +54,7 @@ public class TargetUnselected extends L2GameServerPacket
 		writeD(_z);
 		writeD(0x00); //??
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

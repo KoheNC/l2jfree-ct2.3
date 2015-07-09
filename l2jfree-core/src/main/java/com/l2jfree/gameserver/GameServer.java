@@ -409,7 +409,7 @@ public class GameServer extends Config
 		VoicedCommandHandler.getInstance();
 		ChatHandler.getInstance();
 		SkillTargetHandler.getInstance();
-
+		
 		Util.printSection("Elayne");
 		RemoteAdministrationImpl.getInstance().startServer();
 		

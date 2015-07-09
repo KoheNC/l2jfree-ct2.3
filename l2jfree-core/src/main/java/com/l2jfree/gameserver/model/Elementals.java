@@ -28,42 +28,42 @@ public final class Elementals implements FuncOwner
 	public final static byte EARTH = 3;
 	public final static byte HOLY = 4;
 	public final static byte DARK = 5;
-
+	
 	public final static int FIRST_WEAPON_BONUS = 20;
 	public final static int NEXT_WEAPON_BONUS = 5;
 	public final static int ARMOR_BONUS = 6;
 	
 	public final static int[] WEAPON_VALUES = { 0, // Level 1
-		25, // Level 2
-		75, // Level 3
-		150, // Level 4
-		175, // Level 5
-		225, // Level 6
-		300, // Level 7
-		325, // Level 8
-		375, // Level 9
-		450, // Level 10
-		475, // Level 11
-		525, // Level 12
-		600, // Level 13
-		Integer.MAX_VALUE // TODO: Higher stones
-	};
+			25, // Level 2
+			75, // Level 3
+			150, // Level 4
+			175, // Level 5
+			225, // Level 6
+			300, // Level 7
+			325, // Level 8
+			375, // Level 9
+			450, // Level 10
+			475, // Level 11
+			525, // Level 12
+			600, // Level 13
+			Integer.MAX_VALUE // TODO: Higher stones
+			};
 	
 	public final static int[] ARMOR_VALUES = { 0, // Level 1
-		12, // Level 2
-		30, // Level 3
-		60, // Level 4
-		72, // Level 5
-		90, // Level 6
-		120, // Level 7
-		132, // Level 8
-		150, // Level 9
-		180, // Level 10
-		192, // Level 11
-		210, // Level 12
-		240, // Level 13
-		Integer.MAX_VALUE // TODO: Higher stones
-	};
+			12, // Level 2
+			30, // Level 3
+			60, // Level 4
+			72, // Level 5
+			90, // Level 6
+			120, // Level 7
+			132, // Level 8
+			150, // Level 9
+			180, // Level 10
+			192, // Level 11
+			210, // Level 12
+			240, // Level 13
+			Integer.MAX_VALUE // TODO: Higher stones
+			};
 	
 	public final static int[] STONES = { 9546, 9547, 9549, 9548, 9551, 9550 };
 	

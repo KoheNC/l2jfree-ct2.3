@@ -30,21 +30,21 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class GatekeeperZombie extends L2AttackableAIScript
 {
-	private static final int[] GATEKEEPER = {18343};
-	private static final int[] ITEMS      = {8064, 8065, 8067};
-
+	private static final int[] GATEKEEPER = { 18343 };
+	private static final int[] ITEMS = { 8064, 8065, 8067 };
+	
 	public GatekeeperZombie(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		registerMobs(GATEKEEPER);
 	}
-
+	
 	@Override
 	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
 		boolean isAuthorized = false;
 		L2ItemInstance item;
-
+		
 		if (!npc.isInCombat() && !isPet)
 		{
 			for (int itemId : ITEMS)
@@ -59,22 +59,22 @@ public class GatekeeperZombie extends L2AttackableAIScript
 			if (!isAuthorized)
 			{
 				npc.setTarget(player);
-				((L2Attackable) npc).addDamageHate(player, 0, 999);
+				((L2Attackable)npc).addDamageHate(player, 0, 999);
 				L2Skill skill = SkillTable.getInstance().getInfo(5043, 9);
 				npc.doCast(skill);
 				npc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, player);
 			}
 			else
 			{
-				L2Attackable actor = (L2Attackable) npc;
-    			int hate = actor.getHating(player);
-    			if (hate == 1)
-    				actor.reduceHate(player, hate);
+				L2Attackable actor = (L2Attackable)npc;
+				int hate = actor.getHating(player);
+				if (hate == 1)
+					actor.reduceHate(player, hate);
 			}
 		}
 		return null;
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new GatekeeperZombie(-1, "GatekeeperZombie", "ai");

@@ -47,14 +47,16 @@ public final class LeakTaskManager
 	
 	private static final long MINIMUM_DELAY_BETWEEN_CLEANUPS = TimeUnit.MINUTES.toMillis(30);
 	private static final long MINIMUM_DELAY_BETWEEN_MEMORY_DUMPS = TimeUnit.HOURS.toMillis(4);
-
+	
 	public static LeakTaskManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
 	
-	private final Map<ImmutableReference<L2PcInstance>, Long> _players = new FastMap<ImmutableReference<L2PcInstance>, Long>().setShared(true);
-	private final Map<ImmutableReference<L2Summon>, Long> _summons = new FastMap<ImmutableReference<L2Summon>, Long>().setShared(true);
+	private final Map<ImmutableReference<L2PcInstance>, Long> _players =
+			new FastMap<ImmutableReference<L2PcInstance>, Long>().setShared(true);
+	private final Map<ImmutableReference<L2Summon>, Long> _summons = new FastMap<ImmutableReference<L2Summon>, Long>()
+			.setShared(true);
 	
 	private LeakTaskManager()
 	{
@@ -78,6 +80,7 @@ public final class LeakTaskManager
 	
 	private final class Cleanup implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			synchronized (LeakTaskManager.this)
@@ -245,7 +248,7 @@ public final class LeakTaskManager
 			if (obj != null)
 				obj.reset();
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

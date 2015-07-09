@@ -34,18 +34,18 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class Resurrect implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.RESURRECT };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.RESURRECT };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		L2PcInstance player = null;
 		if (activeChar instanceof L2PcInstance)
-			player = (L2PcInstance) activeChar;
-
+			player = (L2PcInstance)activeChar;
+		
 		L2PcInstance targetPlayer;
 		FastList<L2Character> targetToRes = new FastList<L2Character>();
-
+		
 		for (L2Character target : targets)
 		{
 			if (target == null)
@@ -56,8 +56,8 @@ public class Resurrect implements ISkillHandler
 			
 			if (target instanceof L2PcInstance)
 			{
-				targetPlayer = (L2PcInstance) target;
-
+				targetPlayer = (L2PcInstance)target;
+				
 				// Check for same party or for same clan, if target is for clan.
 				if (skill.getTargetType() == SkillTargetType.TARGET_CORPSE_CLAN)
 				{
@@ -69,21 +69,21 @@ public class Resurrect implements ISkillHandler
 			if (target.isVisible())
 				targetToRes.add(target);
 		}
-
+		
 		for (L2Character cha : targetToRes)
 		{
 			if (activeChar instanceof L2PcInstance)
 			{
 				if (cha instanceof L2PcInstance)
 				{
-					((L2PcInstance) cha).reviveRequest((L2PcInstance) activeChar, skill);
+					((L2PcInstance)cha).reviveRequest((L2PcInstance)activeChar, skill);
 				}
 				else if (cha instanceof L2PetInstance)
 				{
-					if (((L2PetInstance) cha).getOwner() == activeChar)
+					if (((L2PetInstance)cha).getOwner() == activeChar)
 						cha.doRevive(Formulas.calculateSkillResurrectRestorePercent(skill, activeChar));
 					else
-						((L2PetInstance) cha).getOwner().revivePetRequest((L2PcInstance) activeChar, skill);
+						((L2PetInstance)cha).getOwner().revivePetRequest((L2PcInstance)activeChar, skill);
 				}
 				else
 					cha.doRevive(Formulas.calculateSkillResurrectRestorePercent(skill, activeChar));
@@ -95,7 +95,8 @@ public class Resurrect implements ISkillHandler
 			}
 		}
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

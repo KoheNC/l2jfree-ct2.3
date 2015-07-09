@@ -20,10 +20,10 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class RequestRecipeBookOpen extends L2GameClientPacket
 {
-	private static final String	_C__AC_REQUESTRECIPEBOOKOPEN	= "[C] AC RequestRecipeBookOpen";
-
-	private boolean				_isDwarvenCraft;
-
+	private static final String _C__AC_REQUESTRECIPEBOOKOPEN = "[C] AC RequestRecipeBookOpen";
+	
+	private boolean _isDwarvenCraft;
+	
 	/**
 	 * packet type id 0xac
 	 * packet format rev656  cd
@@ -34,25 +34,25 @@ public class RequestRecipeBookOpen extends L2GameClientPacket
 	{
 		_isDwarvenCraft = (readD() == 0);
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (player.getPrivateStoreType() != 0)
 		{
 			requestFailed(SystemMessageId.PRIVATE_STORE_UNDER_WAY);
 			return;
 		}
-
+		
 		RecipeController.getInstance().requestBookOpen(player, _isDwarvenCraft);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -28,50 +28,50 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 	protected String _name;
 	protected int _ownerId = 0;
 	protected L2Clan _formerOwner = null;
-
-	private L2Zone		_zoneHQ;
-	private L2SiegeZone	_zoneBF;
-	private L2Zone		_zoneDS;
-	private L2Zone		_zoneTP;
-
+	
+	private L2Zone _zoneHQ;
+	private L2SiegeZone _zoneBF;
+	private L2Zone _zoneDS;
+	private L2Zone _zoneTP;
+	
 	private L2Skill[] _residentialSkills = null;
-
+	
 	public Siegeable(int entityId)
 	{
 		super();
 		_residentialSkills = ResidentialSkillTable.getInstance().getSkills(entityId);
 	}
-
+	
 	public final String getName()
 	{
 		return _name;
 	}
-
+	
 	public final int getOwnerId()
 	{
 		return _ownerId;
 	}
-
+	
 	public void registerHeadquartersZone(L2Zone zone)
 	{
 		_zoneHQ = zone;
 	}
-
+	
 	public void registerSiegeZone(L2SiegeZone zone)
 	{
 		_zoneBF = zone;
 	}
-
+	
 	public void registerDefenderSpawn(L2Zone zone)
 	{
 		_zoneDS = zone;
 	}
-
+	
 	public void registerTeleportZone(L2Zone zone)
 	{
 		_zoneTP = zone;
 	}
-
+	
 	public void oustAllPlayers()
 	{
 		for (L2Character player : _zoneTP.getCharactersInside())
@@ -81,13 +81,13 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 				player.teleToLocation(_zoneDS.getRandomLocation(), true);
 		}
 	}
-
+	
 	@Override
 	public boolean checkBanish(L2PcInstance cha)
 	{
 		return cha.getClanId() != getOwnerId() && !cha.isGM();
 	}
-
+	
 	/**
 	 * Return true if object is inside the zone
 	 */
@@ -95,7 +95,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 	{
 		return checkIfInZoneBattlefield(obj.getX(), obj.getY(), obj.getZ());
 	}
-
+	
 	/**
 	 * Return true if object is inside the zone
 	 */
@@ -111,7 +111,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 	{
 		return checkIfInZoneHeadQuarters(obj.getX(), obj.getY(), obj.getZ());
 	}
-
+	
 	/**
 	 * Return true if object is inside the zone
 	 */
@@ -119,7 +119,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 	{
 		return getHeadQuarters().isInsideZone(x, y, z);
 	}
-
+	
 	public final L2Zone getHeadQuarters()
 	{
 		return _zoneHQ;
@@ -129,24 +129,24 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 	{
 		return _zoneBF;
 	}
-
+	
 	public final L2Zone getDefenderSpawn()
 	{
 		return _zoneDS;
 	}
-
+	
 	public final L2Zone getTeleZone()
 	{
 		return _zoneTP;
 	}
 	
 	public abstract T getSiege();
-
+	
 	public L2Skill[] getResidentialSkills()
 	{
 		return _residentialSkills;
 	}
-
+	
 	public void giveResidentialSkills(L2PcInstance player)
 	{
 		if (_residentialSkills != null)
@@ -155,7 +155,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 				player.addSkill(sk, false);
 		}
 	}
-
+	
 	public void removeResidentialSkills(L2PcInstance player)
 	{
 		if (_residentialSkills != null)

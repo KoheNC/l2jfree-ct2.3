@@ -21,12 +21,12 @@ public class PledgeSkillList extends L2GameServerPacket
 {
 	private static final String _S__PLEDGESKILLLIST = "[S] FE:3A PledgeSkillList chd0[dd]";
 	private final L2Clan _clan;
-    
+	
 	public PledgeSkillList(L2Clan clan)
 	{
 		_clan = clan;
 	}
-    
+	
 	@Override
 	protected void writeImpl()
 	{

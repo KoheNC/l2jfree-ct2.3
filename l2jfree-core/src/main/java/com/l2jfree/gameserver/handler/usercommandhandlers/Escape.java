@@ -25,12 +25,12 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 
 public class Escape implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 52 };
-
+	private static final int[] COMMAND_IDS = { 52 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
+	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		if (!activeChar.canTeleport(TeleportMode.UNSTUCK))
@@ -40,7 +40,7 @@ public class Escape implements IUserCommandHandler
 		}
 		
 		int unstuckTimer = (activeChar.getAccessLevel() >= Config.GM_ESCAPE ? 1000 : Config.UNSTUCK_INTERVAL * 1000);
-
+		
 		L2Skill GM_escape = SkillTable.getInstance().getInfo(2100, 1); // 1 second escape
 		L2Skill escape = SkillTable.getInstance().getInfo(2099, 1); // 5 minutes escape
 		if (activeChar.getAccessLevel() >= Config.GM_ESCAPE)
@@ -52,7 +52,7 @@ public class Escape implements IUserCommandHandler
 				return true;
 			}
 		}
-		else if (Config.UNSTUCK_INTERVAL == 300 && escape  != null)
+		else if (Config.UNSTUCK_INTERVAL == 300 && escape != null)
 		{
 			activeChar.useMagic(escape, false, false);
 			return true;
@@ -66,22 +66,23 @@ public class Escape implements IUserCommandHandler
 			else
 				activeChar.sendMessage("You use Escape: " + unstuckTimer / 1000 + " seconds.");
 		}
-
+		
 		// Continue execution later
 		activeChar.setTeleportSkillCast(new EscapeFinalizer(activeChar), unstuckTimer);
-
+		
 		return true;
 	}
-
+	
 	static class EscapeFinalizer implements Runnable
 	{
-		private final L2PcInstance	_activeChar;
-
+		private final L2PcInstance _activeChar;
+		
 		EscapeFinalizer(L2PcInstance activeChar)
 		{
 			_activeChar = activeChar;
 		}
-
+		
+		@Override
 		public void run()
 		{
 			_activeChar.setIsIn7sDungeon(false);
@@ -89,10 +90,11 @@ public class Escape implements IUserCommandHandler
 			_activeChar.teleToLocation(TeleportWhereType.Town);
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */
+	@Override
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

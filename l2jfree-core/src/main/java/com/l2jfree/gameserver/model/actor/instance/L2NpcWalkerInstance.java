@@ -58,7 +58,7 @@ public class L2NpcWalkerInstance extends L2Npc
 	{
 		return false;
 	}
-
+	
 	@Override
 	public void onSpawn()
 	{
@@ -68,7 +68,7 @@ public class L2NpcWalkerInstance extends L2Npc
 		ai.setHomeY(getY());
 		ai.setHomeZ(getZ());*/
 	}
-
+	
 	/**
 	 * Sends a chat to all _knowObjects
 	 * @param chat message to say
@@ -80,7 +80,7 @@ public class L2NpcWalkerInstance extends L2Npc
 			broadcastPacket(new CreatureSay(getObjectId(), SystemChatChannelId.Chat_Normal, getName(), chat));
 		}
 	}
-
+	
 	/**
 	 * NPCs are immortal
 	 * @param killer ignore it
@@ -91,7 +91,7 @@ public class L2NpcWalkerInstance extends L2Npc
 	{
 		return false;
 	}
-
+	
 	protected class L2NpcWalkerAIAccessor extends L2Character.AIAccessor
 	{
 		/**

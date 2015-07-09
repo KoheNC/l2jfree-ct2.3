@@ -32,18 +32,19 @@ public class DoorKey implements IItemHandler
 {
 	// All the item IDs that this handler knows.
 	// TODO skill for 9694
-	private static final int[]	ITEM_IDS				= {};
-
-	public static final int		INTERACTION_DISTANCE	= 100;
-
+	private static final int[] ITEM_IDS = { };
+	
+	public static final int INTERACTION_DISTANCE = 100;
+	
+	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-
+		
 		int itemId = item.getItemId();
 		if (!(playable instanceof L2PcInstance))
 			return;
-		L2PcInstance activeChar = (L2PcInstance) playable;
-
+		L2PcInstance activeChar = (L2PcInstance)playable;
+		
 		// Key of Enigma (Pavel Research Quest)
 		if (itemId == 8060)
 		{
@@ -52,24 +53,24 @@ public class DoorKey implements IItemHandler
 				activeChar.doSimultaneousCast(skill);
 			return;
 		}
-
+		
 		L2Object target = activeChar.getTarget();
-
+		
 		if (!(target instanceof L2DoorInstance))
 		{
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		L2DoorInstance door = (L2DoorInstance) target;
-
+		L2DoorInstance door = (L2DoorInstance)target;
+		
 		if (!(activeChar.isInsideRadius(door, INTERACTION_DISTANCE, false, false)))
 		{
 			activeChar.sendMessage("Too far.");
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-
+		
 		if (activeChar.getAbnormalEffect() > 0 || activeChar.isInCombat())
 		{
 			activeChar.sendMessage("You are currently engaged in combat.");
@@ -77,7 +78,8 @@ public class DoorKey implements IItemHandler
 			return;
 		}
 	}
-
+	
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

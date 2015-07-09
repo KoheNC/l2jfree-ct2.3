@@ -32,7 +32,7 @@ public class FriendlyMobKnownList extends AttackableKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	@Override
@@ -40,22 +40,22 @@ public class FriendlyMobKnownList extends AttackableKnownList
 	{
 		if (!super.addKnownObject(object))
 			return false;
-
+		
 		if (object instanceof L2PcInstance && getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
 			getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public boolean removeKnownObject(L2Object object)
 	{
 		if (!super.removeKnownObject(object))
 			return false;
-
+		
 		if (!(object instanceof L2Character))
 			return true;
-
+		
 		if (getActiveChar().hasAI())
 		{
 			L2Character temp = (L2Character)object;
@@ -63,25 +63,26 @@ public class FriendlyMobKnownList extends AttackableKnownList
 			if (getActiveChar().getTarget() == temp)
 				getActiveChar().setTarget(null);
 		}
-	
+		
 		if (getActiveChar().isVisible() && getKnownPlayers().isEmpty())
 		{
 			getActiveChar().clearAggroList();
 			//removeAllKnownObjects();
-			if (getActiveChar().hasAI()) getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE, null);
+			if (getActiveChar().hasAI())
+				getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE, null);
 		}
-
+		
 		return true;
 	}
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public final L2FriendlyMobInstance getActiveChar()
 	{
-		return (L2FriendlyMobInstance) _activeChar;
+		return (L2FriendlyMobInstance)_activeChar;
 	}
 }

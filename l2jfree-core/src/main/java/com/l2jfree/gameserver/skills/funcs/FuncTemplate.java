@@ -154,7 +154,8 @@ public final class FuncTemplate
 		
 		try
 		{
-			_constructor = clazz.getConstructor(Stats.class, Integer.TYPE, FuncOwner.class, Double.TYPE,Condition.class);
+			_constructor =
+					clazz.getConstructor(Stats.class, Integer.TYPE, FuncOwner.class, Double.TYPE, Condition.class);
 		}
 		catch (Exception e)
 		{

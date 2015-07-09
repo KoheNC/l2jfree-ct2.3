@@ -29,7 +29,7 @@ import com.l2jfree.lang.L2System;
 public class L2DropData
 {
 	public static final int MAX_CHANCE = 1000000;
-
+	
 	private int _itemId;
 	private int _minDrop;
 	private int _maxDrop;
@@ -37,7 +37,7 @@ public class L2DropData
 	private String _questID = null;
 	private String[] _stateID = null;
 	private int _category;
-
+	
 	/**
 	 * Returns the ID of the item dropped
 	 * @return int
@@ -46,7 +46,7 @@ public class L2DropData
 	{
 		return _itemId;
 	}
-
+	
 	/**
 	 * Sets the ID of the item dropped
 	 * @param itemId : int designating the ID of the item
@@ -55,7 +55,7 @@ public class L2DropData
 	{
 		_itemId = itemId;
 	}
-
+	
 	/**
 	 * Returns the minimum quantity of items dropped
 	 * @return int
@@ -64,7 +64,7 @@ public class L2DropData
 	{
 		return _minDrop;
 	}
-
+	
 	/**
 	 * Returns the maximum quantity of items dropped
 	 * @return int
@@ -73,7 +73,7 @@ public class L2DropData
 	{
 		return _maxDrop;
 	}
-
+	
 	/**
 	 * Returns the chance of having a drop
 	 * @return int
@@ -82,7 +82,7 @@ public class L2DropData
 	{
 		return _chance;
 	}
-
+	
 	/**
 	 * Sets the value for minimal quantity of dropped items
 	 * @param mindrop : int designating the quantity
@@ -91,7 +91,7 @@ public class L2DropData
 	{
 		_minDrop = minDrop;
 	}
-
+	
 	/**
 	 * Sets the value for maximal quantity of dopped items
 	 * @param maxdrop : int designating the quantity of dropped items
@@ -100,7 +100,7 @@ public class L2DropData
 	{
 		_maxDrop = maxDrop;
 	}
-
+	
 	/**
 	 * Sets the chance of having the item for a drop
 	 * @param chance : int designating the chance
@@ -109,6 +109,7 @@ public class L2DropData
 	{
 		_chance = chance;
 	}
+	
 	/**
 	 * Returns the stateID.
 	 * @return String[]
@@ -117,7 +118,7 @@ public class L2DropData
 	{
 		return _stateID;
 	}
-
+	
 	/**
 	 * Adds states of the dropped item
 	 * @param list : String[]
@@ -126,7 +127,7 @@ public class L2DropData
 	{
 		_stateID = list;
 	}
-
+	
 	/**
 	 * Returns the questID.
 	 * @return String designating the ID of the quest
@@ -135,7 +136,7 @@ public class L2DropData
 	{
 		return _questID;
 	}
-
+	
 	/**
 	 * Sets the questID
 	 * @param String designating the questID to set.
@@ -144,7 +145,7 @@ public class L2DropData
 	{
 		_questID = questID;
 	}
-
+	
 	/**
 	 * Returns if the dropped item is requested for a quest
 	 * @return boolean
@@ -153,7 +154,7 @@ public class L2DropData
 	{
 		return _questID != null && _stateID != null;
 	}
-
+	
 	/**
 	 * Returns a report of the object
 	 * @return String
@@ -161,8 +162,9 @@ public class L2DropData
 	@Override
 	public String toString()
 	{
-		String out = "ItemID: " + getItemId() + " Min: " + getMinDrop() +
-			" Max: " + getMaxDrop() + " Chance: " + (getChance() / 10000.0) + "%";
+		String out =
+				"ItemID: " + getItemId() + " Min: " + getMinDrop() + " Max: " + getMaxDrop() + " Chance: "
+						+ (getChance() / 10000.0) + "%";
 		if (isQuestDrop())
 		{
 			out += " QuestID: " + getQuestID() + " StateID's: " + Arrays.toString(getStateIDs());
@@ -170,7 +172,7 @@ public class L2DropData
 		
 		return out;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -196,12 +198,12 @@ public class L2DropData
 		
 		return true;
 	}
-
+	
 	public void setCategory(int category)
 	{
 		_category = category;
 	}
-
+	
 	public int getCategory()
 	{
 		return _category;

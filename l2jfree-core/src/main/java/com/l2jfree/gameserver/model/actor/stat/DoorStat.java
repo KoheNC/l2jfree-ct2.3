@@ -26,23 +26,23 @@ public class DoorStat extends CharStat
 	public DoorStat(L2DoorInstance activeChar)
 	{
 		super(activeChar);
-		setLevel((byte) 1);
+		setLevel((byte)1);
 	}
-
+	
 	// =========================================================
 	// Method - Public
-
+	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2DoorInstance getActiveChar()
 	{
-		return (L2DoorInstance) _activeChar;
+		return (L2DoorInstance)_activeChar;
 	}
-
+	
 	@Override
 	public final byte getLevel()
 	{

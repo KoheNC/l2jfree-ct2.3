@@ -14,8 +14,6 @@
  */
 package com.l2jfree.gameserver.network.serverpackets;
 
-
-
 /**
  * This class ...
  * 
@@ -27,7 +25,6 @@ public class ObservationMode extends L2GameServerPacket
 	private static final String _S__DF_OBSERVMODE = "[S] DF ObservationMode";
 	private final int _x, _y, _z;
 	
-
 	/**
 	 * @param _characters
 	 */
@@ -37,7 +34,7 @@ public class ObservationMode extends L2GameServerPacket
 		_y = y;
 		_z = z;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -45,9 +42,9 @@ public class ObservationMode extends L2GameServerPacket
 		writeD(_x);
 		writeD(_y);
 		writeD(_z);
-		writeC( 0x00);
-		writeC( 0xc0);
-		writeC( 0x00);
+		writeC(0x00);
+		writeC(0xc0);
+		writeC(0x00);
 	}
 	
 	/* (non-Javadoc)

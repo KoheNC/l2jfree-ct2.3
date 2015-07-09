@@ -21,26 +21,26 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class RequestSkillCoolTime extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTSKILLCOOLTIME	= "[C] A6 RequestSkillCoolTime c";
-
+	private static final String _C__REQUESTSKILLCOOLTIME = "[C] A6 RequestSkillCoolTime c";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		player.sendSkillCoolTime();
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

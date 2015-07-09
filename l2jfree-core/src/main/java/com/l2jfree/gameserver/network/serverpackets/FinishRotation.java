@@ -27,7 +27,7 @@ public class FinishRotation extends L2GameServerPacket
 	private static final String _S__78_FINISHROTATION = "[S] 63 FinishRotation";
 	private final int _heading;
 	private final int _charObjId;
-
+	
 	public FinishRotation(L2Character cha)
 	{
 		_charObjId = cha.getObjectId();
@@ -41,7 +41,7 @@ public class FinishRotation extends L2GameServerPacket
 		writeD(_charObjId);
 		writeD(_heading);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

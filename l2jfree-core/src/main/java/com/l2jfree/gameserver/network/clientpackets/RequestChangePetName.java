@@ -32,21 +32,22 @@ import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
 public class RequestChangePetName extends L2GameClientPacket
 {
 	private static final String REQUESTCHANGEPETNAME__C__89 = "[C] 89 RequestChangePetName";
-
+	
 	private String _name;
-
-    @Override
-    protected void readImpl()
-    {
-        _name = readS();
-    }
-
-    @Override
-    protected void runImpl()
+	
+	@Override
+	protected void readImpl()
+	{
+		_name = readS();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2Character activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
-
+		if (activeChar == null)
+			return;
+		
 		final L2Summon pet = activeChar.getPet();
 		if (pet == null)
 		{
@@ -63,26 +64,26 @@ public class RequestChangePetName extends L2GameClientPacket
 			requestFailed(SystemMessageId.NAMING_ALREADY_IN_USE_BY_ANOTHER_PET);
 			return;
 		}
-        else if (_name.length() < 3 || _name.length() > 8)
+		else if (_name.length() < 3 || _name.length() > 8)
 		{
-        	requestFailed(SystemMessageId.NAMING_PETNAME_UP_TO_8CHARS);
+			requestFailed(SystemMessageId.NAMING_PETNAME_UP_TO_8CHARS);
 			return;
 		}
-        else if (!Config.PET_NAME_PATTERN.matcher(_name).matches())
+		else if (!Config.PET_NAME_PATTERN.matcher(_name).matches())
 		{
-        	requestFailed(SystemMessageId.NAMING_PETNAME_CONTAINS_INVALID_CHARS);
+			requestFailed(SystemMessageId.NAMING_PETNAME_CONTAINS_INVALID_CHARS);
 			return;
 		}
 		// the pattern might have been changed by the admin
-        else if (_name.contains(" "))
-        {
-        	requestFailed(SystemMessageId.NAMING_THERE_IS_A_SPACE);
-        	return;
-        }
-
+		else if (_name.contains(" "))
+		{
+			requestFailed(SystemMessageId.NAMING_THERE_IS_A_SPACE);
+			return;
+		}
+		
 		pet.setName(_name);
 		pet.broadcastFullInfo();
-
+		
 		// set the flag on the control item to say that the pet has a name
 		if (pet instanceof L2PetInstance)
 		{
@@ -93,13 +94,14 @@ public class RequestChangePetName extends L2GameClientPacket
 				controlItem.updateDatabase();
 				InventoryUpdate iu = new InventoryUpdate();
 				iu.addModifiedItem(controlItem);
-				sendPacket(iu); iu = null;
+				sendPacket(iu);
+				iu = null;
 			}
 		}
-
+		
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -27,18 +27,18 @@ public abstract class PlayableKnownList extends CharKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2Playable getActiveChar()
 	{
-		return (L2Playable) _activeChar;
+		return (L2Playable)_activeChar;
 	}
 }

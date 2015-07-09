@@ -20,7 +20,7 @@ public class AskJoinParty extends L2GameServerPacket
 	
 	private final String _requestorName;
 	private final int _itemDistribution;
-
+	
 	/**
 	 * @param int objectId of the target
 	 * @param int
@@ -30,7 +30,7 @@ public class AskJoinParty extends L2GameServerPacket
 		_requestorName = requestorName;
 		_itemDistribution = itemDistribution;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{

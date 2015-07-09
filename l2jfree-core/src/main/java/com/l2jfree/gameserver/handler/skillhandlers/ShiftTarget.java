@@ -29,33 +29,33 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class ShiftTarget implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.SHIFT_TARGET };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SHIFT_TARGET };
+	
+	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		L2Attackable attackerChar = null;
 		L2Npc attacker = null;
 		L2PcInstance targetChar = null;
-
+		
 		boolean targetShifted = false;
-
+		
 		for (L2Object target : targets)
 		{
 			if (target instanceof L2PcInstance)
 			{
-				targetChar = (L2PcInstance) target;
+				targetChar = (L2PcInstance)target;
 				break;
 			}
 		}
-
+		
 		for (L2Object nearby : activeChar.getKnownList().getKnownCharactersInRadius(skill.getSkillRadius()))
 		{
 			if (!targetShifted)
 			{
 				if (nearby instanceof L2Attackable)
 				{
-					attackerChar = (L2Attackable) nearby;
+					attackerChar = (L2Attackable)nearby;
 					targetShifted = true;
 					break;
 				}
@@ -66,7 +66,7 @@ public class ShiftTarget implements ISkillHandler
 		{
 			attacker = attackerChar;
 			int aggro = attackerChar.getHating(activeChar);
-
+			
 			if (aggro == 0)
 			{
 				if (targetChar.isRunning())
@@ -90,7 +90,8 @@ public class ShiftTarget implements ISkillHandler
 			}
 		}
 	}
-
+	
+	@Override
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

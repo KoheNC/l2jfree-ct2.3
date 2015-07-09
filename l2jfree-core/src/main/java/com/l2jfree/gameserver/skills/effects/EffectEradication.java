@@ -30,7 +30,7 @@ public class EffectEradication extends L2Effect
 	{
 		super(env, template);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.model.L2Effect#getEffectType()
 	 */
@@ -39,7 +39,7 @@ public class EffectEradication extends L2Effect
 	{
 		return L2EffectType.DEBUFF;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.model.L2Effect#onStart()
 	 */
@@ -49,7 +49,7 @@ public class EffectEradication extends L2Effect
 		getEffected().setIsEradicated(true);
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.model.L2Effect#onExit()
 	 */

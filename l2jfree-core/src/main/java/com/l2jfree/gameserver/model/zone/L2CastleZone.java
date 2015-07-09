@@ -33,45 +33,46 @@ public class L2CastleZone extends SiegeableEntityZone
 		_entity = initCastle();
 		_entity.registerZone(this);
 	}
-
+	
 	@Override
 	protected void onEnter(L2Character character)
 	{
 		character.setInsideZone(FLAG_CASTLE, true);
 		alertCastle(character, true);
 		super.onEnter(character);
-
+		
 		if (character instanceof L2PcInstance)
 		{
-			L2PcInstance player = (L2PcInstance) character;
+			L2PcInstance player = (L2PcInstance)character;
 			L2Clan clan = player.getClan();
 			if (clan != null)
 			{
 				Siege s = getSiege();
 				if (s.getIsInProgress() && (s.checkIsAttacker(clan) || s.checkIsDefender(clan)))
 				{
-					player.startFameTask(Config.CASTLE_ZONE_FAME_TASK_FREQUENCY * 1000, Config.CASTLE_ZONE_FAME_AQUIRE_POINTS);
+					player.startFameTask(Config.CASTLE_ZONE_FAME_TASK_FREQUENCY * 1000,
+							Config.CASTLE_ZONE_FAME_AQUIRE_POINTS);
 				}
 			}
 		}
 	}
-
+	
 	@Override
 	protected void onExit(L2Character character)
 	{
 		character.setInsideZone(FLAG_CASTLE, false);
-
+		
 		super.onExit(character);
-
+		
 		if (character instanceof L2PcInstance)
-			((L2PcInstance) character).stopFameTask();
+			((L2PcInstance)character).stopFameTask();
 	}
-
+	
 	private void alertCastle(L2Character character, boolean entering)
 	{
 		Castle castle = CastleManager.getInstance().getCastleById(_entity.getCastleId());
 		int ownerId = castle.getOwnerId();
-
+		
 		Siege siege = SiegeManager.getInstance().getSiege(character);
 		if (siege != null && siege.getIsInProgress())
 			return;
@@ -85,22 +86,26 @@ public class L2CastleZone extends SiegeableEntityZone
 			return;
 		else if (character instanceof L2PcInstance)
 		{
-			if (((L2PcInstance) character).isGM())
+			if (((L2PcInstance)character).isGM())
 				return;
 		}
 		else
 			return;
-
-		L2PcInstance activeChar = (L2PcInstance) character;
+		
+		L2PcInstance activeChar = (L2PcInstance)character;
 		L2Clan castleClan = ClanTable.getInstance().getClan(ownerId);
 		L2Clan activeCharClan = activeChar.getClan();
 		SystemMessage sm = null;
-
+		
 		if (entering)
-			sm = SystemMessage.sendString("Castle Alert: " + activeChar.getName() + " has entered the castle's premises!");
+			sm =
+					SystemMessage.sendString("Castle Alert: " + activeChar.getName()
+							+ " has entered the castle's premises!");
 		else
-			sm = SystemMessage.sendString("Castle Alert: " + activeChar.getName() + " has exited the castle's premises!");
-
+			sm =
+					SystemMessage.sendString("Castle Alert: " + activeChar.getName()
+							+ " has exited the castle's premises!");
+		
 		switch (castle.getFunction(Castle.FUNC_SECURITY).getLvl())
 		{
 			case 1: // low

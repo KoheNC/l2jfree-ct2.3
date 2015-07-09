@@ -26,35 +26,34 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * @author Luno, Dezmond
  */
 public class GeoEditorThread extends Thread
 {
-	private static Log				_log		= LogFactory.getLog(GeoEditorThread.class);
-
-	private boolean					_working	= false;
-
-	private int						_mode		= 0;													// 0 - don't send coords, 1 - send each
-
+	private static Log _log = LogFactory.getLog(GeoEditorThread.class);
+	
+	private boolean _working = false;
+	
+	private int _mode = 0; // 0 - don't send coords, 1 - send each
+	
 	// validateposition from client, 2 - send in
 	// intervals of _sendDelay ms.
-	private int						_sendDelay	= 1000;												// default - once in second
-
-	private final Socket					_geSocket;
-
-	private OutputStream			_out;
-
-	private final FastList<L2PcInstance>	_gms;
-
+	private int _sendDelay = 1000; // default - once in second
+	
+	private final Socket _geSocket;
+	
+	private OutputStream _out;
+	
+	private final FastList<L2PcInstance> _gms;
+	
 	public GeoEditorThread(Socket ge)
 	{
 		_geSocket = ge;
 		_working = true;
 		_gms = new FastList<L2PcInstance>();
 	}
-
+	
 	@Override
 	public void interrupt()
 	{
@@ -67,7 +66,7 @@ public class GeoEditorThread extends Thread
 		}
 		super.interrupt();
 	}
-
+	
 	@Override
 	public void run()
 	{
@@ -75,12 +74,12 @@ public class GeoEditorThread extends Thread
 		{
 			_out = _geSocket.getOutputStream();
 			int timer = 0;
-
+			
 			while (_working)
 			{
 				if (!isConnected())
 					_working = false;
-
+				
 				if (_mode == 2 && timer > _sendDelay)
 				{
 					for (L2PcInstance gm : _gms)
@@ -90,7 +89,7 @@ public class GeoEditorThread extends Thread
 							_gms.remove(gm);
 					timer = 0;
 				}
-
+				
 				try
 				{
 					sleep(100);
@@ -122,7 +121,7 @@ public class GeoEditorThread extends Thread
 			_working = false;
 		}
 	}
-
+	
 	public void sendGmPosition(int gx, int gy, short z)
 	{
 		if (!isConnected())
@@ -157,12 +156,12 @@ public class GeoEditorThread extends Thread
 			_working = false;
 		}
 	}
-
+	
 	public void sendGmPosition(L2PcInstance _gm)
 	{
-		sendGmPosition(_gm.getX(), _gm.getY(), (short) _gm.getZ());
+		sendGmPosition(_gm.getX(), _gm.getY(), (short)_gm.getZ());
 	}
-
+	
 	public void sendPing()
 	{
 		if (!isConnected())
@@ -194,7 +193,7 @@ public class GeoEditorThread extends Thread
 			_working = false;
 		}
 	}
-
+	
 	private void writeD(int value) throws IOException
 	{
 		_out.write(value & 0xff);
@@ -202,23 +201,23 @@ public class GeoEditorThread extends Thread
 		_out.write(value >> 16 & 0xff);
 		_out.write(value >> 24 & 0xff);
 	}
-
+	
 	private void writeH(int value) throws IOException
 	{
 		_out.write(value & 0xff);
 		_out.write(value >> 8 & 0xff);
 	}
-
+	
 	private void writeC(int value) throws IOException
 	{
 		_out.write(value & 0xff);
 	}
-
+	
 	public void setMode(int value)
 	{
 		_mode = value;
 	}
-
+	
 	public void setTimer(int value)
 	{
 		if (value < 500)
@@ -228,35 +227,35 @@ public class GeoEditorThread extends Thread
 		else
 			_sendDelay = value;
 	}
-
+	
 	public void addGM(L2PcInstance gm)
 	{
 		if (!_gms.contains(gm))
 			_gms.add(gm);
 	}
-
+	
 	public void removeGM(L2PcInstance gm)
 	{
 		if (_gms.contains(gm))
 			_gms.remove(gm);
 	}
-
+	
 	public boolean isSend(L2PcInstance gm)
 	{
-        return _mode == 1 && _gms.contains(gm);
+		return _mode == 1 && _gms.contains(gm);
 	}
-
+	
 	private boolean isConnected()
 	{
 		return _geSocket.isConnected() && !_geSocket.isClosed();
 	}
-
+	
 	public boolean isWorking()
 	{
 		sendPing();
 		return _working;
 	}
-
+	
 	public int getMode()
 	{
 		return _mode;

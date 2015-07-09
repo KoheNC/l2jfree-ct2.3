@@ -29,9 +29,9 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public class RequestHennaEquip extends L2GameClientPacket
 {
 	private static final String _C__BC_RequestHennaEquip = "[C] bc RequestHennaEquip";
-
+	
 	private int _symbolId;
-
+	
 	/**
 	 * packet type id 0xbb
 	 * format: cd
@@ -41,14 +41,14 @@ public class RequestHennaEquip extends L2GameClientPacket
 	{
 		_symbolId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Henna henna = HennaTable.getInstance().getTemplate(_symbolId);
 		if (henna == null)
 		{
@@ -65,13 +65,16 @@ public class RequestHennaEquip extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANT_DRAW_SYMBOL);
 			return;
 		}
-
+		
 		L2ItemInstance item = activeChar.getInventory().getItemByItemId(henna.getItemId());
 		long count = (item == null ? 0 : item.getCount());
-		if (count >= henna.getAmount() && activeChar.reduceAdena("Henna", henna.getPrice(), activeChar.getLastFolkNPC(), true))
+		if (count >= henna.getAmount()
+				&& activeChar.reduceAdena("Henna", henna.getPrice(), activeChar.getLastFolkNPC(), true))
 		{
 			activeChar.addHenna(henna);
-			L2ItemInstance dye = activeChar.getInventory().destroyItemByItemId("Henna", henna.getItemId(), henna.getAmount(), activeChar, activeChar.getLastFolkNPC());
+			L2ItemInstance dye =
+					activeChar.getInventory().destroyItemByItemId("Henna", henna.getItemId(), henna.getAmount(),
+							activeChar, activeChar.getLastFolkNPC());
 			SystemMessage sm = new SystemMessage(SystemMessageId.S2_S1_DISAPPEARED);
 			sm.addItemName(henna.getItemId());
 			sm.addItemNumber(henna.getAmount());
@@ -82,10 +85,10 @@ public class RequestHennaEquip extends L2GameClientPacket
 		}
 		else
 			sendPacket(SystemMessageId.NUMBER_INCORRECT);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

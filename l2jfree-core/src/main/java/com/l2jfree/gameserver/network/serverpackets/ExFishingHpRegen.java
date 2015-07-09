@@ -25,7 +25,8 @@ public class ExFishingHpRegen extends L2GameServerPacket
 	private final L2Character _activeChar;
 	private final int _time, _fishHp, _hpMode, _anim, _goodUse, _penalty, _hpBarColor;
 	
-	public ExFishingHpRegen(L2Character character, int time, int fishHp, int HPmode, int GoodUse, int anim, int penalty, int hpBarColor)
+	public ExFishingHpRegen(L2Character character, int time, int fishHp, int HPmode, int GoodUse, int anim,
+			int penalty, int hpBarColor)
 	{
 		_activeChar = character;
 		_time = time;
@@ -36,7 +37,7 @@ public class ExFishingHpRegen extends L2GameServerPacket
 		_penalty = penalty;
 		_hpBarColor = hpBarColor;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -52,7 +53,7 @@ public class ExFishingHpRegen extends L2GameServerPacket
 		writeD(_penalty); // Penalty
 		writeC(_hpBarColor); // 0 = normal hp bar, 1 = purple hp bar
 	}
-
+	
 	@Override
 	public String getType()
 	{

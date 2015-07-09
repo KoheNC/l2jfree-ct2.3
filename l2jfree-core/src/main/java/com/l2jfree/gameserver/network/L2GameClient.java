@@ -29,8 +29,8 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.LoginServerThread;
-import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.LoginServerThread.SessionKey;
+import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.model.CharSelectInfoPackage;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -252,7 +252,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		 * (_log.isDebugEnabled()) _log.debug("active Char saved"); _activeChar
 		 * = null; }
 		 */
-
+		
 		int objid = getObjectIdForSlot(charslot);
 		if (objid < 0)
 			return;
@@ -350,7 +350,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		if (_charSlotMapping == null || charslot < 0 || charslot >= _charSlotMapping.length)
 		{
 			_log.warn(toString() + " tried to delete Character in slot " + charslot
-				+ " but no characters exits at that slot.");
+					+ " but no characters exits at that slot.");
 			return -1;
 		}
 		
@@ -440,6 +440,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 			ThreadPoolManager.getInstance().schedule(this, Config.ENTERWORLD_TICK);
 		}
 		
+		@Override
 		public void run()
 		{
 			synchronized (L2GameClient.this)
@@ -579,7 +580,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		if (_log.isDebugEnabled())
 			_log.info("Client " + toString() + " disconnected abnormally.");
 	}
-
+	
 	@Override
 	protected String getUID()
 	{

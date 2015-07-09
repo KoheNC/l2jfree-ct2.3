@@ -142,7 +142,8 @@ public final class FactionAggressionNotificationQueue extends FIFOExecutableQueu
 		}
 	}
 	
-	private static final HashMap<String, FactionAggressionNotificationQueue> _queues = new HashMap<String, FactionAggressionNotificationQueue>();
+	private static final HashMap<String, FactionAggressionNotificationQueue> _queues =
+			new HashMap<String, FactionAggressionNotificationQueue>();
 	
 	public static void add(String factionId, L2Npc npc, L2Character target)
 	{

@@ -22,12 +22,12 @@ public class DoorStatusUpdate extends L2GameServerPacket
 {
 	private static final String _S__4d_DOORSTATUSUPDATE = "[S] 4d DoorStatusUpdate [ddddddd]";
 	private final L2DoorInstance _door;
-
+	
 	public DoorStatusUpdate(L2DoorInstance door)
 	{
 		_door = door;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -37,10 +37,10 @@ public class DoorStatusUpdate extends L2GameServerPacket
 		writeD(_door.getDamageGrade());
 		writeD(_door.isEnemy() ? 1 : 0);
 		writeD(_door.getDoorId());
-		writeD((int) _door.getStatus().getCurrentHp());
+		writeD((int)_door.getStatus().getCurrentHp());
 		writeD(_door.getMaxHp());
 	}
-
+	
 	@Override
 	public String getType()
 	{

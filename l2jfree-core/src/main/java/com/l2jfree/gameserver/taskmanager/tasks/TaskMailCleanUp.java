@@ -42,7 +42,8 @@ public class TaskMailCleanUp extends TaskHandler
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("SELECT letterId FROM character_mail WHERE (location = ? OR location = ?) AND deleteDate < ?");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT letterId FROM character_mail WHERE (location = ? OR location = ?) AND deleteDate < ?");
 			statement.setString(1, "inbox");
 			statement.setString(2, "sentbox");
 			statement.setLong(3, System.currentTimeMillis());

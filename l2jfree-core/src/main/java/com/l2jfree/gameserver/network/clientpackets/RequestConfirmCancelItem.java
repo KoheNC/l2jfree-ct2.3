@@ -28,24 +28,26 @@ import com.l2jfree.gameserver.templates.item.L2Item;
 public final class RequestConfirmCancelItem extends L2GameClientPacket
 {
 	private static final String _C__D0_2D_REQUESTCONFIRMCANCELITEM = "[C] D0:2D RequestConfirmCancelItem";
-
+	
 	private int _itemId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_itemId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
-
+		if (activeChar == null)
+			return;
+		
 		L2ItemInstance item = activeChar.getInventory().getItemByObjectId(_itemId);
-		if (item == null) return;
-
+		if (item == null)
+			return;
+		
 		if (!item.isAugmented())
 		{
 			requestFailed(SystemMessageId.AUGMENTATION_REMOVAL_CAN_ONLY_BE_DONE_ON_AN_AUGMENTED_ITEM);
@@ -95,11 +97,11 @@ public final class RequestConfirmCancelItem extends L2GameClientPacket
 				requestFailed(SystemMessageId.THIS_IS_NOT_A_SUITABLE_ITEM);
 				return;
 		}
-
+		
 		sendPacket(new ExPutItemResultForVariationCancel(_itemId, price));
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

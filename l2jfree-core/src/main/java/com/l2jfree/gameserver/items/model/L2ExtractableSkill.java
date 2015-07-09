@@ -20,19 +20,19 @@ public class L2ExtractableSkill
 {
 	private final int _hash;
 	private final L2ExtractableProductItem[] _products;
-
+	
 	public L2ExtractableSkill(int hash, List<L2ExtractableProductItem> products)
 	{
 		_hash = hash;
 		_products = new L2ExtractableProductItem[products.size()];
 		products.toArray(_products);
 	}
-
+	
 	public int getSkillHash()
 	{
 		return _hash;
 	}
-
+	
 	public L2ExtractableProductItem[] getProductItemsArray()
 	{
 		return _products;

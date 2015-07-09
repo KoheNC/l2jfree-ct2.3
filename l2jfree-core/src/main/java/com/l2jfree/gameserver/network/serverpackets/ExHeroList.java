@@ -27,14 +27,14 @@ import com.l2jfree.gameserver.templates.StatsSet;
  */
 public class ExHeroList extends L2GameServerPacket
 {
-	private static final String		_S__FE_79_EXHEROLIST	= "[S] FE:79 ExHeroList [d(sdsdsdd)]";
-	private final Map<Integer, StatsSet>	_heroList;
-
+	private static final String _S__FE_79_EXHEROLIST = "[S] FE:79 ExHeroList [d(sdsdsdd)]";
+	private final Map<Integer, StatsSet> _heroList;
+	
 	public ExHeroList()
 	{
 		_heroList = Hero.getInstance().getHeroes();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -43,7 +43,7 @@ public class ExHeroList extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x79);
-
+		
 		writeD(_heroList.size());
 		for (Integer heroId : _heroList.keySet())
 		{
@@ -57,7 +57,7 @@ public class ExHeroList extends L2GameServerPacket
 			writeD(hero.getInteger(Hero.COUNT));
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

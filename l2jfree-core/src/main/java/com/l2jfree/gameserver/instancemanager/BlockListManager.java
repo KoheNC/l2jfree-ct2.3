@@ -145,7 +145,7 @@ public final class BlockListManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

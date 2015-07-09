@@ -23,28 +23,28 @@ public class StaticObjectKnownList extends CharKnownList
 {
 	// =========================================================
 	// Data Field
-
+	
 	// =========================================================
 	// Constructor
 	public StaticObjectKnownList(L2StaticObjectInstance activeChar)
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
-
+	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public final L2StaticObjectInstance getActiveChar()
 	{
-		return (L2StaticObjectInstance) _activeChar;
+		return (L2StaticObjectInstance)_activeChar;
 	}
-
+	
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
@@ -54,7 +54,7 @@ public class StaticObjectKnownList extends CharKnownList
 			return 0;
 		return 4000;
 	}
-
+	
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{

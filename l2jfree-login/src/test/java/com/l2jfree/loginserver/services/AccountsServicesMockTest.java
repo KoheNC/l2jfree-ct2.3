@@ -27,15 +27,15 @@ import com.l2jfree.loginserver.services.exception.AccountModificationException;
  */
 public class AccountsServicesMockTest extends TestCase
 {
-	private ClassPathXmlApplicationContext	context		= null;
-
-	private AccountsServices				services	= null;
-
+	private ClassPathXmlApplicationContext context = null;
+	
+	private AccountsServices services = null;
+	
 	private void setAccountsServices(AccountsServices _services)
 	{
 		services = _services;
 	}
-
+	
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
@@ -43,21 +43,21 @@ public class AccountsServicesMockTest extends TestCase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-
+		
 		context = new ClassPathXmlApplicationContext("classpath*:/**/**/applicationContext-TestMock.xml");
-		setAccountsServices((AccountsServices) context.getBean("AccountsServices"));
+		setAccountsServices((AccountsServices)context.getBean("AccountsServices"));
 	}
-
+	
 	public void testAddAccount() throws Exception
 	{
 		assertEquals(2, services.getAccountsInfo().size());
 		Accounts acc = services.addOrUpdateAccount("player1", "pass", "1");
-
+		
 		assertEquals(acc.getLogin(), "player1");
 		assertEquals(acc.getAccessLevel(), new Integer(1));
 		assertEquals(2, services.getAccountsInfo().size());
 	}
-
+	
 	public void testAddAccountWithBadLevel() throws Exception
 	{
 		assertEquals(2, services.getAccountsInfo().size());
@@ -71,7 +71,7 @@ public class AccountsServicesMockTest extends TestCase
 			assertNotNull(e);
 		}
 	}
-
+	
 	public void testUpdateLevel() throws Exception
 	{
 		assertEquals(2, services.getAccountsInfo().size());
@@ -79,14 +79,14 @@ public class AccountsServicesMockTest extends TestCase
 		assertEquals(acc.getLogin(), "player1");
 		assertEquals(acc.getAccessLevel(), new Integer(1));
 		acc = services.addOrUpdateAccount("player2", "pass1", "2");
-
+		
 		services.changeAccountLevel("player1", "2");
-
+		
 		acc = services.getAccountById("player1");
 		assertEquals(acc.getLogin(), "player1");
 		assertEquals(acc.getAccessLevel(), new Integer(2));
 	}
-
+	
 	public void testUpdateLevelIncorretValue() throws Exception
 	{
 		assertEquals(2, services.getAccountsInfo().size());
@@ -94,7 +94,7 @@ public class AccountsServicesMockTest extends TestCase
 		assertEquals(acc.getLogin(), "player1");
 		assertEquals(acc.getAccessLevel(), new Integer(1));
 		acc = services.addOrUpdateAccount("player2", "pass1", "2");
-
+		
 		try
 		{
 			services.changeAccountLevel("player1", "x");
@@ -104,27 +104,27 @@ public class AccountsServicesMockTest extends TestCase
 			assertNotNull(e);
 		}
 	}
-
+	
 	public void testGetUnknownAccount()
 	{
 		Accounts acc = services.getAccountById("unknown");
 		assertEquals(acc, null);
-
+		
 	}
-
+	
 	public void testDeleteAccount() throws Exception
 	{
 		assertEquals(2, services.getAccountsInfo().size());
 		Accounts acc = services.addOrUpdateAccount("player1", "pass", "1");
-
+		
 		assertEquals(acc.getLogin(), "player1");
 		assertEquals(acc.getAccessLevel(), new Integer(1));
 		assertEquals(2, services.getAccountsInfo().size());
-
+		
 		services.deleteAccount("player1");
 		assertEquals(1, services.getAccountsInfo().size());
 	}
-
+	
 	public void testDeleteUnknownAccount()
 	{
 		assertEquals(2, services.getAccountsInfo().size());
@@ -138,11 +138,11 @@ public class AccountsServicesMockTest extends TestCase
 			fail(e1.getMessage());
 			return;
 		}
-
+		
 		assertEquals(acc.getLogin(), "player1");
 		assertEquals(acc.getAccessLevel(), new Integer(1));
 		assertEquals(2, services.getAccountsInfo().size());
-
+		
 		try
 		{
 			services.deleteAccount("unknown");
@@ -154,5 +154,5 @@ public class AccountsServicesMockTest extends TestCase
 		}
 		assertEquals(2, services.getAccountsInfo().size());
 	}
-
+	
 }

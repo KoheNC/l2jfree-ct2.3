@@ -242,9 +242,12 @@ public final class ModuleTester extends Config
 			super(file);
 		}
 		
-		private static final String L1_S1 = "    <table name=\"#enchantMagicLvl\"> 76 76 76 77 77 77 78 78 78 79 79 79 80 80 80 81 81 81 82 82 82 83 83 83 84 84 84 85 85 85 </table>";
-		private static final String L1_S2 = "    <table name=\"#enchantMagicLvl\"> 76 76 76 77 77 77 78 78 78 79 79 79 80 80 80 81 81 81 82 82 82 82 83 83 83 84 84 85 85 85 </table>";
-		private static final String L1_S3 = "    <table name=\"#enchantMagicLvl\"> 81 81 81 82 82 82 83 83 83 84 84 84 85 85 85 </table>";
+		private static final String L1_S1 =
+				"    <table name=\"#enchantMagicLvl\"> 76 76 76 77 77 77 78 78 78 79 79 79 80 80 80 81 81 81 82 82 82 83 83 83 84 84 84 85 85 85 </table>";
+		private static final String L1_S2 =
+				"    <table name=\"#enchantMagicLvl\"> 76 76 76 77 77 77 78 78 78 79 79 79 80 80 80 81 81 81 82 82 82 82 83 83 83 84 84 85 85 85 </table>";
+		private static final String L1_S3 =
+				"    <table name=\"#enchantMagicLvl\"> 81 81 81 82 82 82 83 83 83 84 84 84 85 85 85 </table>";
 		
 		@Override
 		protected ArrayList<String> convertImpl(ArrayList<String> list)
