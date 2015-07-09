@@ -28,7 +28,7 @@ import javolution.util.FastMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.L2FastSet;
@@ -63,7 +63,7 @@ public abstract class StatusServer extends Thread
 		{
 			try
 			{
-				for (String tmp : new L2Properties(L2Config.TELNET_FILE).getProperty("ListOfHosts").split(","))
+				for (String tmp : new L2Properties(L2AutoInitialization.TELNET_FILE).getProperty("ListOfHosts").split(","))
 					if (host.equals(InetAddress.getByName(tmp.trim()).getHostAddress()))
 						return true;
 			}
@@ -84,7 +84,7 @@ public abstract class StatusServer extends Thread
 	
 	protected StatusServer() throws IOException
 	{
-		_socket = new ServerSocket(Integer.parseInt(new L2Properties(L2Config.TELNET_FILE).getProperty("StatusPort")));
+		_socket = new ServerSocket(Integer.parseInt(new L2Properties(L2AutoInitialization.TELNET_FILE).getProperty("StatusPort")));
 		
 		addFilter(new FloodFilter());
 		addFilter(new HostFilter());

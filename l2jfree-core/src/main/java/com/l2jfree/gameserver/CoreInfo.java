@@ -16,7 +16,7 @@ package com.l2jfree.gameserver;
 
 import java.util.Date;
 
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.mmocore.network.SelectorThread;
 import com.l2jfree.versionning.Version;
@@ -31,7 +31,7 @@ public final class CoreInfo
 	}
 	
 	private static final CoreVersion coreVersion = new CoreVersion(GameServer.class);
-	private static final CoreVersion commonsVersion = new CoreVersion(L2Config.class);
+	private static final CoreVersion commonsVersion = new CoreVersion(L2AutoInitialization.class);
 	private static final CoreVersion mmocoreVersion = new CoreVersion(SelectorThread.class);
 	
 	public static void showStartupInfo()

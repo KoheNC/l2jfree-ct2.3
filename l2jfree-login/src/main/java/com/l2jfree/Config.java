@@ -24,7 +24,7 @@ import com.l2jfree.config.L2Properties;
  * 
  * @author mkizub
  */
-public class Config extends L2Config
+public class Config extends L2AutoInitialization
 {
 	/** Number of login tries before IP ban gets activated, default 10*/
 	public static int LOGIN_TRY_BEFORE_BAN;

@@ -24,7 +24,7 @@ import javolution.text.TextBuilder;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 
 /**
  * @author NB4L1
@@ -52,7 +52,7 @@ public abstract class L2RuntimeLogFormatter extends L2LogFormatter
 		
 		if (throwable == null)
 		{
-			if (record.getLevel().intValue() >= L2Config.EXTENDED_LOG_LEVEL.intValue())
+			if (record.getLevel().intValue() >= L2AutoInitialization.EXTENDED_LOG_LEVEL.intValue())
 				throwable = new ExtendedLog();
 			else if (record.getMessage() != null
 					&& record.getMessage().contains("Unevenly distributed hash code - Degraded Preformance"))

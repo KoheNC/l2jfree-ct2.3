@@ -52,7 +52,7 @@ import com.l2jfree.util.L2FastSet;
  * It's initialized at the very begin of startup, and later JIT will optimize
  * away debug/unused code.
  */
-public class Config extends L2Config
+public class Config extends L2AutoInitialization
 {
 	static
 	{
@@ -4037,11 +4037,11 @@ public class Config extends L2Config
 		loadDateTimeConfig();
 		initDBProperties();
 		
-		L2Config.loadConfigs();
+		L2AutoInitialization.loadConfigs();
 		
 		registerConfig(new AllConfig());
 		
-		if (L2Config.isIDEMode())
+		if (L2AutoInitialization.isIDEMode())
 			Config.DATAPACK_ROOT = new File("../l2jfree-datapack");
 	}
 	
