@@ -20,12 +20,13 @@ import java.io.LineNumberReader;
 import java.math.BigInteger;
 
 import com.l2jfree.Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2Registry;
 import com.l2jfree.loginserver.beans.Gameservers;
 import com.l2jfree.loginserver.manager.GameServerManager;
 import com.l2jfree.tools.util.HexUtil;
 
-public class GameServerRegister extends Config
+public class GameServerRegister extends L2AutoInitialization
 {
 	private String _choice;
 	private static GameServerManager gsServerManager;

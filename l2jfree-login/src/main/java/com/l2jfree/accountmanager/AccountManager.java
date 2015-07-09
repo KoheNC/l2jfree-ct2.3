@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2Registry;
 import com.l2jfree.loginserver.beans.Accounts;
 import com.l2jfree.loginserver.services.AccountsServices;
@@ -33,7 +34,7 @@ import com.l2jfree.loginserver.services.exception.AccountModificationException;
  * Enhanced L2JFree account manager.
  * @author savormix
  */
-public final class AccountManager extends Config
+public final class AccountManager extends L2AutoInitialization
 {
 	private static final String[] CMD = { "register", "change", "setlevel", "cancel", "list", "quit" };
 	private static final String SPACE = " ";

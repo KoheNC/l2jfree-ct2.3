@@ -14,6 +14,10 @@
  */
 package com.l2jfree;
 
+import static com.l2jfree.L2AutoInitialization.EXTENDED_LOG_LEVEL;
+import static com.l2jfree.L2AutoInitialization.TELNET_FILE;
+import static com.l2jfree.L2AutoInitialization.registerConfig;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +39,12 @@ import javolution.util.FastMap;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import com.l2jfree.L2AutoInitialization.ConfigFileLoader;
+import com.l2jfree.L2AutoInitialization.ConfigLoader;
+import com.l2jfree.L2AutoInitialization.ConfigPropertiesLoader;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.GameServer;
 import com.l2jfree.gameserver.GameServer.StartupHook;
@@ -52,8 +61,10 @@ import com.l2jfree.util.L2FastSet;
  * It's initialized at the very begin of startup, and later JIT will optimize
  * away debug/unused code.
  */
-public class Config extends L2AutoInitialization
+public final class Config
 {
+	private static final Log _log = LogFactory.getLog(Config.class);
+	
 	static
 	{
 		System.setProperty("python.home", ".");
