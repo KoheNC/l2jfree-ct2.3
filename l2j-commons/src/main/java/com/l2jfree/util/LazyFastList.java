@@ -23,7 +23,7 @@ import javolution.util.FastList;
 /**
  * @author NB4L1
  */
-public final class SingletonList<E> extends SingletonCollection<E, List<E>> implements List<E>
+public final class LazyFastList<E> extends LazyCollection<E, List<E>> implements List<E>
 {
 	@Override
 	protected List<E> emptyCollection()

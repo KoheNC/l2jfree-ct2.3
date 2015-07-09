@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.gameserver.templates.item.L2WeaponType;
-import com.l2jfree.util.SingletonSet;
+import com.l2jfree.util.LazyFastSet;
 
 /**
  * @author NB4L1
@@ -122,7 +122,7 @@ public final class PcShots extends CharShots
 		new ShotInfo(22086, 26064, L2Item.CRYSTAL_S); // Soulshot - S-grade
 	}
 	
-	private final Set<Integer> _activeSoulShots = new SingletonSet<Integer>().setShared();
+	private final Set<Integer> _activeSoulShots = new LazyFastSet<Integer>().setShared();
 	
 	public PcShots(L2PcInstance activeChar)
 	{

@@ -313,8 +313,8 @@ import com.l2jfree.tools.util.HexUtil;
 import com.l2jfree.util.ArrayBunch;
 import com.l2jfree.util.L2Arrays;
 import com.l2jfree.util.L2Collections;
-import com.l2jfree.util.SingletonList;
-import com.l2jfree.util.SingletonMap;
+import com.l2jfree.util.LazyFastList;
+import com.l2jfree.util.LazyFastMap;
 
 /**
  * This class represents all player characters in the world.
@@ -505,7 +505,7 @@ public final class L2PcInstance extends L2Playable
 	private boolean _isIn7sDungeon = false;
 	
 	public int _bookmarkslot = 0; // The Teleport Bookmark Slot
-	public final List<TeleportBookmark> tpbookmark = new SingletonList<TeleportBookmark>();
+	public final List<TeleportBookmark> tpbookmark = new LazyFastList<TeleportBookmark>();
 	
 	private int _subPledgeType = 0;
 	
@@ -545,7 +545,7 @@ public final class L2PcInstance extends L2Playable
 	private int _newbie;
 	
 	/** The table containing all Quests began by the L2PcInstance */
-	private final Map<String, QuestState> _quests = new SingletonMap<String, QuestState>();
+	private final Map<String, QuestState> _quests = new LazyFastMap<String, QuestState>();
 	
 	/** The list containing all shortCuts of this L2PcInstance */
 	private ShortCuts _shortCuts;
@@ -650,8 +650,8 @@ public final class L2PcInstance extends L2Playable
 	private Map<Integer, String> _chars;
 	
 	/** The table containing all L2RecipeList of the L2PcInstance */
-	private final Map<Integer, L2RecipeList> _dwarvenRecipeBook = new SingletonMap<Integer, L2RecipeList>();
-	private final Map<Integer, L2RecipeList> _commonRecipeBook = new SingletonMap<Integer, L2RecipeList>();
+	private final Map<Integer, L2RecipeList> _dwarvenRecipeBook = new LazyFastMap<Integer, L2RecipeList>();
+	private final Map<Integer, L2RecipeList> _commonRecipeBook = new LazyFastMap<Integer, L2RecipeList>();
 	
 	private int _mountType;
 	private int _mountNpcId;
@@ -676,7 +676,7 @@ public final class L2PcInstance extends L2Playable
 	
 	protected boolean _inventoryDisabled = false;
 	
-	protected Map<Integer, L2CubicInstance> _cubics = new SingletonMap<Integer, L2CubicInstance>().setShared();
+	protected Map<Integer, L2CubicInstance> _cubics = new LazyFastMap<Integer, L2CubicInstance>().setShared();
 	
 	/** The L2NpcInstance corresponding to the last Folk wich one the player talked. */
 	private L2Npc _lastFolkNpc = null;
@@ -711,7 +711,7 @@ public final class L2PcInstance extends L2Playable
 	private int _fishy = 0;
 	private int _fishz = 0;
 	
-	private final List<Integer> _transformAllowedSkills = new SingletonList<Integer>();
+	private final List<Integer> _transformAllowedSkills = new LazyFastList<Integer>();
 	
 	private int _team = 0;
 	private int _wantsPeace = 0;
@@ -781,7 +781,7 @@ public final class L2PcInstance extends L2Playable
 	private int _evaluations;
 	
 	/** List of players this player already evaluated */
-	private final List<Integer> _evaluated = new SingletonList<Integer>();
+	private final List<Integer> _evaluated = new LazyFastList<Integer>();
 	
 	private boolean _inCrystallize;
 	
@@ -1639,7 +1639,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/** List of all QuestState instance that needs to be notified of this L2PcInstance's or its pet's death */
-	private final List<QuestState> _NotifyQuestOfDeathList = new SingletonList<QuestState>();
+	private final List<QuestState> _NotifyQuestOfDeathList = new LazyFastList<QuestState>();
 	
 	/**
 	 * Add QuestState instance that is to be notified of L2PcInstance's death.<BR>
@@ -9968,7 +9968,7 @@ public final class L2PcInstance extends L2Playable
 	public Map<Integer, SubClass> getSubClasses()
 	{
 		if (_subClasses == null)
-			_subClasses = new SingletonMap<Integer, SubClass>();
+			_subClasses = new LazyFastMap<Integer, SubClass>();
 		
 		return _subClasses;
 	}
@@ -13269,7 +13269,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private abstract class ConditionListener
 	{
-		private final Map<Func, Boolean> _values = new SingletonMap<Func, Boolean>().setShared();
+		private final Map<Func, Boolean> _values = new LazyFastMap<Func, Boolean>().setShared();
 		private final Env _env;
 		
 		protected ConditionListener()

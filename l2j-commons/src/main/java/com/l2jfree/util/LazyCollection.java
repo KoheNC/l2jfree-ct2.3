@@ -20,12 +20,12 @@ import java.util.Iterator;
 /**
  * @author NB4L1
  */
-public abstract class SingletonCollection<E, C extends Collection<E>> implements Collection<E>
+public abstract class LazyCollection<E, C extends Collection<E>> implements Collection<E>
 {
 	protected boolean _initialized = false;
 	protected C _collection = emptyCollection();
 	
-	protected SingletonCollection()
+	protected LazyCollection()
 	{
 	}
 	

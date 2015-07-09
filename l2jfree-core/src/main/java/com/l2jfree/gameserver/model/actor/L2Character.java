@@ -129,7 +129,7 @@ import com.l2jfree.lang.L2System;
 import com.l2jfree.tools.geometry.Point3D;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.L2Arrays;
-import com.l2jfree.util.SingletonSet;
+import com.l2jfree.util.LazyFastSet;
 
 /**
  * Mother class of all character objects of the world (PC, NPC...)<BR>
@@ -2216,7 +2216,7 @@ public abstract class L2Character extends L2Object
 	public final Set<L2Character> getAttackByList()
 	{
 		if (_attackByList == null)
-			_attackByList = new SingletonSet<L2Character>();
+			_attackByList = new LazyFastSet<L2Character>();
 		
 		return _attackByList;
 	}
