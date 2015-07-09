@@ -1,0 +1,12 @@
+/target
+/build
+/cache
+/log
+/bin
+/dumps
+/config/override.properties
+/config/hexid.txt
+/cachedir
+*.jdbc
+*.db
+/chk_facts.txt
