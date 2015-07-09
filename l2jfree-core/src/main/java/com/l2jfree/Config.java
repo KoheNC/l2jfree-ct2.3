@@ -1625,7 +1625,7 @@ public class Config extends L2Config
 			
 			OPTIMIZE_DATABASE = Boolean.parseBoolean(optionsSettings.getProperty("OptimizeDatabaseTables", "True"));
 			
-			HTML_CACHE_FILE = optionsSettings.getProperty("HtmlCacheFile", "./html.cache");
+			HTML_CACHE_FILE = optionsSettings.getProperty("HtmlCacheFile", "./cache/html.cache");
 			
 			BAN_DUPLICATE_ITEM_OWNER =
 					Boolean.parseBoolean(optionsSettings.getProperty("BanDuplicateItemOwner", "False"));
