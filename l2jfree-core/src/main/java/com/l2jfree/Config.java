@@ -205,7 +205,7 @@ public class Config extends L2Config
 			PACKET_HANDLER_DEBUG = Boolean.parseBoolean(serverSettings.getProperty("PacketHandlerDebug", "false"));
 			MAXIMUM_ONLINE_USERS = Integer.parseInt(serverSettings.getProperty("MaximumOnlineUsers", "100"));
 			DATABASE_DRIVER = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
-			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
+			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jfree_gs");
 			DATABASE_LOGIN = serverSettings.getProperty("Login", "root");
 			DATABASE_PASSWORD = serverSettings.getProperty("Password", "");
 			DATABASE_MAX_CONNECTIONS = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
@@ -1617,7 +1617,7 @@ public class Config extends L2Config
 					Boolean.parseBoolean(optionsSettings.getProperty("DatabaseBackupMakeBackupOnStartup", "False"));
 			DATABASE_BACKUP_MAKE_BACKUP_ON_SHUTDOWN =
 					Boolean.parseBoolean(optionsSettings.getProperty("DatabaseBackupMakeBackupOnShutdown", "False"));
-			DATABASE_BACKUP_DATABASE_NAME = optionsSettings.getProperty("DatabaseBackupDatabaseName", "l2jdb");
+			DATABASE_BACKUP_DATABASE_NAME = optionsSettings.getProperty("DatabaseBackupDatabaseName", "l2jfree_gs");
 			DATABASE_BACKUP_SAVE_PATH = optionsSettings.getProperty("DatabaseBackupSavePath", "/backup/database/");
 			DATABASE_BACKUP_COMPRESSION =
 					Boolean.parseBoolean(optionsSettings.getProperty("DatabaseBackupCompression", "True"));

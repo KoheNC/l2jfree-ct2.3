@@ -95,7 +95,7 @@ public class Config extends L2Config
 			GM_MIN = Integer.parseInt(serverSettings.getProperty("GMMinLevel", "100"));
 			
 			DATABASE_DRIVER = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
-			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
+			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jfree_ls");
 			DATABASE_LOGIN = serverSettings.getProperty("Login", "root");
 			DATABASE_PASSWORD = serverSettings.getProperty("Password", "");
 			
