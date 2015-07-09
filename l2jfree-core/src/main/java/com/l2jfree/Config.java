@@ -46,13 +46,13 @@ import com.l2jfree.L2AutoInitialization.ConfigFileLoader;
 import com.l2jfree.L2AutoInitialization.ConfigLoader;
 import com.l2jfree.L2AutoInitialization.ConfigPropertiesLoader;
 import com.l2jfree.config.L2Properties;
-import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.GameServer.StartupHook;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.util.Util;
+import com.l2jfree.lang.management.StartupManager;
+import com.l2jfree.lang.management.StartupManager.StartupHook;
 import com.l2jfree.util.L2FastSet;
 
 /**
@@ -3897,7 +3897,7 @@ public final class Config
 			AUTO_TVT_TK_PUNISH_POINTS_LOST = Integer.parseInt(properties.getProperty("TvTPunishTKDecreaseScore", "5"));
 			final StringTokenizer skills = new StringTokenizer(properties.getProperty("TvTPunishTKDebuff", ""), ";");
 			AUTO_TVT_TK_PUNISH_EFFECTS = new L2Skill[skills.countTokens()];
-			GameServer.addStartupHook(new StartupHook() {
+			StartupManager.addStartupHook(new StartupHook() {
 				@Override
 				public void onStartup()
 				{
