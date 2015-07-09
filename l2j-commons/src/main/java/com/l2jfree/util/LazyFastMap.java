@@ -23,7 +23,7 @@ import javolution.util.FastMap;
 /**
  * @author NB4L1
  */
-public final class SingletonMap<K, V> implements Map<K, V>
+public final class LazyFastMap<K, V> implements Map<K, V>
 {
 	private boolean _initialized = false;
 	private Map<K, V> _map = L2Collections.emptyMap();
@@ -45,7 +45,7 @@ public final class SingletonMap<K, V> implements Map<K, V>
 		}
 	}
 	
-	public SingletonMap<K, V> setShared()
+	public LazyFastMap<K, V> setShared()
 	{
 		_shared = true;
 		

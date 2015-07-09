@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * @author NB4L1
  */
-public final class SingletonSet<E> extends SingletonCollection<E, Set<E>> implements Set<E>
+public final class LazyFastSet<E> extends LazyCollection<E, Set<E>> implements Set<E>
 {
 	private boolean _shared = false;
 	
@@ -35,7 +35,7 @@ public final class SingletonSet<E> extends SingletonCollection<E, Set<E>> implem
 		return new L2FastSet<E>().setShared(_shared);
 	}
 	
-	public SingletonSet<E> setShared()
+	public LazyFastSet<E> setShared()
 	{
 		_shared = true;
 		

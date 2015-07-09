@@ -19,9 +19,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.GameServer.StartupHook;
 import com.l2jfree.gameserver.ThreadPoolManager;
+import com.l2jfree.lang.management.StartupManager;
+import com.l2jfree.lang.management.StartupManager.StartupHook;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -41,7 +41,7 @@ abstract class AbstractPeriodicTaskManager implements Runnable, StartupHook
 	{
 		_period = period;
 		
-		GameServer.addStartupHook(this);
+		StartupManager.addStartupHook(this);
 		
 		_log.info(getClass().getSimpleName() + ": Initialized.");
 	}

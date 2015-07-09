@@ -14,6 +14,11 @@
  */
 package com.l2jfree;
 
+import static com.l2jfree.L2AutoInitialization.TELNET_FILE;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.l2jfree.config.L2Properties;
 
 /**
@@ -24,8 +29,10 @@ import com.l2jfree.config.L2Properties;
  * 
  * @author mkizub
  */
-public class Config extends L2Config
+public final class Config
 {
+	private static final Log _log = LogFactory.getLog(Config.class);
+	
 	/** Number of login tries before IP ban gets activated, default 10*/
 	public static int LOGIN_TRY_BEFORE_BAN;
 	/** Number of seconds the IP ban will last, default 10 minutes */

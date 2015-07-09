@@ -31,7 +31,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.Announcements;
@@ -134,7 +134,7 @@ public final class GameStatusThread extends Thread
 		
 		try
 		{
-			L2Properties telnetSettings = new L2Properties(L2Config.TELNET_FILE);
+			L2Properties telnetSettings = new L2Properties(L2AutoInitialization.TELNET_FILE);
 			
 			String HostList = telnetSettings.getProperty("ListOfHosts", "127.0.0.1,localhost");
 			
@@ -922,11 +922,11 @@ public final class GameStatusThread extends Thread
 					
 					try
 					{
-						_print.println(L2Config.loadConfig(st.nextToken()));
+						_print.println(L2AutoInitialization.loadConfig(st.nextToken()));
 					}
 					catch (Exception e)
 					{
-						_print.println("Usage:  reload_config <" + L2Config.getLoaderNames() + ">");
+						_print.println("Usage:  reload_config <" + L2AutoInitialization.getLoaderNames() + ">");
 					}
 				}
 				else if (_usrCommand.startsWith("reload"))

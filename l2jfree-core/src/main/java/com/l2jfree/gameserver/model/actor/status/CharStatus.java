@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.model.entity.Duel;
 import com.l2jfree.gameserver.skills.Formulas;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 import com.l2jfree.tools.random.Rnd;
-import com.l2jfree.util.SingletonSet;
+import com.l2jfree.util.LazyFastSet;
 
 public class CharStatus
 {
@@ -367,7 +367,7 @@ public class CharStatus
 	public final Set<L2PcInstance> getStatusListeners()
 	{
 		if (_statusListeners == null)
-			_statusListeners = new SingletonSet<L2PcInstance>();
+			_statusListeners = new LazyFastSet<L2PcInstance>();
 		
 		return _statusListeners;
 	}

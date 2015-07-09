@@ -51,7 +51,7 @@ import com.l2jfree.util.HandlerRegistry;
 /**
  * @author evill33t
  */
-public abstract class L2Config
+public abstract class L2AutoInitialization
 {
 	public static final int LOGIN_PROTOCOL_L2J = 258;
 	
@@ -196,7 +196,7 @@ public abstract class L2Config
 			IOUtils.closeQuietly(fis);
 		}
 		
-		_log = LogFactory.getLog(L2Config.class);
+		_log = LogFactory.getLog(L2AutoInitialization.class);
 		_log.info("logging initialized");
 		_logger = ((Jdk14Logger)_log).getLogger();
 		
@@ -243,7 +243,7 @@ public abstract class L2Config
 		return null;
 	}
 	
-	protected L2Config()
+	protected L2AutoInitialization()
 	{
 	}
 	

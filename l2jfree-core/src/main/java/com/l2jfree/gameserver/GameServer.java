@@ -19,10 +19,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.l2jfree.Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.cache.CrestCache;
 import com.l2jfree.gameserver.cache.HtmCache;
@@ -153,10 +152,11 @@ import com.l2jfree.gameserver.util.DynamicExtension;
 import com.l2jfree.gameserver.util.OfflineTradeManager;
 import com.l2jfree.gameserver.util.TableOptimizer;
 import com.l2jfree.gameserver.util.Util;
+import com.l2jfree.lang.management.StartupManager;
 import com.l2jfree.status.Status;
 import com.l2jfree.util.concurrent.RunnableStatsManager;
 
-public class GameServer extends Config
+public final class GameServer extends L2AutoInitialization
 {
 	private static final Calendar _serverStarted = Calendar.getInstance();
 	
@@ -465,7 +465,7 @@ public class GameServer extends Config
 		_log.info("Maximum number of connected players: " + Config.MAXIMUM_ONLINE_USERS);
 		_log.info("Server loaded in " + ((System.currentTimeMillis() - serverLoadStart) / 1000) + " seconds.");
 		
-		onStartup();
+		StartupManager.onStartup();
 		
 		Util.printSection("GameServerLog");
 		if (Config.ENABLE_JYTHON_SHELL)
@@ -473,31 +473,6 @@ public class GameServer extends Config
 			Util.printSection("JythonShell");
 			Util.JythonShell();
 		}
-	}
-	
-	private static Set<StartupHook> _startupHooks = new HashSet<StartupHook>();
-	
-	public synchronized static void addStartupHook(StartupHook hook)
-	{
-		if (_startupHooks != null)
-			_startupHooks.add(hook);
-		else
-			hook.onStartup();
-	}
-	
-	private synchronized static void onStartup()
-	{
-		final Set<StartupHook> startupHooks = _startupHooks;
-		
-		_startupHooks = null;
-		
-		for (StartupHook hook : startupHooks)
-			hook.onStartup();
-	}
-	
-	public interface StartupHook
-	{
-		public void onStartup();
 	}
 	
 	public static Calendar getStartedTime()

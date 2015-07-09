@@ -21,7 +21,7 @@ import java.net.Socket;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.tools.random.Rnd;
@@ -81,7 +81,7 @@ public class Status extends Thread
 	public Status() throws IOException
 	{
 		super("Status");
-		L2Properties telnetSettings = new L2Properties(L2Config.TELNET_FILE);
+		L2Properties telnetSettings = new L2Properties(L2AutoInitialization.TELNET_FILE);
 		
 		_statusPort = Integer.parseInt(telnetSettings.getProperty("StatusPort", "12345"));
 		_statusPw = telnetSettings.getProperty("StatusPW");

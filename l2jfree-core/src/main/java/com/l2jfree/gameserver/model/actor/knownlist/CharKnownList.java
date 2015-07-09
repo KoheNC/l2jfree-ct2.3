@@ -22,14 +22,14 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.util.L2Collections;
-import com.l2jfree.util.SingletonMap;
+import com.l2jfree.util.LazyFastMap;
 
 public class CharKnownList extends ObjectKnownList
 {
 	protected final L2Character _activeChar;
 	
-	private final Map<Integer, L2Object> _knownObjects = new SingletonMap<Integer, L2Object>().setShared();
-	private final Map<Integer, L2PcInstance> _knownPlayers = new SingletonMap<Integer, L2PcInstance>().setShared();
+	private final Map<Integer, L2Object> _knownObjects = new LazyFastMap<Integer, L2Object>().setShared();
+	private final Map<Integer, L2PcInstance> _knownPlayers = new LazyFastMap<Integer, L2PcInstance>().setShared();
 	
 	public CharKnownList(L2Character activeChar)
 	{

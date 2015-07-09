@@ -14,6 +14,10 @@
  */
 package com.l2jfree;
 
+import static com.l2jfree.L2AutoInitialization.EXTENDED_LOG_LEVEL;
+import static com.l2jfree.L2AutoInitialization.TELNET_FILE;
+import static com.l2jfree.L2AutoInitialization.registerConfig;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,15 +39,20 @@ import javolution.util.FastMap;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import com.l2jfree.L2AutoInitialization.ConfigFileLoader;
+import com.l2jfree.L2AutoInitialization.ConfigLoader;
+import com.l2jfree.L2AutoInitialization.ConfigPropertiesLoader;
 import com.l2jfree.config.L2Properties;
-import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.GameServer.StartupHook;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.util.Util;
+import com.l2jfree.lang.management.StartupManager;
+import com.l2jfree.lang.management.StartupManager.StartupHook;
 import com.l2jfree.util.L2FastSet;
 
 /**
@@ -52,8 +61,10 @@ import com.l2jfree.util.L2FastSet;
  * It's initialized at the very begin of startup, and later JIT will optimize
  * away debug/unused code.
  */
-public class Config extends L2Config
+public final class Config
 {
+	private static final Log _log = LogFactory.getLog(Config.class);
+	
 	static
 	{
 		System.setProperty("python.home", ".");
@@ -3886,7 +3897,7 @@ public class Config extends L2Config
 			AUTO_TVT_TK_PUNISH_POINTS_LOST = Integer.parseInt(properties.getProperty("TvTPunishTKDecreaseScore", "5"));
 			final StringTokenizer skills = new StringTokenizer(properties.getProperty("TvTPunishTKDebuff", ""), ";");
 			AUTO_TVT_TK_PUNISH_EFFECTS = new L2Skill[skills.countTokens()];
-			GameServer.addStartupHook(new StartupHook() {
+			StartupManager.addStartupHook(new StartupHook() {
 				@Override
 				public void onStartup()
 				{
@@ -4037,11 +4048,11 @@ public class Config extends L2Config
 		loadDateTimeConfig();
 		initDBProperties();
 		
-		L2Config.loadConfigs();
+		L2AutoInitialization.loadConfigs();
 		
 		registerConfig(new AllConfig());
 		
-		if (L2Config.isIDEMode())
+		if (L2AutoInitialization.isIDEMode())
 			Config.DATAPACK_ROOT = new File("../l2jfree-datapack");
 	}
 	

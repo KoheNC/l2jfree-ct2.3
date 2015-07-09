@@ -29,7 +29,7 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
@@ -313,13 +313,13 @@ public final class LoginServerThread extends NetworkThread
 							if (_log.isDebugEnabled())
 								_log.debug("Init received");
 							
-							if (init.getRevision() != L2Config.LOGIN_PROTOCOL_L2J)
+							if (init.getRevision() != L2AutoInitialization.LOGIN_PROTOCOL_L2J)
 							{
 								_log.warn("/!\\ Revision mismatch between LS and GS /!\\");
 								break;
 							}
 							
-							if (init.getTrueRevision() == L2Config.LOGIN_PROTOCOL_CURRENT)
+							if (init.getTrueRevision() == L2AutoInitialization.LOGIN_PROTOCOL_CURRENT)
 							{
 								// Fully compatible login
 								sendPacket(new CompatibleProtocol());

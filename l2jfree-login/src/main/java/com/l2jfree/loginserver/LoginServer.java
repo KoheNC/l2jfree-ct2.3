@@ -17,6 +17,7 @@ package com.l2jfree.loginserver;
 import java.net.InetAddress;
 
 import com.l2jfree.Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2Registry;
 import com.l2jfree.loginserver.manager.BanManager;
 import com.l2jfree.loginserver.manager.GameServerManager;
@@ -24,7 +25,7 @@ import com.l2jfree.loginserver.manager.LoginManager;
 import com.l2jfree.loginserver.thread.GameServerListener;
 import com.l2jfree.status.Status;
 
-public final class L2LoginServer extends Config
+public final class LoginServer extends L2AutoInitialization
 {
 	public static void main(String[] args) throws Throwable
 	{

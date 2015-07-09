@@ -69,7 +69,7 @@ import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.ArrayBunch;
-import com.l2jfree.util.SingletonMap;
+import com.l2jfree.util.LazyFastMap;
 
 /**
  * This class manages all NPC that can be attacked.<BR>
@@ -219,7 +219,7 @@ public class L2Attackable extends L2Npc
 	 * and L2Character that attacked the L2Attackable This Map is Thread Safe,
 	 * but Removing Object While Interating Over It Will Result NPE
 	 */
-	private final Map<L2Character, AggroInfo> _aggroList = new SingletonMap<L2Character, AggroInfo>().setShared();
+	private final Map<L2Character, AggroInfo> _aggroList = new LazyFastMap<L2Character, AggroInfo>().setShared();
 	
 	/** Use this to Read or Put Object to this Map */
 	public final Map<L2Character, AggroInfo> getAggroListRP()
@@ -302,7 +302,7 @@ public class L2Attackable extends L2Npc
 	 * The table containing all L2PcInstance that successfuly absorbed the soul
 	 * of this L2Attackable
 	 */
-	private final Map<L2PcInstance, AbsorberInfo> _absorbersList = new SingletonMap<L2PcInstance, AbsorberInfo>()
+	private final Map<L2PcInstance, AbsorberInfo> _absorbersList = new LazyFastMap<L2PcInstance, AbsorberInfo>()
 			.setShared();
 	
 	public Map<L2PcInstance, AbsorberInfo> getAbsorbersList()

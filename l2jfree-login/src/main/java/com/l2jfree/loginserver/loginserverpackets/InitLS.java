@@ -14,17 +14,17 @@
  */
 package com.l2jfree.loginserver.loginserverpackets;
 
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 
 public final class InitLS extends LoginToGamePacket
 {
 	public InitLS(byte[] publickey)
 	{
 		super(0x00);
-		writeD(L2Config.LOGIN_PROTOCOL_L2J);
+		writeD(L2AutoInitialization.LOGIN_PROTOCOL_L2J);
 		writeD(publickey.length);
 		writeB(publickey);
 		// let the l2jfree game servers know we support enhanced protocol
-		writeD(L2Config.LOGIN_PROTOCOL_CURRENT);
+		writeD(L2AutoInitialization.LOGIN_PROTOCOL_CURRENT);
 	}
 }

@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.communitybbs.Manager.AuctionBBSManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
@@ -125,11 +125,11 @@ public class AdminAdmin implements IAdminCommandHandler
 			
 			try
 			{
-				activeChar.sendMessage(L2Config.loadConfig(st.nextToken()));
+				activeChar.sendMessage(L2AutoInitialization.loadConfig(st.nextToken()));
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage:  //reload_config <" + L2Config.getLoaderNames() + ">");
+				activeChar.sendMessage("Usage:  //reload_config <" + L2AutoInitialization.getLoaderNames() + ">");
 			}
 		}
 		else if (command.startsWith("admin_summon_npc"))

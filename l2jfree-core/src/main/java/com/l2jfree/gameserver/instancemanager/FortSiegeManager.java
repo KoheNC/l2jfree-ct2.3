@@ -27,7 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.datatables.SkillTable;
@@ -246,7 +246,7 @@ public class FortSiegeManager
 		_commanderSpawnList.clear();
 		try
 		{
-			L2Config.loadConfig("fortsiege");
+			L2AutoInitialization.loadConfig("fortsiege");
 		}
 		catch (Exception e)
 		{
