@@ -4040,6 +4040,9 @@ public class Config extends L2Config
 		L2Config.loadConfigs();
 		
 		registerConfig(new AllConfig());
+		
+		if (L2Config.isIDEMode())
+			Config.DATAPACK_ROOT = new File("../l2jfree-datapack");
 	}
 	
 	private static final class AllConfig extends ConfigLoader
