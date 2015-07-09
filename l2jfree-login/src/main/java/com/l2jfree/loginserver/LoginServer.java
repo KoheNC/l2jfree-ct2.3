@@ -25,7 +25,7 @@ import com.l2jfree.loginserver.manager.LoginManager;
 import com.l2jfree.loginserver.thread.GameServerListener;
 import com.l2jfree.status.Status;
 
-public final class L2LoginServer extends L2AutoInitialization
+public final class LoginServer extends L2AutoInitialization
 {
 	public static void main(String[] args) throws Throwable
 	{
