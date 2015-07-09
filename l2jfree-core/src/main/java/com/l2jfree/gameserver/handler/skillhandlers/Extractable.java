@@ -34,13 +34,10 @@ import com.l2jfree.tools.random.Rnd;
 
 public class Extractable implements ISkillHandler
 {
-	protected static Log	_log						= LogFactory.getLog(Extractable.class);
-
-	private static final L2SkillType[] SKILL_IDS =
-	{
-		L2SkillType.EXTRACTABLE
-	};
-
+	protected static Log _log = LogFactory.getLog(Extractable.class);
+	
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.EXTRACTABLE };
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.model.actor.L2Character, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.model.actor.L2Character...)
@@ -49,40 +46,41 @@ public class Extractable implements ISkillHandler
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
+		
 		L2PcInstance player = (L2PcInstance)activeChar;
 		int itemID = skill.getReferenceItemId();
 		if (itemID == 0)
 			return;
-
+		
 		L2ExtractableSkill exitem = ExtractableSkillsData.getInstance().getExtractableItem(skill);
-
+		
 		if (exitem == null)
 			return;
-
+		
 		int rndNum = Rnd.get(100), chanceFrom = 0;
 		int[] createItemID = new int[20];
 		int[] createAmount = new int[20];
-
+		
 		// calculate extraction
 		for (L2ExtractableProductItem expi : exitem.getProductItemsArray())
 		{
 			int chance = expi.getChance();
-
+			
 			if (rndNum >= chanceFrom && rndNum <= chance + chanceFrom)
 			{
 				for (int i = 0; i < expi.getId().length; i++)
 				{
 					createItemID[i] = expi.getId()[i];
-
-					if ((itemID >= 6411 && itemID <= 6518) || (itemID >= 7726 && itemID <= 7860) || (itemID >= 8403 && itemID <= 8483))
+					
+					if ((itemID >= 6411 && itemID <= 6518) || (itemID >= 7726 && itemID <= 7860)
+							|| (itemID >= 8403 && itemID <= 8483))
 						createAmount[i] = (expi.getAmmount()[i] * Config.RATE_EXTR_FISH);
 					else
 						createAmount[i] = expi.getAmmount()[i];
 				}
 				break;
 			}
-
+			
 			chanceFrom += chance;
 		}
 		if (player.isSubClassActive() && skill.getReuseDelay() > 0)
@@ -92,7 +90,7 @@ public class Extractable implements ISkillHandler
 			player.sendPacket(new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED).addSkillName(skill));
 			return;
 		}
-		if (createItemID[0] <= 0 || createItemID.length == 0 )
+		if (createItemID[0] <= 0 || createItemID.length == 0)
 		{
 			player.sendPacket(SystemMessageId.NOTHING_INSIDE_THAT);
 			return;
@@ -103,14 +101,14 @@ public class Extractable implements ISkillHandler
 			{
 				if (createItemID[i] <= 0)
 					return;
-
+				
 				if (ItemTable.getInstance().getTemplate(createItemID[i]) == null)
 				{
 					_log.warn("createItemID " + createItemID[i] + " doesn't have template!");
 					player.sendPacket(SystemMessageId.NOTHING_INSIDE_THAT);
 					return;
 				}
-
+				
 				if (ItemTable.getInstance().getTemplate(createItemID[i]).isStackable())
 					player.addItem("Extract", createItemID[i], createAmount[i], targets[0], false);
 				else
@@ -118,7 +116,7 @@ public class Extractable implements ISkillHandler
 					for (int j = 0; j < createAmount[i]; j++)
 						player.addItem("Extract", createItemID[i], 1, targets[0], false);
 				}
-
+				
 				if (createItemID[i] == PcInventory.ADENA_ID)
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
@@ -135,7 +133,7 @@ public class Extractable implements ISkillHandler
 			}
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.ISkillHandler#getSkillIds()

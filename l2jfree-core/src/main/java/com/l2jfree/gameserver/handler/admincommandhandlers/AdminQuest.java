@@ -29,12 +29,10 @@ import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.scripting.L2ScriptEngineManager;
 
-
 public class AdminQuest implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_quest_reload", "admin_script_load" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_quest_reload", "admin_script_load" };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -116,7 +114,7 @@ public class AdminQuest implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */
@@ -124,5 +122,5 @@ public class AdminQuest implements IAdminCommandHandler
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 }

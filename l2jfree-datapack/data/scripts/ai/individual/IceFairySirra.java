@@ -47,13 +47,13 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public class IceFairySirra extends L2AttackableAIScript
 {
-	private static final int			STEWARD				= 32029;
-	private static final int			SILVER_HEMOCYTE		= 8057;
-	private static L2BossZone			_freyasZone;
-	private static L2PcInstance			_player				= null;
-	protected FastList<L2Npc>	_allMobs			= new FastList<L2Npc>();
-	protected Future<?>					_onDeadEventTask	= null;
-
+	private static final int STEWARD = 32029;
+	private static final int SILVER_HEMOCYTE = 8057;
+	private static L2BossZone _freyasZone;
+	private static L2PcInstance _player = null;
+	protected FastList<L2Npc> _allMobs = new FastList<L2Npc>();
+	protected Future<?> _onDeadEventTask = null;
+	
 	public IceFairySirra(int id, String name, String descr)
 	{
 		super(id, name, descr);
@@ -64,7 +64,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		addEventId(STEWARD, Quest.QuestEventType.ON_FIRST_TALK);
 		init0();
 	}
-
+	
 	private void init0()
 	{
 		L2Zone zone = ZoneManager.getInstance().isInsideZone(ZoneType.Boss, 105546, 127892);
@@ -83,7 +83,7 @@ public class IceFairySirra extends L2AttackableAIScript
 			steward.setBusy(false);
 		openGates();
 	}
-
+	
 	public void cleanUp()
 	{
 		init0();
@@ -105,7 +105,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		}
 		_allMobs.clear();
 	}
-
+	
 	public L2Npc findTemplate(int npcId)
 	{
 		L2Npc npc = null;
@@ -119,7 +119,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		}
 		return npc;
 	}
-
+	
 	protected void openGates()
 	{
 		for (int i = 23140001; i < 23140003; i++)
@@ -142,7 +142,7 @@ public class IceFairySirra extends L2AttackableAIScript
 			}
 		}
 	}
-
+	
 	protected void closeGates()
 	{
 		for (int i = 23140001; i < 23140003; i++)
@@ -165,7 +165,7 @@ public class IceFairySirra extends L2AttackableAIScript
 			}
 		}
 	}
-
+	
 	public boolean checkItems(L2PcInstance player)
 	{
 		if (player.getParty() != null)
@@ -183,7 +183,7 @@ public class IceFairySirra extends L2AttackableAIScript
 			return false;
 		return true;
 	}
-
+	
 	public void destroyItems(L2PcInstance player)
 	{
 		if (player.getParty() != null)
@@ -197,7 +197,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		else
 			cleanUp();
 	}
-
+	
 	public void teleportInside(L2PcInstance player)
 	{
 		if (player.getParty() != null)
@@ -218,7 +218,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		else
 			cleanUp();
 	}
-
+	
 	public void screenMessage(L2PcInstance player, String text, int time)
 	{
 		if (player.getParty() != null)
@@ -231,15 +231,13 @@ public class IceFairySirra extends L2AttackableAIScript
 		else
 			cleanUp();
 	}
-
+	
 	public void doSpawns()
 	{
-		int[][] mobs = {
-				{ 29060, 105546, -127892, -2768 },
-				{ 29056, 102779, -125920, -2840 },
-				{ 22100, 111719, -126646, -2992 },
-				{ 22102, 109509, -128946, -3216 },
-				{ 22104, 109680, -125756, -3136 } };
+		int[][] mobs =
+				{ { 29060, 105546, -127892, -2768 }, { 29056, 102779, -125920, -2840 },
+						{ 22100, 111719, -126646, -2992 }, { 22102, 109509, -128946, -3216 },
+						{ 22104, 109680, -125756, -3136 } };
 		L2Spawn spawnDat;
 		L2NpcTemplate template;
 		try
@@ -271,24 +269,24 @@ public class IceFairySirra extends L2AttackableAIScript
 			_log.warn("IceFairySirraManager: Spawns could not be initialized: ", e);
 		}
 	}
-
+	
 	public String getHtmlPath(int val)
 	{
 		String pom = "";
-
+		
 		pom = "32029-" + val;
 		if (val == 0)
 			pom = "32029";
-
+		
 		String temp = "data/html/default/" + pom + ".htm";
-
+		
 		if (HtmCache.getInstance().pathExists(temp))
 			return temp;
-
+		
 		// If the file is not found, the standard message "I have nothing to say to you" is returned
 		return "data/html/npcdefault.htm";
 	}
-
+	
 	public void sendHtml(L2Npc npc, L2PcInstance player, String filename)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
@@ -297,7 +295,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		player.sendPacket(html);
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
@@ -312,7 +310,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		sendHtml(npc, player, filename);
 		return null;
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -389,7 +387,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		}
 		return super.onAdvEvent(event, npc, player);
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new IceFairySirra(-1, "IceFairySirra", "ai");

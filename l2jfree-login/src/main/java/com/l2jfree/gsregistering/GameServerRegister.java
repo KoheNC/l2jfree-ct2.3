@@ -27,30 +27,29 @@ import com.l2jfree.tools.util.HexUtil;
 
 public class GameServerRegister extends Config
 {
-	private String						_choice;
-	private static GameServerManager	gsServerManager;
-	private boolean						_choiceOk;
-
+	private String _choice;
+	private static GameServerManager gsServerManager;
+	private boolean _choiceOk;
+	
 	public static void main(String[] args) throws IOException
 	{
 		// o Load config
 		// -------------
 		Config.load();
-
+		
 		// o Load registry
 		// ----------------
-		L2Registry.loadRegistry(new String[]
-		{ "spring.xml" });
-
+		L2Registry.loadRegistry(new String[] { "spring.xml" });
+		
 		// Load Game server manager
 		// -------------------------
 		gsServerManager = GameServerManager.getInstance();
-
+		
 		GameServerRegister gsRegister = new GameServerRegister();
-
+		
 		gsRegister.displayMenu();
 	}
-
+	
 	/**
 	* Display menu and return true or false if we should continue
 	* @return true or false if user want to stop
@@ -65,14 +64,14 @@ public class GameServerRegister extends Config
 		System.out.println("Type 'help' to get a list of ids.");
 		System.out.println("Type 'clean' to unregister all currently registered gameservers on this LoginServer.");
 		LineNumberReader _in = new LineNumberReader(new InputStreamReader(System.in));
-
+		
 		// o ask id of server until id is a valid one
 		// ------------------------------------------
 		while (!_choiceOk)
 		{
 			System.out.println("Your choice:");
 			_choice = _in.readLine();
-
+			
 			// o ask the list of server
 			// -----------------------
 			if (_choice.equalsIgnoreCase("help"))
@@ -103,7 +102,7 @@ public class GameServerRegister extends Config
 			}
 		}
 	}
-
+	
 	/**
 	 * register server.
 	 * Check that id is not to high, > 0 and free.
@@ -134,11 +133,12 @@ public class GameServerRegister extends Config
 				if (!gsServerManager.hasRegisteredGameServerOnId(id))
 				{
 					byte[] hex = HexUtil.generateHex(16);
-
+					
 					gsServerManager.registerServerOnDB(hex, id, "");
 					HexUtil.saveHexid(id, new BigInteger(hex).toString(16), "hexid(server " + id + ").txt");
 					System.out.println("Server Registered hexid saved to 'hexid(server " + id + ").txt'");
-					System.out.println("Put this file in the /config folder of your gameserver and rename it to 'hexid.txt'");
+					System.out
+							.println("Put this file in the /config folder of your gameserver and rename it to 'hexid.txt'");
 					_choiceOk = true;
 				}
 				else
@@ -152,7 +152,7 @@ public class GameServerRegister extends Config
 			System.out.println("Please, type a number or 'help'");
 		}
 	}
-
+	
 	/**
 	 * 
 	 */
@@ -165,7 +165,7 @@ public class GameServerRegister extends Config
 		}
 		System.out.println("You can also see servername.xml");
 	}
-
+	
 	public static void cleanRegisteredGameServersFromDB()
 	{
 		GameServerManager.getInstance().deleteAllServer();

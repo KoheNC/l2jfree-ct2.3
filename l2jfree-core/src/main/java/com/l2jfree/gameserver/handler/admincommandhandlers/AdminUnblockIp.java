@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,12 +30,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class AdminUnblockIp implements IAdminCommandHandler
 {
-
-	private static final Log		_log			= LogFactory.getLog(AdminTeleport.class);
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_unblockip" };
-
+	
+	private static final Log _log = LogFactory.getLog(AdminTeleport.class);
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_unblockip" };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -58,15 +56,15 @@ public class AdminUnblockIp implements IAdminCommandHandler
 				activeChar.sendMessage("Usage mode: //unblockip <ip>");
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	/**
 	 * @param ipAddress
 	 * @param activeChar
@@ -77,5 +75,5 @@ public class AdminUnblockIp implements IAdminCommandHandler
 		_log.warn("IP removed by GM " + activeChar.getName());
 		return true;
 	}
-
+	
 }

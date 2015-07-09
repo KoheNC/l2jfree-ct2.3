@@ -27,26 +27,26 @@ import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket.Elemental
  */
 public class L2WarehouseItem implements ElementalOwner
 {
-
-	private final L2Item	_item;
-	private final int		_object;
-	private final long	_count;
-	private final int		_owner;
-	private final int		_enchant;
-	private final int		_grade;
-	private boolean	_isAugmented;
-	private int		_augmentationId;
-	private final int		_manaLeft;
-
+	
+	private final L2Item _item;
+	private final int _object;
+	private final long _count;
+	private final int _owner;
+	private final int _enchant;
+	private final int _grade;
+	private boolean _isAugmented;
+	private int _augmentationId;
+	private final int _manaLeft;
+	
 	private byte _elemAtkType = -2;
 	private int _elemAtkPower = 0;
-	private final int[] _elemDefAttr = {0, 0, 0, 0, 0, 0};
-
-	private final int		_type1;
-	private final int		_type2;
-
+	private final int[] _elemDefAttr = { 0, 0, 0, 0, 0, 0 };
+	
+	private final int _type1;
+	private final int _type2;
+	
 	private final int _time;
-
+	
 	public L2WarehouseItem(L2ItemInstance item)
 	{
 		_item = item.getItem();
@@ -63,16 +63,16 @@ public class L2WarehouseItem implements ElementalOwner
 		else
 			_isAugmented = false;
 		_manaLeft = item.getMana();
-		_time = item.isTimeLimitedItem() ? (int) (item.getRemainingTime()/1000) : -1;
+		_time = item.isTimeLimitedItem() ? (int)(item.getRemainingTime() / 1000) : -1;
 		_type1 = item.getCustomType1();
 		_type2 = item.getCustomType2();
-
+		
 		_elemAtkType = item.getAttackElementType();
 		_elemAtkPower = item.getAttackElementPower();
 		for (byte i = 0; i < 6; i++)
 			_elemDefAttr[i] = item.getElementDefAttr(i);
 	}
-
+	
 	/**
 	 * Returns the item.
 	 * @return L2Item
@@ -81,7 +81,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item;
 	}
-
+	
 	/**
 	 * Returns the unique objectId
 	 * @return int
@@ -90,7 +90,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _object;
 	}
-
+	
 	/**
 	 * Returns the owner
 	 * @return int
@@ -99,7 +99,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _owner;
 	}
-
+	
 	/**
 	 * Returns the count
 	 * @return long
@@ -108,7 +108,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _count;
 	}
-
+	
 	/**
 	 * Returns the time
 	 * @return int
@@ -117,7 +117,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _time;
 	}
-
+	
 	/**
 	 * Returns the first type
 	 * @return int
@@ -126,7 +126,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getType1();
 	}
-
+	
 	/**
 	 * Returns the second type
 	 * @return int
@@ -135,7 +135,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getType2();
 	}
-
+	
 	/**
 	 * Returns the second type
 	 * @return int
@@ -144,7 +144,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getItemType();
 	}
-
+	
 	/**
 	 * Returns the ItemId
 	 * @return int
@@ -153,7 +153,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getItemId();
 	}
-
+	
 	/**
 	 * Returns the part of body used with this item
 	 * @return int
@@ -162,7 +162,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getBodyPart();
 	}
-
+	
 	/**
 	 * Returns the enchant level
 	 * @return int
@@ -171,7 +171,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _enchant;
 	}
-
+	
 	/**
 	 * Returns the item grade
 	 * @return int
@@ -180,7 +180,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _grade;
 	}
-
+	
 	/**
 	 * Returns true if it is a weapon
 	 * @return boolean
@@ -189,7 +189,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return (_item instanceof L2Weapon);
 	}
-
+	
 	/**
 	 * Returns true if it is an armor
 	 * @return boolean
@@ -198,7 +198,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return (_item instanceof L2Armor);
 	}
-
+	
 	/**
 	 * Returns true if it is an EtcItem
 	 * @return boolean
@@ -207,7 +207,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return (_item instanceof L2EtcItem);
 	}
-
+	
 	/**
 	 * Returns the name of the item
 	 * @return String
@@ -216,17 +216,17 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getName();
 	}
-
+	
 	public boolean isAugmented()
 	{
 		return _isAugmented;
 	}
-
+	
 	public int getAugmentationId()
 	{
 		return _augmentationId;
 	}
-
+	
 	/**
 	 * Returns the name of the item
 	 * @return String
@@ -237,7 +237,7 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.getName();
 	}
-
+	
 	/**
 	 * Returns the name of the item
 	 * @return String
@@ -247,32 +247,32 @@ public class L2WarehouseItem implements ElementalOwner
 	{
 		return _item.toString();
 	}
-
+	
 	public int getCustomType1()
 	{
 		return _type1;
 	}
-
+	
 	public int getCustomType2()
 	{
 		return _type2;
 	}
-
+	
 	public int getManaLeft()
 	{
 		return _manaLeft;
 	}
-
+	
 	public byte getAttackElementType()
 	{
 		return _elemAtkType;
 	}
-
+	
 	public int getAttackElementPower()
 	{
 		return _elemAtkPower;
 	}
-
+	
 	public int getElementDefAttr(byte i)
 	{
 		return _elemDefAttr[i];

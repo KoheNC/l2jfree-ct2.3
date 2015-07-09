@@ -24,14 +24,14 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class ExMPCCShowPartyMemberInfo extends L2GameServerPacket
 {
 	private static final String _S__FE_4B_EXMPCCSHOWPARTYMEMBERINFO = "[S] FE:4b ExMPCCShowPartyMemberInfo []";
-
+	
 	public ExMPCCShowPartyMemberInfo(L2Party party)
 	{
 		_party = party;
 	}
-
+	
 	private final L2Party _party;
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -40,7 +40,7 @@ public class ExMPCCShowPartyMemberInfo extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x4b);
-
+		
 		writeD(_party.getMemberCount());
 		for (L2PcInstance mem : _party.getPartyMembers())
 		{
@@ -49,7 +49,7 @@ public class ExMPCCShowPartyMemberInfo extends L2GameServerPacket
 			writeD(mem.getClassId().getId());
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

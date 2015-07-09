@@ -30,17 +30,17 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class RequestOustFromPartyRoom extends L2GameClientPacket
 {
 	private static final String _C__D0_09_REQUESTOUSTFROMPARTYROOM = "[C] D0:09 RequestOustFromPartyRoom";
-
+	
 	private int _objectId;
-
-    @Override
-    protected void readImpl()
-    {
-    	_objectId = readD();
-    }
-
+	
 	@Override
-    protected void runImpl()
+	protected void readImpl()
+	{
+		_objectId = readD();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
@@ -51,14 +51,15 @@ public class RequestOustFromPartyRoom extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		L2Party party = target.getParty();
-		if (party != null && party.isInDimensionalRift() && !party.getDimensionalRift().getRevivedAtWaitingRoom().contains(activeChar))
+		if (party != null && party.isInDimensionalRift()
+				&& !party.getDimensionalRift().getRevivedAtWaitingRoom().contains(activeChar))
 		{
 			requestFailed(SystemMessageId.COULD_NOT_OUST_FROM_PARTY);
 			return;
 		}
-
+		
 		L2PartyRoom room = activeChar.getPartyRoom();
 		if (room != null && room.getLeader() == activeChar)
 		{
@@ -67,10 +68,10 @@ public class RequestOustFromPartyRoom extends L2GameClientPacket
 			else
 				room.removeMember(target, true);
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

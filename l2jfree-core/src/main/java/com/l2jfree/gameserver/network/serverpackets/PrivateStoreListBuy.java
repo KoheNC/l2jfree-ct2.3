@@ -25,11 +25,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class PrivateStoreListBuy extends L2GameServerPacket
 {
 	//	private static final String _S__D1_PRIVATEBUYLISTBUY = "[S] b8 PrivateBuyListBuy";
-	private static final String		_S__BE_PRIVATESTORELISTBUY	= "[S] be PrivateStoreListBuy";
-	private final int						_objId;
-	private final long					_playerAdena;
-	private final TradeList.TradeItem[]	_items;
-
+	private static final String _S__BE_PRIVATESTORELISTBUY = "[S] be PrivateStoreListBuy";
+	private final int _objId;
+	private final long _playerAdena;
+	private final TradeList.TradeItem[] _items;
+	
 	public PrivateStoreListBuy(L2PcInstance player, L2PcInstance storePlayer)
 	{
 		_objId = storePlayer.getObjectId();
@@ -37,16 +37,16 @@ public class PrivateStoreListBuy extends L2GameServerPacket
 		storePlayer.getSellList().updateItems(); // Update SellList for case inventory content has changed
 		_items = storePlayer.getBuyList().getAvailableItems(player.getInventory());
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xbe);
 		writeD(_objId);
 		writeCompQ(_playerAdena);
-
+		
 		writeD(_items.length);
-
+		
 		for (TradeList.TradeItem item : _items)
 		{
 			writeD(item.getObjectId());
@@ -59,11 +59,11 @@ public class PrivateStoreListBuy extends L2GameServerPacket
 			writeH(item.getItem().getType2());
 			writeCompQ(item.getPrice());//buyers price
 			writeCompQ(item.getStoreCount()); // maximum possible tradecount
-
+			
 			writeElementalInfo(item); //8x h or d
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

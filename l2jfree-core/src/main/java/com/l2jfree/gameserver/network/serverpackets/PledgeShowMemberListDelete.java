@@ -35,7 +35,7 @@ public class PledgeShowMemberListDelete extends L2GameServerPacket
 		writeC(0x5d);
 		writeS(_player);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

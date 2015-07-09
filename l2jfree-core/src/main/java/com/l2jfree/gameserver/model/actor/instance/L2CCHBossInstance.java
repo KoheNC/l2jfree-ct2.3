@@ -33,9 +33,9 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public final class L2CCHBossInstance extends L2MonsterInstance
 {
-	private final FastMap<Integer, Integer>	_damage;
-	private final int						_hideoutIndex;
-
+	private final FastMap<Integer, Integer> _damage;
+	private final int _hideoutIndex;
+	
 	/**
 	 * @param objectId
 	 * @param template
@@ -47,29 +47,29 @@ public final class L2CCHBossInstance extends L2MonsterInstance
 		_damage = new FastMap<Integer, Integer>().setShared(true);
 		switch (getNpcId())
 		{
-		case 35410:
-			_hideoutIndex = 34;
-			break;
-		case 35629:
-			_hideoutIndex = 64;
-			break;
-		default:
-			_hideoutIndex = -1;
+			case 35410:
+				_hideoutIndex = 34;
+				break;
+			case 35629:
+				_hideoutIndex = 64;
+				break;
+			default:
+				_hideoutIndex = -1;
 		}
 	}
-
+	
 	@Override
 	protected CharStatus initStatus()
 	{
 		return new CCHLeaderStatus(this);
 	}
-
+	
 	@Override
 	public CCHLeaderStatus getStatus()
 	{
-		return (CCHLeaderStatus) _status;
+		return (CCHLeaderStatus)_status;
 	}
-
+	
 	@Override
 	public final boolean doDie(L2Character killer)
 	{
@@ -88,17 +88,17 @@ public final class L2CCHBossInstance extends L2MonsterInstance
 		getHideout().getSiege().endSiege(ClanTable.getInstance().getClan(winner));
 		return true;
 	}
-
+	
 	public final FastMap<Integer, Integer> getDamageTable()
 	{
 		return _damage;
 	}
-
+	
 	public final CCHSiege getSiege()
 	{
 		return getHideout().getSiege();
 	}
-
+	
 	private final ClanHall getHideout()
 	{
 		if (_hideoutIndex < 0)

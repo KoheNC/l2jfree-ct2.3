@@ -32,7 +32,7 @@ public class PledgeShowMemberListAdd extends L2GameServerPacket
 	private final int _pledgeType;
 	private final int _sex;
 	private final int _race;
-
+	
 	public PledgeShowMemberListAdd(L2PcInstance player)
 	{
 		_name = player.getName();
@@ -43,7 +43,7 @@ public class PledgeShowMemberListAdd extends L2GameServerPacket
 		_sex = player.getAppearance().getSex() ? 1 : 0;
 		_race = player.getRace().ordinal();
 	}
-
+	
 	public PledgeShowMemberListAdd(L2ClanMember cm)
 	{
 		_name = cm.getName();
@@ -54,7 +54,7 @@ public class PledgeShowMemberListAdd extends L2GameServerPacket
 		_sex = cm.getSex();
 		_race = cm.getRace();
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -67,7 +67,7 @@ public class PledgeShowMemberListAdd extends L2GameServerPacket
 		writeD(_isOnline); // 1=online 0=offline
 		writeD(_pledgeType);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

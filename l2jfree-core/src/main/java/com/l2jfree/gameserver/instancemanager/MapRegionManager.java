@@ -167,7 +167,8 @@ public final class MapRegionManager
 						{
 							if ("restartarea".equalsIgnoreCase(f.getNodeName()))
 							{
-								final int restartId = Integer.parseInt(f.getAttributes().getNamedItem("restartId").getNodeValue());
+								final int restartId =
+										Integer.parseInt(f.getAttributes().getNamedItem("restartId").getNodeValue());
 								
 								restartAreas.add(restartId);
 								
@@ -222,7 +223,8 @@ public final class MapRegionManager
 		}
 		
 		_log.info("MapRegionManager: Loaded " + _mapRegionRestart.size() + " restartpoint(s).");
-		_log.info("MapRegionManager: Loaded " + restartAreas.size() + " restartareas with " + mapAreas.size() + " arearegion(s).");
+		_log.info("MapRegionManager: Loaded " + restartAreas.size() + " restartareas with " + mapAreas.size()
+				+ " arearegion(s).");
 		_log.info("MapRegionManager: Loaded " + specialMapRegions.size() + " zoneregion(s).");
 		_log.info("MapRegionManager: Loaded " + redirectCount + " race depending redirects.");
 	}
@@ -394,7 +396,8 @@ public final class MapRegionManager
 					if (flag != null)
 						return flag.getLoc();
 				}
-				else if (siege == null && fsiege != null && fsiege.checkIsAttacker(clan) && fsiege.checkIfInZone(player))
+				else if (siege == null && fsiege != null && fsiege.checkIsAttacker(clan)
+						&& fsiege.checkIfInZone(player))
 				{
 					// Karma player respawns out of siege zone
 					if (player.isChaotic())
@@ -467,52 +470,52 @@ public final class MapRegionManager
 	
 	public int convertLocNameToL2Region(int locName)
 	{
-		switch(locName)
+		switch (locName)
 		{
-		case 910: // TI
-			return 1;
-		case 911: // Gludin
-		case 912: // Gludio
-		case 2190: // Southern wastelands
-		case 2710: // Keucereus
-		case 2711: // inside SoI
-		case 2712: // outside SoI
-		case 2716: // inside Cleft
-			return 2;
-		case 913: // Neutral zone
-			return 7;
-		case 914: // Elven village
-			return 4;
-		case 915: // DE village
-			return 3;
-		case 916: // Dion
-		case 917: // Floran
-			return 5;
-		case 918: // Giran
-		case 919: // Harbor
-			return 6;
-		case 920: // Orc village
-		case 921: // Dwarven village
-		case 1714: // Schuttgart
-			return 9;
-		case 922: // Oren
-			return 10;
-		case 923: // Hunters village
-			return 11;
-		case 924: // Aden
-		case 925: // Coliseum
-		case 2189: // Kamael Village
-			return 13;
-		case 926: // Heine
-			return 12;
-		case 1537: // Rune
-		case 1924: // Primeval Isle
-		case 2259: // Fantasy Isle
-			return 14;
-		case 1538: // Goddard
-			return 15;
-		default: // TODO: Epilogue locations
-			return 0; // no name
+			case 910: // TI
+				return 1;
+			case 911: // Gludin
+			case 912: // Gludio
+			case 2190: // Southern wastelands
+			case 2710: // Keucereus
+			case 2711: // inside SoI
+			case 2712: // outside SoI
+			case 2716: // inside Cleft
+				return 2;
+			case 913: // Neutral zone
+				return 7;
+			case 914: // Elven village
+				return 4;
+			case 915: // DE village
+				return 3;
+			case 916: // Dion
+			case 917: // Floran
+				return 5;
+			case 918: // Giran
+			case 919: // Harbor
+				return 6;
+			case 920: // Orc village
+			case 921: // Dwarven village
+			case 1714: // Schuttgart
+				return 9;
+			case 922: // Oren
+				return 10;
+			case 923: // Hunters village
+				return 11;
+			case 924: // Aden
+			case 925: // Coliseum
+			case 2189: // Kamael Village
+				return 13;
+			case 926: // Heine
+				return 12;
+			case 1537: // Rune
+			case 1924: // Primeval Isle
+			case 2259: // Fantasy Isle
+				return 14;
+			case 1538: // Goddard
+				return 15;
+			default: // TODO: Epilogue locations
+				return 0; // no name
 		}
 	}
 	

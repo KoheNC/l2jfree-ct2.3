@@ -62,7 +62,7 @@ public final class EffectWarp extends L2Effect
 			_actor = getEffector();
 		else
 			_actor = getEffected();
-
+		
 		if (_actor.isRooted())
 			return false;
 		
@@ -81,8 +81,9 @@ public final class EffectWarp extends L2Effect
 		
 		if (Config.GEODATA > 0)
 		{
-			Location destiny = GeoData.getInstance().moveCheck(_actor.getX(), _actor.getY(), _actor.getZ(), x, y, z,
-					_actor.getInstanceId());
+			Location destiny =
+					GeoData.getInstance().moveCheck(_actor.getX(), _actor.getY(), _actor.getZ(), x, y, z,
+							_actor.getInstanceId());
 			x = destiny.getX();
 			y = destiny.getY();
 			z = destiny.getZ();

@@ -27,14 +27,17 @@ import junit.framework.TestCase;
  * use... ?
  * 
  */
-public class TestMultiSort extends TestCase {
-
-	public void testCreateWithIntArray() {
+public class TestMultiSort extends TestCase
+{
+	
+	public void testCreateWithIntArray()
+	{
 		MultiSort ms = new MultiSort(new int[] { 5, 7, 1, 4, 10, 55, 32 });
 		assertEquals(7, ms.getValues().size());
 	}
-
-	public void testCreateWithList() {
+	
+	public void testCreateWithList()
+	{
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(5);
 		list.add(7);
@@ -45,11 +48,12 @@ public class TestMultiSort extends TestCase {
 		list.add(32);
 		MultiSort ms = new MultiSort(list);
 		assertEquals(7, ms.getValues().size());
-
+		
 		assertEquals(0, ms.getKeys().size());
 	}
-
-	public void testCreateWithMap() {
+	
+	public void testCreateWithMap()
+	{
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("5", 5);
 		map.put("7", 7);
@@ -63,65 +67,74 @@ public class TestMultiSort extends TestCase {
 		// Here we should have keys
 		assertEquals(7, ms.getKeys().size());
 	}
-
-	public void testHarmonicMean() {
-		double harmonicMean = 7.0 / (1.0 / 5.0 + 1.0 / 7.0 + 1.0 + 1.0 / 4.0
-				+ 1.0 / 10.0 + 1.0 / 55.0 + 1.0 / 32.0);
+	
+	public void testHarmonicMean()
+	{
+		double harmonicMean = 7.0 / (1.0 / 5.0 + 1.0 / 7.0 + 1.0 + 1.0 / 4.0 + 1.0 / 10.0 + 1.0 / 55.0 + 1.0 / 32.0);
 		MultiSort ms = new MultiSort(new int[] { 5, 7, 1, 4, 10, 55, 32 });
 		assertEquals(harmonicMean, ms.getHarmonicMean());
 	}
-
-	public void testFrequency() {
+	
+	public void testFrequency()
+	{
 		MultiSort ms = new MultiSort(new int[] { 5, 5, 1, 4, 10, 55, 32 });
 		assertEquals(2, ms.getFrequency(5));
 	}
-
-	public void testMaxValue() {
+	
+	public void testMaxValue()
+	{
 		MultiSort ms = new MultiSort(new int[] { 5, 5, 1, 4, 10, 55, 32 });
 		assertEquals(55, ms.getMaxValue());
 	}
-
-	public void testMinValue() {
+	
+	public void testMinValue()
+	{
 		MultiSort ms = new MultiSort(new int[] { 5, 5, 1, 4, 10, 55, 32 });
 		assertEquals(1, ms.getMinValue());
 	}
-
-	public void testMean() {
+	
+	public void testMean()
+	{
 		MultiSort ms = new MultiSort(new int[] { 0, 5 });
 		assertEquals(2.5, ms.getMean());
 	}
-
-	public void testSumOfValue() {
+	
+	public void testSumOfValue()
+	{
 		MultiSort ms = new MultiSort(new int[] { 0, 5, 10, 100 });
 		assertEquals(115, ms.getTotalValue());
 	}
-
-	public void testSortDescending() {
+	
+	public void testSortDescending()
+	{
 		MultiSort ms = new MultiSort(new int[] { 0, 5, 10, 100 });
 		ms.setSortDescending(true);
 		assertTrue(ms.isSortDescending());
 		assertTrue(!ms.isSorted());
 		assertTrue(ms.sort());
 		assertTrue(ms.isSorted());
-
+		
 		List<Integer> list = ms.getValues();
 		int previousValue = -1;
-		for (int value : list) {
+		for (int value : list)
+		{
 			assertTrue(value > previousValue);
 		}
 	}
-
-	public void testSortAscending() {
+	
+	public void testSortAscending()
+	{
 		MultiSort ms = new MultiSort(new int[] { 0, 5, 10, 100 });
 		ms.setSortDescending(false);
 		assertTrue(!ms.isSortDescending());
 		assertTrue(!ms.isSorted());
 		assertTrue(ms.sort());
 		assertTrue(ms.isSorted());
-
+		
 		List<Integer> list = ms.getValues();
 		int previousValue = 101;
-		for (int value : list) {
+		for (int value : list)
+		{
 			assertTrue(value < previousValue);
 		}
 	}

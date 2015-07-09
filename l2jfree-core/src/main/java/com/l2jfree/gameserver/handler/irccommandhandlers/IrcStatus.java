@@ -21,24 +21,30 @@ import com.l2jfree.gameserver.instancemanager.IrcManager;
 
 public class IrcStatus implements IIrcCommandHandler
 {
-	private static final String[]	IRC_COMMANDS	= { "!status" };
-
+	private static final String[] IRC_COMMANDS = { "!status" };
+	
 	public boolean useIrcCommand(String command, String gm, String target, boolean authed)
 	{
 		if (!authed)
 			return false;
-
+		
 		if (command.equalsIgnoreCase("!status"))
 		{
 			IrcManager.getInstance().getConnection().send(gm, "Server Status: ");
-			IrcManager.getInstance().getConnection().send(gm, "  ---> Server Uptime: " + getUptime(GameServer.getStartedTime().getTimeInMillis()));
+			IrcManager.getInstance().getConnection()
+					.send(gm, "  ---> Server Uptime: " + getUptime(GameServer.getStartedTime().getTimeInMillis()));
 			IrcManager.getInstance().getConnection().send(gm, "  --->      GM Count: " + getOnlineGMS());
 			IrcManager.getInstance().getConnection().send(gm, "  --->       Threads: " + Thread.activeCount());
-			IrcManager.getInstance().getConnection().send(gm, "  RAM Used: " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+			IrcManager
+					.getInstance()
+					.getConnection()
+					.send(gm,
+							"  RAM Used: "
+									+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
 		}
 		return true;
 	}
-
+	
 	private String getUptime(long time)
 	{
 		long uptime = (System.currentTimeMillis() - time);
@@ -48,12 +54,12 @@ public class IrcStatus implements IIrcCommandHandler
 		long s = ((uptime - (h * 3600)) - (m * 60));
 		return h + "hrs " + m + "mins " + s + "secs";
 	}
-
+	
 	private int getOnlineGMS()
 	{
 		return GmListTable.getAllGms(true).size();
 	}
-
+	
 	public String[] getIrcCommandList()
 	{
 		return IRC_COMMANDS;

@@ -27,30 +27,30 @@ import com.l2jfree.gameserver.model.L2TradeList;
 
 public final class BuyListSeed extends L2GameServerPacket
 {
-	private static final String		_S__E9_BUYLISTSEED	= "[S] E9 BuyListSeed [dd h (hdddhhd)]";
-
-	private final int						_manorId;
-	private List<L2ItemInstance>	_list				= new FastList<L2ItemInstance>();
-	private final long					_money;
-
+	private static final String _S__E9_BUYLISTSEED = "[S] E9 BuyListSeed [dd h (hdddhhd)]";
+	
+	private final int _manorId;
+	private List<L2ItemInstance> _list = new FastList<L2ItemInstance>();
+	private final long _money;
+	
 	public BuyListSeed(L2TradeList list, int manorId, long currentMoney)
 	{
 		_money = currentMoney;
 		_manorId = manorId;
 		_list = list.getItems();
 	}
-
+	
 	@Override
 	public void writeImpl()
 	{
 		writeC(0xE9);
-
+		
 		// current money
 		writeCompQ(_money);
 		writeD(_manorId); // manor id
-
+		
 		writeH(_list.size()); // list length
-
+		
 		for (L2ItemInstance item : _list)
 		{
 			writeH(0x04); // item->type1
@@ -62,7 +62,7 @@ public final class BuyListSeed extends L2GameServerPacket
 			writeCompQ(item.getPriceToSell()); // price
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

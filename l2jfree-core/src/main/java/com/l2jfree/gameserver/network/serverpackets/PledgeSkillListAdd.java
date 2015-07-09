@@ -30,7 +30,7 @@ public class PledgeSkillListAdd extends L2GameServerPacket
 		_id = id;
 		_lvl = lvl;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -43,7 +43,7 @@ public class PledgeSkillListAdd extends L2GameServerPacket
 		writeD(_id);
 		writeD(_lvl);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

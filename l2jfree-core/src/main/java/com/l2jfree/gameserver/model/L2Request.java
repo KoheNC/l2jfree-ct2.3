@@ -28,18 +28,18 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class L2Request
 {
 	private static final int REQUEST_TIMEOUT = 15; //in secs
-
+	
 	protected L2PcInstance _player;
 	protected L2PcInstance _partner;
 	protected boolean _isRequestor;
 	protected boolean _isAnswerer;
 	protected L2GameClientPacket _requestPacket;
-
+	
 	public L2Request(L2PcInstance player)
 	{
 		_player = player;
 	}
-
+	
 	protected void clear()
 	{
 		_partner = null;
@@ -47,7 +47,7 @@ public class L2Request
 		_isRequestor = false;
 		_isAnswerer = false;
 	}
-
+	
 	/**
 	 * Set the L2PcInstance member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
 	 */
@@ -55,7 +55,7 @@ public class L2Request
 	{
 		_partner = partner;
 	}
-
+	
 	/**
 	 * Return the L2PcInstance member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
 	 */
@@ -63,7 +63,7 @@ public class L2Request
 	{
 		return _partner;
 	}
-
+	
 	/**
 	 * Set the packet incomed from requestor.<BR><BR>
 	 */
@@ -71,7 +71,7 @@ public class L2Request
 	{
 		_requestPacket = packet;
 	}
-
+	
 	/**
 	 * Return the packet originally incomed from requestor.<BR><BR>
 	 */
@@ -79,7 +79,7 @@ public class L2Request
 	{
 		return _requestPacket;
 	}
-
+	
 	/**
 	 * Checks if request can be made and in success case puts both PC on request state.<BR><BR>
 	 */
@@ -103,7 +103,7 @@ public class L2Request
 			_player.sendPacket(SystemMessageId.WAITING_FOR_ANOTHER_REPLY);
 			return false;
 		}
-
+		
 		_partner = partner;
 		_requestPacket = packet;
 		setOnRequestTimer(true);
@@ -112,20 +112,19 @@ public class L2Request
 		_partner.getRequest().setOnRequestTimer(false);
 		return true;
 	}
-
+	
 	private void setOnRequestTimer(boolean isRequestor)
 	{
 		_isRequestor = isRequestor;
 		_isAnswerer = !isRequestor;
-		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-		{
+		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 			public void run()
 			{
 				clear();
 			}
 		}, REQUEST_TIMEOUT * 1000);
 	}
-
+	
 	/**
 	 * Clears PC request state. Should be called after answer packet receive.<BR><BR>
 	 */
@@ -137,7 +136,7 @@ public class L2Request
 		}
 		clear();
 	}
-
+	
 	/**
 	 * Return True if a transaction is in progress.<BR><BR>
 	 */

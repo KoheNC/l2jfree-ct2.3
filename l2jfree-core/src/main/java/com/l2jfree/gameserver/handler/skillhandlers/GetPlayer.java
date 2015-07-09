@@ -23,16 +23,14 @@ import com.l2jfree.gameserver.network.serverpackets.ValidateLocation;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 import com.l2jfree.tools.random.Rnd;
 
-
 /*
  * Mobs can teleport players to them
  */
 
 public class GetPlayer implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.GET_PLAYER };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.GET_PLAYER };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (activeChar.isAlikeDead())
@@ -42,18 +40,19 @@ public class GetPlayer implements ISkillHandler
 		{
 			if (target instanceof L2PcInstance)
 			{
-				L2PcInstance trg = (L2PcInstance) target;
-
+				L2PcInstance trg = (L2PcInstance)target;
+				
 				if (trg.isAlikeDead())
 					continue;
 				// GetPlayer is a handler for skills of mobs, eg "Zaken" or "Porta"
-				trg.getPosition().setXYZ(activeChar.getX() + Rnd.get(-10, 10), activeChar.getY() + Rnd.get(-10, 10), activeChar.getZ());
+				trg.getPosition().setXYZ(activeChar.getX() + Rnd.get(-10, 10), activeChar.getY() + Rnd.get(-10, 10),
+						activeChar.getZ());
 				trg.stopMove(null);
 				trg.sendPacket(new ValidateLocation(trg));
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

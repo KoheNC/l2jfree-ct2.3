@@ -75,7 +75,8 @@ public final class ItemSkills implements IItemHandler
 				{
 					playable.doSimultaneousCast(itemSkill);
 					// Summons should be affected by herbs too, self time effect is handled at L2Effect constructor
-					if (!isPet && item.getItemType() == L2EtcItemType.HERB && activeChar.getPet() instanceof L2SummonInstance)
+					if (!isPet && item.getItemType() == L2EtcItemType.HERB
+							&& activeChar.getPet() instanceof L2SummonInstance)
 						activeChar.getPet().doSimultaneousCast(itemSkill);
 				}
 				else

@@ -26,7 +26,6 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.GMViewPledgeInfo;
 import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 
-
 /**
  * <B>Pledge Manipulation:</B><BR>
  * <LI>With target in a character without clan:<BR>
@@ -39,15 +38,14 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class AdminPledge implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_pledge" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_pledge" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		L2Object target = activeChar.getTarget();
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
-			player = (L2PcInstance) target;
+			player = (L2PcInstance)target;
 		else
 		{
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
@@ -113,7 +111,7 @@ public class AdminPledge implements IAdminCommandHandler
 				catch (NumberFormatException nfe)
 				{
 				}
-
+				
 				if (level >= 0 && level < 12)
 				{
 					player.getClan().changeLevel(level);
@@ -133,7 +131,7 @@ public class AdminPledge implements IAdminCommandHandler
 				{
 					activeChar.sendMessage("Usage: //pledge <rep> <number>");
 				}
-
+				
 				L2Clan clan = player.getClan();
 				if (clan.getLevel() < 5)
 				{
@@ -141,13 +139,14 @@ public class AdminPledge implements IAdminCommandHandler
 					return false;
 				}
 				clan.setReputationScore(clan.getReputationScore() + points, true);
-				activeChar.sendMessage("You " + (points > 0 ? "add " : "remove ") + Math.abs(points) + " points " + (points > 0 ? "to " : "from ")
-						+ clan.getName() + "'s reputation. Their current score is " + clan.getReputationScore());
+				activeChar.sendMessage("You " + (points > 0 ? "add " : "remove ") + Math.abs(points) + " points "
+						+ (points > 0 ? "to " : "from ") + clan.getName() + "'s reputation. Their current score is "
+						+ clan.getReputationScore());
 			}
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

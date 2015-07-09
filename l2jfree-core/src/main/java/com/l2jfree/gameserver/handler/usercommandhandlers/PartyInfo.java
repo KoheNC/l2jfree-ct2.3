@@ -26,9 +26,8 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class PartyInfo implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 81 };
-
+	private static final int[] COMMAND_IDS = { 81 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -36,38 +35,38 @@ public class PartyInfo implements IUserCommandHandler
 	{
 		if (id != COMMAND_IDS[0])
 			return false;
-
+		
 		activeChar.sendPacket(SystemMessageId.PARTY_INFORMATION);
 		if (!activeChar.isInParty())
 		{
 			activeChar.sendPacket(SystemMessageId.WAR_LIST);
 			return false;
 		}
-
+		
 		L2Party playerParty = activeChar.getParty();
 		int memberCount = playerParty.getMemberCount();
 		int lootDistribution = playerParty.getLootDistribution();
 		String partyLeader = playerParty.getPartyMembers().get(0).getName();
-
+		
 		switch (lootDistribution)
 		{
-		case L2Party.ITEM_LOOTER:
-			activeChar.sendPacket(SystemMessageId.LOOTING_FINDERS_KEEPERS);
-			break;
-		case L2Party.ITEM_ORDER:
-			activeChar.sendPacket(SystemMessageId.LOOTING_BY_TURN);
-			break;
-		case L2Party.ITEM_ORDER_SPOIL:
-			activeChar.sendPacket(SystemMessageId.LOOTING_BY_TURN_INCLUDE_SPOIL);
-			break;
-		case L2Party.ITEM_RANDOM:
-			activeChar.sendPacket(SystemMessageId.LOOTING_RANDOM);
-			break;
-		case L2Party.ITEM_RANDOM_SPOIL:
-			activeChar.sendPacket(SystemMessageId.LOOTING_RANDOM_INCLUDE_SPOIL);
-			break;
+			case L2Party.ITEM_LOOTER:
+				activeChar.sendPacket(SystemMessageId.LOOTING_FINDERS_KEEPERS);
+				break;
+			case L2Party.ITEM_ORDER:
+				activeChar.sendPacket(SystemMessageId.LOOTING_BY_TURN);
+				break;
+			case L2Party.ITEM_ORDER_SPOIL:
+				activeChar.sendPacket(SystemMessageId.LOOTING_BY_TURN_INCLUDE_SPOIL);
+				break;
+			case L2Party.ITEM_RANDOM:
+				activeChar.sendPacket(SystemMessageId.LOOTING_RANDOM);
+				break;
+			case L2Party.ITEM_RANDOM_SPOIL:
+				activeChar.sendPacket(SystemMessageId.LOOTING_RANDOM_INCLUDE_SPOIL);
+				break;
 		}
-
+		
 		SystemMessage sm = new SystemMessage(SystemMessageId.PARTY_LEADER_C1);
 		sm.addString(partyLeader);
 		activeChar.sendPacket(sm);
@@ -75,7 +74,7 @@ public class PartyInfo implements IUserCommandHandler
 		activeChar.sendPacket(SystemMessageId.WAR_LIST);
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */

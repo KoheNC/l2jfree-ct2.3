@@ -22,14 +22,14 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public final class RequestExBlockGameVote extends L2GameClientPacket
 {
 	private int _unk1, _unk2;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_unk1 = readD();
 		_unk2 = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{

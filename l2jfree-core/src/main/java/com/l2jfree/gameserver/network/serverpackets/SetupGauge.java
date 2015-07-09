@@ -29,35 +29,35 @@ public class SetupGauge extends L2GameServerPacket
 	public static final int RED = 1;
 	public static final int CYAN = 2;
 	public static final int GREEN = 3;
-
+	
 	private final int _color;
 	private final int _time1;
 	private final int _time2;
-
+	
 	public SetupGauge(int color, int time)
 	{
 		_color = color;
 		_time1 = time;
 		_time2 = time;
 	}
-
+	
 	public SetupGauge(int color, int currentTime, int maxTime)
 	{
 		_color = color;
 		_time1 = currentTime;
 		_time2 = maxTime;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x6b);
-
+		
 		writeD(_color);
 		writeD(_time1);
 		writeD(_time2); //c2
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

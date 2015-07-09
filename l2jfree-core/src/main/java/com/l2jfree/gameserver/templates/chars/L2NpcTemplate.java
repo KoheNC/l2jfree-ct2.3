@@ -66,69 +66,76 @@ public final class L2NpcTemplate extends L2CharTemplate
 	/**
 	 * Logger
 	 */
-	private final static Log					_log		= LogFactory.getLog(L2NpcTemplate.class);
-
-	private int									_npcId;
-	private int									_idTemplate;
-	private final String						_type;
-	private final Class<?>						_clazz;
-	private String								_name;
-	private boolean								_serverSideName;
-	private String								_title;
-	private boolean								_serverSideTitle;
-	private String								_sex;
-	private byte								_level;
-	private int									_rewardExp;
-	private int									_rewardSp;
-	private int									_aggroRange;
-	private int									_rhand;
-	private int									_lhand;
-	private int									_armor;
-	private String								_factionId;
-	private int									_factionRange;
-	private int									_absorbLevel;
-	private AbsorbCrystalType					_absorbType;
-	private short								_ss;
-	private short								_bss;
-	private short								_ssRate;
-	private int									_npcFaction;
-	private String								_npcFactionName;
-	private String								_jClass;
-	private AIType								_ai;
-	private final boolean						_isQuestMonster;
-	private final boolean						_dropHerbs;
-	private final float							_baseVitalityDivider;
-
-	private Race								_race;
-
+	private final static Log _log = LogFactory.getLog(L2NpcTemplate.class);
+	
+	private int _npcId;
+	private int _idTemplate;
+	private final String _type;
+	private final Class<?> _clazz;
+	private String _name;
+	private boolean _serverSideName;
+	private String _title;
+	private boolean _serverSideTitle;
+	private String _sex;
+	private byte _level;
+	private int _rewardExp;
+	private int _rewardSp;
+	private int _aggroRange;
+	private int _rhand;
+	private int _lhand;
+	private int _armor;
+	private String _factionId;
+	private int _factionRange;
+	private int _absorbLevel;
+	private AbsorbCrystalType _absorbType;
+	private short _ss;
+	private short _bss;
+	private short _ssRate;
+	private int _npcFaction;
+	private String _npcFactionName;
+	private String _jClass;
+	private AIType _ai;
+	private final boolean _isQuestMonster;
+	private final boolean _dropHerbs;
+	private final float _baseVitalityDivider;
+	
+	private Race _race;
+	
 	/** The table containing all Item that can be dropped by L2NpcInstance using this L2NpcTemplate*/
-	private L2DropCategory[]					_categories;
-
+	private L2DropCategory[] _categories;
+	
 	/** The table containing all Minions that must be spawn with the L2NpcInstance using this L2NpcTemplate*/
-	private L2MinionData[]						_minions;
-
+	private L2MinionData[] _minions;
+	
 	/** The list of class that this NpcTemplate can Teach */
-	private EnumSet<ClassId>					_teachInfo;
-
+	private EnumSet<ClassId> _teachInfo;
+	
 	/** List of skills of this npc */
 	private FastMap<Integer, L2Skill> _skills;
-
+	
 	/** List of resist stats for this npc*/
-	private Map<Stats, Double>					_vulnerabilities;
-
+	private Map<Stats, Double> _vulnerabilities;
+	
 	/** contains a list of quests for each event type (questStart, questAttack, questKill, etc)*/
 	private Quest[][] _questEvents;
-
+	
 	public static enum AbsorbCrystalType
 	{
-		LAST_HIT, FULL_PARTY, PARTY_ONE_RANDOM
+		LAST_HIT,
+		FULL_PARTY,
+		PARTY_ONE_RANDOM
 	}
-
+	
 	public static enum AIType
 	{
-		FIGHTER, ARCHER, BALANCED, MAGE, HEALER, CORPSE
+		FIGHTER,
+		ARCHER,
+		BALANCED,
+		MAGE,
+		HEALER,
+		CORPSE
 	}
-
+	
 	public static enum Race
 	{
 		UNDEAD,
@@ -272,11 +279,13 @@ public final class L2NpcTemplate extends L2CharTemplate
 		setBaseEarthRes(getBaseEarthRes() + 20);
 		setBaseHolyRes(getBaseHolyRes() + 20);
 		setBaseDarkRes(getBaseDarkRes() + 20);
-
+		
 		// can be loaded from db
-		_baseVitalityDivider = getLevel() > 0 && getRewardExp() > 0 ? getBaseHpMax() * 9 * getLevel() * getLevel() /(100 * getRewardExp()) : 0;
+		_baseVitalityDivider =
+				getLevel() > 0 && getRewardExp() > 0 ? getBaseHpMax() * 9 * getLevel() * getLevel()
+						/ (100 * getRewardExp()) : 0;
 	}
-
+	
 	/**
 	 * Add the class id this npc can teach
 	 * @param classId
@@ -287,7 +296,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 			_teachInfo = EnumSet.noneOf(ClassId.class);
 		_teachInfo.add(classId);
 	}
-
+	
 	/**
 	 * @return the teach infos
 	 */
@@ -295,7 +304,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _teachInfo;
 	}
-
+	
 	/**
 	 * Check if this npc can teach to this class
 	 * @param classId
@@ -305,7 +314,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		if (_teachInfo == null)
 			return false;
-
+		
 		// If the player is on a third class, fetch the class teacher
 		// information for its parent class.
 		if (classId.level() == 3)
@@ -313,7 +322,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		
 		return _teachInfo.contains(classId);
 	}
-
+	
 	/**
 	 * add a drop to a given category.  If the category does not exist, create it.
 	 * @param drop
@@ -353,7 +362,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 			}
 		}
 	}
-
+	
 	public void addRaidData(L2MinionData minion)
 	{
 		if (_minions == null)
@@ -361,7 +370,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		else
 			_minions = (L2MinionData[])ArrayUtils.add(_minions, minion);
 	}
-
+	
 	public void addSkill(L2Skill skill)
 	{
 		if (_skills == null)
@@ -389,7 +398,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 			_vulnerabilities = new FastMap<Stats, Double>();
 		_vulnerabilities.put(id, vuln);
 	}
-
+	
 	public double getVulnerability(Stats id)
 	{
 		if (_vulnerabilities == null)
@@ -397,12 +406,12 @@ public final class L2NpcTemplate extends L2CharTemplate
 		Double vuln = _vulnerabilities.get(id);
 		return vuln == null ? 1 : vuln.doubleValue();
 	}
-
+	
 	public double removeVulnerability(Stats id)
 	{
 		return _vulnerabilities.remove(id);
 	}
-
+	
 	/**
 	 * Return the list of all possible UNCATEGORIZED drops of this L2NpcTemplate.<BR><BR>
 	 * @return the drop categories
@@ -411,7 +420,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _categories;
 	}
-
+	
 	/**
 	 * Return the list of all possible item drops of this L2NpcTemplate.<BR>
 	 * (ie full drops and part drops, mats, miscellaneous & UNCATEGORIZED)<BR><BR>
@@ -427,7 +436,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		}
 		return lst;
 	}
-
+	
 	/**
 	 * Empty all possible drops of this L2NpcTemplate.<BR><BR>
 	 */
@@ -441,7 +450,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		
 		_categories = null;
 	}
-
+	
 	/**
 	 * Return the list of all Minions that must be spawn with the L2NpcInstance using this L2NpcTemplate.<BR><BR>
 	 */
@@ -449,17 +458,17 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _minions;
 	}
-
+	
 	public Map<Integer, L2Skill> getSkills()
 	{
 		return _skills == null ? null : _skills.unmodifiable();
 	}
-
+	
 	public void addQuestEvent(Quest.QuestEventType EventType, Quest q)
 	{
 		if (_questEvents == null)
 			_questEvents = new Quest[Quest.QuestEventType.values().length][];
-
+		
 		if (_questEvents[EventType.ordinal()] == null)
 		{
 			_questEvents[EventType.ordinal()] = new Quest[] { q };
@@ -468,7 +477,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		{
 			Quest[] _quests = _questEvents[EventType.ordinal()];
 			int len = _quests.length;
-
+			
 			// if only one registration per npc is allowed for this event type
 			// then only register this NPC if not already registered for the specified event.
 			// if a quest allows multiple registrations, then register regardless of count
@@ -478,8 +487,8 @@ public final class L2NpcTemplate extends L2CharTemplate
 				if (_quests[0].getName().equals(q.getName()))
 					_quests[0] = q;
 				else
-					_log.warn("Quest event not allowed in multiple quests.  Skipped addition of Event Type \"" + EventType + "\" for NPC \"" + _name
-							+ "\" and quest \"" + q.getName() + "\".");
+					_log.warn("Quest event not allowed in multiple quests.  Skipped addition of Event Type \""
+							+ EventType + "\" for NPC \"" + _name + "\" and quest \"" + q.getName() + "\".");
 			}
 			else
 			{
@@ -503,122 +512,122 @@ public final class L2NpcTemplate extends L2CharTemplate
 			}
 		}
 	}
-
+	
 	public Quest[] getEventQuests(Quest.QuestEventType EventType)
 	{
 		if (_questEvents == null)
 			return null;
 		return _questEvents[EventType.ordinal()];
 	}
-
+	
 	public void setRace(int raceId)
 	{
 		switch (raceId)
 		{
-		case 1:
-			_race = L2NpcTemplate.Race.UNDEAD;
-			break;
-		case 2:
-			_race = L2NpcTemplate.Race.MAGICCREATURE;
-			break;
-		case 3:
-			_race = L2NpcTemplate.Race.BEAST;
-			break;
-		case 4:
-			_race = L2NpcTemplate.Race.ANIMAL;
-			break;
-		case 5:
-			_race = L2NpcTemplate.Race.PLANT;
-			break;
-		case 6:
-			_race = L2NpcTemplate.Race.HUMANOID;
-			break;
-		case 7:
-			_race = L2NpcTemplate.Race.SPIRIT;
-			break;
-		case 8:
-			_race = L2NpcTemplate.Race.ANGEL;
-			break;
-		case 9:
-			_race = L2NpcTemplate.Race.DEMON;
-			break;
-		case 10:
-			_race = L2NpcTemplate.Race.DRAGON;
-			break;
-		case 11:
-			_race = L2NpcTemplate.Race.GIANT;
-			break;
-		case 12:
-			_race = L2NpcTemplate.Race.BUG;
-			break;
-		case 13:
-			_race = L2NpcTemplate.Race.FAIRIE;
-			break;
-		case 14:
-			_race = L2NpcTemplate.Race.HUMAN;
-			break;
-		case 15:
-			_race = L2NpcTemplate.Race.ELVE;
-			break;
-		case 16:
-			_race = L2NpcTemplate.Race.DARKELVE;
-			break;
-		case 17:
-			_race = L2NpcTemplate.Race.ORC;
-			break;
-		case 18:
-			_race = L2NpcTemplate.Race.DWARVE;
-			break;
-		case 19:
-			_race = L2NpcTemplate.Race.OTHER;
-			break;
-		case 20:
-			_race = L2NpcTemplate.Race.NONLIVING;
-			break;
-		case 21:
-			_race = L2NpcTemplate.Race.SIEGEWEAPON;
-			break;
-		case 22:
-			_race = L2NpcTemplate.Race.DEFENDINGARMY;
-			break;
-		case 23:
-			_race = L2NpcTemplate.Race.MERCENARIE;
-			break;
-		case 24:
-			_race = L2NpcTemplate.Race.UNKNOWN;
-			break;
-		case 25:
-			_race = L2NpcTemplate.Race.KAMAEL;
-			break;
-		default:
-			_race = L2NpcTemplate.Race.NONE;
-			break;
+			case 1:
+				_race = L2NpcTemplate.Race.UNDEAD;
+				break;
+			case 2:
+				_race = L2NpcTemplate.Race.MAGICCREATURE;
+				break;
+			case 3:
+				_race = L2NpcTemplate.Race.BEAST;
+				break;
+			case 4:
+				_race = L2NpcTemplate.Race.ANIMAL;
+				break;
+			case 5:
+				_race = L2NpcTemplate.Race.PLANT;
+				break;
+			case 6:
+				_race = L2NpcTemplate.Race.HUMANOID;
+				break;
+			case 7:
+				_race = L2NpcTemplate.Race.SPIRIT;
+				break;
+			case 8:
+				_race = L2NpcTemplate.Race.ANGEL;
+				break;
+			case 9:
+				_race = L2NpcTemplate.Race.DEMON;
+				break;
+			case 10:
+				_race = L2NpcTemplate.Race.DRAGON;
+				break;
+			case 11:
+				_race = L2NpcTemplate.Race.GIANT;
+				break;
+			case 12:
+				_race = L2NpcTemplate.Race.BUG;
+				break;
+			case 13:
+				_race = L2NpcTemplate.Race.FAIRIE;
+				break;
+			case 14:
+				_race = L2NpcTemplate.Race.HUMAN;
+				break;
+			case 15:
+				_race = L2NpcTemplate.Race.ELVE;
+				break;
+			case 16:
+				_race = L2NpcTemplate.Race.DARKELVE;
+				break;
+			case 17:
+				_race = L2NpcTemplate.Race.ORC;
+				break;
+			case 18:
+				_race = L2NpcTemplate.Race.DWARVE;
+				break;
+			case 19:
+				_race = L2NpcTemplate.Race.OTHER;
+				break;
+			case 20:
+				_race = L2NpcTemplate.Race.NONLIVING;
+				break;
+			case 21:
+				_race = L2NpcTemplate.Race.SIEGEWEAPON;
+				break;
+			case 22:
+				_race = L2NpcTemplate.Race.DEFENDINGARMY;
+				break;
+			case 23:
+				_race = L2NpcTemplate.Race.MERCENARIE;
+				break;
+			case 24:
+				_race = L2NpcTemplate.Race.UNKNOWN;
+				break;
+			case 25:
+				_race = L2NpcTemplate.Race.KAMAEL;
+				break;
+			default:
+				_race = L2NpcTemplate.Race.NONE;
+				break;
 		}
 	}
-
+	
 	public L2NpcTemplate.Race getRace()
 	{
 		if (_race == null)
 			_race = L2NpcTemplate.Race.NONE;
-
+		
 		return _race;
 	}
-
+	
 	public int getNpcFaction()
 	{
 		return _npcFaction;
 	}
-
+	
 	public void setNpcFaction(int npcFaction)
 	{
 		_npcFaction = npcFaction;
 	}
-
+	
 	public String getNpcFactionName()
 	{
 		return _npcFactionName;
 	}
-
+	
 	/**
 	 * @return the absorb_level
 	 */
@@ -626,7 +635,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _absorbLevel;
 	}
-
+	
 	/**
 	 * @param absorb_level the absorb_level to set
 	 */
@@ -634,7 +643,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_absorbLevel = absorb_level;
 	}
-
+	
 	/**
 	 * @return the absorb_type
 	 */
@@ -642,7 +651,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _absorbType;
 	}
-
+	
 	/**
 	 * @param absorb_type the absorb type to set
 	 */
@@ -650,7 +659,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_absorbType = absorb_type;
 	}
-
+	
 	/**
 	 * @return the aggroRange
 	 */
@@ -658,7 +667,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _aggroRange;
 	}
-
+	
 	/**
 	 * @param aggroRange the aggroRange to set
 	 */
@@ -666,7 +675,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_aggroRange = aggroRange;
 	}
-
+	
 	/**
 	 * @return the armor
 	 */
@@ -674,7 +683,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _armor;
 	}
-
+	
 	/**
 	 * @param armor the armor to set
 	 */
@@ -682,7 +691,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_armor = armor;
 	}
-
+	
 	/**
 	 * @return the factionId
 	 */
@@ -690,7 +699,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _factionId;
 	}
-
+	
 	/**
 	 * @param factionId the factionId to set
 	 */
@@ -703,7 +712,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		}
 		_factionId = factionId.intern();
 	}
-
+	
 	/**
 	 * @return the factionRange
 	 */
@@ -711,7 +720,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _factionRange;
 	}
-
+	
 	/**
 	 * @param factionRange the factionRange to set
 	 */
@@ -719,7 +728,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_factionRange = factionRange;
 	}
-
+	
 	/**
 	 * @return the idTemplate
 	 */
@@ -727,7 +736,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _idTemplate;
 	}
-
+	
 	/**
 	 * @param idTemplate the idTemplate to set
 	 */
@@ -735,7 +744,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_idTemplate = idTemplate;
 	}
-
+	
 	/**
 	 * @return the level
 	 */
@@ -743,7 +752,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _level;
 	}
-
+	
 	/**
 	 * @param level the level to set
 	 */
@@ -751,7 +760,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_level = level;
 	}
-
+	
 	/**
 	 * @return the lhand
 	 */
@@ -759,7 +768,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _lhand;
 	}
-
+	
 	/**
 	 * @param lhand the lhand to set
 	 */
@@ -767,7 +776,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_lhand = lhand;
 	}
-
+	
 	/**
 	 * @return the name
 	 */
@@ -775,7 +784,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _name;
 	}
-
+	
 	/**
 	 * @param name the name to set
 	 */
@@ -783,7 +792,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_name = name;
 	}
-
+	
 	/**
 	 * @return the npcId
 	 */
@@ -791,7 +800,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _npcId;
 	}
-
+	
 	/**
 	 * @param npcId the npcId to set
 	 */
@@ -799,7 +808,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_npcId = npcId;
 	}
-
+	
 	/**
 	 * @return the rewardExp
 	 */
@@ -807,7 +816,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _rewardExp;
 	}
-
+	
 	/**
 	 * @param rewardExp the rewardExp to set
 	 */
@@ -815,7 +824,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_rewardExp = rewardExp;
 	}
-
+	
 	/**
 	 * @return the rewardSp
 	 */
@@ -823,7 +832,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _rewardSp;
 	}
-
+	
 	/**
 	 * @param rewardSp the rewardSp to set
 	 */
@@ -831,7 +840,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_rewardSp = rewardSp;
 	}
-
+	
 	/**
 	 * @return the rhand
 	 */
@@ -839,7 +848,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _rhand;
 	}
-
+	
 	/**
 	 * @param rhand the rhand to set
 	 */
@@ -847,7 +856,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_rhand = rhand;
 	}
-
+	
 	/**
 	 * @return the serverSideName
 	 */
@@ -855,7 +864,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _serverSideName;
 	}
-
+	
 	/**
 	 * @param serverSideName the serverSideName to set
 	 */
@@ -863,7 +872,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_serverSideName = serverSideName;
 	}
-
+	
 	/**
 	 * @return the serverSideTitle
 	 */
@@ -871,7 +880,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _serverSideTitle;
 	}
-
+	
 	/**
 	 * @param serverSideTitle the serverSideTitle to set
 	 */
@@ -879,7 +888,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_serverSideTitle = serverSideTitle;
 	}
-
+	
 	/**
 	 * @return the sex
 	 */
@@ -887,7 +896,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _sex;
 	}
-
+	
 	/**
 	 * @param sex the sex to set
 	 */
@@ -895,7 +904,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_sex = sex;
 	}
-
+	
 	/**
 	 * @return the title
 	 */
@@ -903,7 +912,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _title;
 	}
-
+	
 	/**
 	 * @param title the title to set
 	 */
@@ -911,7 +920,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_title = title;
 	}
-
+	
 	/**
 	 * @return the type
 	 */
@@ -937,7 +946,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_npcFactionName = (factionName == null ? "Devine Clan" : factionName);
 	}
-
+	
 	/**
 	 * @return the jClass
 	 */
@@ -945,7 +954,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _jClass;
 	}
-
+	
 	/**
 	 * @param class1 the jClass to set
 	 */
@@ -953,62 +962,62 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		_jClass = class1;
 	}
-
+	
 	public short getSS()
 	{
 		return _ss;
 	}
-
+	
 	public short getBSS()
 	{
 		return _bss;
 	}
-
+	
 	public short getSSRate()
 	{
 		return _ssRate;
 	}
-
+	
 	public AIType getAI()
 	{
 		return _ai;
 	}
-
+	
 	public void setSS(short ss)
 	{
 		_ss = ss;
 	}
-
+	
 	public void setBSS(short bss)
 	{
 		_bss = bss;
 	}
-
+	
 	public void setSSRate(short ssrate)
 	{
 		_ssRate = ssrate;
 	}
-
+	
 	public void setAI(AIType type)
 	{
 		_ai = type;
 	}
-
+	
 	public boolean isQuestMonster()
 	{
 		return _isQuestMonster;
 	}
-
+	
 	public boolean dropHerbs()
 	{
 		return _dropHerbs;
 	}
-
+	
 	public boolean isCustom()
 	{
 		return _npcId != _idTemplate;
 	}
-
+	
 	public float getBaseVitalityDivider()
 	{
 		return _baseVitalityDivider;

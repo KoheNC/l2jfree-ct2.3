@@ -22,7 +22,6 @@ import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.model.actor.instance.L2NpcInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 public class AttackableKnownList extends NpcKnownList
 {
 	// =========================================================
@@ -34,7 +33,7 @@ public class AttackableKnownList extends NpcKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	@Override
@@ -42,7 +41,7 @@ public class AttackableKnownList extends NpcKnownList
 	{
 		if (!super.removeKnownObject(object))
 			return false;
-
+		
 		// Remove the L2Object from the _aggrolist of the L2Attackable
 		if (object instanceof L2Character)
 			getActiveChar().getAggroList().remove(object);
@@ -53,21 +52,21 @@ public class AttackableKnownList extends NpcKnownList
 		{
 			getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		}
-
+		
 		return true;
 	}
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2Attackable getActiveChar()
 	{
-		return (L2Attackable) _activeChar;
+		return (L2Attackable)_activeChar;
 	}
-
+	
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
@@ -75,7 +74,7 @@ public class AttackableKnownList extends NpcKnownList
 			return 3000;
 		return Math.min(2200, 2 * getDistanceToWatchObject(object));
 	}
-
+	
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{

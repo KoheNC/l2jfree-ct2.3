@@ -25,8 +25,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class Auction implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	= { "auction" };
-
+	private static final String[] VOICED_COMMANDS = { "auction" };
+	
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.equals("auction"))
@@ -36,7 +36,7 @@ public class Auction implements IVoicedCommandHandler
 		}
 		return false;
 	}
-
+	
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

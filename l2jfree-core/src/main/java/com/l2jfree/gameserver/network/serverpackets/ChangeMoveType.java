@@ -39,7 +39,7 @@ public class ChangeMoveType extends L2GameServerPacket
 		writeD(_running ? RUN : WALK);
 		writeD(0x00);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -28,7 +28,7 @@ public class TaskProcessAuction extends TaskHandler
 	{
 		TaskManager.addUniqueTask(getName(), TaskTypes.TYPE_FIXED_SHEDULED, "3600000", "3600000", "");
 	}
-
+	
 	@Override
 	void onTimeElapsed(ExecutedTask task, String[] params)
 	{
@@ -36,5 +36,5 @@ public class TaskProcessAuction extends TaskHandler
 		AuctionBBSManager.getInstance().removeOldAuctions();
 		_log.info("Process Auction Task: launched.");
 	}
-
+	
 }

@@ -14,22 +14,21 @@
  */
 package com.l2jfree.gameserver.network.serverpackets;
 
-
 /**
  * 
  * @author KenM
  */
 public class ExEnchantSkillInfoDetail extends L2GameServerPacket
 {
-	private final int	_itemId;
-	private final long	_itemCount;
-
+	private final int _itemId;
+	private final long _itemCount;
+	
 	public ExEnchantSkillInfoDetail(int itemId, long itemCount)
 	{
 		_itemId = itemId;
 		_itemCount = itemCount;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
 	 */
@@ -38,7 +37,7 @@ public class ExEnchantSkillInfoDetail extends L2GameServerPacket
 	{
 		return "[S] FE:5E ExEnchantSkillInfoDetail";
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
 	 */
@@ -47,7 +46,7 @@ public class ExEnchantSkillInfoDetail extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x5e);
-
+		
 		writeD(0);
 		writeD(0);
 		writeD(0);

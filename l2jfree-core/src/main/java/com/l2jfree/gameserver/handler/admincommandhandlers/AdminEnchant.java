@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,8 +33,7 @@ import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
  */
 public class AdminEnchant implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_seteh",//6
+	private static final String[] ADMIN_COMMANDS = { "admin_seteh",//6
 			"admin_setec",//10
 			"admin_seteg",//9
 			"admin_setel",//11
@@ -49,11 +47,10 @@ public class AdminEnchant implements IAdminCommandHandler
 			"admin_seten",//3
 			"admin_setun",//0
 			"admin_setba",//13
-			"admin_setbe",
-			"admin_enchant"						};
-
-	private final static Log		_log			= LogFactory.getLog(AdminEnchant.class);
-
+			"admin_setbe", "admin_enchant" };
+	
+	private final static Log _log = LogFactory.getLog(AdminEnchant.class);
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_enchant"))
@@ -63,7 +60,7 @@ public class AdminEnchant implements IAdminCommandHandler
 		else
 		{
 			int armorType = -1;
-
+			
 			if (command.startsWith("admin_seteh"))
 				armorType = Inventory.PAPERDOLL_HEAD;
 			else if (command.startsWith("admin_setec"))
@@ -94,13 +91,13 @@ public class AdminEnchant implements IAdminCommandHandler
 				armorType = Inventory.PAPERDOLL_BACK;
 			else if (command.startsWith("admin_setbe"))
 				armorType = Inventory.PAPERDOLL_BELT;
-
+			
 			if (armorType != -1)
 			{
 				try
 				{
 					int ench = Integer.parseInt(command.substring(12));
-
+					
 					// check value
 					if (ench < 0 || ench > 65535)
 						activeChar.sendMessage("You must set the enchant level to be between 0-65535.");
@@ -120,14 +117,14 @@ public class AdminEnchant implements IAdminCommandHandler
 					activeChar.sendMessage("Please specify a valid new enchant value.");
 				}
 			}
-
+			
 			// show the enchant menu after an action
 			showMainPage(activeChar);
 		}
-
+		
 		return true;
 	}
-
+	
 	private void setEnchant(L2PcInstance activeChar, int ench, int armorType)
 	{
 		// get the target
@@ -137,18 +134,18 @@ public class AdminEnchant implements IAdminCommandHandler
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
 		{
-			player = (L2PcInstance) target;
+			player = (L2PcInstance)target;
 		}
 		else
 		{
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 			return;
 		}
-
+		
 		// now we need to find the equipped weapon of the targeted character...
 		int curEnchant = 0; // display purposes only
 		L2ItemInstance itemInstance = null;
-
+		
 		// only attempt to enchant if there is a weapon equipped
 		L2ItemInstance parmorInstance = player.getInventory().getPaperdollItem(armorType);
 		if (parmorInstance != null && parmorInstance.getLocationSlot() == armorType)
@@ -162,35 +159,36 @@ public class AdminEnchant implements IAdminCommandHandler
 			if (parmorInstance != null && parmorInstance.getLocationSlot() == Inventory.PAPERDOLL_LRHAND)
 				itemInstance = parmorInstance;
 		}
-
+		
 		if (itemInstance != null)
 		{
 			curEnchant = itemInstance.getEnchantLevel();
-
+			
 			// set enchant value
 			player.getInventory().unEquipItemInSlotAndRecord(armorType);
 			itemInstance.setEnchantLevel(ench);
 			player.getInventory().equipItemAndRecord(itemInstance);
-
+			
 			// send packets
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addModifiedItem(itemInstance);
 			player.sendPacket(iu);
 			player.broadcastUserInfo();
-
+			
 			// informations
-			activeChar.sendMessage("Changed enchantment of " + player.getName() + "'s " + itemInstance.getItem().getName() + " from " + curEnchant + " to "
-					+ ench + ".");
+			activeChar.sendMessage("Changed enchantment of " + player.getName() + "'s "
+					+ itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
 			if (activeChar != player)
-				player.sendMessage("Admin has changed the enchantment of your " + itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
+				player.sendMessage("Admin has changed the enchantment of your " + itemInstance.getItem().getName()
+						+ " from " + curEnchant + " to " + ench + ".");
 		}
 	}
-
+	
 	public void showMainPage(L2PcInstance activeChar)
 	{
 		AdminHelpPage.showHelpPage(activeChar, "enchant.htm");
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

@@ -30,9 +30,8 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class ChatHero implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Hero };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Hero };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatTypes()
 	 */
@@ -40,14 +39,14 @@ public class ChatHero implements IChatHandler
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		boolean canSpeak = activeChar.isGM();
-
+		
 		if (!canSpeak)
 		{
 			if (activeChar.isHero())
@@ -58,19 +57,22 @@ public class ChatHero implements IChatHandler
 				}
 				else
 				{
-					activeChar.sendMessage("Action failed. Heroes are only able to speak in the global channel once every 10 seconds.");
+					activeChar
+							.sendMessage("Action failed. Heroes are only able to speak in the global channel once every 10 seconds.");
 				}
 			}
 		}
-
+		
 		if (canSpeak)
 		{
-			if (Config.IRC_ENABLED && Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("hero") && activeChar.isHero() || Config.IRC_ENABLED
-					&& Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("all")) // added hero voice to IRC like said in the properties files
+			if (Config.IRC_ENABLED && Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("hero") && activeChar.isHero()
+					|| Config.IRC_ENABLED && Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("all")) // added hero voice to IRC like said in the properties files
 			{
 				IrcManager.getInstance().getConnection().sendChan("12%" + activeChar.getName() + ": " + text);
 			}
-			String name = (activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS)? "[GM]" + activeChar.getName() : activeChar.getName();
+			String name =
+					(activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS) ? "[GM]" + activeChar.getName() : activeChar
+							.getName();
 			
 			CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, name, text);
 			for (L2PcInstance player : L2World.getInstance().getAllPlayers())

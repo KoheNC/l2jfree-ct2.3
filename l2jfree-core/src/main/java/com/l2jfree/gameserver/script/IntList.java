@@ -30,17 +30,16 @@ public class IntList
 		{
 			return getIntegerList(range.split(","));
 		}
-
-		int[] list =
-		{ getInt(range) };
+		
+		int[] list = { getInt(range) };
 		return list;
 	}
-
+	
 	private static int getInt(String number)
 	{
 		return Integer.parseInt(number);
 	}
-
+	
 	private static int[] getIntegerList(String[] numbers)
 	{
 		int[] list = new int[numbers.length];

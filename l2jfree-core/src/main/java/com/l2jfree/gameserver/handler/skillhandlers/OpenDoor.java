@@ -22,22 +22,21 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class OpenDoor implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.OPEN_DOOR };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.OPEN_DOOR };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		for (L2Character element : targets)
 		{
 			if (element instanceof L2DoorInstance)
 			{
-				L2DoorInstance door = (L2DoorInstance) element;
+				L2DoorInstance door = (L2DoorInstance)element;
 				door.openMe();
 				door.onOpen();
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

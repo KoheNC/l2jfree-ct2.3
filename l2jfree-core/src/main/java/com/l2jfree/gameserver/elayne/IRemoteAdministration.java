@@ -34,7 +34,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public int getOnlineUsersCount(String rmiPassword) throws RemoteException;
-
+	
 	/**
 	 * Perform an announcement in game that is broadcasted to every online player.
 	 * 
@@ -42,7 +42,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public void announceToAll(String rmiPassword, String announcement) throws RemoteException;
-
+	
 	/**
 	 * Attempts to send a private message to an online Player.
 	 * 
@@ -52,7 +52,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public int sendPrivateMessage(String rmiPassword, String player, String message) throws RemoteException;
-
+	
 	/**
 	 * Attempts to send a message to Any GMs online at one particular moment.
 	 * 
@@ -61,7 +61,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public int sendMessageToGms(String rmiPassword, String message) throws RemoteException;
-
+	
 	/**
 	 * This method will try to kick a player from the Server.
 	 * 
@@ -70,7 +70,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public int kickPlayerFromServer(String rmiPassword, String playerName) throws RemoteException;
-
+	
 	/**
 	 * Attempt a server restart once the given seconds are over.
 	 * 
@@ -78,7 +78,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public void scheduleServerRestart(String rmiPassword, int secondsUntilRestart) throws RemoteException;
-
+	
 	/**
 	 * Attempt a server shut down once the given seconds are over.
 	 * 
@@ -86,14 +86,14 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public void scheduleServerShutDown(String rmiPassword, int secondsUntilShutDown) throws RemoteException;
-
+	
 	/**
 	 * Attempt to abort a server restart/shut down procedure.
 	 * 
 	 * @throws RemoteException
 	 */
 	public void abortServerRestart(String rmiPassword) throws RemoteException;
-
+	
 	/**
 	 * Reloads something in-game.
 	 * 
@@ -102,7 +102,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public void reload(String rmiPassword, int reloadProcedure) throws RemoteException;
-
+	
 	/**
 	 * This method returns a map containing the information of all the players online at one particular moment.<br>
 	 * For each key (String containing the name of a player), this method returns an Array of Strings following the object model of the
@@ -112,7 +112,7 @@ public interface IRemoteAdministration extends Remote
 	 * @throws RemoteException
 	 */
 	public FastMap<String, IRemotePlayer> getOnlinePlayersDetails(String rmiPassword) throws RemoteException;
-
+	
 	/**
 	 * Returns information about a player in the "live" server.
 	 * 

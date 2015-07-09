@@ -29,22 +29,22 @@ package com.l2jfree.gameserver.network.serverpackets;
 public final class ExNeedToChangeName extends L2GameServerPacket
 {
 	private static final String _S__FE_69_EXNEEDTOCHANGENAME = "[S] FE:69 ExNeedToChangeName";
-
+	
 	public ExNeedToChangeName()
 	{
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x69);
-
+		
 		// write 0x01 if player must retry, nothing otherwise.
 		writeD(0x01);
 	}
-
+	
 	@Override
 	public String getType()
 	{

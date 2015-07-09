@@ -86,7 +86,7 @@ public final class HtmCache
 		}
 		
 		_log.info("Cache[HTML]: Caching started...");
-
+		
 		if (cacheFile.exists())
 		{
 			_log.info("Cache[HTML]: Using cache file...");

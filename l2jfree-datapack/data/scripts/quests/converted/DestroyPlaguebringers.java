@@ -31,22 +31,22 @@ import com.l2jfree.gameserver.network.serverpackets.NpcSay;
 public final class DestroyPlaguebringers extends QuestJython
 {
 	private static final String DESTROY_PLAGUE_BRINGERS = "316_DestroyPlaguebringers";
-
+	
 	// Quest NPCs
 	private static final int ELLIASIN = 30155;
-
+	
 	// Quest items
 	private static final int WERERAT_FANG = 1042;
 	private static final int NORMAL_FANG_REWARD = 60;
 	private static final int VAROOL_FOULCLAWS_FANG = 1043;
 	private static final int LEADER_FANG_REWARD = 10000;
-
+	
 	// Quest monsters
 	private static final int SUKAR_WERERAT = 20040;
 	private static final int SUKAR_WERERAT_LEADER = 20047;
 	private static final int VAROOL_FOULCLAW = 27020;
 	private static final String VAROOL_ATTACKED = "For what reason are you oppressing us?";
-
+	
 	private DestroyPlaguebringers(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
@@ -60,27 +60,26 @@ public final class DestroyPlaguebringers extends QuestJython
 		addAttackId(VAROOL_FOULCLAW);
 		addKillId(VAROOL_FOULCLAW);
 	}
-
+	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet,
-			L2Skill skill)
+	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
-		case ATTACK_NOONE:
-			if (npc.getNpcId() == VAROOL_FOULCLAW)
-				npc.broadcastPacket(new NpcSay(npc, VAROOL_ATTACKED));
-			npc.setQuestAttackStatus(ATTACK_SINGLE);
-			npc.setQuestFirstAttacker(attacker);
-			break;
-		case ATTACK_SINGLE:
-			//if (attacker != npc.getQuestFirstAttacker())
-			//	npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			break;
+			case ATTACK_NOONE:
+				if (npc.getNpcId() == VAROOL_FOULCLAW)
+					npc.broadcastPacket(new NpcSay(npc, VAROOL_ATTACKED));
+				npc.setQuestAttackStatus(ATTACK_SINGLE);
+				npc.setQuestFirstAttacker(attacker);
+				break;
+			case ATTACK_SINGLE:
+				//if (attacker != npc.getQuestFirstAttacker())
+				//	npc.setQuestAttackStatus(ATTACK_MULTIPLE);
+				break;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onEvent(String event, QuestState qs)
 	{
@@ -97,7 +96,7 @@ public final class DestroyPlaguebringers extends QuestJython
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -105,10 +104,9 @@ public final class DestroyPlaguebringers extends QuestJython
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(DESTROY_PLAGUE_BRINGERS);
-		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) != 1
-				|| npc.getQuestAttackStatus() != ATTACK_SINGLE)
+		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) != 1 || npc.getQuestAttackStatus() != ATTACK_SINGLE)
 			return null;
-
+		
 		if (npc.getNpcId() == VAROOL_FOULCLAW)
 		{
 			if (qs.getQuestItemsCount(VAROOL_FOULCLAWS_FANG) == 0)
@@ -116,17 +114,17 @@ public final class DestroyPlaguebringers extends QuestJython
 		}
 		else
 			qs.dropQuestItems(WERERAT_FANG, 1, Long.MAX_VALUE, 500000, true, false);
-
+		
 		return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
 		QuestState qs = talker.getQuestState(DESTROY_PLAGUE_BRINGERS);
 		if (qs == null)
 			return NO_QUEST;
-
+		
 		int cond = qs.getInt(CONDITION);
 		if (cond == 0)
 		{
@@ -151,15 +149,14 @@ public final class DestroyPlaguebringers extends QuestJython
 			{
 				qs.takeItems(WERERAT_FANG, normal);
 				qs.takeItems(VAROOL_FOULCLAWS_FANG, leader);
-				qs.rewardItems(PcInventory.ADENA_ID,
-						(normal * NORMAL_FANG_REWARD + leader * LEADER_FANG_REWARD));
+				qs.rewardItems(PcInventory.ADENA_ID, (normal * NORMAL_FANG_REWARD + leader * LEADER_FANG_REWARD));
 				return "30155-07.htm";
 			}
 			else
 				return "30155-05.htm";
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new DestroyPlaguebringers(316, DESTROY_PLAGUE_BRINGERS, "Destroy Plague Bringers");

@@ -25,8 +25,8 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class GiveSp implements ISkillHandler
 {
-	private static final L2SkillType[] SKILL_IDS = {L2SkillType.GIVE_SP};
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.GIVE_SP };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		for (L2Character target : targets)
@@ -38,7 +38,7 @@ public class GiveSp implements ISkillHandler
 			target.addExpAndSp(0, spToAdd);
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

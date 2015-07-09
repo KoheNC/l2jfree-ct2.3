@@ -33,22 +33,23 @@ import com.l2jfree.gameserver.network.serverpackets.PrivateStoreMsgBuy;
  */
 public class SetPrivateStoreListBuy extends L2GameClientPacket
 {
-	private static final String	_C__91_SETPRIVATESTORELISTBUY	= "[C] 91 SetPrivateStoreListBuy";
-
-	private static final int	BATCH_LENGTH					= 12;								// length of the one item
-	private static final int	BATCH_LENGTH_FINAL				= 40;
-
-	private Item[]				_items							= null;
-
+	private static final String _C__91_SETPRIVATESTORELISTBUY = "[C] 91 SetPrivateStoreListBuy";
+	
+	private static final int BATCH_LENGTH = 12; // length of the one item
+	private static final int BATCH_LENGTH_FINAL = 40;
+	
+	private Item[] _items = null;
+	
 	@Override
 	protected void readImpl()
 	{
 		int count = readD();
-		if (count < 0 || count > Config.MAX_ITEM_IN_PACKET || count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
+		if (count < 0 || count > Config.MAX_ITEM_IN_PACKET
+				|| count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
 		{
 			return;
 		}
-
+		
 		_items = new Item[count];
 		for (int i = 0; i < count; i++)
 		{
@@ -57,7 +58,7 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 			/*_unk2=*/readH();//TODO: analyse this
 			long cnt = readCompQ();
 			long price = readCompQ();
-
+			
 			if (itemId < 1 || cnt < 1 || price < 0)
 			{
 				_items = null;
@@ -73,14 +74,14 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 			_items[i] = new Item(itemId, cnt, price);
 		}
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (_items == null)
 		{
 			player.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
@@ -88,22 +89,23 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		if (Shutdown.isActionDisabled(DisableType.TRANSACTION))
 		{
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-
-		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN && player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+		
+		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{
 			requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
 			return;
 		}
-
+		
 		TradeList tradeList = player.getBuyList();
 		tradeList.clear();
-
+		
 		// Check maximum number of allowed slots for pvt shops
 		if (_items.length > player.getPrivateBuyStoreLimit())
 		{
@@ -111,7 +113,7 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 			requestFailed(SystemMessageId.YOU_HAVE_EXCEEDED_QUANTITY_THAT_CAN_BE_INPUTTED);
 			return;
 		}
-
+		
 		int totalCost = 0;
 		for (Item i : _items)
 		{
@@ -120,7 +122,7 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 				requestFailed(SystemMessageId.YOU_HAVE_EXCEEDED_QUANTITY_THAT_CAN_BE_INPUTTED);
 				return;
 			}
-
+			
 			totalCost += i.getCost();
 			if (totalCost > MAX_ADENA)
 			{
@@ -128,7 +130,7 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		// Check for available funds
 		if (totalCost > player.getAdena())
 		{
@@ -136,7 +138,7 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 			requestFailed(SystemMessageId.THE_PURCHASE_PRICE_IS_HIGHER_THAN_MONEY);
 			return;
 		}
-
+		
 		// Prevents player to start buying inside a nostore zone. By heX1r0
 		if (player.isInsideZone(L2Zone.FLAG_NOSTORE))
 		{
@@ -144,43 +146,43 @@ public class SetPrivateStoreListBuy extends L2GameClientPacket
 			requestFailed(SystemMessageId.NO_PRIVATE_STORE_HERE);
 			return;
 		}
-
+		
 		player.sitDown();
 		player.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_BUY);
 		player.broadcastUserInfo();
 		player.broadcastPacket(new PrivateStoreMsgBuy(player));
-
+		
 		sendAF();
 	}
-
+	
 	private class Item
 	{
-		private final int	_itemId;
-		private final long	_count;
-		private final long	_price;
-
+		private final int _itemId;
+		private final long _count;
+		private final long _price;
+		
 		public Item(int id, long num, long pri)
 		{
 			_itemId = id;
 			_count = num;
 			_price = pri;
 		}
-
+		
 		public boolean addToTradeList(TradeList list)
 		{
 			if ((MAX_ADENA / _count) < _price)
 				return false;
-
+			
 			list.addItemByItemId(_itemId, _count, _price);
 			return true;
 		}
-
+		
 		public long getCost()
 		{
 			return _count * _price;
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

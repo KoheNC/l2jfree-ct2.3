@@ -27,15 +27,15 @@ import com.l2jfree.gameserver.network.L2GameClient;
  */
 public class AuthLogin extends L2GameClientPacket
 {
-	private static final String	_C__AUTHLOGIN	= "[C] 2B AuthLogin c[sdddddddd] (unk) (changes often)";
-
+	private static final String _C__AUTHLOGIN = "[C] 2B AuthLogin c[sdddddddd] (unk) (changes often)";
+	
 	// loginName + keys must match what the login server used.
-	private String				_loginName;
-	private int					_playKey1;
-	private int					_playKey2;
-	private int					_loginKey1;
-	private int					_loginKey2;
-
+	private String _loginName;
+	private int _playKey1;
+	private int _playKey2;
+	private int _loginKey1;
+	private int _loginKey2;
+	
 	@Override
 	protected void readImpl()
 	{
@@ -49,20 +49,20 @@ public class AuthLogin extends L2GameClientPacket
 		else
 			skipAll();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		if (!getClient().isProtocolOk())
 			return;
-
+		
 		SessionKey key = new SessionKey(_loginKey1, _loginKey2, _playKey1, _playKey2);
 		if (_log.isDebugEnabled())
 		{
 			_log.info("User: " + _loginName);
 			_log.info("Key: " + key);
 		}
-
+		
 		L2GameClient client = getClient();
 		// avoid potential exploits
 		if (client.getAccountName() == null)
@@ -71,7 +71,7 @@ public class AuthLogin extends L2GameClientPacket
 			LoginServerThread.getInstance().addWaitingClientAndSendRequest(_loginName, client, key);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

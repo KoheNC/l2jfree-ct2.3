@@ -29,32 +29,31 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class TakeCastle implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.TAKECASTLE };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.TAKECASTLE };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		if (player.getClan() == null || player.getClan().getLeaderId() != player.getObjectId())
 			return;
-
+		
 		Castle castle = CastleManager.getInstance().getCastle(player);
 		if (castle == null || !SiegeManager.getInstance().checkIfOkToCastSealOfRule(player, castle))
 			return;
-
+		
 		if (targets.length > 0 && targets[0] instanceof L2ArtefactInstance)
 			castle.engrave(player.getClan(), targets[0].getObjectId());
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;
 	}
-
+	
 	/**
 	 * Return true if character clan place a flag<BR><BR>
 	 * 
@@ -63,6 +62,7 @@ public class TakeCastle implements ISkillHandler
 	 */
 	public static boolean checkIfOkToCastSealOfRule(L2Character activeChar)
 	{
-		return SiegeManager.getInstance().checkIfOkToCastSealOfRule(activeChar, CastleManager.getInstance().getCastle(activeChar));
+		return SiegeManager.getInstance().checkIfOkToCastSealOfRule(activeChar,
+				CastleManager.getInstance().getCastle(activeChar));
 	}
 }

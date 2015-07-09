@@ -16,22 +16,22 @@ package com.l2jfree.gameserver.network.clientpackets;
 
 public final class BrProductInfo extends L2GameClientPacket
 {
-	private static final String	_C__BRPRODUCTINFO = "[C] D0:67 BR_ProductInfo ch[d]";
-
+	private static final String _C__BRPRODUCTINFO = "[C] D0:67 BR_ProductInfo ch[d]";
+	
 	//private int				_productId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		/*_productId = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		// normally server doesn't respond to this packet
 	}
-
+	
 	@Override
 	public String getType()
 	{

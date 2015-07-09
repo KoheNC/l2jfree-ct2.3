@@ -19,7 +19,7 @@ import com.l2jfree.network.ReceivableBasePacket;
 /**
  * @author -Wooden-
  */
-public abstract class LoginServerBasePacket  extends ReceivableBasePacket
+public abstract class LoginServerBasePacket extends ReceivableBasePacket
 {
 	protected LoginServerBasePacket(byte[] decrypt)
 	{

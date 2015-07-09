@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2StaticObjectInstance;
 public class StaticObject extends L2GameServerPacket
 {
 	private final static String S_9F_STATICOBJECT = "[S] 9F StaticObject";
-
+	
 	private final int _staticObjectId;
 	private final int _objectId;
 	private final int _type;
@@ -32,7 +32,7 @@ public class StaticObject extends L2GameServerPacket
 	private final int _currentHp;
 	private final boolean _hpShown;
 	private final int _damageGrade;
-
+	
 	/**
 	 * Default static object packet.
 	 * @param staticObject A static object (throne, bulletin, etc)
@@ -51,7 +51,7 @@ public class StaticObject extends L2GameServerPacket
 		_hpShown = false;
 		_damageGrade = 0;
 	}
-
+	
 	/**
 	 * Creates a default info packet for a door.
 	 * Targeting is allowed and HP is shown.
@@ -61,7 +61,7 @@ public class StaticObject extends L2GameServerPacket
 	{
 		this(door, true, true);
 	}
-
+	
 	/**
 	 * Advanced door packet creation.
 	 * @param door A door instance
@@ -80,7 +80,7 @@ public class StaticObject extends L2GameServerPacket
 		if (_targetable)
 		{
 			_enemy = door.isEnemy();
-			_currentHp = (int) door.getCurrentHp();
+			_currentHp = (int)door.getCurrentHp();
 		}
 		else
 		{
@@ -90,12 +90,12 @@ public class StaticObject extends L2GameServerPacket
 		_hpShown = hpShown;
 		_damageGrade = door.getDamageGrade();
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x9F);
-
+		
 		writeD(_staticObjectId);
 		writeD(_objectId);
 		writeD(_type);
@@ -108,7 +108,7 @@ public class StaticObject extends L2GameServerPacket
 		writeD(_hpShown);
 		writeD(_damageGrade);
 	}
-
+	
 	@Override
 	public String getType()
 	{

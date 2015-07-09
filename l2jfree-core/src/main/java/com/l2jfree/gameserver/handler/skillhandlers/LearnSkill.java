@@ -45,7 +45,8 @@ public class LearnSkill implements ISkillHandler
 		{
 			if (player.getSkillLevel(skill.getNewSkillId()[i]) < 0 && skill.getNewSkillId()[i] != 0)
 			{
-				L2Skill newSkill = SkillTable.getInstance().getInfo(skill.getNewSkillId()[i], skill.getNewSkillLvl()[i]);
+				L2Skill newSkill =
+						SkillTable.getInstance().getInfo(skill.getNewSkillId()[i], skill.getNewSkillLvl()[i]);
 				if (newSkill != null)
 					player.addSkill(newSkill, true);
 			}

@@ -64,11 +64,12 @@ public class GMViewPledgeInfo extends L2GameServerPacket
 		
 		L2ClanMember[] members = _clan.getMembers();
 		writeD(members.length);
-
+		
 		for (L2ClanMember element : members)
 		{
-			if (element == null) continue;
-
+			if (element == null)
+				continue;
+			
 			writeS(element.getName());
 			writeD(element.getLevel());
 			writeD(element.getClassId());
@@ -78,7 +79,7 @@ public class GMViewPledgeInfo extends L2GameServerPacket
 			writeD(element.getSponsor());
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
@@ -87,5 +88,5 @@ public class GMViewPledgeInfo extends L2GameServerPacket
 	{
 		return _S__A9_GMVIEWPLEDGEINFO;
 	}
-
+	
 }

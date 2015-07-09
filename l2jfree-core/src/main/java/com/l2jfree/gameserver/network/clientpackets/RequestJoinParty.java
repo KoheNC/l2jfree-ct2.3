@@ -33,24 +33,25 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class RequestJoinParty extends L2GameClientPacket
 {
-	private static final String	_C__29_REQUESTJOINPARTY	= "[C] 29 RequestJoinParty";
-
-	private String				_name;
-	private int					_itemDistribution;
-
+	private static final String _C__29_REQUESTJOINPARTY = "[C] 29 RequestJoinParty";
+	
+	private String _name;
+	private int _itemDistribution;
+	
 	@Override
 	protected void readImpl()
 	{
 		_name = readS();
 		_itemDistribution = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance requestor = getClient().getActiveChar();
-		if (requestor == null) return;
-
+		if (requestor == null)
+			return;
+		
 		L2PcInstance target = L2World.getInstance().getPlayer(_name);
 		if (target == null || (target.getAppearance().isInvisible() && !requestor.isGM()))
 		{
@@ -91,7 +92,7 @@ public class RequestJoinParty extends L2GameClientPacket
 				requestor.onTransactionRequest(target);
 				target.sendPacket(new AskJoinParty(requestor.getName(), _itemDistribution));
 				requestor.getParty().setPendingInvitation(true);
-
+				
 				if (_log.isDebugEnabled())
 					_log.debug(requestor.getName() + "sent out a party invitation to:" + target.getName());
 			}
@@ -126,13 +127,13 @@ public class RequestJoinParty extends L2GameClientPacket
 				requestFailed(SystemMessageId.WAITING_FOR_ANOTHER_REPLY);
 				return;
 			}
-
+			
 			if (!target.isProcessingRequest())
 			{
 				requestor.onTransactionRequest(target);
 				target.sendPacket(new AskJoinParty(requestor.getName(), requestor.getParty().getLootDistribution()));
 				requestor.getParty().setPendingInvitation(true);
-
+				
 				if (_log.isDebugEnabled())
 					_log.debug(requestor.getName() + "sent out a party invitation to:" + target.getName());
 			}
@@ -146,7 +147,7 @@ public class RequestJoinParty extends L2GameClientPacket
 		}
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

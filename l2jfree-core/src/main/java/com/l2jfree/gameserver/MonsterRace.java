@@ -27,11 +27,11 @@ import com.l2jfree.tools.random.Rnd;
 
 public class MonsterRace
 {
-	private final static Log	_log	= LogFactory.getLog(MonsterRace.class);
-	private final L2Npc[]				_monsters;
-	private int[][]				_speeds;
-	private final int[]				_first, _second;
-
+	private final static Log _log = LogFactory.getLog(MonsterRace.class);
+	private final L2Npc[] _monsters;
+	private int[][] _speeds;
+	private final int[] _first, _second;
+	
 	private MonsterRace()
 	{
 		_monsters = new L2Npc[8];
@@ -39,30 +39,30 @@ public class MonsterRace
 		_first = new int[2];
 		_second = new int[2];
 	}
-
+	
 	public static MonsterRace getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	public void newRace()
 	{
 		int random = 0;
-
+		
 		for (int i = 0; i < 8; i++)
 		{
 			int id = 31003;
 			random = Rnd.get(24);
-
-            for (int j = i - 1; j >= 0; j--)
-            {
-                if (_monsters[j].getTemplate().getNpcId() == (id + random))
-                {
-                    random = Rnd.get(24);
-                    continue;
-                }
-            }
-
+			
+			for (int j = i - 1; j >= 0; j--)
+			{
+				if (_monsters[j].getTemplate().getNpcId() == (id + random))
+				{
+					random = Rnd.get(24);
+					continue;
+				}
+			}
+			
 			try
 			{
 				L2NpcTemplate template = NpcTable.getInstance().getTemplate(id + random);
@@ -77,7 +77,7 @@ public class MonsterRace
 		}
 		newSpeeds();
 	}
-
+	
 	public void newSpeeds()
 	{
 		_speeds = new int[8][20];
@@ -109,7 +109,7 @@ public class MonsterRace
 			}
 		}
 	}
-
+	
 	/**
 	 * @return Returns the monsters.
 	 */
@@ -117,7 +117,7 @@ public class MonsterRace
 	{
 		return _monsters;
 	}
-
+	
 	/**
 	 * @return Returns the speeds.
 	 */
@@ -125,17 +125,17 @@ public class MonsterRace
 	{
 		return _speeds;
 	}
-
+	
 	public int getFirstPlace()
 	{
 		return _first[0];
 	}
-
+	
 	public int getSecondPlace()
 	{
 		return _second[0];
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

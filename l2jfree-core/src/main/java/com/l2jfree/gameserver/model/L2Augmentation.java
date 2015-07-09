@@ -30,25 +30,25 @@ import com.l2jfree.gameserver.skills.funcs.FuncOwner;
  */
 public final class L2Augmentation
 {
-	private int						_effectsId	= 0;
-	private AugmentationStatBoni	_boni		= null;
-	private L2Skill					_skill		= null;
-
+	private int _effectsId = 0;
+	private AugmentationStatBoni _boni = null;
+	private L2Skill _skill = null;
+	
 	public L2Augmentation(int effects, L2Skill skill)
 	{
 		_effectsId = effects;
 		_boni = new AugmentationStatBoni(_effectsId);
 		_skill = skill;
 	}
-
+	
 	public L2Augmentation(int effects, int skill, int skillLevel)
 	{
 		this(effects, SkillTable.getInstance().getInfo(skill, skillLevel));
 	}
-
+	
 	// =========================================================
 	// Nested Class
-
+	
 	public final class AugmentationStatBoni implements FuncOwner
 	{
 		private final Func[] _statFuncs;
@@ -101,12 +101,12 @@ public final class L2Augmentation
 			return null;
 		}
 	}
-
+	
 	public int getAttributes()
 	{
 		return _effectsId;
 	}
-
+	
 	/**
 	 * Get the augmentation "id" used in serverpackets.
 	 * @return augmentationId
@@ -115,12 +115,12 @@ public final class L2Augmentation
 	{
 		return _effectsId;
 	}
-
+	
 	public L2Skill getSkill()
 	{
 		return _skill;
 	}
-
+	
 	/**
 	 * Applies the bonuses to the player.
 	 * @param player
@@ -128,14 +128,14 @@ public final class L2Augmentation
 	public void applyBonus(L2PcInstance player)
 	{
 		_boni.applyBonus(player);
-
+		
 		// add the skill if any
 		if (_skill != null)
 		{
 			player.addSkill(_skill);
 		}
 	}
-
+	
 	/**
 	 * Removes the augmentation bonuses from the player.
 	 * @param player
@@ -143,7 +143,7 @@ public final class L2Augmentation
 	public void removeBonus(L2PcInstance player)
 	{
 		_boni.removeBonus(player);
-
+		
 		// remove the skill if any
 		if (_skill != null)
 			player.removeSkill(_skill);

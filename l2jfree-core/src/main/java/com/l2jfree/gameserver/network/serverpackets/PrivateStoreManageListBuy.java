@@ -25,12 +25,12 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class PrivateStoreManageListBuy extends L2GameServerPacket
 {
-	private static final String		_S__D0_PRIVATESELLLISTBUY	= "[S] b7 PrivateSellListBuy";
-	private final int						_objId;
-	private final long					_playerAdena;
-	private final L2ItemInstance[]		_itemList;
-	private final TradeList.TradeItem[]	_buyList;
-
+	private static final String _S__D0_PRIVATESELLLISTBUY = "[S] b7 PrivateSellListBuy";
+	private final int _objId;
+	private final long _playerAdena;
+	private final L2ItemInstance[] _itemList;
+	private final TradeList.TradeItem[] _buyList;
+	
 	public PrivateStoreManageListBuy(L2PcInstance player)
 	{
 		_objId = player.getObjectId();
@@ -38,7 +38,7 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 		_itemList = player.getInventory().getUniqueItems(false, true);
 		_buyList = player.getBuyList().getItems();
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -46,7 +46,7 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 		//section 1
 		writeD(_objId);
 		writeCompQ(_playerAdena);
-
+		
 		//section2
 		writeD(_itemList.length); // inventory items for potential buy
 		for (L2ItemInstance item : _itemList)
@@ -58,10 +58,10 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 			writeH(0x00);
 			writeD(item.getItem().getBodyPart());
 			writeH(item.getItem().getType2());
-
+			
 			writeElementalInfo(item); //8x h or d
 		}
-
+		
 		//section 3
 		writeD(_buyList.length); //count for all items already added for buy
 		for (TradeList.TradeItem item : _buyList)
@@ -70,17 +70,17 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 			writeH(0);
 			writeCompQ(item.getCount());
 			writeCompQ(item.getItem().getReferencePrice());
-
+			
 			writeH(0x00);
 			writeD(item.getItem().getBodyPart());
 			writeH(item.getItem().getType2());
 			writeCompQ(item.getPrice());//your price
 			writeCompQ(item.getItem().getReferencePrice());//fixed store price
-
+			
 			writeElementalInfo(item); //8x h or d
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

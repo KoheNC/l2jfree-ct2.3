@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public final class RequestTeleportBookMark extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTTELEPORTBOOKMARK	= "[C] D0:51:04 RequestTeleportBookMark chd[d]";
+	private static final String _C__REQUESTTELEPORTBOOKMARK = "[C] D0:51:04 RequestTeleportBookMark chd[d]";
 	
 	private int _id;
 	

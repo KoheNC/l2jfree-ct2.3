@@ -50,7 +50,8 @@ public class L2FortZone extends SiegeableEntityZone
 				FortSiege s = getSiege();
 				if (s.getIsInProgress() && (s.checkIsAttacker(clan) || s.checkIsDefender(clan)))
 				{
-					player.startFameTask(Config.FORTRESS_ZONE_FAME_TASK_FREQUENCY * 1000, Config.FORTRESS_ZONE_FAME_AQUIRE_POINTS);
+					player.startFameTask(Config.FORTRESS_ZONE_FAME_TASK_FREQUENCY * 1000,
+							Config.FORTRESS_ZONE_FAME_AQUIRE_POINTS);
 				}
 			}
 		}
@@ -66,7 +67,7 @@ public class L2FortZone extends SiegeableEntityZone
 		if (character instanceof L2PcInstance)
 			((L2PcInstance)character).stopFameTask();
 	}
-
+	
 	@Override
 	protected void onDieInside(L2Character character)
 	{
@@ -79,7 +80,7 @@ public class L2FortZone extends SiegeableEntityZone
 				lvl = Math.min(effect.getLevel() + 1, SkillTable.getInstance().getMaxLevel(5660));
 			else
 				lvl = 1;
-
+			
 			L2Skill skill = SkillTable.getInstance().getInfo(5660, lvl);
 			if (skill != null)
 				skill.getEffects(character, character);

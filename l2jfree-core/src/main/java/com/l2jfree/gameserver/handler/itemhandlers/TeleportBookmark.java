@@ -34,9 +34,9 @@ public class TeleportBookmark implements IItemHandler
 		if (playable == null || item == null || !(playable instanceof L2PcInstance))
 			return;
 		
-		L2PcInstance player = (L2PcInstance) playable;
+		L2PcInstance player = (L2PcInstance)playable;
 		
-		if(player.getBookMarkSlot() >= 9)
+		if (player.getBookMarkSlot() >= 9)
 		{
 			player.sendPacket(SystemMessageId.YOUR_NUMBER_OF_MY_TELEPORTS_SLOTS_HAS_REACHED_ITS_MAXIMUM_LIMIT);
 			return;
@@ -44,14 +44,14 @@ public class TeleportBookmark implements IItemHandler
 		
 		player.destroyItem("Consume", item.getObjectId(), 1, null, false);
 		
-		player.setBookMarkSlot(player.getBookMarkSlot()+3);
+		player.setBookMarkSlot(player.getBookMarkSlot() + 3);
 		player.sendPacket(SystemMessageId.THE_NUMBER_OF_MY_TELEPORTS_SLOTS_HAS_BEEN_INCREASED);
 		
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1_DISAPPEARED);
 		sm.addItemName(item.getItemId());
 		player.sendPacket(sm);
 	}
-
+	
 	@Override
 	public int[] getItemIds()
 	{

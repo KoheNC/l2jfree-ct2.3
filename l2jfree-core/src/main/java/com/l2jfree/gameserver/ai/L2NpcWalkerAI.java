@@ -138,8 +138,8 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 	protected void onEvtArrivedBlocked(L2CharPosition blocked_at_pos)
 	{
 		_log.warn("NpcWalker ID: " + getActor().getNpcId() + ": Blocked at rote position [" + _currentPos
-			+ "], coords: " + blocked_at_pos.x + ", " + blocked_at_pos.y + ", " + blocked_at_pos.z
-			+ ". Teleporting to next point");
+				+ "], coords: " + blocked_at_pos.x + ", " + blocked_at_pos.y + ", " + blocked_at_pos.z
+				+ ". Teleporting to next point");
 		
 		L2NpcWalkerNode node = getCurrentNode();
 		

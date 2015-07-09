@@ -57,12 +57,12 @@ public class GeoEditorListener extends Thread
 		start();
 		_log.info("GeoEditorListener Initialized.");
 	}
-
+	
 	public GeoEditorThread getThread()
 	{
 		return _geoEditor;
 	}
-
+	
 	public String getStatus()
 	{
 		if (_geoEditor != null && _geoEditor.isWorking())
@@ -71,7 +71,7 @@ public class GeoEditorListener extends Thread
 		}
 		return "Geoeditor not connected.";
 	}
-
+	
 	@Override
 	public void run()
 	{
@@ -97,7 +97,8 @@ public class GeoEditorListener extends Thread
 			_log.info("GeoEditorListener: ", e);
 			try
 			{
-				if (connection != null) connection.close();
+				if (connection != null)
+					connection.close();
 			}
 			catch (Exception e2)
 			{

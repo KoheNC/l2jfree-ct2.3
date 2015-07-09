@@ -22,20 +22,20 @@ import com.l2jfree.gameserver.handler.IIrcCommandHandler;
  */
 public class IrcAnnounce implements IIrcCommandHandler
 {
-	private static final String[]	IRC_COMMANDS	= { "!announce" };
-
+	private static final String[] IRC_COMMANDS = { "!announce" };
+	
 	public boolean useIrcCommand(String command, String gm, String target, boolean authed)
 	{
 		if (!authed)
 			return false;
-
+		
 		if (command.startsWith("!announce "))
 		{
 			Announcements.getInstance().handleAnnounce(command, 10);
 		}
 		return true;
 	}
-
+	
 	public String[] getIrcCommandList()
 	{
 		return IRC_COMMANDS;

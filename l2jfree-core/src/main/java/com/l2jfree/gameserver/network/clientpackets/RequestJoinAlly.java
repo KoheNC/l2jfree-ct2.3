@@ -31,29 +31,30 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class RequestJoinAlly extends L2GameClientPacket
 {
-	private static final String _C__82_REQUESTJOINALLY	= "[C] 82 RequestJoinAlly";
-
+	private static final String _C__82_REQUESTJOINALLY = "[C] 82 RequestJoinAlly";
+	
 	private int _objectId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
-
+		if (activeChar == null)
+			return;
+		
 		if (activeChar.getClan() == null)
 		{
 			//requestFailed(SystemMessageId.YOU_ARE_NOT_A_CLAN_MEMBER);
 			requestFailed(SystemMessageId.FEATURE_ONLY_FOR_ALLIANCE_LEADER);
 			return;
 		}
-
+		
 		L2Object obj = null;
 		// Get object from target
 		if (activeChar.getTargetId() == _objectId)
@@ -61,31 +62,30 @@ public class RequestJoinAlly extends L2GameClientPacket
 		// Try to get object from world
 		if (obj == null)
 			obj = L2World.getInstance().getPlayer(_objectId);
-
+		
 		if (!(obj instanceof L2PcInstance))
 		{
 			requestFailed(SystemMessageId.YOU_HAVE_INVITED_THE_WRONG_TARGET);
 			return;
 		}
-
-		L2PcInstance target = (L2PcInstance) obj;
-		if (!L2Clan.checkAllyJoinCondition(activeChar, target) ||
-				!activeChar.getRequest().setRequest(target, this))
+		
+		L2PcInstance target = (L2PcInstance)obj;
+		if (!L2Clan.checkAllyJoinCondition(activeChar, target) || !activeChar.getRequest().setRequest(target, this))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-
+		
 		SystemMessage sm = new SystemMessage(SystemMessageId.S2_ALLIANCE_LEADER_OF_S1_REQUESTED_ALLIANCE);
 		sm.addString(activeChar.getClan().getAllyName());
 		sm.addString(activeChar.getName());
 		target.sendPacket(sm);
 		target.sendPacket(new AskJoinAlly(activeChar.getObjectId(), activeChar.getClan().getAllyName()));
 		sendPacket(SystemMessageId.YOU_INVITED_FOR_ALLIANCE);
-
+		
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -54,81 +54,75 @@ public class BaylorManager extends BossLair
 	{
 		return SingletonHolder.INSTANCE;
 	}
-
-	// Teleport cube location.
-	private final int				_baylorCubeLocation[][]		= {
-			{ 153569, 142075, -12732, 0 }
-	};
 	
-	private final int[] doors = {
-			24220001, 24220002,	24220003, 24220004, 24220005,
-			24220006, 24220007, 24220008, 24220009,	24220010,
-			24220011, 24220012, 24220013, 24220014, 24220015,
-			24220016, 24220017, 24220018, 24220019, 24220020,
-			24220021, 24220022, 24220024, 24220025, 24220026
-	};
-
-	protected List<L2Spawn>			_baylorCubeSpawn			= new FastList<L2Spawn>();
-	protected List<L2Npc>	_baylorCube					= new FastList<L2Npc>();
-
+	// Teleport cube location.
+	private final int _baylorCubeLocation[][] = { { 153569, 142075, -12732, 0 } };
+	
+	private final int[] doors = { 24220001, 24220002, 24220003, 24220004, 24220005, 24220006, 24220007, 24220008,
+			24220009, 24220010, 24220011, 24220012, 24220013, 24220014, 24220015, 24220016, 24220017, 24220018,
+			24220019, 24220020, 24220021, 24220022, 24220024, 24220025, 24220026 };
+	
+	protected List<L2Spawn> _baylorCubeSpawn = new FastList<L2Spawn>();
+	protected List<L2Npc> _baylorCube = new FastList<L2Npc>();
+	
 	// Spawn data of monsters
-	protected L2Spawn				_crystalineSpawn1;												// Crystaline1
-	protected L2Spawn				_crystalineSpawn2;												// Crystaline2
-	protected L2Spawn				_crystalineSpawn3;												// Crystaline3
-	protected L2Spawn				_crystalineSpawn4;												// Crystaline4
-	protected L2Spawn				_crystalineSpawn5;												// Crystaline5
-	protected L2Spawn				_crystalineSpawn6;												// Crystaline6
-	protected L2Spawn				_crystalineSpawn7;												// Crystaline7
-	protected L2Spawn				_crystalineSpawn8;												// Crystaline8
-	protected L2Spawn				_baylorSapwn;													// Baylor
-
+	protected L2Spawn _crystalineSpawn1; // Crystaline1
+	protected L2Spawn _crystalineSpawn2; // Crystaline2
+	protected L2Spawn _crystalineSpawn3; // Crystaline3
+	protected L2Spawn _crystalineSpawn4; // Crystaline4
+	protected L2Spawn _crystalineSpawn5; // Crystaline5
+	protected L2Spawn _crystalineSpawn6; // Crystaline6
+	protected L2Spawn _crystalineSpawn7; // Crystaline7
+	protected L2Spawn _crystalineSpawn8; // Crystaline8
+	protected L2Spawn _baylorSapwn; // Baylor
+	
 	// Instance of monsters
-	protected L2Npc			_crystaline1;													// Crystaline1
-	protected L2Npc			_crystaline2;													// Crystaline2
-	protected L2Npc			_crystaline3;													// Crystaline3
-	protected L2Npc			_crystaline4;													// Crystaline4
-	protected L2Npc			_crystaline5;													// Crystaline5
-	protected L2Npc			_crystaline6;													// Crystaline6
-	protected L2Npc			_crystaline7;													// Crystaline7
-	protected L2Npc			_crystaline8;													// Crystaline8
-	protected L2Npc			_baylor;														// Baylor
-
+	protected L2Npc _crystaline1; // Crystaline1
+	protected L2Npc _crystaline2; // Crystaline2
+	protected L2Npc _crystaline3; // Crystaline3
+	protected L2Npc _crystaline4; // Crystaline4
+	protected L2Npc _crystaline5; // Crystaline5
+	protected L2Npc _crystaline6; // Crystaline6
+	protected L2Npc _crystaline7; // Crystaline7
+	protected L2Npc _crystaline8; // Crystaline8
+	protected L2Npc _baylor; // Baylor
+	
 	// Tasks
-	protected ScheduledFuture<?>	_cubeSpawnTask				= null;
-	protected ScheduledFuture<?>	_baylorSpawnTask			= null;
-	protected ScheduledFuture<?>	_intervalEndTask			= null;
-	protected ScheduledFuture<?>	_activityTimeEndTask		= null;
-	protected ScheduledFuture<?>	_socialTask					= null;
-	protected ScheduledFuture<?>	_socialTask1				= null;
-	protected ScheduledFuture<?>	_socialTask2				= null;
-	protected ScheduledFuture<?>	_socialTask3				= null;
-	protected ScheduledFuture<?>	_socialTask4				= null;
-	protected ScheduledFuture<?>	_socialTask5				= null;
-	protected ScheduledFuture<?>	_socialTask6				= null;
-	protected ScheduledFuture<?>	_socialTask7				= null;
-	protected ScheduledFuture<?>	_socialTask8				= null;
-
+	protected ScheduledFuture<?> _cubeSpawnTask = null;
+	protected ScheduledFuture<?> _baylorSpawnTask = null;
+	protected ScheduledFuture<?> _intervalEndTask = null;
+	protected ScheduledFuture<?> _activityTimeEndTask = null;
+	protected ScheduledFuture<?> _socialTask = null;
+	protected ScheduledFuture<?> _socialTask1 = null;
+	protected ScheduledFuture<?> _socialTask2 = null;
+	protected ScheduledFuture<?> _socialTask3 = null;
+	protected ScheduledFuture<?> _socialTask4 = null;
+	protected ScheduledFuture<?> _socialTask5 = null;
+	protected ScheduledFuture<?> _socialTask6 = null;
+	protected ScheduledFuture<?> _socialTask7 = null;
+	protected ScheduledFuture<?> _socialTask8 = null;
+	
 	// State of baylor's lair.
-	protected boolean				_isAlreadyEnteredOtherParty	= false;
-
+	protected boolean _isAlreadyEnteredOtherParty = false;
+	
 	public BaylorManager()
 	{
 		_questName = "baylor";
 		_state = new GrandBossState(29099);
 	}
-
+	
 	// Init.
 	@Override
 	public void init()
 	{
 		// Init state.
 		_isAlreadyEnteredOtherParty = false;
-
+		
 		// Setting spawn data of monsters.
 		try
 		{
 			L2NpcTemplate template1;
-
+			
 			// Crystaline1
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn1 = new L2Spawn(template1);
@@ -139,7 +133,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn1.setAmount(1);
 			_crystalineSpawn1.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn1, false);
-
+			
 			// Crystaline2
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn2 = new L2Spawn(template1);
@@ -150,7 +144,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn2.setAmount(1);
 			_crystalineSpawn2.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn2, false);
-
+			
 			// Crystaline3
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn3 = new L2Spawn(template1);
@@ -161,7 +155,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn3.setAmount(1);
 			_crystalineSpawn3.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn3, false);
-
+			
 			// Crystaline4
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn4 = new L2Spawn(template1);
@@ -172,7 +166,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn4.setAmount(1);
 			_crystalineSpawn4.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn4, false);
-
+			
 			// Crystaline5
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn5 = new L2Spawn(template1);
@@ -183,7 +177,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn5.setAmount(1);
 			_crystalineSpawn5.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn5, false);
-
+			
 			// Crystaline6
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn6 = new L2Spawn(template1);
@@ -194,7 +188,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn6.setAmount(1);
 			_crystalineSpawn6.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn6, false);
-
+			
 			// Crystaline7
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn7 = new L2Spawn(template1);
@@ -205,7 +199,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn7.setAmount(1);
 			_crystalineSpawn7.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn7, false);
-
+			
 			// Crystaline8
 			template1 = NpcTable.getInstance().getTemplate(29100); //Crystaline
 			_crystalineSpawn8 = new L2Spawn(template1);
@@ -216,7 +210,7 @@ public class BaylorManager extends BossLair
 			_crystalineSpawn8.setAmount(1);
 			_crystalineSpawn8.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2);
 			SpawnTable.getInstance().addNewSpawn(_crystalineSpawn8, false);
-
+			
 			// Baylor
 			template1 = NpcTable.getInstance().getTemplate(29099); //Baylor
 			_baylorSapwn = new L2Spawn(template1);
@@ -227,19 +221,19 @@ public class BaylorManager extends BossLair
 			_baylorSapwn.setAmount(1);
 			_baylorSapwn.setRespawnDelay(Config.FWBA_ACTIVITYTIMEOFMOBS * 2 + 30);
 			SpawnTable.getInstance().addNewSpawn(_baylorSapwn, false);
-
+			
 		}
 		catch (Exception e)
 		{
 			_log.warn(e.getMessage(), e);
 		}
-
+		
 		// Setting spawn data of teleporte cube.
 		try
 		{
 			L2NpcTemplate cube = NpcTable.getInstance().getTemplate(32273);
 			L2Spawn spawnDat;
-
+			
 			for (int[] element : _baylorCubeLocation)
 			{
 				spawnDat = new L2Spawn(cube);
@@ -258,16 +252,16 @@ public class BaylorManager extends BossLair
 		{
 			_log.warn(e.getMessage(), e);
 		}
-
+		
 		_log.info("BaylorManager : State of Baylor is " + _state.getState() + ".");
 		if (!_state.getState().equals(GrandBossState.StateEnum.NOTSPAWN))
 			setIntervalEndTask();
-
+		
 		Date dt = new Date(_state.getRespawnDate());
 		_log.info("BaylorManager : Next spawn date of Baylor is " + dt + ".");
 		_log.info("BaylorManager : Init BaylorManager.");
 	}
-
+	
 	// Whether it is permitted to enter the baylor's lair is confirmed.
 	public int canIntoBaylorLair(L2PcInstance pc)
 	{
@@ -277,14 +271,15 @@ public class BaylorManager extends BossLair
 			return 2;
 		else if (_state.getState().equals(GrandBossState.StateEnum.NOTSPAWN))
 			return 0;
-		else if (_state.getState().equals(GrandBossState.StateEnum.ALIVE) || _state.getState().equals(GrandBossState.StateEnum.DEAD))
+		else if (_state.getState().equals(GrandBossState.StateEnum.ALIVE)
+				|| _state.getState().equals(GrandBossState.StateEnum.DEAD))
 			return 1;
 		else if (_state.getState().equals(GrandBossState.StateEnum.INTERVAL))
 			return 3;
 		else
 			return 0;
 	}
-
+	
 	// Set baylor spawn task.
 	public void setBaylorSpawnTask(int NpcId)
 	{
@@ -292,31 +287,31 @@ public class BaylorManager extends BossLair
 		{
 			switch (NpcId)
 			{
-			case 29100:
-				_baylorSpawnTask = ThreadPoolManager.getInstance().scheduleGeneral(new BaylorSpawn(NpcId), 20000);
-				break;
-			case 29099:
-				_baylorSpawnTask = ThreadPoolManager.getInstance().scheduleGeneral(new BaylorSpawn(NpcId), 50000);
-				break;
-			default:
-				break;
+				case 29100:
+					_baylorSpawnTask = ThreadPoolManager.getInstance().scheduleGeneral(new BaylorSpawn(NpcId), 20000);
+					break;
+				case 29099:
+					_baylorSpawnTask = ThreadPoolManager.getInstance().scheduleGeneral(new BaylorSpawn(NpcId), 50000);
+					break;
+				default:
+					break;
 			}
 		}
 	}
-
+	
 	// Teleporting player to baylor's lair.
 	public void entryToBaylorLair(L2PcInstance pc)
 	{
 		int driftx;
 		int drifty;
-
+		
 		if (canIntoBaylorLair(pc) != 0)
 		{
 			pc.sendMessage("Entrance was refused.");
 			_isAlreadyEnteredOtherParty = false;
 			return;
 		}
-
+		
 		if (pc.getParty() == null)
 		{
 			driftx = Rnd.get(-80, 80);
@@ -343,7 +338,7 @@ public class BaylorManager extends BossLair
 		}
 		_isAlreadyEnteredOtherParty = true;
 	}
-
+	
 	// When annihilating or limit of time coming, the compulsion movement players from the baylor's lair.
 	@Override
 	public void banishForeigners()
@@ -351,14 +346,14 @@ public class BaylorManager extends BossLair
 		super.banishForeigners();
 		_isAlreadyEnteredOtherParty = false;
 	}
-
+	
 	// Clean up Baylor's lair.
 	@Override
 	public void setUnspawn()
 	{
 		// Eliminate players.
 		banishForeigners();
-
+		
 		// Delete teleport cube.
 		for (L2Npc cube : _baylorCube)
 		{
@@ -366,7 +361,7 @@ public class BaylorManager extends BossLair
 			cube.deleteMe();
 		}
 		_baylorCube.clear();
-
+		
 		// Not executed tasks is canceled.
 		if (_cubeSpawnTask != null)
 		{
@@ -388,7 +383,7 @@ public class BaylorManager extends BossLair
 			_activityTimeEndTask.cancel(true);
 			_activityTimeEndTask = null;
 		}
-
+		
 		// Init state of baylor's lair.
 		_crystaline1 = null;
 		_crystaline2 = null;
@@ -399,11 +394,11 @@ public class BaylorManager extends BossLair
 		_crystaline7 = null;
 		_crystaline8 = null;
 		_baylor = null;
-
+		
 		// Interval begin.
 		setIntervalEndTask();
 	}
-
+	
 	// Spawn teleport cube.
 	public void spawnCube()
 	{
@@ -412,112 +407,113 @@ public class BaylorManager extends BossLair
 			_baylorCube.add(spawnDat.doSpawn());
 		}
 	}
-
+	
 	// Task of teleport cube spawn.
 	public void setCubeSpawn()
 	{
 		_state.setState(GrandBossState.StateEnum.DEAD);
 		_state.update();
-
+		
 		_cubeSpawnTask = ThreadPoolManager.getInstance().scheduleGeneral(new CubeSpawn(), 10000);
 	}
-
+	
 	// Task of interval of baylor spawn.
 	public void setIntervalEndTask()
 	{
 		if (!_state.getState().equals(GrandBossState.StateEnum.INTERVAL))
 		{
-			_state
-					.setRespawnDate(Rnd.get(Config.FWBA_FIXINTERVALOFBAYLORSPAWN, Config.FWBA_FIXINTERVALOFBAYLORSPAWN
-							+ Config.FWBA_RANDOMINTERVALOFBAYLORSPAWN));
+			_state.setRespawnDate(Rnd.get(Config.FWBA_FIXINTERVALOFBAYLORSPAWN, Config.FWBA_FIXINTERVALOFBAYLORSPAWN
+					+ Config.FWBA_RANDOMINTERVALOFBAYLORSPAWN));
 			_state.setState(GrandBossState.StateEnum.INTERVAL);
 			_state.update();
 		}
-
+		
 		_intervalEndTask = ThreadPoolManager.getInstance().scheduleGeneral(new IntervalEnd(), _state.getInterval());
 	}
-
+	
 	// Spawn monster.
 	private class BaylorSpawn implements Runnable
 	{
-		private final int				_npcId;
-		private final L2CharPosition	_pos	= new L2CharPosition(153569, 142075, -12711, 44732);
-
+		private final int _npcId;
+		private final L2CharPosition _pos = new L2CharPosition(153569, 142075, -12711, 44732);
+		
 		public BaylorSpawn(int npcId)
 		{
 			_npcId = npcId;
 		}
-
+		
 		public void run()
 		{
 			switch (_npcId)
 			{
-			case 29100:
-				_crystaline1 = _crystalineSpawn1.doSpawn();
-				_crystaline2 = _crystalineSpawn2.doSpawn();
-				_crystaline3 = _crystalineSpawn3.doSpawn();
-				_crystaline4 = _crystalineSpawn4.doSpawn();
-				_crystaline5 = _crystalineSpawn5.doSpawn();
-				_crystaline6 = _crystalineSpawn6.doSpawn();
-				_crystaline7 = _crystalineSpawn7.doSpawn();
-				_crystaline8 = _crystalineSpawn8.doSpawn();
-
-				for (int doorId : doors)
-					DoorTable.getInstance().getDoor(doorId).openMe();
-
-				_crystaline1.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline2.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline3.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline4.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline5.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline6.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline7.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-				_crystaline8.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
-
-				_socialTask1 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline1, 2), 10000);
-				_socialTask2 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline2, 2), 10000);
-				_socialTask3 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline3, 2), 10000);
-				_socialTask4 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline4, 2), 10000);
-				_socialTask5 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline5, 2), 10000);
-				_socialTask6 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline6, 2), 10000);
-				_socialTask7 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline7, 2), 10000);
-				_socialTask8 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline8, 2), 10000);
-
-				break;
-			case 29099:
-				_baylor = _baylorSapwn.doSpawn();
-
-				_state.setRespawnDate(Rnd.get(Config.FWBA_FIXINTERVALOFBAYLORSPAWN, Config.FWBA_FIXINTERVALOFBAYLORSPAWN
-						+ Config.FWBA_RANDOMINTERVALOFBAYLORSPAWN)
-						+ Config.FWBA_ACTIVITYTIMEOFMOBS);
-				_state.setState(GrandBossState.StateEnum.ALIVE);
-				_state.update();
-
-				if (_socialTask != null)
-				{
-					_socialTask.cancel(true);
-					_socialTask = null;
-				}
-				_socialTask = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_baylor, 1), 500);
-				if (_activityTimeEndTask != null)
-				{
-					_activityTimeEndTask.cancel(true);
-					_activityTimeEndTask = null;
-				}
-				_activityTimeEndTask = ThreadPoolManager.getInstance().scheduleGeneral(new ActivityTimeEnd(_baylor), Config.FWBA_ACTIVITYTIMEOFMOBS);
-
-				_crystalineSpawn1.stopRespawn();
-				_crystalineSpawn2.stopRespawn();
-				_crystalineSpawn3.stopRespawn();
-				_crystalineSpawn4.stopRespawn();
-				_crystalineSpawn5.stopRespawn();
-				_crystalineSpawn6.stopRespawn();
-				_crystalineSpawn7.stopRespawn();
-				_crystalineSpawn8.stopRespawn();
-
-				break;
+				case 29100:
+					_crystaline1 = _crystalineSpawn1.doSpawn();
+					_crystaline2 = _crystalineSpawn2.doSpawn();
+					_crystaline3 = _crystalineSpawn3.doSpawn();
+					_crystaline4 = _crystalineSpawn4.doSpawn();
+					_crystaline5 = _crystalineSpawn5.doSpawn();
+					_crystaline6 = _crystalineSpawn6.doSpawn();
+					_crystaline7 = _crystalineSpawn7.doSpawn();
+					_crystaline8 = _crystalineSpawn8.doSpawn();
+					
+					for (int doorId : doors)
+						DoorTable.getInstance().getDoor(doorId).openMe();
+					
+					_crystaline1.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline2.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline3.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline4.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline5.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline6.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline7.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					_crystaline8.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, _pos);
+					
+					_socialTask1 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline1, 2), 10000);
+					_socialTask2 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline2, 2), 10000);
+					_socialTask3 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline3, 2), 10000);
+					_socialTask4 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline4, 2), 10000);
+					_socialTask5 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline5, 2), 10000);
+					_socialTask6 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline6, 2), 10000);
+					_socialTask7 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline7, 2), 10000);
+					_socialTask8 = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_crystaline8, 2), 10000);
+					
+					break;
+				case 29099:
+					_baylor = _baylorSapwn.doSpawn();
+					
+					_state.setRespawnDate(Rnd.get(Config.FWBA_FIXINTERVALOFBAYLORSPAWN,
+							Config.FWBA_FIXINTERVALOFBAYLORSPAWN + Config.FWBA_RANDOMINTERVALOFBAYLORSPAWN)
+							+ Config.FWBA_ACTIVITYTIMEOFMOBS);
+					_state.setState(GrandBossState.StateEnum.ALIVE);
+					_state.update();
+					
+					if (_socialTask != null)
+					{
+						_socialTask.cancel(true);
+						_socialTask = null;
+					}
+					_socialTask = ThreadPoolManager.getInstance().scheduleGeneral(new Social(_baylor, 1), 500);
+					if (_activityTimeEndTask != null)
+					{
+						_activityTimeEndTask.cancel(true);
+						_activityTimeEndTask = null;
+					}
+					_activityTimeEndTask =
+							ThreadPoolManager.getInstance().scheduleGeneral(new ActivityTimeEnd(_baylor),
+									Config.FWBA_ACTIVITYTIMEOFMOBS);
+					
+					_crystalineSpawn1.stopRespawn();
+					_crystalineSpawn2.stopRespawn();
+					_crystalineSpawn3.stopRespawn();
+					_crystalineSpawn4.stopRespawn();
+					_crystalineSpawn5.stopRespawn();
+					_crystalineSpawn6.stopRespawn();
+					_crystalineSpawn7.stopRespawn();
+					_crystalineSpawn8.stopRespawn();
+					
+					break;
 			}
-
+			
 			if (_baylorSpawnTask != null)
 			{
 				_baylorSpawnTask.cancel(true);
@@ -525,7 +521,7 @@ public class BaylorManager extends BossLair
 			}
 		}
 	}
-
+	
 	// Spawn teleport cube.
 	private class CubeSpawn implements Runnable
 	{
@@ -534,17 +530,17 @@ public class BaylorManager extends BossLair
 			spawnCube();
 		}
 	}
-
+	
 	// Limit of time coming.
 	private class ActivityTimeEnd implements Runnable
 	{
-		private L2Npc	_mob;
-
+		private L2Npc _mob;
+		
 		public ActivityTimeEnd(L2Npc npc)
 		{
 			_mob = npc;
 		}
-
+		
 		public void run()
 		{
 			if (!_mob.isDead())
@@ -557,7 +553,7 @@ public class BaylorManager extends BossLair
 			setUnspawn();
 		}
 	}
-
+	
 	// Interval end.
 	private class IntervalEnd implements Runnable
 	{
@@ -567,19 +563,19 @@ public class BaylorManager extends BossLair
 			_state.update();
 		}
 	}
-
+	
 	// Social.
 	private class Social implements Runnable
 	{
-		private final int				_action;
-		private final L2Npc	_npc;
-
+		private final int _action;
+		private final L2Npc _npc;
+		
 		public Social(L2Npc npc, int actionId)
 		{
 			_npc = npc;
 			_action = actionId;
 		}
-
+		
 		public void run()
 		{
 			SocialAction sa = new SocialAction(_npc.getObjectId(), _action);

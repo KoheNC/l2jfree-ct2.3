@@ -17,8 +17,6 @@ package com.l2jfree.gameserver.network.serverpackets;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance.TeleportBookmark;
 
-
-
 /**
  *
  * @author ShanSoft
@@ -29,11 +27,12 @@ public class ExGetBookMarkInfoPacket extends L2GameServerPacket
 	private static final String _S__FE_84_EXGETBOOKMARKINFOPACKET = "[S] FE:84 ExGetBookMarkInfoPacket";
 	
 	private final L2PcInstance player;
+	
 	public ExGetBookMarkInfoPacket(L2PcInstance cha)
 	{
 		player = cha;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -42,8 +41,7 @@ public class ExGetBookMarkInfoPacket extends L2GameServerPacket
 		writeD(0x00); // Dummy
 		writeD(player._bookmarkslot);
 		writeD(player.tpbookmark.size());
-      
-
+		
 		for (TeleportBookmark tpbm : player.tpbookmark)
 		{
 			writeD(tpbm._id);
@@ -55,7 +53,7 @@ public class ExGetBookMarkInfoPacket extends L2GameServerPacket
 			writeS(tpbm._tag);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

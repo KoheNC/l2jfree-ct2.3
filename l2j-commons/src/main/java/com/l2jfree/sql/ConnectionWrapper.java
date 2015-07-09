@@ -338,31 +338,31 @@ public abstract class ConnectionWrapper implements Connection
 	{
 		return _connection.unwrap(iface);
 	}
-
+	
 	@Override
 	public void setSchema(String schema) throws SQLException
 	{
 		_connection.setSchema(schema);
 	}
-
+	
 	@Override
 	public String getSchema() throws SQLException
 	{
 		return _connection.getSchema();
 	}
-
+	
 	@Override
 	public void abort(Executor executor) throws SQLException
 	{
 		_connection.abort(executor);
 	}
-
+	
 	@Override
 	public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException
 	{
 		_connection.setNetworkTimeout(executor, milliseconds);
 	}
-
+	
 	@Override
 	public int getNetworkTimeout() throws SQLException
 	{

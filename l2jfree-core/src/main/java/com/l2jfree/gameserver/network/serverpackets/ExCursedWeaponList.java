@@ -22,18 +22,18 @@ import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 public class ExCursedWeaponList extends L2GameServerPacket
 {
 	private static final String _S__FE_46_EXCURSEDWEAPONLIST = "[S] FE:46 ExCursedWeaponList [d(d)]";
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x46);
-
+		
 		writeD(CursedWeaponsManager.getInstance().getCursedWeaponsIds().size());
 		for (int id : CursedWeaponsManager.getInstance().getCursedWeaponsIds())
 			writeD(id);
 	}
-
+	
 	@Override
 	public String getType()
 	{

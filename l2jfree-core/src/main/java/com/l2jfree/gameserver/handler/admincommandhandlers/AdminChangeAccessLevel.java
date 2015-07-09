@@ -34,20 +34,19 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class AdminChangeAccessLevel implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_changelvl" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_changelvl" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		handleChangeLevel(command, activeChar);
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	/**
 	 * If no character name is specified, tries to change GM's target access level. Else
 	 * if a character name is provided, will try to reach it either from L2World or from
@@ -65,7 +64,7 @@ public class AdminChangeAccessLevel implements IAdminCommandHandler
 			{
 				int lvl = Integer.parseInt(parts[1]);
 				if (activeChar.getTarget() instanceof L2PcInstance)
-					onLineChange(activeChar, (L2PcInstance) activeChar.getTarget(), lvl);
+					onLineChange(activeChar, (L2PcInstance)activeChar.getTarget(), lvl);
 				else
 					activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 			}
@@ -87,7 +86,8 @@ public class AdminChangeAccessLevel implements IAdminCommandHandler
 				try
 				{
 					con = L2DatabaseFactory.getInstance().getConnection(con);
-					PreparedStatement statement = con.prepareStatement("UPDATE characters SET accesslevel=? WHERE char_name=?");
+					PreparedStatement statement =
+							con.prepareStatement("UPDATE characters SET accesslevel=? WHERE char_name=?");
 					statement.setInt(1, lvl);
 					statement.setString(2, name);
 					statement.execute();
@@ -109,7 +109,7 @@ public class AdminChangeAccessLevel implements IAdminCommandHandler
 			}
 		}
 	}
-
+	
 	/**
 	 * @param activeChar
 	 * @param player
@@ -125,6 +125,7 @@ public class AdminChangeAccessLevel implements IAdminCommandHandler
 			player.sendMessage("Your character has been banned. Bye.");
 			new Disconnection(player).defaultSequence(false);
 		}
-		activeChar.sendMessage("Character's access level is now set to " + lvl + ". Effects won't be noticeable until next session.");
+		activeChar.sendMessage("Character's access level is now set to " + lvl
+				+ ". Effects won't be noticeable until next session.");
 	}
 }

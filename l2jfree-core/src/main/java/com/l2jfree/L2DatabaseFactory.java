@@ -71,6 +71,7 @@ public final class L2DatabaseFactory
 	
 	private final ProviderType _providerType;
 	private final ComboPooledDataSource _source;
+	
 	// private final EntityManagerFactory _entityManagerFactory;
 	
 	private L2DatabaseFactory()

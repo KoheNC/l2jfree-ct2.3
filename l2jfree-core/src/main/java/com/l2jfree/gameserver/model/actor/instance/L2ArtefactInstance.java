@@ -39,18 +39,17 @@ public final class L2ArtefactInstance extends L2Npc
 	 * @param objectId Identifier of the object to initialized
 	 * @param L2NpcTemplate Template to apply to the NPC
 	 */
-    public L2ArtefactInstance(int objectId, L2NpcTemplate template)
-    {
-        super(objectId, template);
-    }
-
-    @Override
-    public boolean isAttackable()
-    {
-        return false;
-    }
-
-
+	public L2ArtefactInstance(int objectId, L2NpcTemplate template)
+	{
+		super(objectId, template);
+	}
+	
+	@Override
+	public boolean isAttackable()
+	{
+		return false;
+	}
+	
 	/**
 	 * Manage actions when a player click on the L2ArtefactInstance.<BR><BR>
 	 *
@@ -68,8 +67,9 @@ public final class L2ArtefactInstance extends L2Npc
 	@Override
 	public void onAction(L2PcInstance player)
 	{
-		if (!canTarget(player)) return;
-
+		if (!canTarget(player))
+			return;
+		
 		if (this != player.getTarget())
 		{
 			// Set the target of the L2PcInstance player

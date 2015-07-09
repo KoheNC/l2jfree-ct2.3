@@ -31,22 +31,22 @@ import com.l2jfree.gameserver.model.quest.QuestState;
 public abstract class BossLair extends Entity
 {
 	public abstract void init();
-
+	
 	public abstract void setUnspawn();
-
-	protected GrandBossState	_state;
-	protected String			_questName;
-
+	
+	protected GrandBossState _state;
+	protected String _questName;
+	
 	public GrandBossState.StateEnum getState()
 	{
 		return _state.getState();
 	}
-
+	
 	public boolean isEnableEnterToLair()
 	{
 		return _state.getState() == GrandBossState.StateEnum.NOTSPAWN;
 	}
-
+	
 	public synchronized boolean isPlayersAnnihilated()
 	{
 		for (L2PcInstance pc : getPlayersInside())
@@ -56,13 +56,12 @@ public abstract class BossLair extends Entity
 		}
 		return true;
 	}
-
+	
 	public void checkAnnihilated()
 	{
 		if (isPlayersAnnihilated())
 		{
-			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-			{
+			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 				public void run()
 				{
 					setUnspawn();
@@ -70,7 +69,7 @@ public abstract class BossLair extends Entity
 			}, 5000);
 		}
 	}
-
+	
 	@Override
 	public void banishForeigners()
 	{

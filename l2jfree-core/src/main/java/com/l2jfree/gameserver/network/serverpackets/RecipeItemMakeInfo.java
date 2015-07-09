@@ -25,50 +25,51 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class RecipeItemMakeInfo extends L2GameServerPacket
 {
-    private static final String _S__D7_RECIPEITEMMAKEINFO = "[S] D7 RecipeItemMakeInfo";
-
-    private final int _id;
-    private final L2PcInstance _activeChar;
-    private final boolean _success;
-
-    public RecipeItemMakeInfo(int id, L2PcInstance player, boolean success)
-    {
-        _id = id;
-        _activeChar = player;
-        _success = success;
-    }
-
-    public RecipeItemMakeInfo(int id, L2PcInstance player)
-    {
-        _id = id;
-        _activeChar = player;
-        _success = true;
-    }
-
-    @Override
-    protected final void writeImpl()
-    {
-        L2RecipeList recipe = RecipeController.getInstance().getRecipeList(_id);
-
-        if (recipe != null)
-        {
-            writeC(0xDd);
-
-            writeD(_id);
-            writeD(recipe.isDwarvenRecipe() ? 0 : 1); // 0 = Dwarven - 1 = Common
-            writeD((int) _activeChar.getStatus().getCurrentMp());
-            writeD(_activeChar.getMaxMp());
-            writeD(_success ? 1 : 0); // item creation success/failed
-        }
-        else if (_log.isDebugEnabled()) _log.info("No recipe found with ID = " + _id);
-    }
-
-    /* (non-Javadoc)
-     * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _S__D7_RECIPEITEMMAKEINFO;
-    }
+	private static final String _S__D7_RECIPEITEMMAKEINFO = "[S] D7 RecipeItemMakeInfo";
+	
+	private final int _id;
+	private final L2PcInstance _activeChar;
+	private final boolean _success;
+	
+	public RecipeItemMakeInfo(int id, L2PcInstance player, boolean success)
+	{
+		_id = id;
+		_activeChar = player;
+		_success = success;
+	}
+	
+	public RecipeItemMakeInfo(int id, L2PcInstance player)
+	{
+		_id = id;
+		_activeChar = player;
+		_success = true;
+	}
+	
+	@Override
+	protected final void writeImpl()
+	{
+		L2RecipeList recipe = RecipeController.getInstance().getRecipeList(_id);
+		
+		if (recipe != null)
+		{
+			writeC(0xDd);
+			
+			writeD(_id);
+			writeD(recipe.isDwarvenRecipe() ? 0 : 1); // 0 = Dwarven - 1 = Common
+			writeD((int)_activeChar.getStatus().getCurrentMp());
+			writeD(_activeChar.getMaxMp());
+			writeD(_success ? 1 : 0); // item creation success/failed
+		}
+		else if (_log.isDebugEnabled())
+			_log.info("No recipe found with ID = " + _id);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _S__D7_RECIPEITEMMAKEINFO;
+	}
 }

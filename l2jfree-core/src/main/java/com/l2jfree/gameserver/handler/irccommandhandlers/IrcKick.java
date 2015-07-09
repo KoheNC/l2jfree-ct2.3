@@ -25,17 +25,17 @@ import com.l2jfree.gameserver.network.Disconnection;
 
 public class IrcKick implements IIrcCommandHandler
 {
-	private static final String[]	IRC_COMMANDS	= { "!kick", "!kick_nongm", "!ban" };
-
+	private static final String[] IRC_COMMANDS = { "!kick", "!kick_nongm", "!ban" };
+	
 	public boolean useIrcCommand(String command, String gm, String target, boolean authed)
 	{
 		if (!authed)
 			return false;
-
+		
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
 		String player = "";
-
+		
 		if (command.startsWith("!kick_nongm"))
 		{
 			int counter = 0;
@@ -58,7 +58,8 @@ public class IrcKick implements IIrcCommandHandler
 				if (plyr != null)
 				{
 					new Disconnection(plyr).defaultSequence(false);
-					IrcManager.getInstance().getConnection().send(gm, "You kicked " + plyr.getName() + " from the game.");
+					IrcManager.getInstance().getConnection()
+							.send(gm, "You kicked " + plyr.getName() + " from the game.");
 				}
 			}
 			catch (NoSuchElementException nsee)
@@ -113,7 +114,7 @@ public class IrcKick implements IIrcCommandHandler
 		}
 		return true;
 	}
-
+	
 	public String[] getIrcCommandList()
 	{
 		return IRC_COMMANDS;

@@ -31,12 +31,12 @@ import com.l2jfree.gameserver.network.serverpackets.NpcSay;
 public final class PathToOracle extends QuestJython
 {
 	private static final String PATH_TO_ORACLE = "409_PathToOracle";
-
+	
 	// Quest NPCs
 	private static final int MANUEL = 30293;
 	private static final int ALLANA = 30424;
 	private static final int PERRIN = 30428;
-
+	
 	// Quest items
 	private static final int CRYSTAL_MEDALLION = 1231;
 	private static final int SWINDLERS_MONEY = 1232;
@@ -45,7 +45,7 @@ public final class PathToOracle extends QuestJython
 	private static final int LEAF_OF_ORACLE = 1235;
 	private static final int HALF_OF_DIARY = 1236;
 	private static final int TAMILS_NECKLACE = 1275;
-
+	
 	// Quest monsters
 	private static final int LIZARDMAN_WARRIOR = 27032;
 	private static final int LIZARDMAN_SCOUT = 27033;
@@ -55,14 +55,13 @@ public final class PathToOracle extends QuestJython
 	private static final String WARRIOR_KILLED = "Arrghh...we will give up ";
 	private static final String LIZARDMAN_ATTACKED = "The sacred flame is ours";
 	private static final String TAMIL_ATTACKED = "As you wish, master!";
-
+	
 	private PathToOracle(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
-		questItemIds = new int[] {
-			CRYSTAL_MEDALLION, SWINDLERS_MONEY, ALLANAS_DIARY, LIZARD_CAPTAIN_ORDER,
-			LEAF_OF_ORACLE, HALF_OF_DIARY, TAMILS_NECKLACE
-		};
+		questItemIds =
+				new int[] { CRYSTAL_MEDALLION, SWINDLERS_MONEY, ALLANAS_DIARY, LIZARD_CAPTAIN_ORDER, LEAF_OF_ORACLE,
+						HALF_OF_DIARY, TAMILS_NECKLACE };
 		addStartNpc(MANUEL);
 		addTalkId(MANUEL);
 		addTalkId(ALLANA);
@@ -76,39 +75,38 @@ public final class PathToOracle extends QuestJython
 		addAttackId(TAMIL);
 		addKillId(TAMIL);
 	}
-
+	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet,
-			L2Skill skill)
+	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
-		case ATTACK_NOONE:
-			npc.setQuestFirstAttacker(attacker);
-			String say;
-			switch (npc.getNpcId())
-			{
-			case LIZARDMAN_WARRIOR:
-				say = WARRIOR_ATTACKED;
+			case ATTACK_NOONE:
+				npc.setQuestFirstAttacker(attacker);
+				String say;
+				switch (npc.getNpcId())
+				{
+					case LIZARDMAN_WARRIOR:
+						say = WARRIOR_ATTACKED;
+						break;
+					case TAMIL:
+						say = TAMIL_ATTACKED;
+						break;
+					default:
+						say = LIZARDMAN_ATTACKED;
+						break;
+				}
+				npc.broadcastPacket(new NpcSay(npc, say));
+				npc.setQuestAttackStatus(ATTACK_SINGLE);
 				break;
-			case TAMIL:
-				say = TAMIL_ATTACKED;
+			case ATTACK_SINGLE:
+				if (attacker != npc.getQuestFirstAttacker())
+					npc.setQuestAttackStatus(ATTACK_MULTIPLE);
 				break;
-			default:
-				say = LIZARDMAN_ATTACKED;
-				break;
-			}
-			npc.broadcastPacket(new NpcSay(npc, say));
-			npc.setQuestAttackStatus(ATTACK_SINGLE);
-			break;
-		case ATTACK_SINGLE:
-			if (attacker != npc.getQuestFirstAttacker())
-				npc.setQuestAttackStatus(ATTACK_MULTIPLE);
-			break;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -169,7 +167,7 @@ public final class PathToOracle extends QuestJython
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -177,10 +175,9 @@ public final class PathToOracle extends QuestJython
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(PATH_TO_ORACLE);
-		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) == 0
-				|| npc.getQuestAttackStatus() != ATTACK_SINGLE)
+		if (qs == null || !qs.isStarted() || qs.getInt(CONDITION) == 0 || npc.getQuestAttackStatus() != ATTACK_SINGLE)
 			return null;
-
+		
 		int npcId = npc.getNpcId();
 		if (npcId == TAMIL)
 		{
@@ -199,28 +196,26 @@ public final class PathToOracle extends QuestJython
 			quester.sendPacket(SND_MIDDLE);
 			qs.set(CONDITION, 3);
 		}
-
+		
 		return null;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
 		QuestState qs = talker.getQuestState(PATH_TO_ORACLE);
 		if (qs == null)
 			return NO_QUEST;
-
+		
 		int npcId = npc.getNpcId();
 		int cond = qs.getInt(CONDITION);
-
+		
 		if (npcId == MANUEL)
 		{
 			if (qs.getQuestItemsCount(CRYSTAL_MEDALLION) != 0)
 			{
-				if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) == 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
+				if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) == 0
+						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0 && qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
 				{
 					if (cond == 0)
 						return "30293-06.htm";
@@ -229,10 +224,8 @@ public final class PathToOracle extends QuestJython
 				}
 				else
 				{
-					if (qs.getQuestItemsCount(ALLANAS_DIARY) != 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) != 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
+					if (qs.getQuestItemsCount(ALLANAS_DIARY) != 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
+							&& qs.getQuestItemsCount(SWINDLERS_MONEY) != 0 && qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
 					{
 						qs.takeItems(SWINDLERS_MONEY, -1);
 						qs.takeItems(ALLANAS_DIARY, -1);
@@ -267,49 +260,39 @@ public final class PathToOracle extends QuestJython
 		{
 			if (npcId == ALLANA)
 			{
-				if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) == 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
+				if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) == 0
+						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0 && qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
 				{
 					if (cond > 2)
 						return "30424-05.htm";
 					else
 						return "30424-01.htm";
 				}
-				else if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
+				else if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
+						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0 && qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
 				{
 					qs.giveItems(HALF_OF_DIARY, 1);
 					qs.set(CONDITION, 4);
 					return "30424-02.htm";
 				}
-				else if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) != 0)
+				else if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
+						&& qs.getQuestItemsCount(SWINDLERS_MONEY) == 0 && qs.getQuestItemsCount(HALF_OF_DIARY) != 0)
 				{
 					if (qs.getQuestItemsCount(TAMILS_NECKLACE) == 0)
 						return "30424-06.htm";
 					else
 						return "30424-03.htm";
 				}
-				else if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) != 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) != 0)
+				else if (qs.getQuestItemsCount(ALLANAS_DIARY) == 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
+						&& qs.getQuestItemsCount(SWINDLERS_MONEY) != 0 && qs.getQuestItemsCount(HALF_OF_DIARY) != 0)
 				{
 					qs.takeItems(HALF_OF_DIARY, -1);
 					qs.giveItems(ALLANAS_DIARY, 1);
 					qs.set(CONDITION, 7);
 					return "30424-04.htm";
 				}
-				else if (qs.getQuestItemsCount(ALLANAS_DIARY) != 0
-						&& qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
-						&& qs.getQuestItemsCount(SWINDLERS_MONEY) != 0
-						&& qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
+				else if (qs.getQuestItemsCount(ALLANAS_DIARY) != 0 && qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0
+						&& qs.getQuestItemsCount(SWINDLERS_MONEY) != 0 && qs.getQuestItemsCount(HALF_OF_DIARY) == 0)
 					return "30424-05.htm";
 			}
 			else if (qs.getQuestItemsCount(LIZARD_CAPTAIN_ORDER) != 0)
@@ -337,7 +320,7 @@ public final class PathToOracle extends QuestJython
 		}
 		return NO_QUEST;
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new PathToOracle(409, PATH_TO_ORACLE, "Path to Oracle");

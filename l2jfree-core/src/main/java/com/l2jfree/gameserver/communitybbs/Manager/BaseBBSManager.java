@@ -24,9 +24,10 @@ import com.l2jfree.lang.L2TextBuilder;
 public abstract class BaseBBSManager
 {
 	public abstract void parsecmd(String command, L2PcInstance activeChar);
-
-	public abstract void parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2PcInstance activeChar);
-
+	
+	public abstract void
+			parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2PcInstance activeChar);
+	
 	protected void separateAndSend(L2TextBuilder html, L2PcInstance acha)
 	{
 		separateAndSend(html.moveToString(), acha);
@@ -52,7 +53,7 @@ public abstract class BaseBBSManager
 			acha.sendPacket(new ShowBoard(html, "1001"));
 		}
 	}
-
+	
 	/**
 	 * @param i
 	 */
@@ -60,7 +61,7 @@ public abstract class BaseBBSManager
 	{
 		send1002(acha, " ", " ", "0");
 	}
-
+	
 	/**
 	 * @param activeChar
 	 * @param string

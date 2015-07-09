@@ -21,37 +21,36 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ExDuelUpdateUserInfo extends L2GameServerPacket
 {
-    private static final String _S__FE_50_EXDUELUPDATEUSERINFO = "[S] FE:50 ExDuelUpdateUserInfo [sddddddddd]";
-    private final L2PcInstance _activeChar;
-
-    public ExDuelUpdateUserInfo(L2PcInstance cha)
-    {
-        _activeChar = cha;
-    }
-
-    @Override
-    protected
-    void writeImpl()
-    {
-        writeC(0xfe);
-        writeH(0x50);
-        
-        writeS(_activeChar.getName());
-        writeD(_activeChar.getObjectId());
-        writeD(_activeChar.getClassId().getId());
-        writeD(_activeChar.getStat().getLevel());
-        writeD((int)_activeChar.getStatus().getCurrentHp());
-        writeD(_activeChar.getStat().getMaxHp());
-        writeD((int)_activeChar.getStatus().getCurrentMp());
-        writeD(_activeChar.getStat().getMaxMp());
-        writeD((int)_activeChar.getStatus().getCurrentCp());
-        writeD(_activeChar.getStat().getMaxCp());
-    }
-
-    @Override
-    public String getType()
-    {
-        return _S__FE_50_EXDUELUPDATEUSERINFO;
-    }
-
+	private static final String _S__FE_50_EXDUELUPDATEUSERINFO = "[S] FE:50 ExDuelUpdateUserInfo [sddddddddd]";
+	private final L2PcInstance _activeChar;
+	
+	public ExDuelUpdateUserInfo(L2PcInstance cha)
+	{
+		_activeChar = cha;
+	}
+	
+	@Override
+	protected void writeImpl()
+	{
+		writeC(0xfe);
+		writeH(0x50);
+		
+		writeS(_activeChar.getName());
+		writeD(_activeChar.getObjectId());
+		writeD(_activeChar.getClassId().getId());
+		writeD(_activeChar.getStat().getLevel());
+		writeD((int)_activeChar.getStatus().getCurrentHp());
+		writeD(_activeChar.getStat().getMaxHp());
+		writeD((int)_activeChar.getStatus().getCurrentMp());
+		writeD(_activeChar.getStat().getMaxMp());
+		writeD((int)_activeChar.getStatus().getCurrentCp());
+		writeD(_activeChar.getStat().getMaxCp());
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _S__FE_50_EXDUELUPDATEUSERINFO;
+	}
+	
 }

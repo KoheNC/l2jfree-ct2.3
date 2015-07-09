@@ -44,9 +44,9 @@ public class L2FameManagerInstance extends L2Npc
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		player.setLastFolkNPC(this);
-
+		
 		// Check if the L2PcInstance already target the L2Npc
 		if (this != player.getTarget())
 		{
@@ -69,7 +69,7 @@ public class L2FameManagerInstance extends L2Npc
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -78,59 +78,61 @@ public class L2FameManagerInstance extends L2Npc
 		if (actualCommand.equalsIgnoreCase("PK_Count"))
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(1);
-			if (player.getFame() >= 5000 && player.getClassId().level() >= 2 && player.getClan() != null && player.getClan().getLevel() >= 5)
+			if (player.getFame() >= 5000 && player.getClassId().level() >= 2 && player.getClan() != null
+					&& player.getClan().getLevel() >= 5)
 			{
 				if (player.getPkKills() > 0)
 				{
-					player.setFame(player.getFame()-5000);
-					player.setPkKills(player.getPkKills()-1);
+					player.setFame(player.getFame() - 5000);
+					player.setPkKills(player.getPkKills() - 1);
 					player.sendPacket(new UserInfo(player));
-					html.setFile("data/html/famemanager/"+getNpcId()+"-3.htm");
+					html.setFile("data/html/famemanager/" + getNpcId() + "-3.htm");
 				}
 				else
 				{
-					html.setFile("data/html/famemanager/"+getNpcId()+"-4.htm");
+					html.setFile("data/html/famemanager/" + getNpcId() + "-4.htm");
 				}
 			}
 			else
 			{
-				html.setFile("data/html/famemanager/"+getNpcId()+"-lowfame.htm");
+				html.setFile("data/html/famemanager/" + getNpcId() + "-lowfame.htm");
 			}
 			sendHtmlMessage(player, html);
 		}
 		else if (actualCommand.equalsIgnoreCase("CRP"))
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(1);
-			if (player.getFame() >= 1000 && player.getClassId().level() >= 2 && player.getClan() != null && player.getClan().getLevel() >= 5)
+			if (player.getFame() >= 1000 && player.getClassId().level() >= 2 && player.getClan() != null
+					&& player.getClan().getLevel() >= 5)
 			{
 				player.setFame(player.getFame() - 1000);
 				player.getClan().setReputationScore(player.getClan().getReputationScore() + 50, true);
 				player.sendPacket(SystemMessageId.ACQUIRED_50_CLAN_FAME_POINTS);
-				html.setFile("data/html/famemanager/"+getNpcId()+"-5.htm");
+				html.setFile("data/html/famemanager/" + getNpcId() + "-5.htm");
 			}
 			else
 			{
-				html.setFile("data/html/famemanager/"+getNpcId()+"-lowfame.htm");
+				html.setFile("data/html/famemanager/" + getNpcId() + "-lowfame.htm");
 			}
 			sendHtmlMessage(player, html);
 		}
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	private void sendHtmlMessage(L2PcInstance player, NpcHtmlMessage html)
 	{
 		html.replace("%objectId%", String.valueOf(getObjectId()));
 		player.sendPacket(html);
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
-		String filename = "data/html/famemanager/"+getNpcId()+"-lowfame.htm";
+		String filename = "data/html/famemanager/" + getNpcId() + "-lowfame.htm";
 		
 		if (player.getFame() > 0)
-			filename = "data/html/famemanager/"+getNpcId()+".htm";
+			filename = "data/html/famemanager/" + getNpcId() + ".htm";
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));

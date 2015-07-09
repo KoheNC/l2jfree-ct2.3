@@ -28,12 +28,12 @@ import com.l2jfree.gameserver.model.entity.Fort;
 public class ExShowFortressMapInfo extends L2GameServerPacket
 {
 	private final Fort _fortress;
-
+	
 	public ExShowFortressMapInfo(Fort fortress)
 	{
 		_fortress = fortress;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
 	 */
@@ -42,7 +42,7 @@ public class ExShowFortressMapInfo extends L2GameServerPacket
 	{
 		return "[S] FE:7D ExShowFortressMapInfo";
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
 	 */
@@ -55,7 +55,7 @@ public class ExShowFortressMapInfo extends L2GameServerPacket
 		writeD(_fortress.getFortId());
 		writeD(_fortress.getSiege().getIsInProgress() ? 1 : 0); // fortress siege status
 		writeD(_fortress.getFortSize()); // barracks count
-
+		
 		FastList<SiegeSpawn> commanders = FortSiegeManager.getInstance().getCommanderSpawnList(_fortress.getFortId());
 		if (commanders != null && !commanders.isEmpty() && _fortress.getSiege().getIsInProgress())
 		{
@@ -91,13 +91,13 @@ public class ExShowFortressMapInfo extends L2GameServerPacket
 		}
 		else
 		{
-			for (int i = 0; i <_fortress.getFortSize(); i++)
+			for (int i = 0; i < _fortress.getFortSize(); i++)
 			{
 				writeD(0);
 			}
 		}
 	}
-
+	
 	/**
 	 * @param npcId
 	 * @return

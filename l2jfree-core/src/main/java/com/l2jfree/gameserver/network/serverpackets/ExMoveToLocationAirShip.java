@@ -20,7 +20,7 @@ public class ExMoveToLocationAirShip extends L2GameServerPacket
 {
 	
 	private static final String _S__FE_65_EXAIRSHIPMOVETOLOCATION = "[S] FE:65 ExGetOnAirShip";
-
+	
 	private final int _airShipId;
 	private final int _x, _y, _z, _dx, _dy, _dz;
 	
@@ -36,24 +36,24 @@ public class ExMoveToLocationAirShip extends L2GameServerPacket
 	}
 	
 	@Override
-    protected void writeImpl()
-    {
-	    writeC(0xfe);
-	    writeH(0x65);
-	    
-	    writeD(_airShipId);
-	    writeD(_dx);
-	    writeD(_dy);
-	    writeD(_dz);
-	    writeD(_x);
-	    writeD(_y);
-	    writeD(_z);
+	protected void writeImpl()
+	{
+		writeC(0xfe);
+		writeH(0x65);
+		
+		writeD(_airShipId);
+		writeD(_dx);
+		writeD(_dy);
+		writeD(_dz);
+		writeD(_x);
+		writeD(_y);
+		writeD(_z);
 	}
 	
 	@Override
-    public String getType()
-    {
-	    return _S__FE_65_EXAIRSHIPMOVETOLOCATION;
-    }
+	public String getType()
+	{
+		return _S__FE_65_EXAIRSHIPMOVETOLOCATION;
+	}
 	
 }

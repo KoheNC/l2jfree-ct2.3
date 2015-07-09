@@ -26,31 +26,31 @@ import com.l2jfree.tools.geometry.Point3D;
  */
 public class CannotMoveAnymoreInVehicle extends L2GameClientPacket
 {
-	private static final String	_C__CANNOTMOVEANYMOREINVEHICLE	= "[C] 76 CannotMoveAnymoreInVehicle c[ddddd]";
-
-	private int					_x;
-	private int					_y;
-	private int					_z;
-	private int					_heading;
-	private int					_boatId;
-
-    @Override
-    protected void readImpl()
-    {
-        _boatId = readD();
-        _x = readD();
-        _y = readD();
-        _z = readD();
-        _heading = readD();
-    }
-
+	private static final String _C__CANNOTMOVEANYMOREINVEHICLE = "[C] 76 CannotMoveAnymoreInVehicle c[ddddd]";
+	
+	private int _x;
+	private int _y;
+	private int _z;
+	private int _heading;
+	private int _boatId;
+	
 	@Override
-    protected void runImpl()
+	protected void readImpl()
+	{
+		_boatId = readD();
+		_x = readD();
+		_y = readD();
+		_z = readD();
+		_heading = readD();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (player.isInBoat() && player.getBoat().getObjectId() == _boatId)
 		{
 			player.setInBoatPosition(new Point3D(_x, _y, _z));
@@ -59,10 +59,10 @@ public class CannotMoveAnymoreInVehicle extends L2GameClientPacket
 			Broadcast.toSelfAndKnownPlayers(player, stop);
 			//XXX: is PartyMemberPosition necessary here or it's auto when on boat?
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

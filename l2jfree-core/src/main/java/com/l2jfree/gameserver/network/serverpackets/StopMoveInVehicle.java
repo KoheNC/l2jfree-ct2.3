@@ -20,10 +20,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  * @author Maktakien
  *
  */
-public class StopMoveInVehicle  extends L2GameServerPacket
+public class StopMoveInVehicle extends L2GameServerPacket
 {
 	private final L2PcInstance _activeChar;
 	private final int _boatId;
+	
 	/**
 	 * @param player
 	 * @param boatid
@@ -33,7 +34,7 @@ public class StopMoveInVehicle  extends L2GameServerPacket
 		_activeChar = player;
 		_boatId = boatId;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -48,7 +49,7 @@ public class StopMoveInVehicle  extends L2GameServerPacket
 		writeD(_activeChar.getInBoatPosition().getZ());
 		writeD(_activeChar.getPosition().getHeading());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

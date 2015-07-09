@@ -20,8 +20,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class Mail implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	= { "mail" };
-
+	private static final String[] VOICED_COMMANDS = { "mail" };
+	
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.equals("mail"))
@@ -31,7 +31,7 @@ public class Mail implements IVoicedCommandHandler
 		}
 		return false;
 	}
-
+	
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

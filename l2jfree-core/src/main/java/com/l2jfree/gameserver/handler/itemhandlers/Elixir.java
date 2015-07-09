@@ -26,47 +26,10 @@ import com.l2jfree.gameserver.network.serverpackets.ExUseSharedGroupItem;
 
 public class Elixir implements IItemHandler
 {
-	private static final int[]		ITEM_IDS	=
-												{
-			8622,
-			8623,
-			8624,
-			8625,
-			8626,
-			8627,
-			8628,
-			8629,
-			8630,
-			8631,
-			8632,
-			8633,
-			8634,
-			8635,
-			8636,
-			8637,
-			8638,
-			8639,
-			20354,
-			20355,
-			20356,
-			20357,
-			20358,
-			20359,
-			20360,
-			20361,
-			20362,
-			20363,
-			22027,
-			22028,
-			22029,
-			22030,
-			22031,
-			22032,
-			22033,
-			22034,
-			22035,
-			22036								};
-
+	private static final int[] ITEM_IDS = { 8622, 8623, 8624, 8625, 8626, 8627, 8628, 8629, 8630, 8631, 8632, 8633,
+			8634, 8635, 8636, 8637, 8638, 8639, 20354, 20355, 20356, 20357, 20358, 20359, 20360, 20361, 20362, 20363,
+			22027, 22028, 22029, 22030, 22031, 22032, 22033, 22034, 22035, 22036 };
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.actor.L2Playable, com.l2jfree.gameserver.model.L2ItemInstance)
@@ -75,19 +38,19 @@ public class Elixir implements IItemHandler
 	{
 		L2PcInstance activeChar; // use activeChar only for L2PcInstance checks where cannot be used PetInstance
 		if (playable instanceof L2PcInstance)
-			activeChar = (L2PcInstance) playable;
+			activeChar = (L2PcInstance)playable;
 		else
 		{
 			playable.sendPacket(SystemMessageId.ITEM_NOT_FOR_PETS);
 			return;
 		}
-
+		
 		if (activeChar.isInOlympiadMode())
 		{
 			activeChar.sendPacket(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT);
 			return;
 		}
-
+		
 		if (playable.isAllSkillsDisabled())
 		{
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
@@ -95,73 +58,73 @@ public class Elixir implements IItemHandler
 		}
 		
 		activeChar.getEffects().dispelOnAction();
-
+		
 		int itemId = item.getItemId();
-
+		
 		switch (itemId)
 		{
-		case 8622:
-		case 8623:
-		case 8624:
-		case 8625:
-		case 8626:
-		case 8627:
-			if (usePotion(activeChar, 2287, 2288, itemId - 8621))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
-			break;
-		case 8628:
-		case 8629:
-		case 8630:
-		case 8631:
-		case 8632:
-		case 8633:
-			if (usePotion(activeChar, 2288, 2287, itemId - 8627))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
-			break;
-		case 8634:
-		case 8635:
-		case 8636:
-		case 8637:
-		case 8638:
-		case 8639:
-			if (usePotion(activeChar, 2289, 0, itemId - 8633))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 2, 300000, 300000));
-			break;
-		case 22027:
-		case 22028:
-		case 22029:
-		case 22030:
-		case 22031:
-			if (usePotion(activeChar, 26027, 0, itemId - 22025))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 2, 300000, 300000));
-			break;
-		case 22032:
-		case 22033:
-		case 22034:
-		case 22035:
-		case 22036:
-			if (usePotion(activeChar, 26028, 0, itemId - 22030))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
-			break;
-		case 20354:
-		case 20355:
-		case 20356:
-		case 20357:
-		case 20358:
-			if (usePotion(activeChar, 22043, 0, itemId - 20352))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 2, 300000, 300000));
-			break;
-		case 20359:
-		case 20360:
-		case 20361:
-		case 20362:
-		case 20363:
-			if (usePotion(activeChar, 22044, 0, itemId - 20357))
-				activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
-			break;
+			case 8622:
+			case 8623:
+			case 8624:
+			case 8625:
+			case 8626:
+			case 8627:
+				if (usePotion(activeChar, 2287, 2288, itemId - 8621))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
+				break;
+			case 8628:
+			case 8629:
+			case 8630:
+			case 8631:
+			case 8632:
+			case 8633:
+				if (usePotion(activeChar, 2288, 2287, itemId - 8627))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
+				break;
+			case 8634:
+			case 8635:
+			case 8636:
+			case 8637:
+			case 8638:
+			case 8639:
+				if (usePotion(activeChar, 2289, 0, itemId - 8633))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 2, 300000, 300000));
+				break;
+			case 22027:
+			case 22028:
+			case 22029:
+			case 22030:
+			case 22031:
+				if (usePotion(activeChar, 26027, 0, itemId - 22025))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 2, 300000, 300000));
+				break;
+			case 22032:
+			case 22033:
+			case 22034:
+			case 22035:
+			case 22036:
+				if (usePotion(activeChar, 26028, 0, itemId - 22030))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
+				break;
+			case 20354:
+			case 20355:
+			case 20356:
+			case 20357:
+			case 20358:
+				if (usePotion(activeChar, 22043, 0, itemId - 20352))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 2, 300000, 300000));
+				break;
+			case 20359:
+			case 20360:
+			case 20361:
+			case 20362:
+			case 20363:
+				if (usePotion(activeChar, 22044, 0, itemId - 20357))
+					activeChar.sendPacket(new ExUseSharedGroupItem(itemId, 1, 300000, 300000));
+				break;
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param activeChar
@@ -198,7 +161,7 @@ public class Elixir implements IItemHandler
 		}
 		return false;
 	}
-
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#getItemIds()

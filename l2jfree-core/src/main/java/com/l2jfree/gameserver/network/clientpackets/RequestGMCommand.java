@@ -33,39 +33,40 @@ import com.l2jfree.gameserver.network.serverpackets.GMViewWarehouseWithdrawList;
 public class RequestGMCommand extends L2GameClientPacket
 {
 	private static final String _C__REQUESTGMCOMMAND = "[C] 7E RequestGMCommand c[sdd]";
-
+	
 	private String _targetName;
 	private int _command;
+	
 	//private final int _unknown;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_targetName = readS();
-		_command	= readD();
+		_command = readD();
 		/*_unknown  = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (activeChar.getAccessLevel() < Config.GM_ALTG_MIN_LEVEL)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		L2PcInstance player = L2World.getInstance().getPlayer(_targetName);
 		if (player == null)
 		{
 			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
 			return;
 		}
-
+		
 		switch (_command)
 		{
 			case 1: // player status
@@ -111,10 +112,10 @@ public class RequestGMCommand extends L2GameClientPacket
 				break;
 			}
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

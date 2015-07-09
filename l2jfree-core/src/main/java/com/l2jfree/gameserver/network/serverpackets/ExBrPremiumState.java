@@ -19,26 +19,26 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ExBrPremiumState extends L2GameServerPacket
 {
 	private static final String _S__EXBRPREMIUMSTATE = "[S] FE:AA ExBR_PremiumState ch[dc]";
-
+	
 	private final int _objectId;
 	private final int _state;
-
+	
 	public ExBrPremiumState(int objectId, int state)
 	{
 		_objectId = objectId;
 		_state = state;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0xaa);
-
+		
 		writeD(_objectId);
 		writeC(_state);
 	}
-
+	
 	@Override
 	public String getType()
 	{

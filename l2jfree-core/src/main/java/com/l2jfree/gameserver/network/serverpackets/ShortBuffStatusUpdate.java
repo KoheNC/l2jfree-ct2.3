@@ -71,14 +71,14 @@ public final class ShortBuffStatusUpdate extends L2GameServerPacket
 		
 		switch (effect.getId())
 		{
-			// lesser healing potions
+		// lesser healing potions
 			case 2031:
 				return 1;
-			// healing potions
+				// healing potions
 			case 2032:
 			case 26026:
 				return 2;
-			// greater healing potions
+				// greater healing potions
 			case 2037:
 			case 26025:
 				return 3;

@@ -35,15 +35,15 @@ import com.l2jfree.tools.codec.Base64;
  */
 public class AccountsServices
 {
-	private static Log	_log		= LogFactory.getLog(AccountsServices.class);
-
-	private AccountsDAO	__accDAO	= null;
-
+	private static Log _log = LogFactory.getLog(AccountsServices.class);
+	
+	private AccountsDAO __accDAO = null;
+	
 	public void setAccountsDAO(AccountsDAO accDAO)
 	{
 		__accDAO = accDAO;
 	}
-
+	
 	/**
 	 * Add or update an account
 	 * @param account
@@ -56,12 +56,13 @@ public class AccountsServices
 	 * @return the new account
 	 * @throws AccountModificationException
 	 */
-	public Accounts addOrUpdateAccount(String account, String password, String level, int by, int bm, int bd, int gs) throws AccountModificationException
+	public Accounts addOrUpdateAccount(String account, String password, String level, int by, int bm, int bd, int gs)
+			throws AccountModificationException
 	{
 		// o initialization
 		// ---------------
 		Accounts acc = null;
-
+		
 		// o Encode Password
 		// ----------------
 		MessageDigest md;
@@ -80,7 +81,7 @@ public class AccountsServices
 		{
 			throw new AccountModificationException("Unsupported encoding.", e1);
 		}
-
+		
 		// o update account
 		// ---------------
 		try
@@ -104,12 +105,13 @@ public class AccountsServices
 		}
 		return acc;
 	}
-
-	public Accounts addOrUpdateAccount(String account, String password, String level) throws AccountModificationException
+	
+	public Accounts addOrUpdateAccount(String account, String password, String level)
+			throws AccountModificationException
 	{
 		return addOrUpdateAccount(account, password, level, 1900, 1, 1, 0);
 	}
-
+	
 	/**
 	 * Add or update an account
 	 * @param acc
@@ -132,7 +134,7 @@ public class AccountsServices
 		}
 		return acc;
 	}
-
+	
 	/**
 	 * Change account level
 	 * @param account - the account to update
@@ -144,10 +146,10 @@ public class AccountsServices
 		// Search account
 		// ---------------
 		Accounts acc = __accDAO.getAccountById(account);
-
+		
 		if (acc == null)
 			throw new AccountModificationException("Account " + account + " doesn't exist.");
-
+		
 		// Update account
 		// --------------
 		try
@@ -163,7 +165,7 @@ public class AccountsServices
 			throw new AccountModificationException("Error : level (" + level + ") should be an integer.", e);
 		}
 	}
-
+	
 	/**
 	 * Change account level
 	 * @param account - the account to upadte
@@ -175,10 +177,10 @@ public class AccountsServices
 		// Search account
 		// ---------------
 		Accounts acc = __accDAO.getAccountById(account);
-
+		
 		if (acc == null)
 			throw new AccountModificationException("Account " + account + " doesn't exist.");
-
+		
 		// Update account
 		// --------------
 		Integer iLevel = new Integer(level);
@@ -187,7 +189,7 @@ public class AccountsServices
 		if (_log.isDebugEnabled())
 			_log.debug("Account " + account + " has been updated.");
 	}
-
+	
 	/**
 	 * Delete account and all linked objects
 	 * @param account
@@ -204,11 +206,12 @@ public class AccountsServices
 		}
 		catch (ObjectRetrievalFailureException e)
 		{
-			throw new AccountModificationException("Unable to delete account : " + account + ". This account does not exist.");
+			throw new AccountModificationException("Unable to delete account : " + account
+					+ ". This account does not exist.");
 		}
 		__accDAO.removeAccount(acc);
 	}
-
+	
 	/**
 	 * Get accounts information
 	 *
@@ -218,7 +221,7 @@ public class AccountsServices
 		List<Accounts> list = __accDAO.getAllAccounts();
 		return list;
 	}
-
+	
 	/**
 	 * Get account information for a specific id
 	 * 
@@ -242,13 +245,16 @@ public class AccountsServices
 			return null;
 		}
 	}
-
-	public boolean exists(String accountName) {
-		try {
+	
+	public boolean exists(String accountName)
+	{
+		try
+		{
 			__accDAO.getAccountById(accountName);
 			return true;
 		}
-		catch (ObjectRetrievalFailureException e) {
+		catch (ObjectRetrievalFailureException e)
+		{
 			return false;
 		}
 	}

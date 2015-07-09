@@ -48,7 +48,7 @@ final class ConditionForceBuff extends Condition
 		{
 			L2Effect force = player.getFirstEffect(BATTLE_FORCE);
 			
-			if (!(force instanceof EffectFusion) || ((EffectFusion) force)._effect < _battleForces)
+			if (!(force instanceof EffectFusion) || ((EffectFusion)force)._effect < _battleForces)
 				return false;
 		}
 		
@@ -56,7 +56,7 @@ final class ConditionForceBuff extends Condition
 		{
 			L2Effect force = player.getFirstEffect(SPELL_FORCE);
 			
-			if (!(force instanceof EffectFusion) || ((EffectFusion) force)._effect < _spellForces)
+			if (!(force instanceof EffectFusion) || ((EffectFusion)force)._effect < _spellForces)
 				return false;
 		}
 		

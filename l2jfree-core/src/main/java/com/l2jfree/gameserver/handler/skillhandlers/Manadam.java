@@ -30,14 +30,13 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class Manadam implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.MANADAM };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.MANADAM };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (activeChar.isAlikeDead())
 			return;
-
+		
 		boolean ss = false;
 		boolean bss = false;
 		
@@ -59,7 +58,7 @@ public class Manadam implements ISkillHandler
 			
 			if (Formulas.calcSkillReflect(target, skill) == Formulas.SKILL_REFLECT_SUCCEED)
 				target = activeChar;
-
+			
 			boolean acted = Formulas.calcMagicAffected(activeChar, target, skill);
 			if (!acted || target.isInvul())
 			{
@@ -84,25 +83,25 @@ public class Manadam implements ISkillHandler
 					if (target.isImmobileUntilAttacked())
 						target.stopImmobileUntilAttacked(true);
 				}
-
+				
 				if (target instanceof L2PcInstance)
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.S2_MP_HAS_BEEN_DRAINED_BY_C1);
 					sm.addCharName(activeChar);
-					sm.addNumber((int) mp);
+					sm.addNumber((int)mp);
 					target.getActingPlayer().sendPacket(sm);
 				}
-
+				
 				if (activeChar instanceof L2PcInstance)
 				{
 					SystemMessage sm2 = new SystemMessage(SystemMessageId.YOUR_OPPONENTS_MP_WAS_REDUCED_BY_S1);
-					sm2.addNumber((int) mp);
+					sm2.addNumber((int)mp);
 					activeChar.getActingPlayer().sendPacket(sm2);
 				}
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

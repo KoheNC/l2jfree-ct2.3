@@ -24,117 +24,146 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.lang.L2System;
 
-public class Version {
+public class Version
+{
 	private String _revisionNumber = "exported";
 	private String _versionNumber = "-1";
 	private String _buildJdk = "";
 	private long _buildTime = -1;
-
+	
 	private static final Log _log = LogFactory.getLog(Version.class);
-
-	static {
+	
+	static
+	{
 		L2System.milliTime();
 	}
-
-	public Version() {
+	
+	public Version()
+	{
 	}
-
-	public Version(Class<?> c) {
+	
+	public Version(Class<?> c)
+	{
 		loadInformation(c);
 	}
-
-	public void loadInformation(Class<?> c) {
+	
+	public void loadInformation(Class<?> c)
+	{
 		File jarName = null;
-		try {
+		try
+		{
 			jarName = Locator.getClassSource(c);
 			JarFile jarFile = new JarFile(jarName);
-
+			
 			Attributes attrs = jarFile.getManifest().getMainAttributes();
-
+			
 			setBuildTime(attrs);
-
+			
 			setBuildJdk(attrs);
-
+			
 			setRevisionNumber(attrs);
-
+			
 			setVersionNumber(attrs);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			if (_log.isErrorEnabled())
 				_log.error(
 						"Unable to get Soft information\nFile name '"
-								+ (jarName == null ? "null" : jarName
-										.getAbsolutePath())
-								+ "' isn't a valid jar", e);
+								+ (jarName == null ? "null" : jarName.getAbsolutePath()) + "' isn't a valid jar", e);
 		}
-
+		
 	}
-
+	
 	/**
 	 * @param attrs
 	 */
-	private void setVersionNumber(Attributes attrs) {
+	private void setVersionNumber(Attributes attrs)
+	{
 		String versionNumber = attrs.getValue("Implementation-Version");
-		if (versionNumber != null) {
+		if (versionNumber != null)
+		{
 			_versionNumber = versionNumber;
-		} else {
+		}
+		else
+		{
 			_versionNumber = "-1";
 		}
 	}
-
+	
 	/**
 	 * @param attrs
 	 */
-	private void setRevisionNumber(Attributes attrs) {
+	private void setRevisionNumber(Attributes attrs)
+	{
 		String revisionNumber = attrs.getValue("Implementation-Build");
-		if (revisionNumber != null) {
+		if (revisionNumber != null)
+		{
 			_revisionNumber = revisionNumber;
-		} else {
+		}
+		else
+		{
 			_revisionNumber = "-1";
 		}
 	}
-
+	
 	/**
 	 * @param attrs
 	 */
-	private void setBuildJdk(Attributes attrs) {
+	private void setBuildJdk(Attributes attrs)
+	{
 		String buildJdk = attrs.getValue("Build-Jdk");
-		if (buildJdk != null) {
+		if (buildJdk != null)
+		{
 			_buildJdk = buildJdk;
-		} else {
+		}
+		else
+		{
 			buildJdk = attrs.getValue("Created-By");
-			if (buildJdk != null) {
+			if (buildJdk != null)
+			{
 				_buildJdk = buildJdk;
-			} else {
+			}
+			else
+			{
 				_buildJdk = "-1";
 			}
 		}
 	}
-
+	
 	/**
 	 * @param attrs
 	 */
-	private void setBuildTime(Attributes attrs) {
+	private void setBuildTime(Attributes attrs)
+	{
 		String buildTime = attrs.getValue("Implementation-Time");
-		if (buildTime != null) {
+		if (buildTime != null)
+		{
 			_buildTime = Long.parseLong(buildTime);
-		} else {
+		}
+		else
+		{
 			_buildTime = -1;
 		}
 	}
-
-	public String getRevisionNumber() {
+	
+	public String getRevisionNumber()
+	{
 		return _revisionNumber;
 	}
-
-	public String getVersionNumber() {
+	
+	public String getVersionNumber()
+	{
 		return _versionNumber;
 	}
-
-	public String getBuildJdk() {
+	
+	public String getBuildJdk()
+	{
 		return _buildJdk;
 	}
-
-	public long getBuildTime() {
+	
+	public long getBuildTime()
+	{
 		return _buildTime;
 	}
 }

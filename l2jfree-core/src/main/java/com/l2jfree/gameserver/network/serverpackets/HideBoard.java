@@ -18,18 +18,18 @@ public class HideBoard extends StaticPacket
 {
 	private static final String _S__SHOWBOARD = "[S] 7B ShowBoard c[c]";
 	public static final HideBoard PACKET = new HideBoard();
-
+	
 	private HideBoard()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x7b);
 		writeC(0x00);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

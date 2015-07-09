@@ -29,24 +29,24 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ListPartyWaiting extends L2GameServerPacket
 {
-	private static final String	_S__9C_LISTPARTYWATING = "[S] 9C ListPartyWating";
-
-	private final List<L2PartyRoom>	_rooms;
-	private final int				_offset;
-	private final int				_last;
-
+	private static final String _S__9C_LISTPARTYWATING = "[S] 9C ListPartyWating";
+	
+	private final List<L2PartyRoom> _rooms;
+	private final int _offset;
+	private final int _last;
+	
 	public ListPartyWaiting(L2PcInstance player, int page)
 	{
 		_rooms = PartyRoomManager.getInstance().getRooms(player);
 		_offset = (page - 1) * ENTRIES_PER_PAGE;
 		_last = _offset + Math.min(_rooms.size() - _offset, ENTRIES_PER_PAGE);
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x9c);
-
+		
 		writeD(_rooms.size() / 64 + 1); // total pages?
 		//writeD(_rooms.size()); // total rooms?
 		writeD(_last - _offset); // rooms in this page
@@ -63,7 +63,7 @@ public class ListPartyWaiting extends L2GameServerPacket
 			writeS(room.getLeader().getName());
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

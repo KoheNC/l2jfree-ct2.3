@@ -24,8 +24,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class Report implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	= { "report" };
-
+	private static final String[] VOICED_COMMANDS = { "report" };
+	
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.equals("report"))
@@ -33,7 +33,7 @@ public class Report implements IVoicedCommandHandler
 		}
 		return false;
 	}
-
+	
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

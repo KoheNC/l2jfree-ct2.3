@@ -36,10 +36,10 @@ import com.l2jfree.gameserver.network.serverpackets.RecipeShopMsg;
 public final class OfflineTradeManager
 {
 	private static final Log _log = LogFactory.getLog(OfflineTradeManager.class);
-	private int _playerCount 	= 0;
-	private int _itemCount 		= 0;
-	private int _recipeCount 	= 0;
-
+	private int _playerCount = 0;
+	private int _itemCount = 0;
+	private int _recipeCount = 0;
+	
 	public static OfflineTradeManager getInstance()
 	{
 		return SingletonHolder.INSTANCE;
@@ -56,7 +56,7 @@ public final class OfflineTradeManager
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
+			
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM offline_traders");
 			ResultSet rset = statement.executeQuery();
 			
@@ -106,7 +106,7 @@ public final class OfflineTradeManager
 				{
 					case L2PcInstance.STORE_PRIVATE_PACKAGE_SELL:
 						p.getSellList().setPackaged(true);
-					//$FALL-THROUGH$
+						//$FALL-THROUGH$
 					case L2PcInstance.STORE_PRIVATE_SELL:
 						p.getSellList().setTitle(msg);
 						p.tryOpenPrivateSellStore(p.getSellList().isPackaged());
@@ -121,15 +121,15 @@ public final class OfflineTradeManager
 						p.broadcastPacket(new RecipeShopMsg(p));
 						break;
 				}
-
+				
 				p.setPrivateStoreType(privateStoreType);
 				p.sitDown();
 				p.enterOfflineMode();
 				p.broadcastUserInfo();
-
+				
 				_playerCount++;
 			}
-
+			
 			rset.close();
 			statement.close();
 		}
@@ -141,7 +141,8 @@ public final class OfflineTradeManager
 		{
 			L2DatabaseFactory.close(con);
 		}
-		_log.info("OfflineTradeManager: Restored " + _playerCount + " offline traders with " + _itemCount + " items and " + _recipeCount + " recipes!");
+		_log.info("OfflineTradeManager: Restored " + _playerCount + " offline traders with " + _itemCount
+				+ " items and " + _recipeCount + " recipes!");
 	}
 	
 	public void store()
@@ -173,14 +174,15 @@ public final class OfflineTradeManager
 								tradeList = p.getSellList();
 								for (TradeItem i : tradeList.getItems())
 								{
-									PreparedStatement st2 = con.prepareStatement("INSERT INTO offline_traders_items VALUES(?,?,?,?)");
+									PreparedStatement st2 =
+											con.prepareStatement("INSERT INTO offline_traders_items VALUES(?,?,?,?)");
 									st2.setInt(1, p.getObjectId());
 									st2.setInt(2, i.getObjectId());
 									st2.setLong(3, i.getCount());
 									st2.setLong(4, i.getPrice());
 									st2.execute();
 									st2.close();
-
+									
 									_itemCount++;
 								}
 								break;
@@ -188,14 +190,15 @@ public final class OfflineTradeManager
 								tradeList = p.getBuyList();
 								for (TradeItem i : tradeList.getItems())
 								{
-									PreparedStatement st2 = con.prepareStatement("INSERT INTO offline_traders_items VALUES(?,?,?,?)");
+									PreparedStatement st2 =
+											con.prepareStatement("INSERT INTO offline_traders_items VALUES(?,?,?,?)");
 									st2.setInt(1, p.getObjectId());
 									st2.setInt(2, i.getItem().getItemId());
 									st2.setLong(3, i.getCount());
 									st2.setLong(4, i.getPrice());
 									st2.execute();
 									st2.close();
-
+									
 									_itemCount++;
 								}
 								break;
@@ -203,7 +206,8 @@ public final class OfflineTradeManager
 								manufactureList = p.getCreateList();
 								for (L2ManufactureItem i : manufactureList.getList())
 								{
-									PreparedStatement st2 = con.prepareStatement("INSERT INTO offline_traders_items VALUES(?,?,?,?)");
+									PreparedStatement st2 =
+											con.prepareStatement("INSERT INTO offline_traders_items VALUES(?,?,?,?)");
 									st2.setInt(1, p.getObjectId());
 									st2.setInt(2, i.getRecipeId());
 									st2.setLong(3, -1);
@@ -240,7 +244,7 @@ public final class OfflineTradeManager
 						
 						st.execute();
 						st.close();
-
+						
 						_playerCount++;
 					}
 					//new Disconnection(p).defaultSequence(true);
@@ -259,9 +263,10 @@ public final class OfflineTradeManager
 		{
 			L2DatabaseFactory.close(con);
 		}
-		_log.info("OfflineTradeManager: Stored " + _playerCount + " offline traders with " + _itemCount + " items and " + _recipeCount + " recipes!");
+		_log.info("OfflineTradeManager: Stored " + _playerCount + " offline traders with " + _itemCount + " items and "
+				+ _recipeCount + " recipes!");
 	}
-
+	
 	private void cleanTables()
 	{
 		Connection con = null;

@@ -23,11 +23,8 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class GiveVitality implements ISkillHandler
 {
-	private static final L2SkillType[] SKILL_IDS =
-	{
-		L2SkillType.GIVE_VITALITY
-	};
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.GIVE_VITALITY };
+	
 	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
@@ -35,11 +32,11 @@ public class GiveVitality implements ISkillHandler
 		{
 			if (target instanceof L2PcInstance)
 			{
-				((L2PcInstance) target).updateVitalityPoints((float)skill.getPower(), false, false);
+				((L2PcInstance)target).updateVitalityPoints((float)skill.getPower(), false, false);
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

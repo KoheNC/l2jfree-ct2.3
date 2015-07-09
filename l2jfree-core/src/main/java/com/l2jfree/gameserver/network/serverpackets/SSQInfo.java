@@ -15,6 +15,7 @@
 package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.SevenSigns;
+
 /**
  * Changes the sky color depending on the outcome
  * of the Seven Signs competition.
@@ -26,51 +27,51 @@ import com.l2jfree.gameserver.SevenSigns;
  */
 public class SSQInfo extends L2GameServerPacket
 {
-    private static final String S_73_SSQINFO = "[S] 73 SSQInfo";
-
-    private int _state = 0;
-
-    public SSQInfo()
-    {
-        int compWinner = SevenSigns.getInstance().getCabalHighestScore();
-
-        if (SevenSigns.getInstance().isSealValidationPeriod())
-            if (compWinner == SevenSigns.CABAL_DAWN)
-                _state = 2;
-            else if (compWinner == SevenSigns.CABAL_DUSK)
-                _state = 1;
-    }
-
-    public SSQInfo(int state)
-    {
-        _state = state;
-    }
-
-    @Override
+	private static final String S_73_SSQINFO = "[S] 73 SSQInfo";
+	
+	private int _state = 0;
+	
+	public SSQInfo()
+	{
+		int compWinner = SevenSigns.getInstance().getCabalHighestScore();
+		
+		if (SevenSigns.getInstance().isSealValidationPeriod())
+			if (compWinner == SevenSigns.CABAL_DAWN)
+				_state = 2;
+			else if (compWinner == SevenSigns.CABAL_DUSK)
+				_state = 1;
+	}
+	
+	public SSQInfo(int state)
+	{
+		_state = state;
+	}
+	
+	@Override
 	protected final void writeImpl()
-    {
-        writeC(0x73);
-
-        if (_state == 2) // Dawn Sky
-        {
-            writeH(258);
-        }
-        else if (_state == 1) // Dusk Sky
-        {
-            writeH(257);
-        }
-        else
-        {
-            writeH(256);
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return S_73_SSQINFO;
-    }
+	{
+		writeC(0x73);
+		
+		if (_state == 2) // Dawn Sky
+		{
+			writeH(258);
+		}
+		else if (_state == 1) // Dusk Sky
+		{
+			writeH(257);
+		}
+		else
+		{
+			writeH(256);
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return S_73_SSQINFO;
+	}
 }

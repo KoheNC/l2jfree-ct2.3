@@ -26,17 +26,17 @@ import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 public final class Asterios extends QuestJython
 {
 	private static final String ASTERIOS_OCCUPATION = "30154_asterios_occupation_change";
-
+	
 	//Quest NPCs
 	private static final int ASTERIOS = 30154;
-
+	
 	public Asterios(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		addStartNpc(ASTERIOS);
 		addTalkId(ASTERIOS);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -45,7 +45,7 @@ public final class Asterios extends QuestJython
 		else
 			return event;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
@@ -53,20 +53,20 @@ public final class Asterios extends QuestJython
 			return "30154-11.htm";
 		switch (talker.getClassId())
 		{
-		case ElvenFighter:
-			return "30154-01.htm";
-		case ElvenMystic:
-			return "30154-02.htm";
-		case ElvenWizard:
-		case ElvenOracle:
-		case ElvenKnight:
-		case ElvenScout:
-			return "30154-12.htm";
-		default:
-			return "30154-13.htm";
+			case ElvenFighter:
+				return "30154-01.htm";
+			case ElvenMystic:
+				return "30154-02.htm";
+			case ElvenWizard:
+			case ElvenOracle:
+			case ElvenKnight:
+			case ElvenScout:
+				return "30154-12.htm";
+			default:
+				return "30154-13.htm";
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new Asterios(-1, ASTERIOS_OCCUPATION, "village_master");

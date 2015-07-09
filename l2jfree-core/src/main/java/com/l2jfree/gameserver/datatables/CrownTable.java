@@ -22,15 +22,15 @@ package com.l2jfree.gameserver.datatables;
 public final class CrownTable
 {
 	private static final int[] CROWN_IDS = { 6841, // Crown of the lord
-		6834, // Innadril
-		6835, // Dion
-		6836, // Goddard
-		6837, // Oren
-		6838, // Gludio
-		6839, // Giran
-		6840, // Aden
-		8182, // Rune
-		8183, // Schuttgart
+			6834, // Innadril
+			6835, // Dion
+			6836, // Goddard
+			6837, // Oren
+			6838, // Gludio
+			6839, // Giran
+			6840, // Aden
+			8182, // Rune
+			8183, // Schuttgart
 	};
 	
 	public static int[] getCrownIds()

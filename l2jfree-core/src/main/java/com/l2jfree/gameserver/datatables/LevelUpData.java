@@ -35,32 +35,33 @@ import com.l2jfree.gameserver.model.base.ClassId;
  */
 public class LevelUpData
 {
-	private static final String				SELECT_ALL	= "SELECT classid, defaulthpbase, defaulthpadd, defaulthpmod, defaultcpbase, defaultcpadd, defaultcpmod, defaultmpbase, defaultmpadd, defaultmpmod, class_lvl FROM lvlupgain";
-	private static final String				CLASS_LVL	= "class_lvl";
-	private static final String				MP_MOD		= "defaultmpmod";
-	private static final String				MP_ADD		= "defaultmpadd";
-	private static final String				MP_BASE		= "defaultmpbase";
-	private static final String				HP_MOD		= "defaulthpmod";
-	private static final String				HP_ADD		= "defaulthpadd";
-	private static final String				HP_BASE		= "defaulthpbase";
-	private static final String				CP_MOD		= "defaultcpmod";
-	private static final String				CP_ADD		= "defaultcpadd";
-	private static final String				CP_BASE		= "defaultcpbase";
-	private static final String				CLASS_ID	= "classid";
-
-	private final static Log				_log		= LogFactory.getLog(LevelUpData.class);
-
-	private final FastMap<Integer, L2LvlupData>	_lvlTable;
-
+	private static final String SELECT_ALL =
+			"SELECT classid, defaulthpbase, defaulthpadd, defaulthpmod, defaultcpbase, defaultcpadd, defaultcpmod, defaultmpbase, defaultmpadd, defaultmpmod, class_lvl FROM lvlupgain";
+	private static final String CLASS_LVL = "class_lvl";
+	private static final String MP_MOD = "defaultmpmod";
+	private static final String MP_ADD = "defaultmpadd";
+	private static final String MP_BASE = "defaultmpbase";
+	private static final String HP_MOD = "defaulthpmod";
+	private static final String HP_ADD = "defaulthpadd";
+	private static final String HP_BASE = "defaulthpbase";
+	private static final String CP_MOD = "defaultcpmod";
+	private static final String CP_ADD = "defaultcpadd";
+	private static final String CP_BASE = "defaultcpbase";
+	private static final String CLASS_ID = "classid";
+	
+	private final static Log _log = LogFactory.getLog(LevelUpData.class);
+	
+	private final FastMap<Integer, L2LvlupData> _lvlTable;
+	
 	public static LevelUpData getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private LevelUpData()
 	{
 		_lvlTable = new FastMap<Integer, L2LvlupData>();
-
+		
 		Connection con = null;
 		try
 		{
@@ -68,7 +69,7 @@ public class LevelUpData
 			PreparedStatement statement = con.prepareStatement(SELECT_ALL);
 			ResultSet rset = statement.executeQuery();
 			L2LvlupData lvlDat;
-
+			
 			while (rset.next())
 			{
 				lvlDat = new L2LvlupData();
@@ -83,13 +84,13 @@ public class LevelUpData
 				lvlDat.setClassMpBase(rset.getFloat(MP_BASE));
 				lvlDat.setClassMpAdd(rset.getFloat(MP_ADD));
 				lvlDat.setClassMpModifier(rset.getFloat(MP_MOD));
-
+				
 				_lvlTable.put(lvlDat.getClassid(), lvlDat);
 			}
-
+			
 			rset.close();
 			statement.close();
-
+			
 			_log.info("LevelUpData: Loaded " + _lvlTable.size() + " Character Level Up Templates.");
 		}
 		catch (Exception e)
@@ -101,7 +102,7 @@ public class LevelUpData
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * @param classId
 	 * @return
@@ -110,12 +111,12 @@ public class LevelUpData
 	{
 		return _lvlTable.get(classId);
 	}
-
+	
 	public L2LvlupData getTemplate(ClassId classId)
 	{
 		return _lvlTable.get(classId.getId());
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

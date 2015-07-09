@@ -613,7 +613,8 @@ public final class L2Collections
 		}
 	}
 	
-	public static <T> Iterable<T> concatenatedIterable(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2)
+	public static <T> Iterable<T>
+			concatenatedIterable(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2)
 	{
 		return new ConcatenatedIterable<T>(iterable1, iterable2);
 	}
@@ -629,7 +630,8 @@ public final class L2Collections
 		return new ConcatenatedIterable<T>(iterables);
 	}
 	
-	public static <T> Iterator<T> concatenatedIterator(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2)
+	public static <T> Iterator<T>
+			concatenatedIterator(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2)
 	{
 		return new ConcatenatedIterator<T>(iterable1, iterable2);
 	}

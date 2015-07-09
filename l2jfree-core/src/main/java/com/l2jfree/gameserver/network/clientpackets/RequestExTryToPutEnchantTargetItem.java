@@ -26,23 +26,24 @@ import com.l2jfree.gameserver.network.serverpackets.ExPutEnchantTargetItemResult
  */
 public class RequestExTryToPutEnchantTargetItem extends AbstractEnchantPacket
 {
-	private static final String	_C__D0_78_REQUESTEXTRYTOPUTENCHANTTARGETITEM	= "[C] D0 4F RequestExTryToPutEnchantTargetItem";
-
+	private static final String _C__D0_78_REQUESTEXTRYTOPUTENCHANTTARGETITEM =
+			"[C] D0 4F RequestExTryToPutEnchantTargetItem";
+	
 	private int _objectId = 0;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		if (_objectId == 0)
 		{
 			if (_log.isDebugEnabled())
@@ -50,7 +51,7 @@ public class RequestExTryToPutEnchantTargetItem extends AbstractEnchantPacket
 			sendAF();
 			return;
 		}
-
+		
 		if (activeChar.isEnchanting())
 		{
 			if (_log.isDebugEnabled())
@@ -58,12 +59,12 @@ public class RequestExTryToPutEnchantTargetItem extends AbstractEnchantPacket
 			requestFailed(SystemMessageId.ENCHANTMENT_ALREADY_IN_PROGRESS);
 			return;
 		}
-
-		L2ItemInstance item = (L2ItemInstance) L2World.getInstance().findObject(_objectId);
+		
+		L2ItemInstance item = (L2ItemInstance)L2World.getInstance().findObject(_objectId);
 		if (_log.isDebugEnabled())
 			_log.info("ENCHANT: Trying to insert " + item + " to enchanting slot.");
 		L2ItemInstance scroll = activeChar.getActiveEnchantItem();
-
+		
 		if (item == null || scroll == null)
 		{
 			if (_log.isDebugEnabled())
@@ -71,7 +72,7 @@ public class RequestExTryToPutEnchantTargetItem extends AbstractEnchantPacket
 			requestFailed(SystemMessageId.INAPPROPRIATE_ENCHANT_CONDITION);
 			return;
 		}
-
+		
 		// template for scroll
 		EnchantScroll scrollTemplate = getEnchantScroll(scroll);
 		if (!scrollTemplate.isValid(item) || !isEnchantable(item))
@@ -88,10 +89,10 @@ public class RequestExTryToPutEnchantTargetItem extends AbstractEnchantPacket
 		activeChar.setIsEnchanting(true);
 		activeChar.setActiveEnchantTimestamp(System.currentTimeMillis());
 		activeChar.sendPacket(new ExPutEnchantTargetItemResult(_objectId));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -29,21 +29,20 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class MakeKillable implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.MAKE_KILLABLE };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.MAKE_KILLABLE };
+	
 	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
+		
 		for (L2Character element : targets)
 		{
 			if (!(element instanceof L2MonsterInstance))
 				continue;
 			
-			L2MonsterInstance target = (L2MonsterInstance) element;
+			L2MonsterInstance target = (L2MonsterInstance)element;
 			
 			if (!target.isKillable())
 				target.setKillable(true);
@@ -54,7 +53,7 @@ public class MakeKillable implements ISkillHandler
 			}
 		}
 	}
-
+	
 	@Override
 	public L2SkillType[] getSkillIds()
 	{

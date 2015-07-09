@@ -17,7 +17,6 @@ package com.l2jfree.gameserver.network.serverpackets;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * @author Kerberos
  */
@@ -25,13 +24,13 @@ public class ExBrExtraUserInfo extends L2GameServerPacket
 {
 	private final int _charObjId;
 	private final int _val;
-
+	
 	protected ExBrExtraUserInfo(L2PcInstance player)
 	{
 		_charObjId = player.getObjectId();
 		_val = player.getAfroHaircutId();
 	}
-
+	
 	/**
 	 * This packet should belong to Quest windows, not UserInfo in T3.
 	 */
@@ -43,10 +42,10 @@ public class ExBrExtraUserInfo extends L2GameServerPacket
 			writeH(0xac);
 		else
 			writeH(0x8d);
-		writeD(_charObjId);  // object id of player
-		writeD(_val);        // afro hair cut
+		writeD(_charObjId); // object id of player
+		writeD(_val); // afro hair cut
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

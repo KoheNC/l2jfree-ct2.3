@@ -31,9 +31,9 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminShutdown implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_server_shutdown", "admin_server_restart", "admin_server_abort" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_server_shutdown", "admin_server_restart",
+			"admin_server_abort" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_server_shutdown"))
@@ -64,21 +64,22 @@ public class AdminShutdown implements IAdminCommandHandler
 		{
 			serverAbort(activeChar);
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void sendHtmlForm(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/shutdown.htm");
 		adminReply.replace("%count%", String.valueOf(L2World.getInstance().getAllPlayersCount()));
-		adminReply.replace("%used%", String.valueOf(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
+		adminReply.replace("%used%",
+				String.valueOf(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
 		adminReply.replace("%xp%", String.valueOf(Config.RATE_XP));
 		adminReply.replace("%sp%", String.valueOf(Config.RATE_SP));
 		adminReply.replace("%adena%", String.valueOf(Config.RATE_DROP_ADENA));
@@ -89,7 +90,8 @@ public class AdminShutdown implements IAdminCommandHandler
 	
 	private void serverShutdown(L2PcInstance activeChar, int seconds, boolean restart)
 	{
-		Shutdown.start(activeChar.getName() + "(" + activeChar.getObjectId() + ")", seconds, restart ? ShutdownMode.RESTART : ShutdownMode.SHUTDOWN);
+		Shutdown.start(activeChar.getName() + "(" + activeChar.getObjectId() + ")", seconds, restart
+				? ShutdownMode.RESTART : ShutdownMode.SHUTDOWN);
 	}
 	
 	private void serverAbort(L2PcInstance activeChar)

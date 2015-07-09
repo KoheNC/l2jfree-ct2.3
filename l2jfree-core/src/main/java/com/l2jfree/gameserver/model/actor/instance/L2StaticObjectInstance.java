@@ -283,7 +283,7 @@ public class L2StaticObjectInstance extends L2Character
 		
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	/**
 	 * <B>Check if the given player can sit on this throne</B> (<I>= if a CharSit packet can be
 	 * broadcast</I>)<BR>
@@ -303,22 +303,24 @@ public class L2StaticObjectInstance extends L2Character
 		// removed from the world properly
 		if (_occupier != null && L2World.getInstance().findPlayer( // If the actual user isn't
 				_occupier.getObjectId()) == null) // found in the world anymore
-				_occupier = null; // release me
-
-		if (player == null) return false;
+			_occupier = null; // release me
+			
+		if (player == null)
+			return false;
 		if (!player.isInsideRadius(this, INTERACTION_DISTANCE, false, false))
 			return false;
-
+		
 		Castle throneCastle = CastleManager.getInstance().getCastle(this);
 		if (getType() != 1 || isOccupied() || throneCastle == null)
 			return false;
 		L2Clan c = player.getClan();
-		if (c == null) return false;
+		if (c == null)
+			return false;
 		if (c.getHasCastle() != throneCastle.getCastleId())
 			return false;
 		if (Config.ALT_ONLY_CLANLEADER_CAN_SIT_ON_THRONE && !player.isClanLeader())
 			return false;
-
+		
 		setOccupier(player);
 		player.setObjectSittingOn(this);
 		ChairSit cs = new ChairSit(player, getStaticObjectId());

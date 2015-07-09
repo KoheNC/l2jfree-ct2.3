@@ -27,10 +27,9 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminHelpPage implements IAdminCommandHandler
 {
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_help" };
-
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_help" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_help"))
@@ -45,15 +44,15 @@ public class AdminHelpPage implements IAdminCommandHandler
 				//case of empty filename
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	//PUBLIC & STATIC so other classes from package can include it directly
 	public static void showHelpPage(L2PcInstance targetChar, String filename)
 	{

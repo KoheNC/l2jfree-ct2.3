@@ -22,18 +22,18 @@ import java.math.BigDecimal;
  */
 public final class Accounts extends AccountBean
 {
-	private static final long	serialVersionUID	= -3344760382246635879L;
-
-	private Integer				birthYear;
-	private Integer				birthMonth;
-	private Integer				birthDay;
-
+	private static final long serialVersionUID = -3344760382246635879L;
+	
+	private Integer birthYear;
+	private Integer birthMonth;
+	private Integer birthDay;
+	
 	/** Default constructor */
 	public Accounts()
 	{
 		super();
 	}
-
+	
 	/**
 	 * Simple constructor - self explanatory
 	 * @param login
@@ -42,7 +42,7 @@ public final class Accounts extends AccountBean
 	{
 		super(login);
 	}
-
+	
 	/**
 	 * Full constructor - self explanatory
 	 * @param login
@@ -55,41 +55,40 @@ public final class Accounts extends AccountBean
 	 * @param birthDay
 	 * @param lastIp
 	 */
-	public Accounts(String login, String password, BigDecimal lastactive,
-			Integer accessLevel, Integer lastServerId, Integer birthYear,
-			Integer birthMonth, Integer birthDay, String lastIp)
+	public Accounts(String login, String password, BigDecimal lastactive, Integer accessLevel, Integer lastServerId,
+			Integer birthYear, Integer birthMonth, Integer birthDay, String lastIp)
 	{
 		super(login, password, lastactive, accessLevel, lastServerId, lastIp);
 		this.birthYear = birthYear;
 		this.birthMonth = birthMonth;
 		this.birthDay = birthDay;
 	}
-
+	
 	public final Integer getBirthYear()
 	{
 		return birthYear;
 	}
-
+	
 	public final void setBirthYear(Integer birthYear)
 	{
 		this.birthYear = birthYear;
 	}
-
+	
 	public final Integer getBirthMonth()
 	{
 		return birthMonth;
 	}
-
+	
 	public final void setBirthMonth(Integer birthMonth)
 	{
 		this.birthMonth = birthMonth;
 	}
-
+	
 	public final Integer getBirthDay()
 	{
 		return birthDay;
 	}
-
+	
 	public final void setBirthDay(Integer birthDay)
 	{
 		this.birthDay = birthDay;

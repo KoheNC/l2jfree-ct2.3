@@ -18,21 +18,20 @@ import java.rmi.RemoteException;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * 
  * @author polbat02
  */
 public class RemotePlayerImpl implements IRemotePlayer
 {
-
-	private L2PcInstance	_player;
-
+	
+	private L2PcInstance _player;
+	
 	public RemotePlayerImpl(L2PcInstance character)
 	{
 		_player = character;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getAccessLevel()
 	 */
@@ -40,7 +39,7 @@ public class RemotePlayerImpl implements IRemotePlayer
 	{
 		return _player.getAccessLevel();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getAccount()
 	 */
@@ -48,7 +47,7 @@ public class RemotePlayerImpl implements IRemotePlayer
 	{
 		return _player.getAccountName();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getLevel()
 	 */
@@ -56,7 +55,7 @@ public class RemotePlayerImpl implements IRemotePlayer
 	{
 		return _player.getLevel();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getName()
 	 */
@@ -64,7 +63,7 @@ public class RemotePlayerImpl implements IRemotePlayer
 	{
 		return _player.getName();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getObjectId()
 	 */
@@ -72,7 +71,7 @@ public class RemotePlayerImpl implements IRemotePlayer
 	{
 		return _player.getObjectId();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#getSex()
 	 */
@@ -82,7 +81,7 @@ public class RemotePlayerImpl implements IRemotePlayer
 			return 1;
 		return 0;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemotePlayer#online()
 	 */
@@ -90,5 +89,5 @@ public class RemotePlayerImpl implements IRemotePlayer
 	{
 		return _player.isOnline();
 	}
-
+	
 }

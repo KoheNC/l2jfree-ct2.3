@@ -23,28 +23,28 @@ public class DoorKnownList extends CharKnownList
 {
 	// =========================================================
 	// Data Field
-
+	
 	// =========================================================
 	// Constructor
 	public DoorKnownList(L2DoorInstance activeChar)
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
-
+	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public final L2DoorInstance getActiveChar()
 	{
-		return (L2DoorInstance) _activeChar;
+		return (L2DoorInstance)_activeChar;
 	}
-
+	
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
@@ -54,7 +54,7 @@ public class DoorKnownList extends CharKnownList
 			return 0;
 		return 4000;
 	}
-
+	
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{

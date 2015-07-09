@@ -35,30 +35,30 @@ import com.l2jfree.gameserver.model.L2SummonItem;
  */
 public class SummonItemsData
 {
-	private static final Log				_log	= LogFactory.getLog(SummonItemsData.class);
-
-	private final FastMap<Integer, L2SummonItem>	_summonitems;
-
+	private static final Log _log = LogFactory.getLog(SummonItemsData.class);
+	
+	private final FastMap<Integer, L2SummonItem> _summonitems;
+	
 	private int[] _summonItemIds;
-
+	
 	public static SummonItemsData getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private SummonItemsData()
 	{
-		_summonitems	= new FastMap<Integer, L2SummonItem>();
-		Document doc	= null;
-		File file		= new File(Config.DATAPACK_ROOT, "data/summon_items.xml");
-	
+		_summonitems = new FastMap<Integer, L2SummonItem>();
+		Document doc = null;
+		File file = new File(Config.DATAPACK_ROOT, "data/summon_items.xml");
+		
 		try
 		{
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setValidating(true);
 			factory.setIgnoringComments(true);
 			doc = factory.newDocumentBuilder().parse(file);
-
+			
 			int itemID = 0, npcID = 0;
 			byte summonType = 0;
 			Node a;
@@ -71,7 +71,8 @@ public class SummonItemsData
 						if ("item".equalsIgnoreCase(d.getNodeName()))
 						{
 							a = d.getAttributes().getNamedItem("id");
-							if (a == null) throw new Exception("Error in summon item defenition!");
+							if (a == null)
+								throw new Exception("Error in summon item defenition!");
 							itemID = Integer.parseInt(a.getNodeValue());
 							
 							for (Node e = d.getFirstChild(); e != null; e = e.getNextSibling())
@@ -79,13 +80,16 @@ public class SummonItemsData
 								if ("npcId".equalsIgnoreCase(e.getNodeName()))
 								{
 									a = e.getAttributes().getNamedItem("val");
-									if (a == null) throw new Exception("Not defined npc id for summon item id=" + itemID + "!");
+									if (a == null)
+										throw new Exception("Not defined npc id for summon item id=" + itemID + "!");
 									npcID = Integer.parseInt(a.getNodeValue());
 								}
 								else if ("summonType".equalsIgnoreCase(e.getNodeName()))
 								{
 									a = e.getAttributes().getNamedItem("val");
-									if (a == null) throw new Exception("Not defined summon type for summon item id=" + itemID + "!");
+									if (a == null)
+										throw new Exception("Not defined summon type for summon item id=" + itemID
+												+ "!");
 									summonType = Byte.parseByte(a.getNodeValue());
 								}
 							}
@@ -97,7 +101,7 @@ public class SummonItemsData
 			}
 			_summonItemIds = new int[_summonitems.size()];
 			int i = 0;
-			for(int itemId : _summonitems.keySet())
+			for (int itemId : _summonitems.keySet())
 				_summonItemIds[i++] = itemId;
 		}
 		catch (IOException e)
@@ -110,17 +114,17 @@ public class SummonItemsData
 		}
 		_log.info("SummonItemsData: Loaded " + _summonitems.size() + " Summon Items from " + file.getName());
 	}
-
+	
 	public L2SummonItem getSummonItem(int itemId)
 	{
 		return _summonitems.get(itemId);
 	}
-
+	
 	public int[] itemIDs()
 	{
 		return _summonItemIds;
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

@@ -25,16 +25,16 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 
 public final class HennaEquipList extends L2GameServerPacket
 {
-	private static final String	_S__EE_HennaEquipList	= "[S] EE HennaEquipList";
-
-	private final L2PcInstance	_player;
-	private final L2Henna[]		_hennas;
-
+	private static final String _S__EE_HennaEquipList = "[S] EE HennaEquipList";
+	
+	private final L2PcInstance _player;
+	private final L2Henna[] _hennas;
+	
 	public HennaEquipList(L2PcInstance player)
 	{
 		_player = player;
 		_hennas = HennaTreeTable.getInstance().getAvailableHenna(player).clone();
-
+		
 		Arrays.sort(_hennas, new Comparator<L2Henna>() {
 			@Override
 			public int compare(L2Henna o1, L2Henna o2)
@@ -43,7 +43,7 @@ public final class HennaEquipList extends L2GameServerPacket
 			}
 		});
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -51,7 +51,7 @@ public final class HennaEquipList extends L2GameServerPacket
 		writeCompQ(_player.getAdena());
 		writeD(3); //available equip slot
 		writeD(_hennas.length);
-
+		
 		for (L2Henna element : _hennas)
 		{
 			int req = checkRequirements(element);
@@ -71,29 +71,29 @@ public final class HennaEquipList extends L2GameServerPacket
 				writeCompQ(0x00);
 				writeCompQ(0x00);
 			}
-
+			
 			// Makes no difference in current gracia final client
 			//writeD(req == 0); //meet the requirement(1) or not(0)
 			writeD(0x01);
 		}
 	}
-
+	
 	private final Integer checkRequirements(L2Henna henna)
 	{
 		final L2ItemInstance hennaItem = _player.getInventory().getItemByItemId(henna.getItemId());
-
+		
 		if (hennaItem == null)
 			return 3;
-
+		
 		if (hennaItem.getCount() < henna.getAmount())
 			return 2;
-
+		
 		if (_player.getAdena() < henna.getPrice())
 			return 1;
-
+		
 		return 0;
 	}
-
+	
 	@Override
 	public String getType()
 	{

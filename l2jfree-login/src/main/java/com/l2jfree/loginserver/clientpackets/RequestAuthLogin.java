@@ -37,27 +37,27 @@ import com.l2jfree.loginserver.services.exception.IPRestrictedException;
  */
 public class RequestAuthLogin extends L2LoginClientPacket
 {
-	private final byte[]	_raw	= new byte[128];
-
-	private String	_user;
-	private String	_password;
-	private int		_ncotp;
-
+	private final byte[] _raw = new byte[128];
+	
+	private String _user;
+	private String _password;
+	private int _ncotp;
+	
 	public String getPassword()
 	{
 		return _password;
 	}
-
+	
 	public String getUser()
 	{
 		return _user;
 	}
-
+	
 	public int getOneTimePassword()
 	{
 		return _ncotp;
 	}
-
+	
 	@Override
 	protected int getMinimumLength()
 	{
@@ -68,7 +68,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 	public void readImpl()
 	{
 		readB(_raw);
-
+		
 		/* First three bytes will match with AuthGameGuard's additional block's
 		 * 2nd, 3rd and 4th byte respectively, then goes the randomly deviated 1st byte.
 		 * Then 16 null bytes, a byte equal to 8, 10 null bytes, 4 unknown bytes,
@@ -79,7 +79,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 		*/
 		skip(47);
 	}
-
+	
 	@Override
 	public void runImpl()
 	{
@@ -95,7 +95,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 			e.printStackTrace();
 			return;
 		}
-
+		
 		_user = new String(decrypted, 0x5E, 14).trim();
 		_user = _user.toLowerCase();
 		_password = new String(decrypted, 0x6C, 16).trim();
@@ -103,7 +103,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 		_ncotp |= decrypted[0x7d] << 8;
 		_ncotp |= decrypted[0x7e] << 16;
 		_ncotp |= decrypted[0x7f] << 24;
-
+		
 		LoginManager lc = LoginManager.getInstance();
 		L2LoginClient client = getClient();
 		try
@@ -138,7 +138,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 					if ((gsi = lc.getAccountOnGameServer(_user)) != null)
 					{
 						client.closeLogin(LoginFail.REASON_ALREADY_IN_USE);
-
+						
 						// kick from there
 						if (gsi.isAuthed())
 							gsi.getGameServerThread().kickPlayer(_user);
@@ -147,7 +147,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 				case SYSTEM_ERROR:
 				default:
 					client.closeLogin(LoginFail.REASON_THERE_IS_A_SYSTEM_ERROR);
-
+					
 			}
 		}
 		// catch (HackingException e)
@@ -164,10 +164,10 @@ public class RequestAuthLogin extends L2LoginClientPacket
 		{
 			client.closeLogin(LoginFail.REASON_PASSWORD_INCORRECT);
 		}
-        catch (IPRestrictedException e)
-        {
-        	//client.closeBanned(e.getMinutesLeft());
-        	client.closeBanned(-1);
+		catch (IPRestrictedException e)
+		{
+			//client.closeBanned(e.getMinutesLeft());
+			client.closeBanned(-1);
 		}
 	}
 }

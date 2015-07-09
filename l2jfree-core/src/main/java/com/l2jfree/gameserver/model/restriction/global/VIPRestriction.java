@@ -98,7 +98,7 @@ public final class VIPRestriction extends AbstractFunEventRestriction
 	{
 		VIPPlayerInfo info = activeChar.getPlayerInfo(VIPPlayerInfo.class);
 		
-		return info != null ? info._nameColourVIP: -1;
+		return info != null ? info._nameColourVIP : -1;
 	}
 	
 	@Override

@@ -33,7 +33,7 @@ import com.l2jfree.mmocore.network.IPacketHandler;
  * @author KenM
  */
 public final class L2LoginPacketHandler implements
-	IPacketHandler<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket>
+		IPacketHandler<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket>
 {
 	public L2LoginClientPacket handlePacket(ByteBuffer buf, L2LoginClient client, final int opcode)
 	{

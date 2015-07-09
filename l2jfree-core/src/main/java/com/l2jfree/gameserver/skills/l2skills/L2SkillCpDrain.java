@@ -26,7 +26,7 @@ public class L2SkillCpDrain extends L2Skill
 	{
 		super(set);
 	}
-
+	
 	@Override
 	public void useSkill(L2Character activeChar, L2Character... targets)
 	{
@@ -42,9 +42,9 @@ public class L2SkillCpDrain extends L2Skill
 				else
 					continue;
 			}
-
-			int _cp = (int) target.getStatus().getCurrentCp();
-			final int damage = (int) Math.min(getPower(), _cp);
+			
+			int _cp = (int)target.getStatus().getCurrentCp();
+			final int damage = (int)Math.min(getPower(), _cp);
 			
 			if (damage > 0)
 			{

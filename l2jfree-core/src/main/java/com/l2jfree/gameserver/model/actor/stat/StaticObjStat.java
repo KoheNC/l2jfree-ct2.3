@@ -20,29 +20,29 @@ public class StaticObjStat extends CharStat
 {
 	// =========================================================
 	// Data Field
-
+	
 	// =========================================================
 	// Constructor
 	public StaticObjStat(L2StaticObjectInstance activeChar)
 	{
 		super(activeChar);
-		setLevel((byte) 1);
+		setLevel((byte)1);
 	}
-
+	
 	// =========================================================
 	// Method - Public
-
+	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public L2StaticObjectInstance getActiveChar()
 	{
-		return (L2StaticObjectInstance) _activeChar;
+		return (L2StaticObjectInstance)_activeChar;
 	}
-
+	
 	@Override
 	public final byte getLevel()
 	{

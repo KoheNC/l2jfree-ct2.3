@@ -24,33 +24,34 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class RequestWithDrawalParty extends L2GameClientPacket
 {
-	private static final String	_C__2B_REQUESTWITHDRAWALPARTY	= "[C] 2B RequestWithDrawalParty";
-
+	private static final String _C__2B_REQUESTWITHDRAWALPARTY = "[C] 2B RequestWithDrawalParty";
+	
 	@Override
 	public String getType()
 	{
 		return _C__2B_REQUESTWITHDRAWALPARTY;
 	}
-
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (player.isInParty())
-			if (player.getParty().isInDimensionalRift() && !player.getParty().getDimensionalRift().getRevivedAtWaitingRoom().contains(player))
+			if (player.getParty().isInDimensionalRift()
+					&& !player.getParty().getDimensionalRift().getRevivedAtWaitingRoom().contains(player))
 				sendPacket(SystemMessageId.COULD_NOT_LEAVE_PARTY);
 			else
 				player.getParty().removePartyMember(player, false);
-
+		
 		sendAF();
 	}
 }

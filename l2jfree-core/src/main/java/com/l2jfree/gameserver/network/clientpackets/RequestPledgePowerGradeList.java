@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.network.clientpackets;
 
-
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Clan.RankPrivs;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
@@ -22,33 +21,33 @@ import com.l2jfree.gameserver.network.serverpackets.PledgePowerGradeList;
 
 public class RequestPledgePowerGradeList extends L2GameClientPacket
 {
-    private static final String _C__C0_REQUESTPLEDGEPOWER = "[C] C0 RequestPledgePowerGradeList";
-    
-    @Override
-    protected void readImpl()
-    {
-        // trigger
-    }
-
-    @Override
-    protected void runImpl()
-    {
-        L2PcInstance player = getClient().getActiveChar();
-        L2Clan clan = player.getClan();
-        if (clan != null)
-        {
-            RankPrivs[] privs = clan.getAllRankPrivs();
-            player.sendPacket(new PledgePowerGradeList(privs));
-            //_log.warn("plegdepowergradelist send, privs length: "+privs.length);
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see com.l2jfree.gameserver.clientpackets.ClientBasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _C__C0_REQUESTPLEDGEPOWER;
-    }
+	private static final String _C__C0_REQUESTPLEDGEPOWER = "[C] C0 RequestPledgePowerGradeList";
+	
+	@Override
+	protected void readImpl()
+	{
+		// trigger
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance player = getClient().getActiveChar();
+		L2Clan clan = player.getClan();
+		if (clan != null)
+		{
+			RankPrivs[] privs = clan.getAllRankPrivs();
+			player.sendPacket(new PledgePowerGradeList(privs));
+			//_log.warn("plegdepowergradelist send, privs length: "+privs.length);
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.clientpackets.ClientBasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _C__C0_REQUESTPLEDGEPOWER;
+	}
 }

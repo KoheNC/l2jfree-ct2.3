@@ -35,160 +35,160 @@ public class L2DoorAI extends L2CharacterAI
 	{
 		super(accessor);
 	}
-
+	
 	// rather stupid AI... well, it's for doors :D
 	@Override
 	protected void onIntentionIdle()
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionActive()
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionRest()
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionAttack(L2Character target)
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionCast(SkillUsageRequest request)
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionMoveTo(L2CharPosition destination)
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionFollow(L2Character target)
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionPickUp(L2Object item)
 	{
 	}
-
+	
 	@Override
 	protected void onIntentionInteract(L2Object object)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtThink()
 	{
 	}
-
+	
 	private GuardNotificationQueue _guardNotificationTasks;
-
+	
 	@Override
 	protected void onEvtAttacked(L2Character attacker)
 	{
 		if (_guardNotificationTasks == null)
 			_guardNotificationTasks = new GuardNotificationQueue();
-
+		
 		_guardNotificationTasks.add(attacker);
 	}
-
+	
 	@Override
 	protected void onEvtAggression(L2Character target, int aggro)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtStunned(L2Character attacker)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtSleeping(L2Character attacker)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtRooted(L2Character attacker)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtReadyToAct()
 	{
 	}
-
+	
 	@Override
 	protected void onEvtUserCmd(Object arg0, Object arg1)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtArrived()
 	{
 	}
-
+	
 	@Override
 	protected void onEvtArrivedRevalidate()
 	{
 	}
-
+	
 	@Override
 	protected void onEvtArrivedBlocked(L2CharPosition blocked_at_pos)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtForgetObject(L2Object object)
 	{
 	}
-
+	
 	@Override
 	protected void onEvtCancel()
 	{
 	}
-
+	
 	@Override
 	protected void onEvtDead()
 	{
 	}
-
+	
 	private final boolean isGuarding(L2Object o)
 	{
 		if (o instanceof L2Attackable)
 		{
 			if (o instanceof L2SiegeGuard)
 				return true;
-			switch (((L2Attackable) o).getNpcId())
+			switch (((L2Attackable)o).getNpcId())
 			{
-			case 35411:
-			case 35412:
-			case 35413:
-			case 35414:
-			case 35415:
-			case 35416:
-			case 35369:
-			case 35370:
-			case 35371:
-			case 35372:
-			case 35373:
-			case 35382:
-			case 35383:
-				return true;
+				case 35411:
+				case 35412:
+				case 35413:
+				case 35414:
+				case 35415:
+				case 35416:
+				case 35369:
+				case 35370:
+				case 35371:
+				case 35372:
+				case 35373:
+				case 35382:
+				case 35383:
+					return true;
 			}
 		}
 		return false;
 	}
-
+	
 	private final class GuardNotificationQueue extends FIFOExecutableQueue
 	{
 		private final FastMap<L2Character, Integer> _map = new FastMap<L2Character, Integer>();
-
+		
 		private void add(L2Character attacker)
 		{
 			synchronized (_map)
@@ -201,7 +201,7 @@ public class L2DoorAI extends L2CharacterAI
 			}
 			execute();
 		}
-
+		
 		@Override
 		protected boolean isEmpty()
 		{
@@ -210,30 +210,30 @@ public class L2DoorAI extends L2CharacterAI
 				return _map.isEmpty();
 			}
 		}
-
+		
 		@Override
 		protected void removeAndExecuteFirst()
 		{
 			L2Character attacker = null;
 			int aggro = 0;
-
+			
 			synchronized (_map)
 			{
 				Entry<L2Character, Integer> first = _map.head().getNext();
-
+				
 				attacker = first.getKey();
 				aggro = first.getValue();
-
+				
 				_map.remove(attacker);
 			}
-
+			
 			getActor().getKnownList().updateKnownObjects();
-
+			
 			for (L2Object obj : getActor().getKnownList().getKnownObjects().values())
 			{
 				if (isGuarding(obj))
 				{
-					L2Attackable guard = (L2Attackable) obj;
+					L2Attackable guard = (L2Attackable)obj;
 					if (Math.abs(attacker.getZ() - guard.getZ()) < 200)
 						if (getActor().isInsideRadius(guard, guard.getFactionRange(), false, true))
 							guard.getAI().notifyEvent(CtrlEvent.EVT_AGGRESSION, attacker, aggro);

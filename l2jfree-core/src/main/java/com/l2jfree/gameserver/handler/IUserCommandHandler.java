@@ -26,8 +26,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public interface IUserCommandHandler
 {
-	public static Log	_log	= LogFactory.getLog(IUserCommandHandler.class);
-
+	public static Log _log = LogFactory.getLog(IUserCommandHandler.class);
+	
 	/**
 	 * this is the worker method that is called when someone uses an admin command.
 	 * @param activeChar
@@ -35,7 +35,7 @@ public interface IUserCommandHandler
 	 * @return command success
 	 */
 	public boolean useUserCommand(int id, L2PcInstance activeChar);
-
+	
 	/**
 	 * this method is called at initialization to register all the item ids automatically
 	 * @return all known itemIds

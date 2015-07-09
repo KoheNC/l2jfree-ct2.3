@@ -30,10 +30,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DateRange
 {
-	private final static Log	_log	= LogFactory.getLog(DateRange.class);
-
-	private final Date				_startDate, _endDate;
-
+	private final static Log _log = LogFactory.getLog(DateRange.class);
+	
+	private final Date _startDate, _endDate;
+	
 	/**
 	 * Constructor
 	 * @param from
@@ -44,7 +44,7 @@ public class DateRange
 		_startDate = from;
 		_endDate = to;
 	}
-
+	
 	/**
 	 * Create a DateRange with a single String and a Date formatter
 	 * The initial String is split on "-"
@@ -61,7 +61,7 @@ public class DateRange
 			{
 				Date start = format.parse(date[0]);
 				Date end = format.parse(date[1]);
-
+				
 				return new DateRange(start, end);
 			}
 			catch (ParseException e)
@@ -71,7 +71,7 @@ public class DateRange
 		}
 		return new DateRange(null, null);
 	}
-
+	
 	/**
 	 * 
 	 * @return true if date range are valid, false if the two bound interval are undefined (null)
@@ -80,7 +80,7 @@ public class DateRange
 	{
 		return _startDate != null || _endDate != null;
 	}
-
+	
 	/**
 	 * 
 	 * @param date
@@ -90,7 +90,7 @@ public class DateRange
 	{
 		return date.after(_startDate) && date.before(_endDate);
 	}
-
+	
 	/**
 	 * 
 	 * @return
@@ -99,7 +99,7 @@ public class DateRange
 	{
 		return _endDate;
 	}
-
+	
 	/**
 	 * 
 	 * @return

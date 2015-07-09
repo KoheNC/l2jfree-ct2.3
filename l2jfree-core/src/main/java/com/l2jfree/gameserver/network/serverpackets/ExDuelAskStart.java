@@ -29,7 +29,7 @@ public class ExDuelAskStart extends L2GameServerPacket
 		_requestorName = requestor;
 		_partyDuel = partyDuel;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -42,7 +42,7 @@ public class ExDuelAskStart extends L2GameServerPacket
 		writeS(_requestorName);
 		writeD(_partyDuel);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

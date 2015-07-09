@@ -31,9 +31,8 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminPForge implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_forge", "admin_forge2", "admin_forge3" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_forge", "admin_forge2", "admin_forge3" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_forge"))
@@ -98,11 +97,11 @@ public class AdminPForge implements IAdminCommandHandler
 					}
 					else if (val.toLowerCase().equals("$tclanid"))
 					{
-						val = String.valueOf(((L2PcInstance) activeChar.getTarget()).getCharId());
+						val = String.valueOf(((L2PcInstance)activeChar.getTarget()).getCharId());
 					}
 					else if (val.toLowerCase().equals("$tallyid"))
 					{
-						val = String.valueOf(((L2PcInstance) activeChar.getTarget()).getAllyId());
+						val = String.valueOf(((L2PcInstance)activeChar.getTarget()).getAllyId());
 					}
 					else if (val.toLowerCase().equals("$x"))
 					{
@@ -134,9 +133,9 @@ public class AdminPForge implements IAdminCommandHandler
 					}
 					else if (val.toLowerCase().equals("$theading"))
 					{
-						val = String.valueOf(((L2PcInstance) activeChar.getTarget()).getHeading());
+						val = String.valueOf(((L2PcInstance)activeChar.getTarget()).getHeading());
 					}
-
+					
 					sp.addPart(bytes[i], val);
 				}
 				if (broadcast)
@@ -148,7 +147,7 @@ public class AdminPForge implements IAdminCommandHandler
 					if (activeChar.getTarget() == null || !(activeChar.getTarget() instanceof L2PcInstance))
 						activeChar.sendPacket(sp);
 					else
-						((L2PcInstance) activeChar.getTarget()).sendPacket(sp);
+						((L2PcInstance)activeChar.getTarget()).sendPacket(sp);
 				}
 				showPage3(activeChar, format, command);
 			}
@@ -159,18 +158,18 @@ public class AdminPForge implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	private void showMainPage(L2PcInstance activeChar)
 	{
 		AdminHelpPage.showHelpPage(activeChar, "pforge1.htm");
 	}
-
+	
 	private void showPage2(L2PcInstance activeChar, String format)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/pforge2.htm");
 		adminReply.replace("%format%", format);
-
+		
 		TextBuilder replyMSG = new TextBuilder();
 		for (int i = 0; i < format.length(); i++)
 			replyMSG.append(format.charAt(i) + " : <edit var=\"v" + i + "\" width=100><br1>");
@@ -181,7 +180,7 @@ public class AdminPForge implements IAdminCommandHandler
 		adminReply.replace("%send%", replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	private void showPage3(L2PcInstance activeChar, String format, String command)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
@@ -190,7 +189,7 @@ public class AdminPForge implements IAdminCommandHandler
 		adminReply.replace("%command%", command);
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

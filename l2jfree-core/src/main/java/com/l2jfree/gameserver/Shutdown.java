@@ -223,7 +223,7 @@ public final class Shutdown extends Thread
 		}
 		if (MercTicketManager.getInstance().stopSaveTask())
 			MercTicketManager.getInstance().saveAll();
-
+		
 		HellboundManager.getInstance().saveToDB();
 		System.out.println("HellboundManager: Current state saved.");
 		
@@ -344,7 +344,7 @@ public final class Shutdown extends Thread
 	public static boolean isActionDisabled(DisableType type)
 	{
 		return type.isDisabled() && Config.SAFE_REBOOT && _counterInstance != null
-			&& _counter <= Config.SAFE_REBOOT_TIME;
+				&& _counter <= Config.SAFE_REBOOT_TIME;
 	}
 	
 	public static enum DisableType
@@ -377,7 +377,7 @@ public final class Shutdown extends Thread
 			}
 		}
 	}
-
+	
 	public static boolean isInProgress()
 	{
 		return _counterInstance != null;

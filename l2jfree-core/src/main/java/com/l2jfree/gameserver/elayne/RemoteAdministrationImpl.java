@@ -50,16 +50,16 @@ import com.l2jfree.tools.random.Rnd;
 
 public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRemoteAdministration
 {
-	private final static Log				_log				= LogFactory.getLog(RemoteAdministrationImpl.class.getName());
-	private static final long				serialVersionUID	= -8523099127883669758L;
-	private static RemoteAdministrationImpl	_instance;
-	private IRemoteAdministration			_obj;
-
+	private final static Log _log = LogFactory.getLog(RemoteAdministrationImpl.class.getName());
+	private static final long serialVersionUID = -8523099127883669758L;
+	private static RemoteAdministrationImpl _instance;
+	private IRemoteAdministration _obj;
+	
 	@SuppressWarnings("unused")
-	private Registry						_lReg;
-	private String							_pass;
-	private int								_port;
-
+	private Registry _lReg;
+	private String _pass;
+	private int _port;
+	
 	public static RemoteAdministrationImpl getInstance()
 	{
 		if (_instance == null)
@@ -75,14 +75,14 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		}
 		return _instance;
 	}
-
+	
 	public RemoteAdministrationImpl() throws RemoteException
 	{
 		super();
 		_pass = Config.RMI_SERVER_PASSWORD;
 		_port = Config.RMI_SERVER_PORT;
 	}
-
+	
 	public void startServer()
 	{
 		if (Config.ALLOW_RMI_SERVER && _port != 0)
@@ -91,14 +91,14 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			{
 				_lReg = LocateRegistry.createRegistry(_port);
 				_obj = new RemoteAdministrationImpl();
-
+				
 				if (_pass.isEmpty())
 				{
 					_log.info("No password defined for RMI Server");
 					_pass = generateRandomPassword(10);
 					_log.info("A password has been automatically generated: " + _pass);
 				}
-
+				
 				Naming.rebind("//localhost:" + _port + "/Elayne", _obj);
 				_log.info("RMI Server started on port: " + _port + ", Password: " + _pass + ".");
 			}
@@ -111,7 +111,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		else
 			_log.info("RMI Server is currently disabled.");
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#getOnlineUsersCount()
 	 */
@@ -121,7 +121,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			return 0;
 		return L2World.getInstance().getAllPlayersCount();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#getPlayerInformation(java.lang.String)
 	 */
@@ -134,7 +134,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			return new RemotePlayerImpl(player);
 		return null;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#announceToAll(java.lang.String)
 	 */
@@ -144,7 +144,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			return;
 		Announcements.getInstance().announceToAll(announcement);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#abortServerRestart()
 	 */
@@ -153,7 +153,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		if (password.equals(_pass))
 			Shutdown.abort("127.0.0.1");
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#kickPlayerFromServer(java.lang.String)
 	 */
@@ -170,10 +170,10 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			}
 			return 2;
 		}
-
+		
 		return 3;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#reload(int)
 	 */
@@ -217,7 +217,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			}
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#scheduleServerRestart(int)
 	 */
@@ -226,7 +226,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		if (password.equals(_pass))
 			Shutdown.start("127.0.0.1", secondsUntilRestart, ShutdownMode.SHUTDOWN);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#scheduleServerShutDown(int)
 	 */
@@ -234,9 +234,9 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 	{
 		if (password.equals(_pass))
 			Shutdown.start("127.0.0.1", secondsUntilShutDown, ShutdownMode.RESTART);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#sendMessageToGms(java.lang.String)
 	 */
@@ -248,7 +248,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 		GmListTable.broadcastToGMs(cs);
 		return GmListTable.getAllGms(true).size();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#sendPrivateMessage(java.lang.String, java.lang.String)
 	 */
@@ -263,10 +263,10 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			reciever.sendPacket(cs);
 			return 1;
 		}
-
+		
 		return 2;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.elayne.IRemoteAdministration#getOnlinePlayersDetails(java.lang.String)
 	 */
@@ -276,7 +276,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			return null;
 		return null;
 	}
-
+	
 	private String generateRandomPassword(int length)
 	{
 		L2TextBuilder password = L2TextBuilder.newInstance();

@@ -26,33 +26,33 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class WareHouseDepositList extends L2GameServerPacket
 {
-	public static final int			PRIVATE						= 1;
-	public static final int			CLAN						= 4;
-	public static final int			CASTLE						= 3;								//not sure
-	public static final int			FREIGHT						= 1;
-
-	private static final String		_S__41_WAREHOUSEDEPOSITLIST	= "[S] 41 WareHouseDepositList";
-
-	private final long						_playerAdena;
-	private final FastList<L2ItemInstance>	_items;
-	private final int							_whType;
-
+	public static final int PRIVATE = 1;
+	public static final int CLAN = 4;
+	public static final int CASTLE = 3; //not sure
+	public static final int FREIGHT = 1;
+	
+	private static final String _S__41_WAREHOUSEDEPOSITLIST = "[S] 41 WareHouseDepositList";
+	
+	private final long _playerAdena;
+	private final FastList<L2ItemInstance> _items;
+	private final int _whType;
+	
 	public WareHouseDepositList(L2PcInstance player, int type)
 	{
 		_whType = type;
-
+		
 		final boolean isPrivate = _whType == PRIVATE;
 		_playerAdena = player.getAdena();
-
+		
 		_items = new FastList<L2ItemInstance>();
-
+		
 		for (L2ItemInstance temp : player.getInventory().getAvailableItems(true, isPrivate))
 		{
 			if (temp != null && temp.isDepositable(isPrivate))
 				_items.add(temp);
 		}
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -67,7 +67,7 @@ public class WareHouseDepositList extends L2GameServerPacket
 		if (_log.isDebugEnabled())
 			_log.debug("count:" + count);
 		writeH(count);
-
+		
 		for (L2ItemInstance item : _items)
 		{
 			writeH(item.getItem().getType1());
@@ -88,17 +88,17 @@ public class WareHouseDepositList extends L2GameServerPacket
 			}
 			else
 				writeQ(0x00);
-
+			
 			// T1
 			writeElementalInfo(item); //8x h or d
-
+			
 			writeD(item.getMana());
 			// T2
-			writeD(item.isTimeLimitedItem() ? (int) (item.getRemainingTime() / 1000) : -1);
+			writeD(item.isTimeLimitedItem() ? (int)(item.getRemainingTime() / 1000) : -1);
 		}
 		_items.clear();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

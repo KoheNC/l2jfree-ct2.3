@@ -66,8 +66,8 @@ public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2G
 		return SingletonHolder.INSTANCE;
 	}
 	
-	private L2GameSelectorThread(SelectorConfig sc, IPacketHandler<L2GameClient, L2GameClientPacket, L2GameServerPacket> packetHandler)
-		throws IOException
+	private L2GameSelectorThread(SelectorConfig sc,
+			IPacketHandler<L2GameClient, L2GameClientPacket, L2GameServerPacket> packetHandler) throws IOException
 	{
 		super(sc, packetHandler);
 	}

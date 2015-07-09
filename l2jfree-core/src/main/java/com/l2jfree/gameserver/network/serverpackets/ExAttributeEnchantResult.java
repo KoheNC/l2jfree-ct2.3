@@ -23,7 +23,7 @@ public class ExAttributeEnchantResult extends L2GameServerPacket
 	
 	private final int _result;
 	
-	public ExAttributeEnchantResult (int result)
+	public ExAttributeEnchantResult(int result)
 	{
 		_result = result;
 	}

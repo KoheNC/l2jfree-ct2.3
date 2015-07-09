@@ -32,7 +32,7 @@ abstract class ConditionLogic extends Condition
 	{
 		if (condition == null)
 			throw new IllegalStateException("Tried to add a 'null' condition to an <"
-				+ getClass().getSimpleName().replace("ConditionLogic", "").toLowerCase() + "> condition");
+					+ getClass().getSimpleName().replace("ConditionLogic", "").toLowerCase() + "> condition");
 		
 		_conditions = (Condition[])ArrayUtils.add(_conditions, condition);
 	}
@@ -41,7 +41,7 @@ abstract class ConditionLogic extends Condition
 	{
 		if (_conditions.length == 0)
 			throw new IllegalStateException("Empty <"
-				+ getClass().getSimpleName().replace("ConditionLogic", "").toLowerCase() + "> condition");
+					+ getClass().getSimpleName().replace("ConditionLogic", "").toLowerCase() + "> condition");
 		
 		if (_conditions.length == 1)
 			return _conditions[0];

@@ -169,16 +169,15 @@ public final class GameTimeController
 				if (newHour == Config.ALT_TIME_IN_A_DAY_OF_OPEN_A_DOOR)
 				{
 					DoorTable.getInstance().getDoor(21240006).openMe();
-
-					ThreadPoolManager.getInstance().schedule(new Runnable()
-					{
+					
+					ThreadPoolManager.getInstance().schedule(new Runnable() {
 						public void run()
 						{
 							DoorTable.getInstance().getDoor(21240006).closeMe();
 						}
 					}, Config.ALT_TIME_OF_OPENING_A_DOOR * 60 * 1000);
 				}
-
+				
 				// Blacksmith Shadai
 				if (newHour == 0 || newHour == Config.DATETIME_SUNRISE)
 				{
@@ -206,7 +205,7 @@ public final class GameTimeController
 					if (oldYear != newYear)
 					{
 						Announcements.getInstance().announceToAll(
-							"A new year has begun, good luck to all in the year " + newYear);
+								"A new year has begun, good luck to all in the year " + newYear);
 					}
 				}
 				

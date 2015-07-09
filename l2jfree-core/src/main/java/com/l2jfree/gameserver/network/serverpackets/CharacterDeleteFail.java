@@ -16,26 +16,26 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 public class CharacterDeleteFail extends L2GameServerPacket
 {
-	private static final String	_S__CHARACTERDELETEFAIL					= "[S] 1E CharacterDeleteFail c[d]";
-
-	public static final int		REASON_DELETION_FAILED					= 0x01;
-	public static final int		REASON_YOU_MAY_NOT_DELETE_CLAN_MEMBER	= 0x02;
-	public static final int		REASON_CLAN_LEADERS_MAY_NOT_BE_DELETED	= 0x03;
-
-	private final int			_error;
-
+	private static final String _S__CHARACTERDELETEFAIL = "[S] 1E CharacterDeleteFail c[d]";
+	
+	public static final int REASON_DELETION_FAILED = 0x01;
+	public static final int REASON_YOU_MAY_NOT_DELETE_CLAN_MEMBER = 0x02;
+	public static final int REASON_CLAN_LEADERS_MAY_NOT_BE_DELETED = 0x03;
+	
+	private final int _error;
+	
 	public CharacterDeleteFail(int error)
 	{
 		_error = error;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x1e);
 		writeD(_error);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

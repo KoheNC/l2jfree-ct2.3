@@ -34,59 +34,32 @@ import com.l2jfree.gameserver.util.Util;
 
 public class AdminTvTiEngine implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	= {
-			/** Main Page Commands */
-			"admin_tvti",
-			"admin_tvti_title",
-			"admin_tvti_desc",
-			"admin_tvti_join_name",
-			"admin_tvti_announce_name",
-			"admin_tvti_npc_pos",
-			"admin_tvti_npc",
-			"admin_tvti_radius",
-			"admin_tvti_control_all",
-			"admin_tvti_create_instance",
-			"admin_tvti_remove_instance",
-			"admin_tvti_dupe_instance",
+	private static final String[] ADMIN_COMMANDS = {
+	/** Main Page Commands */
+	"admin_tvti", "admin_tvti_title", "admin_tvti_desc", "admin_tvti_join_name", "admin_tvti_announce_name",
+			"admin_tvti_npc_pos", "admin_tvti_npc", "admin_tvti_radius", "admin_tvti_control_all",
+			"admin_tvti_create_instance", "admin_tvti_remove_instance", "admin_tvti_dupe_instance",
 			"admin_tvti_instance_page",
 			/** Instance Page Commands */
-			"admin_tvti_control_instance",
-			"admin_tvti_instance_name",
-			"admin_tvti_instance_reward",
-			"admin_tvti_instance_amount",
-			"admin_tvti_instance_minplayers",
-			"admin_tvti_instance_maxplayers",
-			"admin_tvti_instance_minlvl",
-			"admin_tvti_instance_maxlvl",
-			"admin_tvti_instance_jointime",
-			"admin_tvti_instance_eventtime",
-			"admin_tvti_team_page",
-			"admin_tvti_create_team",
+			"admin_tvti_control_instance", "admin_tvti_instance_name", "admin_tvti_instance_reward",
+			"admin_tvti_instance_amount", "admin_tvti_instance_minplayers", "admin_tvti_instance_maxplayers",
+			"admin_tvti_instance_minlvl", "admin_tvti_instance_maxlvl", "admin_tvti_instance_jointime",
+			"admin_tvti_instance_eventtime", "admin_tvti_team_page", "admin_tvti_create_team",
 			"admin_tvti_remove_team",
 			/** Team Page Commands */
-			"admin_tvti_team_name",
-			"admin_tvti_team_color",
-			"admin_tvti_team_spawn",
-			"admin_tvti_team_radius",
+			"admin_tvti_team_name", "admin_tvti_team_color", "admin_tvti_team_spawn", "admin_tvti_team_radius",
 			/** Control All Page Commands */
-			"admin_tvti_control_all_join",
-			"admin_tvti_control_all_tele",
-			"admin_tvti_control_all_sit",
-			"admin_tvti_control_all_start",
-			"admin_tvti_control_all_fin",
-			"admin_tvti_control_all_abort",
+			"admin_tvti_control_all_join", "admin_tvti_control_all_tele", "admin_tvti_control_all_sit",
+			"admin_tvti_control_all_start", "admin_tvti_control_all_fin", "admin_tvti_control_all_abort",
 			"admin_tvti_control_all_auto",
 			/** Control Instance Page Commands */
-			"admin_tvti_control_instance_tele",
-			"admin_tvti_control_instance_sit",
-			"admin_tvti_control_instance_start",
-			"admin_tvti_control_instance_fin",
-			"admin_tvti_control_instance_abort",
+			"admin_tvti_control_instance_tele", "admin_tvti_control_instance_sit", "admin_tvti_control_instance_start",
+			"admin_tvti_control_instance_fin", "admin_tvti_control_instance_abort",
 			/** Misc Commands */
-			"admin_tvtikick"						};
-
-	private static final int		REQUIRED_LEVEL	= 100;
-
+			"admin_tvtikick" };
+	
+	private static final int REQUIRED_LEVEL = 100;
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (!(checkLevel(activeChar.getAccessLevel()) && activeChar.isGM()))
@@ -160,63 +133,72 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setInstanceName(command.substring(params[0].length() + params[1].length() + 2));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setInstanceName(
+					command.substring(params[0].length() + params[1].length() + 2));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_reward "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setRewardId(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setRewardId(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_amount "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setRewardAmount(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setRewardAmount(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_minplayers "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMinPlayers(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMinPlayers(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_maxplayers "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMaxPlayers(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMaxPlayers(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_minlvl "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMinLvl(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMinLvl(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_maxlvl "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMaxLvl(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setMaxLvl(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_jointime "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setJoinTime(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setJoinTime(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_instance_eventtime "))
 		{
 			String[] params;
 			params = command.split(" ");
-			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setEventTime(Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
+			TvTIMain.getTvTInstance(Integer.valueOf(params[1])).setEventTime(
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + 2)));
 			showInstancePage(activeChar, Integer.valueOf(params[1]));
 		}
 		else if (command.startsWith("admin_tvti_team_page "))
@@ -226,7 +208,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			// admin_tvti_team_page 300000 Red
 			String teamName = command.substring(params[0].length() + params[1].length() + 2);
 			int teamIdx = 0;
-
+			
 			for (TvTITeam t : TvTIMain.getTvTInstance(Integer.valueOf(params[1])).getTeams())
 			{
 				if (t.getTeamName().equals(teamName))
@@ -235,7 +217,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 					break;
 				}
 			}
-
+			
 			showTeamPage(activeChar, Integer.valueOf(params[1]), teamIdx);
 		}
 		else if (command.startsWith("admin_tvti_create_team "))
@@ -244,7 +226,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			params = command.split(" ");
 			String teamName = command.substring(params[0].length() + params[1].length() + 2);
 			int teamIdx = 0;
-
+			
 			for (TvTITeam t : TvTIMain.getTvTInstance(Integer.valueOf(params[1])).getTeams())
 				if (t.getTeamName().equals(teamName))
 				{
@@ -260,7 +242,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			params = command.split(" ");
 			String teamName = command.substring(params[0].length() + params[1].length() + 2);
 			int teamIdx = 0;
-
+			
 			for (TvTITeam t : TvTIMain.getTvTInstance(Integer.valueOf(params[1])).getTeams())
 				if (t.getTeamName().equals(teamName))
 					teamIdx = TvTIMain.getTvTInstance(Integer.valueOf(params[1])).getTeams().indexOf(t);
@@ -283,7 +265,8 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			params = command.split(" ");
 			String teamColor = command.substring(params[0].length() + params[1].length() + params[2].length() + 3);
 			int teamIdx = Integer.valueOf(params[2]);
-			getTeam(Integer.valueOf(params[1]), teamIdx).setTeamColor(Integer.decode("0x" + Util.reverseColor(teamColor)));
+			getTeam(Integer.valueOf(params[1]), teamIdx).setTeamColor(
+					Integer.decode("0x" + Util.reverseColor(teamColor)));
 			showTeamPage(activeChar, Integer.valueOf(params[1]), teamIdx);
 		}
 		else if (command.startsWith("admin_tvti_team_spawn "))
@@ -298,7 +281,8 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		{
 			String[] params;
 			params = command.split(" ");
-			int radius = Integer.valueOf(command.substring(params[0].length() + params[1].length() + params[2].length() + 3));
+			int radius =
+					Integer.valueOf(command.substring(params[0].length() + params[1].length() + params[2].length() + 3));
 			int teamIdx = Integer.valueOf(params[2]);
 			getTeam(Integer.valueOf(params[1]), teamIdx).setSpawnRadius(radius);
 			showTeamPage(activeChar, Integer.valueOf(params[1]), teamIdx);
@@ -387,7 +371,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		}
 		else if (command.equals("admin_tvtikick"))
 		{
-			L2PcInstance playerToKick = (L2PcInstance) activeChar.getTarget();
+			L2PcInstance playerToKick = (L2PcInstance)activeChar.getTarget();
 			if (playerToKick != null)
 			{
 				TvTIMain.kickPlayerFromEvent(playerToKick, 2);
@@ -398,27 +382,27 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private boolean checkLevel(int level)
 	{
 		return (level >= REQUIRED_LEVEL);
 	}
-
+	
 	public TvTITeam getTeam(int instanceId, int teamIdx)
 	{
 		return TvTIMain.getTvTInstance(instanceId).getTeams().get(teamIdx);
 	}
-
+	
 	public void showMainPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
-
+		
 		replyMSG.append("<title>[TvT Instanced Engine]</title>");
 		replyMSG.append("<center><font color=\"LEVEL\">[Main Page]</font></center><br><br>");
 		replyMSG.append("<table width=\"260\"><tr>");
@@ -436,7 +420,8 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		replyMSG.append("<td width=\"170\">Join Loc Name: " + TvTIMain.getJoinLocName() + "</td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_npc_pos\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-		replyMSG.append("<td width=\"170\">Join Npc Loc: " + TvTIMain.getNpcX() + "," + TvTIMain.getNpcY() + "," + TvTIMain.getNpcZ() + "</td>");
+		replyMSG.append("<td width=\"170\">Join Npc Loc: " + TvTIMain.getNpcX() + "," + TvTIMain.getNpcY() + ","
+				+ TvTIMain.getNpcZ() + "</td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_npc $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Join Npc: " + TvTIMain.getNpcId() + "</td>");
@@ -447,18 +432,23 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_announce_name $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Announce Name: " + TvTIMain.getAnnounceName() + "</td>");
 		replyMSG.append("</tr></table>");
-
+		
 		if (!TvTIMain.getInstances().isEmpty())
 			for (TVTInstance i : TvTIMain.getInstances())
 			{
 				replyMSG.append("<br><table width=\"300\" border=\"0\"><tr>");
-				replyMSG.append("<td align=\"right\"><button value=\"" + i.getInstanceName() + "\" action=\"bypass -h admin_tvti_instance_page " + i.getInstanceId()
+				replyMSG.append("<td align=\"right\"><button value=\"" + i.getInstanceName()
+						+ "\" action=\"bypass -h admin_tvti_instance_page " + i.getInstanceId()
 						+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-				replyMSG.append("<td align=\"left\"><button value=\"Remove\" action=\"bypass -h admin_tvti_remove_instance " + i.getInstanceId() + "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-				replyMSG.append("<td align=\"left\"><button value=\"Dupe\" action=\"bypass -h admin_tvti_dupe_instance " + i.getInstanceId() + "\" width=50 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+				replyMSG.append("<td align=\"left\"><button value=\"Remove\" action=\"bypass -h admin_tvti_remove_instance "
+						+ i.getInstanceId()
+						+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+				replyMSG.append("<td align=\"left\"><button value=\"Dupe\" action=\"bypass -h admin_tvti_dupe_instance "
+						+ i.getInstanceId()
+						+ "\" width=50 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 				if (!i.isSetUp())
 					replyMSG.append("<td align=\"left\"><font color=\"FF0000\">Not Setup!</font></td>");
-
+				
 				replyMSG.append("</tr></table>");
 			}
 		else
@@ -467,7 +457,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			replyMSG.append("<tr><td>There are no instance, please create at least one.</td></tr>");
 			replyMSG.append("</tr></table>");
 		}
-
+		
 		replyMSG.append("<br><table width=\"300\" border=\"0\"><tr>");
 		replyMSG.append("<td align=\"center\"><button value=\"Create new\" action=\"bypass -h admin_tvti_create_instance\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("</tr></table>");
@@ -475,73 +465,99 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public void showInstancePage(L2PcInstance activeChar, int instanceId)
 	{
 		TVTInstance i = TvTIMain.getTvTInstance(instanceId);
-
+		
 		if (i == null)
 		{
 			activeChar.sendMessage("TvT instance does not exist.");
 			return;
 		}
-
+		
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
-
+		
 		replyMSG.append("<title>[TvT Instanced Engine]</title>");
 		replyMSG.append("<table width=\"300\"><tr><td align=\"right\"><button value=\"Back\" action=\"bypass -h admin_tvti\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
-		replyMSG.append("<center><font color=\"LEVEL\">[" + i.getInstanceName() + " Instance View]</font></center><br><br>");
+		replyMSG.append("<center><font color=\"LEVEL\">[" + i.getInstanceName()
+				+ " Instance View]</font></center><br><br>");
 		replyMSG.append("<table width=\"260\"><tr>");
 		replyMSG.append("<td width=\"200\"><edit var=\"input\" width=\"200\"></td>");
-		replyMSG.append("<td width=\"60\"><button value=\"Control This\" action=\"bypass -h admin_tvti_control_instance " + i.getInstanceId() + "\" width=80 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"60\"><button value=\"Control This\" action=\"bypass -h admin_tvti_control_instance "
+				+ i.getInstanceId()
+				+ "\" width=80 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("</tr></table>");
 		replyMSG.append("<table width=\"300\" border=\"0\"><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_name " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_name "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Name: " + i.getInstanceName() + "</td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"></td>");
 		replyMSG.append("<td width=\"170\">Instance Id: " + i.getInstanceId() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_reward " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_reward "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		if (i.getRewardId() == 0)
 			replyMSG.append("<td width=\"170\">Reward: None</td>");
 		else
-			replyMSG.append("<td width=\"170\">Reward: (" + i.getRewardId() + ")" + ItemTable.getInstance().getTemplate(i.getRewardId()).getName() + "</td>");
+			replyMSG.append("<td width=\"170\">Reward: (" + i.getRewardId() + ")"
+					+ ItemTable.getInstance().getTemplate(i.getRewardId()).getName() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_amount " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_amount "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Reward Amount: " + i.getRewardAmount() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_minplayers " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_minplayers "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Min Players: " + i.getMinPlayers() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_maxplayers " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_maxplayers "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Max Players: " + i.getMaxPlayers() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_minlvl " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_minlvl "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Min Level: " + i.getMinLvl() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_maxlvl " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_maxlvl "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Max Level: " + i.getMaxLvl() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_jointime " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_jointime "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Join Time: " + i.getJoinTime() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_eventtime " + instanceId + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_instance_eventtime "
+				+ instanceId
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Event Time: " + i.getEventTime() + "</td>");
 		replyMSG.append("</tr></table>");
-
+		
 		if (!i.getTeams().isEmpty())
 			for (TvTITeam t : i.getTeams())
 			{
 				replyMSG.append("<br><table width=\"300\" border=\"0\"><tr>");
-				replyMSG.append("<td align=\"right\"><button value=\"" + t.getTeamName() + "\" action=\"bypass -h admin_tvti_team_page " + instanceId + " " + t.getTeamName()
+				replyMSG.append("<td align=\"right\"><button value=\"" + t.getTeamName()
+						+ "\" action=\"bypass -h admin_tvti_team_page " + instanceId + " " + t.getTeamName()
 						+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-				replyMSG.append("<td align=\"left\"><button value=\"Remove\" action=\"bypass -h admin_tvti_remove_team " + instanceId + " " + t.getTeamName()
+				replyMSG.append("<td align=\"left\"><button value=\"Remove\" action=\"bypass -h admin_tvti_remove_team "
+						+ instanceId
+						+ " "
+						+ t.getTeamName()
 						+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 				if (!t.isSetUp())
 					replyMSG.append("<td align=\"left\"><font color=\"FF0000\">Not Setup!</font></td>");
-
+				
 				replyMSG.append("</tr></table>");
 			}
 		else if (i.getTeams().size() == 1)
@@ -556,18 +572,20 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			replyMSG.append("<tr><td>There are no teams, please create at least two.</td></tr>");
 			replyMSG.append("</tr></table>");
 		}
-
+		
 		replyMSG.append("<br><table width=\"300\" border=\"0\"><tr>");
 		replyMSG.append("<td align=\"center\">Team Name: <edit var=\"teamName\" width=\"200\"></td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td align=\"center\"><button value=\"Create new\" action=\"bypass -h admin_tvti_create_team " + instanceId + " $teamName\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td align=\"center\"><button value=\"Create new\" action=\"bypass -h admin_tvti_create_team "
+				+ instanceId
+				+ " $teamName\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("</tr></table>");
 		replyMSG.append("");
 		replyMSG.append("</body></html>");
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public void showTeamPage(L2PcInstance activeChar, int instanceId, int teamIdx)
 	{
 		TvTITeam t = getTeam(instanceId, teamIdx);
@@ -577,32 +595,41 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 			activeChar.sendMessage("TvT team does not exist.");
 			return;
 		}
-
+		
 		String c = Integer.toHexString(t.getTeamColor());
 		while (c.length() < 6)
 			c = "0" + c;
-
+		
 		c = Util.reverseColor(c);
-
+		
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
-
+		
 		replyMSG.append("<title>[TvT Instanced Engine]</title>");
-		replyMSG.append("<table width=\"300\"><tr><td align=\"right\"><button value=\"Back\" action=\"bypass -h admin_tvti_instance_page " + TvTIMain.getTvTInstance(instanceId).getInstanceId()
+		replyMSG.append("<table width=\"300\"><tr><td align=\"right\"><button value=\"Back\" action=\"bypass -h admin_tvti_instance_page "
+				+ TvTIMain.getTvTInstance(instanceId).getInstanceId()
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
 		replyMSG.append("<center><font color=\"LEVEL\">[" + t.getTeamName() + " Team View]</font></center><br><br>");
 		replyMSG.append("<edit var=\"input\" width=\"200\">");
 		replyMSG.append("<table width=\"300\" border=\"0\"><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_name " + instanceId + " " + teamIdx + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_name " + instanceId
+				+ " " + teamIdx
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Name: " + t.getTeamName() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_spawn " + instanceId + " " + teamIdx + "\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
-		replyMSG.append("<td width=\"170\">Team Spawn Loc: " + t.getSpawnX() + "," + t.getSpawnY() + "," + t.getSpawnZ() + "</td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_spawn " + instanceId
+				+ " " + teamIdx + "\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"170\">Team Spawn Loc: " + t.getSpawnX() + "," + t.getSpawnY() + ","
+				+ t.getSpawnZ() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_radius " + instanceId + " " + teamIdx + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_radius "
+				+ instanceId + " " + teamIdx
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Random Spawn Radius: " + t.getSpawnRadius() + "</td>");
 		replyMSG.append("</tr><tr>");
-		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
+		replyMSG.append("<td width=\"30\"><button value=\"Set\" action=\"bypass -h admin_tvti_team_color " + instanceId
+				+ " " + teamIdx
+				+ " $input\" width=30 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=\"170\">Color: <font color=\"" + c + "\">" + c.toUpperCase() + "</font></td>");
 		replyMSG.append("</tr></table>");
 		replyMSG.append("<table width=\"300\" border=\"0\"><tr>");
@@ -610,35 +637,44 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		replyMSG.append("</tr></table>");
 		replyMSG.append("<table width=\"300\" border=\"0\"><tr>");
 		replyMSG.append("<td width=\"30\"></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FF0000\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " FF0000\">Red</a></font></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"0000FF\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " 0000FF\">Blue</a></font></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"00FF00\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " 00FF00\">Green</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FF0000\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " FF0000\">Red</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"0000FF\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " 0000FF\">Blue</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"00FF00\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " 00FF00\">Green</a></font></td>");
 		replyMSG.append("<td width=\"30\"></td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FF00FF\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " FF00FF\">Pink</a></font></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"6600CC\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " 6600CC\">Purple</a></font></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FF6600\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " FF6600\">Orange</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FF00FF\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " FF00FF\">Pink</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"6600CC\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " 6600CC\">Purple</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FF6600\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " FF6600\">Orange</a></font></td>");
 		replyMSG.append("<td width=\"30\"></td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("<td width=\"30\"></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FFFF00\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " FFFF00\">Yellow</a></font></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"99FFFF\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " 99FFFF\">Light Blue</a></font></td>");
-		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"999999\"><a action=\"bypass -h admin_tvti_team_color " + instanceId + " " + teamIdx + " 999999\">Grey</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"FFFF00\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " FFFF00\">Yellow</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"99FFFF\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " 99FFFF\">Light Blue</a></font></td>");
+		replyMSG.append("<td align=\"center\" width=\"80\"><font color=\"999999\"><a action=\"bypass -h admin_tvti_team_color "
+				+ instanceId + " " + teamIdx + " 999999\">Grey</a></font></td>");
 		replyMSG.append("<td width=\"30\"></td>");
 		replyMSG.append("</tr><tr>");
 		replyMSG.append("</tr></table>");
-
+		
 		replyMSG.append("</body></html>");
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public void showControlAllPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
-
+		
 		replyMSG.append("<title>[TvT Instanced Engine]</title>");
 		replyMSG.append("<table width=\"300\"><tr><td align=\"right\"><button value=\"Back\" action=\"bypass -h admin_tvti\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
 		replyMSG.append("<button value=\"Join\" action=\"bypass -h admin_tvti_control_all_join\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
@@ -648,21 +684,22 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		replyMSG.append("<button value=\"Finish\" action=\"bypass -h admin_tvti_control_all_fin\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		replyMSG.append("<button value=\"Abort\" action=\"bypass -h admin_tvti_control_all_abort\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		replyMSG.append("<button value=\"Auto\" action=\"bypass -h admin_tvti_control_all_auto\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-
+		
 		replyMSG.append("</body></html>");
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
-
+	
 	public void showControlInstancePage(L2PcInstance activeChar, int instanceId)
 	{
 		TVTInstance i = TvTIMain.getTvTInstance(instanceId);
-
+		
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
-
+		
 		replyMSG.append("<title>[TvT Instanced Engine]</title>");
-		replyMSG.append("<table width=\"300\"><tr><td align=\"right\"><button value=\"Back\" action=\"bypass -h admin_tvti_instance_page " + instanceId
+		replyMSG.append("<table width=\"300\"><tr><td align=\"right\"><button value=\"Back\" action=\"bypass -h admin_tvti_instance_page "
+				+ instanceId
 				+ "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
 		replyMSG.append("<table width=\"300\"><tr>");
 		replyMSG.append("<td>Name : " + i.getInstanceName() + "</td>");
@@ -679,18 +716,23 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		else
 			replyMSG.append("<td>Status : Set up</td>");
 		replyMSG.append("</tr><tr>");
-
+		
 		replyMSG.append("<td>Levels : " + i.getMinLvl() + " - " + i.getMaxLvl() + "</td>");
 		replyMSG.append("</tr><tr>");
 		if (i.isJoining())
 			replyMSG.append("<td>Players : " + i.getPlayers().size() + " / " + i.getMaxPlayers() + "</td>");
 		replyMSG.append("</tr></table>");
 		replyMSG.append("<center> --------------------------------- <br1>");
-		replyMSG.append("<button value=\"Teleport\" action=\"bypass -h admin_tvti_control_instance_tele " + instanceId + "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-		replyMSG.append("<button value=\"Sit\" action=\"bypass -h admin_tvti_control_instance_sit " + instanceId + "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-		replyMSG.append("<button value=\"Start\" action=\"bypass -h admin_tvti_control_instance_start " + instanceId + "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-		replyMSG.append("<button value=\"Finish\" action=\"bypass -h admin_tvti_control_instance_fin " + instanceId + "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-		replyMSG.append("<button value=\"Abort\" action=\"bypass -h admin_tvti_control_instance_abort " + instanceId + "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+		replyMSG.append("<button value=\"Teleport\" action=\"bypass -h admin_tvti_control_instance_tele " + instanceId
+				+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+		replyMSG.append("<button value=\"Sit\" action=\"bypass -h admin_tvti_control_instance_sit " + instanceId
+				+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+		replyMSG.append("<button value=\"Start\" action=\"bypass -h admin_tvti_control_instance_start " + instanceId
+				+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+		replyMSG.append("<button value=\"Finish\" action=\"bypass -h admin_tvti_control_instance_fin " + instanceId
+				+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+		replyMSG.append("<button value=\"Abort\" action=\"bypass -h admin_tvti_control_instance_abort " + instanceId
+				+ "\" width=100 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		replyMSG.append("</center>");
 		replyMSG.append("</body></html>");
 		adminReply.setHtml(replyMSG.toString());

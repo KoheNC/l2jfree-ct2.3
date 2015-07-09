@@ -28,6 +28,7 @@ public class VehicleDeparture extends L2GameServerPacket
 	private final int _x;
 	private final int _y;
 	private final int _z;
+	
 	/**
 	 * @param _boat
 	 * @param speed1
@@ -45,13 +46,12 @@ public class VehicleDeparture extends L2GameServerPacket
 		_y = y;
 		_z = z;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
-	protected
-	void writeImpl()
+	protected void writeImpl()
 	{
 		writeC(0x6c);
 		writeD(_boat.getObjectId());
@@ -61,7 +61,7 @@ public class VehicleDeparture extends L2GameServerPacket
 		writeD(_y);
 		writeD(_z);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

@@ -28,7 +28,7 @@ public class ShowTownMap extends L2GameServerPacket
 	private final String _texture;
 	private final int _x;
 	private final int _y;
-
+	
 	/**
 	 */
 	public ShowTownMap(String texture, int x, int y)
@@ -46,7 +46,7 @@ public class ShowTownMap extends L2GameServerPacket
 		writeD(_x);
 		writeD(_y);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

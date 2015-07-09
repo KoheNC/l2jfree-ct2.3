@@ -48,7 +48,8 @@ public final class CannotMoveAnymore extends L2GameClientPacket
 			return;
 		
 		if (_log.isDebugEnabled())
-			_log.debug("client: x:" + _x + " y:" + _y + " z:" + _z + " server x:" + player.getX() + " y:" + player.getY() + " z:" + player.getZ());
+			_log.debug("client: x:" + _x + " y:" + _y + " z:" + _z + " server x:" + player.getX() + " y:"
+					+ player.getY() + " z:" + player.getZ());
 		
 		player.getAI().notifyEvent(CtrlEvent.EVT_ARRIVED_BLOCKED, new L2CharPosition(_x, _y, _z, _heading));
 		sendAF();

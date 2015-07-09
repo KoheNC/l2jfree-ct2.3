@@ -41,47 +41,47 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 
 public class ClanHall extends Siegeable<CCHSiege>
 {
-	private int								_clanHallId;
-	private List<L2DoorInstance>			_doors;
-	private List<String>					_doorDefault;
-	private L2Clan							_ownerClan;
-	private int								_lease;
-	private String							_desc;
-	private String							_location;
-	protected long							_paidUntil;
-	private int								_grade;
-	protected final int						_chRate						= 604800000;
-	protected boolean						_isFree						= true;
-	private Map<Integer, ClanHallFunction>	_functions;
-	protected boolean						_paid;
-
+	private int _clanHallId;
+	private List<L2DoorInstance> _doors;
+	private List<String> _doorDefault;
+	private L2Clan _ownerClan;
+	private int _lease;
+	private String _desc;
+	private String _location;
+	protected long _paidUntil;
+	private int _grade;
+	protected final int _chRate = 604800000;
+	protected boolean _isFree = true;
+	private Map<Integer, ClanHallFunction> _functions;
+	protected boolean _paid;
+	
 	// Only for contestable clan halls
-	private CCHSiege						_siege;
-	private Calendar						_siegeDate;
-	private boolean							_isTimeRegistrationOver		= true;
-	private Calendar						_siegeTimeRegistrationEndDate;
-
+	private CCHSiege _siege;
+	private Calendar _siegeDate;
+	private boolean _isTimeRegistrationOver = true;
+	private Calendar _siegeTimeRegistrationEndDate;
+	
 	/** Clan Hall Functions */
-	public static final int					FUNC_TELEPORT				= 1;
-	public static final int					FUNC_ITEM_CREATE			= 2;
-	public static final int					FUNC_RESTORE_HP				= 3;
-	public static final int					FUNC_RESTORE_MP				= 4;
-	public static final int					FUNC_RESTORE_EXP			= 5;
-	public static final int					FUNC_SUPPORT				= 6;
-	public static final int					FUNC_DECO_FRONTPLATEFORM	= 7;
-	public static final int					FUNC_DECO_CURTAINS			= 8;
-
+	public static final int FUNC_TELEPORT = 1;
+	public static final int FUNC_ITEM_CREATE = 2;
+	public static final int FUNC_RESTORE_HP = 3;
+	public static final int FUNC_RESTORE_MP = 4;
+	public static final int FUNC_RESTORE_EXP = 5;
+	public static final int FUNC_SUPPORT = 6;
+	public static final int FUNC_DECO_FRONTPLATEFORM = 7;
+	public static final int FUNC_DECO_CURTAINS = 8;
+	
 	public class ClanHallFunction
 	{
-		private int			_type;
-		private int			_lvl;
-		protected int		_fee;
-		protected int		_tempFee;
-		private long		_rate;
-		private long		_endDate;
-		protected boolean	_inDebt;
-		public boolean		_cwh;		// first activating clanhall function is payed from player inventory, any others from clan warehouse
-
+		private int _type;
+		private int _lvl;
+		protected int _fee;
+		protected int _tempFee;
+		private long _rate;
+		private long _endDate;
+		protected boolean _inDebt;
+		public boolean _cwh; // first activating clanhall function is payed from player inventory, any others from clan warehouse
+		
 		public ClanHallFunction(int type, int lvl, int lease, int tempLease, long rate, long time, boolean cwh)
 		{
 			_type = type;
@@ -92,47 +92,47 @@ public class ClanHall extends Siegeable<CCHSiege>
 			_endDate = time;
 			initializeFunctionTask(cwh);
 		}
-
+		
 		public int getType()
 		{
 			return _type;
 		}
-
+		
 		public int getLvl()
 		{
 			return _lvl;
 		}
-
+		
 		public int getLease()
 		{
 			return _fee;
 		}
-
+		
 		public long getRate()
 		{
 			return _rate;
 		}
-
+		
 		public long getEndTime()
 		{
 			return _endDate;
 		}
-
+		
 		public void setLvl(int lvl)
 		{
 			_lvl = lvl;
 		}
-
+		
 		public void setLease(int lease)
 		{
 			_fee = lease;
 		}
-
+		
 		public void setEndTime(long time)
 		{
 			_endDate = time;
 		}
-
+		
 		private void initializeFunctionTask(boolean cwh)
 		{
 			if (_isFree)
@@ -143,14 +143,14 @@ public class ClanHall extends Siegeable<CCHSiege>
 			else
 				ThreadPoolManager.getInstance().scheduleGeneral(new FunctionTask(cwh), 0);
 		}
-
+		
 		private class FunctionTask implements Runnable
 		{
 			public FunctionTask(boolean cwh)
 			{
 				_cwh = cwh;
 			}
-
+			
 			public void run()
 			{
 				try
@@ -175,9 +175,11 @@ public class ClanHall extends Siegeable<CCHSiege>
 						dbSave(newfc);
 						if (_cwh)
 						{
-							getOwnerClan().getWarehouse().destroyItemByItemId("CH_function_fee", PcInventory.ADENA_ID, fee, null, null);
+							getOwnerClan().getWarehouse().destroyItemByItemId("CH_function_fee", PcInventory.ADENA_ID,
+									fee, null, null);
 							if (_log.isDebugEnabled())
-								_log.warn("deducted "+fee+" adena from "+getName()+" owner's cwh for function id : "+getType());
+								_log.warn("deducted " + fee + " adena from " + getName()
+										+ " owner's cwh for function id : " + getType());
 						}
 						ThreadPoolManager.getInstance().scheduleGeneral(new FunctionTask(true), getRate());
 					}
@@ -190,18 +192,19 @@ public class ClanHall extends Siegeable<CCHSiege>
 				}
 			}
 		}
-
+		
 		public void dbSave(boolean newFunction)
 		{
 			Connection con = null;
 			try
 			{
 				PreparedStatement statement;
-
+				
 				con = L2DatabaseFactory.getInstance().getConnection(con);
 				if (newFunction)
 				{
-					statement = con.prepareStatement("INSERT INTO clanhall_functions (hall_id, type, lvl, lease, rate, endTime) VALUES (?,?,?,?,?,?)");
+					statement =
+							con.prepareStatement("INSERT INTO clanhall_functions (hall_id, type, lvl, lease, rate, endTime) VALUES (?,?,?,?,?,?)");
 					statement.setInt(1, getId());
 					statement.setInt(2, getType());
 					statement.setInt(3, getLvl());
@@ -211,7 +214,8 @@ public class ClanHall extends Siegeable<CCHSiege>
 				}
 				else
 				{
-					statement = con.prepareStatement("UPDATE clanhall_functions SET lvl=?, lease=?, endTime=? WHERE hall_id=? AND type=?");
+					statement =
+							con.prepareStatement("UPDATE clanhall_functions SET lvl=?, lease=?, endTime=? WHERE hall_id=? AND type=?");
 					statement.setInt(1, getLvl());
 					statement.setInt(2, getLease());
 					statement.setLong(3, getEndTime());
@@ -223,7 +227,9 @@ public class ClanHall extends Siegeable<CCHSiege>
 			}
 			catch (Exception e)
 			{
-				_log.fatal("Exception: ClanHall.updateFunctions(int type, int lvl, int lease, long rate, long time, boolean addNew): " + e.getMessage(), e);
+				_log.fatal(
+						"Exception: ClanHall.updateFunctions(int type, int lvl, int lease, long rate, long time, boolean addNew): "
+								+ e.getMessage(), e);
 			}
 			finally
 			{
@@ -231,8 +237,9 @@ public class ClanHall extends Siegeable<CCHSiege>
 			}
 		}
 	}
-
-	public ClanHall(int clanHallId, String name, int ownerId, int lease, String desc, String location, long paidUntil, int Grade, boolean paid)
+	
+	public ClanHall(int clanHallId, String name, int ownerId, int lease, String desc, String location, long paidUntil,
+			int Grade, boolean paid)
 	{
 		super(clanHallId);
 		_clanHallId = clanHallId;
@@ -256,49 +263,49 @@ public class ClanHall extends Siegeable<CCHSiege>
 		}
 		loadSiegeData();
 	}
-
+	
 	/** Return if clanHall is paid or not */
 	public final boolean getPaid()
 	{
 		return _paid;
 	}
-
+	
 	/** Return Id Of Clan hall */
 	public final int getId()
 	{
 		return _clanHallId;
 	}
-
+	
 	/** Return lease*/
 	public final int getLease()
 	{
 		return _lease;
 	}
-
+	
 	/** Return Desc */
 	public final String getDesc()
 	{
 		return _desc;
 	}
-
+	
 	/** Return Location */
 	public final String getLocation()
 	{
 		return _location;
 	}
-
+	
 	/** Return PaidUntil */
 	public final long getPaidUntil()
 	{
 		return _paidUntil;
 	}
-
+	
 	/** Return Grade */
 	public final int getGrade()
 	{
 		return _grade;
 	}
-
+	
 	/** Return all DoorInstance */
 	public final List<L2DoorInstance> getDoors()
 	{
@@ -306,20 +313,20 @@ public class ClanHall extends Siegeable<CCHSiege>
 			_doors = new FastList<L2DoorInstance>();
 		return _doors;
 	}
-
+	
 	/** Return Door */
 	public final L2DoorInstance getDoor(int doorId)
 	{
 		if (doorId <= 0)
 			return null;
-		for (L2DoorInstance door: getDoors())
+		for (L2DoorInstance door : getDoors())
 		{
 			if (door.getDoorId() == doorId)
 				return door;
 		}
 		return null;
 	}
-
+	
 	/** Return function with id */
 	public ClanHallFunction getFunction(int type)
 	{
@@ -327,7 +334,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 			return _functions.get(type);
 		return null;
 	}
-
+	
 	/** Free this clan hall */
 	public void free()
 	{
@@ -345,21 +352,21 @@ public class ClanHall extends Siegeable<CCHSiege>
 		_paidUntil = 0;
 		updateDb();
 	}
-
+	
 	/** Set owner if clan hall is free */
 	public void setOwner(L2Clan clan)
 	{
 		// An owner exists - must not mess with auction, as GM commands call a different method
 		if (!isSiegeable() && _ownerId > 0)
 			return;
-
+		
 		// An owner might exist, but we wont mess anything
 		if (isSiegeable())
 			free();
 		// New owner doesn't exist. Stop here.
 		if (clan == null)
 			return;
-
+		
 		_ownerId = clan.getClanId();
 		_ownerClan = clan;
 		_isFree = false;
@@ -376,13 +383,13 @@ public class ClanHall extends Siegeable<CCHSiege>
 		clan.broadcastToOnlineMembers(new PledgeShowInfoUpdate(clan));
 		updateDb();
 	}
-
+	
 	/** Respawn all doors */
 	public void spawnDoor()
 	{
 		spawnDoor(false);
 	}
-
+	
 	/** Respawn all doors */
 	public void spawnDoor(boolean isDoorWeak)
 	{
@@ -404,19 +411,19 @@ public class ClanHall extends Siegeable<CCHSiege>
 				door.closeMe();
 		}
 	}
-
+	
 	/** Open or Close Door */
 	public void openCloseDoor(L2PcInstance activeChar, int doorId, boolean open)
 	{
 		if (activeChar != null && activeChar.getClanId() == getOwnerId())
 			openCloseDoor(doorId, open);
 	}
-
+	
 	public void openCloseDoor(int doorId, boolean open)
 	{
 		openCloseDoor(getDoor(doorId), open);
 	}
-
+	
 	public void openCloseDoor(L2DoorInstance door, boolean open)
 	{
 		if (door != null)
@@ -427,13 +434,13 @@ public class ClanHall extends Siegeable<CCHSiege>
 				door.closeMe();
 		}
 	}
-
+	
 	public void openCloseDoors(L2PcInstance activeChar, boolean open)
 	{
 		if (activeChar != null && activeChar.getClanId() == getOwnerId())
 			openCloseDoors(open);
 	}
-
+	
 	public void openCloseDoors(boolean open)
 	{
 		for (L2DoorInstance door : getDoors())
@@ -447,13 +454,13 @@ public class ClanHall extends Siegeable<CCHSiege>
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean checkBanish(L2PcInstance cha)
 	{
 		return cha.getClanId() != getOwnerId();
 	}
-
+	
 	/** Load All Functions */
 	private void loadFunctions()
 	{
@@ -468,8 +475,10 @@ public class ClanHall extends Siegeable<CCHSiege>
 			rs = statement.executeQuery();
 			while (rs.next())
 			{
-				_functions.put(rs.getInt("type"), new ClanHallFunction(rs.getInt("type"), rs.getInt("lvl"), rs.getInt("lease"), 0, rs.getLong("rate"), rs
-						.getLong("endTime"), true));
+				_functions.put(
+						rs.getInt("type"),
+						new ClanHallFunction(rs.getInt("type"), rs.getInt("lvl"), rs.getInt("lease"), 0, rs
+								.getLong("rate"), rs.getLong("endTime"), true));
 			}
 			statement.close();
 		}
@@ -482,7 +491,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/** Remove function In List and in DB */
 	public void removeFunction(int functionType)
 	{
@@ -507,21 +516,22 @@ public class ClanHall extends Siegeable<CCHSiege>
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public boolean updateFunctions(L2PcInstance player, int type, int lvl, int lease, long rate, boolean addNew)
 	{
 		if (player == null)
 			return false;
-
+		
 		if (_log.isDebugEnabled())
-			_log.warn("Called ClanHall.updateFunctions(int type, int lvl, int lease, long rate, boolean addNew) Owner : " + getOwnerId());
-
+			_log.warn("Called ClanHall.updateFunctions(int type, int lvl, int lease, long rate, boolean addNew) Owner : "
+					+ getOwnerId());
+		
 		if (lease > 0)
 		{
 			if (!player.destroyItemByItemId("Consume", PcInventory.ADENA_ID, lease, null, true))
 				return false;
 		}
-
+		
 		if (addNew)
 		{
 			_functions.put(type, new ClanHallFunction(type, lvl, lease, 0, rate, 0, false));
@@ -550,7 +560,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 		}
 		return true;
 	}
-
+	
 	/** Update DB */
 	public void updateDb()
 	{
@@ -559,7 +569,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
 			PreparedStatement statement;
-
+			
 			statement = con.prepareStatement("UPDATE clanhall SET ownerId=?, paidUntil=?, paid=? WHERE id=?");
 			statement.setInt(1, _ownerId);
 			statement.setLong(2, _paidUntil);
@@ -577,7 +587,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/** Initialyze Fee Task */
 	private void initializeTask(boolean forced)
 	{
@@ -591,19 +601,20 @@ public class ClanHall extends Siegeable<CCHSiege>
 			if (System.currentTimeMillis() + (1000 * 60 * 60 * 24) <= _paidUntil + _chRate)
 				ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(), 1000 * 60 * 60 * 24);
 			else
-				ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(), (_paidUntil + _chRate) - System.currentTimeMillis());
+				ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(),
+						(_paidUntil + _chRate) - System.currentTimeMillis());
 		}
 		else
 			ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(), 0);
 	}
-
+	
 	/** Fee Task */
 	private class FeeTask implements Runnable
 	{
 		public FeeTask()
 		{
 		}
-
+		
 		public void run()
 		{
 			try
@@ -620,11 +631,14 @@ public class ClanHall extends Siegeable<CCHSiege>
 					}
 					else
 						_paidUntil = System.currentTimeMillis() + _chRate;
-
-					getOwnerClan().getWarehouse().destroyItemByItemId("CH_rental_fee", PcInventory.ADENA_ID, getLease(), null, null);
+					
+					getOwnerClan().getWarehouse().destroyItemByItemId("CH_rental_fee", PcInventory.ADENA_ID,
+							getLease(), null, null);
 					if (_log.isDebugEnabled())
-						_log.warn("deducted " + getLease() + " adena from " + getName() + " owner's cwh for ClanHall _paidUntil" + _paidUntil);
-					ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(), _paidUntil - System.currentTimeMillis());
+						_log.warn("deducted " + getLease() + " adena from " + getName()
+								+ " owner's cwh for ClanHall _paidUntil" + _paidUntil);
+					ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(),
+							_paidUntil - System.currentTimeMillis());
 					_paid = true;
 					updateDb();
 				}
@@ -646,11 +660,13 @@ public class ClanHall extends Siegeable<CCHSiege>
 					{
 						updateDb();
 						// TODO: fix this...
-						Clan.broadcastToOnlineMembers(new SystemMessage(SystemMessageId.MAKE_CLAN_HALL_PAYMENT_BY_S1_TOMORROW).addNumber(12));
+						Clan.broadcastToOnlineMembers(new SystemMessage(
+								SystemMessageId.MAKE_CLAN_HALL_PAYMENT_BY_S1_TOMORROW).addNumber(12));
 						if (System.currentTimeMillis() + (1000 * 60 * 60 * 24) <= _paidUntil + _chRate)
 							ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(), 1000 * 60 * 60 * 24);
 						else
-							ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(), (_paidUntil + _chRate) - System.currentTimeMillis());
+							ThreadPoolManager.getInstance().scheduleGeneral(new FeeTask(),
+									(_paidUntil + _chRate) - System.currentTimeMillis());
 					}
 				}
 			}
@@ -660,29 +676,30 @@ public class ClanHall extends Siegeable<CCHSiege>
 			}
 		}
 	}
-
+	
 	public L2Clan getOwnerClan()
 	{
 		if (_ownerId == 0)
 			return null;
-
+		
 		if (_ownerClan == null)
 			_ownerClan = ClanTable.getInstance().getClan(getOwnerId());
-
+		
 		return _ownerClan;
 	}
-
+	
 	private final boolean isSiegeable()
 	{
 		switch (getId())
 		{
-		case 34: case 64:
-			return true;
-		default:
-			return false;
+			case 34:
+			case 64:
+				return true;
+			default:
+				return false;
 		}
 	}
-
+	
 	@Override
 	public final CCHSiege getSiege()
 	{
@@ -690,39 +707,40 @@ public class ClanHall extends Siegeable<CCHSiege>
 			_siege = new CCHSiege(this);
 		return _siege;
 	}
-
+	
 	public final Calendar getSiegeDate()
 	{
 		return _siegeDate;
 	}
-
+	
 	public boolean getIsTimeRegistrationOver()
 	{
 		return _isTimeRegistrationOver;
 	}
-
+	
 	public void setIsTimeRegistrationOver(boolean val)
 	{
 		_isTimeRegistrationOver = val;
 	}
-
+	
 	public Calendar getTimeRegistrationOverDate()
 	{
 		if (_siegeTimeRegistrationEndDate == null)
 			_siegeTimeRegistrationEndDate = Calendar.getInstance();
 		return _siegeTimeRegistrationEndDate;
 	}
-
+	
 	private final void loadSiegeData()
 	{
 		if (!isSiegeable())
 			return;
-
+		
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT siegeDate,regTimeEnd,regTimeOver FROM clanhall_sieges WHERE hallId=?");
+			PreparedStatement ps =
+					con.prepareStatement("SELECT siegeDate,regTimeEnd,regTimeOver FROM clanhall_sieges WHERE hallId=?");
 			ps.setInt(1, getId());
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())

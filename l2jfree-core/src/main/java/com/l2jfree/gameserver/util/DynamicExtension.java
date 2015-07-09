@@ -31,14 +31,14 @@ import com.l2jfree.config.L2Properties;
  */
 public class DynamicExtension
 {
-	private static Log										_log	= LogFactory.getLog(DynamicExtension.class);
-	private JarClassLoader									classLoader;
-	private static final String								CONFIG	= "config/extensions.properties";
-	private L2Properties									_prop;
-	private ConcurrentHashMap<String, Object>				_loadedExtensions;
-	private final ConcurrentHashMap<String, ExtensionFunction>	_getters;
-	private final ConcurrentHashMap<String, ExtensionFunction>	_setters;
-
+	private static Log _log = LogFactory.getLog(DynamicExtension.class);
+	private JarClassLoader classLoader;
+	private static final String CONFIG = "config/extensions.properties";
+	private L2Properties _prop;
+	private ConcurrentHashMap<String, Object> _loadedExtensions;
+	private final ConcurrentHashMap<String, ExtensionFunction> _getters;
+	private final ConcurrentHashMap<String, ExtensionFunction> _setters;
+	
 	/**
 	 * create an instance of DynamicExtension this will be done by GameServer
 	 * according to the altsettings.properties
@@ -50,7 +50,7 @@ public class DynamicExtension
 		_setters = new ConcurrentHashMap<String, ExtensionFunction>();
 		initExtensions();
 	}
-
+	
 	/**
 	 * get the singleton of DynamicInstance
 	 * 
@@ -60,7 +60,7 @@ public class DynamicExtension
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	/**
 	 * get an extension object by class name
 	 * 
@@ -71,7 +71,7 @@ public class DynamicExtension
 	{
 		return _loadedExtensions.get(className);
 	}
-
+	
 	/**
 	 * initialize all configured extensions
 	 * 
@@ -95,14 +95,14 @@ public class DynamicExtension
 		classLoader = new JarClassLoader();
 		for (Object o : _prop.keySet())
 		{
-			String k = (String) o;
+			String k = (String)o;
 			if (k.endsWith("Class"))
 			{
 				initExtension(_prop.getProperty(k));
 			}
 		}
 	}
-
+	
 	/**
 	 * init a named extension
 	 * 
@@ -133,7 +133,7 @@ public class DynamicExtension
 			_log.warn(name, ex);
 		}
 	}
-
+	
 	/**
 	 * create a new class loader which resets the cache (jar files and loaded
 	 * classes) on next class loading request it will read the jar again
@@ -142,7 +142,7 @@ public class DynamicExtension
 	{
 		classLoader = new JarClassLoader();
 	}
-
+	
 	/**
 	 * call unloadExtension() for all known extensions
 	 * 
@@ -152,7 +152,7 @@ public class DynamicExtension
 		for (String e : _loadedExtensions.keySet())
 			unloadExtension(e);
 	}
-
+	
 	/**
 	 * unload a named extension
 	 * 
@@ -181,7 +181,7 @@ public class DynamicExtension
 			_log.warn("could not unload " + className, ex);
 		}
 	}
-
+	
 	/**
 	 * unloads all extensions, resets the cache and initializes all configured
 	 * extensions
@@ -193,7 +193,7 @@ public class DynamicExtension
 		clearCache();
 		initExtensions();
 	}
-
+	
 	/**
 	 * unloads a named extension, resets the cache and initializes the extension
 	 * 
@@ -206,7 +206,7 @@ public class DynamicExtension
 		clearCache();
 		initExtension(name);
 	}
-
+	
 	/**
 	 * register a getter function given a (hopefully) unique name
 	 * 
@@ -217,7 +217,7 @@ public class DynamicExtension
 	{
 		_getters.put(name, function);
 	}
-
+	
 	/**
 	 * deregister a getter function
 	 * 
@@ -227,7 +227,7 @@ public class DynamicExtension
 	{
 		_getters.remove(name);
 	}
-
+	
 	/**
 	 * call a getter function registered with DynamicExtension
 	 * 
@@ -242,7 +242,7 @@ public class DynamicExtension
 			return func.get(arg);
 		return "<none>";
 	}
-
+	
 	/**
 	 * register a setter function given a (hopefully) unique name
 	 * 
@@ -253,7 +253,7 @@ public class DynamicExtension
 	{
 		_setters.put(name, function);
 	}
-
+	
 	/**
 	 * deregister a setter function
 	 * 
@@ -263,7 +263,7 @@ public class DynamicExtension
 	{
 		_setters.remove(name);
 	}
-
+	
 	/**
 	 * call a setter function registered with DynamicExtension
 	 * 
@@ -277,7 +277,7 @@ public class DynamicExtension
 		if (func != null)
 			func.set(arg, obj);
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

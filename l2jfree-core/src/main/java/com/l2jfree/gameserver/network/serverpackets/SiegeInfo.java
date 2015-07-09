@@ -42,20 +42,20 @@ import com.l2jfree.gameserver.network.L2GameClient;
  */
 public class SiegeInfo extends L2GameServerPacket
 {
-	private static final String	_S__C9_SIEGEINFO	= "[S] c9 SiegeInfo";
+	private static final String _S__C9_SIEGEINFO = "[S] c9 SiegeInfo";
 	private static final String DEFAULT_OWNER = "NPC";
 	private static final String DEFAULT_CLAN_ALLY = "";
 	private final int _siegeableID;
 	private final L2Clan _owner;
 	private final int _siegeTime;
-
+	
 	public SiegeInfo(Castle castle)
 	{
 		_siegeableID = castle.getCastleId();
 		_owner = ClanTable.getInstance().getClan(castle.getOwnerId());
-		_siegeTime = (int) (castle.getSiege().getSiegeDate().getTimeInMillis() / 1000);
+		_siegeTime = (int)(castle.getSiege().getSiegeDate().getTimeInMillis() / 1000);
 	}
-
+	
 	public SiegeInfo(ClanHall hideout)
 	{
 		_siegeableID = hideout.getId();
@@ -66,9 +66,9 @@ public class SiegeInfo extends L2GameServerPacket
 			_log.fatal("Requested siege info for non-contestable hideout!");
 		}
 		else
-			_siegeTime = (int) (hideout.getSiege().getSiegeDate().getTimeInMillis() / 1000);
+			_siegeTime = (int)(hideout.getSiege().getSiegeDate().getTimeInMillis() / 1000);
 	}
-
+	
 	@Override
 	protected final void writeImpl(L2GameClient client, L2PcInstance activeChar)
 	{
@@ -97,11 +97,11 @@ public class SiegeInfo extends L2GameServerPacket
 			writeD(0x00);
 			writeS(DEFAULT_CLAN_ALLY);
 		}
-		writeD((int) (System.currentTimeMillis() / 1000));
+		writeD((int)(System.currentTimeMillis() / 1000));
 		writeD(_siegeTime);
 		writeD(0x00);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

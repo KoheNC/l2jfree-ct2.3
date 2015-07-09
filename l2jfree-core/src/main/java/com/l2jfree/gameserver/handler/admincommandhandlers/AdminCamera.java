@@ -26,15 +26,14 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class AdminCamera implements IAdminCommandHandler
 {
-
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_camera", "admin_camset", };
-
+	
+	private static final String[] ADMIN_COMMANDS = { "admin_camera", "admin_camset", };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_camera"))
 			AdminHelpPage.showHelpPage(activeChar, "camera_menu.htm");
-
+		
 		else if (command.startsWith("admin_camset"))
 		{
 			if (activeChar.getTarget() == null)
@@ -45,7 +44,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				StringTokenizer st = new StringTokenizer(command);
 				st.nextToken();
-
+				
 				try
 				{
 					L2Object target = activeChar.getTarget();
@@ -54,7 +53,8 @@ public class AdminCamera implements IAdminCommandHandler
 					int scPitch = Integer.parseInt(st.nextToken());
 					int scTime = Integer.parseInt(st.nextToken());
 					int scDuration = Integer.parseInt(st.nextToken());
-					activeChar.sendMessage("camera " + scDist + "," + scYaw + "," + scPitch + "," + scTime + "," + scDuration);
+					activeChar.sendMessage("camera " + scDist + "," + scYaw + "," + scPitch + "," + scTime + ","
+							+ scDuration);
 					activeChar.enterMovieMode();
 					activeChar.specialCamera(target, scDist, scYaw, scPitch, scTime, scDuration);
 				}
@@ -66,12 +66,12 @@ public class AdminCamera implements IAdminCommandHandler
 				{
 					activeChar.leaveMovieMode();
 				}
-
+				
 			}
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

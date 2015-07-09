@@ -26,14 +26,15 @@ import com.l2jfree.gameserver.network.serverpackets.ExListPartyMatchingWaitingRo
  */
 public class RequestListPartyMatchingWaitingRoom extends L2GameClientPacket
 {
-	private static final String _C__D0_31_REQUESTLISTPARTYMATCHINGWAITINGROOM = "[C] D0:31 RequestListPartyMatchingWaitingRoom";
-
+	private static final String _C__D0_31_REQUESTLISTPARTYMATCHINGWAITINGROOM =
+			"[C] D0:31 RequestListPartyMatchingWaitingRoom";
+	
 	private int _page;
 	@SuppressWarnings("unused")
 	private boolean _showAll;
 	private int _minLevel;
 	private int _maxLevel;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -42,20 +43,20 @@ public class RequestListPartyMatchingWaitingRoom extends L2GameClientPacket
 		_maxLevel = readD();
 		_showAll = readD() == 1; // client sends 0 if in party room, 1 if not in party room. If you are in party room, only players with matching level are shown.
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		// show all isn't used. TODO: test & compare
 		sendPacket(new ExListPartyMatchingWaitingRoom(_minLevel, _maxLevel, _page));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

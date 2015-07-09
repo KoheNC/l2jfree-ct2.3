@@ -18,22 +18,22 @@ public class ExBrProductList extends L2GameServerPacket
 {
 	private static final String _S__EXBRPRODUCTLIST = "[S] FE:A7 ExBR_ProductList ch[d(unk)]";
 	public static final ExBrProductList EMPTY = new ExBrProductList();
-
+	
 	/** Unknown packet structure when list isn't empty! */
 	private ExBrProductList()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0xa7);
-
+		
 		writeD(0x00); // list size
 		// ???
 	}
-
+	
 	@Override
 	public String getType()
 	{

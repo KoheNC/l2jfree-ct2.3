@@ -26,13 +26,13 @@ public class BanInfo
 	/**
 	 * The IP address banned
 	 */
-	private final SubNet	_net;
-
+	private final SubNet _net;
+	
 	/**
 	 * expiration of the ban : represent the difference, measured in milliseconds, between the expiration time of the ban and midnight, January 1, 1970 UTC.
 	 */
-	private final long	_expiration;
-
+	private final long _expiration;
+	
 	/**
 	 * Constructor
 	 * @param ipAddress
@@ -43,12 +43,12 @@ public class BanInfo
 		_net = net;
 		_expiration = expiration;
 	}
-
+	
 	public SubNet getNet()
 	{
 		return _net;
 	}
-
+	
 	/**
 	 * check if the ban is eternal (equal to 0)
 	 * @return true or false
@@ -57,7 +57,7 @@ public class BanInfo
 	{
 		return _expiration == 0;
 	}
-
+	
 	/**
 	 * Check if ban expired : current time > _expiration
 	 * @return true if ban is expired
@@ -66,8 +66,9 @@ public class BanInfo
 	{
 		return System.currentTimeMillis() > _expiration;
 	}
-
-	public long getExpiry() {
+	
+	public long getExpiry()
+	{
 		return _expiration;
 	}
 }

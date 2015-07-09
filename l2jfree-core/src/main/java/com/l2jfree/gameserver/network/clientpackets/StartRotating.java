@@ -19,30 +19,30 @@ import com.l2jfree.gameserver.network.serverpackets.StartRotation;
 
 public class StartRotating extends L2GameClientPacket
 {
-	private static final String	_C__STARTROTATING	= "[C] 5B StartRotating c[dd]";
-
-	private int					_degree;
-	private int					_side;
-
+	private static final String _C__STARTROTATING = "[C] 5B StartRotating c[dd]";
+	
+	private int _degree;
+	private int _side;
+	
 	@Override
 	protected void readImpl()
 	{
 		_degree = readD();
 		_side = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		player.broadcastPacket(new StartRotation(player.getObjectId(), _degree, _side, 0));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

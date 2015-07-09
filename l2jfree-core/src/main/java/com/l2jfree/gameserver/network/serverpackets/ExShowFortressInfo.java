@@ -24,11 +24,11 @@ public class ExShowFortressInfo extends StaticPacket
 {
 	private static final String _S__EXSHOWFORTRESSINFO = "[S] FE:15 ExShowFortressInfo ch[d (dsdd)]";
 	public static final ExShowFortressInfo PACKET = new ExShowFortressInfo();
-
+	
 	private ExShowFortressInfo()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -48,7 +48,7 @@ public class ExShowFortressInfo extends StaticPacket
 			writeD(fort.getOwnedTime());
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

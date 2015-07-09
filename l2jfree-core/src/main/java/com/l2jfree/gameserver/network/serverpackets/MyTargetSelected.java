@@ -41,7 +41,7 @@ public class MyTargetSelected extends L2GameServerPacket
 	private static final String _S__BF_MYTARGETSELECTED = "[S] a6 MyTargetSelected";
 	private final int _objectId;
 	private final int _color;
-
+	
 	/**
 	 * @param int objectId of the target
 	 * @param int level difference to the target. name color is calculated from that

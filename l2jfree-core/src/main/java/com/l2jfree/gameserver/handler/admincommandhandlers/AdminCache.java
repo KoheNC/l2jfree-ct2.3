@@ -22,27 +22,21 @@ import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * @author Layanere
  *
  */
 public class AdminCache implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_cache_htm_rebuild",
-			"admin_cache_htm_reload",
-			"admin_cache_reload_path",
-			"admin_cache_reload_file",
-			"admin_cache_crest_rebuild",
-			"admin_cache_crest_reload"				};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_cache_htm_rebuild", "admin_cache_htm_reload",
+			"admin_cache_reload_path", "admin_cache_reload_file", "admin_cache_crest_rebuild",
+			"admin_cache_crest_reload" };
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_cache_htm_rebuild") || command.equals("admin_cache_htm_reload"))
@@ -91,7 +85,7 @@ public class AdminCache implements IAdminCommandHandler
 			CrestCache.getInstance().convertOldPedgeFiles();
 			activeChar.sendMessage("Cache[Crest]: crests fixed");
 		}
-
+		
 		return true;
 	}
 }

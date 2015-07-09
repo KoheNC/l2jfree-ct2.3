@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -45,10 +44,9 @@ import com.l2jfree.gameserver.model.entity.Castle;
  */
 public class AdminDoorControl implements IAdminCommandHandler
 {
-	private static Log				_log			= LogFactory.getLog(AdminDoorControl.class);
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_open", "admin_close", "admin_openall", "admin_closeall" };
-
+	private static Log _log = LogFactory.getLog(AdminDoorControl.class);
+	private static final String[] ADMIN_COMMANDS = { "admin_open", "admin_close", "admin_openall", "admin_closeall" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		try
@@ -106,20 +104,20 @@ public class AdminDoorControl implements IAdminCommandHandler
 				L2Object target = activeChar.getTarget();
 				if (target instanceof L2DoorInstance)
 				{
-					((L2DoorInstance) target).openMe();
+					((L2DoorInstance)target).openMe();
 				}
 				else
 				{
 					activeChar.sendMessage("Incorrect target.");
 				}
 			}
-
+			
 			if (command.equals("admin_close"))
 			{
 				L2Object target = activeChar.getTarget();
 				if (target instanceof L2DoorInstance)
 				{
-					((L2DoorInstance) target).closeMe();
+					((L2DoorInstance)target).closeMe();
 				}
 				else
 				{
@@ -131,10 +129,10 @@ public class AdminDoorControl implements IAdminCommandHandler
 		{
 			_log.error(e.getMessage(), e);
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

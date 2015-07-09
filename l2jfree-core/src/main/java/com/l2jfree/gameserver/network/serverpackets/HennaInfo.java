@@ -20,15 +20,15 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public final class HennaInfo extends L2GameServerPacket
 {
 	private static final String _S__E5_HennaInfo = "[S] E5 HennaInfo";
-
+	
 	private final L2PcInstance _activeChar;
 	private final L2Henna[] _hennas = new L2Henna[3];
 	private int _count = 0;
-
+	
 	public HennaInfo(L2PcInstance player)
 	{
 		_activeChar = player;
-
+		
 		for (int i = 1; i <= 3; i++)
 		{
 			L2Henna h = _activeChar.getHenna(i);
@@ -36,17 +36,17 @@ public final class HennaInfo extends L2GameServerPacket
 				_hennas[_count++] = h;
 		}
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xe5);
-		writeC(_activeChar.getHennaStatINT());	//equip INT
-		writeC(_activeChar.getHennaStatSTR());	//equip STR
-		writeC(_activeChar.getHennaStatCON());	//equip CON
-		writeC(_activeChar.getHennaStatMEN());	//equip MEM
-		writeC(_activeChar.getHennaStatDEX());	//equip DEX
-		writeC(_activeChar.getHennaStatWIT());	//equip WIT
+		writeC(_activeChar.getHennaStatINT()); //equip INT
+		writeC(_activeChar.getHennaStatSTR()); //equip STR
+		writeC(_activeChar.getHennaStatCON()); //equip CON
+		writeC(_activeChar.getHennaStatMEN()); //equip MEM
+		writeC(_activeChar.getHennaStatDEX()); //equip DEX
+		writeC(_activeChar.getHennaStatWIT()); //equip WIT
 		writeD(3); // slots?
 		writeD(_count); //size
 		for (int i = 0; i < _count; i++)
@@ -55,7 +55,7 @@ public final class HennaInfo extends L2GameServerPacket
 			writeD(_hennas[i].getSymbolId());
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

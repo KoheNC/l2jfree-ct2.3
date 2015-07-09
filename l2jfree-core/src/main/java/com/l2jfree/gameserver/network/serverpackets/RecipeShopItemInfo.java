@@ -20,18 +20,18 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  * ddddd
  * @version $Revision: 1.1.2.3.2.3 $ $Date: 2005/03/27 15:29:39 $
  */
-public class RecipeShopItemInfo  extends L2GameServerPacket
+public class RecipeShopItemInfo extends L2GameServerPacket
 {
 	private static final String _S__DA_RecipeShopItemInfo = "[S] da RecipeShopItemInfo";
 	private final L2PcInstance _crafter;
 	private final int _recipeId;
-
+	
 	public RecipeShopItemInfo(L2PcInstance crafter, int recipeId)
 	{
 		_crafter = crafter;
 		_recipeId = recipeId;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{

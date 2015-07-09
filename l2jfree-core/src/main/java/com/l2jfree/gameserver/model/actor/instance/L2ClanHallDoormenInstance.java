@@ -32,15 +32,15 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 	private boolean _init = false;
 	private ClanHall _clanHall = null;
 	private boolean _hasEvolve = false;
-
+	
 	// list of clan halls with evolve function, should be sorted
-	private static final int[] CH_WITH_EVOLVE = {36, 37, 38, 39, 40, 41, 51, 52, 53, 54, 55, 56, 57};
-
+	private static final int[] CH_WITH_EVOLVE = { 36, 37, 38, 39, 40, 41, 51, 52, 53, 54, 55, 56, 57 };
+	
 	public L2ClanHallDoormenInstance(int objectID, L2NpcTemplate template)
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	public void onBypassFeedback(L2PcInstance player, String command)
 	{
@@ -80,8 +80,8 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 				player.sendPacket(html);
 			}
 		}
-		else if (!Config.SIEGE_GATE_CONTROL && getClanHall().getSiege() != null &&
-				getClanHall().getSiege().getIsInProgress() && command.startsWith("open_doors"))
+		else if (!Config.SIEGE_GATE_CONTROL && getClanHall().getSiege() != null
+				&& getClanHall().getSiege().getIsInProgress() && command.startsWith("open_doors"))
 		{
 			NpcHtmlMessage infoHtml = new NpcHtmlMessage(getObjectId());
 			infoHtml.setFile("data/html/siege/siegewar.htm");
@@ -91,14 +91,14 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 		else
 			super.onBypassFeedback(player, command);
 	}
-
+	
 	@Override
 	public void showMessageWindow(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
-
+		
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-
+		
 		if (getClanHall() != null)
 		{
 			L2Clan owner = ClanTable.getInstance().getClan(getClanHall().getOwnerId());
@@ -133,7 +133,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 			player.sendPacket(html);
 		}
 	}
-
+	
 	@Override
 	protected final void openDoors(L2PcInstance player, String command)
 	{
@@ -143,7 +143,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 		html.replace("%objectId%", String.valueOf(getObjectId()));
 		player.sendPacket(html);
 	}
-
+	
 	@Override
 	protected final void closeDoors(L2PcInstance player, String command)
 	{
@@ -171,7 +171,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 		}
 		return _clanHall;
 	}
-
+	
 	@Override
 	protected final boolean isOwnerClan(L2PcInstance player)
 	{

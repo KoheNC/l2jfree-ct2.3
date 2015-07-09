@@ -24,36 +24,36 @@ import com.l2jfree.gameserver.model.TradeList;
  */
 public class TradeOtherAdd extends L2GameServerPacket
 {
-	private static final String	_S__31_TRADEOTHERADD	= "[S] 21 TradeOtherAdd";
-	private final TradeList.TradeItem	_item;
-
+	private static final String _S__31_TRADEOTHERADD = "[S] 21 TradeOtherAdd";
+	private final TradeList.TradeItem _item;
+	
 	public TradeOtherAdd(TradeList.TradeItem item)
 	{
 		_item = item;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x1b);
-
+		
 		writeH(1); // item count
-
+		
 		writeH(_item.getItem().getType1()); // item type1
 		writeD(_item.getObjectId());
 		writeD(_item.getItem().getItemDisplayId());
 		writeCompQ(_item.getCount());
 		writeH(_item.getItem().getType2()); // item type2
 		writeH(0x00); // ?
-
+		
 		writeD(_item.getItem().getBodyPart()); // rev 415  slot    0006-lr.ear  0008-neck  0030-lr.finger  0040-head  0080-??  0100-l.hand  0200-gloves  0400-chest  0800-pants  1000-feet  2000-??  4000-r.hand  8000-r.hand
 		writeH(_item.getEnchant()); // enchant level
 		writeH(0x00);
 		writeH(_item.getCustomType2());
-
+		
 		writeElementalInfo(_item); //8x h or d
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

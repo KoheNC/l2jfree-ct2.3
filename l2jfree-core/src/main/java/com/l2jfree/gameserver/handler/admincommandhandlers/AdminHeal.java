@@ -27,16 +27,15 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class AdminHeal implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_heal" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_heal" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_heal"))
 		{
 			if (activeChar.getTarget() instanceof L2Character)
 			{
-				handleHeal((L2Character) activeChar.getTarget());
+				handleHeal((L2Character)activeChar.getTarget());
 			}
 		}
 		else if (command.startsWith("admin_heal"))
@@ -44,7 +43,7 @@ public class AdminHeal implements IAdminCommandHandler
 			try
 			{
 				String val = command.substring(11);
-
+				
 				try
 				{
 					int radius = Integer.parseInt(val);
@@ -68,12 +67,12 @@ public class AdminHeal implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleHeal(L2Character target)
 	{
 		target.getStatus().setCurrentHpMp(target.getMaxHp(), target.getMaxMp());

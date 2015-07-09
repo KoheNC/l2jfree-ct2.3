@@ -32,18 +32,18 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class RequestGiveItemToPet extends L2GameClientPacket
 {
-	private static final String	REQUESTCIVEITEMTOPET__C__8B	= "[C] 8B RequestGiveItemToPet";
-
-	private int					_objectId;
-	private long				_amount;
-
+	private static final String REQUESTCIVEITEMTOPET__C__8B = "[C] 8B RequestGiveItemToPet";
+	
+	private int _objectId;
+	private long _amount;
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 		_amount = readCompQ();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -52,7 +52,7 @@ public class RequestGiveItemToPet extends L2GameClientPacket
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))
 			return;
-
+		
 		if (!(player.getPet() instanceof L2PetInstance))
 		{
 			requestFailed(SystemMessageId.DONT_HAVE_PET);
@@ -68,7 +68,8 @@ public class RequestGiveItemToPet extends L2GameClientPacket
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-		else if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN && player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+		else if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{
 			requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
 			return;
@@ -79,7 +80,7 @@ public class RequestGiveItemToPet extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		else if (player.getPrivateStoreType() != 0)
 		{
 			requestFailed(SystemMessageId.ITEMS_CANNOT_BE_DISCARDED_OR_DESTROYED_WHILE_OPERATING_PRIVATE_STORE_OR_WORKSHOP);
@@ -90,22 +91,23 @@ public class RequestGiveItemToPet extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANNOT_DISCARD_OR_DESTROY_ITEM_WHILE_TRADING);
 			return;
 		}
-
-		L2PetInstance pet = (L2PetInstance) player.getPet();
+		
+		L2PetInstance pet = (L2PetInstance)player.getPet();
 		if (pet.isDead())
 		{
 			requestFailed(SystemMessageId.CANNOT_GIVE_ITEMS_TO_DEAD_PET);
 			return;
 		}
-
+		
 		if (_amount <= 0)
 		{
 			requestFailed(SystemMessageId.NOT_ENOUGH_ITEMS);
 			return;
 		}
-
+		
 		L2ItemInstance item = player.getInventory().getItemByObjectId(_objectId);
-		if (!item.isDropable() || !item.isDestroyable() || !item.isTradeable() || item.isAugmented() || (Config.ALT_STRICT_HERO_SYSTEM && item.isHeroItem()))
+		if (!item.isDropable() || !item.isDestroyable() || !item.isTradeable() || item.isAugmented()
+				|| (Config.ALT_STRICT_HERO_SYSTEM && item.isHeroItem()))
 		{
 			requestFailed(SystemMessageId.ITEM_NOT_FOR_PETS);
 			return;
@@ -115,7 +117,7 @@ public class RequestGiveItemToPet extends L2GameClientPacket
 			requestFailed(SystemMessageId.PET_CANNOT_USE_ITEM);
 			return;
 		}
-
+		
 		else if (!pet.getInventory().validateCapacity(item))
 		{
 			requestFailed(SystemMessageId.YOUR_PET_CANNOT_CARRY_ANY_MORE_ITEMS);
@@ -126,13 +128,13 @@ public class RequestGiveItemToPet extends L2GameClientPacket
 			requestFailed(SystemMessageId.UNABLE_TO_PLACE_ITEM_YOUR_PET_IS_TOO_ENCUMBERED);
 			return;
 		}
-
+		
 		if (player.transferItem("Transfer", _objectId, _amount, pet.getInventory(), pet) == null)
 			_log.warn("Invalid item transfer request: " + pet.getName() + "(pet) --> " + player.getName());
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

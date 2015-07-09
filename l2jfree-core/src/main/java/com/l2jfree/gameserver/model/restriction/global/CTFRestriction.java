@@ -86,7 +86,8 @@ public final class CTFRestriction extends AbstractFunEventRestriction
 	@Override
 	boolean teamEquals(L2PcInstance participant1, L2PcInstance participant2)
 	{
-		return participant1.as(CTFPlayerInfo.class)._teamNameCTF.equals(participant2.as(CTFPlayerInfo.class)._teamNameCTF);
+		return participant1.as(CTFPlayerInfo.class)._teamNameCTF
+				.equals(participant2.as(CTFPlayerInfo.class)._teamNameCTF);
 	}
 	
 	@Override

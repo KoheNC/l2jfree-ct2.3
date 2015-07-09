@@ -40,17 +40,16 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class AdminKill implements IAdminCommandHandler
 {
-	private final static Log		_log			= LogFactory.getLog(AdminKill.class);
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_kill", "admin_kill_monster" };
-
+	private final static Log _log = LogFactory.getLog(AdminKill.class);
+	private static final String[] ADMIN_COMMANDS = { "admin_kill", "admin_kill_monster" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_kill"))
 		{
 			StringTokenizer st = new StringTokenizer(command, " ");
 			st.nextToken(); // skip command
-
+			
 			if (st.hasMoreTokens())
 			{
 				String firstParam = st.nextToken();
@@ -66,10 +65,10 @@ public class AdminKill implements IAdminCommandHandler
 							{
 								if (knownChar instanceof L2ControllableMobInstance || knownChar == activeChar)
 									continue;
-
+								
 								kill(activeChar, knownChar);
 							}
-
+							
 							activeChar.sendMessage("Killed all characters within a " + radius + " unit radius.");
 							return true;
 						}
@@ -79,7 +78,7 @@ public class AdminKill implements IAdminCommandHandler
 							return false;
 						}
 					}
-
+					
 					kill(activeChar, plyr);
 				}
 				else
@@ -87,15 +86,15 @@ public class AdminKill implements IAdminCommandHandler
 					try
 					{
 						int radius = Integer.parseInt(firstParam);
-
+						
 						for (L2Character knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 						{
 							if (knownChar instanceof L2ControllableMobInstance || knownChar == activeChar)
 								continue;
-
+							
 							kill(activeChar, knownChar);
 						}
-
+						
 						activeChar.sendMessage("Killed all characters within a " + radius + " unit radius.");
 						return true;
 					}
@@ -109,26 +108,26 @@ public class AdminKill implements IAdminCommandHandler
 			else
 			{
 				L2Object obj = activeChar.getTarget();
-
+				
 				if (obj instanceof L2ControllableMobInstance || !(obj instanceof L2Character))
 				{
 					activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 				}
 				else
 				{
-					kill(activeChar, (L2Character) obj);
+					kill(activeChar, (L2Character)obj);
 				}
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	private void kill(L2PcInstance activeChar, L2Character target)
 	{
 		if (target instanceof L2PcInstance)
 		{
-			if (!((L2PcInstance) target).isGM())
+			if (!((L2PcInstance)target).isGM())
 				target.stopAllEffects(); // e.g. invincibility effect
 			target.reduceCurrentHp(target.getMaxHp() + target.getMaxCp() + 1, activeChar);
 		}
@@ -141,11 +140,12 @@ public class AdminKill implements IAdminCommandHandler
 			else
 				target.reduceCurrentHp(target.getMaxHp() + 1, activeChar);
 		}
-
+		
 		if (_log.isDebugEnabled())
-			_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ")" + " killed character " + target.getObjectId());
+			_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ")" + " killed character "
+					+ target.getObjectId());
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

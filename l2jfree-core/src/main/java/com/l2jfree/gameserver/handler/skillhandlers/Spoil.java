@@ -30,9 +30,8 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class Spoil extends ISkillConditionChecker
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.SPOIL };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SPOIL };
+	
 	@Override
 	public boolean checkConditions(L2Character activeChar, L2Skill skill, L2Character target)
 	{
@@ -50,26 +49,26 @@ public class Spoil extends ISkillConditionChecker
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
+		
 		for (L2Character element : targets)
 		{
 			if (!(element instanceof L2MonsterInstance))
 				continue;
-
-			L2MonsterInstance target = (L2MonsterInstance) element;
-
+			
+			L2MonsterInstance target = (L2MonsterInstance)element;
+			
 			if (target.isSpoil())
 			{
 				activeChar.sendPacket(SystemMessageId.ALREADY_SPOILED);
 				continue;
 			}
-
+			
 			// SPOIL SYSTEM by Lbaldi
 			boolean spoil = false;
 			if (!target.isDead())
 			{
 				spoil = Formulas.calcMagicSuccess(activeChar, target, skill);
-
+				
 				if (spoil)
 				{
 					target.setSpoil(true);
@@ -82,7 +81,7 @@ public class Spoil extends ISkillConditionChecker
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

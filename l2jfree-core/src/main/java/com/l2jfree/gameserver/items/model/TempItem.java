@@ -29,7 +29,7 @@ public class TempItem
 	private final int _ownerId;
 	private final int _referencePrice;
 	private final String _itemName;
-
+	
 	/**
 	 * @param item
 	 * @param quantity of that item
@@ -43,7 +43,7 @@ public class TempItem
 		_itemName = item.getItem().getName();
 		_referencePrice = item.getReferencePrice();
 	}
-
+	
 	/**
 	 * @return Returns the quantity.
 	 */
@@ -51,7 +51,7 @@ public class TempItem
 	{
 		return _quantity;
 	}
-
+	
 	/**
 	 * @param quantity The quantity to set.
 	 */
@@ -59,12 +59,12 @@ public class TempItem
 	{
 		_quantity = quantity;
 	}
-
+	
 	public int getReferencePrice()
 	{
 		return _referencePrice;
 	}
-
+	
 	/**
 	 * @return Returns the itemId.
 	 */
@@ -72,7 +72,7 @@ public class TempItem
 	{
 		return _itemId;
 	}
-
+	
 	/**
 	 * @return Returns the ownerId.
 	 */
@@ -80,7 +80,7 @@ public class TempItem
 	{
 		return _ownerId;
 	}
-
+	
 	/**
 	 * @return Returns the itemName.
 	 */

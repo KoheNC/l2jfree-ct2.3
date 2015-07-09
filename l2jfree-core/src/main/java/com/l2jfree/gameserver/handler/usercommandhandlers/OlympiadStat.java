@@ -25,8 +25,8 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class OlympiadStat implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	= { 109 };
-
+	private static final int[] COMMAND_IDS = { 109 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -34,15 +34,16 @@ public class OlympiadStat implements IUserCommandHandler
 	{
 		if (id != COMMAND_IDS[0])
 			return false;
-
+		
 		if (!activeChar.isNoble())
 		{
 			activeChar.sendPacket(SystemMessageId.NOBLESSE_ONLY);
 			return false;
 		}
-
-		SystemMessage sm = new SystemMessage(
-				SystemMessageId.YOUR_CURRENT_OLYMPIAD_RECORD_S1_MATCHES_S2_WINS_S3_DEFEATS_EARNED_S4_POINTS);
+		
+		SystemMessage sm =
+				new SystemMessage(
+						SystemMessageId.YOUR_CURRENT_OLYMPIAD_RECORD_S1_MATCHES_S2_WINS_S3_DEFEATS_EARNED_S4_POINTS);
 		sm.addNumber(Olympiad.getInstance().getCompetitionDone(activeChar.getObjectId()));
 		sm.addNumber(Olympiad.getInstance().getCompetitionWon(activeChar.getObjectId()));
 		sm.addNumber(Olympiad.getInstance().getCompetitionLost(activeChar.getObjectId()));
@@ -50,7 +51,7 @@ public class OlympiadStat implements IUserCommandHandler
 		activeChar.sendPacket(sm);
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */

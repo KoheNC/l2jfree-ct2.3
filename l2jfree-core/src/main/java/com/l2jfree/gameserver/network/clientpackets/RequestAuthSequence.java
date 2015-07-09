@@ -16,24 +16,24 @@ package com.l2jfree.gameserver.network.clientpackets;
 
 public final class RequestAuthSequence extends L2GameClientPacket
 {
-    private int _version;
-
-    @Override
+	private int _version;
+	
+	@Override
 	protected void readImpl()
-    {
-        _version = readD();
-    }
-
-    @Override
+	{
+		_version = readD();
+	}
+	
+	@Override
 	protected void runImpl()
-    {
-        _log.warn("Requested unknown auth sequence with " + _version + " protocol. Closing connection.");
-        getClient().closeNow();
-    }
-
-    @Override
+	{
+		_log.warn("Requested unknown auth sequence with " + _version + " protocol. Closing connection.");
+		getClient().closeNow();
+	}
+	
+	@Override
 	public String getType()
-    {
-        return "RequestAuthSequence";
-    }
+	{
+		return "RequestAuthSequence";
+	}
 }

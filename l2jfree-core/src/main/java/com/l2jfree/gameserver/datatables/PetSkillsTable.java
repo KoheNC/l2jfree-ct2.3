@@ -32,7 +32,7 @@ import com.l2jfree.gameserver.model.actor.L2Summon;
 public class PetSkillsTable
 {
 	private final static Log _log = LogFactory.getLog(PetSkillsTable.class);
-
+	
 	private final FastMap<Integer, Map<Integer, L2PetSkillLearn>> _skillTrees;
 	
 	public static PetSkillsTable getInstance()
@@ -63,7 +63,8 @@ public class PetSkillsTable
 			con = L2DatabaseFactory.getInstance().getConnection();
 			try
 			{
-				PreparedStatement statement = con.prepareStatement("SELECT id FROM npc WHERE type IN ('L2Pet','L2BabyPet','L2SiegeSummon') ORDER BY id");
+				PreparedStatement statement =
+						con.prepareStatement("SELECT id FROM npc WHERE type IN ('L2Pet','L2BabyPet','L2SiegeSummon') ORDER BY id");
 				ResultSet petlist = statement.executeQuery();
 				Map<Integer, L2PetSkillLearn> map;
 				L2PetSkillLearn skillLearn;
@@ -71,7 +72,8 @@ public class PetSkillsTable
 				{
 					map = new FastMap<Integer, L2PetSkillLearn>();
 					npcId = petlist.getInt("id");
-					PreparedStatement statement2 = con.prepareStatement("SELECT minLvl, skillId, skillLvl FROM pets_skills WHERE templateId=? ORDER BY skillId, skillLvl");
+					PreparedStatement statement2 =
+							con.prepareStatement("SELECT minLvl, skillId, skillLvl FROM pets_skills WHERE templateId=? ORDER BY skillId, skillLvl");
 					statement2.setInt(1, npcId);
 					ResultSet skilltree = statement2.executeQuery();
 					
@@ -82,7 +84,7 @@ public class PetSkillsTable
 						int minLvl = skilltree.getInt("minLvl");
 						
 						skillLearn = new L2PetSkillLearn(id, lvl, minLvl);
-						map.put(SkillTable.getSkillUID(id, lvl+1), skillLearn);
+						map.put(SkillTable.getSkillUID(id, lvl + 1), skillLearn);
 					}
 					_skillTrees.put(npcId, map);
 					skilltree.close();
@@ -110,7 +112,7 @@ public class PetSkillsTable
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public int getAvailableLevel(L2Summon cha, int skillId)
 	{
 		int lvl = 0;
@@ -144,7 +146,7 @@ public class PetSkillsTable
 		}
 		return lvl;
 	}
-
+	
 	public FastList<Integer> getAvailableSkills(L2Summon cha)
 	{
 		FastList<Integer> skillIds = new FastList<Integer>();
@@ -159,7 +161,7 @@ public class PetSkillsTable
 		}
 		return skillIds;
 	}
-
+	
 	public final class L2PetSkillLearn
 	{
 		private final int _id;
@@ -172,23 +174,23 @@ public class PetSkillsTable
 			_level = lvl;
 			_minLevel = minLvl;
 		}
-
+		
 		public int getId()
 		{
 			return _id;
 		}
-
+		
 		public int getLevel()
 		{
 			return _level;
 		}
-
+		
 		public int getMinLevel()
 		{
 			return _minLevel;
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

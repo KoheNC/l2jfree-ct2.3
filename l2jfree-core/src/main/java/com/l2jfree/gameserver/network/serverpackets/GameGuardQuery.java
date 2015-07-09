@@ -23,32 +23,32 @@ import com.l2jfree.gameserver.network.L2GameClient;
  */
 public class GameGuardQuery extends StaticPacket
 {
-    private static final String _S__F9_GAMEGUARDQUERY = "[S] F9 GameGuardQuery";
-
-    public static final GameGuardQuery STATIC_PACKET = new GameGuardQuery();
-
-    private GameGuardQuery()
-    {
-    }
-    
-    @Override
-    public void prepareToSend(final L2GameClient client, final L2PcInstance activeChar)
-    {
-        // Lets make user as gg-unauthorized
-        // We will set him as ggOK after reply fromclient
-        // or kick
-        client.setGameGuardOk(false);
-    }
-    
-    @Override
-    public void writeImpl()
-    {
-        writeC(0x74);
-    }
-    
-    @Override
-    public String getType()
-    {
-        return _S__F9_GAMEGUARDQUERY;
-    }
+	private static final String _S__F9_GAMEGUARDQUERY = "[S] F9 GameGuardQuery";
+	
+	public static final GameGuardQuery STATIC_PACKET = new GameGuardQuery();
+	
+	private GameGuardQuery()
+	{
+	}
+	
+	@Override
+	public void prepareToSend(final L2GameClient client, final L2PcInstance activeChar)
+	{
+		// Lets make user as gg-unauthorized
+		// We will set him as ggOK after reply fromclient
+		// or kick
+		client.setGameGuardOk(false);
+	}
+	
+	@Override
+	public void writeImpl()
+	{
+		writeC(0x74);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _S__F9_GAMEGUARDQUERY;
+	}
 }

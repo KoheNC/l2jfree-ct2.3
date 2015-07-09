@@ -30,11 +30,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public final class AdminContest implements IAdminCommandHandler
 {
 	private static final Log _log = LogFactory.getLog(AdminContest.class);
-	private static final String[] COMMANDS =
-	{
-		"admin_contest_start", "admin_contest_cancel"
-	};
-
+	private static final String[] COMMANDS = { "admin_contest_start", "admin_contest_cancel" };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */
@@ -43,7 +40,7 @@ public final class AdminContest implements IAdminCommandHandler
 	{
 		return COMMANDS;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
 	 */

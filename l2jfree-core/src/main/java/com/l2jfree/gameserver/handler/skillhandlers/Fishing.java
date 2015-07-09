@@ -35,16 +35,15 @@ import com.l2jfree.tools.random.Rnd;
 
 public class Fishing implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.FISHING };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.FISHING };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		if (!Config.ALLOW_FISHING)
 		{
 			player.sendMessage("Fishing is disabled.");
@@ -78,31 +77,34 @@ public class Fishing implements ISkillHandler
 			player.sendPacket(SystemMessageId.CANNOT_FISH_UNDER_WATER);
 			return;
 		}
-
+		
 		// Calculate point of a float
 		int d = Rnd.get(50) + 150;
 		double angle = Util.convertHeadingToDegree(player.getHeading());
 		double radian = Math.toRadians(angle);
-
-		int dx = (int) (d * Math.cos(radian));
-		int dy = (int) (d * Math.sin(radian));
-
+		
+		int dx = (int)(d * Math.cos(radian));
+		int dy = (int)(d * Math.sin(radian));
+		
 		int x = activeChar.getX() + dx;
 		int y = activeChar.getY() + dy;
-
+		
 		L2Zone water = ZoneManager.getInstance().isInsideZone(L2Zone.ZoneType.Water, x, y);
-
+		
 		// Float must be in water
 		if (water == null)
 		{
 			player.sendPacket(SystemMessageId.CANNOT_FISH_HERE);
 			return;
 		}
-
+		
 		int z = water.getMaxZ(x, y, activeChar.getZ());
-
-		if (Config.GEODATA > 0 && !GeoData.getInstance().canSeeTarget(activeChar.getX(), activeChar.getY(), activeChar.getZ(), x, y, z, activeChar.getInstanceId())
-				|| (Config.GEODATA == 0 && (Util.calculateDistance(activeChar.getX(), activeChar.getY(), activeChar.getZ(), x, y, z, true) > d * 1.73)))
+		
+		if (Config.GEODATA > 0
+				&& !GeoData.getInstance().canSeeTarget(activeChar.getX(), activeChar.getY(), activeChar.getZ(), x, y,
+						z, activeChar.getInstanceId())
+				|| (Config.GEODATA == 0 && (Util.calculateDistance(activeChar.getX(), activeChar.getY(),
+						activeChar.getZ(), x, y, z, true) > d * 1.73)))
 		{
 			player.sendPacket(SystemMessageId.CANNOT_FISH_HERE);
 			return;
@@ -128,7 +130,7 @@ public class Fishing implements ISkillHandler
 		}
 		player.setLure(lure);
 		L2ItemInstance lure2 = player.getInventory().getPaperdollItem(Inventory.PAPERDOLL_LHAND);
-
+		
 		if (lure2 == null || lure2.getCount() < 1) //Not enough bait.
 		{
 			player.sendPacket(SystemMessageId.NOT_ENOUGH_BAIT);
@@ -137,16 +139,18 @@ public class Fishing implements ISkillHandler
 		else
 		// Has enough bait, consume 1 and update inventory. Start fishing follows.
 		{
-			lure2 = player.getInventory().destroyItem("Consume", player.getInventory().getPaperdollObjectId(Inventory.PAPERDOLL_LHAND), 1, player, null);
+			lure2 =
+					player.getInventory().destroyItem("Consume",
+							player.getInventory().getPaperdollObjectId(Inventory.PAPERDOLL_LHAND), 1, player, null);
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addModifiedItem(lure2);
 			player.sendPacket(iu);
 		}
-
+		
 		// Client itself find z coord of a float
 		player.startFishing(x, y, z + 10);
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

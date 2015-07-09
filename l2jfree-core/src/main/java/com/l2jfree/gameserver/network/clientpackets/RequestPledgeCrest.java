@@ -23,29 +23,29 @@ public class RequestPledgeCrest extends L2GameClientPacket
 	
 	private int _crestId;
 	
-    @Override
-    protected void readImpl()
+	@Override
+	protected void readImpl()
 	{
 		_crestId = readD();
 	}
-    
-    @Override
-    protected void runImpl()
+	
+	@Override
+	protected void runImpl()
 	{
 		if (_crestId == 0)
-		    return;
+			return;
 		
 		if (_log.isDebugEnabled())
 			_log.debug("Clan crest " + _crestId + " requested.");
-        
-        byte[] data = CrestCache.getInstance().getPledgeCrest(_crestId);
-        
+		
+		byte[] data = CrestCache.getInstance().getPledgeCrest(_crestId);
+		
 		if (data != null)
 			sendPacket(new PledgeCrest(_crestId, data));
 		else if (_log.isDebugEnabled())
 			_log.debug("Clan crest is missing: " + _crestId);
 	}
-    
+	
 	@Override
 	public String getType()
 	{

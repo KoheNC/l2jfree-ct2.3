@@ -42,9 +42,8 @@ import com.l2jfree.gameserver.skills.AbnormalEffect;
  */
 public class Wedding implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	=
-													{ "divorce", "engage", "gotolove" };
-
+	private static final String[] VOICED_COMMANDS = { "divorce", "engage", "gotolove" };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(String, com.l2jfree.gameserver.model.L2PcInstance), String)
 	 */
@@ -71,27 +70,27 @@ public class Wedding implements IVoicedCommandHandler
 		
 		return false;
 	}
-
+	
 	public boolean divorce(L2PcInstance activeChar)
 	{
 		if (activeChar.getPartnerId() == 0)
 			return false;
-
+		
 		int _partnerId = activeChar.getPartnerId();
 		int _coupleId = activeChar.getCoupleId();
 		long adenaAmount = 0;
-
+		
 		if (activeChar.isMaried())
 		{
 			activeChar.sendMessage("You are now divorced.");
-
+			
 			adenaAmount = (activeChar.getAdena() / 100) * Config.WEDDING_DIVORCE_COSTS;
 			activeChar.getInventory().reduceAdena("Wedding", adenaAmount, activeChar, null);
-
+			
 		}
 		else
 			activeChar.sendMessage("You have broken up as a couple.");
-
+		
 		L2PcInstance partner = L2World.getInstance().getPlayer(_partnerId);
 		if (partner != null)
 		{
@@ -100,16 +99,16 @@ public class Wedding implements IVoicedCommandHandler
 				partner.sendMessage("Your fiance has decided to divorce from you.");
 			else
 				partner.sendMessage("Your fiance has decided to break the engagement with you.");
-
+			
 			// give adena
 			if (adenaAmount > 0)
 				partner.addAdena("WEDDING", adenaAmount, null, false);
 		}
-
+		
 		CoupleManager.getInstance().deleteCouple(_coupleId);
 		return true;
 	}
-
+	
 	public boolean engage(final L2PcInstance activeChar)
 	{
 		// Check target
@@ -118,15 +117,15 @@ public class Wedding implements IVoicedCommandHandler
 			activeChar.sendMessage("You have no one targeted.");
 			return false;
 		}
-
+		
 		// Check if target is a L2PcInstance
 		if (!(activeChar.getTarget() instanceof L2PcInstance))
 		{
 			activeChar.sendMessage("You can only ask another player for engagement");
-
+			
 			return false;
 		}
-
+		
 		// Check if player is already engaged
 		if (activeChar.getPartnerId() != 0)
 		{
@@ -136,19 +135,19 @@ public class Wedding implements IVoicedCommandHandler
 				activeChar.startAbnormalEffect(AbnormalEffect.BIG_HEAD); // give player a Big Head
 				// lets recycle the sevensigns debuffs
 				int skillId;
-
+				
 				int skillLevel = 1;
-
+				
 				if (activeChar.getLevel() > 40)
 					skillLevel = 2;
-
+				
 				if (activeChar.isMageClass())
 					skillId = 4361;
 				else
 					skillId = 4362;
-
+				
 				L2Skill skill = SkillTable.getInstance().getInfo(skillId, skillLevel);
-
+				
 				if (activeChar.getFirstEffect(skill) == null)
 				{
 					skill.getEffects(activeChar, activeChar);
@@ -159,47 +158,47 @@ public class Wedding implements IVoicedCommandHandler
 			}
 			return false;
 		}
-
-		final L2PcInstance ptarget = (L2PcInstance) activeChar.getTarget();
-
+		
+		final L2PcInstance ptarget = (L2PcInstance)activeChar.getTarget();
+		
 		// Check if player target himself
 		if (ptarget.getObjectId() == activeChar.getObjectId())
 		{
 			activeChar.sendMessage("Is there something wrong with you, are you trying to go out with yourself?");
 			return false;
 		}
-
+		
 		if (ptarget.isMaried())
 		{
 			activeChar.sendMessage("Player already married.");
 			return false;
 		}
-
+		
 		if (ptarget.getPartnerId() != 0)
 		{
 			activeChar.sendMessage("Player already engaged.");
 			return false;
 		}
-
+		
 		if (ptarget.hasActiveConfirmDlg())
 		{
 			activeChar.sendMessage("Player already asked by someone else.");
 			return false;
 		}
-
+		
 		if (ptarget.getAppearance().getSex() == activeChar.getAppearance().getSex() && !Config.WEDDING_SAMESEX)
 		{
 			activeChar.sendMessage("You can't ask someone of the same sex for engagement.");
 			return false;
 		}
-
+		
 		if (!activeChar.getFriendList().contains(ptarget))
 		{
 			activeChar
 					.sendMessage("The player you want to ask is not on your friends list, you must first be on each others friends list before you choose to engage.");
 			return false;
 		}
-
+		
 		ConfirmDlg dlg = new ConfirmDlg(SystemMessageId.S1);
 		dlg.addAnswerHandler(new AnswerHandler() {
 			@Override
@@ -217,14 +216,15 @@ public class Wedding implements IVoicedCommandHandler
 					activeChar.sendMessage("Engage declined.");
 			}
 		});
-		ptarget.sendPacket(dlg.addString(activeChar.getName() + " is asking to engage you. Do you want to start a new relationship?"));
+		ptarget.sendPacket(dlg.addString(activeChar.getName()
+				+ " is asking to engage you. Do you want to start a new relationship?"));
 		return true;
 	}
-
+	
 	private static L2PcInstance checkGoToLoveState(L2PcInstance activeChar)
 	{
 		Siege siege = SiegeManager.getInstance().getSiege(activeChar);
-
+		
 		if (!activeChar.isMaried())
 		{
 			activeChar.sendMessage("You're not married.");
@@ -268,7 +268,7 @@ public class Wedding implements IVoicedCommandHandler
 			activeChar.sendMessage("You cannot find your love due to a restriction.");
 			return null;
 		}
-
+		
 		L2PcInstance partner = L2World.getInstance().getPlayer(activeChar.getPartnerId());
 		if (partner != null)
 		{
@@ -290,7 +290,8 @@ public class Wedding implements IVoicedCommandHandler
 		{
 			return null;
 		}
-		else if (DimensionalRiftManager.getInstance().checkIfInRiftZone(partner.getX(), partner.getY(), partner.getZ(), false))
+		else if (DimensionalRiftManager.getInstance().checkIfInRiftZone(partner.getX(), partner.getY(), partner.getZ(),
+				false))
 		{
 			activeChar.sendMessage("Your partner is in dimensional rift.");
 			return null;
@@ -318,12 +319,13 @@ public class Wedding implements IVoicedCommandHandler
 			int playerCabal = SevenSigns.getInstance().getPlayerCabal(activeChar);
 			boolean isSealValidationPeriod = SevenSigns.getInstance().isSealValidationPeriod();
 			int compWinner = SevenSigns.getInstance().getCabalHighestScore();
-
+			
 			if (isSealValidationPeriod)
 			{
 				if (playerCabal != compWinner)
 				{
-					activeChar.sendMessage("Your Partner is in a Seven Signs Dungeon and you are not in the winner Cabal!");
+					activeChar
+							.sendMessage("Your Partner is in a Seven Signs Dungeon and you are not in the winner Cabal!");
 					return null;
 				}
 			}
@@ -339,47 +341,48 @@ public class Wedding implements IVoicedCommandHandler
 		
 		return partner;
 	}
-
+	
 	public boolean goToLove(L2PcInstance activeChar)
 	{
 		L2PcInstance partner = null;
 		if ((partner = checkGoToLoveState(activeChar)) == null)
 			return false;
-
+		
 		int teleportTimer = Config.WEDDING_TELEPORT_INTERVAL * 1000;
-
+		
 		activeChar.sendMessage("After " + teleportTimer / 60000 + " min. you will be teleported to your partner.");
 		activeChar.getInventory().reduceAdena("Wedding", Config.WEDDING_TELEPORT_PRICE, activeChar, null);
-
+		
 		// Continue execution later
-		activeChar.setTeleportSkillCast(new EscapeFinalizer(activeChar, partner.getLoc(), partner.isIn7sDungeon()), teleportTimer);
-
+		activeChar.setTeleportSkillCast(new EscapeFinalizer(activeChar, partner.getLoc(), partner.isIn7sDungeon()),
+				teleportTimer);
+		
 		return true;
 	}
-
+	
 	private static class EscapeFinalizer implements Runnable
 	{
-		private final L2PcInstance	_activeChar;
-		private final Location			_partnerLoc;
-		private final boolean			_to7sDungeon;
-
+		private final L2PcInstance _activeChar;
+		private final Location _partnerLoc;
+		private final boolean _to7sDungeon;
+		
 		EscapeFinalizer(L2PcInstance activeChar, Location partnerLoc, boolean to7sDungeon)
 		{
 			_activeChar = activeChar;
 			_partnerLoc = partnerLoc;
 			_to7sDungeon = to7sDungeon;
 		}
-
+		
 		public void run()
 		{
 			if (checkGoToLoveState(_activeChar) == null)
 				return;
-
+			
 			_activeChar.setIsIn7sDungeon(_to7sDungeon);
 			_activeChar.teleToLocation(_partnerLoc, true);
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
 	 */

@@ -28,62 +28,62 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public final class IllegalPlayerAction implements Runnable
 {
-	private static final Log	_logAudit			= LogFactory.getLog("audit");
-
-	protected String			_message;
-	protected int				_punishment;
-	protected L2PcInstance		_actor;
-
-	public static final int		PUNISH_BROADCAST	= 1;
-	public static final int		PUNISH_KICK			= 2;
-	public static final int		PUNISH_KICKBAN		= 3;
-	public static final int		PUNISH_JAIL			= 4;
-
+	private static final Log _logAudit = LogFactory.getLog("audit");
+	
+	protected String _message;
+	protected int _punishment;
+	protected L2PcInstance _actor;
+	
+	public static final int PUNISH_BROADCAST = 1;
+	public static final int PUNISH_KICK = 2;
+	public static final int PUNISH_KICKBAN = 3;
+	public static final int PUNISH_JAIL = 4;
+	
 	public IllegalPlayerAction(L2PcInstance actor, String message, int punishment)
 	{
 		_message = message;
 		_punishment = punishment;
 		_actor = actor;
-
+		
 		switch (punishment)
 		{
-		case PUNISH_KICK:
-			_actor.sendPacket(SystemMessageId.DISCONNECTED_AS_ILLEGAL_USER);
-			break;
-		case PUNISH_KICKBAN:
-			_actor.sendPacket(SystemMessageId.ACCOUNT_SUSPENDED);
-			break;
-		case PUNISH_JAIL:
-			_actor.sendPacket(SystemMessageId.BLOCKED_DUE_TO_3RD_PARTY_PROGRAM);
-			break;
+			case PUNISH_KICK:
+				_actor.sendPacket(SystemMessageId.DISCONNECTED_AS_ILLEGAL_USER);
+				break;
+			case PUNISH_KICKBAN:
+				_actor.sendPacket(SystemMessageId.ACCOUNT_SUSPENDED);
+				break;
+			case PUNISH_JAIL:
+				_actor.sendPacket(SystemMessageId.BLOCKED_DUE_TO_3RD_PARTY_PROGRAM);
+				break;
 		}
 	}
-
+	
 	public void run()
 	{
 		_logAudit.info("AUDIT:" + _message + "," + _actor + " " + _punishment);
-
+		
 		GmListTable.broadcastMessageToGMs(_message);
-
+		
 		switch (_punishment)
 		{
-		case PUNISH_BROADCAST:
-			return;
-
-		case PUNISH_KICKBAN:
-			_actor.setAccountAccesslevel(-100);
-			//$FALL-THROUGH$
-		case PUNISH_KICK:
-			new Disconnection(_actor).defaultSequence(false);
-			break;
-		case PUNISH_JAIL:
-			long duration = Config.DEFAULT_PUNISH_PARAM * 60000;
-
-			if (_actor.isInJail())
-				duration = Math.max(duration, _actor.getJailTimer());
-
-			_actor.setInJail(true, (int) Math.ceil(duration / 60000.0));
-			break;
+			case PUNISH_BROADCAST:
+				return;
+				
+			case PUNISH_KICKBAN:
+				_actor.setAccountAccesslevel(-100);
+				//$FALL-THROUGH$
+			case PUNISH_KICK:
+				new Disconnection(_actor).defaultSequence(false);
+				break;
+			case PUNISH_JAIL:
+				long duration = Config.DEFAULT_PUNISH_PARAM * 60000;
+				
+				if (_actor.isInJail())
+					duration = Math.max(duration, _actor.getJailTimer());
+				
+				_actor.setInJail(true, (int)Math.ceil(duration / 60000.0));
+				break;
 		}
 	}
 }

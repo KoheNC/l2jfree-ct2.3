@@ -34,10 +34,9 @@ import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminBan implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	= {
-		"admin_ban", "admin_unban", "admin_ban_select", "admin_banbychar"
-	};
-
+	private static final String[] ADMIN_COMMANDS =
+			{ "admin_ban", "admin_unban", "admin_ban_select", "admin_banbychar" };
+	
 	@SuppressWarnings("null")
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -50,7 +49,7 @@ public class AdminBan implements IAdminCommandHandler
 		L2Object target = activeChar.getTarget();
 		if (target != null && target instanceof L2PcInstance && target != activeChar)
 			player = target.getActingPlayer();
-
+		
 		if (nameToBan == null && player == null)
 		{
 			if (command.contains("un"))
@@ -69,7 +68,7 @@ public class AdminBan implements IAdminCommandHandler
 			activeChar.sendPacket(SystemMessageId.INCORRECT_NAME_TRY_AGAIN);
 			return false;
 		}
-
+		
 		if (command.startsWith(ADMIN_COMMANDS[0]))
 		{
 			if (command.charAt(command.length() - 1) == 't')
@@ -95,14 +94,14 @@ public class AdminBan implements IAdminCommandHandler
 			else
 			{
 				if (!st.hasMoreTokens())
-				{	// missing level, so send a level selection page
+				{ // missing level, so send a level selection page
 					if (nameToBan != null)
 						sendBanSelect(activeChar, nameToBan);
 					else
 						sendBanSelect(activeChar, player.getAccountName());
 					return true;
 				}
-
+				
 				int level;
 				try
 				{
@@ -117,7 +116,7 @@ public class AdminBan implements IAdminCommandHandler
 					activeChar.sendPacket(SystemMessageId.INCORRECT_SYNTAX);
 					return false;
 				}
-
+				
 				if (player != null && nameToBan.equalsIgnoreCase(player.getAccountName()))
 				{
 					player.setAccountAccesslevel(level);
@@ -146,7 +145,7 @@ public class AdminBan implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	private void sendBanSelect(L2PcInstance gm, String account)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(gm.getObjectId());
@@ -154,7 +153,7 @@ public class AdminBan implements IAdminCommandHandler
 		html.replace("%account%", account);
 		gm.sendPacket(html);
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

@@ -23,9 +23,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class Hellbound implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	=
-													{ "trust" };
-
+	private static final String[] VOICED_COMMANDS = { "trust" };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(String, com.l2jfree.gameserver.model.L2PcInstance), String)
 	 */
@@ -35,14 +34,14 @@ public class Hellbound implements IVoicedCommandHandler
 		{
 			int points = HellboundManager.getInstance().getTrustPoints();
 			int level = HellboundManager.getInstance().getCurrentLevel();
-
+			
 			activeChar.sendMessage("Hellbound current trust points: " + points);
 			activeChar.sendMessage("Hellbound current level: " + level);
 			return true;
 		}
 		return false;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
 	 */

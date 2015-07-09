@@ -18,24 +18,24 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public final class RequestWithDrawPremiumItem extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTWITHDRAWPREMIUMITEM	= "[C] D0:52 RequestWriteHeroWords ch[qq]";
-
-	private long				_unk1, _unk2;
-
+	private static final String _C__REQUESTWITHDRAWPREMIUMITEM = "[C] D0:52 RequestWriteHeroWords ch[qq]";
+	
+	private long _unk1, _unk2;
+	
 	@Override
 	protected void readImpl()
 	{
 		_unk1 = readCompQ();
 		_unk2 = readCompQ();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		_log.info("RequestWithDrawPremiumItem, unk=" + _unk1 + ", unk=" + _unk2 + ", sent by " + getActiveChar());
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -33,12 +33,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 
-
 public class AdminZone implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_zone_check", "admin_zone_reload" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_zone_check", "admin_zone_reload" };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -46,7 +44,7 @@ public class AdminZone implements IAdminCommandHandler
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
-
+		
 		if (actualCommand.equalsIgnoreCase("admin_zone_check"))
 		{
 			int zones = 0;
@@ -55,26 +53,31 @@ public class AdminZone implements IAdminCommandHandler
 				if (zone.isInsideZone(activeChar.getX(), activeChar.getY()))
 				{
 					zones++;
-					activeChar.sendMessage("Zone (XY" + (zone.isInsideZone(activeChar) ? ("Z) ") : (") ")) + "Type: " + zone.getClassName() + ", " + "ID: "
-							+ zone.getId() + ", " + "Name: " + zone.getName() + ", " + "Z[" + zone.getMinZ(activeChar) + ":" + zone.getMaxZ(activeChar) + "]");
+					activeChar.sendMessage("Zone (XY" + (zone.isInsideZone(activeChar) ? ("Z) ") : (") ")) + "Type: "
+							+ zone.getClassName() + ", " + "ID: " + zone.getId() + ", " + "Name: " + zone.getName()
+							+ ", " + "Z[" + zone.getMinZ(activeChar) + ":" + zone.getMaxZ(activeChar) + "]");
 				}
 			}
 			if (zones == 0)
 				activeChar.sendMessage("No zones");
-			activeChar.sendMessage("Closest Castle: " + CastleManager.getInstance().getClosestCastle(activeChar).getName());
+			activeChar.sendMessage("Closest Castle: "
+					+ CastleManager.getInstance().getClosestCastle(activeChar).getName());
 			activeChar.sendMessage("Closest Town: " + TownManager.getInstance().getClosestTownName(activeChar));
-
+			
 			Location loc;
-
+			
 			loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.Castle);
-			activeChar.sendMessage("TeleToLocation (Castle): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+			activeChar
+					.sendMessage("TeleToLocation (Castle): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
+			
 			loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.ClanHall);
-			activeChar.sendMessage("TeleToLocation (ClanHall): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+			activeChar.sendMessage("TeleToLocation (ClanHall): x:" + loc.getX() + " y:" + loc.getY() + " z:"
+					+ loc.getZ());
+			
 			loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.SiegeFlag);
-			activeChar.sendMessage("TeleToLocation (SiegeFlag): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
-
+			activeChar.sendMessage("TeleToLocation (SiegeFlag): x:" + loc.getX() + " y:" + loc.getY() + " z:"
+					+ loc.getZ());
+			
 			loc = MapRegionManager.getInstance().getTeleToLocation(activeChar, TeleportWhereType.Town);
 			activeChar.sendMessage("TeleToLocation (Town): x:" + loc.getX() + " y:" + loc.getY() + " z:" + loc.getZ());
 		}
@@ -85,7 +88,7 @@ public class AdminZone implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#getAdminCommandList()
 	 */

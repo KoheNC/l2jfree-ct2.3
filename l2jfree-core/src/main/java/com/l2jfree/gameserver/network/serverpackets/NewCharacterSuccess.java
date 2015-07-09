@@ -22,9 +22,9 @@ import com.l2jfree.gameserver.templates.chars.L2PcTemplate;
 
 public class NewCharacterSuccess extends StaticPacket
 {
-	private static final String				_S__NEWCHARACTERSUCCESS	= "[S] 0D NewCharacterSuccess c[d->dddddddddddddddddddd<-]";
-	private static final int[]				DELIMITER				= { 0x46, 0x0A };
-	public static final NewCharacterSuccess	PACKET					= new NewCharacterSuccess();
+	private static final String _S__NEWCHARACTERSUCCESS = "[S] 0D NewCharacterSuccess c[d->dddddddddddddddddddd<-]";
+	private static final int[] DELIMITER = { 0x46, 0x0A };
+	public static final NewCharacterSuccess PACKET = new NewCharacterSuccess();
 	static
 	{
 		PACKET.addChar(CharTemplateTable.getInstance().getTemplate(0));
@@ -41,35 +41,35 @@ public class NewCharacterSuccess extends StaticPacket
 		PACKET.addChar(CharTemplateTable.getInstance().getTemplate(ClassId.FemaleSoldier));
 		PACKET.finish();
 	}
-
-	private final ArrayList<L2PcTemplate>	_chars = new ArrayList<L2PcTemplate>();
-
+	
+	private final ArrayList<L2PcTemplate> _chars = new ArrayList<L2PcTemplate>();
+	
 	private NewCharacterSuccess()
 	{
 	}
-
+	
 	public void addChar(L2PcTemplate template)
 	{
 		_chars.add(template);
 	}
-
+	
 	public void finish()
 	{
 		_chars.trimToSize();
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x0D);
 		writeD(_chars.size());
-
+		
 		for (int i = 0; i < _chars.size(); i++)
 		{
 			L2PcTemplate temp = _chars.get(i);
 			if (temp == null)
 				continue;
-
+			
 			writeD(temp.getRace().ordinal());
 			writeD(temp.getClassId().getId());
 			writeD(DELIMITER[0]);
@@ -92,7 +92,7 @@ public class NewCharacterSuccess extends StaticPacket
 			writeD(DELIMITER[1]);
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -20,20 +20,18 @@ import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * This class handles following admin commands:
  * admin_ircc admin_ircm
  */
 public class AdminIRC implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_ircc", "admin_ircm" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_ircc", "admin_ircm" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		String text = command.substring(10);
-
+		
 		if (command.startsWith("admin_ircc"))
 		{
 			IrcManager.getInstance().getConnection().send(text);
@@ -47,7 +45,7 @@ public class AdminIRC implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

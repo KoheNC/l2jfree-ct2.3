@@ -27,15 +27,15 @@ import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 public final class DimensionalMerchants extends QuestJython
 {
 	private static final String THIS = "1003_DimensionalMerchants";
-
+	
 	// Quest NPCs
 	private static final int VITAMIN_MANAGER = 32478;
-
+	
 	// Quest items
 	private static final int COUPON_NORMAL = 13273;
 	private static final int COUPON_EVENT = 13383;
 	private static final int COUPON_HQ = 14065;
-
+	
 	public DimensionalMerchants(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
@@ -43,7 +43,7 @@ public final class DimensionalMerchants extends QuestJython
 		addFirstTalkId(VITAMIN_MANAGER);
 		addTalkId(VITAMIN_MANAGER);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -83,7 +83,7 @@ public final class DimensionalMerchants extends QuestJython
 		}
 		return event;
 	}
-
+	
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
@@ -95,7 +95,7 @@ public final class DimensionalMerchants extends QuestJython
 		else
 			return "32478-na.htm";
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new DimensionalMerchants(-1, THIS, "custom");

@@ -26,12 +26,12 @@ import com.l2jfree.gameserver.network.serverpackets.SiegeDefenderList;
 
 public class RequestJoinSiege extends L2GameClientPacket
 {
-	private static final String	_C__A4_RequestJoinSiege	= "[C] a4 RequestJoinSiege";
-
-	private int					_siegeableID;
-	private int					_isAttacker;
-	private int					_isJoining;
-
+	private static final String _C__A4_RequestJoinSiege = "[C] a4 RequestJoinSiege";
+	
+	private int _siegeableID;
+	private int _isAttacker;
+	private int _isJoining;
+	
 	@Override
 	protected void readImpl()
 	{
@@ -39,32 +39,32 @@ public class RequestJoinSiege extends L2GameClientPacket
 		_isAttacker = readD();
 		_isJoining = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2Clan clan = activeChar.getClan();
 		if (clan == null || !L2Clan.checkPrivileges(activeChar, L2Clan.CP_CS_MANAGE_SIEGE))
 		{
 			requestFailed(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
 			return;
 		}
-
+		
 		ClanHall hideout = null;
 		Castle castle = CastleManager.getInstance().getCastleById(_siegeableID);
 		if (castle == null)
 			hideout = ClanHallManager.getInstance().getClanHallById(_siegeableID);
-
+		
 		if (_isJoining == 1 && System.currentTimeMillis() < clan.getDissolvingExpiryTime())
 		{
 			requestFailed(SystemMessageId.CANT_PARTICIPATE_IN_SIEGE_WHILE_DISSOLUTION_IN_PROGRESS);
 			return;
 		}
-
+		
 		if (castle != null)
 		{
 			if (castle.getSiege().getIsInProgress())
@@ -109,10 +109,10 @@ public class RequestJoinSiege extends L2GameClientPacket
 			else
 				sendPacket(new SiegeDefenderList(hideout));
 		}
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

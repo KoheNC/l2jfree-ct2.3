@@ -43,18 +43,18 @@ public class SiegeGuardManager
 	private static final int DEFAULT_GUARD_RESPAWN = 600; // as earlier
 	private static final String LOAD_NPC_GUARDS = "SELECT * FROM castle_siege_guards WHERE castleId=?";
 	private static final String ADD_NPC_GUARD = "INSERT INTO castle_siege_guards VALUES (?,NULL,?,?,?,?,?,?)";
-
+	
 	private final Castle _castle;
 	private final FastList<L2Spawn> _siegeGuardSpawn;
 	private volatile int _spawnId;
-
+	
 	public SiegeGuardManager(Castle castle)
 	{
 		_castle = castle;
 		_siegeGuardSpawn = new FastList<L2Spawn>();
 		_spawnId = Integer.MIN_VALUE;
 	}
-
+	
 	/**
 	 * Spawns siege guards only if {@link Config#ALT_SPAWN_SIEGE_GUARD} is true.<BR>
 	 * If the castle is owned by NPCs, loads & spawns guards defined in
@@ -82,7 +82,7 @@ public class SiegeGuardManager
 			_log.warn("Error spawning siege guards for castle " + getCastle().getName() + ":", e);
 		}
 	}
-
+	
 	/**
 	 * Unspawns siege guards and clears the {@link #_siegeGuardSpawn}
 	 * <U>Should only be called after siege.</U>
@@ -93,14 +93,14 @@ public class SiegeGuardManager
 		{
 			if (spawn == null)
 				continue;
-
+			
 			spawn.stopRespawn();
 			if (spawn.getLastSpawn() != null)
 				spawn.getLastSpawn().doDie(spawn.getLastSpawn());
 		}
 		getSiegeGuardSpawn().clear();
 	}
-
+	
 	/**
 	 * Add a mercenary spawn to the guard list.<BR>
 	 * <B><U>Not to be called from {@link MercTicketManager#addPosition(L2PcInstance)}
@@ -134,7 +134,7 @@ public class SiegeGuardManager
 		else
 			_log.warn("Missing mercenary NPC data: " + npc);
 	}
-
+	
 	/**
 	 * Saves a castle guard directly to the database.<BR>
 	 * There are no restrictions for the NPC, however, it will be saved
@@ -175,7 +175,7 @@ public class SiegeGuardManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * This method behaves just as
 	 * <CODE>addAnyGuard(gm, npc, {@link #DEFAULT_GUARD_RESPAWN})</CODE>
@@ -187,7 +187,7 @@ public class SiegeGuardManager
 	{
 		addAnyGuard(gm, npc, DEFAULT_GUARD_RESPAWN);
 	}
-
+	
 	/**
 	 * Load guards defined in <CODE>castle_siege_guards</CODE> if castle is
 	 * owned by NPCs.<BR>
@@ -201,7 +201,7 @@ public class SiegeGuardManager
 			MercTicketManager.getInstance().buildSpawns(this);
 			return;
 		}
-
+		
 		Connection con = null;
 		try
 		{
@@ -209,10 +209,10 @@ public class SiegeGuardManager
 			PreparedStatement statement = con.prepareStatement(LOAD_NPC_GUARDS);
 			statement.setInt(1, getCastle().getCastleId());
 			ResultSet rs = statement.executeQuery();
-
+			
 			L2Spawn spawn1;
 			L2NpcTemplate template1;
-
+			
 			while (rs.next())
 			{
 				template1 = NpcTable.getInstance().getTemplate(rs.getInt("npcId"));
@@ -243,13 +243,13 @@ public class SiegeGuardManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/** @return the owner castle */
 	public final Castle getCastle()
 	{
 		return _castle;
 	}
-
+	
 	/** @return guard spawn list */
 	public final FastList<L2Spawn> getSiegeGuardSpawn()
 	{

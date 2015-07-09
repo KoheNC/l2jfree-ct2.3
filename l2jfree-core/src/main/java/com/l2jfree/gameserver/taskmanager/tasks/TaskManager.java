@@ -145,8 +145,8 @@ public final class TaskManager extends HandlerRegistry<String, TaskHandler>
 			try
 			{
 				con = L2DatabaseFactory.getInstance().getConnection();
-				PreparedStatement statement = con
-						.prepareStatement("UPDATE global_tasks SET last_activation=? WHERE id=?");
+				PreparedStatement statement =
+						con.prepareStatement("UPDATE global_tasks SET last_activation=? WHERE id=?");
 				statement.setLong(1, _lastActivation = System.currentTimeMillis());
 				statement.setInt(2, _id);
 				statement.executeUpdate();
@@ -295,15 +295,16 @@ public final class TaskManager extends HandlerRegistry<String, TaskHandler>
 		return addTask(task, type, param1, param2, param3, 0);
 	}
 	
-	static boolean addTask(String task, TaskTypes type, String param1, String param2, String param3, long lastActivation)
+	static boolean
+			addTask(String task, TaskTypes type, String param1, String param2, String param3, long lastActivation)
 	{
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO global_tasks (task,type,last_activation,param1,param2,param3) VALUES(?,?,?,?,?,?)");
+			PreparedStatement statement =
+					con.prepareStatement("INSERT INTO global_tasks (task,type,last_activation,param1,param2,param3) VALUES(?,?,?,?,?,?)");
 			statement.setString(1, task);
 			statement.setString(2, type.toString());
 			statement.setLong(3, lastActivation);

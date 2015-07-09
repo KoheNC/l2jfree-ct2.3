@@ -29,9 +29,8 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class MakeQuestDropable implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.MAKE_QUEST_DROPABLE };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.MAKE_QUEST_DROPABLE };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
@@ -39,19 +38,18 @@ public class MakeQuestDropable implements ISkillHandler
 		
 		for (L2Character element : targets)
 		{
-			if (!(element instanceof L2MonsterInstance) ||
-					((L2MonsterInstance) element).getQuestDropable())
+			if (!(element instanceof L2MonsterInstance) || ((L2MonsterInstance)element).getQuestDropable())
 			{
 				activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 				activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 			else if (element instanceof L2MonsterInstance)
 			{
-				((L2MonsterInstance) element).setQuestDropable(true);
+				((L2MonsterInstance)element).setQuestDropable(true);
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

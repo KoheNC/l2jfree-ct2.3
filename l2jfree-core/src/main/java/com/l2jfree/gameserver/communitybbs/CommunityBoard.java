@@ -36,69 +36,69 @@ public class CommunityBoard
 		L2PcInstance activeChar = client.getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		switch (Config.COMMUNITY_TYPE)
 		{
-		default:
-		case 0: // disabled
-			activeChar.sendPacket(SystemMessageId.CB_OFFLINE);
-			break;
-		case 1: // old
-			RegionBBSManager.getInstance().parsecmd(command, activeChar);
-			break;
-		case 2: // new
-			if (command.startsWith("_bbsclan"))
-			{
-				ClanBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbsmemo"))
-			{
-				TopicBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbstopics"))
-			{
-				TopicBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbsposts"))
-			{
-				PostBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbstop"))
-			{
-				TopBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbshome"))
-			{
-				TopBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbsloc"))
-			{
+			default:
+			case 0: // disabled
+				activeChar.sendPacket(SystemMessageId.CB_OFFLINE);
+				break;
+			case 1: // old
 				RegionBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_maillist_0_1_0_"))
-			{
-				MailBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbsauction"))
-			{
-				AuctionBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbsupdate"))
-			{
-				UpdateBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else if (command.startsWith("_bbsdroploc"))
-			{
-				DroplocatorBBSManager.getInstance().parsecmd(command, activeChar);
-			}
-			else
-			{
-				ShowBoard.notImplementedYet(activeChar, command);
-			}
-			break;
+				break;
+			case 2: // new
+				if (command.startsWith("_bbsclan"))
+				{
+					ClanBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbsmemo"))
+				{
+					TopicBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbstopics"))
+				{
+					TopicBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbsposts"))
+				{
+					PostBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbstop"))
+				{
+					TopBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbshome"))
+				{
+					TopBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbsloc"))
+				{
+					RegionBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_maillist_0_1_0_"))
+				{
+					MailBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbsauction"))
+				{
+					AuctionBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbsupdate"))
+				{
+					UpdateBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else if (command.startsWith("_bbsdroploc"))
+				{
+					DroplocatorBBSManager.getInstance().parsecmd(command, activeChar);
+				}
+				else
+				{
+					ShowBoard.notImplementedYet(activeChar, command);
+				}
+				break;
 		}
 	}
-
+	
 	/**
 	 * @param client
 	 * @param url
@@ -108,51 +108,52 @@ public class CommunityBoard
 	 * @param arg4
 	 * @param arg5
 	 */
-	public static void handleWriteCommands(L2GameClient client, String url, String arg1, String arg2, String arg3, String arg4, String arg5)
+	public static void handleWriteCommands(L2GameClient client, String url, String arg1, String arg2, String arg3,
+			String arg4, String arg5)
 	{
 		L2PcInstance activeChar = client.getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		switch (Config.COMMUNITY_TYPE)
 		{
-		case 2:
-			if (url.equals("Topic"))
-			{
-				TopicBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			}
-			else if (url.equals("Post"))
-			{
-				PostBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			}
-			else if (url.equals("Region"))
-			{
+			case 2:
+				if (url.equals("Topic"))
+				{
+					TopicBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
+				}
+				else if (url.equals("Post"))
+				{
+					PostBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
+				}
+				else if (url.equals("Region"))
+				{
+					RegionBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
+				}
+				else if (url.equals("Notice"))
+				{
+					ClanBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
+				}
+				else if (url.equals("Mail"))
+				{
+					MailBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
+				}
+				else if (url.equals("Auction"))
+				{
+					AuctionBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
+				}
+				else
+				{
+					ShowBoard.notImplementedYet(activeChar, url);
+				}
+				break;
+			case 1:
 				RegionBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			}
-			else if (url.equals("Notice"))
-			{
-				ClanBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			}
-			else if (url.equals("Mail"))
-			{
-				MailBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			}
-			else if (url.equals("Auction"))
-			{
-				AuctionBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			}
-			else
-			{
-				ShowBoard.notImplementedYet(activeChar, url);
-			}
-			break;
-		case 1:
-			RegionBBSManager.getInstance().parsewrite(arg1, arg2, arg3, arg4, arg5, activeChar);
-			break;
-		default:
-		case 0:
-			activeChar.sendPacket(SystemMessageId.CB_OFFLINE);
-			break;
+				break;
+			default:
+			case 0:
+				activeChar.sendPacket(SystemMessageId.CB_OFFLINE);
+				break;
 		}
 	}
 }

@@ -25,12 +25,12 @@ import com.l2jfree.gameserver.model.actor.L2Npc;
 public class NpcInventory extends Inventory
 {
 	private final L2Npc _owner;
-
+	
 	public NpcInventory(L2Npc owner)
 	{
 		_owner = owner;
 	}
-
+	
 	public void reset()
 	{
 		destroyAllItems("Reset", null, null);
@@ -41,12 +41,23 @@ public class NpcInventory extends Inventory
 	}
 	
 	@Override
-	public L2Npc getOwner() { return _owner; }
+	public L2Npc getOwner()
+	{
+		return _owner;
+	}
+	
 	@Override
-	protected ItemLocation getBaseLocation() { return ItemLocation.NPC; }
+	protected ItemLocation getBaseLocation()
+	{
+		return ItemLocation.NPC;
+	}
+	
 	@Override
-	protected ItemLocation getEquipLocation() { return ItemLocation.NPC; }
-
+	protected ItemLocation getEquipLocation()
+	{
+		return ItemLocation.NPC;
+	}
+	
 	/**
 	 * Returns the list of all items in inventory that have a given item id.
 	 * @return L2ItemInstance[] : matching items from inventory
@@ -59,10 +70,10 @@ public class NpcInventory extends Inventory
 			if (item.getItemId() == itemId)
 				list.add(item);
 		}
-
+		
 		return list.toArray(new L2ItemInstance[list.size()]);
 	}
-
+	
 	/**
 	 * Refresh the weight of equipment loaded
 	 */
@@ -71,7 +82,7 @@ public class NpcInventory extends Inventory
 	{
 		// not needed
 	}
-
+	
 	/**
 	 * Get back items in inventory from database
 	 */
@@ -80,7 +91,7 @@ public class NpcInventory extends Inventory
 	{
 		// not needed
 	}
-
+	
 	@Override
 	public void updateInventory(L2ItemInstance newItem)
 	{

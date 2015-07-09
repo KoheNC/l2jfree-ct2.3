@@ -32,9 +32,8 @@ import com.l2jfree.gameserver.templates.item.L2Item;
  */
 public class AdminCreateItem implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_itemcreate", "admin_create_item", "admin_clear_inventory" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_itemcreate", "admin_create_item", "admin_clear_inventory" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_itemcreate"))
@@ -76,15 +75,15 @@ public class AdminCreateItem implements IAdminCommandHandler
 		{
 			removeAllItems(activeChar);
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void createItem(L2PcInstance activeChar, int id, long num)
 	{
 		L2Item template = ItemTable.getInstance().getTemplate(id);
@@ -101,13 +100,14 @@ public class AdminCreateItem implements IAdminCommandHandler
 				return;
 			}
 		}
-
+		
 		activeChar.getInventory().addItem("Admin", id, num, activeChar, null);
-		activeChar.sendMessage("You have spawned " + num + " " + template.getName() + " (" + id + ") in your inventory.");
+		activeChar.sendMessage("You have spawned " + num + " " + template.getName() + " (" + id
+				+ ") in your inventory.");
 		// Send whole item list
 		activeChar.sendPacket(new ItemList(activeChar, false));
 	}
-
+	
 	private void removeAllItems(L2PcInstance activeChar)
 	{
 		for (L2ItemInstance item : activeChar.getInventory().getItems())

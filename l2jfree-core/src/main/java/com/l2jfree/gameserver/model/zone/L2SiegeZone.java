@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.model.entity.Fort;
 public class L2SiegeZone extends SiegeableEntityZone
 {
 	public static final int DEATH_SYNDROME = 5660;
-
+	
 	@Override
 	protected void register() throws Exception
 	{
@@ -47,10 +47,10 @@ public class L2SiegeZone extends SiegeableEntityZone
 		
 		if (character instanceof L2PcInstance)
 		{
-			L2PcInstance pc = (L2PcInstance) character;
+			L2PcInstance pc = (L2PcInstance)character;
 			if (pc.getClan() != null
-				&& (_entity.getSiege().checkIsAttacker(pc.getClan())
-				|| _entity.getSiege().checkIsDefender(pc.getClan())))
+					&& (_entity.getSiege().checkIsAttacker(pc.getClan()) || _entity.getSiege().checkIsDefender(
+							pc.getClan())))
 			{
 				pc.setIsInSiege(true);
 			}
@@ -129,7 +129,7 @@ public class L2SiegeZone extends SiegeableEntityZone
 				lvl = Math.min(effect.getLevel() + 1, SkillTable.getInstance().getMaxLevel(DEATH_SYNDROME));
 			else
 				lvl = 1;
-
+			
 			L2Skill skill = SkillTable.getInstance().getInfo(DEATH_SYNDROME, lvl);
 			if (skill != null)
 				skill.getEffects(character, character);

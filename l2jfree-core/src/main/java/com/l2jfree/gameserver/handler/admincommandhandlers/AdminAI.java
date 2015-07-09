@@ -29,16 +29,15 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jfree.lang.L2TextBuilder;
 
-
 public class AdminAI implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_show_ai" };
-
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
-
+		
 		if (command.equals("admin_show_ai"))
 		{
 			L2Object target = activeChar.getTarget();
@@ -47,15 +46,17 @@ public class AdminAI implements IAdminCommandHandler
 				activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 				return false;
 			}
-
-			L2CharacterAI ai = ((L2Character) target).getAI();
+			
+			L2CharacterAI ai = ((L2Character)target).getAI();
 			CtrlIntention intention = ai.getIntention();
 			String param0 = ai.getIntentionArg0() == null ? "--" : ai.getIntentionArg0().toString();
 			String param1 = ai.getIntentionArg1() == null ? "--" : ai.getIntentionArg1().toString();
-
+			
 			NpcHtmlMessage html = new NpcHtmlMessage(target.getObjectId());
-			L2TextBuilder html1 = L2TextBuilder.newInstance("<html><body><center><font color=\"LEVEL\">AI Information</font></center><br><br>");
-
+			L2TextBuilder html1 =
+					L2TextBuilder
+							.newInstance("<html><body><center><font color=\"LEVEL\">AI Information</font></center><br><br>");
+			
 			html1.append("<font color=\"LEVEL\">Intention</font>");
 			html1.append("<table border=\"0\" width=\"100%\">");
 			html1.append("<tr><td>Intention:</td><td>");
@@ -68,7 +69,7 @@ public class AdminAI implements IAdminCommandHandler
 			html1.append(param1);
 			html1.append("</td></tr>");
 			html1.append("</table><br><br>");
-
+			
 			if (target instanceof L2Attackable)
 			{
 				html1.append("<font color=\"LEVEL\">Aggrolist</font>");
@@ -87,17 +88,17 @@ public class AdminAI implements IAdminCommandHandler
 				}
 				html1.append("</table><br><br>");
 			}
-
+			
 			html1.append("<button value=\"Refresh\" action=\"bypass -h admin_show_ai\" width=60 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-
+			
 			html1.append("</body></html>");
 			html.setHtml(html1.moveToString());
 			activeChar.sendPacket(html);
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

@@ -79,7 +79,7 @@ public final class PledgeShowMemberListAll extends L2GameServerPacket
 		
 		if (Config.PACKET_FINAL)
 			writeD(0); // Territory castle ID
-		
+			
 		writeD(_clan.getSubPledgeMembersCount(_pledgeType));
 		
 		for (L2ClanMember m : _members)

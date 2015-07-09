@@ -44,10 +44,10 @@ import com.l2jfree.loginserver.dao.GameserversDAO;
  */
 public class GameserversDAOXml implements GameserversDAO
 {
-	private static final Log			_log		= LogFactory.getLog(GameserversDAOXml.class);
-
-	private final Map<Integer, Gameservers>	serverNames	= new TreeMap<Integer, Gameservers>();
-
+	private static final Log _log = LogFactory.getLog(GameserversDAOXml.class);
+	
+	private final Map<Integer, Gameservers> serverNames = new TreeMap<Integer, Gameservers>();
+	
 	/**
 	 * Load server name from xml
 	 */
@@ -65,22 +65,22 @@ public class GameserversDAOXml implements GameserversDAO
 				// just for eclipse development, we have to search in dist folder
 				in = new FileInputStream("dist/servername.xml");
 			}
-
+			
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(in);
-
+			
 			Element root = document.getRootElement();
-
+			
 			// Find all servers_list (should have only one)
 			for (Iterator<?> i = root.elementIterator("server"); i.hasNext();)
 			{
-				Element server = (Element) i.next();
+				Element server = (Element)i.next();
 				Integer id = null;
 				String name = null;
 				// For each server, read the attributes
 				for (Iterator<?> iAttr = server.attributeIterator(); iAttr.hasNext();)
 				{
-					Attribute attribute = (Attribute) iAttr.next();
+					Attribute attribute = (Attribute)iAttr.next();
 					if (attribute.getName().equals("id"))
 					{
 						id = new Integer(attribute.getValue());
@@ -120,7 +120,7 @@ public class GameserversDAOXml implements GameserversDAO
 			}
 		}
 	}
-
+	
 	/**
 	 * Search by id
 	 * @param id
@@ -130,7 +130,7 @@ public class GameserversDAOXml implements GameserversDAO
 	{
 		return serverNames.get(id);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#createGameserver(Gameservers)
 	 */
@@ -139,16 +139,16 @@ public class GameserversDAOXml implements GameserversDAO
 		serverNames.put(obj.getServerId(), obj);
 		return obj.getServerId();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#createOrUpdate(Gameservers)
 	 */
 	public void createOrUpdate(Gameservers obj)
 	{
 		createGameserver(obj);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#createOrUpdateAll(java.util.Collection)
 	 */
@@ -157,29 +157,30 @@ public class GameserversDAOXml implements GameserversDAO
 		Iterator<?> it = entities.iterator();
 		while (it.hasNext())
 		{
-			createGameserver((Gameservers) it.next());
+			createGameserver((Gameservers)it.next());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#getAllGameservers()
 	 */
 	public List<Gameservers> getAllGameservers()
 	{
 		if (serverNames == null)
-			throw new ObjectRetrievalFailureException("Could not load gameservers", new NullPointerException("serverNames"));
+			throw new ObjectRetrievalFailureException("Could not load gameservers", new NullPointerException(
+					"serverNames"));
 		return new ArrayList<Gameservers>(serverNames.values());
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeGameservers(Gameservers)
 	 */
 	public void removeGameserver(Gameservers obj)
 	{
 		serverNames.remove(obj.getServerId());
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeAccountById(java.io.Serializable)
 	 */
@@ -187,7 +188,7 @@ public class GameserversDAOXml implements GameserversDAO
 	{
 		serverNames.remove(id);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeAll(java.util.Collection)
 	 */
@@ -196,20 +197,20 @@ public class GameserversDAOXml implements GameserversDAO
 		Iterator<?> it = entities.iterator();
 		while (it.hasNext())
 		{
-			removeGameserver((Gameservers) it.next());
+			removeGameserver((Gameservers)it.next());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#update(java.lang.Object)
 	 */
 	public void update(Object obj)
 	{
-		Gameservers gs = (Gameservers) obj;
+		Gameservers gs = (Gameservers)obj;
 		removeGameserverByServerId(gs.getServerId());
 		createGameserver(gs);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeAll()
 	 */

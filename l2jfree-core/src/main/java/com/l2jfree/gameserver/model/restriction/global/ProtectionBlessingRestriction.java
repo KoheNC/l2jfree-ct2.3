@@ -33,8 +33,8 @@ public class ProtectionBlessingRestriction extends AbstractRestriction
 			return false;
 		
 		// Keeps you safe from an attack by a chaotic character who is more than 10 levels apart from you.
-		if (target_.getProtectionBlessing() && attacker_.getKarma() > 0 &&
-				target_.getLevel() + 10 < attacker_.getLevel())
+		if (target_.getProtectionBlessing() && attacker_.getKarma() > 0
+				&& target_.getLevel() + 10 < attacker_.getLevel())
 		{
 			if (sendMessage)
 				attacker_.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);

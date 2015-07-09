@@ -26,7 +26,7 @@ public class ExDuelStart extends L2GameServerPacket
 	{
 		_unk1 = unk1;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -38,7 +38,7 @@ public class ExDuelStart extends L2GameServerPacket
 		
 		writeD(_unk1);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

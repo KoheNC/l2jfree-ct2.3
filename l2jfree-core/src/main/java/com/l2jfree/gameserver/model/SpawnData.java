@@ -37,7 +37,8 @@ public class SpawnData
 		this.respawnMaxDelay = respawnDelay;
 	}
 	
-	public SpawnData(int npcId, int x, int y, int z, int heading, int respawnDelay, int respawnMinDelay, int respawnMaxDelay)
+	public SpawnData(int npcId, int x, int y, int z, int heading, int respawnDelay, int respawnMinDelay,
+			int respawnMaxDelay)
 	{
 		this.npcId = npcId;
 		this.x = x;

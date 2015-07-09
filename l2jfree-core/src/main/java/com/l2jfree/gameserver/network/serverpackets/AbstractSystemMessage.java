@@ -267,7 +267,8 @@ public abstract class AbstractSystemMessage<T extends AbstractSystemMessage> ext
 			}
 		}
 		
-		_log.warn("AbstractSystemMessage: Too much parameter for ID: " + _messageId, new ArrayIndexOutOfBoundsException());
+		_log.warn("AbstractSystemMessage: Too much parameter for ID: " + _messageId,
+				new ArrayIndexOutOfBoundsException());
 		
 		_elements = Arrays.copyOf(_elements, _elements.length + 1);
 		_elements[_elements.length - 1] = element;

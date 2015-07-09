@@ -46,7 +46,7 @@ public final class L2System
 		return TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - ZERO);
 	}
 	*/
-
+	
 	/**
 	 * Copy of HashMap.hash().
 	 */

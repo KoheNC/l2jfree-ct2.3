@@ -252,7 +252,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		 * (_log.isDebugEnabled()) _log.debug("active Char saved"); _activeChar
 		 * = null; }
 		 */
-
+		
 		int objid = getObjectIdForSlot(charslot);
 		if (objid < 0)
 			return;
@@ -350,7 +350,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		if (_charSlotMapping == null || charslot < 0 || charslot >= _charSlotMapping.length)
 		{
 			_log.warn(toString() + " tried to delete Character in slot " + charslot
-				+ " but no characters exits at that slot.");
+					+ " but no characters exits at that slot.");
 			return -1;
 		}
 		
@@ -579,7 +579,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		if (_log.isDebugEnabled())
 			_log.info("Client " + toString() + " disconnected abnormally.");
 	}
-
+	
 	@Override
 	protected String getUID()
 	{

@@ -31,33 +31,20 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class Continuous implements ICubicSkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{
-			L2SkillType.BUFF,
-			L2SkillType.DEBUFF,
-			L2SkillType.DOT,
-			L2SkillType.MDOT,
-			L2SkillType.POISON,
-			L2SkillType.BLEED,
-			L2SkillType.HOT,
-			L2SkillType.CPHOT,
-			L2SkillType.MPHOT,
-			L2SkillType.FEAR,
-			L2SkillType.CONT,
-			L2SkillType.WEAKNESS,
-			L2SkillType.REFLECT,
-			L2SkillType.AGGDEBUFF,
-			L2SkillType.FUSION			};
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.BUFF, L2SkillType.DEBUFF, L2SkillType.DOT,
+			L2SkillType.MDOT, L2SkillType.POISON, L2SkillType.BLEED, L2SkillType.HOT, L2SkillType.CPHOT,
+			L2SkillType.MPHOT, L2SkillType.FEAR, L2SkillType.CONT, L2SkillType.WEAKNESS, L2SkillType.REFLECT,
+			L2SkillType.AGGDEBUFF, L2SkillType.FUSION };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		L2PcInstance player = null;
 		if (activeChar instanceof L2PcInstance)
-			player = (L2PcInstance) activeChar;
-
+			player = (L2PcInstance)activeChar;
+		
 		if (skill.getEffectId() != 0)
 		{
-			int skillLevel = (int) skill.getEffectLvl();
+			int skillLevel = (int)skill.getEffectLvl();
 			int skillEffectId = skill.getEffectId();
 			
 			L2Skill skill2;
@@ -69,11 +56,11 @@ public class Continuous implements ICubicSkillHandler
 			{
 				skill2 = SkillTable.getInstance().getInfo(skillEffectId, skillLevel);
 			}
-
+			
 			if (skill2 != null)
 				skill = skill2;
 		}
-
+		
 		for (L2Character target : targets)
 		{
 			if (target == null)
@@ -87,26 +74,26 @@ public class Continuous implements ICubicSkillHandler
 			
 			if (Formulas.calcSkillReflect(target, skill) == Formulas.SKILL_REFLECT_SUCCEED)
 				target = activeChar;
-
+			
 			// With Mystic Immunity you can't be buffed/debuffed
 			if (target.isPreventedFromReceivingBuffs())
 				continue;
-
+			
 			// Player holding a cursed weapon can't be buffed and can't buff
 			if (skill.getSkillType() == L2SkillType.BUFF && !(activeChar instanceof L2ClanHallManagerInstance))
 			{
 				if (target != activeChar)
 				{
-					if (target instanceof L2PcInstance && ((L2PcInstance) target).isCursedWeaponEquipped())
+					if (target instanceof L2PcInstance && ((L2PcInstance)target).isCursedWeaponEquipped())
 						continue;
 					else if (player != null && player.isCursedWeaponEquipped())
 						continue;
 				}
 				// TODO: boolean isn't good idea, could cause bugs
 				else if (skill.getId() == 2168 && activeChar instanceof L2PcInstance)
-					((L2PcInstance) activeChar).setCharmOfLuck(true);
+					((L2PcInstance)activeChar).setCharmOfLuck(true);
 			}
-
+			
 			if (skill.isOffensive())
 			{
 				if (skill.useSpiritShot())
@@ -131,7 +118,7 @@ public class Continuous implements ICubicSkillHandler
 				shld = Formulas.calcShldUse(activeChar, target, skill);
 				acted = Formulas.calcSkillSuccess(activeChar, target, skill, shld, ss, sps, bss);
 			}
-
+			
 			if (acted)
 			{
 				if (skill.isToggle())
@@ -144,13 +131,13 @@ public class Continuous implements ICubicSkillHandler
 						return;
 					}
 				}
-
+				
 				skill.getEffects(activeChar, target);
-
+				
 				if (skill.getSkillType() == L2SkillType.AGGDEBUFF)
 				{
 					if (target instanceof L2Attackable)
-						target.getAI().notifyEvent(CtrlEvent.EVT_AGGRESSION, activeChar, (int) skill.getPower());
+						target.getAI().notifyEvent(CtrlEvent.EVT_AGGRESSION, activeChar, (int)skill.getPower());
 					else if (target instanceof L2Playable)
 					{
 						if (target.getTarget() == activeChar)
@@ -164,7 +151,7 @@ public class Continuous implements ICubicSkillHandler
 				activeChar.sendResistedMyEffectMessage(target, skill);
 		}
 	}
-
+	
 	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Character... targets)
 	{
 		for (L2Character target : targets)
@@ -186,7 +173,7 @@ public class Continuous implements ICubicSkillHandler
 			skill.getEffects(activeCubic, target);
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

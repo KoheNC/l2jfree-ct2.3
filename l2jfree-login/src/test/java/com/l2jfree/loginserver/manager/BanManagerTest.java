@@ -34,7 +34,7 @@ public class BanManagerTest extends TestCase
 	{
 		super.setUp();
 		BanManager.BAN_LIST = getClass().getResource("banlist.cfg").getFile().replace("%20", " ");
-
+		
 		// intialize a file for the test
 		FileWriter fw = new FileWriter(BanManager.BAN_LIST);
 		fw.write("#comment\n");
@@ -43,10 +43,10 @@ public class BanManagerTest extends TestCase
 		fw.write("\n176.12.12.12 " + System.currentTimeMillis() + 10000);
 		fw.write("\n132.12.12.12 ");
 		fw.close();
-
+		
 		BanManager.getInstance();
 	}
-
+	
 	public void testLoadBanList() throws UnknownHostException
 	{
 		BanManager bm = BanManager.getInstance();
@@ -54,24 +54,24 @@ public class BanManagerTest extends TestCase
 		InetAddress netAddress = InetAddress.getByName("127.0.0.1");
 		assertTrue(bm.isBannedAddress(netAddress));
 	}
-
+	
 	public void testUnBan() throws UnknownHostException
 	{
 		BanManager bm = BanManager.getInstance();
 		InetAddress netAddress = InetAddress.getByName("127.0.0.1");
 		assertTrue(bm.isBannedAddress(netAddress));
-
+		
 		bm.removeBanForAddress("127.0.0.1");
 		assertTrue(!bm.isBannedAddress(netAddress));
 	}
-
+	
 	public void testEternalBan() throws UnknownHostException
 	{
 		BanManager bm = BanManager.getInstance();
 		InetAddress netAddress = InetAddress.getByName("132.12.12.12");
 		assertTrue(bm.isBannedAddress(netAddress));
 	}
-
+	
 	public void testBanIp() throws Exception
 	{
 		BanManager bm = BanManager.getInstance();
@@ -80,7 +80,7 @@ public class BanManagerTest extends TestCase
 		{
 			bm.removeBanForAddress("127.0.0.1");
 		}
-
+		
 		bm.addBanForAddress(netAddress, 1000);
 		assertTrue(bm.isBannedAddress(netAddress));
 		Thread.sleep(2000);

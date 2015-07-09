@@ -23,29 +23,29 @@ public class Dice extends L2GameServerPacket
 	private final int _x;
 	private final int _y;
 	private final int _z;
-
-	public Dice(int charObjId, int itemId, int number, int x , int y , int z)
+	
+	public Dice(int charObjId, int itemId, int number, int x, int y, int z)
 	{
 		_charObjId = charObjId;
 		_itemId = itemId;
 		_number = number;
-		_x =x;
-		_y =y;
-		_z =z;
+		_x = x;
+		_y = y;
+		_z = z;
 	}
 	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xDA);
-		writeD(_charObjId);  //object id of player
-		writeD(_itemId);     //	item id of dice (spade)  4625,4626,4627,4628
-		writeD(_number);      //number rolled
-		writeD(_x);       //x
-		writeD(_y);       //y
-		writeD(_z);     //z
+		writeD(_charObjId); //object id of player
+		writeD(_itemId); //	item id of dice (spade)  4625,4626,4627,4628
+		writeD(_number); //number rolled
+		writeD(_x); //x
+		writeD(_y); //y
+		writeD(_z); //z
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

@@ -29,7 +29,7 @@ public interface IIrcCommandHandler
 	 * @return command success
 	 */
 	public boolean useIrcCommand(String command, String gm, String target, boolean authed);
-
+	
 	/**
 	 * this method is called at initialization to register all the item ids
 	 * automatically

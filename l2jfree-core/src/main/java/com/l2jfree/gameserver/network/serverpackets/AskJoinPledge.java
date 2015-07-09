@@ -17,12 +17,12 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class AskJoinPledge extends L2GameServerPacket
 {
 	private static final String _S__2C_ASKJOINPLEDGE = "[S] 2c AskJoinPledge";
-
+	
 	private final int _requestorObjId;
 	private final String _subPledgeName;
 	private final int _pledgeType;
 	private final String _pledgeName;
-
+	
 	public AskJoinPledge(int requestorObjId, String subPledgeName, int pledgeType, String pledgeName)
 	{
 		_requestorObjId = requestorObjId;
@@ -30,7 +30,7 @@ public class AskJoinPledge extends L2GameServerPacket
 		_pledgeType = pledgeType;
 		_pledgeName = pledgeName;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -42,7 +42,7 @@ public class AskJoinPledge extends L2GameServerPacket
 			writeD(_pledgeType);
 		writeS(_pledgeName);
 	}
-
+	
 	@Override
 	public String getType()
 	{

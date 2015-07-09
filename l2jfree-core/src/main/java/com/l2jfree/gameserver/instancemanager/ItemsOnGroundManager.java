@@ -41,10 +41,10 @@ import com.l2jfree.gameserver.model.L2World;
  */
 public class ItemsOnGroundManager
 {
-	protected static Log				_log	= LogFactory.getLog(ItemsOnGroundManager.class);
-
-	protected FastList<L2ItemInstance>	_items	= null;
-
+	protected static Log _log = LogFactory.getLog(ItemsOnGroundManager.class);
+	
+	protected FastList<L2ItemInstance> _items = null;
+	
 	private ItemsOnGroundManager()
 	{
 		if (!Config.SAVE_DROPPED_ITEM)
@@ -52,23 +52,24 @@ public class ItemsOnGroundManager
 		_items = new FastList<L2ItemInstance>();
 		load();
 		if (Config.SAVE_DROPPED_ITEM_INTERVAL > 0)
-			ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new StoreInDb(), Config.SAVE_DROPPED_ITEM_INTERVAL, Config.SAVE_DROPPED_ITEM_INTERVAL);
+			ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new StoreInDb(),
+					Config.SAVE_DROPPED_ITEM_INTERVAL, Config.SAVE_DROPPED_ITEM_INTERVAL);
 	}
-
+	
 	public static final ItemsOnGroundManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private void load()
 	{
 		// If SaveDroppedItem is false, may want to delete all items previously stored to avoid add old items on reactivate
 		if (!Config.SAVE_DROPPED_ITEM && Config.CLEAR_DROPPED_ITEM_TABLE)
 			emptyTable();
-
+		
 		if (!Config.SAVE_DROPPED_ITEM)
 			return;
-
+		
 		// if DestroyPlayerDroppedItem was previously  false, items curently protected will be added to ItemsAutoDestroy
 		if (Config.DESTROY_DROPPED_PLAYER_ITEM)
 		{
@@ -95,7 +96,7 @@ public class ItemsOnGroundManager
 				L2DatabaseFactory.close(con);
 			}
 		}
-
+		
 		// Add items to world
 		Connection con = null;
 		try
@@ -106,7 +107,8 @@ public class ItemsOnGroundManager
 				Statement s = con.createStatement();
 				ResultSet result;
 				int count = 0;
-				result = s.executeQuery("SELECT object_id,item_id,count,enchant_level,x,y,z,drop_time,equipable FROM itemsonground");
+				result =
+						s.executeQuery("SELECT object_id,item_id,count,enchant_level,x,y,z,drop_time,equipable FROM itemsonground");
 				while (result.next())
 				{
 					L2ItemInstance item = new L2ItemInstance(result.getInt(1), result.getInt(2));
@@ -144,35 +146,35 @@ public class ItemsOnGroundManager
 		{
 			L2DatabaseFactory.close(con);
 		}
-
+		
 		if (Config.EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD)
 			emptyTable();
 	}
-
+	
 	public void save(L2ItemInstance item)
 	{
 		if (!Config.SAVE_DROPPED_ITEM)
 			return;
 		_items.add(item);
 	}
-
+	
 	public void removeObject(L2Object item)
 	{
 		if (!Config.SAVE_DROPPED_ITEM)
 			return;
 		_items.remove(item);
 	}
-
+	
 	public void saveInDb()
 	{
 		new StoreInDb().run();
 	}
-
+	
 	public void cleanUp()
 	{
 		_items.clear();
 	}
-
+	
 	public void emptyTable()
 	{
 		Connection con = null;
@@ -192,7 +194,7 @@ public class ItemsOnGroundManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	protected class StoreInDb extends Thread
 	{
 		@Override
@@ -200,29 +202,29 @@ public class ItemsOnGroundManager
 		{
 			if (!Config.SAVE_DROPPED_ITEM)
 				return;
-
+			
 			emptyTable();
-
+			
 			if (_items.isEmpty() && _log.isDebugEnabled())
 			{
 				_log.warn("ItemsOnGroundManager: nothing to save...");
 				return;
 			}
-
+			
 			for (L2ItemInstance item : _items)
 			{
 				if (item == null)
 					continue;
-
+				
 				if (CursedWeaponsManager.getInstance().isCursed(item.getItemId()))
 					continue; // Cursed Items not saved to ground, prevent double save
-
+					
 				Connection con = null;
 				try
 				{
 					con = L2DatabaseFactory.getInstance().getConnection(con);
-					PreparedStatement statement = con
-							.prepareStatement("INSERT INTO itemsonground(object_id,item_id,count,enchant_level,x,y,z,drop_time,equipable) VALUES(?,?,?,?,?,?,?,?,?)");
+					PreparedStatement statement =
+							con.prepareStatement("INSERT INTO itemsonground(object_id,item_id,count,enchant_level,x,y,z,drop_time,equipable) VALUES(?,?,?,?,?,?,?,?,?)");
 					statement.setInt(1, item.getObjectId());
 					statement.setInt(2, item.getItemId());
 					statement.setLong(3, item.getCount());
@@ -230,7 +232,7 @@ public class ItemsOnGroundManager
 					statement.setInt(5, item.getX());
 					statement.setInt(6, item.getY());
 					statement.setInt(7, item.getZ());
-
+					
 					if (item.isProtected())
 						statement.setLong(8, -1); // Item will be protected
 					else
@@ -255,7 +257,7 @@ public class ItemsOnGroundManager
 				_log.warn("ItemsOnGroundManager: " + _items.size() + " items on ground saved");
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

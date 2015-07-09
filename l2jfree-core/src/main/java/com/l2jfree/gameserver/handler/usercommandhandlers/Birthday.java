@@ -24,9 +24,8 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class Birthday implements IUserCommandHandler
 {
 	// 161714928 in Gracia P2
-	private static final int[]	COMMAND_IDS	=
-											{ 126 };
-
+	private static final int[] COMMAND_IDS = { 126 };
+	
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		Calendar bDay = activeChar.getCreationDate();
@@ -40,7 +39,7 @@ public class Birthday implements IUserCommandHandler
 			activeChar.sendPacket(SystemMessageId.CHARACTERS_CREATED_FEB_29_WILL_RECEIVE_GIFT_FEB_28);
 		return true;
 	}
-
+	
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

@@ -27,9 +27,8 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class ChatAll implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Normal };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Normal };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
 	 */
@@ -37,16 +36,18 @@ public class ChatAll implements IChatHandler
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
-		String name = (activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS)? "[GM]" + activeChar.getAppearance().getVisibleName() : activeChar.getAppearance().getVisibleName();
+		String name =
+				(activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS) ? "[GM]"
+						+ activeChar.getAppearance().getVisibleName() : activeChar.getAppearance().getVisibleName();
 		
 		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, name, text);
-
+		
 		for (L2PcInstance player : activeChar.getKnownList().getKnownPlayers().values())
 		{
 			if (player != null && activeChar.isInsideRadius(player, 1250, false, true)

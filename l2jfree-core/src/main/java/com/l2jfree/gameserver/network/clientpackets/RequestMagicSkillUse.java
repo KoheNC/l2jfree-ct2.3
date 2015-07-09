@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.skills.SkillUsageRequest;
 
 public class RequestMagicSkillUse extends L2GameClientPacket
 {
-	private static final String	_C__REQUESTMAGICSKILLUSE	= "[C] 39 RequestMagicSkillUse c[ddc]";
-
-	private int					_skillId;
-	private boolean				_ctrl;
-	private boolean				_shift;
-
+	private static final String _C__REQUESTMAGICSKILLUSE = "[C] 39 RequestMagicSkillUse c[ddc]";
+	
+	private int _skillId;
+	private boolean _ctrl;
+	private boolean _shift;
+	
 	@Override
 	protected void readImpl()
 	{
@@ -36,23 +36,23 @@ public class RequestMagicSkillUse extends L2GameClientPacket
 		_ctrl = readD() != 0;
 		_shift = readC() != 0;
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		// removes spawn protection
 		activeChar.onActionRequest();
-
+		
 		if (ObjectRestrictions.getInstance().checkRestriction(activeChar, AvailableRestriction.PlayerCast))
 		{
 			activeChar.sendMessage("You cannot cast a skill due to a restriction.");
 			return;
 		}
-
+		
 		// Get the level of the used skill
 		int level = activeChar.getSkillLevel(_skillId);
 		if (level <= 0)
@@ -60,10 +60,10 @@ public class RequestMagicSkillUse extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		// Get the L2Skill template corresponding to the skillID received from the client
 		L2Skill skill = SkillTable.getInstance().getInfo(_skillId, level);
-
+		
 		// Check the validity of the skill
 		if (activeChar.canUseMagic(skill))
 		{
@@ -77,7 +77,7 @@ public class RequestMagicSkillUse extends L2GameClientPacket
 			sendAF();
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

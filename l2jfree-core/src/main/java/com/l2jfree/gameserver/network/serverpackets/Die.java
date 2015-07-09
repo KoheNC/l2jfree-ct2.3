@@ -39,28 +39,28 @@ import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
  */
 public class Die extends L2GameServerPacket
 {
-	private static final String _S__00_DIE			= "[S] 00 Die [dddddddd]";
-	public static final int FEATHER_OF_BLESSING_1	= 10649;
-	public static final int FEATHER_OF_BLESSING_2	= 13300;
-	public static final int PHOENIX_FEATHER			= 13128;
-
+	private static final String _S__00_DIE = "[S] 00 Die [dddddddd]";
+	public static final int FEATHER_OF_BLESSING_1 = 10649;
+	public static final int FEATHER_OF_BLESSING_2 = 13300;
+	public static final int PHOENIX_FEATHER = 13128;
+	
 	private final int _charObjId;
 	private final boolean _fallDown;
 	private final int _sweepable;
-
+	
 	private final int _showVillage;
 	private final int _showClanhall;
 	private final int _showCastle;
 	private int _showFlag;
 	private final int _showFeather;
 	private final int _showFortress;
-
+	
 	public Die(L2Character cha)
 	{
 		_charObjId = cha.getObjectId();
 		_fallDown = cha.mustFallDownOnDeath();
 		if (cha instanceof L2Attackable)
-			_sweepable = ((L2Attackable) cha).isSweepActive() ? 1 : 0;
+			_sweepable = ((L2Attackable)cha).isSweepActive() ? 1 : 0;
 		else
 			_sweepable = 0;
 		if (cha instanceof L2PcInstance)
@@ -79,7 +79,7 @@ public class Die extends L2GameServerPacket
 				_showFortress = 0;
 				return;
 			}
-
+			
 			_showVillage = 1;
 			_showFlag = 0;
 			L2Clan clan = player.getClan();
@@ -104,12 +104,12 @@ public class Die extends L2GameServerPacket
 						_showFlag = 1;
 				}
 				as = CCHManager.getInstance().getSiege(player);
-			 	if (as != null && as.getIsInProgress())
-			 	{
-			 		sc = as.getAttackerClan(clan);
-			 		if (sc != null && sc.getNumFlags() > 0)
-			 			_showFlag = 1;
-			 	}
+				if (as != null && as.getIsInProgress())
+				{
+					sc = as.getAttackerClan(clan);
+					if (sc != null && sc.getNumFlags() > 0)
+						_showFlag = 1;
+				}
 			}
 			else
 			{
@@ -117,11 +117,11 @@ public class Die extends L2GameServerPacket
 				_showCastle = 0;
 				_showFortress = 0;
 			}
-
-			if (player.getAccessLevel() >= Config.GM_FIXED ||
-					player.getInventory().getItemByItemId(FEATHER_OF_BLESSING_1) != null ||
-					player.getInventory().getItemByItemId(FEATHER_OF_BLESSING_2) != null ||
-					player.getInventory().getItemByItemId(PHOENIX_FEATHER) != null)
+			
+			if (player.getAccessLevel() >= Config.GM_FIXED
+					|| player.getInventory().getItemByItemId(FEATHER_OF_BLESSING_1) != null
+					|| player.getInventory().getItemByItemId(FEATHER_OF_BLESSING_2) != null
+					|| player.getInventory().getItemByItemId(PHOENIX_FEATHER) != null)
 				_showFeather = 1;
 			else
 				_showFeather = 0;
@@ -136,13 +136,13 @@ public class Die extends L2GameServerPacket
 			_showFeather = 0;
 		}
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		if (!_fallDown)
 			return;
-
+		
 		writeC(0x00);
 		writeD(_charObjId);
 		writeD(_showVillage);
@@ -153,7 +153,7 @@ public class Die extends L2GameServerPacket
 		writeD(_showFeather);
 		writeD(_showFortress);
 	}
-
+	
 	@Override
 	public String getType()
 	{

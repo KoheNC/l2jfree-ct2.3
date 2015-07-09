@@ -25,35 +25,34 @@ import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
  */
 public class CharSelectInfoPackage
 {
-	private String		_name;
-	private int			_objectId			= 0;
-	private int			_charId				= 0x00030b7a;
-	private long		_exp				= 0;
-	private int			_sp					= 0;
-	private int			_clanId				= 0;
-	private int			_karma				= 0;
-	private int			_pkKills			= 0;
-	private int			_pvpKills			= 0;
-	private int			_augmentationId		= 0;
-	private int			_race				= 0;
-	private int			_classId			= 0;
-	private int			_baseClassId		= 0;
-	private long		_deleteTimer		= 0;
-	private long		_lastAccess			= 0L;
-	private int			_face				= 0;
-	private int			_hairStyle			= 0;
-	private int			_hairColor			= 0;
-	private int			_sex				= 0;
-	private int			_level				= 1;
-	private int			_maxHp				= 0;
-	private double		_currentHp			= 0;
-	private int			_maxMp				= 0;
-	private double		_currentMp			= 0;
-	private final int[][]		_paperdoll;
-	private int			_transformationId	= 0;
-	private int			_x = 0, _y = 0, _z	= 0;
-
-
+	private String _name;
+	private int _objectId = 0;
+	private int _charId = 0x00030b7a;
+	private long _exp = 0;
+	private int _sp = 0;
+	private int _clanId = 0;
+	private int _karma = 0;
+	private int _pkKills = 0;
+	private int _pvpKills = 0;
+	private int _augmentationId = 0;
+	private int _race = 0;
+	private int _classId = 0;
+	private int _baseClassId = 0;
+	private long _deleteTimer = 0;
+	private long _lastAccess = 0L;
+	private int _face = 0;
+	private int _hairStyle = 0;
+	private int _hairColor = 0;
+	private int _sex = 0;
+	private int _level = 1;
+	private int _maxHp = 0;
+	private double _currentHp = 0;
+	private int _maxMp = 0;
+	private double _currentMp = 0;
+	private final int[][] _paperdoll;
+	private int _transformationId = 0;
+	private int _x = 0, _y = 0, _z = 0;
+	
 	/**
 	 * @param int1
 	 */

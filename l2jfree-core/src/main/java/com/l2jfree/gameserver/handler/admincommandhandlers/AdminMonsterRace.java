@@ -32,11 +32,10 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class AdminMonsterRace implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_mons" };
-
-	protected static int			state			= -1;
-
+	private static final String[] ADMIN_COMMANDS = { "admin_mons" };
+	
+	protected static int state = -1;
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equalsIgnoreCase("admin_mons"))
@@ -45,12 +44,12 @@ public class AdminMonsterRace implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void handleSendPacket(L2PcInstance activeChar)
 	{
 		/*
@@ -61,15 +60,10 @@ public class AdminMonsterRace implements IAdminCommandHandler
 		 * 
 		 * 8003 to 8027
 		 */
-
-		int[][] codes =
-		{
-		{ -1, 0 },
-		{ 0, 15322 },
-		{ 13765, -1 },
-		{ -1, 0 } };
+		
+		int[][] codes = { { -1, 0 }, { 0, 15322 }, { 13765, -1 }, { -1, 0 } };
 		MonsterRace race = MonsterRace.getInstance();
-
+		
 		if (state == -1)
 		{
 			state++;
@@ -94,24 +88,24 @@ public class AdminMonsterRace implements IAdminCommandHandler
 			MonRaceInfo spk = new MonRaceInfo(codes[state][0], codes[state][1], race.getMonsters(), race.getSpeeds());
 			activeChar.sendPacket(spk);
 			activeChar.broadcastPacket(spk);
-
+			
 			ThreadPoolManager.getInstance().scheduleGeneral(new RunRace(codes, activeChar), 5000);
 		}
-
+		
 	}
-
+	
 	class RunRace implements Runnable
 	{
-
-		private final int[][]			codes;
-		private final L2PcInstance	activeChar;
-
+		
+		private final int[][] codes;
+		private final L2PcInstance activeChar;
+		
 		public RunRace(int[][] pCodes, L2PcInstance pActiveChar)
 		{
 			codes = pCodes;
 			activeChar = pActiveChar;
 		}
-
+		
 		public void run()
 		{
 			//int[][] speeds1 = MonsterRace.getInstance().getSpeeds();
@@ -128,23 +122,25 @@ public class AdminMonsterRace implements IAdminCommandHandler
 			 }
 			 _log.debugr("Total speed for "+(i+1)+" = "+speed[i]);
 			 }*/
-
-			MonRaceInfo spk = new MonRaceInfo(codes[2][0], codes[2][1], MonsterRace.getInstance().getMonsters(), MonsterRace.getInstance().getSpeeds());
+			
+			MonRaceInfo spk =
+					new MonRaceInfo(codes[2][0], codes[2][1], MonsterRace.getInstance().getMonsters(), MonsterRace
+							.getInstance().getSpeeds());
 			activeChar.sendPacket(spk);
 			activeChar.broadcastPacket(spk);
 			ThreadPoolManager.getInstance().scheduleGeneral(new RunEnd(activeChar), 30000);
 		}
 	}
-
+	
 	class RunEnd implements Runnable
 	{
-		private final L2PcInstance	activeChar;
-
+		private final L2PcInstance activeChar;
+		
 		public RunEnd(L2PcInstance pActiveChar)
 		{
 			activeChar = pActiveChar;
 		}
-
+		
 		public void run()
 		{
 			DeleteObject obj = null;

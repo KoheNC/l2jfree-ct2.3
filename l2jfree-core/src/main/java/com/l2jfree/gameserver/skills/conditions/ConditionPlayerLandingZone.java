@@ -24,12 +24,12 @@ import com.l2jfree.gameserver.skills.Env;
 final class ConditionPlayerLandingZone extends Condition
 {
 	private final boolean _val;
-
+	
 	public ConditionPlayerLandingZone(boolean val)
 	{
 		_val = val;
 	}
-
+	
 	@Override
 	public boolean testImpl(Env env)
 	{

@@ -26,87 +26,45 @@ import com.l2jfree.gameserver.network.serverpackets.ChooseInventoryItem;
 public class EnchantScrolls implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int[]	ITEM_IDS	=
-											{
-											// A grade
-			729,
-			730,
-			731,
-			732,
-			6569,
-			6570,
-			22009,
-			22013,
-			22015,
-			22017,
-			22019,
-			22021,
+	private static final int[] ITEM_IDS = {
+			// A grade
+			729, 730, 731, 732, 6569, 6570, 22009, 22013, 22015, 22017, 22019, 22021,
 			// B grade
-			947,
-			948,
-			949,
-			950,
-			6571,
-			6572,
-			22008,
-			22012,
-			22014,
-			22016,
-			22018,
-			22020,
+			947, 948, 949, 950, 6571, 6572, 22008, 22012, 22014, 22016, 22018, 22020,
 			// C grade
-			951,
-			952,
-			953,
-			954,
-			6573,
-			6574,
-			22007,
-			22011,
+			951, 952, 953, 954, 6573, 6574, 22007, 22011,
 			// D grade
-			955,
-			956,
-			957,
-			958,
-			6575,
-			6576,
-			22006,
-			22010,
+			955, 956, 957, 958, 6575, 6576, 22006, 22010,
 			// S grade
-			959,
-			960,
-			961,
-			962,
-			6577,
-			6578							};
-
+			959, 960, 961, 962, 6577, 6578 };
+	
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-		L2PcInstance activeChar = (L2PcInstance) playable;
+		L2PcInstance activeChar = (L2PcInstance)playable;
 		if (activeChar.isCastingNow())
 			return;
-
+		
 		// Restrict enchant during restart/shutdown (because of an existing exploit)
 		if (Shutdown.isActionDisabled(DisableType.ENCHANT))
 		{
 			activeChar.sendMessage("Enchanting items is not allowed during restart/shutdown.");
 			return;
 		}
-
+		
 		if (activeChar.getActiveEnchantItem() != null)
 		{
 			if (_log.isDebugEnabled())
 				_log.warn(activeChar + " has got already an active enchant item");
 			return;
 		}
-
+		
 		activeChar.setActiveEnchantItem(item);
 		//activeChar.sendPacket(SystemMessageId.SELECT_ITEM_TO_ENCHANT);
-
+		
 		int itemId = item.getItemId();
-
+		
 		if (Config.ALLOW_CRYSTAL_SCROLL && (itemId == 957 || itemId == 958 || itemId == 953 || itemId == 954 || // Crystal scrolls D and C Grades
 				itemId == 949 || itemId == 950 || itemId == 731 || itemId == 732 || // Crystal scrolls B and A Grades
 				itemId == 961 || itemId == 962)) // Crystal scrolls S Grade
@@ -114,7 +72,7 @@ public class EnchantScrolls implements IItemHandler
 		else
 			activeChar.sendPacket(new ChooseInventoryItem(itemId));
 	}
-
+	
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

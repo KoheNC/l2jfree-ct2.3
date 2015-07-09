@@ -16,19 +16,19 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 public class CharacterDeleteSuccess extends StaticPacket
 {
-	private static final String	_S__CHARACTERDELETESUCCESS	= "[S] 1D CharacterDeleteSuccess c";
+	private static final String _S__CHARACTERDELETESUCCESS = "[S] 1D CharacterDeleteSuccess c";
 	public static final CharacterDeleteSuccess PACKET = new CharacterDeleteSuccess();
-
+	
 	private CharacterDeleteSuccess()
 	{
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x1d);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

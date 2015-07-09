@@ -19,16 +19,16 @@ import com.l2jfree.gameserver.network.serverpackets.PrivateStoreMsgSell;
 
 public class SetPrivateStoreMsgSell extends L2GameClientPacket
 {
-	private static final String	_C__SETPRIVATESTOREMSGSELL	= "[C] 97 SetPrivateStoreMsgSell c[s]";
-
-	private String				_msg;
-
+	private static final String _C__SETPRIVATESTOREMSGSELL = "[C] 97 SetPrivateStoreMsgSell c[s]";
+	
+	private String _msg;
+	
 	@Override
 	protected void readImpl()
 	{
 		_msg = readS();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -40,13 +40,13 @@ public class SetPrivateStoreMsgSell extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		player.getSellList().setTitle(_msg);
 		sendPacket(new PrivateStoreMsgSell(player));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

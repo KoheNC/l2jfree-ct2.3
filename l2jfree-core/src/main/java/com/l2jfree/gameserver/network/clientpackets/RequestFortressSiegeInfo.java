@@ -24,28 +24,29 @@ import com.l2jfree.gameserver.network.serverpackets.ExShowFortressSiegeInfo;
  */
 public class RequestFortressSiegeInfo extends L2GameClientPacket
 {
-	private static final String	_C__D0_42_REQUESTFORTRESSSIEGEINFO = "[C] D0:42 RequestFortressSiegeInfo";
-
-    @Override
-    protected void readImpl()
-    {
-    }
-
-    @Override
-    protected void runImpl()
-    {
-    	if (getActiveChar() == null) return;
-
-        for (Fort fort : FortManager.getInstance().getForts())
-        	if (fort != null && fort.getSiege().getIsInProgress())
-        		sendPacket(new ExShowFortressSiegeInfo(fort));
-
-        sendPacket(ActionFailed.STATIC_PACKET);
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__D0_42_REQUESTFORTRESSSIEGEINFO;
-    }
+	private static final String _C__D0_42_REQUESTFORTRESSSIEGEINFO = "[C] D0:42 RequestFortressSiegeInfo";
+	
+	@Override
+	protected void readImpl()
+	{
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		if (getActiveChar() == null)
+			return;
+		
+		for (Fort fort : FortManager.getInstance().getForts())
+			if (fort != null && fort.getSiege().getIsInProgress())
+				sendPacket(new ExShowFortressSiegeInfo(fort));
+		
+		sendPacket(ActionFailed.STATIC_PACKET);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__D0_42_REQUESTFORTRESSSIEGEINFO;
+	}
 }

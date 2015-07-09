@@ -70,7 +70,7 @@ public final class WarehouseCacheManager implements Runnable
 			}
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

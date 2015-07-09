@@ -21,13 +21,13 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ServerClose extends StaticPacket
 {
 	private static final String _S__26_SERVERCLOSE = "[S] 26 ServerClose";
-
+	
 	public static final ServerClose STATIC_PACKET = new ServerClose();
-
+	
 	private ServerClose()
 	{
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket#writeImpl()
 	 */
@@ -36,7 +36,7 @@ public class ServerClose extends StaticPacket
 	{
 		writeC(0x20);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket#getType()
 	 */

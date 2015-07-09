@@ -27,46 +27,47 @@ import com.l2jfree.gameserver.templates.StatsSet;
 
 public abstract class L2Equip extends L2Item
 {
-	protected static final Log		_log				= LogFactory.getLog(L2Equip.class);
-	private L2Skill[]				_itemSkills			= null;
-	private L2Skill[]				_enchant4Skills		= null; // skill that activates when item is enchanted +4 (for duals)
-
+	protected static final Log _log = LogFactory.getLog(L2Equip.class);
+	private L2Skill[] _itemSkills = null;
+	private L2Skill[] _enchant4Skills = null; // skill that activates when item is enchanted +4 (for duals)
+	
 	// TODO: Replace by chance skills
 	public static class WeaponSkill
 	{
-		public L2Skill	skill;
-		public int		chance;
+		public L2Skill skill;
+		public int chance;
 	}
-
+	
 	public L2Equip(AbstractL2ItemType type, StatsSet set)
 	{
 		super(type, set);
-
+		
 		String[] itemSkillDefs = set.getString("skills_item").split(";");
 		String[] enchant4SkillDefs = set.getString("enchant4_skill").split(";");
-
+		
 		FastList<L2Skill> itemSkills = null;
 		FastList<L2Skill> enchant4Skills = null;
-
+		
 		// Item skills
 		if (itemSkillDefs != null && itemSkillDefs.length > 0)
 		{
 			itemSkills = parseSkills(itemSkillDefs, "item", (type instanceof L2ArmorType) ? "armor" : "weapon");
 		}
-
+		
 		// Enchant4 skills
 		if (enchant4SkillDefs != null && enchant4SkillDefs.length > 0)
 		{
-			enchant4Skills = parseSkills(enchant4SkillDefs, "enchant4", (type instanceof L2ArmorType) ? "armor" : "weapon");
+			enchant4Skills =
+					parseSkills(enchant4SkillDefs, "enchant4", (type instanceof L2ArmorType) ? "armor" : "weapon");
 		}
-
+		
 		if (itemSkills != null)
 			_itemSkills = itemSkills.toArray(new L2Skill[itemSkills.size()]);
-
+		
 		if (enchant4Skills != null && !enchant4Skills.isEmpty())
 			_enchant4Skills = enchant4Skills.toArray(new L2Skill[enchant4Skills.size()]);
 	}
-
+	
 	protected FastList<Integer> parseRestriction(String[] from, String restrictType, String itemType)
 	{
 		FastList<Integer> values = null;
@@ -79,20 +80,21 @@ public abstract class L2Equip extends L2Item
 			}
 			catch (Exception e)
 			{
-				_log.error("Cannot parse " + restrictType + " restriction \"" + strVal + "\" for " + itemType + " " + getItemId(), e);
+				_log.error("Cannot parse " + restrictType + " restriction \"" + strVal + "\" for " + itemType + " "
+						+ getItemId(), e);
 				continue;
 			}
-
+			
 			if (intVal < 0)
 				continue;
-
+			
 			if (values == null)
 				values = new FastList<Integer>();
 			values.add(intVal);
 		}
 		return values;
 	}
-
+	
 	protected FastList<L2Skill> parseSkills(String[] from, String skillType, String itemType)
 	{
 		FastList<L2Skill> itemSkills = null;
@@ -100,7 +102,7 @@ public abstract class L2Equip extends L2Item
 		{
 			if (skillStr.length() == 0)
 				continue;
-
+			
 			int skillId = 0;
 			int skillLevel = 0;
 			L2Skill skill = null;
@@ -112,14 +114,16 @@ public abstract class L2Equip extends L2Item
 			}
 			catch (Exception e)
 			{
-				_log.error("Cannot parse " + skillType + " skill \"" + skillStr + "\" for " + itemType + " item " + getItemId(), e);
+				_log.error("Cannot parse " + skillType + " skill \"" + skillStr + "\" for " + itemType + " item "
+						+ getItemId(), e);
 				continue;
 			}
-
+			
 			skill = SkillTable.getInstance().getInfo(skillId, skillLevel);
 			if (skill == null)
 			{
-				_log.error("Cannot find " + skillType + " skill (" + skillId + "," + skillLevel + ") for " + itemType + " item " + getItemId());
+				_log.error("Cannot find " + skillType + " skill (" + skillId + "," + skillLevel + ") for " + itemType
+						+ " item " + getItemId());
 			}
 			else
 			{
@@ -130,7 +134,7 @@ public abstract class L2Equip extends L2Item
 		}
 		return itemSkills;
 	}
-
+	
 	protected FastList<WeaponSkill> parseChanceSkills(String[] from, String skillType, String itemType)
 	{
 		FastList<WeaponSkill> itemSkills = null;
@@ -138,7 +142,7 @@ public abstract class L2Equip extends L2Item
 		{
 			if (skillStr.length() == 0)
 				continue;
-
+			
 			int skillId = 0;
 			int skillLevel = 0;
 			int chance = 0;
@@ -152,14 +156,16 @@ public abstract class L2Equip extends L2Item
 			}
 			catch (Exception e)
 			{
-				_log.error("Cannot parse " + skillType + " skill \"" + skillStr + "\" for " + itemType + " item " + getItemId(), e);
+				_log.error("Cannot parse " + skillType + " skill \"" + skillStr + "\" for " + itemType + " item "
+						+ getItemId(), e);
 				continue;
 			}
-
+			
 			skill = SkillTable.getInstance().getInfo(skillId, skillLevel);
 			if (skill == null)
 			{
-				_log.error("Cannot find " + skillType + " skill (" + skillId + "," + skillLevel + ") for " + itemType + " item " + getItemId());
+				_log.error("Cannot find " + skillType + " skill (" + skillId + "," + skillLevel + ") for " + itemType
+						+ " item " + getItemId());
 			}
 			else
 			{
@@ -174,7 +180,7 @@ public abstract class L2Equip extends L2Item
 		}
 		return itemSkills;
 	}
-
+	
 	/**
 	* Returns passive skills linked to that item
 	* @return

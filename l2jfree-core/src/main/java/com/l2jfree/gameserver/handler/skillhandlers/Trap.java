@@ -24,9 +24,8 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class Trap implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.DETECT_TRAP, L2SkillType.REMOVE_TRAP };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.DETECT_TRAP, L2SkillType.REMOVE_TRAP };
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.model.actor.L2Character, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.model.actor.L2Character...)
@@ -44,12 +43,12 @@ public class Trap implements ISkillHandler
 				{
 					if (!(element instanceof L2TrapInstance))
 						continue;
-	
-					L2TrapInstance target = (L2TrapInstance) element;
-	
+					
+					L2TrapInstance target = (L2TrapInstance)element;
+					
 					if (target.isAlikeDead())
 						continue;
-	
+					
 					if (target.getLevel() <= skill.getPower())
 					{
 						target.setDetected();
@@ -65,18 +64,18 @@ public class Trap implements ISkillHandler
 				{
 					if (!(element instanceof L2TrapInstance))
 						continue;
-	
-					L2TrapInstance target = (L2TrapInstance) element;
-	
+					
+					L2TrapInstance target = (L2TrapInstance)element;
+					
 					if (!target.isDetected())
 						continue;
-	
+					
 					if (target.getLevel() > skill.getPower())
 						continue;
-	
+					
 					L2PcInstance trapOwner = null;
 					trapOwner = target.getOwner();
-	
+					
 					target.unSummon(trapOwner);
 					if (activeChar instanceof L2PcInstance)
 						activeChar.sendPacket(SystemMessageId.A_TRAP_DEVICE_HAS_BEEN_STOPPED);
@@ -84,7 +83,7 @@ public class Trap implements ISkillHandler
 			}
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @see com.l2jfree.gameserver.handler.ISkillHandler#getSkillIds()

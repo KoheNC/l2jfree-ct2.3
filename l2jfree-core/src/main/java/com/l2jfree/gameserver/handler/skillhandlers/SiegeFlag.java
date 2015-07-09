@@ -40,16 +40,15 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class SiegeFlag extends ISkillConditionChecker
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.SIEGEFLAG };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SIEGEFLAG };
+	
 	@Override
 	public boolean checkConditions(L2Character activeChar, L2Skill skill)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return false;
 		
-		final L2PcInstance player = (L2PcInstance) activeChar;
+		final L2PcInstance player = (L2PcInstance)activeChar;
 		
 		if (player.isInsideZone(L2Zone.FLAG_NO_HQ))
 		{
@@ -57,9 +56,9 @@ public class SiegeFlag extends ISkillConditionChecker
 			return false;
 		}
 		// awful idea
-		else if (!SiegeManager.checkIfOkToPlaceFlag(player, true) &&
-				!FortSiegeManager.checkIfOkToPlaceFlag(player, true) &&
-				!CCHManager.checkIfOkToPlaceFlag(player, true))
+		else if (!SiegeManager.checkIfOkToPlaceFlag(player, true)
+				&& !FortSiegeManager.checkIfOkToPlaceFlag(player, true)
+				&& !CCHManager.checkIfOkToPlaceFlag(player, true))
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED);
 			sm.addSkillName(skill);
@@ -76,9 +75,9 @@ public class SiegeFlag extends ISkillConditionChecker
 		
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
-
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
+		
 		Siege siege = SiegeManager.getInstance().getSiege(player);
 		FortSiege fsiege = FortSiegeManager.getInstance().getSiege(player);
 		CCHSiege csiege = CCHManager.getInstance().getSiege(player);
@@ -89,7 +88,9 @@ public class SiegeFlag extends ISkillConditionChecker
 			if (skill != null && template != null)
 			{
 				// spawn a new flag
-				L2SiegeFlagInstance flag = new L2SiegeFlagInstance(player, IdFactory.getInstance().getNextId(), template, skill.isAdvanced());
+				L2SiegeFlagInstance flag =
+						new L2SiegeFlagInstance(player, IdFactory.getInstance().getNextId(), template,
+								skill.isAdvanced());
 				flag.setTitle(player.getClan().getName());
 				flag.getStatus().setCurrentHpMp(flag.getMaxHp(), flag.getMaxMp());
 				flag.setHeading(player.getHeading());
@@ -102,7 +103,9 @@ public class SiegeFlag extends ISkillConditionChecker
 			if (skill != null && template != null)
 			{
 				// spawn a new flag
-				L2SiegeFlagInstance flag = new L2SiegeFlagInstance(player, IdFactory.getInstance().getNextId(), template, skill.isAdvanced());
+				L2SiegeFlagInstance flag =
+						new L2SiegeFlagInstance(player, IdFactory.getInstance().getNextId(), template,
+								skill.isAdvanced());
 				flag.setTitle(player.getClan().getName());
 				flag.getStatus().setCurrentHpMp(flag.getMaxHp(), flag.getMaxMp());
 				flag.setHeading(player.getHeading());
@@ -114,7 +117,9 @@ public class SiegeFlag extends ISkillConditionChecker
 			L2NpcTemplate template = NpcTable.getInstance().getTemplate(35062);
 			if (skill != null && template != null)
 			{
-				L2SiegeFlagInstance flag = new L2SiegeFlagInstance(player, IdFactory.getInstance().getNextId(), template, skill.isAdvanced());
+				L2SiegeFlagInstance flag =
+						new L2SiegeFlagInstance(player, IdFactory.getInstance().getNextId(), template,
+								skill.isAdvanced());
 				flag.setTitle(player.getClan().getName());
 				flag.getStatus().setCurrentHpMp(flag.getMaxHp(), flag.getMaxMp());
 				flag.setHeading(player.getHeading());
@@ -122,7 +127,7 @@ public class SiegeFlag extends ISkillConditionChecker
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

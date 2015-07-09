@@ -26,13 +26,12 @@ public final class RequestPackageSendableItemList extends L2GameClientPacket
 	private static final String _C_9E_REQUESTPACKAGESENDABLEITEMLIST = "[C] 9E RequestPackageSendableItemList";
 	private int _objectID;
 	
-	
 	@Override
-    protected void readImpl()
+	protected void readImpl()
 	{
 		_objectID = readD();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
 	 */
@@ -41,7 +40,7 @@ public final class RequestPackageSendableItemList extends L2GameClientPacket
 	{
 		sendPacket(new PackageSendableList(getClient().getActiveChar(), _objectID));
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

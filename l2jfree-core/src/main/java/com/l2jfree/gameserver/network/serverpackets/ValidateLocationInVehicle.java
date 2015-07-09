@@ -15,6 +15,7 @@
 package com.l2jfree.gameserver.network.serverpackets;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+
 /**
  * This class ...
  * 
@@ -22,36 +23,36 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class ValidateLocationInVehicle extends L2GameServerPacket
 {
-    private static final String _S__73_ValidateLocationInVehicle = "[S] 73 ValidateLocationInVehicle";
-    private final L2PcInstance _activeChar;
-
-    /**
-     * 0x73 ValidateLocationInVehicle         hdd
-     * @param _characters
-     */
-    public ValidateLocationInVehicle(L2PcInstance player)
-    {
-        _activeChar = player;
-    }
-    
-    @Override
-    protected final void writeImpl()
-    {
-        writeC(0x80);
-        writeD(_activeChar.getObjectId());
-        writeD(_activeChar.getBoat().getObjectId());
-        writeD(_activeChar.getX());
-        writeD(_activeChar.getY());
-        writeD(_activeChar.getZ());
-        writeD(_activeChar.getHeading());
-    }
-
-    /* (non-Javadoc)
-     * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _S__73_ValidateLocationInVehicle;
-    }
+	private static final String _S__73_ValidateLocationInVehicle = "[S] 73 ValidateLocationInVehicle";
+	private final L2PcInstance _activeChar;
+	
+	/**
+	 * 0x73 ValidateLocationInVehicle         hdd
+	 * @param _characters
+	 */
+	public ValidateLocationInVehicle(L2PcInstance player)
+	{
+		_activeChar = player;
+	}
+	
+	@Override
+	protected final void writeImpl()
+	{
+		writeC(0x80);
+		writeD(_activeChar.getObjectId());
+		writeD(_activeChar.getBoat().getObjectId());
+		writeD(_activeChar.getX());
+		writeD(_activeChar.getY());
+		writeD(_activeChar.getZ());
+		writeD(_activeChar.getHeading());
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _S__73_ValidateLocationInVehicle;
+	}
 }

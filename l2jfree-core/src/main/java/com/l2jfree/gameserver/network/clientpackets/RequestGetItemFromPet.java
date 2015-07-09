@@ -28,13 +28,13 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public class RequestGetItemFromPet extends L2GameClientPacket
 {
-	private static final String	REQUESTGETITEMFROMPET__C__8C	= "[C] 8C RequestGetItemFromPet";
-
-	private int					_objectId;
-	private long				_amount;
+	private static final String REQUESTGETITEMFROMPET__C__8C = "[C] 8C RequestGetItemFromPet";
+	
+	private int _objectId;
+	private long _amount;
 	@SuppressWarnings("unused")
-	private int					_unknown;
-
+	private int _unknown;
+	
 	@Override
 	protected void readImpl()
 	{
@@ -42,7 +42,7 @@ public class RequestGetItemFromPet extends L2GameClientPacket
 		_amount = readCompQ();
 		_unknown = readD();// = 0 for most trades
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -51,7 +51,7 @@ public class RequestGetItemFromPet extends L2GameClientPacket
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))
 			return;
-
+		
 		if (!(player.getPet() instanceof L2PetInstance))
 		{
 			requestFailed(SystemMessageId.DONT_HAVE_PET);
@@ -62,15 +62,15 @@ public class RequestGetItemFromPet extends L2GameClientPacket
 			requestFailed(SystemMessageId.TRY_AGAIN_LATER);
 			return;
 		}
-
-		L2PetInstance pet = (L2PetInstance) player.getPet();
-
+		
+		L2PetInstance pet = (L2PetInstance)player.getPet();
+		
 		if (_amount > 0 && pet.transferItem("Transfer", _objectId, _amount, player.getInventory(), player, pet) == null)
 			_log.warn("Invalid item transfer request: " + pet.getName() + "(pet) --> " + player.getName());
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

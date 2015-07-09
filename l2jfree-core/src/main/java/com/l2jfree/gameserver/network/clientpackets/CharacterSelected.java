@@ -25,14 +25,14 @@ import com.l2jfree.gameserver.network.serverpackets.CharSelected;
 public final class CharacterSelected extends L2GameClientPacket
 {
 	private static final String _C__0D_CHARACTERSELECTED = "[C] 0D CharacterSelected";
-
+	
 	private int _charSlot;
-
+	
 	//private int _unk1; // new in C4
 	//private int _unk2; // new in C4
 	//private int _unk3; // new in C4
 	//private int _unk4; // new in C4
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -42,7 +42,7 @@ public final class CharacterSelected extends L2GameClientPacket
 		/*_unk3 = */readD();
 		/*_unk4 = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -50,9 +50,9 @@ public final class CharacterSelected extends L2GameClientPacket
 		// but if not then this is repeated packet and nothing should be done here
 		if (getClient().getActiveChar() != null)
 			return;
-
+		
 		final L2PcInstance cha = getClient().loadCharFromDisk(_charSlot);
-
+		
 		if (cha == null)
 		{
 			_log.fatal(getClient() + ": character couldn't be loaded (slot:" + _charSlot + ")");
@@ -60,32 +60,32 @@ public final class CharacterSelected extends L2GameClientPacket
 			return;
 		}
 		
-		if( (cha.getAccessLevel() < 0) || (Config.SERVER_GMONLY && cha.getAccessLevel()<=0))
+		if ((cha.getAccessLevel() < 0) || (Config.SERVER_GMONLY && cha.getAccessLevel() <= 0))
 		{
 			new Disconnection(getClient(), cha).defaultSequence(false);
 			return;
 		}
-
+		
 		// preinitialize some values for each login
 		cha.setRunning(); // running is default
 		cha.standUp(); // standing is default
-
+		
 		// the char & skills are fully loaded, so update
 		cha.refreshOverloaded();
 		// refresh expertise already done when loading character (after loading inv)
 		cha.setOnlineStatus(true);
-
+		
 		L2World.getInstance().storeObject(cha);
 		L2World.getInstance().addOnlinePlayer(cha);
-
+		
 		cha.setClient(getClient());
 		getClient().setActiveChar(cha);
-
+		
 		getClient().setState(GameClientState.IN_GAME);
 		sendPacket(new CharSelected(cha, getClient().getSessionId().playOkID1));
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	@Override
 	public String getType()
 	{

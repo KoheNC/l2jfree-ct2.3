@@ -33,8 +33,8 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
  */
 public class Sweep extends ISkillConditionChecker
 {
-	private static final L2SkillType[]	SKILL_IDS	= { L2SkillType.SWEEP };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SWEEP };
+	
 	@Override
 	public boolean checkConditions(L2Character activeChar, L2Skill skill, L2Character target)
 	{
@@ -70,20 +70,20 @@ public class Sweep extends ISkillConditionChecker
 		{
 			return;
 		}
-
-		L2SkillSweep skill = (L2SkillSweep) tmpSkill;
-
-		L2PcInstance player = (L2PcInstance) activeChar;
+		
+		L2SkillSweep skill = (L2SkillSweep)tmpSkill;
+		
+		L2PcInstance player = (L2PcInstance)activeChar;
 		InventoryUpdate iu = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		boolean send = false;
-
+		
 		for (L2Character element : targets)
 		{
 			if (!(element instanceof L2Attackable))
 				continue;
-
-			L2Attackable target = (L2Attackable) element;
-
+			
+			L2Attackable target = (L2Attackable)element;
+			
 			L2Attackable.RewardItem[] items = null;
 			boolean isSweeping = false;
 			synchronized (target)
@@ -101,7 +101,7 @@ public class Sweep extends ISkillConditionChecker
 					double hpAdd = skill.getAbsorbAbs();
 					double hp = Math.min(activeChar.getStatus().getCurrentHp() + hpAdd, activeChar.getMaxHp());
 					double hpDiff = hp - activeChar.getStatus().getCurrentHp();
-
+					
 					activeChar.getStatus().increaseHp(hpDiff);
 				}
 				if (items == null || items.length == 0)
@@ -112,11 +112,13 @@ public class Sweep extends ISkillConditionChecker
 						player.getParty().distributeItem(player, ritem, true, target);
 					else
 					{
-						L2ItemInstance item = player.getInventory().addItem("Sweep", ritem.getItemId(), ritem.getCount(), player, target);
+						L2ItemInstance item =
+								player.getInventory().addItem("Sweep", ritem.getItemId(), ritem.getCount(), player,
+										target);
 						if (iu != null)
 							iu.addItem(item);
 						send = true;
-
+						
 						SystemMessage smsg = new SystemMessage(SystemMessageId.YOU_PICKED_UP_S1_S2); // you picked up $s1$s2
 						smsg.addNumber(ritem.getCount());
 						smsg.addItemName(item);
@@ -134,7 +136,7 @@ public class Sweep extends ISkillConditionChecker
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

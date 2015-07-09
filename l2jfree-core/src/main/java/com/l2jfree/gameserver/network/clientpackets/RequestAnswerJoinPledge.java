@@ -33,27 +33,28 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class RequestAnswerJoinPledge extends L2GameClientPacket
 {
 	private static final String _C__25_REQUESTANSWERJOINPLEDGE = "[C] 25 RequestAnswerJoinPledge";
-
+	
 	private int _answer;
-
-    @Override
-    protected void readImpl()
-    {
-        _answer = readD();
-    }
-
-    @Override
-    protected void runImpl()
+	
+	@Override
+	protected void readImpl()
+	{
+		_answer = readD();
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
+		if (activeChar == null)
+			return;
 		L2PcInstance requestor = activeChar.getRequest().getPartner();
-        if (requestor == null)
-        {
-        	sendAF();
-        	return;
-        }
-
+		if (requestor == null)
+		{
+			sendAF();
+			return;
+		}
+		
 		if (_answer == 0)
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.YOU_DID_NOT_RESPOND_TO_S1_CLAN_INVITATION);
@@ -66,54 +67,54 @@ public class RequestAnswerJoinPledge extends L2GameClientPacket
 		}
 		else
 		{
-	        if (!(requestor.getRequest().getRequestPacket() instanceof RequestJoinPledge))
-	        {
-	        	sendAF();
-	        	return; // hax
-	        }
-
-			RequestJoinPledge requestPacket = (RequestJoinPledge) requestor.getRequest().getRequestPacket();
+			if (!(requestor.getRequest().getRequestPacket() instanceof RequestJoinPledge))
+			{
+				sendAF();
+				return; // hax
+			}
+			
+			RequestJoinPledge requestPacket = (RequestJoinPledge)requestor.getRequest().getRequestPacket();
 			L2Clan clan = requestor.getClan();
 			// we must double check this cause during response time conditions can be changed, i.e. another player could join clan
 			if (clan.checkClanJoinCondition(requestor, activeChar, requestPacket.getSubPledgeType()))
-	        {
+			{
 				sendPacket(new JoinPledge(requestor.getClanId()));
-
+				
 				activeChar.setSubPledgeType(requestPacket.getSubPledgeType());
-				if(requestPacket.getSubPledgeType() == L2Clan.SUBUNIT_ACADEMY)
+				if (requestPacket.getSubPledgeType() == L2Clan.SUBUNIT_ACADEMY)
 				{
 					activeChar.setPledgeRank(9); // academy
 					activeChar.setLvlJoinedAcademy(activeChar.getLevel());
 				}
 				else
 					activeChar.setPledgeRank(5); // new member starts at 5, not confirmed
-
+					
 				clan.addClanMember(activeChar);
 				activeChar.setClanPrivileges(activeChar.getClan().getRankPrivs(activeChar.getPledgeRank()));
 				sendPacket(SystemMessageId.ENTERED_THE_CLAN);
-
+				
 				SystemMessage sm = new SystemMessage(SystemMessageId.S1_HAS_JOINED_CLAN);
 				sm.addString(activeChar.getName());
 				clan.broadcastToOnlineMembers(sm);
-
+				
 				L2GameServerPacket pledge = new PledgeShowMemberListAdd(activeChar);
 				clan.broadcastToOtherOnlineMembers(pledge, activeChar);
 				pledge = new PledgeShowInfoUpdate(clan);
 				clan.broadcastToOnlineMembers(pledge);
-
+				
 				// this activates the clan tab on the new member
 				sendPacket(new PledgeShowMemberListAll(clan));
 				activeChar.setClanJoinExpiryTime(0);
 				activeChar.broadcastUserInfo();
-
+				
 				activeChar.enableResidentialSkills(true);
 			}
 		}
-
+		
 		activeChar.getRequest().onRequestResponse();
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

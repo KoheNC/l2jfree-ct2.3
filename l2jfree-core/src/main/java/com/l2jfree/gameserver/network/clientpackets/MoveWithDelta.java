@@ -25,29 +25,29 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
  */
 public class MoveWithDelta extends L2GameClientPacket
 {
-//	private int _dx;
-//	private int _dy;
-//	private int _dz;
-
-    @Override
-    protected void readImpl()
-    {
-    	/*_dx =*/ readD();
-    	/*_dy =*/ readD();
-    	/*_dz =*/ readD();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-        // TODO: implement (no message since this packet is sent while moving?)
-        //requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
-    	sendPacket(ActionFailed.STATIC_PACKET);
-    }
-
-    @Override
-    public String getType()
-    {
-        return "[C] 0x41 MoveWithDelta";
-    }
+	//	private int _dx;
+	//	private int _dy;
+	//	private int _dz;
+	
+	@Override
+	protected void readImpl()
+	{
+		/*_dx =*/readD();
+		/*_dy =*/readD();
+		/*_dz =*/readD();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		// TODO: implement (no message since this packet is sent while moving?)
+		//requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
+		sendPacket(ActionFailed.STATIC_PACKET);
+	}
+	
+	@Override
+	public String getType()
+	{
+		return "[C] 0x41 MoveWithDelta";
+	}
 }

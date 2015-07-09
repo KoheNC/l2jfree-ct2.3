@@ -29,9 +29,9 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  */
 public abstract class BaseRootDAOHib extends HibernateDaoSupport
 {
-
-	private Session	__session	= null;
-
+	
+	private Session __session = null;
+	
 	/**
 	 * Load object matching the given key and return it.
 	 */
@@ -44,7 +44,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 		}
 		return obj;
 	}
-
+	
 	/**
 	 * Return all objects related to the implementation of this DAO with no filter.
 	 */
@@ -52,7 +52,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		return getCurrentSession().createQuery("from " + refClass.getName()).list();
 	}
-
+	
 	/**
 	 * Persist the given transient instance, first assigning a generated identifier.
 	 * (Or using the current value of the identifier property if the assigned generator is used.)
@@ -63,7 +63,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 		Serializable ser = getCurrentSession().save(obj);
 		return ser;
 	}
-
+	
 	/**
 	 * Either save() or update() the given instance, depending upon the value of its
 	 * identifier property.
@@ -72,7 +72,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		getCurrentSession().saveOrUpdate(obj);
 	}
-
+	
 	/**
 	 * Either save() or update() the given instances, depending upon the value of its
 	 * identifier property.
@@ -84,7 +84,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 			getCurrentSession().saveOrUpdate(name);
 		}
 	}
-
+	
 	/**
 	 * Update the persistent state associated with the given identifier. An exception is thrown if there is a persistent
 	 * instance with the same identifier in the current session.
@@ -94,7 +94,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		getCurrentSession().update(obj);
 	}
-
+	
 	/**
 	 * Delete an object.
 	 */
@@ -102,7 +102,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		getCurrentSession().delete(obj);
 	}
-
+	
 	/**
 	 * Delete a collection.
 	 */
@@ -113,7 +113,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 			getCurrentSession().delete(name);
 		}
 	}
-
+	
 	/**
 	 * Re-read the state of the given instance from the underlying database. It is inadvisable to use this to implement
 	 * long-running sessions that span many business tasks. This method is, however, useful in certain special circumstances.
@@ -122,7 +122,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		getCurrentSession().refresh(obj);
 	}
-
+	
 	/**
 	 * Get an object
 	 */
@@ -133,10 +133,10 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 		{
 			throw new ObjectRetrievalFailureException(clazz, id);
 		}
-
+		
 		return o;
 	}
-
+	
 	/**
 	 * Delete an object by id
 	 */
@@ -144,7 +144,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		getCurrentSession().delete(get(clazz, id));
 	}
-
+	
 	public Session getCurrentSession()
 	{
 		if (__session == null)
@@ -165,7 +165,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 			}
 		}
 	}
-
+	
 	/**
 	 * @param _session
 	 *            the session to set
@@ -176,7 +176,7 @@ public abstract class BaseRootDAOHib extends HibernateDaoSupport
 	{
 		__session = _session;
 	}
-
+	
 	/**
 	 * @deprecated only for test purpose
 	 */

@@ -38,12 +38,12 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class L2MonsterInstance extends L2Attackable
 {
-	protected final MinionList		_minionList;
-
-	protected ScheduledFuture<?>	_maintenanceTask				= null;
-
-	private static final int		MONSTER_MAINTENANCE_INTERVAL	= 1000;
-
+	protected final MinionList _minionList;
+	
+	protected ScheduledFuture<?> _maintenanceTask = null;
+	
+	private static final int MONSTER_MAINTENANCE_INTERVAL = 1000;
+	
 	/**
 	 * Constructor of L2MonsterInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
 	 * 
@@ -60,7 +60,7 @@ public class L2MonsterInstance extends L2Attackable
 		super(objectId, template);
 		getKnownList(); // init knownlist
 		if (getTemplate().getMinionData() != null)
-			_minionList  = new MinionList(this);
+			_minionList = new MinionList(this);
 		else
 			_minionList = null;
 	}
@@ -76,7 +76,7 @@ public class L2MonsterInstance extends L2Attackable
 	{
 		return (MonsterKnownList)_knownList;
 	}
-
+	
 	/**
 	 * Return True if the attacker is not another L2MonsterInstance.<BR><BR>
 	 */
@@ -85,10 +85,10 @@ public class L2MonsterInstance extends L2Attackable
 	{
 		if (attacker instanceof L2MonsterInstance)
 			return false;
-
+		
 		return true;
 	}
-
+	
 	/**
 	 * Return True if the L2MonsterInstance is Agressive (aggroRange > 0).<BR><BR>
 	 */
@@ -97,15 +97,15 @@ public class L2MonsterInstance extends L2Attackable
 	{
 		return getTemplate().getAggroRange() > 0;
 	}
-
+	
 	@Override
 	public void onSpawn()
 	{
 		super.onSpawn();
-
+		
 		if (getRightHandItem() > 0 && Config.ALT_MONSTER_HAVE_ENCHANTED_WEAPONS)
 			setWeaponEnchantLevel(Rnd.get(16));
-
+		
 		if (_minionList != null)
 			deleteSpawnedMinions();
 		
@@ -116,7 +116,7 @@ public class L2MonsterInstance extends L2Attackable
 	{
 		return MONSTER_MAINTENANCE_INTERVAL;
 	}
-
+	
 	/**
 	 * Spawn all minions at a regular interval
 	 *
@@ -127,15 +127,14 @@ public class L2MonsterInstance extends L2Attackable
 		if (_minionList == null)
 			return;
 		
-		_maintenanceTask = ThreadPoolManager.getInstance().schedule(new Runnable()
-		{
+		_maintenanceTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 			public void run()
 			{
 				_minionList.spawnMinions();
 			}
 		}, getMaintenanceInterval() + Rnd.get(1000));
 	}
-
+	
 	public void callMinions()
 	{
 		if (hasMinions())
@@ -169,7 +168,7 @@ public class L2MonsterInstance extends L2Attackable
 			}
 		}
 	}
-
+	
 	public void callMinionsToAssist(L2Character attacker)
 	{
 		if (hasMinions())
@@ -187,62 +186,62 @@ public class L2MonsterInstance extends L2Attackable
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean doDie(L2Character killer)
 	{
 		if (!isKillable())
 			return false;
-
+		
 		if (!super.doDie(killer))
 			return false;
-
+		
 		if (_maintenanceTask != null)
 			_maintenanceTask.cancel(true); // doesn't do it?
-
+			
 		if (hasMinions() && isRaid())
 			deleteSpawnedMinions();
 		return true;
 	}
-
+	
 	public Set<L2MinionInstance> getSpawnedMinions()
 	{
 		if (_minionList == null)
 			return null;
 		return _minionList.getSpawnedMinions();
 	}
-
+	
 	public int getTotalSpawnedMinionsInstances()
 	{
 		if (_minionList == null)
 			return 0;
 		return _minionList.countSpawnedMinions();
 	}
-
+	
 	public int getTotalSpawnedMinionsGroups()
 	{
 		if (_minionList == null)
 			return 0;
 		return _minionList.lazyCountSpawnedMinionsGroups();
 	}
-
+	
 	public void notifyMinionDied(L2MinionInstance minion)
 	{
 		_minionList.moveMinionToRespawnList(minion);
 	}
-
+	
 	public void notifyMinionSpawned(L2MinionInstance minion)
 	{
 		_minionList.addSpawnedMinion(minion);
 	}
-
+	
 	public boolean hasMinions()
 	{
 		if (_minionList == null)
 			return false;
 		return _minionList.hasMinions();
 	}
-
+	
 	@Override
 	public void addDamageHate(L2Character attacker, int damage, int aggro)
 	{
@@ -251,7 +250,7 @@ public class L2MonsterInstance extends L2Attackable
 			super.addDamageHate(attacker, damage, aggro);
 		}
 	}
-
+	
 	@Override
 	public void deleteMe()
 	{
@@ -259,12 +258,12 @@ public class L2MonsterInstance extends L2Attackable
 		{
 			if (_maintenanceTask != null)
 				_maintenanceTask.cancel(true);
-
+			
 			deleteSpawnedMinions();
 		}
 		super.deleteMe();
 	}
-
+	
 	public void deleteSpawnedMinions()
 	{
 		for (L2MinionInstance minion : getSpawnedMinions())

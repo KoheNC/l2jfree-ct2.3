@@ -340,8 +340,7 @@ public final class LoginServerThread extends NetworkThread
 								if (Config.CONNECTION_FILTERING)
 								{
 									// not supported by login, inform that GS can't do anything
-									_log
-											.warn("Connection filtering has been disabled, as the login server doesn't support it.");
+									_log.warn("Connection filtering has been disabled, as the login server doesn't support it.");
 								}
 							}
 							
@@ -489,7 +488,7 @@ public final class LoginServerThread extends NetworkThread
 								break;
 							}
 						}
-							//$FALL-THROUGH$
+						//$FALL-THROUGH$
 						default:
 						{
 							_log.warn("Unknown opcode: " + Integer.toHexString(packetType));

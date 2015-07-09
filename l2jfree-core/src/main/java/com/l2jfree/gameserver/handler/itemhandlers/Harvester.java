@@ -32,8 +32,7 @@ import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
 public class Harvester implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int[]	ITEM_IDS	=
-											{ 5125 };
+	private static final int[] ITEM_IDS = { 5125 };
 	
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{

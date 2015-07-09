@@ -32,18 +32,18 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class Recipes implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private final int[]	ITEM_IDS;
-
+	private final int[] ITEM_IDS;
+	
 	public Recipes()
 	{
 		ITEM_IDS = RecipeController.getInstance().getAllItemIds();
 	}
-
+	
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-		L2PcInstance activeChar = (L2PcInstance) playable;
+		L2PcInstance activeChar = (L2PcInstance)playable;
 		L2RecipeList rp = RecipeController.getInstance().getRecipeByItemId(item.getItemId());
 		if (rp == null)
 			return;
@@ -113,7 +113,7 @@ public class Recipes implements IItemHandler
 			}
 		}
 	}
-
+	
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

@@ -21,12 +21,10 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
 
-
 public class AdminKick implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{ "admin_kick", "admin_kick_non_gm" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_kick", "admin_kick_non_gm" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_kick"))
@@ -59,7 +57,7 @@ public class AdminKick implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

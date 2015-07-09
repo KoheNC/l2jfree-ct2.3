@@ -35,10 +35,7 @@ import com.l2jfree.gameserver.util.Util;
  */
 public class InstantJump extends ISkillConditionChecker
 {
-	private static final L2SkillType[] SKILL_IDS =
-	{
-		L2SkillType.INSTANT_JUMP
-	};
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.INSTANT_JUMP };
 	
 	@Override
 	public boolean checkConditions(L2Character activeChar, L2Skill skill)
@@ -86,10 +83,10 @@ public class InstantJump extends ISkillConditionChecker
 		
 		ph = (Math.PI * ph) / 180;
 		
-		x = (int) (px + (25 * Math.cos(ph)));
-		y = (int) (py + (25 * Math.sin(ph)));
+		x = (int)(px + (25 * Math.cos(ph)));
+		y = (int)(py + (25 * Math.sin(ph)));
 		z = target.getZ();
-
+		
 		activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		activeChar.broadcastPacket(new FlyToLocation(activeChar, x, y, z, FlyType.DUMMY));
 		activeChar.abortAttack();

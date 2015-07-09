@@ -22,14 +22,14 @@ import com.l2jfree.loginserver.beans.SessionKey;
  */
 public final class PlayOk extends L2LoginServerPacket
 {
-	private final int	_playOk1, _playOk2;
-
+	private final int _playOk1, _playOk2;
+	
 	public PlayOk(SessionKey sessionKey)
 	{
 		_playOk1 = sessionKey.playOkID1;
 		_playOk2 = sessionKey.playOkID2;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.SendablePacket#write()
 	 */

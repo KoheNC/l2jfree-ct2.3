@@ -32,12 +32,12 @@ public class ExSendManorList extends L2GameServerPacket
 {
 	private static final String _S__FE_1B_EXSENDMANORLIST = "[S] FE:1B ExSendManorList";
 	private final FastList<String> _manors;
-
+	
 	public ExSendManorList(FastList<String> manors)
 	{
 		_manors = manors;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -51,7 +51,7 @@ public class ExSendManorList extends L2GameServerPacket
 			writeS(_manors.get(i));
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -24,11 +24,11 @@ import com.l2jfree.gameserver.model.L2Party;
  */
 public class ExMPCCPartyInfoUpdate extends L2GameServerPacket
 {
-
+	
 	private static final String _S__FE_5B_EXMPCCPARTYINFOUPDATE = "[S] FE:5B ExMPCCPartyInfoUpdate";
 	private final L2Party _party;
 	private final int _mode;
-
+	
 	/**
 	 * 
 	 * @param party
@@ -39,7 +39,7 @@ public class ExMPCCPartyInfoUpdate extends L2GameServerPacket
 		_party = party;
 		_mode = mode;
 	}
-
+	
 	/**
 	* @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#writeImpl()
 	*/
@@ -48,13 +48,13 @@ public class ExMPCCPartyInfoUpdate extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x5b);
-
+		
 		writeS(_party.getLeader().getName());
 		writeD(_party.getPartyLeaderOID());
 		writeD(_party.getMemberCount());
 		writeD(_mode); //mode 0 = Remove Party, 1 = AddParty, maybe more...
 	}
-
+	
 	/**
 	* @see com.l2jfree.gameserver.serverpackets.L2GameServerPacket#getType()
 	*/

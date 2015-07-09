@@ -21,25 +21,25 @@ package com.l2jfree.loginserver.beans;
  */
 public class Gameservers implements java.io.Serializable
 {
-
+	
 	// Fields
-
+	
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 2293307012167588040L;
-	private String				serverName;
-	private int					serverId;
-	private String				hexid;
-	private String				host;
-
+	private static final long serialVersionUID = 2293307012167588040L;
+	private String serverName;
+	private int serverId;
+	private String hexid;
+	private String host;
+	
 	// Constructors
-
+	
 	/** default constructor */
 	public Gameservers()
 	{
 	}
-
+	
 	/** full constructor */
 	public Gameservers(int _serverId, String _hexid, String _host)
 	{
@@ -47,46 +47,46 @@ public class Gameservers implements java.io.Serializable
 		hexid = _hexid;
 		host = _host;
 	}
-
+	
 	// Property accessors
 	public int getServerId()
 	{
 		return serverId;
 	}
-
+	
 	public void setServerId(int _serverId)
 	{
 		serverId = _serverId;
 	}
-
+	
 	public String getHexid()
 	{
 		return hexid;
 	}
-
+	
 	public void setHexid(String _hexid)
 	{
 		hexid = _hexid;
 	}
-
+	
 	public String getHost()
 	{
 		return host;
 	}
-
+	
 	public void setHost(String _host)
 	{
 		host = _host;
 	}
-
+	
 	public String getServerName()
 	{
 		return serverName;
 	}
-
+	
 	public void setServerName(String _serverName)
 	{
 		serverName = _serverName;
 	}
-
+	
 }

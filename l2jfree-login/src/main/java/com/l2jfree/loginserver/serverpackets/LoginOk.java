@@ -30,14 +30,14 @@ import com.l2jfree.loginserver.beans.SessionKey;
  */
 public final class LoginOk extends L2LoginServerPacket
 {
-	private final int	_loginOk1, _loginOk2;
-
+	private final int _loginOk1, _loginOk2;
+	
 	public LoginOk(SessionKey sessionKey)
 	{
 		_loginOk1 = sessionKey.loginOkID1;
 		_loginOk2 = sessionKey.loginOkID2;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.mmocore.network.SendablePacket#write()
 	 */

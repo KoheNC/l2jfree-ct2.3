@@ -77,7 +77,7 @@ public final class Mdam implements ICubicSkillHandler
 		// Activate attacked effects, if any
 		if (skill.getId() == 4139 && activeChar instanceof L2Summon) //big boom unsummon-destroy
 		{
-			((L2Summon) activeChar).unSummon();
+			((L2Summon)activeChar).unSummon();
 		}
 	}
 	

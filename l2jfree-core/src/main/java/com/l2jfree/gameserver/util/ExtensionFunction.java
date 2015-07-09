@@ -24,7 +24,7 @@ package com.l2jfree.gameserver.util;
  */
 public interface ExtensionFunction
 {
-
+	
 	/**
 	 * get an object identified with a name (should have a human readable output
 	 * with toString())
@@ -33,7 +33,7 @@ public interface ExtensionFunction
 	 * @return the object
 	 */
 	public Object get(String name);
-
+	
 	/**
 	 * set the named object to the new value supplied in obj
 	 * 

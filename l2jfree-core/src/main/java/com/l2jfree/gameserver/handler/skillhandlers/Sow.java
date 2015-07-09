@@ -33,48 +33,47 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class Sow implements ISkillHandler
 {
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.SOW };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SOW };
+	
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
-
+		
 		if (targets == null || targets.length == 0)
 			return;
-
-		L2PcInstance activePlayer = (L2PcInstance) activeChar;
+		
+		L2PcInstance activePlayer = (L2PcInstance)activeChar;
 		if (_log.isDebugEnabled())
 			_log.info("Casting sow");
-
+		
 		for (L2Character element : targets)
 		{
 			if (!(element instanceof L2MonsterInstance))
 				continue;
-
-			L2MonsterInstance target = (L2MonsterInstance) element;
-
+			
+			L2MonsterInstance target = (L2MonsterInstance)element;
+			
 			if (target.isSeeded())
 				continue;
-
+			
 			if (target.isDead())
 				continue;
-
+			
 			if (target.getSeeder() != activeChar)
 				continue;
-
+			
 			int seedId = target.getSeedType();
 			if (seedId == 0)
 				continue;
-
+			
 			L2ItemInstance item = activePlayer.getInventory().getItemByItemId(seedId);
 			if (item == null)
 				return;
-
+			
 			// Consuming used seed
 			activePlayer.destroyItem("Consume", item.getObjectId(), 1, null, false);
-
+			
 			SystemMessage sm;
 			if (calcSuccess(activePlayer, target, seedId))
 			{
@@ -99,7 +98,7 @@ public class Sow implements ISkillHandler
 			target.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		}
 	}
-
+	
 	private boolean calcSuccess(L2PcInstance activeChar, L2MonsterInstance target, int seedId)
 	{
 		int basicSuccess = (L2Manor.getInstance().isAlternative(seedId) ? 20 : 90);
@@ -107,16 +106,16 @@ public class Sow implements ISkillHandler
 		int maxlevelSeed = 0;
 		minlevelSeed = L2Manor.getInstance().getSeedMinLevel(seedId);
 		maxlevelSeed = L2Manor.getInstance().getSeedMaxLevel(seedId);
-
+		
 		int levelPlayer = activeChar.getLevel(); // Attacker Level
 		int levelTarget = target.getLevel(); // target Level
-
+		
 		// seed level
 		if (levelTarget < minlevelSeed)
 			basicSuccess -= 5 * (minlevelSeed - levelTarget);
 		if (levelTarget > maxlevelSeed)
 			basicSuccess -= 5 * (levelTarget - maxlevelSeed);
-
+		
 		// 5% decrease in chance if player level
 		// is more than +/- 5 levels to _target's_ level
 		int diff = (levelPlayer - levelTarget);
@@ -124,16 +123,16 @@ public class Sow implements ISkillHandler
 			diff = -diff;
 		if (diff > 5)
 			basicSuccess -= 5 * (diff - 5);
-
+		
 		// Chance can't be less than 1%
 		if (basicSuccess < 1)
 			basicSuccess = 1;
-
+		
 		int rate = Rnd.nextInt(100);
-
+		
 		return (rate < basicSuccess);
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

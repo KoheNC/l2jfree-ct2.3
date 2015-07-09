@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public final class RequestDuelAnswerStart extends L2GameClientPacket
 {
 	private static final String _C__D0_28_REQUESTDUELANSWERSTART = "[C] D0:28 RequestDuelAnswerStart";
-
+	
 	private int _partyDuel;
 	//private int _unk1;
 	private int _response;
@@ -38,7 +38,7 @@ public final class RequestDuelAnswerStart extends L2GameClientPacket
 		/*_unk1 = */readD();
 		_response = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -51,7 +51,7 @@ public final class RequestDuelAnswerStart extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		if (_response == 1)
 		{
 			SystemMessage msg1 = null, msg2 = null;
@@ -67,27 +67,31 @@ public final class RequestDuelAnswerStart extends L2GameClientPacket
 				requestFailed(SystemMessageId.YOU_ARE_UNABLE_TO_REQUEST_A_DUEL_AT_THIS_TIME);
 				return;
 			}
-
+			
 			if (_partyDuel == 1)
 			{
 				msg1 = new SystemMessage(SystemMessageId.YOU_ACCEPTED_C1_CHALLENGE_TO_PARTY_DUEL);
 				msg1.addString(requestor.getName());
-
+				
 				msg2 = new SystemMessage(SystemMessageId.C1_ACCEPTED_YOUR_CHALLENGE_TO_A_PARTY_DUEL);
 				msg2.addString(player.getName());
 			}
 			else
 			{
-				msg1 = new SystemMessage(SystemMessageId.YOU_HAVE_ACCEPTED_C1_CHALLENGE_TO_A_DUEL_THE_DUEL_WILL_BEGIN_IN_A_FEW_MOMENTS);
+				msg1 =
+						new SystemMessage(
+								SystemMessageId.YOU_HAVE_ACCEPTED_C1_CHALLENGE_TO_A_DUEL_THE_DUEL_WILL_BEGIN_IN_A_FEW_MOMENTS);
 				msg1.addString(requestor.getName());
-
-				msg2 = new SystemMessage(SystemMessageId.C1_HAS_ACCEPTED_YOUR_CHALLENGE_TO_A_DUEL_THE_DUEL_WILL_BEGIN_IN_A_FEW_MOMENTS);
+				
+				msg2 =
+						new SystemMessage(
+								SystemMessageId.C1_HAS_ACCEPTED_YOUR_CHALLENGE_TO_A_DUEL_THE_DUEL_WILL_BEGIN_IN_A_FEW_MOMENTS);
 				msg2.addString(player.getName());
 			}
-
+			
 			sendPacket(msg1);
 			requestor.sendPacket(msg2);
-
+			
 			DuelManager.getInstance().addDuel(requestor, player, _partyDuel);
 		}
 		else
@@ -100,15 +104,15 @@ public final class RequestDuelAnswerStart extends L2GameClientPacket
 				msg = new SystemMessage(SystemMessageId.C1_HAS_DECLINED_YOUR_CHALLENGE_TO_A_DUEL);
 				msg.addString(player.getName());
 			}
-    		requestor.sendPacket(msg);
+			requestor.sendPacket(msg);
 		}
-
+		
 		sendAF();
-
+		
 		player.setActiveRequester(null);
-    	requestor.onTransactionResponse();
+		requestor.onTransactionResponse();
 	}
-
+	
 	@Override
 	public String getType()
 	{

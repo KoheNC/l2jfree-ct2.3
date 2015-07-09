@@ -19,23 +19,23 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class SuperCmdSummonCmd extends L2GameClientPacket
 {
 	// currently server acts as opcode is ch?!
-	private static final String	_C__SUPERCMDSUMMONCMD	= "[C] 4A:00 SuperCmdSummonCmd cc[s]";
-
+	private static final String _C__SUPERCMDSUMMONCMD = "[C] 4A:00 SuperCmdSummonCmd cc[s]";
+	
 	private String _command;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_command = readS();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		_log.info("SuperCmdSummonCmd, unk=" + _command + ", sent by " + getActiveChar());
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
-
+	
 	@Override
 	public String getType()
 	{

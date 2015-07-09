@@ -93,8 +93,8 @@ public final class PcEffects extends CharEffects
 			
 			deleteEffects(con, getOwner().getClassIndex());
 			
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO character_effects (charId,classIndex,buffIndex,skillId,skillLvl,count,remaining) VALUES (?,?,?,?,?,?,?)");
+			PreparedStatement statement =
+					con.prepareStatement("INSERT INTO character_effects (charId,classIndex,buffIndex,skillId,skillLvl,count,remaining) VALUES (?,?,?,?,?,?,?)");
 			
 			int buffIndex = 0;
 			for (StoredEffect se : list)
@@ -146,8 +146,8 @@ public final class PcEffects extends CharEffects
 	
 	public void deleteEffects(Connection con, int classIndex) throws SQLException
 	{
-		PreparedStatement statement = con
-				.prepareStatement("DELETE FROM character_effects WHERE charId=? AND classIndex=?");
+		PreparedStatement statement =
+				con.prepareStatement("DELETE FROM character_effects WHERE charId=? AND classIndex=?");
 		statement.setInt(1, getOwner().getObjectId());
 		statement.setInt(2, classIndex);
 		statement.execute();
@@ -170,8 +170,8 @@ public final class PcEffects extends CharEffects
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con
-					.prepareStatement("SELECT skillId,skillLvl,count,remaining FROM character_effects WHERE charId=? AND classIndex=? ORDER BY buffIndex ASC");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT skillId,skillLvl,count,remaining FROM character_effects WHERE charId=? AND classIndex=? ORDER BY buffIndex ASC");
 			statement.setInt(1, getOwner().getObjectId());
 			statement.setInt(2, getOwner().getClassIndex());
 			

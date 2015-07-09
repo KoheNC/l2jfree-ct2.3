@@ -32,13 +32,13 @@ import com.l2jfree.loginserver.dao.GameserversDAO;
  */
 public class GameserversDAOMock implements GameserversDAO
 {
-	private final Map<Integer, Gameservers>	referential	= new HashMap<Integer, Gameservers>();
-
+	private final Map<Integer, Gameservers> referential = new HashMap<Integer, Gameservers>();
+	
 	public GameserversDAOMock()
 	{
 		referential.put(1, new Gameservers(1, "548545", "*"));
 	}
-
+	
 	/**
 	 * Search by id
 	 * @param id
@@ -52,7 +52,7 @@ public class GameserversDAOMock implements GameserversDAO
 		}
 		return referential.get(id);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#createGameserver(java.lang.Object)
 	 */
@@ -61,16 +61,16 @@ public class GameserversDAOMock implements GameserversDAO
 		referential.put(obj.getServerId(), obj);
 		return obj.getServerId();
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#createOrUpdate(java.lang.Object)
 	 */
 	public void createOrUpdate(Gameservers obj)
 	{
 		createGameserver(obj);
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#createOrUpdateAll(java.util.Collection)
 	 */
@@ -79,10 +79,10 @@ public class GameserversDAOMock implements GameserversDAO
 		Iterator<?> it = entities.iterator();
 		while (it.hasNext())
 		{
-			createGameserver((Gameservers) it.next());
+			createGameserver((Gameservers)it.next());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#getAlGameservers()
 	 */
@@ -90,16 +90,16 @@ public class GameserversDAOMock implements GameserversDAO
 	{
 		return new ArrayList<Gameservers>(referential.values());
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeGameserver(java.lang.Object)
 	 */
 	public void removeGameserver(Gameservers obj)
 	{
 		referential.remove(obj.getServerId());
-
+		
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeGameserverById(java.io.Serializable)
 	 */
@@ -107,7 +107,7 @@ public class GameserversDAOMock implements GameserversDAO
 	{
 		referential.remove(id);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#removeAll(java.util.Collection)
 	 */
@@ -116,24 +116,24 @@ public class GameserversDAOMock implements GameserversDAO
 		Iterator<?> it = entities.iterator();
 		while (it.hasNext())
 		{
-			removeGameserver((Gameservers) it.next());
+			removeGameserver((Gameservers)it.next());
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.loginserver.dao.GameserversDAO#update(java.lang.Object)
 	 */
 	public void update(Object obj)
 	{
-		Gameservers acc = (Gameservers) obj;
+		Gameservers acc = (Gameservers)obj;
 		removeGameserverByServerId(acc.getServerId());
 		createGameserver(acc);
-
+		
 	}
-
+	
 	public void removeAll()
 	{
 		referential.clear();
 	}
-
+	
 }

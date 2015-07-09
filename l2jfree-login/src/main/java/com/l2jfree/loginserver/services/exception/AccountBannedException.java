@@ -23,8 +23,8 @@ public class AccountBannedException extends Exception
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 2448159234999935143L;
-
+	private static final long serialVersionUID = 2448159234999935143L;
+	
 	/**
 	 * Default constructor
 	 */
@@ -32,7 +32,7 @@ public class AccountBannedException extends Exception
 	{
 		super();
 	}
-
+	
 	/**
 	 * constructor with reason
 	 */
@@ -40,7 +40,7 @@ public class AccountBannedException extends Exception
 	{
 		super("Account " + accountName + " is banned.");
 	}
-
+	
 	/**
 	 * Copy constructor
 	 */
@@ -48,7 +48,7 @@ public class AccountBannedException extends Exception
 	{
 		super(e);
 	}
-
+	
 	/**
 	 * Copy constructor
 	 */
@@ -56,5 +56,5 @@ public class AccountBannedException extends Exception
 	{
 		super("Account " + accountName + " is banned.", e);
 	}
-
+	
 }

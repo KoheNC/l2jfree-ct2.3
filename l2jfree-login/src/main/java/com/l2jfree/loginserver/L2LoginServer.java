@@ -70,7 +70,8 @@ public final class L2LoginServer extends Config
 		// o Start the server
 		// ------------------
 		
-		L2LoginSelectorThread.getInstance().openServerSocket(InetAddress.getByName(Config.LOGIN_SERVER_HOSTNAME), Config.LOGIN_SERVER_PORT);
+		L2LoginSelectorThread.getInstance().openServerSocket(InetAddress.getByName(Config.LOGIN_SERVER_HOSTNAME),
+				Config.LOGIN_SERVER_PORT);
 		L2LoginSelectorThread.getInstance().start();
 		
 		_log.info("Login Server ready on " + Config.LOGIN_SERVER_HOSTNAME + ":" + Config.LOGIN_SERVER_PORT);

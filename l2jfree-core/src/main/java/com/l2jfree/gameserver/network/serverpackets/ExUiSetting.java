@@ -467,19 +467,19 @@ package com.l2jfree.gameserver.network.serverpackets;
 public class ExUiSetting extends L2GameServerPacket
 {
 	private static final String _S__EXUISETTING = "[S] FE:70 ExUISetting ch[unk]";
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
 		writeH(0x70);
-
+		
 		// 4514
 		// 8
 		// 4
 		// 
 	}
-
+	
 	@Override
 	public String getType()
 	{

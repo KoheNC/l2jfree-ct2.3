@@ -33,11 +33,11 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class ExPVPMatchRecord extends L2GameServerPacket
 {
 	private static final String _S__FE_7E_EXPVPMATCHRECORD = "[S] FE:7E ExPVPMatchRecord";
-
+	
 	private final PlayerRecord[] _t1;
 	private final PlayerRecord[] _t2;
 	private final boolean _winner;
-
+	
 	/**
 	 * @param team1 Team 1's player records
 	 * @param team2 Team 2's player records
@@ -49,20 +49,20 @@ public class ExPVPMatchRecord extends L2GameServerPacket
 		_t2 = team2;
 		_winner = t1wins;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xfe);
 		writeH(0x7e);
-
+		
 		writeD(0x02); // team count?
 		writeD(_winner ? 0x01 : 0x02); // winner team no?
 		writeD(_winner ? 0x02 : 0x01); // loser team no?
-
+		
 		writeD(0x00); // ??
 		writeD(0x00); // ??
-
+		
 		writeD(_t1.length + _t2.length); // total players
 		for (int i = 0; i < _t1.length; i++)
 		{
@@ -77,13 +77,13 @@ public class ExPVPMatchRecord extends L2GameServerPacket
 			writeD(_t2[i].getDeaths()); // deaths
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{
 		return _S__FE_7E_EXPVPMATCHRECORD;
 	}
-
+	
 	/**
 	 * An <U>example</U> class to use with this packet.
 	 * @author savormix
@@ -93,39 +93,39 @@ public class ExPVPMatchRecord extends L2GameServerPacket
 		private final String _name;
 		private int _kills;
 		private int _deaths;
-
+		
 		public PlayerRecord(L2PcInstance player)
 		{
 			this(player.getName());
 		}
-
+		
 		private PlayerRecord(String name)
 		{
 			_name = name;
 			_kills = 0;
 			_deaths = 0;
 		}
-
+		
 		public final String getPcName()
 		{
 			return _name;
 		}
-
+		
 		public final int getKills()
 		{
 			return _kills;
 		}
-
+		
 		public final void setKills(int kills)
 		{
 			_kills = kills;
 		}
-
+		
 		public final int getDeaths()
 		{
 			return _deaths;
 		}
-
+		
 		public final void setDeaths(int deaths)
 		{
 			_deaths = deaths;

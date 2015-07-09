@@ -38,18 +38,18 @@ public class PartySmallWindowUpdate extends L2GameServerPacket
 		writeD(_member.getObjectId());
 		writeS(_member.getName());
 		
-		writeD((int) _member.getStatus().getCurrentCp()); //c4
+		writeD((int)_member.getStatus().getCurrentCp()); //c4
 		writeD(_member.getMaxCp()); //c4
 		
-		writeD((int) _member.getStatus().getCurrentHp());
+		writeD((int)_member.getStatus().getCurrentHp());
 		writeD(_member.getMaxHp());
-		writeD((int) _member.getStatus().getCurrentMp());
+		writeD((int)_member.getStatus().getCurrentMp());
 		writeD(_member.getMaxMp());
 		writeD(_member.getLevel());
 		writeD(_member.getClassId().getId());
-
+		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

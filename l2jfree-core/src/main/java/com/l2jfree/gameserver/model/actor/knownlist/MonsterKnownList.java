@@ -32,7 +32,7 @@ public class MonsterKnownList extends AttackableKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	@Override
@@ -40,28 +40,28 @@ public class MonsterKnownList extends AttackableKnownList
 	{
 		if (!super.addKnownObject(object))
 			return false;
-
+		
 		// Set the L2MonsterInstance Intention to AI_INTENTION_ACTIVE if the state was AI_INTENTION_IDLE
 		if (object instanceof L2PcInstance && getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
 			getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);
 		return true;
 	}
-
+	
 	@Override
 	public boolean removeKnownObject(L2Object object)
 	{
 		if (!super.removeKnownObject(object))
 			return false;
-
+		
 		if (!(object instanceof L2Character))
 			return true;
-
+		
 		if (getActiveChar().hasAI())
 		{
 			// Notify the L2MonsterInstance AI with EVT_FORGET_OBJECT
 			getActiveChar().getAI().notifyEvent(CtrlEvent.EVT_FORGET_OBJECT, object);
 		}
-	
+		
 		if (getActiveChar().isVisible() && getKnownPlayers().isEmpty())
 		{
 			// Clear the _aggroList of the L2MonsterInstance
@@ -70,18 +70,18 @@ public class MonsterKnownList extends AttackableKnownList
 			// Remove all L2Object from _knownObjects and _knownPlayer of the L2MonsterInstance then cancel Attak or Cast and notify AI
 			//removeAllKnownObjects();
 		}
-
+		
 		return true;
 	}
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public final L2MonsterInstance getActiveChar()
 	{
-		return (L2MonsterInstance) _activeChar;
+		return (L2MonsterInstance)_activeChar;
 	}
 }

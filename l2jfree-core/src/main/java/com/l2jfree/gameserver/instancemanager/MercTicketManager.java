@@ -62,50 +62,40 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 public class MercTicketManager
 {
 	protected static final Log _log = LogFactory.getLog(MercTicketManager.class);
-
+	
 	/** Represents all hireling positioning messages */
-	public static final String[] MESSAGES = {
-		"To arms!", "I am ready to serve you my lord when the time comes.", "You summon me."
-	};
-
+	public static final String[] MESSAGES = { "To arms!", "I am ready to serve you my lord when the time comes.",
+			"You summon me." };
+	
 	private static final String LOAD_POSITIONS = "SELECT * FROM castle_hired_guards";
 	private static final String CLEAN_POSITIONS = "TRUNCATE TABLE castle_hired_guards";
 	private static final String ADD_POSITION = "INSERT INTO castle_hired_guards VALUES (?,?,?,?,?)";
 	private static final String REMOVE_POSITION = "DELETE FROM castle_hired_guards WHERE x=? AND y=? AND z=?";
-
+	
 	private static final int DAWN_MERCENARY_MIN = 35020;
 	private static final int DAWN_MERCENARY_MAX = 35029;
 	private static final int DAWN_MERCENARY_ELITE_MIN = 35060;
 	private static final int DAWN_MERCENARY_ELITE_MAX = 35061;
 	private static final int RECRUIT_MIN = 35040;
 	private static final int RECRUIT_MAX = 35059;
-	private static final int[] CASTLE_TYPE_LIMIT = {
-		10, 15, 10, 10, 20, 20, 20, 20, 20
-	};
-	private static final int[] CASTLE_HIRE_LIMIT = {
-		Config.GLUDIO_MAX_MERCENARIES,
-		Config.DION_MAX_MERCENARIES,
-		Config.GIRAN_MAX_MERCENARIES,
-		Config.OREN_MAX_MERCENARIES,
-		Config.ADEN_MAX_MERCENARIES,
-		Config.INNADRIL_MAX_MERCENARIES,
-		Config.GODDARD_MAX_MERCENARIES,
-		Config.RUNE_MAX_MERCENARIES,
-		Config.SCHUTTGART_MAX_MERCENARIES
-	};
+	private static final int[] CASTLE_TYPE_LIMIT = { 10, 15, 10, 10, 20, 20, 20, 20, 20 };
+	private static final int[] CASTLE_HIRE_LIMIT = { Config.GLUDIO_MAX_MERCENARIES, Config.DION_MAX_MERCENARIES,
+			Config.GIRAN_MAX_MERCENARIES, Config.OREN_MAX_MERCENARIES, Config.ADEN_MAX_MERCENARIES,
+			Config.INNADRIL_MAX_MERCENARIES, Config.GODDARD_MAX_MERCENARIES, Config.RUNE_MAX_MERCENARIES,
+			Config.SCHUTTGART_MAX_MERCENARIES };
 	private static final int WEEK = 604800000;
-
+	
 	public static final MercTicketManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	private final FastMap<Integer, Integer> _typeLimit;
 	private final FastMap<Integer, MercInfo> _mercenaries;
 	private final FastMap<Integer, FastList<L2ItemInstance>> _positions;
 	private volatile ScheduledFuture<?> _update;
 	private int[] _handlerIds;
-
+	
 	private MercTicketManager()
 	{
 		_typeLimit = new FastMap<Integer, Integer>().setShared(true);
@@ -116,7 +106,7 @@ public class MercTicketManager
 		fillPositions();
 		_update = null;
 	}
-
+	
 	/**
 	 * Fills the "limit per mercenary type" map. It would be reasonable to do so
 	 * with the values obtained from the configuration file. This map doesn't have
@@ -126,7 +116,7 @@ public class MercTicketManager
 	{
 		// Example of a Gludio ticket (normally 10 mercs of each type in Gludio)
 		_typeLimit.put(3960, 10);
-
+		
 		// Teleporters
 		for (int i = 3970; i <= 3972; i++)
 			_typeLimit.put(i, 1);
@@ -148,7 +138,7 @@ public class MercTicketManager
 		for (int i = 7928; i <= 7930; i++)
 			_typeLimit.put(i, 1);
 	}
-
+	
 	/** Fills the item-to-npc ID known mercenary map. */
 	private final void fillMercenaries()
 	{
@@ -214,7 +204,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Gludio
 		_mercenaries.put(6295, new MercInfo(35060, 1)); // Sword/Mobile
 		_mercenaries.put(6296, new MercInfo(35061, 1)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Dion
 		_mercenaries.put(3973, new MercInfo(35010, 2)); // Sword/Stationary
 		_mercenaries.put(3974, new MercInfo(35011, 2)); // Spear/Stationary
@@ -277,7 +267,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Dion
 		_mercenaries.put(6297, new MercInfo(35060, 2)); // Sword/Mobile
 		_mercenaries.put(6298, new MercInfo(35061, 2)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Giran
 		_mercenaries.put(3986, new MercInfo(35010, 3)); // Sword/Stationary
 		_mercenaries.put(3987, new MercInfo(35011, 3)); // Spear/Stationary
@@ -340,7 +330,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Giran
 		_mercenaries.put(6299, new MercInfo(35060, 3)); // Sword/Mobile
 		_mercenaries.put(6300, new MercInfo(35061, 3)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Oren
 		_mercenaries.put(3999, new MercInfo(35010, 4)); // Sword/Stationary
 		_mercenaries.put(4000, new MercInfo(35011, 4)); // Spear/Stationary
@@ -403,7 +393,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Oren
 		_mercenaries.put(6301, new MercInfo(35060, 4)); // Sword/Mobile
 		_mercenaries.put(6302, new MercInfo(35061, 4)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Aden
 		_mercenaries.put(4012, new MercInfo(35010, 5)); // Sword/Stationary
 		_mercenaries.put(4013, new MercInfo(35011, 5)); // Spear/Stationary
@@ -468,7 +458,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Aden
 		_mercenaries.put(6303, new MercInfo(35060, 5)); // Sword/Mobile
 		_mercenaries.put(6304, new MercInfo(35061, 5)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Innadril
 		_mercenaries.put(5205, new MercInfo(35010, 6)); // Sword/Stationary
 		_mercenaries.put(5206, new MercInfo(35011, 6)); // Spear/Stationary
@@ -531,7 +521,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Innadril
 		_mercenaries.put(6305, new MercInfo(35060, 6)); // Sword/Mobile
 		_mercenaries.put(6306, new MercInfo(35061, 6)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Goddard
 		_mercenaries.put(6779, new MercInfo(35010, 7)); // Sword/Stationary
 		_mercenaries.put(6780, new MercInfo(35011, 7)); // Spear/Stationary
@@ -594,7 +584,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Goddard
 		_mercenaries.put(6832, new MercInfo(35060, 7)); // Sword/Mobile
 		_mercenaries.put(6833, new MercInfo(35061, 7)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Rune
 		_mercenaries.put(7973, new MercInfo(35010, 8)); // Sword/Stationary
 		_mercenaries.put(7974, new MercInfo(35011, 8)); // Spear/Stationary
@@ -659,7 +649,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Rune
 		_mercenaries.put(8028, new MercInfo(35060, 8)); // Sword/Mobile
 		_mercenaries.put(8029, new MercInfo(35061, 8)); // Wizard/Mobile
-
+		
 		// Normal Mercenaries - Schuttgart
 		_mercenaries.put(7918, new MercInfo(35010, 9)); // Sword/Stationary
 		_mercenaries.put(7919, new MercInfo(35011, 9)); // Spear/Stationary
@@ -722,7 +712,7 @@ public class MercTicketManager
 		// Greater/Elite Dawn Mercenaries - Schuttgart
 		_mercenaries.put(7971, new MercInfo(35060, 9)); // Sword/Mobile
 		_mercenaries.put(7972, new MercInfo(35061, 9)); // Wizard/Mobile
-
+		
 		// Someone forgot to finish removing backwards compatibility in MercTicket
 		// So we need an int[] array, and we need it ready
 		Set<Integer> ids = _mercenaries.keySet();
@@ -731,7 +721,7 @@ public class MercTicketManager
 		for (int i = 0; i < _handlerIds.length; i++)
 			_handlerIds[i] = it.next();
 	}
-
+	
 	/**
 	 * Fills the hired mercenary position map:
 	 * <LI>Load the positions from the database</LI>
@@ -762,7 +752,8 @@ public class MercTicketManager
 				FastList<L2ItemInstance> posts = getPositions(c.getCastleId());
 				if (posts.size() == CASTLE_HIRE_LIMIT[c.getCastleId() - 1])
 				{
-					_log.warn("Mercenary at " + x + ";" + y + ";" + z + " exceeds the castle's hireling limit, removed.");
+					_log.warn("Mercenary at " + x + ";" + y + ";" + z
+							+ " exceeds the castle's hireling limit, removed.");
 					continue;
 				}
 				MercInfo mi = _mercenaries.get(item);
@@ -788,7 +779,7 @@ public class MercTicketManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * Gets the currently assigned mercenary positions.<BR>
 	 * <B><U>Do not use this method to clear() the positions without
@@ -806,7 +797,7 @@ public class MercTicketManager
 		}
 		return posts;
 	}
-
+	
 	/**
 	 * Gets the currently assigned mercenary positions.
 	 * @param castle Castle's ID
@@ -820,7 +811,7 @@ public class MercTicketManager
 		else
 			return i.intValue();
 	}
-
+	
 	/**
 	 * Counts how many specific mercenaries are hired already.
 	 * @param castle castle ID
@@ -837,7 +828,7 @@ public class MercTicketManager
 				total++;
 		return total;
 	}
-
+	
 	/**
 	 * Calculates the distance between the player's position and all
 	 * hireling positions and determines if the player's position
@@ -857,13 +848,13 @@ public class MercTicketManager
 			double dx = x - item.getX();
 			double dy = y - item.getY();
 			double dz = z - item.getZ();
-
+			
 			if ((dx * dx + dy * dy + dz * dz) < 25 * 25)
 				return false;
 		}
 		return true;
 	}
-
+	
 	/**
 	 * Called when a player double-clicks (or tries to drop) a mercenary posting ticket.
 	 * This means a confirm dialog is sent to the player, so we need to store main data.
@@ -888,7 +879,7 @@ public class MercTicketManager
 		
 		player.sendPacket(dlg);
 	}
-
+	
 	/**
 	 * Adds a new mercenary position, that is: drops the ticket from the
 	 * player's inventory (on player's position), temporarily spawns the
@@ -959,8 +950,7 @@ public class MercTicketManager
 			player.sendPacket(SystemMessageId.MERC_CAN_BE_ASSIGNED);
 			return;
 		}
-		else if (getTypeHired(c.getCastleId(), ticket.getItemId()) >=
-			getTypeLimit(ticket.getItemId()))
+		else if (getTypeHired(c.getCastleId(), ticket.getItemId()) >= getTypeLimit(ticket.getItemId()))
 		{
 			player.sendPacket(SystemMessageId.THIS_MERCENARY_CANNOT_BE_POSITIONED_ANYMORE);
 			return;
@@ -977,29 +967,29 @@ public class MercTicketManager
 		}
 		switch (SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_STRIFE))
 		{
-		case SevenSigns.CABAL_NULL:
-			// Nowadays you can't have recruits (read the ticket description)
-			if (mi.isDawnMercenary() || mi.isRecruit())
-			{
-				player.sendPacket(SystemMessageId.MERC_CANT_BE_ASSIGNED_USING_STRIFE);
-				return;
-			}
-			break;
-		case SevenSigns.CABAL_DUSK:
-			if (!mi.isRecruit())
-			{
-				player.sendPacket(SystemMessageId.MERC_CANT_BE_ASSIGNED_USING_STRIFE);
-				return;
-			}
-			break;
+			case SevenSigns.CABAL_NULL:
+				// Nowadays you can't have recruits (read the ticket description)
+				if (mi.isDawnMercenary() || mi.isRecruit())
+				{
+					player.sendPacket(SystemMessageId.MERC_CANT_BE_ASSIGNED_USING_STRIFE);
+					return;
+				}
+				break;
+			case SevenSigns.CABAL_DUSK:
+				if (!mi.isRecruit())
+				{
+					player.sendPacket(SystemMessageId.MERC_CANT_BE_ASSIGNED_USING_STRIFE);
+					return;
+				}
+				break;
 		}
 		if (!player.destroyItem("Mercenary posting", ticket, 1, ticket, false))
 			return;
-
+		
 		spawnTicket(ticket.getItemId(), x, y, z, player.getHeading(), true);
 		save(false, ticket.getItemId(), x, y, z, player.getHeading());
 	}
-
+	
 	/**
 	 * Assuming the ticket has been already removed from player's inventory,
 	 * a new item instance is created and spawned on a given location (which by
@@ -1015,8 +1005,7 @@ public class MercTicketManager
 	 * @param heading Mercenary position's heading
 	 * @param npc Spawn the mercenary NPC temporarily?
 	 */
-	private final void spawnTicket(int item, int x, int y, int z, int heading,
-			boolean npc)
+	private final void spawnTicket(int item, int x, int y, int z, int heading, boolean npc)
 	{
 		MercInfo mi = _mercenaries.get(item);
 		L2ItemInstance post = new L2ItemInstance(IdFactory.getInstance().getNextId(), item);
@@ -1044,8 +1033,7 @@ public class MercTicketManager
 			merc.setDecayed(false);
 			merc.spawnMe(x, y, (z + 20));
 			AutoChatHandler.getInstance().registerChat(merc, MercTicketManager.MESSAGES, 0);
-			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-			{
+			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 				public void run()
 				{
 					merc.deleteMe();
@@ -1053,7 +1041,7 @@ public class MercTicketManager
 			}, 3000);
 		}
 	}
-
+	
 	/**
 	 * Returns this manager's opinion about a player trying to pickup an item.<BR>
 	 * Informational (SM) packets are sent if check returns false.
@@ -1066,7 +1054,7 @@ public class MercTicketManager
 		// not a mercenary posting ticket
 		if (ticket == null || !isTicket(ticket.getItemId()))
 			return true;
-
+		
 		MercInfo mi = _mercenaries.get(ticket.getItemId());
 		L2Clan clan = player.getClan();
 		if (clan == null || clan.getHasCastle() != mi.getCastleId())
@@ -1087,7 +1075,7 @@ public class MercTicketManager
 		else
 			return true;
 	}
-
+	
 	/**
 	 * This method should only be called from {@link L2ItemInstance#pickupMe(L2Character)}
 	 * without any additional checks.<BR>
@@ -1103,7 +1091,7 @@ public class MercTicketManager
 		getPositions(mi.getCastleId()).remove(ticket);
 		save(true, ticket.getX(), ticket.getY(), ticket.getZ());
 	}
-
+	
 	/**
 	 * Saves a mercenary position to the database. Saving will be performed
 	 * according to the value of {@link Config#MERCENARY_SAVING_DELAY}.
@@ -1113,7 +1101,8 @@ public class MercTicketManager
 	 */
 	private final void save(boolean delete, int... ticket)
 	{
-		if (Config.MERCENARY_SAVING_DELAY == 0) {
+		if (Config.MERCENARY_SAVING_DELAY == 0)
+		{
 			Connection con = null;
 			try
 			{
@@ -1150,7 +1139,7 @@ public class MercTicketManager
 		else if (_update == null)
 			ThreadPoolManager.getInstance().scheduleGeneral(new PostSaver(), Config.MERCENARY_SAVING_DELAY);
 	}
-
+	
 	/**
 	 * Removes all mercenary positions from the database and then saves
 	 * each position currently in {@link #_positions} to the database.
@@ -1190,7 +1179,7 @@ public class MercTicketManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	/**
 	 * Builds the mercenary spawns for a <CODE>SiegeGuardManager</CODE>.
 	 * <U>Removes all tickets from L2World and clears the position list.</U>
@@ -1210,7 +1199,7 @@ public class MercTicketManager
 		}
 		posts.clear();
 	}
-
+	
 	/**
 	 * Checks if this item ID is mapped.
 	 * @param item Item ID
@@ -1220,7 +1209,7 @@ public class MercTicketManager
 	{
 		return _mercenaries.containsKey(item);
 	}
-
+	
 	/**
 	 * When {@link Config#MERCENARY_SAVING_DELAY} is above 0, this is used
 	 * to determine if saving is necessary at this very moment (called when
@@ -1234,7 +1223,7 @@ public class MercTicketManager
 			_update.cancel(true);
 		return _update != null;
 	}
-
+	
 	/**
 	 * Necessary to provide IDs for the ItemHandler.
 	 * @return mercenary posting ticket item ID array
@@ -1243,7 +1232,7 @@ public class MercTicketManager
 	{
 		return _handlerIds;
 	}
-
+	
 	/**
 	 * Knowing that the item ID is mapped, all we need is the NPC ID.
 	 * However, I've also included the castle ID for easy exploit protection.
@@ -1253,43 +1242,41 @@ public class MercTicketManager
 	{
 		private final int npc;
 		private final int castle;
-
+		
 		private MercInfo(int npc, int castle)
 		{
 			this.npc = npc;
 			this.castle = castle;
 		}
-
+		
 		private final int getNpcId()
 		{
 			return npc;
 		}
-
+		
 		private final int getCastleId()
 		{
 			return castle;
 		}
-
+		
 		private final int getCastleArrayId()
 		{
 			return getCastleId() - 1;
 		}
-
+		
 		/** @return whether this is a raw recruit that can be hired only if Dusk owns Strife */
 		private final boolean isRecruit()
 		{
 			return getNpcId() >= RECRUIT_MIN && getNpcId() <= RECRUIT_MAX;
 		}
-
+		
 		/** @return whether this is a mercenary that can be hired only if Dawn owns Strife */
 		private final boolean isDawnMercenary()
 		{
-			return ((getNpcId() >= DAWN_MERCENARY_MIN && getNpcId() <= DAWN_MERCENARY_MAX) ||
-					(getNpcId() >= DAWN_MERCENARY_ELITE_MIN &&
-							getNpcId() <= DAWN_MERCENARY_ELITE_MAX));
+			return ((getNpcId() >= DAWN_MERCENARY_MIN && getNpcId() <= DAWN_MERCENARY_MAX) || (getNpcId() >= DAWN_MERCENARY_ELITE_MIN && getNpcId() <= DAWN_MERCENARY_ELITE_MAX));
 		}
 	}
-
+	
 	/**
 	 * This task just calls {@link MercTicketManager#saveAll()}.<BR><BR>
 	 * You may wonder about the name, because mercenaries don't really have
@@ -1306,7 +1293,7 @@ public class MercTicketManager
 			saveAll();
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

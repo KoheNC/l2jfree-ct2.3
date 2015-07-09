@@ -24,18 +24,18 @@ import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
  */
 public class PetInfo extends L2GameServerPacket
 {
-	private static final String	_S__CA_PETINFO	= "[S] b1 PetInfo";
-	private final L2Summon			_summon;
-	private final int					_x, _y, _z, _heading;
-	private final boolean				_isSummoned;
-	private final int					_val;
-	private final int					_mAtkSpd, _pAtkSpd;
-	private final int					_runSpd, _walkSpd, _swimRunSpd, _swimWalkSpd;
+	private static final String _S__CA_PETINFO = "[S] b1 PetInfo";
+	private final L2Summon _summon;
+	private final int _x, _y, _z, _heading;
+	private final boolean _isSummoned;
+	private final int _val;
+	private final int _mAtkSpd, _pAtkSpd;
+	private final int _runSpd, _walkSpd, _swimRunSpd, _swimWalkSpd;
 	private int _flRunSpd, _flWalkSpd, _flyRunSpd, _flyWalkSpd;
-	private final int					_maxHp, _maxMp;
-	private int					_maxFed, _curFed;
-	private final float				_multiplier;
-
+	private final int _maxHp, _maxMp;
+	private int _maxFed, _curFed;
+	private final float _multiplier;
+	
 	/**
 	 * rev 478  dddddddddddddddddddffffdddcccccSSdddddddddddddddddddddddddddhc
 	 * @param _characters
@@ -54,7 +54,7 @@ public class PetInfo extends L2GameServerPacket
 		_pAtkSpd = _summon.getPAtkSpd();
 		_multiplier = _summon.getStat().getMovementSpeedMultiplier();
 		_runSpd = _summon.getPetSpeed();
-		_walkSpd =  _summon.isMountable() ? 45 : 30;
+		_walkSpd = _summon.isMountable() ? 45 : 30;
 		_swimRunSpd = _flRunSpd = _flyRunSpd = _runSpd;
 		_swimWalkSpd = _flWalkSpd = _flyWalkSpd = _walkSpd;
 		_maxHp = _summon.getMaxHp();
@@ -62,12 +62,12 @@ public class PetInfo extends L2GameServerPacket
 		_val = val;
 		if (_summon instanceof L2PetInstance)
 		{
-			L2PetInstance pet = (L2PetInstance) _summon;
+			L2PetInstance pet = (L2PetInstance)_summon;
 			_curFed = pet.getCurrentFed(); // how fed it is
 			_maxFed = pet.getMaxFed(); //max fed it can be
 		}
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
@@ -91,7 +91,7 @@ public class PetInfo extends L2GameServerPacket
 		writeD(_flWalkSpd);
 		writeD(_flyRunSpd);
 		writeD(_flyWalkSpd);
-
+		
 		writeF(_multiplier); // movement multiplier
 		writeF(1); // attack speed multiplier
 		writeF(_summon.getTemplate().getCollisionRadius());
@@ -99,8 +99,8 @@ public class PetInfo extends L2GameServerPacket
 		writeD(_summon.getWeapon()); // right hand weapon
 		writeD(_summon.getArmor()); // body armor
 		writeD(0x00); // left hand weapon
-		writeC(_summon.getOwner() != null ? 1 : 0);    // when pet is dead and player exit game, pet doesn't show master name
-		writeC(1);     // running=1 (it is always 1, walking mode is calculated from multiplier)
+		writeC(_summon.getOwner() != null ? 1 : 0); // when pet is dead and player exit game, pet doesn't show master name
+		writeC(1); // running=1 (it is always 1, walking mode is calculated from multiplier)
 		writeC(_summon.isInCombat() ? 1 : 0); // attacking 1=true
 		writeC(_summon.isAlikeDead() ? 1 : 0); // dead 1=true
 		writeC(_isSummoned ? 2 : _val); //  0=teleported  1=default   2=summoned
@@ -111,9 +111,9 @@ public class PetInfo extends L2GameServerPacket
 		writeD(_summon.getOwner() != null ? _summon.getOwner().getKarma() : 0); // karma
 		writeD(_curFed); // how fed it is
 		writeD(_maxFed); //max fed it can be
-		writeD((int) _summon.getStatus().getCurrentHp());//current hp
+		writeD((int)_summon.getStatus().getCurrentHp());//current hp
 		writeD(_maxHp);// max hp
-		writeD((int) _summon.getStatus().getCurrentMp());//current mp
+		writeD((int)_summon.getStatus().getCurrentMp());//current mp
 		writeD(_maxMp);//max mp
 		writeD(_summon.getStat().getSp()); //sp
 		writeD(_summon.getLevel());// lvl
@@ -132,23 +132,23 @@ public class PetInfo extends L2GameServerPacket
 		writeD(_summon.getAccuracy());//accuracy
 		writeD(_summon.getEvasionRate());//evasion
 		writeD(_summon.getCriticalHit());//critical
-		writeD((int) _summon.getStat().getMoveSpeed());//speed
+		writeD((int)_summon.getStat().getMoveSpeed());//speed
 		writeD(_summon.getPAtkSpd());//atkspeeds
 		writeD(_summon.getMAtkSpd());//casting speed
-
+		
 		writeD(_summon.getAbnormalEffect());//c2  abnormal visual effect... bleed=1; poison=2; poison & bleed=3; flame=4;
 		int npcId = _summon.getTemplate().getNpcId();
-
+		
 		writeH(_summon.isMountable() ? 1 : 0);//c2    ride button
-
+		
 		writeC(0); // c2
-
+		
 		// Following all added in C4.
 		writeH(0); // ??
 		writeC(_summon.getOwner() != null ? _summon.getOwner().getTeam() : 0); // team aura (1 = blue, 2 = red)
 		writeD(_summon.getSoulShotsPerHit()); // How many soulshots this servitor uses per hit
 		writeD(_summon.getSpiritShotsPerHit()); // How many spiritshots this servitor uses per hit
-
+		
 		int form = 0;
 		if (npcId == 16041 || npcId == 16042)
 		{
@@ -159,7 +159,7 @@ public class PetInfo extends L2GameServerPacket
 			else if (_summon.getLevel() > 74)
 				form = 1;
 		}
-		else if (npcId == 16025 ||npcId == 16037)
+		else if (npcId == 16025 || npcId == 16037)
 		{
 			if (_summon.getLevel() > 69)
 				form = 3;
@@ -171,7 +171,7 @@ public class PetInfo extends L2GameServerPacket
 		writeD(form);//CT1.5 Pet form and skills
 		writeD(0x00);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#getType()
 	 */

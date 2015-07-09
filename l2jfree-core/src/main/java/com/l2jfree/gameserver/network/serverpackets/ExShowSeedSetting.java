@@ -35,12 +35,12 @@ import com.l2jfree.gameserver.model.entity.Castle;
  */
 public class ExShowSeedSetting extends L2GameServerPacket
 {
-	private static final String	_S__FE_1F_EXSHOWSEEDSETTING	= "[S] FE:1F ExShowSeedSetting";
-
-	private final int					_manorId;
-	private final int					_count;
-	private final long[]				_seedData;														// data to send, size:_count*12
-
+	private static final String _S__FE_1F_EXSHOWSEEDSETTING = "[S] FE:1F ExShowSeedSetting";
+	
+	private final int _manorId;
+	private final int _count;
+	private final long[] _seedData; // data to send, size:_count*12
+	
 	public ExShowSeedSetting(int manorId)
 	{
 		_manorId = manorId;
@@ -84,37 +84,37 @@ public class ExShowSeedSetting extends L2GameServerPacket
 			i++;
 		}
 	}
-
+	
 	@Override
 	public void writeImpl()
 	{
 		writeC(0xFE); // Id
 		writeH(0x26); // SubId
-
+		
 		writeD(_manorId); // manor id
 		writeD(_count); // size
-
+		
 		for (int i = 0; i < _count; i++)
 		{
-			writeD((int) _seedData[(i * 12)]); // seed id
-			writeD((int) _seedData[i * 12 + 1]); // level
+			writeD((int)_seedData[(i * 12)]); // seed id
+			writeD((int)_seedData[i * 12 + 1]); // level
 			writeC(1);
-			writeD((int) _seedData[i * 12 + 2]); // reward 1 id
+			writeD((int)_seedData[i * 12 + 2]); // reward 1 id
 			writeC(1);
-			writeD((int) _seedData[i * 12 + 3]); // reward 2 id
-
-			writeD((int) _seedData[i * 12 + 4]); // next sale limit
-			writeD((int) _seedData[i * 12 + 5]); // price for castle to produce 1
-			writeD((int) _seedData[i * 12 + 6]); // min seed price
-			writeD((int) _seedData[i * 12 + 7]); // max seed price
-
+			writeD((int)_seedData[i * 12 + 3]); // reward 2 id
+			
+			writeD((int)_seedData[i * 12 + 4]); // next sale limit
+			writeD((int)_seedData[i * 12 + 5]); // price for castle to produce 1
+			writeD((int)_seedData[i * 12 + 6]); // min seed price
+			writeD((int)_seedData[i * 12 + 7]); // max seed price
+			
 			writeCompQ(_seedData[i * 12 + 8]); // today sales
 			writeCompQ(_seedData[i * 12 + 9]); // today price
 			writeCompQ(_seedData[i * 12 + 10]); // next sales
 			writeCompQ(_seedData[i * 12 + 11]); // next price
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

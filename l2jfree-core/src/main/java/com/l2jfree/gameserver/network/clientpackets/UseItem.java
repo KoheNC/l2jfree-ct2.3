@@ -38,57 +38,58 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
 
 public final class UseItem extends L2GameClientPacket
 {
-	private static final String	_C__USEITEM	= "[C] 19 UseItem c[dd]";
-
-	private int					_objectId;
+	private static final String _C__USEITEM = "[C] 19 UseItem c[dd]";
+	
+	private int _objectId;
+	
 	//private int				_unk;
-
+	
 	/** Weapon Equip Task */
 	public class WeaponEquipTask implements Runnable
 	{
-		L2ItemInstance	item;
-		L2PcInstance	activeChar;
-
+		L2ItemInstance item;
+		L2PcInstance activeChar;
+		
 		public WeaponEquipTask(L2ItemInstance it, L2PcInstance character)
 		{
 			item = it;
 			activeChar = character;
 		}
-
+		
 		public void run()
 		{
 			// Equip or unEquip
 			activeChar.useEquippableItem(item, false);
 		}
 	}
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 		/*_unk = */readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		// Flood protect UseItem
 		if (!FloodProtector.tryPerformAction(activeChar, Protected.USEITEM))
 			return;
-
+		
 		if (activeChar.getPrivateStoreType() != 0)
 		{
 			requestFailed(SystemMessageId.NOT_USE_ITEMS_IN_PRIVATE_STORE);
 			return;
 		}
-
+		
 		if (activeChar.getActiveTradeList() != null)
 			activeChar.cancelActiveTrade();
-
+		
 		// NOTE: disabled due to deadlocks
 		// synchronized (activeChar.getInventory())
 		// 	{
@@ -98,7 +99,7 @@ public final class UseItem extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		if (item.isWear())
 		{
 			sendAF();
@@ -155,27 +156,27 @@ public final class UseItem extends L2GameClientPacket
 		{
 			switch (itemId)
 			{
-			case 736:
-			case 1538:
-			case 1829:
-			case 1830:
-			case 3958:
-			case 5858:
-			case 5859:
-			case 6663:
-			case 6664:
-			case 7554:
-			case 7555:
-			case 7556:
-			case 7557:
-			case 7558:
-			case 7559:
-			case 7618:
-			case 7619:
-			case 10129:
-			case 10130:
-				sendAF();
-				return;
+				case 736:
+				case 1538:
+				case 1829:
+				case 1830:
+				case 3958:
+				case 5858:
+				case 5859:
+				case 6663:
+				case 6664:
+				case 7554:
+				case 7555:
+				case 7556:
+				case 7557:
+				case 7558:
+				case 7559:
+				case 7618:
+				case 7619:
+				case 10129:
+				case 10130:
+					sendAF();
+					return;
 			}
 			if (itemId >= 7117 && itemId <= 7135)
 			{
@@ -183,31 +184,31 @@ public final class UseItem extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		// Items that cannot be used
 		if (itemId == PcInventory.ADENA_ID)
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (activeChar.isFishing() && !ShotTable.isFishingShot(itemId))
 		{
 			// You cannot do anything else while fishing
 			requestFailed(SystemMessageId.CANNOT_DO_WHILE_FISHING_3);
 			return;
 		}
-
+		
 		if (!GlobalRestrictions.canUseItemHandler(null, itemId, activeChar, item))
 			return;
-
+		
 		// Char cannot use item when dead
 		if (activeChar.isDead())
 		{
 			requestFailed(new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED).addItemName(item));
 			return;
 		}
-
+		
 		// Char cannot use pet items
 		if ((item.getItem() instanceof L2Armor && item.getItem().getItemType() == L2ArmorType.PET)
 				|| (item.getItem() instanceof L2Weapon && item.getItem().getItemType() == L2WeaponType.PET))
@@ -215,10 +216,10 @@ public final class UseItem extends L2GameClientPacket
 			requestFailed(SystemMessageId.CANNOT_EQUIP_PET_ITEM);
 			return;
 		}
-
+		
 		if (_log.isDebugEnabled())
 			_log.info(activeChar.getObjectId() + ": use item " + _objectId);
-
+		
 		if (!item.isEquipped())
 		{
 			if (!item.getItem().checkCondition(activeChar, true))
@@ -227,96 +228,99 @@ public final class UseItem extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		if (item.isEquipable())
 		{
 			// No unequipping/equipping while the player is in special conditions
-			if (activeChar.isStunned() || activeChar.isSleeping() || activeChar.isParalyzed() || activeChar.isAlikeDead())
+			if (activeChar.isStunned() || activeChar.isSleeping() || activeChar.isParalyzed()
+					|| activeChar.isAlikeDead())
 			{
 				sendAF();
 				return;
 			}
-
+			
 			// Don't allow hero equipment and restricted items during Olympiad
 			if (activeChar.isInOlympiadMode() && (item.isHeroItem() || item.isOlyRestrictedItem()))
 			{
 				requestFailed(SystemMessageId.THIS_ITEM_CANT_BE_EQUIPPED_FOR_THE_OLYMPIAD_EVENT);
 				return;
 			}
-
+			
 			switch (item.getItem().getBodyPart())
 			{
-			case L2Item.SLOT_LR_HAND:
-			case L2Item.SLOT_L_HAND:
-			case L2Item.SLOT_R_HAND:
-			{
-				// prevent players to equip weapon while wearing combat flag
-				if (activeChar.getActiveWeaponItem() != null && activeChar.getActiveWeaponItem().getItemId() == 9819)
+				case L2Item.SLOT_LR_HAND:
+				case L2Item.SLOT_L_HAND:
+				case L2Item.SLOT_R_HAND:
 				{
-					requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
-					return;
-				}
-				// Prevent player to remove the weapon on special conditions
-				else if (activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow())
-				{
-					requestFailed(SystemMessageId.CANNOT_USE_ITEM_WHILE_USING_MAGIC);
-					return;
-				}
-				else if (activeChar.isMounted() || activeChar.isDisarmed())
-				{
-					requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
-					return;
-				}
-				// Don't allow weapon/shield equipment if a cursed weapon is equipped
-				else if (activeChar.isCursedWeaponEquipped())
-				{
-					sendAF();
-					return;
-				}
-
-				// Don't allow other Race to Wear Kamael exclusive Weapons.
-				if (!item.isEquipped() && item.getItem() instanceof L2Weapon && !activeChar.isGM())
-				{
-					if (activeChar.isKamaelic())
+					// prevent players to equip weapon while wearing combat flag
+					if (activeChar.getActiveWeaponItem() != null
+							&& activeChar.getActiveWeaponItem().getItemId() == 9819)
 					{
-						if (item.getItemType() == L2WeaponType.NONE)
+						requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
+						return;
+					}
+					// Prevent player to remove the weapon on special conditions
+					else if (activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow())
+					{
+						requestFailed(SystemMessageId.CANNOT_USE_ITEM_WHILE_USING_MAGIC);
+						return;
+					}
+					else if (activeChar.isMounted() || activeChar.isDisarmed())
+					{
+						requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
+						return;
+					}
+					// Don't allow weapon/shield equipment if a cursed weapon is equipped
+					else if (activeChar.isCursedWeaponEquipped())
+					{
+						sendAF();
+						return;
+					}
+					
+					// Don't allow other Race to Wear Kamael exclusive Weapons.
+					if (!item.isEquipped() && item.getItem() instanceof L2Weapon && !activeChar.isGM())
+					{
+						if (activeChar.isKamaelic())
+						{
+							if (item.getItemType() == L2WeaponType.NONE)
+							{
+								requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
+								return;
+							}
+						}
+						else if (item.getItemType() == L2WeaponType.CROSSBOW
+								|| item.getItemType() == L2WeaponType.RAPIER
+								|| item.getItemType() == L2WeaponType.ANCIENT_SWORD)
 						{
 							requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
 							return;
 						}
 					}
-					else if (item.getItemType() == L2WeaponType.CROSSBOW || item.getItemType() == L2WeaponType.RAPIER
-							|| item.getItemType() == L2WeaponType.ANCIENT_SWORD)
+					break;
+				}
+				case L2Item.SLOT_CHEST:
+				case L2Item.SLOT_BACK:
+				case L2Item.SLOT_GLOVES:
+				case L2Item.SLOT_FEET:
+				case L2Item.SLOT_HEAD:
+				case L2Item.SLOT_FULL_ARMOR:
+				case L2Item.SLOT_LEGS:
+				{
+					if (activeChar.isKamaelic()
+							&& (item.getItem().getItemType() == L2ArmorType.HEAVY || item.getItem().getItemType() == L2ArmorType.MAGIC))
 					{
 						requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
 						return;
 					}
+					break;
 				}
-				break;
 			}
-			case L2Item.SLOT_CHEST:
-			case L2Item.SLOT_BACK:
-			case L2Item.SLOT_GLOVES:
-			case L2Item.SLOT_FEET:
-			case L2Item.SLOT_HEAD:
-			case L2Item.SLOT_FULL_ARMOR:
-			case L2Item.SLOT_LEGS:
-			{
-				if (activeChar.isKamaelic()
-						&& (item.getItem().getItemType() == L2ArmorType.HEAVY || item.getItem().getItemType() == L2ArmorType.MAGIC))
-				{
-					requestFailed(SystemMessageId.NO_CONDITION_TO_EQUIP);
-					return;
-				}
-				break;
-			}
-			}
-
+			
 			// All talisman slots full. Verified.
 			if (!item.isEquipped() && item.getItem().getBodyPart() == L2Item.SLOT_DECO)
 			{
-				if (activeChar.getInventory().getMaxTalismanCount() <=
-					activeChar.getInventory().getEquippedTalismanCount())
+				if (activeChar.getInventory().getMaxTalismanCount() <= activeChar.getInventory()
+						.getEquippedTalismanCount())
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.NO_SPACE_TO_WEAR_S1);
 					sm.addItemName(item);
@@ -324,7 +328,7 @@ public final class UseItem extends L2GameClientPacket
 					return;
 				}
 			}
-
+			
 			if (activeChar.isCursedWeaponEquipped() && itemId == 6408) // Don't allow to put formal wear
 			{
 				sendAF();
@@ -353,8 +357,8 @@ public final class UseItem extends L2GameClientPacket
 			if (itemid == 4393)
 				activeChar.sendPacket(new ShowCalculator(4393));
 			else if ((weaponItem != null && weaponItem.getItemType() == L2WeaponType.ROD)
-					&& ((itemid >= 6519 && itemid <= 6527) || (itemid >= 7610 && itemid <= 7613) || (itemid >= 7807 && itemid <= 7809)
-							|| (itemid >= 8484 && itemid <= 8486) || (itemid >= 8505 && itemid <= 8513)))
+					&& ((itemid >= 6519 && itemid <= 6527) || (itemid >= 7610 && itemid <= 7613)
+							|| (itemid >= 7807 && itemid <= 7809) || (itemid >= 8484 && itemid <= 8486) || (itemid >= 8505 && itemid <= 8513)))
 			{
 				activeChar.getInventory().setPaperdollItem(Inventory.PAPERDOLL_LHAND, item);
 				activeChar.broadcastUserInfo();
@@ -369,7 +373,7 @@ public final class UseItem extends L2GameClientPacket
 		//		}
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

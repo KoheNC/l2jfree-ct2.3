@@ -20,13 +20,18 @@ import java.security.NoSuchAlgorithmException;
 
 import junit.framework.TestCase;
 
-public class TestScrambledKeyPair extends TestCase {
-
-	public void testSCrambleKeyPair() {
+public class TestScrambledKeyPair extends TestCase
+{
+	
+	public void testSCrambleKeyPair()
+	{
 		KeyPairGenerator _keyGen = null;
-		try {
+		try
+		{
 			_keyGen = KeyPairGenerator.getInstance("RSA");
-		} catch (NoSuchAlgorithmException e) {
+		}
+		catch (NoSuchAlgorithmException e)
+		{
 			fail(e.getMessage());
 			return;
 		}
@@ -35,12 +40,13 @@ public class TestScrambledKeyPair extends TestCase {
 		ScrambledKeyPair skp2 = new ScrambledKeyPair(kp);
 		byte[] bySkp1 = skp1.getScrambledModulus();
 		byte[] bySkp2 = skp2.getScrambledModulus();
-
+		
 		assertEquals(bySkp1.length, bySkp2.length);
 		// check that two byte array generated with the same key are the same
-		for (int i = 0; i < bySkp1.length; i++) {
+		for (int i = 0; i < bySkp1.length; i++)
+		{
 			assertEquals(bySkp1[i], bySkp2[i]);
 		}
-
+		
 	}
 }

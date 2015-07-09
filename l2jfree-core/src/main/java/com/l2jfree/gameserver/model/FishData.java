@@ -27,8 +27,9 @@ public class FishData
 	private final int _gutsCheckTime;
 	private final int _waitTime;
 	private final int _combatTime;
-
-	public FishData(int id, int lvl, String name, int HP, int HpRegen, int type, int group, int fish_guts, int guts_check_time, int wait_time, int combat_time)
+	
+	public FishData(int id, int lvl, String name, int HP, int HpRegen, int type, int group, int fish_guts,
+			int guts_check_time, int wait_time, int combat_time)
 	{
 		_id = id;
 		_level = lvl;
@@ -42,7 +43,7 @@ public class FishData
 		_waitTime = wait_time;
 		_combatTime = combat_time;
 	}
-
+	
 	/**
 	 * @return Returns the id.
 	 */
@@ -50,7 +51,7 @@ public class FishData
 	{
 		return _id;
 	}
-
+	
 	/**
 	 * @return Returns the level.
 	 */
@@ -58,7 +59,7 @@ public class FishData
 	{
 		return _level;
 	}
-
+	
 	/**
 	 * @return Returns the name.
 	 */
@@ -66,35 +67,42 @@ public class FishData
 	{
 		return _name;
 	}
-
+	
 	public int getHP()
 	{
 		return _hp;
 	}
+	
 	public int getHpRegen()
 	{
 		return _hpRegen;
 	}
+	
 	public int getType()
 	{
 		return _type;
 	}
+	
 	public int getGroup()
 	{
 		return _group;
 	}
+	
 	public int getFishGuts()
 	{
 		return _fishGuts;
 	}
+	
 	public int getGutsCheckTime()
 	{
 		return _gutsCheckTime;
 	}
+	
 	public int getWaitTime()
 	{
 		return _waitTime;
 	}
+	
 	public int getCombatTime()
 	{
 		return _combatTime;

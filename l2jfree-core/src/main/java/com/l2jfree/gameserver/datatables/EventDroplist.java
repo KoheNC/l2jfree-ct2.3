@@ -32,36 +32,36 @@ import com.l2jfree.gameserver.script.DateRange;
 
 public class EventDroplist
 {
-
-	private final static Log		_log	= LogFactory.getLog(EventDroplist.class);
-
+	
+	private final static Log _log = LogFactory.getLog(EventDroplist.class);
+	
 	/** The table containing all DataDrop object */
-	private final FastList<DateDrop>		_allNpcDateDrops;
-
+	private final FastList<DateDrop> _allNpcDateDrops;
+	
 	public static EventDroplist getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-
+	
 	public class DateDrop
 	{
 		/** Start and end date of the Event */
-		public DateRange	dateRange;
-
+		public DateRange dateRange;
+		
 		/** The table containing Item identifier that can be dropped as extra Items during the Event */
-		public int[]		items;
-
+		public int[] items;
+		
 		/** The min number of Item dropped in one time during this Event */
-		public int			min;
-
+		public int min;
+		
 		/** The max number of Item dropped in one time during this Event */
-		public int			max;
-
+		public int max;
+		
 		/** The rate of drop for this Event */
-		public int			chance;
-
+		public int chance;
+		
 	}
-
+	
 	/**
 	 * Constructor of EventDroplist.<BR><BR>
 	 */
@@ -69,7 +69,7 @@ public class EventDroplist
 	{
 		_allNpcDateDrops = new FastList<DateDrop>();
 	}
-
+	
 	/**
 	 * Create and Init a new DateDrop then add it to the allNpcDateDrops of EventDroplist .<BR><BR>
 	 * 
@@ -82,23 +82,23 @@ public class EventDroplist
 	public void addGlobalDrop(int[] items, int[] count, int chance, DateRange range)
 	{
 		DateDrop date = new DateDrop();
-
+		
 		date.dateRange = range;
 		date.items = items;
 		date.min = count[0];
 		date.max = count[1];
 		date.chance = chance;
-
+		
 		_allNpcDateDrops.add(date);
 	}
-
+	
 	/**
 	 * Return all DateDrop of EventDroplist allNpcDateDrops within the date range.<BR><BR>
 	 */
 	public FastList<DateDrop> getAllDrops()
 	{
 		FastList<DateDrop> list = new FastList<DateDrop>();
-
+		
 		for (DateDrop drop : _allNpcDateDrops)
 		{
 			Date currentDate = new Date();
@@ -108,21 +108,21 @@ public class EventDroplist
 				list.add(drop);
 			}
 		}
-
+		
 		return list;
 	}
-
+	
 	public void getAllDropsDates(String QuestName)
 	{
 		for (DateDrop drop : _allNpcDateDrops)
 		{
 			Date currentDate = new Date();
 			if (_log.isDebugEnabled())
-				_log.debug("Event :: " + QuestName + " : Date Range From: " + drop.dateRange.getStartDate() + " To: " + drop.dateRange.getEndDate() + " Now: "
-						+ currentDate);
+				_log.debug("Event :: " + QuestName + " : Date Range From: " + drop.dateRange.getStartDate() + " To: "
+						+ drop.dateRange.getEndDate() + " Now: " + currentDate);
 		}
 	}
-
+	
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{

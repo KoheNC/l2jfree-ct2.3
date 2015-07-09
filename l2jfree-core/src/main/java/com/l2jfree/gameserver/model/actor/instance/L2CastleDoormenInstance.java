@@ -26,19 +26,19 @@ public class L2CastleDoormenInstance extends L2DoormenInstance
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	protected final void openDoors(L2PcInstance player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command.substring(10), ", ");
 		st.nextToken();
-
+		
 		while (st.hasMoreTokens())
 		{
 			getCastle().openDoor(player, Integer.parseInt(st.nextToken()));
 		}
 	}
-
+	
 	@Override
 	protected final void closeDoors(L2PcInstance player, String command)
 	{
@@ -50,7 +50,7 @@ public class L2CastleDoormenInstance extends L2DoormenInstance
 			getCastle().closeDoor(player, Integer.parseInt(st.nextToken()));
 		}
 	}
-
+	
 	@Override
 	protected final boolean isOwnerClan(L2PcInstance player)
 	{
@@ -70,5 +70,5 @@ public class L2CastleDoormenInstance extends L2DoormenInstance
 	protected final boolean isUnderSiege()
 	{
 		return (!Config.SIEGE_GATE_CONTROL && getCastle().getSiege().getIsInProgress());
-	}	
+	}
 }

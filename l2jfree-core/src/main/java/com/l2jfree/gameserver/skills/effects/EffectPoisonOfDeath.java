@@ -29,7 +29,7 @@ public class EffectPoisonOfDeath extends EffectRoot
 {
 	private static final int CONSTANT_DAMAGE = 3600;
 	private static final double DAMAGE_GROWTH = 2;
-
+	
 	public EffectPoisonOfDeath(Env env, EffectTemplate template)
 	{
 		super(env, template);

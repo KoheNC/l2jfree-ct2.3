@@ -87,7 +87,8 @@ public final class TvTRestriction extends AbstractFunEventRestriction
 	@Override
 	boolean teamEquals(L2PcInstance participant1, L2PcInstance participant2)
 	{
-		return participant1.as(TvTPlayerInfo.class)._teamNameTvT.equals(participant2.as(TvTPlayerInfo.class)._teamNameTvT);
+		return participant1.as(TvTPlayerInfo.class)._teamNameTvT
+				.equals(participant2.as(TvTPlayerInfo.class)._teamNameTvT);
 	}
 	
 	@Override

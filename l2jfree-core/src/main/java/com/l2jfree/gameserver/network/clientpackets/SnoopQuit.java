@@ -20,16 +20,16 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class SnoopQuit extends L2GameClientPacket
 {
-	private static final String	_C__SNOOPQUIT	= "[C] B4 Snoop_quit c[d]";
-
-	private int					_objectId;
-
+	private static final String _C__SNOOPQUIT = "[C] B4 Snoop_quit c[d]";
+	
+	private int _objectId;
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -42,14 +42,14 @@ public class SnoopQuit extends L2GameClientPacket
 			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
 			return;
 		}
-
+		
 		player.removeSnooped(target);
 		target.removeSnooper(player);
 		player.sendMessage("Surveillance of player " + target.getName() + " canceled.");
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

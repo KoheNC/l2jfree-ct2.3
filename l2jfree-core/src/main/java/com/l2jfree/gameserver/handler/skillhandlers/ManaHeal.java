@@ -34,9 +34,9 @@ public class ManaHeal implements ISkillHandler
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.L2PcInstance, com.l2jfree.gameserver.model.L2ItemInstance)
 	 */
-	private static final L2SkillType[]	SKILL_IDS	=
-													{ L2SkillType.MANAHEAL, L2SkillType.MANARECHARGE, L2SkillType.MANAHEAL_PERCENT };
-
+	private static final L2SkillType[] SKILL_IDS = { L2SkillType.MANAHEAL, L2SkillType.MANARECHARGE,
+			L2SkillType.MANAHEAL_PERCENT };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.L2PcInstance, com.l2jfree.gameserver.model.L2ItemInstance)
 	 */
@@ -55,9 +55,11 @@ public class ManaHeal implements ISkillHandler
 			}
 			else
 			{
-				mp = (skill.getSkillType() == L2SkillType.MANARECHARGE) ? target.calcStat(Stats.RECHARGE_MP_RATE, mp, null, null) : mp;
+				mp =
+						(skill.getSkillType() == L2SkillType.MANARECHARGE) ? target.calcStat(Stats.RECHARGE_MP_RATE,
+								mp, null, null) : mp;
 			}
-
+			
 			final int levelDiff = target.getLevel() - actChar.getLevel();
 			
 			if (3 < levelDiff)
@@ -81,34 +83,34 @@ public class ManaHeal implements ISkillHandler
 						break;
 				}
 			}
-
+			
 			// From CT2 you will receive exact MP, you can't go over it, if you have full MP and you get MP buff, you will receive 0MP restored message
 			if ((target.getStatus().getCurrentMp() + mp) >= target.getMaxMp())
 			{
 				mp = target.getMaxMp() - target.getStatus().getCurrentMp();
 			}
-
+			
 			target.getStatus().setCurrentMp(mp + target.getStatus().getCurrentMp());
-
+			
 			if (target instanceof L2PcInstance)
 			{
 				if (actChar instanceof L2PcInstance && actChar != target)
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.S2_MP_RESTORED_BY_C1);
 					sm.addString(actChar.getName());
-					sm.addNumber((int) mp);
+					sm.addNumber((int)mp);
 					target.getActingPlayer().sendPacket(sm);
 				}
 				else
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.S1_MP_RESTORED);
-					sm.addNumber((int) mp);
+					sm.addNumber((int)mp);
 					target.getActingPlayer().sendPacket(sm);
 				}
 			}
 		}
 	}
-
+	
 	public L2SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

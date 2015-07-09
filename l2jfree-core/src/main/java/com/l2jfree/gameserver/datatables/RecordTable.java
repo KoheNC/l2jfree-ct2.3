@@ -53,8 +53,8 @@ public final class RecordTable
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			PreparedStatement statement = con
-				.prepareStatement("SELECT maxplayer, date FROM record ORDER BY maxplayer DESC LIMIT 1");
+			PreparedStatement statement =
+					con.prepareStatement("SELECT maxplayer, date FROM record ORDER BY maxplayer DESC LIMIT 1");
 			ResultSet rset = statement.executeQuery();
 			
 			if (rset.next())
@@ -87,7 +87,8 @@ public final class RecordTable
 			{
 				con = L2DatabaseFactory.getInstance().getConnection();
 				
-				PreparedStatement statement = con.prepareStatement("INSERT INTO record (maxplayer, date) VALUES (?, NOW())");
+				PreparedStatement statement =
+						con.prepareStatement("INSERT INTO record (maxplayer, date) VALUES (?, NOW())");
 				statement.setInt(1, onlinePlayerCount);
 				statement.execute();
 				statement.close();

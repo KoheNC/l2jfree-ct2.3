@@ -31,7 +31,7 @@ public class ExFishingEnd extends L2GameServerPacket
 		_win = win;
 		_activeChar = character;
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -41,7 +41,7 @@ public class ExFishingEnd extends L2GameServerPacket
 		writeD(_activeChar.getObjectId());
 		writeC(_win ? 1 : 0);
 	}
-
+	
 	@Override
 	public String getType()
 	{

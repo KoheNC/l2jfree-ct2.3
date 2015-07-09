@@ -25,22 +25,22 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class RequestExAskJoinMPCC extends L2GameClientPacket
 {
 	private static final String _C__REQUESTEXASKJOINMPCC = "[C] D0:06 RequestExAskJoinMPCC ch[s]";
-
+	
 	private String _name;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_name = readS();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-
+		
 		L2PcInstance player = L2World.getInstance().getPlayer(_name);
 		if (player == null)
 		{
@@ -52,7 +52,7 @@ public class RequestExAskJoinMPCC extends L2GameClientPacket
 			sendAF();
 			return;
 		}
-
+		
 		L2Party activeParty = activeChar.getParty();
 		L2Party invitedParty = player.getParty();
 		if (!activeChar.isInParty())
@@ -73,10 +73,11 @@ public class RequestExAskJoinMPCC extends L2GameClientPacket
 		}
 		else if (invitedParty.isInCommandChannel())
 		{
-			requestFailed(new SystemMessage(SystemMessageId.C1_ALREADY_MEMBER_OF_COMMAND_CHANNEL).addString(player.getName()));
+			requestFailed(new SystemMessage(SystemMessageId.C1_ALREADY_MEMBER_OF_COMMAND_CHANNEL).addString(player
+					.getName()));
 			return;
 		}
-
+		
 		if (activeParty.isInCommandChannel())
 		{
 			if (!activeParty.getCommandChannel().getChannelLeader().equals(activeChar))
@@ -89,10 +90,10 @@ public class RequestExAskJoinMPCC extends L2GameClientPacket
 		}
 		else
 			tryInvite(invitedParty, true);
-
+		
 		sendAF();
 	}
-
+	
 	private final void tryInvite(L2Party invited, boolean newCC)
 	{
 		L2PcInstance activeChar = getActiveChar();
@@ -104,7 +105,7 @@ public class RequestExAskJoinMPCC extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		L2PcInstance contact = invited.getLeader();
 		if (!contact.isProcessingRequest())
 		{
@@ -118,20 +119,20 @@ public class RequestExAskJoinMPCC extends L2GameClientPacket
 			//sendPacket(new SystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER).addString(_name));
 			sendPacket(new SystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER).addString(contact.getName()));
 	}
-
+	
 	private final boolean canCreateCC(L2PcInstance creator)
 	{
 		if (creator == null)
 			return false;
-
+		
 		for (L2Skill s : creator.getClan().getAllSkills())
 			if (s.getId() == 391 && s.checkCondition(creator, creator))
 				return true;
-
+		
 		// TODO: revise! 8871 Strategy Guide. Should be destroyed after successful invite?
 		return creator.destroyItemByItemId("MPCC Creation", 8871, 1, creator, true);
 	}
-
+	
 	@Override
 	public String getType()
 	{

@@ -28,15 +28,15 @@ public class RequestPetition extends L2GameClientPacket
 	private String _content;
 	private int _on;
 	
-    @Override
-    protected void readImpl()
-    {
-        _content = readS();
-        _on = readD()/* != 0*/;
-    }
-    
-    @Override
-    protected void runImpl()
+	@Override
+	protected void readImpl()
+	{
+		_content = readS();
+		_on = readD()/* != 0*/;
+	}
+	
+	@Override
+	protected void runImpl()
 	{
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
@@ -96,8 +96,8 @@ public class RequestPetition extends L2GameClientPacket
 		sm.addNumber(PetitionManager.getInstance().getPendingPetitionCount());
 		sendPacket(sm);
 	}
-    
-	 @Override
+	
+	@Override
 	public String getType()
 	{
 		return _C__REQUESTPETITION;

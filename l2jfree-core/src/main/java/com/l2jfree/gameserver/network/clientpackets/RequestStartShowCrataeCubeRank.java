@@ -28,16 +28,16 @@ public final class RequestStartShowCrataeCubeRank extends L2GameClientPacket
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		sendPacket(new ExPVPMatchCCRecord(2, ExPVPMatchCCRecord.EMPTY_ARRAY));
-
+		
 		sendAF();
 	}
 }

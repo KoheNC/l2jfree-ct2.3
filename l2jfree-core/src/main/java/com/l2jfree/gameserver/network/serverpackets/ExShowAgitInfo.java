@@ -24,11 +24,11 @@ public class ExShowAgitInfo extends StaticPacket
 {
 	private static final String _S__EXSHOWAGITINFO = "[S] FE:16 ExShowAgitInfo ch[d (dssd)]";
 	public static final ExShowAgitInfo PACKET = new ExShowAgitInfo();
-
+	
 	private ExShowAgitInfo()
 	{
 	}
-
+	
 	@Override
 	protected void writeImpl()
 	{
@@ -44,7 +44,7 @@ public class ExShowAgitInfo extends StaticPacket
 			writeD(ch.getSiege() != null); // 0 - auction  1 - war clanhall  2 - ETC (rainbow spring clanhall)
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

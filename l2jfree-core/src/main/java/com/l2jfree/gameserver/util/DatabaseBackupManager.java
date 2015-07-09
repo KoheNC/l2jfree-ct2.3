@@ -56,11 +56,16 @@ public final class DatabaseBackupManager
 		Process run = null;
 		try
 		{
-			run = Runtime.getRuntime().exec("mysqldump" +
-						" --user=" + Config.DATABASE_LOGIN +
-						" --password=" + Config.DATABASE_PASSWORD +
-						" --compact --complete-insert --default-character-set=utf8 --extended-insert --lock-tables --quick --skip-triggers " +
-						Config.DATABASE_BACKUP_DATABASE_NAME, null, new File(Config.DATABASE_BACKUP_MYSQLDUMP_PATH));
+			run =
+					Runtime.getRuntime()
+							.exec("mysqldump"
+									+ " --user="
+									+ Config.DATABASE_LOGIN
+									+ " --password="
+									+ Config.DATABASE_PASSWORD
+									+ " --compact --complete-insert --default-character-set=utf8 --extended-insert --lock-tables --quick --skip-triggers "
+									+ Config.DATABASE_BACKUP_DATABASE_NAME, null,
+									new File(Config.DATABASE_BACKUP_MYSQLDUMP_PATH));
 		}
 		catch (Exception e)
 		{
@@ -89,8 +94,8 @@ public final class DatabaseBackupManager
 				ZipOutputStream dflt = new ZipOutputStream(out);
 				dflt.setMethod(ZipOutputStream.DEFLATED);
 				dflt.setLevel(Deflater.BEST_COMPRESSION);
-				dflt.setComment("L2JFree Schema Backup Utility\r\n\r\nBackup date: " +
-						new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS z").format(time));
+				dflt.setComment("L2JFree Schema Backup Utility\r\n\r\nBackup date: "
+						+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS z").format(time));
 				dflt.putNextEntry(new ZipEntry(Config.DATABASE_BACKUP_DATABASE_NAME + ".sql"));
 				out = dflt;
 			}
@@ -116,8 +121,8 @@ public final class DatabaseBackupManager
 				br.close();
 			}
 			else
-				_log.info("DatabaseBackupManager: Schema `" + Config.DATABASE_BACKUP_DATABASE_NAME +
-						"` backed up successfully in " + (System.currentTimeMillis() - time.getTime()) / 1000 + " s.");
+				_log.info("DatabaseBackupManager: Schema `" + Config.DATABASE_BACKUP_DATABASE_NAME
+						+ "` backed up successfully in " + (System.currentTimeMillis() - time.getTime()) / 1000 + " s.");
 			
 			run.waitFor();
 		}

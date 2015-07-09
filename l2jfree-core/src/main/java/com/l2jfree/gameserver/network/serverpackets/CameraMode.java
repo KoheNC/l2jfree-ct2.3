@@ -19,9 +19,9 @@ public class CameraMode extends L2GameServerPacket
 	private static final String _S__CAMERAMODE = "[S] F7 CameraMode c[d]";
 	public static final CameraMode FIRST_PERSON = new CameraMode(0x01);
 	public static final CameraMode THIRD_PERSON = new CameraMode(0x00);
-
+	
 	private final int _mode;
-
+	
 	private CameraMode(int mode)
 	{
 		_mode = mode;

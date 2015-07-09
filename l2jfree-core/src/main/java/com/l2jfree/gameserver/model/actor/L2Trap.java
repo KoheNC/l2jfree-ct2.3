@@ -29,6 +29,7 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 public class L2Trap extends L2Character
 {
 	private final L2PcInstance _owner;
+	
 	/**
 	 * @param objectId
 	 * @param template
@@ -65,7 +66,7 @@ public class L2Trap extends L2Character
 	{
 		super.onSpawn();
 	}
-
+	
 	/**
 	 *
 	 * @see com.l2jfree.gameserver.model.actor.L2Object#onAction(com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
@@ -81,7 +82,7 @@ public class L2Trap extends L2Character
 	{
 		return player.getLevel() - getLevel();
 	}
-
+	
 	/**
 	 *
 	 *
@@ -90,7 +91,7 @@ public class L2Trap extends L2Character
 	{
 		DecayTaskManager.getInstance().cancelDecayTask(this);
 	}
-
+	
 	/**
 	 *
 	 * @see com.l2jfree.gameserver.model.actor.L2Character#onDecay()
@@ -100,7 +101,7 @@ public class L2Trap extends L2Character
 	{
 		deleteMe(_owner);
 	}
-
+	
 	/**
 	 *
 	 * @return
@@ -109,7 +110,7 @@ public class L2Trap extends L2Character
 	{
 		return getTemplate().getNpcId();
 	}
-
+	
 	/**
 	 *
 	 * @see com.l2jfree.gameserver.model.L2Object#isAutoAttackable(com.l2jfree.gameserver.model.actor.L2Character)
@@ -119,7 +120,7 @@ public class L2Trap extends L2Character
 	{
 		return _owner.isAutoAttackable(attacker);
 	}
-
+	
 	/**
 	 *
 	 * @param owner
@@ -130,7 +131,7 @@ public class L2Trap extends L2Character
 		getKnownList().removeAllKnownObjects();
 		owner.setTrap(null);
 	}
-
+	
 	/**
 	 *
 	 * @param owner
@@ -146,7 +147,7 @@ public class L2Trap extends L2Character
 			getKnownList().removeAllKnownObjects();
 		}
 	}
-
+	
 	/**
 	 *
 	 * @see com.l2jfree.gameserver.model.actor.L2Character#getLevel()
@@ -156,7 +157,7 @@ public class L2Trap extends L2Character
 	{
 		return getTemplate().getLevel();
 	}
-
+	
 	/**
 	 *
 	 * @return
@@ -165,13 +166,13 @@ public class L2Trap extends L2Character
 	{
 		return _owner;
 	}
-
+	
 	@Override
 	public L2PcInstance getActingPlayer()
 	{
 		return _owner;
 	}
-
+	
 	/**
 	 *
 	 * @see com.l2jfree.gameserver.model.actor.L2Character#getTemplate()
@@ -179,9 +180,9 @@ public class L2Trap extends L2Character
 	@Override
 	public L2NpcTemplate getTemplate()
 	{
-		return (L2NpcTemplate) super.getTemplate();
+		return (L2NpcTemplate)super.getTemplate();
 	}
-
+	
 	/**
 	 *
 	 * @return
@@ -190,7 +191,7 @@ public class L2Trap extends L2Character
 	{
 		return false;
 	}
-
+	
 	/**
 	 *
 	 *

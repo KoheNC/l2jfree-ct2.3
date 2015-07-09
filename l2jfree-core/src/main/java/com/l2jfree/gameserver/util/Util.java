@@ -81,8 +81,8 @@ public final class Util
 		InteractiveConsole interp = null;
 		try
 		{
-			String interpClass = PySystemState.registry.getProperty("python.console",
-				"org.python.util.InteractiveConsole");
+			String interpClass =
+					PySystemState.registry.getProperty("python.console", "org.python.util.InteractiveConsole");
 			interp = (InteractiveConsole)Class.forName(interpClass).newInstance();
 		}
 		catch (Exception e)
@@ -256,7 +256,8 @@ public final class Util
 		final ObjectPosition pos1 = obj1.getPosition();
 		final ObjectPosition pos2 = obj2.getPosition();
 		
-		return calculateDistance(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ(), includeZAxis);
+		return calculateDistance(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ(),
+				includeZAxis);
 	}
 	
 	/**
@@ -336,7 +337,8 @@ public final class Util
 		final ObjectPosition pos2 = obj2.getPosition();
 		
 		if (includeZAxis)
-			return L2Math.isDistanceLessThan(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ(), range);
+			return L2Math.isDistanceLessThan(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(),
+					pos2.getZ(), range);
 		else
 			return L2Math.isDistanceLessThan(pos1.getX(), pos1.getY(), pos2.getX(), pos2.getY(), range);
 	}
@@ -354,12 +356,13 @@ public final class Util
 		
 		if (radius == -1)
 			return true; // not limited
-		
+			
 		final ObjectPosition pos1 = obj1.getPosition();
 		final ObjectPosition pos2 = obj2.getPosition();
 		
 		if (includeZAxis)
-			return L2Math.isDistanceLessThan(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ(), radius);
+			return L2Math.isDistanceLessThan(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(),
+					pos2.getZ(), radius);
 		else
 			return L2Math.isDistanceLessThan(pos1.getX(), pos1.getY(), pos2.getX(), pos2.getY(), radius);
 	}

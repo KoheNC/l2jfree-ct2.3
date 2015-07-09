@@ -48,41 +48,42 @@ public class ResidentialSkillTable
 	}
 	
 	private final FastMap<Integer, L2Skill[]> _list = new FastMap<Integer, L2Skill[]>();
-
+	
 	private ResidentialSkillTable()
 	{
 		load();
 	}
-
+	
 	public void reload()
 	{
 		_list.clear();
 		load();
 	}
-
+	
 	private void load()
 	{
 		FastMap<Integer, FastList<L2Skill>> tempMap = new FastMap<Integer, FastList<L2Skill>>();
 		Connection con = null;
-
+		
 		int skills = 0;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM skill_residential ORDER BY entityId");
 			ResultSet rs = statement.executeQuery();
-
+			
 			while (rs.next())
 			{
 				int entityId = rs.getInt("entityId");
 				int skillId = rs.getInt("skillId");
 				int skillLvl = rs.getInt("skillLevel");
-
+				
 				L2Skill sk = SkillTable.getInstance().getInfo(skillId, skillLvl);
-
+				
 				if (sk == null)
 				{
-					_log.warn("ResidentialSkillTable: SkillTable has returned null for ID/level: " + skillId + "/" + skillLvl);
+					_log.warn("ResidentialSkillTable: SkillTable has returned null for ID/level: " + skillId + "/"
+							+ skillLvl);
 					continue;
 				}
 				if (!tempMap.containsKey(entityId))
@@ -97,7 +98,7 @@ public class ResidentialSkillTable
 			}
 			statement.close();
 			rs.close();
-
+			
 			for (Map.Entry<Integer, FastList<L2Skill>> e : tempMap.entrySet())
 			{
 				_list.put(e.getKey(), e.getValue().toArray(new L2Skill[e.getValue().size()]));
@@ -113,7 +114,7 @@ public class ResidentialSkillTable
 		}
 		_log.info("ResidentialSkillTable: Loaded " + _list.size() + " entities with " + skills + " associated skills.");
 	}
-
+	
 	public L2Skill[] getSkills(int entityId)
 	{
 		return _list.get(entityId);

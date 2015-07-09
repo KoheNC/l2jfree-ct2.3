@@ -23,7 +23,7 @@ public class TutorialShowHtml extends L2GameServerPacket
 	{
 		_html = html;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -33,7 +33,7 @@ public class TutorialShowHtml extends L2GameServerPacket
 		writeC(0xa6);
 		writeS(_html);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

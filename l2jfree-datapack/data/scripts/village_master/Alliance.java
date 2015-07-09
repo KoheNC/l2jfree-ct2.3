@@ -24,12 +24,12 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public final class Alliance extends VillageMaster
 {
 	private static final String ALLIANCE = "9001_alliance";
-
+	
 	public Alliance(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 	}
-
+	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -38,13 +38,13 @@ public final class Alliance extends VillageMaster
 		else
 			return event;
 	}
-
+	
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
 		return "9001-01.htm";
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new Alliance(-1, ALLIANCE, "village_master");

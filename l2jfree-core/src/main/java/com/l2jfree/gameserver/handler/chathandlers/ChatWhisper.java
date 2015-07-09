@@ -30,9 +30,8 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class ChatWhisper implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Tell };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Tell };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
 	 */
@@ -40,14 +39,14 @@ public class ChatWhisper implements IChatHandler
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		L2PcInstance receiver = L2World.getInstance().getPlayer(target);
-
+		
 		if (receiver != null)
 		{
 			if ((!receiver.getMessageRefusal() && !BlockList.isBlocked(receiver, activeChar)) || activeChar.isGM())
@@ -59,16 +58,17 @@ public class ChatWhisper implements IChatHandler
 				}
 				if (Config.JAIL_DISABLE_CHAT && receiver.isInJail())
 				{
-					activeChar.sendMessage(receiver.getName()+" is currently in jail.");
+					activeChar.sendMessage(receiver.getName() + " is currently in jail.");
 					return;
 				}
 				if (receiver.isChatBanned())
 				{
-					activeChar.sendMessage(receiver.getName()+" is currently muted.");
+					activeChar.sendMessage(receiver.getName() + " is currently muted.");
 					return;
 				}
 				receiver.sendPacket(new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName(), text));
-				activeChar.sendPacket(new CreatureSay(activeChar.getObjectId(), chatType, "->" + receiver.getName(), text));
+				activeChar.sendPacket(new CreatureSay(activeChar.getObjectId(), chatType, "->" + receiver.getName(),
+						text));
 			}
 			else
 				activeChar.sendPacket(SystemMessageId.THE_PERSON_IS_IN_MESSAGE_REFUSAL_MODE);

@@ -30,89 +30,89 @@ import com.l2jfree.gameserver.network.serverpackets.TradeOwnAdd;
  */
 public class AddTradeItem extends L2GameClientPacket
 {
-    private static final String _C__ADDTRADEITEM = "[C] 1B AddTradeItem c[ddq]";
-
-    private int					_tradeId;
-    private int					_objectId;
-    private long				_count;
-
-    @Override
-    protected void readImpl()
-    {
-        _tradeId = readD();
-        _objectId = readD();
-        _count = readCompQ();
-    }
-
-    @Override
-    protected void runImpl()
-    {
-        L2PcInstance player = getActiveChar();
-        if (player == null)
-        	return;
-
-        if (Shutdown.isActionDisabled(DisableType.TRANSACTION))
-        {
-        	requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
-        	player.cancelActiveTrade();
-            return;
-        }
-
-        TradeList trade = player.getActiveTradeList();
-        if (trade == null)
-        {
-            _log.warn("Character: " + player.getName() + " requested item:" + _objectId + " add without active tradelist:" + _tradeId);
-            requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
-            return;
-        }
-
-        L2PcInstance partner = trade.getPartner();
-        if (partner == null
-            || L2World.getInstance().getPlayer(partner.getObjectId()) == null
-            || partner.getActiveTradeList() == null)
-        {
-            // Trade partner not found, cancel trade
-            if (trade.getPartner() != null)
-                _log.warn("Character:" + player.getName() + " requested invalid trade object: " + _objectId);
-            requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
-        	player.cancelActiveTrade();
-            return;
-        }
-
-        if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
-            && player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
-        {
-        	trade.getPartner().sendPacket(SystemMessageId.CANT_TRADE_WITH_TARGET);
-        	requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
-        	player.cancelActiveTrade();
-            return;
-        }
-
-        if (trade.isConfirmed() || trade.getPartner().getActiveTradeList().isConfirmed())
-        {
-        	requestFailed(SystemMessageId.CANNOT_ADJUST_ITEMS_AFTER_TRADE_CONFIRMED);
-        	return;
-        }
-
-        if (!player.validateItemManipulation(_objectId, "trade") && !player.isGM())
-        {
-        	requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
-            return;
-        }
-
-        final TradeList.TradeItem item = trade.addItem(_objectId, _count);
-        if (item != null)
-        {
-            sendPacket(new TradeOwnAdd(item));
-            trade.getPartner().sendPacket(new TradeOtherAdd(item));
-        }
-
-        sendAF();
-    }
-
-    @Override
-    public String getType()
-    {
-        return _C__ADDTRADEITEM;
-    }
+	private static final String _C__ADDTRADEITEM = "[C] 1B AddTradeItem c[ddq]";
+	
+	private int _tradeId;
+	private int _objectId;
+	private long _count;
+	
+	@Override
+	protected void readImpl()
+	{
+		_tradeId = readD();
+		_objectId = readD();
+		_count = readCompQ();
+	}
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance player = getActiveChar();
+		if (player == null)
+			return;
+		
+		if (Shutdown.isActionDisabled(DisableType.TRANSACTION))
+		{
+			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
+			player.cancelActiveTrade();
+			return;
+		}
+		
+		TradeList trade = player.getActiveTradeList();
+		if (trade == null)
+		{
+			_log.warn("Character: " + player.getName() + " requested item:" + _objectId
+					+ " add without active tradelist:" + _tradeId);
+			requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
+			return;
+		}
+		
+		L2PcInstance partner = trade.getPartner();
+		if (partner == null || L2World.getInstance().getPlayer(partner.getObjectId()) == null
+				|| partner.getActiveTradeList() == null)
+		{
+			// Trade partner not found, cancel trade
+			if (trade.getPartner() != null)
+				_log.warn("Character:" + player.getName() + " requested invalid trade object: " + _objectId);
+			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+			player.cancelActiveTrade();
+			return;
+		}
+		
+		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+		{
+			trade.getPartner().sendPacket(SystemMessageId.CANT_TRADE_WITH_TARGET);
+			requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
+			player.cancelActiveTrade();
+			return;
+		}
+		
+		if (trade.isConfirmed() || trade.getPartner().getActiveTradeList().isConfirmed())
+		{
+			requestFailed(SystemMessageId.CANNOT_ADJUST_ITEMS_AFTER_TRADE_CONFIRMED);
+			return;
+		}
+		
+		if (!player.validateItemManipulation(_objectId, "trade") && !player.isGM())
+		{
+			requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
+			return;
+		}
+		
+		final TradeList.TradeItem item = trade.addItem(_objectId, _count);
+		if (item != null)
+		{
+			sendPacket(new TradeOwnAdd(item));
+			trade.getPartner().sendPacket(new TradeOtherAdd(item));
+		}
+		
+		sendAF();
+	}
+	
+	@Override
+	public String getType()
+	{
+		return _C__ADDTRADEITEM;
+	}
 }

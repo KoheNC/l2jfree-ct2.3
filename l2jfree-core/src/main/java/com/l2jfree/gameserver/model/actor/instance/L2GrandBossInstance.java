@@ -29,18 +29,18 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public class L2GrandBossInstance extends L2Boss
 {
-	protected boolean	_isInSocialAction		= false;
-
+	protected boolean _isInSocialAction = false;
+	
 	public boolean isInSocialAction()
 	{
 		return _isInSocialAction;
 	}
-
+	
 	public void setIsInSocialAction(boolean value)
 	{
 		_isInSocialAction = value;
 	}
-
+	
 	/**
 	 * Constructor for L2GrandBossInstance. This represent all grandbosses:
 	 * <ul>
@@ -68,13 +68,13 @@ public class L2GrandBossInstance extends L2Boss
 	{
 		super(objectId, template);
 	}
-
+	
 	@Override
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
 			return false;
-
+		
 		GrandBossSpawnManager.getInstance().updateStatus(this, true);
 		return true;
 	}
@@ -88,7 +88,7 @@ public class L2GrandBossInstance extends L2Boss
 	@Override
 	public GrandBossStatus getStatus()
 	{
-		return (GrandBossStatus) _status;
+		return (GrandBossStatus)_status;
 	}
 	
 	@Override
@@ -98,7 +98,7 @@ public class L2GrandBossInstance extends L2Boss
 			return;
 		super.doAttack(target);
 	}
-
+	
 	@Override
 	public void doCast(L2Skill skill)
 	{
@@ -106,23 +106,23 @@ public class L2GrandBossInstance extends L2Boss
 			return;
 		super.doCast(skill);
 	}
-
+	
 	@Override
 	public void onSpawn()
 	{
 		setIsRaid(true);
 		setIsNoRndWalk(true);
 		//if (getNpcId() == 29020 || getNpcId() == 29028) // baium and valakas are all the time in passive mode, theirs attack AI handled in AI scripts
-			//super.disableCoreAI(true);
+		//super.disableCoreAI(true);
 		super.onSpawn();
 	}
-
+	
 	@Override
 	public float getVitalityPoints(int damage)
 	{
-		return - super.getVitalityPoints(damage) / 100;
+		return -super.getVitalityPoints(damage) / 100;
 	}
-
+	
 	@Override
 	public boolean useVitalityRate()
 	{

@@ -31,13 +31,13 @@ class ConditionTargetNpcId extends Condition
 	{
 		if (!(env.target instanceof L2Npc))
 			return false;
-
+		
 		for (int id : _npcIds)
 		{
-			if (((L2Npc) env.target).getNpcId() == id)
+			if (((L2Npc)env.target).getNpcId() == id)
 				return true;
 		}
-
+		
 		return false;
 	}
 }

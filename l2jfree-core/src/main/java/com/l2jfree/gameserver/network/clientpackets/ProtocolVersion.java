@@ -23,10 +23,10 @@ import com.l2jfree.gameserver.network.serverpackets.KeyPacket;
  */
 public class ProtocolVersion extends L2GameClientPacket
 {
-	private static final String	_C__PROTOCOLVERSION	= "[C] 0E ProtocolVersion c[unk] (changes often)";
-
-	private int					_version;
-
+	private static final String _C__PROTOCOLVERSION = "[C] 0E ProtocolVersion c[unk] (changes often)";
+	
+	private int _version;
+	
 	@Override
 	protected void readImpl()
 	{
@@ -41,7 +41,7 @@ public class ProtocolVersion extends L2GameClientPacket
 		else
 			skipAll();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
@@ -57,8 +57,8 @@ public class ProtocolVersion extends L2GameClientPacket
 		}
 		else if (_version < Config.MIN_PROTOCOL_REVISION)
 		{
-			_log.info("Client Protocol Revision:" + _version + " is too low. only " + Config.MIN_PROTOCOL_REVISION + " and " + Config.MAX_PROTOCOL_REVISION
-					+ " are supported. Closing connection.");
+			_log.info("Client Protocol Revision:" + _version + " is too low. only " + Config.MIN_PROTOCOL_REVISION
+					+ " and " + Config.MAX_PROTOCOL_REVISION + " are supported. Closing connection.");
 			_log.warn("Wrong Protocol Version " + _version);
 			kp = new KeyPacket(client.enableCrypt(), 0);
 			client.sendPacket(kp);
@@ -66,8 +66,8 @@ public class ProtocolVersion extends L2GameClientPacket
 		}
 		else if (_version > Config.MAX_PROTOCOL_REVISION)
 		{
-			_log.info("Client Protocol Revision:" + _version + " is too high. only " + Config.MIN_PROTOCOL_REVISION + " and " + Config.MAX_PROTOCOL_REVISION
-					+ " are supported. Closing connection.");
+			_log.info("Client Protocol Revision:" + _version + " is too high. only " + Config.MIN_PROTOCOL_REVISION
+					+ " and " + Config.MAX_PROTOCOL_REVISION + " are supported. Closing connection.");
 			_log.warn("Wrong Protocol Version " + _version);
 			kp = new KeyPacket(client.enableCrypt(), 0);
 			client.sendPacket(kp);
@@ -82,7 +82,7 @@ public class ProtocolVersion extends L2GameClientPacket
 			client.setProtocolOk(true);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

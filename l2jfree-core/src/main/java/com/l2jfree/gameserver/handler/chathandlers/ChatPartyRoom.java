@@ -28,29 +28,28 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class ChatPartyRoom implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Party_Room };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Party_Room };
+	
 	public SystemChatChannelId[] getChatTypes()
 	{
 		return _chatTypes;
 	}
-
+	
 	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		if (activeChar == null)
 			return;
-
+		
 		String charName = activeChar.getName();
 		int charObjId = activeChar.getObjectId();
-
+		
 		L2PartyRoom room = activeChar.getPartyRoom();
 		if (room != null)
 		{
 			CreatureSay cs = new CreatureSay(charObjId, chatType, charName, text);
 			room.broadcastPacket(cs);
 		}
-
+		
 		// According to ChatCommander comments, this might not belong here?
 		L2Party party = activeChar.getParty();
 		if (party != null)

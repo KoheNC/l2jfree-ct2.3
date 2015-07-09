@@ -53,9 +53,9 @@ public class ExStorageMaxCount extends L2GameServerPacket
 		_clan = Config.WAREHOUSE_SLOTS_CLAN;
 		_receipeD = _activeChar.getDwarfRecipeLimit();
 		_recipe = _activeChar.getCommonRecipeLimit();
-		_inventoryExtraSlots = (int) _activeChar.getStat().calcStat(Stats.INV_LIM, 0, null, null);
+		_inventoryExtraSlots = (int)_activeChar.getStat().calcStat(Stats.INV_LIM, 0, null, null);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -75,7 +75,7 @@ public class ExStorageMaxCount extends L2GameServerPacket
 		if (Config.PACKET_FINAL)
 			writeD(_inventoryExtraSlots); //belt inventory slots increase count
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

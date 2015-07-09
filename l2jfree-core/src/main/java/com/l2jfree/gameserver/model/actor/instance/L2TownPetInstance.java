@@ -28,59 +28,61 @@ import com.l2jfree.tools.random.Rnd;
  */
 public class L2TownPetInstance extends L2Npc
 {
-    private int _spawnX, _spawnY, _spawnZ;
-
-    public L2TownPetInstance(int objectId, L2NpcTemplate template)
-    {
-        super(objectId, template);
-    }
-
-    @Override
-    public void onAction(L2PcInstance player)
-    {
-        if (!canTarget(player)) return;
-        
-        if (this != player.getTarget())
-        {
-            // Set the target of the L2PcInstance player
-            player.setTarget(this);
-        }
-        else
-        {
-            // Calculate the distance between the L2PcInstance and the L2NpcInstance
-            if (!canInteract(player))
-            {
-                // Notify the L2PcInstance AI with AI_INTENTION_INTERACT
-                player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
-            }
-        }
-        // Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
-        player.sendPacket(ActionFailed.STATIC_PACKET);
-    }
-
-    @Override
-    public void firstSpawn()
-    {
-        super.firstSpawn();
-        _spawnX = getX();
-        _spawnY = getY();
-        _spawnZ = getZ();
-        if (Config.ALLOW_PET_WALKERS)
-            ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new RandomWalkTask(), 2000, 4000);
-    }
-
-    public class RandomWalkTask implements Runnable
-    {
-        public void run()
-        {
-            if (!isInActiveRegion())
-                return; // but rather the AI should be turned off completely
-
-            int randomX = _spawnX + Rnd.get(-1, 1) * 50;
-            int randomY = _spawnY + Rnd.get(-1, 1) * 50;
-
-            if (randomX != getX() || randomY != getY())
-                getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(randomX, randomY, _spawnZ, 0));
-        }
-    }
+	private int _spawnX, _spawnY, _spawnZ;
+	
+	public L2TownPetInstance(int objectId, L2NpcTemplate template)
+	{
+		super(objectId, template);
+	}
+	
+	@Override
+	public void onAction(L2PcInstance player)
+	{
+		if (!canTarget(player))
+			return;
+		
+		if (this != player.getTarget())
+		{
+			// Set the target of the L2PcInstance player
+			player.setTarget(this);
+		}
+		else
+		{
+			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			if (!canInteract(player))
+			{
+				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
+			}
+		}
+		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		player.sendPacket(ActionFailed.STATIC_PACKET);
+	}
+	
+	@Override
+	public void firstSpawn()
+	{
+		super.firstSpawn();
+		_spawnX = getX();
+		_spawnY = getY();
+		_spawnZ = getZ();
+		if (Config.ALLOW_PET_WALKERS)
+			ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new RandomWalkTask(), 2000, 4000);
+	}
+	
+	public class RandomWalkTask implements Runnable
+	{
+		public void run()
+		{
+			if (!isInActiveRegion())
+				return; // but rather the AI should be turned off completely
+				
+			int randomX = _spawnX + Rnd.get(-1, 1) * 50;
+			int randomY = _spawnY + Rnd.get(-1, 1) * 50;
+			
+			if (randomX != getX() || randomY != getY())
+				getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO,
+						new L2CharPosition(randomX, randomY, _spawnZ, 0));
+		}
+	}
 }

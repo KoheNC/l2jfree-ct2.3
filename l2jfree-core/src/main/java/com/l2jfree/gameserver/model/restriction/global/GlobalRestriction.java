@@ -62,7 +62,7 @@ public interface GlobalRestriction
 	public CombatState getCombatState(L2PcInstance activeChar, L2PcInstance target);
 	
 	public boolean canStandUp(L2PcInstance activeChar);
-
+	
 	public boolean canPickUp(L2PcInstance activeChar, L2ItemInstance item, L2PetInstance pet);
 	
 	public int getNameColor(L2PcInstance activeChar);

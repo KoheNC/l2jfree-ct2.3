@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public final class RequestJoinDominionWar extends L2GameClientPacket
 {
 	private int _unk1, _unk2, _unk3;
-
+	
 	@Override
 	protected void readImpl()
 	{
@@ -30,11 +30,12 @@ public final class RequestJoinDominionWar extends L2GameClientPacket
 		_unk2 = readD();
 		_unk3 = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
-		_log.info("RequestJoinDominionWar, unk=" + _unk1 + ", unk=" + _unk2 + ", unk=" + _unk3 + ", sent by " + getActiveChar());
+		_log.info("RequestJoinDominionWar, unk=" + _unk1 + ", unk=" + _unk2 + ", unk=" + _unk3 + ", sent by "
+				+ getActiveChar());
 		requestFailed(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
 	}
 }

@@ -28,7 +28,7 @@ public class Revive extends L2GameServerPacket
 {
 	private static final String _S__0C_REVIVE = "[S] 07 Revive";
 	private final int _objectId;
-
+	
 	public Revive(L2Object obj)
 	{
 		_objectId = obj.getObjectId();

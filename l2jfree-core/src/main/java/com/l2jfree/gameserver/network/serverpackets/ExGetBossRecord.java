@@ -21,18 +21,18 @@ import java.util.Map;
  */
 public class ExGetBossRecord extends L2GameServerPacket
 {
-	private static final String		_S__FE_33_EXGETBOSSRECORD	= "[S] FE:34 ExGetBossRecord";
-	private final Map<Integer, Integer>	_bossRecordInfo;
-	private final int						_ranking;
-	private final int						_totalPoints;
-
+	private static final String _S__FE_33_EXGETBOSSRECORD = "[S] FE:34 ExGetBossRecord";
+	private final Map<Integer, Integer> _bossRecordInfo;
+	private final int _ranking;
+	private final int _totalPoints;
+	
 	public ExGetBossRecord(int ranking, int totalScore, Map<Integer, Integer> list)
 	{
 		_ranking = ranking;
 		_totalPoints = totalScore;
 		_bossRecordInfo = list;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -61,7 +61,7 @@ public class ExGetBossRecord extends L2GameServerPacket
 			}
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */

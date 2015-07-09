@@ -85,8 +85,9 @@ public class EffectThrowUp extends L2Effect
 		
 		if (Config.GEODATA > 0)
 		{
-			Location destiny = GeoData.getInstance().moveCheck(getEffected().getX(), getEffected().getY(),
-					getEffected().getZ(), _x, _y, _z, getEffected().getInstanceId());
+			Location destiny =
+					GeoData.getInstance().moveCheck(getEffected().getX(), getEffected().getY(), getEffected().getZ(),
+							_x, _y, _z, getEffected().getInstanceId());
 			_x = destiny.getX();
 			_y = destiny.getY();
 		}

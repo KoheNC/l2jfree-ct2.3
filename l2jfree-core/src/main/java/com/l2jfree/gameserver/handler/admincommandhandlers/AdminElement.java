@@ -25,21 +25,13 @@ import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
 
 public class AdminElement implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-	{
-		"admin_setlh",
-		"admin_setlc",
-		"admin_setll",
-		"admin_setlg",
-		"admin_setlb",
-		"admin_setlw",
-		"admin_setls"
-	};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_setlh", "admin_setlc", "admin_setll", "admin_setlg",
+			"admin_setlb", "admin_setlw", "admin_setls" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		int armorType = -1;
-
+		
 		if (command.startsWith("admin_setlh"))
 			armorType = Inventory.PAPERDOLL_HEAD;
 		else if (command.startsWith("admin_setlc"))
@@ -54,38 +46,40 @@ public class AdminElement implements IAdminCommandHandler
 			armorType = Inventory.PAPERDOLL_RHAND;
 		else if (command.startsWith("admin_setls"))
 			armorType = Inventory.PAPERDOLL_LHAND;
-
+		
 		if (armorType != -1)
 		{
 			try
 			{
 				String[] args = command.split(" ");
-
+				
 				byte element = Elementals.getElementId(args[1]);
 				int value = Integer.parseInt(args[2]);
 				if (element < -1 || element > 5 || value < 0 || value > 600)
 				{
-					activeChar.sendMessage("Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls <element> <value>[0-600]");
+					activeChar
+							.sendMessage("Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls <element> <value>[0-600]");
 					return false;
 				}
-
+				
 				setElement(activeChar, element, value, armorType);
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls <element>[0-5] <value>[0-600]");
+				activeChar
+						.sendMessage("Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls <element>[0-5] <value>[0-600]");
 				return false;
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-
+	
 	private void setElement(L2PcInstance activeChar, byte type, int value, int armorType)
 	{
 		// get the target
@@ -95,16 +89,16 @@ public class AdminElement implements IAdminCommandHandler
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
 		{
-			player = (L2PcInstance) target;
+			player = (L2PcInstance)target;
 		}
 		else
 		{
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 			return;
 		}
-
+		
 		L2ItemInstance itemInstance = null;
-
+		
 		// only attempt to enchant if there is a weapon equipped
 		L2ItemInstance parmorInstance = player.getInventory().getPaperdollItem(armorType);
 		if (parmorInstance != null && parmorInstance.getLocationSlot() == armorType)
@@ -118,7 +112,7 @@ public class AdminElement implements IAdminCommandHandler
 			if (parmorInstance != null && parmorInstance.getLocationSlot() == Inventory.PAPERDOLL_LRHAND)
 				itemInstance = parmorInstance;
 		}
-
+		
 		if (itemInstance != null)
 		{
 			String old, current;
@@ -127,7 +121,7 @@ public class AdminElement implements IAdminCommandHandler
 				old = "None";
 			else
 				old = element.toString();
-
+			
 			// set enchant value
 			player.getInventory().unEquipItemInSlotAndRecord(armorType);
 			if (type == -1)
@@ -135,24 +129,24 @@ public class AdminElement implements IAdminCommandHandler
 			else
 				itemInstance.setElementAttr(type, value);
 			player.getInventory().equipItemAndRecord(itemInstance);
-
+			
 			if (itemInstance.getElementals() == null)
 				current = "None";
 			else
 				current = itemInstance.getElementals().toString();
-
+			
 			// send packets
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addModifiedItem(itemInstance);
 			player.sendPacket(iu);
-
+			
 			// informations
 			activeChar.sendMessage("Changed elemental power of " + player.getName() + "'s "
-				+ itemInstance.getItem().getName() + " from " + old + " to " + current + ".");
+					+ itemInstance.getItem().getName() + " from " + old + " to " + current + ".");
 			if (player != activeChar)
 			{
-				player.sendMessage(activeChar.getName()+" has changed the elemental power of your "
-					+ itemInstance.getItem().getName() + " from " + old + " to " + current + ".");
+				player.sendMessage(activeChar.getName() + " has changed the elemental power of your "
+						+ itemInstance.getItem().getName() + " from " + old + " to " + current + ".");
 			}
 		}
 	}

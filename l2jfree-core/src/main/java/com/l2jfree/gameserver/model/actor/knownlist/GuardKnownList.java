@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.model.actor.knownlist;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -29,7 +28,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class GuardKnownList extends AttackableKnownList
 {
 	private final static Log _log = LogFactory.getLog(GuardKnownList.class);
-
+	
 	// =========================================================
 	// Data Field
 	
@@ -39,7 +38,7 @@ public class GuardKnownList extends AttackableKnownList
 	{
 		super(activeChar);
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	@Override
@@ -47,15 +46,16 @@ public class GuardKnownList extends AttackableKnownList
 	{
 		if (!super.addKnownObject(object))
 			return false;
-
+		
 		if (object instanceof L2PcInstance)
 		{
 			// Check if the object added is a L2PcInstance that owns Karma
-			L2PcInstance player = (L2PcInstance) object;
+			L2PcInstance player = (L2PcInstance)object;
 			
-			if ( (player.getKarma() > 0) )
+			if ((player.getKarma() > 0))
 			{
-				if (_log.isDebugEnabled()) _log.debug(getActiveChar().getObjectId()+": PK "+player.getObjectId()+" entered scan range");
+				if (_log.isDebugEnabled())
+					_log.debug(getActiveChar().getObjectId() + ": PK " + player.getObjectId() + " entered scan range");
 				
 				// Set the L2GuardInstance Intention to AI_INTENTION_ACTIVE
 				if (getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
@@ -65,27 +65,29 @@ public class GuardKnownList extends AttackableKnownList
 		else if (Config.ALLOW_GUARDS && getActiveChar().isInActiveRegion() && object instanceof L2MonsterInstance)
 		{
 			// Check if the object added is an aggressive L2MonsterInstance
-			L2MonsterInstance mob = (L2MonsterInstance) object;
+			L2MonsterInstance mob = (L2MonsterInstance)object;
 			
-			if (mob.isAggressive() )
+			if (mob.isAggressive())
 			{
-				if (_log.isDebugEnabled()) _log.debug(getActiveChar().getObjectId()+": Aggressive mob "+mob.getObjectId()+" entered scan range");
+				if (_log.isDebugEnabled())
+					_log.debug(getActiveChar().getObjectId() + ": Aggressive mob " + mob.getObjectId()
+							+ " entered scan range");
 				
 				// Set the L2GuardInstance Intention to AI_INTENTION_ACTIVE
 				if (getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
 					getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);
 			}
 		}
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public boolean removeKnownObject(L2Object object)
 	{
 		if (!super.removeKnownObject(object))
 			return false;
-
+		
 		// Check if the _aggroList of the L2GuardInstance is Empty
 		if (getActiveChar().noTarget())
 		{
@@ -93,20 +95,21 @@ public class GuardKnownList extends AttackableKnownList
 			
 			// Set the L2GuardInstance to AI_INTENTION_IDLE
 			L2CharacterAI ai = getActiveChar().getAI();
-			if (ai != null) ai.setIntention(CtrlIntention.AI_INTENTION_IDLE, null);
+			if (ai != null)
+				ai.setIntention(CtrlIntention.AI_INTENTION_IDLE, null);
 		}
-
+		
 		return true;
 	}
 	
 	// =========================================================
 	// Method - Private
-
+	
 	// =========================================================
 	// Property - Public
 	@Override
 	public final L2GuardInstance getActiveChar()
 	{
-		return (L2GuardInstance) _activeChar;
+		return (L2GuardInstance)_activeChar;
 	}
 }

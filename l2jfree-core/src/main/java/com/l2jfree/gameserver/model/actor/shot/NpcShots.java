@@ -86,7 +86,8 @@ public final class NpcShots extends CharShots
 		
 		L2Weapon weapon = getActiveChar().getActiveWeaponItem();
 		
-		if (getActiveChar().getInventory().destroyItemByItemId("Consume", 3947, weapon.getSpiritShotCount(), null, null) == null)
+		if (getActiveChar().getInventory()
+				.destroyItemByItemId("Consume", 3947, weapon.getSpiritShotCount(), null, null) == null)
 			return false;
 		
 		getActiveChar().broadcastPacket(new MagicSkillUse(getActiveChar(), 2061, 1, 0, 0)); // No Grade

@@ -19,26 +19,26 @@ import com.l2jfree.gameserver.network.serverpackets.ExBrProductList;
 
 public final class BrProductList extends L2GameClientPacket
 {
-	private static final String	_C__BRPRODUCTLIST = "[C] D0:66 BR_ProductList ch";
-
+	private static final String _C__BRPRODUCTLIST = "[C] D0:66 BR_ProductList ch";
+	
 	@Override
 	protected void readImpl()
 	{
 		// trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		sendPacket(ExBrProductList.EMPTY);
-
+		
 		// no AF here
 	}
-
+	
 	@Override
 	public String getType()
 	{

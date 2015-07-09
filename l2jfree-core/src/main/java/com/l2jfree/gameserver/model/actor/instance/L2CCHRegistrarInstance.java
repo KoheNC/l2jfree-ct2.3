@@ -27,22 +27,22 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
  */
 public final class L2CCHRegistrarInstance extends L2NpcInstance
 {
-	private int	_hideoutIndex	= -2;
-
+	private int _hideoutIndex = -2;
+	
 	public L2CCHRegistrarInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 		switch (getNpcId())
 		{
-		case 35420:
-			_hideoutIndex = 34;
-			break;
-		case 35639:
-			_hideoutIndex = 64;
-			break;
+			case 35420:
+				_hideoutIndex = 34;
+				break;
+			case 35639:
+				_hideoutIndex = 64;
+				break;
 		}
 	}
-
+	
 	private final ClanHall getHideout()
 	{
 		if (_hideoutIndex < 0)
@@ -50,13 +50,13 @@ public final class L2CCHRegistrarInstance extends L2NpcInstance
 		else
 			return ClanHallManager.getInstance().getClanHallById(_hideoutIndex);
 	}
-
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -79,7 +79,7 @@ public final class L2CCHRegistrarInstance extends L2NpcInstance
 		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	public void showSiegeInfoWindow(L2PcInstance player)
 	{
 		if (validateCondition(player))
@@ -93,7 +93,7 @@ public final class L2CCHRegistrarInstance extends L2NpcInstance
 			player.sendPacket(html);
 		}
 	}
-
+	
 	private boolean validateCondition(L2PcInstance player)
 	{
 		if (getHideout() == null)

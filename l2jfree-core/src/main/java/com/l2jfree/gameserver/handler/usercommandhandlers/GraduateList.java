@@ -20,13 +20,13 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class GraduateList implements IUserCommandHandler
 {
 	private static final int[] COMMAND_IDS = { 110 };
-
+	
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
 		activeChar.sendMessage("Command /graduatelist not implemented yet.");
 		return true;
 	}
-
+	
 	public int[] getUserCommandList()
 	{
 		return COMMAND_IDS;

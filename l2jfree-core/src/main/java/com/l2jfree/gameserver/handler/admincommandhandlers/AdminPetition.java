@@ -29,23 +29,16 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class AdminPetition implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	=
-													{
-			"admin_view_petitions",
-			"admin_view_petition",
-			"admin_accept_petition",
-			"admin_reject_petition",
-			"admin_reset_petitions",
-			"admin_force_peti",
-			"admin_add_peti_chat"
-													};
-
+	private static final String[] ADMIN_COMMANDS = { "admin_view_petitions", "admin_view_petition",
+			"admin_accept_petition", "admin_reject_petition", "admin_reset_petitions", "admin_force_peti",
+			"admin_add_peti_chat" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		L2Object targetChar = activeChar.getTarget();
-
+		
 		int petitionId = -1;
-
+		
 		try
 		{
 			petitionId = Integer.parseInt(command.split(" ")[1]);
@@ -53,7 +46,7 @@ public class AdminPetition implements IAdminCommandHandler
 		catch (Exception e)
 		{
 		}
-
+		
 		if (command.equals("admin_view_petitions"))
 			PetitionManager.getInstance().sendPendingPetitionList(activeChar);
 		else if (command.startsWith("admin_view_petition"))
@@ -65,13 +58,13 @@ public class AdminPetition implements IAdminCommandHandler
 				activeChar.sendPacket(SystemMessageId.ONLY_ONE_ACTIVE_PETITION_AT_TIME);
 				return true;
 			}
-
+			
 			if (PetitionManager.getInstance().isPetitionInProcess(petitionId))
 			{
 				activeChar.sendPacket(SystemMessageId.PETITION_UNDER_PROCESS);
 				return true;
 			}
-
+			
 			if (!PetitionManager.getInstance().acceptPetition(activeChar, petitionId))
 				activeChar.sendPacket(SystemMessageId.NOT_UNDER_PETITION_CONSULTATION);
 		}
@@ -98,10 +91,10 @@ public class AdminPetition implements IAdminCommandHandler
 					activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT); // incorrect target!
 					return false;
 				}
-				L2PcInstance targetPlayer = (L2PcInstance) targetChar;
-
+				L2PcInstance targetPlayer = (L2PcInstance)targetChar;
+				
 				String val = command.substring(15);
-
+				
 				petitionId = PetitionManager.getInstance().submitPetition(targetPlayer, val, 9);
 				PetitionManager.getInstance().acceptPetition(activeChar, petitionId);
 			}
@@ -122,10 +115,10 @@ public class AdminPetition implements IAdminCommandHandler
 			petitionId = PetitionManager.getInstance().submitPetition(player, "", 9);
 			PetitionManager.getInstance().acceptPetition(activeChar, petitionId);
 		}
-
+		
 		return true;
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

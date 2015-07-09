@@ -32,42 +32,17 @@ import com.l2jfree.gameserver.templates.skills.L2EffectType;
 public class Potions implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int[] ITEM_IDS =
-	{ 
-			725,
-			726,
-			727,
-			1061,
-			1060,
-			1073,
-			10410,
-			10411,
-			20393,
-			20394,
-			4416,
-			7061,
-			8515,
-			8516,
-			8517,
-			8518,
-			8519,
-			8520,
-			10143,
-			10144,
-			10145,
-			10146,
-			10147,
-			10148
-	};
+	private static final int[] ITEM_IDS = { 725, 726, 727, 1061, 1060, 1073, 10410, 10411, 20393, 20394, 4416, 7061,
+			8515, 8516, 8517, 8518, 8519, 8520, 10143, 10144, 10145, 10146, 10147, 10148 };
 	
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		L2PcInstance activeChar; // use activeChar only for L2PcInstance checks where cannot be used PetInstance
 		boolean res = false;
 		if (playable instanceof L2PcInstance)
-			activeChar = (L2PcInstance) playable;
+			activeChar = (L2PcInstance)playable;
 		else if (playable instanceof L2PetInstance)
-			activeChar = ((L2PetInstance) playable).getOwner();
+			activeChar = ((L2PetInstance)playable).getOwner();
 		else
 			return;
 		
@@ -232,7 +207,8 @@ public class Potions implements IItemHandler
 	
 	private boolean isUseable(L2Playable playable, L2ItemInstance item, int skillid)
 	{
-		L2PcInstance activeChar = ((playable instanceof L2PcInstance) ? ((L2PcInstance) playable) : ((L2Summon) playable).getOwner());
+		L2PcInstance activeChar =
+				((playable instanceof L2PcInstance) ? ((L2PcInstance)playable) : ((L2Summon)playable).getOwner());
 		if (activeChar.isSkillDisabled(skillid))
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_PREPARED_FOR_REUSE);
@@ -278,7 +254,7 @@ public class Potions implements IItemHandler
 			
 			if (activeChar instanceof L2PcInstance)
 			{
-				L2PcInstance player = (L2PcInstance) activeChar;
+				L2PcInstance player = (L2PcInstance)activeChar;
 				
 				if (!(player.isSitting() && !skill.isPotion()))
 					return true;
@@ -287,7 +263,7 @@ public class Potions implements IItemHandler
 			{
 				SystemMessage sm = new SystemMessage(SystemMessageId.PET_USES_S1);
 				sm.addString(skill.getName());
-				((L2PetInstance) activeChar).getOwner().sendPacket(sm);
+				((L2PetInstance)activeChar).getOwner().sendPacket(sm);
 				return true;
 			}
 		}

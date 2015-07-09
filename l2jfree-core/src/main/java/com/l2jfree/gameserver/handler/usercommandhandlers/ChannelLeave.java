@@ -27,9 +27,8 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class ChannelLeave implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 96 };
-
+	private static final int[] COMMAND_IDS = { 96 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -37,7 +36,7 @@ public class ChannelLeave implements IUserCommandHandler
 	{
 		if (id != COMMAND_IDS[0])
 			return false;
-
+		
 		if (activeChar.isInParty())
 		{
 			if (activeChar.getParty().isLeader(activeChar) && activeChar.getParty().isInCommandChannel())
@@ -45,7 +44,7 @@ public class ChannelLeave implements IUserCommandHandler
 				L2Party party = activeChar.getParty();
 				L2CommandChannel channel = party.getCommandChannel();
 				channel.removeParty(party);
-
+				
 				SystemMessage sm = SystemMessageId.LEFT_COMMAND_CHANNEL.getSystemMessage();
 				party.broadcastToPartyMembers(sm);
 				sm = new SystemMessage(SystemMessageId.C1_PARTY_LEFT_COMMAND_CHANNEL);
@@ -53,14 +52,14 @@ public class ChannelLeave implements IUserCommandHandler
 				channel.broadcastToChannelMembers(sm);
 				return true;
 			}
-
+			
 			activeChar.sendPacket(SystemMessageId.ONLY_PARTY_LEADER_CAN_LEAVE_CHANNEL);
 		}
-
+		
 		return false;
-
+		
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */

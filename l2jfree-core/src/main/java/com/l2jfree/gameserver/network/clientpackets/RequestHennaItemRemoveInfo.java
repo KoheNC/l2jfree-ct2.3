@@ -27,34 +27,34 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public final class RequestHennaItemRemoveInfo extends L2GameClientPacket
 {
 	private static final String _C__BB_RequestHennaItemRemoveInfo = "[C] 71 RequestHennaItemRemoveInfo";
-
+	
 	private int _symbolId;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_symbolId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null || _symbolId == 0) // 0 = player closed window
 			return;
-
+		
 		L2Henna template = HennaTable.getInstance().getTemplate(_symbolId);
 		if (template == null)
 		{
 			requestFailed(SystemMessageId.SYMBOL_NOT_FOUND);
 			return;
 		}
-
+		
 		sendPacket(new HennaItemRemoveInfo(template, activeChar));
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

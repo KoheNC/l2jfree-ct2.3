@@ -25,9 +25,8 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class ChatClan implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Clan };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Clan };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
 	 */
@@ -35,7 +34,7 @@ public class ChatClan implements IChatHandler
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
@@ -43,7 +42,7 @@ public class ChatClan implements IChatHandler
 	{
 		if (activeChar.getClan() == null)
 			return;
-
+		
 		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName(), text);
 		//activeChar.getClan().broadcastToOnlineMembers(cs);
 		activeChar.getClan().broadcastCreatureSayToOnlineMembers(cs, activeChar);

@@ -33,17 +33,17 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class FortSiegeGuardManager
 {
-	protected static final Log	_log				= LogFactory.getLog(FortSiegeGuardManager.class);
-
-	private final Fort				_fort;
+	protected static final Log _log = LogFactory.getLog(FortSiegeGuardManager.class);
+	
+	private final Fort _fort;
 	protected FastMap<Integer, FastList<L2Spawn>> _siegeGuards = new FastMap<Integer, FastList<L2Spawn>>();
 	protected FastList<L2Spawn> _siegeGuardsSpawns;
-
+	
 	public FortSiegeGuardManager(Fort fort)
 	{
 		_fort = fort;
 	}
-
+	
 	/**
 	 * Spawn guards.<BR><BR>
 	 */
@@ -69,7 +69,7 @@ public class FortSiegeGuardManager
 			_log.warn("Error spawning siege guards for fort " + getFort().getName() + ":" + e.getMessage(), e);
 		}
 	}
-
+	
 	/**
 	 * Unspawn guards.<BR><BR>
 	 */
@@ -92,7 +92,7 @@ public class FortSiegeGuardManager
 			_log.warn("Error unspawning siege guards for fort " + getFort().getName() + ":" + e.getMessage(), e);
 		}
 	}
-
+	
 	/**
 	 * Load guards.<BR><BR>
 	 */
@@ -106,10 +106,10 @@ public class FortSiegeGuardManager
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM fort_siege_guards Where fortId = ? ");
 			statement.setInt(1, getFort().getFortId());
 			ResultSet rs = statement.executeQuery();
-
+			
 			L2Spawn spawn1;
 			L2NpcTemplate template1;
-
+			
 			_siegeGuardsSpawns = new FastList<L2Spawn>();
 			while (rs.next())
 			{
@@ -126,7 +126,7 @@ public class FortSiegeGuardManager
 					spawn1.setHeading(rs.getInt("heading"));
 					spawn1.setRespawnDelay(rs.getInt("respawnDelay"));
 					spawn1.setLocation(0);
-
+					
 					_siegeGuardsSpawns.add(spawn1);
 				}
 				else
@@ -147,12 +147,12 @@ public class FortSiegeGuardManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public final Fort getFort()
 	{
 		return _fort;
 	}
-
+	
 	public final FastMap<Integer, FastList<L2Spawn>> getSiegeGuardSpawn()
 	{
 		return _siegeGuards;

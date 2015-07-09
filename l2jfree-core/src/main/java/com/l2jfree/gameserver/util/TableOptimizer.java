@@ -124,7 +124,8 @@ public final class TableOptimizer
 		}
 	}
 	
-	private static final ArrayList<CharacterRelatedTable> CHARACTER_RELATED_TABLES = new ArrayList<CharacterRelatedTable>();
+	private static final ArrayList<CharacterRelatedTable> CHARACTER_RELATED_TABLES =
+			new ArrayList<CharacterRelatedTable>();
 	private static final ArrayList<ItemRelatedTable> ITEM_RELATED_TABLES = new ArrayList<ItemRelatedTable>();
 	
 	public static Iterable<CharacterRelatedTable> getCharacterRelatedTables()
@@ -181,8 +182,9 @@ public final class TableOptimizer
 		public CharacterRelatedTable(String tableName, String charId)
 		{
 			_deleteQuery = "DELETE FROM " + tableName + " WHERE " + tableName + "." + charId + "=?";
-			_cleanQuery = "DELETE FROM " + tableName + " WHERE " + tableName + "." + charId
-					+ " NOT IN (SELECT charId FROM characters)";
+			_cleanQuery =
+					"DELETE FROM " + tableName + " WHERE " + tableName + "." + charId
+							+ " NOT IN (SELECT charId FROM characters)";
 			
 			CHARACTER_RELATED_TABLES.add(this);
 		}
@@ -211,10 +213,12 @@ public final class TableOptimizer
 		
 		public ItemRelatedTable(String tableName, String itemObjectId)
 		{
-			_deleteQuery = "DELETE FROM " + tableName + " WHERE " + tableName + "." + itemObjectId
-					+ " IN (SELECT object_id FROM items WHERE items.owner_id=?)";
-			_cleanQuery = "DELETE FROM " + tableName + " WHERE " + tableName + "." + itemObjectId
-					+ " NOT IN (SELECT object_id FROM items)";
+			_deleteQuery =
+					"DELETE FROM " + tableName + " WHERE " + tableName + "." + itemObjectId
+							+ " IN (SELECT object_id FROM items WHERE items.owner_id=?)";
+			_cleanQuery =
+					"DELETE FROM " + tableName + " WHERE " + tableName + "." + itemObjectId
+							+ " NOT IN (SELECT object_id FROM items)";
 			
 			ITEM_RELATED_TABLES.add(this);
 		}

@@ -39,7 +39,7 @@ import com.l2jfree.mmocore.network.IPacketHandler;
  * @author KenM
  */
 public final class L2GamePacketHandlerFinal implements
-	IPacketHandler<L2GameClient, L2GameClientPacket, L2GameServerPacket>
+		IPacketHandler<L2GameClient, L2GameClientPacket, L2GameServerPacket>
 {
 	private static final Log _log = LogFactory.getLog(L2GamePacketHandlerFinal.class);
 	
@@ -157,7 +157,7 @@ public final class L2GamePacketHandlerFinal implements
 			case IN_GAME:
 				switch (opcode)
 				{
-					// to avoid unnecessary warning about invalid opcode (player clicked the button multiple times)
+				// to avoid unnecessary warning about invalid opcode (player clicked the button multiple times)
 					case 0x12: // CharacterSelected
 						break;
 					//

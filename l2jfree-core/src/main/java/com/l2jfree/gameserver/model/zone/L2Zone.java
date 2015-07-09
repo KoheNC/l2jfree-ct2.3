@@ -184,7 +184,7 @@ public class L2Zone implements FuncOwner
 	private PvpSettings _pvp;
 	private Boss _boss;
 	private Affected _affected = Affected.ALL;
-
+	
 	/** Can't logout (including back to character selection menu); can't use SoE? */
 	private boolean _noEscape;
 	/** Can't use wyvern */
@@ -359,16 +359,16 @@ public class L2Zone implements FuncOwner
 	public final Iterable<L2Character> getCharactersInsideActivated()
 	{
 		return L2Collections.convertingIterable(_charactersInside.entrySet(),
-			new L2Collections.Converter<Map.Entry<L2Character, Boolean>, L2Character>() {
-				@Override
-				public L2Character convert(Entry<L2Character, Boolean> src)
-				{
-					if (Boolean.TRUE.equals(src.getValue()))
-						return src.getKey();
-					
-					return null;
-				}
-			});
+				new L2Collections.Converter<Map.Entry<L2Character, Boolean>, L2Character>() {
+					@Override
+					public L2Character convert(Entry<L2Character, Boolean> src)
+					{
+						if (Boolean.TRUE.equals(src.getValue()))
+							return src.getKey();
+						
+						return null;
+					}
+				});
 	}
 	
 	/**
@@ -394,7 +394,7 @@ public class L2Zone implements FuncOwner
 	{
 		if (character instanceof L2PcInstance)
 		{
-			if (((L2PcInstance) character).getOnlineState() == L2PcInstance.ONLINE_STATE_DELETED)
+			if (((L2PcInstance)character).getOnlineState() == L2PcInstance.ONLINE_STATE_DELETED)
 			{
 				_log.warn("", new IllegalStateException());
 				return State.OUTSIDE;
@@ -645,7 +645,8 @@ public class L2Zone implements FuncOwner
 		
 		if (ir.reason == REASON_MULTIPLE_INSTANCE)
 		{
-			pl.sendMessage("You cannot enter this instance while other " + _instanceGroup + " members are in another instance.");
+			pl.sendMessage("You cannot enter this instance while other " + _instanceGroup
+					+ " members are in another instance.");
 		}
 		else if (ir.reason == REASON_INSTANCE_FULL)
 		{
@@ -653,7 +654,8 @@ public class L2Zone implements FuncOwner
 		}
 		else if (ir.reason == REASON_SMALL_GROUP)
 		{
-			pl.sendMessage("Your " + _instanceGroup + " is too small. There is a minimum of " + _minPlayers + " players inside.");
+			pl.sendMessage("Your " + _instanceGroup + " is too small. There is a minimum of " + _minPlayers
+					+ " players inside.");
 		}
 		else
 		{

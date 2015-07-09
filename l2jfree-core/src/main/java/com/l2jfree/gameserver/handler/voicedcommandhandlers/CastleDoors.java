@@ -24,16 +24,15 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class CastleDoors implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	=
-													{ "open", "close" };
-
+	private static final String[] VOICED_COMMANDS = { "open", "close" };
+	
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.startsWith("open") && target.equals("doors") && (activeChar.isClanLeader()))
 		{
 			if (activeChar.getTarget() instanceof L2DoorInstance)
 			{
-				L2DoorInstance door = (L2DoorInstance) activeChar.getTarget();
+				L2DoorInstance door = (L2DoorInstance)activeChar.getTarget();
 				Castle castle = CastleManager.getInstance().getCastleById(activeChar.getClan().getHasCastle());
 				
 				if (door != null && castle != null && castle.checkIfInZone(door.getX(), door.getY(), door.getZ()))
@@ -51,7 +50,7 @@ public class CastleDoors implements IVoicedCommandHandler
 		{
 			if (activeChar.getTarget() instanceof L2DoorInstance)
 			{
-				L2DoorInstance door = (L2DoorInstance) activeChar.getTarget();
+				L2DoorInstance door = (L2DoorInstance)activeChar.getTarget();
 				Castle castle = CastleManager.getInstance().getCastleById(activeChar.getClan().getHasCastle());
 				
 				if (door != null && castle != null && castle.checkIfInZone(door.getX(), door.getY(), door.getZ()))
@@ -68,7 +67,7 @@ public class CastleDoors implements IVoicedCommandHandler
 		
 		return false;
 	}
-
+	
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

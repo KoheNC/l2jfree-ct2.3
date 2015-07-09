@@ -29,30 +29,30 @@ import com.l2jfree.gameserver.network.SystemMessageId;
  */
 public class TradeDone extends L2GameClientPacket
 {
-	private static final String	_C__TRADEDONE	= "[C] 1C TradeDone c[d]";
-
-	private int					_response;
-
+	private static final String _C__TRADEDONE = "[C] 1C TradeDone c[d]";
+	
+	private int _response;
+	
 	@Override
 	protected void readImpl()
 	{
 		_response = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (Shutdown.isActionDisabled(DisableType.TRANSACTION))
 		{
 			player.cancelActiveTrade();
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-
+		
 		TradeList trade = player.getActiveTradeList();
 		if (trade == null)
 		{
@@ -63,7 +63,7 @@ public class TradeDone extends L2GameClientPacket
 		}
 		if (trade.isLocked())
 			return;
-
+		
 		if (_response == 1)
 		{
 			if (trade.getPartner() == null || L2World.getInstance().getPlayer(trade.getPartner().getObjectId()) == null)
@@ -73,35 +73,36 @@ public class TradeDone extends L2GameClientPacket
 				requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
 				return;
 			}
-
+			
 			if (trade.getOwner().getActiveEnchantItem() != null || trade.getPartner().getActiveEnchantItem() != null)
 			{
 				requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
 				return;
 			}
-
-			if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN && player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+			
+			if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+					&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 			{
 				player.cancelActiveTrade();
 				requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
 				return;
 			}
-
+			
 			if (!player.isSameInstance(trade.getPartner()))
 			{
 				player.cancelActiveTrade();
 				requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
 				return;
 			}
-
+			
 			trade.confirm();
 		}
 		else
 			player.cancelActiveTrade();
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

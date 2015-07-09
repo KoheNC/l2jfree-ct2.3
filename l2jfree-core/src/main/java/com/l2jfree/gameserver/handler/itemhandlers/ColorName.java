@@ -23,18 +23,17 @@ import com.l2jfree.gameserver.network.serverpackets.ExChangeNicknameNColor;
 
 public class ColorName implements IItemHandler
 {
-	private static final int[] ITEM_IDS = {
-		RequestChangeNicknameColor.COLOR_NAME_1, RequestChangeNicknameColor.COLOR_NAME_2
-	};
-
+	private static final int[] ITEM_IDS = { RequestChangeNicknameColor.COLOR_NAME_1,
+			RequestChangeNicknameColor.COLOR_NAME_2 };
+	
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
 			return;
-
+		
 		playable.sendPacket(ExChangeNicknameNColor.PACKET);
 	}
-
+	
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

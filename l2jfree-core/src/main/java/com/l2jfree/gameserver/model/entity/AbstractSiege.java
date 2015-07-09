@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.model.L2SiegeClan;
 public abstract class AbstractSiege
 {
 	public abstract boolean getIsInProgress();
-
+	
 	public abstract boolean checkIsAttacker(L2Clan clan);
-
+	
 	public abstract boolean checkIsDefender(L2Clan clan);
-
+	
 	public abstract L2SiegeClan getAttackerClan(L2Clan clan);
-
+	
 	public abstract L2SiegeClan getDefenderClan(L2Clan clan);
 }

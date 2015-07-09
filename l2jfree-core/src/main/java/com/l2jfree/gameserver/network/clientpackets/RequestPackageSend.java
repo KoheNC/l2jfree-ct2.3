@@ -35,35 +35,34 @@ import com.l2jfree.gameserver.util.FloodProtector.Protected;
  */
 public final class RequestPackageSend extends L2GameClientPacket
 {
-	private static final String	_C_9F_REQUESTPACKAGESEND	= "[C] 9F RequestPackageSend";
-
-	private int					_objectID;
-
+	private static final String _C_9F_REQUESTPACKAGESEND = "[C] 9F RequestPackageSend";
+	
+	private int _objectID;
+	
 	private static final int BATCH_LENGTH = 8; // length of the one item
 	private static final int BATCH_LENGTH_FINAL = 12;
-
+	
 	private Item[] _items = null;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectID = readD();
 		int count = readD();
-		if (count < 0
-				|| count > Config.MAX_ITEM_IN_PACKET
+		if (count < 0 || count > Config.MAX_ITEM_IN_PACKET
 				|| count * (Config.PACKET_FINAL ? BATCH_LENGTH_FINAL : BATCH_LENGTH) != getByteBuffer().remaining())
 		{
 			return;
 		}
 		_items = new Item[count];
-		for(int i = 0; i < count; i++)
+		for (int i = 0; i < count; i++)
 		{
 			int id = readD(); //this is some id sent in PackageSendableList
 			long cnt = readCompQ();
 			_items[i] = new Item(id, cnt);
 		}
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
 	 */
@@ -72,42 +71,41 @@ public final class RequestPackageSend extends L2GameClientPacket
 	{
 		if (_items == null || !Config.ALLOW_FREIGHT)
 			return;
-
+		
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))
 			return;
-
+		
 		// Alt game - Karma punishment
 		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && player.getKarma() > 0)
 			return;
-
+		
 		// player attempts to send freight to the different account
 		if (!player.getAccountChars().containsKey(_objectID))
 			return;
-
+		
 		PcFreight freight = player.getDepositedFreight(_objectID);
-
+		
 		player.setActiveWarehouse(freight);
 		ItemContainer warehouse = player.getActiveWarehouse();
 		if (warehouse == null)
 			return;
-
+		
 		L2Npc manager = player.getLastFolkNPC();
-		if ((manager == null
-				|| !manager.isWarehouse()
-				|| !manager.canInteract(player)) && !player.isGM())
+		if ((manager == null || !manager.isWarehouse() || !manager.canInteract(player)) && !player.isGM())
 			return;
-
-		if (warehouse instanceof PcFreight && Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+		
+		if (warehouse instanceof PcFreight && Config.GM_DISABLE_TRANSACTION
+				&& player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
 				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{
 			player.sendMessage("Unsufficient privileges.");
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-
+		
 		// get current tradelist if any
 		if (player.getActiveTradeList() != null)
 			return;
@@ -116,7 +114,7 @@ public final class RequestPackageSend extends L2GameClientPacket
 		long fee = _items.length * Config.ALT_GAME_FREIGHT_PRICE;
 		long currentAdena = player.getAdena();
 		int slots = 0;
-
+		
 		for (Item i : _items)
 		{
 			// Check validity of requested item
@@ -126,7 +124,7 @@ public final class RequestPackageSend extends L2GameClientPacket
 				_log.warn("Error depositing a warehouse object for char " + player.getName() + " (validity check)");
 				return;
 			}
-
+			
 			// Calculate needed adena and slots
 			if (item.getItemId() == ADENA_ID)
 				currentAdena -= i.getCount();
@@ -135,21 +133,21 @@ public final class RequestPackageSend extends L2GameClientPacket
 			else if (warehouse.getItemByItemId(item.getItemId()) == null)
 				slots++;
 		}
-
+		
 		// Item Max Limit Check
 		if (!warehouse.validateCapacity(slots))
 		{
 			sendPacket(SystemMessageId.WAREHOUSE_FULL);
 			return;
 		}
-
+		
 		// Check if enough adena and charge the fee
 		if (currentAdena < fee || !player.reduceAdena(warehouse.getName(), fee, manager, false))
 		{
 			sendPacket(SystemMessageId.YOU_NOT_ENOUGH_ADENA);
 			return;
 		}
-
+		
 		// Proceed to the transfer
 		InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (Item i : _items)
@@ -160,17 +158,19 @@ public final class RequestPackageSend extends L2GameClientPacket
 				_log.warn("Error depositing a warehouse object for char " + player.getName() + " (olditem == null)");
 				continue;
 			}
-
+			
 			if (!oldItem.isDepositable(false) || !oldItem.isAvailable(player, true, false))
 				continue;
-
-			L2ItemInstance newItem = player.getInventory().transferItem(warehouse.getName(), i.getObjectId(), i.getCount(), warehouse, player, manager);
+			
+			L2ItemInstance newItem =
+					player.getInventory().transferItem(warehouse.getName(), i.getObjectId(), i.getCount(), warehouse,
+							player, manager);
 			if (newItem == null)
 			{
 				_log.warn("Error depositing a warehouse object for char " + player.getName() + " (newitem == null)");
 				continue;
 			}
-
+			
 			if (playerIU != null)
 			{
 				if (oldItem.getCount() > 0 && oldItem != newItem)
@@ -179,19 +179,19 @@ public final class RequestPackageSend extends L2GameClientPacket
 					playerIU.addRemovedItem(oldItem);
 			}
 		}
-
+		
 		// Send updated item list to the player
 		if (playerIU != null)
 			player.sendPacket(playerIU);
 		else
 			player.sendPacket(new ItemList(player, false));
-
+		
 		// Update current load status on player
 		StatusUpdate su = new StatusUpdate(player.getObjectId());
 		su.addAttribute(StatusUpdate.CUR_LOAD, player.getCurrentLoad());
 		player.sendPacket(su);
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -200,23 +200,23 @@ public final class RequestPackageSend extends L2GameClientPacket
 	{
 		return _C_9F_REQUESTPACKAGESEND;
 	}
-
+	
 	private class Item
 	{
 		private final int _objectId;
 		private final long _count;
-
+		
 		public Item(int i, long c)
 		{
 			_objectId = i;
 			_count = c;
 		}
-
+		
 		public int getObjectId()
 		{
 			return _objectId;
 		}
-
+		
 		public long getCount()
 		{
 			return _count;

@@ -33,81 +33,82 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
  */
 public class TradeRequest extends L2GameClientPacket
 {
-	private static final String	_C__TRADEREQUEST	= "[C] 1A TradeRequest c[d]";
-
-	private int					_objectId;
-
+	private static final String _C__TRADEREQUEST = "[C] 1A TradeRequest c[d]";
+	
+	private int _objectId;
+	
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (Shutdown.isActionDisabled(DisableType.TRANSACTION))
 		{
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-
-		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN && player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
+		
+		if (Config.GM_DISABLE_TRANSACTION && player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
+				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{
 			requestFailed(SystemMessageId.ACCOUNT_CANT_TRADE_ITEMS);
 			return;
 		}
-
+		
 		L2Object obj = null;
-
+		
 		// Get object from target
 		if (player.getTargetId() == _objectId)
 			obj = player.getTarget();
-
+		
 		// Get object from world
 		if (obj == null)
 		{
 			obj = L2World.getInstance().getPlayer(_objectId);
 			//_log.warn("Player "+player.getName()+" requested trade from player from outside of his knownlist.");
 		}
-
+		
 		if (!(obj instanceof L2PcInstance) || obj.getObjectId() == player.getObjectId())
 		{
 			requestFailed(SystemMessageId.TARGET_IS_INCORRECT);
 			return;
 		}
-
-		L2PcInstance partner = (L2PcInstance) obj;
-
+		
+		L2PcInstance partner = (L2PcInstance)obj;
+		
 		// cant trade with players from other instance except from multivers
 		if (!player.isSameInstance(partner))
 		{
 			sendAF();
 			return;
 		}
-
+		
 		if (partner.isInOlympiadMode() || player.isInOlympiadMode())
 		{
 			requestFailed(SystemMessageId.TRADE_ATTEMPT_FAILED);
 			return;
 		}
-
+		
 		if (BlockList.isBlocked(partner, player))
 		{
 			requestFailed(new SystemMessage(SystemMessageId.C1_HAS_ADDED_YOU_TO_IGNORE_LIST).addCharName(partner));
 			return;
 		}
-
+		
 		if (player.getDistanceSq(partner) > 22500) // 150
 		{
 			requestFailed(SystemMessageId.TARGET_TOO_FAR);
 			return;
 		}
-
+		
 		// Alt game - Karma punishment
 		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_TRADE)
 		{
@@ -122,13 +123,13 @@ public class TradeRequest extends L2GameClientPacket
 				return;
 			}
 		}
-
+		
 		if (player.getPrivateStoreType() != 0 || partner.getPrivateStoreType() != 0)
 		{
 			requestFailed(SystemMessageId.CANNOT_TRADE_DISCARD_DROP_ITEM_WHILE_IN_SHOPMODE);
 			return;
 		}
-
+		
 		if (player.isProcessingTransaction())
 		{
 			if (_log.isDebugEnabled())
@@ -136,7 +137,7 @@ public class TradeRequest extends L2GameClientPacket
 			requestFailed(SystemMessageId.ALREADY_TRADING);
 			return;
 		}
-
+		
 		if (partner.isProcessingRequest() || partner.isProcessingTransaction())
 		{
 			if (_log.isDebugEnabled())
@@ -144,22 +145,22 @@ public class TradeRequest extends L2GameClientPacket
 			requestFailed(new SystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER).addString(partner.getName()));
 			return;
 		}
-
+		
 		if (partner.getTradeRefusal())
 		{
 			requestFailed(SystemMessageId.CANT_TRADE_WITH_TARGET);
 			return;
 		}
-
+		
 		player.onTransactionRequest(partner);
 		partner.sendPacket(new SendTradeRequest(player.getObjectId()));
 		SystemMessage sm = new SystemMessage(SystemMessageId.REQUEST_C1_FOR_TRADE);
 		sm.addString(partner.getName());
 		player.sendPacket(sm);
-
+		
 		sendAF();
 	}
-
+	
 	@Override
 	public String getType()
 	{

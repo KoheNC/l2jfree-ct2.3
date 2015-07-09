@@ -13,11 +13,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.l2jfree.gameserver.model;
- /**
-  * 
-  * @author luisantonioa
-  * 
-  */
+
+/**
+ * 
+ * @author luisantonioa
+ * 
+ */
 
 import com.l2jfree.gameserver.model.actor.L2Npc;
 

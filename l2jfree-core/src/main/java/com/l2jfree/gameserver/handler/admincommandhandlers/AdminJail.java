@@ -26,7 +26,6 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.zone.L2JailZone;
 
-
 /**
  * This class handles following admin commands:
  * - jail charname [penalty_time] = jails character. Time specified in minutes. For ever if no time is specified.
@@ -36,8 +35,8 @@ import com.l2jfree.gameserver.model.zone.L2JailZone;
  */
 public class AdminJail implements IAdminCommandHandler
 {
-	private static final String[]	ADMIN_COMMANDS	= { "admin_jail", "admin_unjail" };
-
+	private static final String[] ADMIN_COMMANDS = { "admin_jail", "admin_unjail" };
+	
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
@@ -58,12 +57,13 @@ public class AdminJail implements IAdminCommandHandler
 				{
 					activeChar.sendMessage("Usage: //jail <charname> [penalty_minutes]");
 				}
-
+				
 				L2PcInstance playerObj = L2World.getInstance().getPlayer(player);
 				if (playerObj != null)
 				{
 					playerObj.setInJail(true, delay);
-					activeChar.sendMessage("Character " + player + " jailed for " + (delay > 0 ? delay + " minutes." : "ever!"));
+					activeChar.sendMessage("Character " + player + " jailed for "
+							+ (delay > 0 ? delay + " minutes." : "ever!"));
 				}
 				else
 					jailOfflinePlayer(activeChar, player, delay);
@@ -83,7 +83,7 @@ public class AdminJail implements IAdminCommandHandler
 			{
 				player = st.nextToken();
 				L2PcInstance playerObj = L2World.getInstance().getPlayer(player);
-
+				
 				if (playerObj != null)
 				{
 					playerObj.setInJail(false, 0);
@@ -103,30 +103,32 @@ public class AdminJail implements IAdminCommandHandler
 		}
 		return true;
 	}
-
+	
 	private void jailOfflinePlayer(L2PcInstance activeChar, String name, int delay)
 	{
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
-			PreparedStatement statement = con.prepareStatement("UPDATE characters SET x=?, y=?, z=?, in_jail=?, jail_timer=? WHERE char_name=?");
+			
+			PreparedStatement statement =
+					con.prepareStatement("UPDATE characters SET x=?, y=?, z=?, in_jail=?, jail_timer=? WHERE char_name=?");
 			statement.setInt(1, L2JailZone.JAIL_LOCATION.getX());
 			statement.setInt(2, L2JailZone.JAIL_LOCATION.getY());
 			statement.setInt(3, L2JailZone.JAIL_LOCATION.getZ());
 			statement.setInt(4, 1);
 			statement.setLong(5, delay * 60000L);
 			statement.setString(6, name);
-
+			
 			statement.execute();
 			int count = statement.getUpdateCount();
 			statement.close();
-
+			
 			if (count == 0)
 				activeChar.sendMessage("Character not found!");
 			else
-				activeChar.sendMessage("Character " + name + " jailed offline for" + ((delay > 0) ? (" " + delay + " minutes.") : "ever!"));
+				activeChar.sendMessage("Character " + name + " jailed offline for"
+						+ ((delay > 0) ? (" " + delay + " minutes.") : "ever!"));
 		}
 		catch (SQLException se)
 		{
@@ -138,21 +140,22 @@ public class AdminJail implements IAdminCommandHandler
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	private void unjailOfflinePlayer(L2PcInstance activeChar, String name)
 	{
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-			PreparedStatement statement = con.prepareStatement("UPDATE characters SET x=?, y=?, z=?, in_jail=?, jail_timer=? WHERE char_name=?");
+			PreparedStatement statement =
+					con.prepareStatement("UPDATE characters SET x=?, y=?, z=?, in_jail=?, jail_timer=? WHERE char_name=?");
 			statement.setInt(1, 17836);
 			statement.setInt(2, 170178);
 			statement.setInt(3, -3507);
 			statement.setInt(4, 0);
 			statement.setLong(5, 0);
 			statement.setString(6, name);
-
+			
 			statement.execute();
 			int count = statement.getUpdateCount();
 			statement.close();
@@ -171,7 +174,7 @@ public class AdminJail implements IAdminCommandHandler
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;

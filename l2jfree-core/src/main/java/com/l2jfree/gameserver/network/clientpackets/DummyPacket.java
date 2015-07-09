@@ -21,18 +21,18 @@ package com.l2jfree.gameserver.network.clientpackets;
 public class DummyPacket extends L2GameClientPacket
 {
 	private int _packetId;
-
-    @Override
-    protected void readImpl()
-    {
-    }
-
+	
+	@Override
+	protected void readImpl()
+	{
+	}
+	
 	@Override
 	protected void runImpl()
 	{
 		_log.warn("DummyPacket " + _packetId + " received.");
 	}
-
+	
 	@Override
 	public String getType()
 	{

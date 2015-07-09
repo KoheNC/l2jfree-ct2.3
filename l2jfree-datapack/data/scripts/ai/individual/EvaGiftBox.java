@@ -25,25 +25,23 @@ import com.l2jfree.tools.random.Rnd;
 public class EvaGiftBox extends ItemDropper
 {
 	private static final String THIS = "EvaGiftBox";
-
+	
 	// Quest items
 	private static final int RED_CORAL = 9692;
 	private static final int CRYSTAL_FRAGMENT = 9693;
-
+	
 	// Quest monsters
 	private static final int EVAS_GIFT_BOX = 32342;
-
-	private static final int[] KISS_OF_EVA_EFFECT = {
-		1073, 3143
-	};
+	
+	private static final int[] KISS_OF_EVA_EFFECT = { 1073, 3143 };
 	private static final int KISS_OF_EVA_SKILL = 3252;
-
+	
 	public EvaGiftBox(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		addKillId(EVAS_GIFT_BOX);
 	}
-
+	
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
@@ -68,7 +66,7 @@ public class EvaGiftBox extends ItemDropper
 		}
 		return null;
 	}
-
+	
 	public static void main(String[] args)
 	{
 		new EvaGiftBox(-1, THIS, "ai");

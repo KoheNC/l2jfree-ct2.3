@@ -19,12 +19,12 @@ import java.net.InetAddress;
 public class FailedLoginAttempt
 {
 	// private InetAddress _ipAddress;
-	private int		_count;
-
-	private long	_lastAttempTime;
-
-	private String	_lastPassword;
-
+	private int _count;
+	
+	private long _lastAttempTime;
+	
+	private String _lastPassword;
+	
 	public FailedLoginAttempt(InetAddress address, String lastPassword)
 	{
 		// _ipAddress = address;
@@ -32,7 +32,7 @@ public class FailedLoginAttempt
 		_lastAttempTime = System.currentTimeMillis();
 		_lastPassword = lastPassword;
 	}
-
+	
 	public void increaseCounter(String password)
 	{
 		if (!_lastPassword.equals(password))
@@ -46,7 +46,7 @@ public class FailedLoginAttempt
 			{
 				// restart the status
 				_count = 1;
-
+				
 			}
 			_lastPassword = password;
 			_lastAttempTime = System.currentTimeMillis();
@@ -57,7 +57,7 @@ public class FailedLoginAttempt
 			_lastAttempTime = System.currentTimeMillis();
 		}
 	}
-
+	
 	public int getCount()
 	{
 		return _count;

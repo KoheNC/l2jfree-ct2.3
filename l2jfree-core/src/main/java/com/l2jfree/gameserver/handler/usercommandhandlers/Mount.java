@@ -23,9 +23,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  */
 public class Mount implements IUserCommandHandler
 {
-	private static final int[]	COMMAND_IDS	=
-											{ 61 };
-
+	private static final int[] COMMAND_IDS = { 61 };
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
 	 */
@@ -33,10 +32,10 @@ public class Mount implements IUserCommandHandler
 	{
 		if (id != COMMAND_IDS[0])
 			return false;
-
+		
 		return activeChar.mountPlayer(activeChar.getPet());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
 	 */

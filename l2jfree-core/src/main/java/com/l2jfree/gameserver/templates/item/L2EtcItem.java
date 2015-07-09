@@ -65,15 +65,15 @@ public final class L2EtcItem extends L2Item
 							list.add(info);
 						else
 							throw new IllegalStateException("Invalid 'skills_item' parameters at database for ID "
-								+ getItemId());
+									+ getItemId());
 					}
 					else if (skillId != 0 || skillLvl != 0)
 						throw new IllegalStateException("Invalid 'skills_item' parameters at database for ID "
-							+ getItemId());
+								+ getItemId());
 				}
 				else
 					throw new IllegalStateException("Invalid 'skills_item' parameters at database for ID "
-						+ getItemId());
+							+ getItemId());
 			}
 			
 			_skillInfos = list.toArray(new SkillInfo[list.size()]);

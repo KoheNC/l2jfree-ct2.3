@@ -26,9 +26,9 @@ import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
  */
 public class ChatAnnounce implements IChatHandler
 {
-	private final SystemChatChannelId[]	_chatTypes	=
-												{ SystemChatChannelId.Chat_Announce, SystemChatChannelId.Chat_Critical_Announce };
-
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Announce,
+			SystemChatChannelId.Chat_Critical_Announce };
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
 	 */
@@ -36,7 +36,7 @@ public class ChatAnnounce implements IChatHandler
 	{
 		return _chatTypes;
 	}
-
+	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
@@ -44,21 +44,21 @@ public class ChatAnnounce implements IChatHandler
 	{
 		String charName = "";
 		int charObjId = 0;
-
+		
 		if (activeChar != null)
 		{
 			charName = activeChar.getName();
 			charObjId = activeChar.getObjectId();
-
+			
 			if (!activeChar.isGM())
 				return;
 		}
 		
 		if (chatType == SystemChatChannelId.Chat_Critical_Announce)
 			text = "** " + text;
-
+		
 		CreatureSay cs = new CreatureSay(charObjId, chatType, charName, text);
-
+		
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 		{
 			if (player != null)

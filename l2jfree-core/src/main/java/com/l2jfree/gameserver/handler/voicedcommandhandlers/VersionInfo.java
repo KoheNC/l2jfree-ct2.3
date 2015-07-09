@@ -22,11 +22,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
  * @author evill33t
  * 
  */
-public class VersionInfo  implements IVoicedCommandHandler
+public class VersionInfo implements IVoicedCommandHandler
 {
-	private static final String[]	VOICED_COMMANDS	=
-													{ "version" };
-
+	private static final String[] VOICED_COMMANDS = { "version" };
+	
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
 	{
 		if (command.startsWith("version"))
@@ -36,6 +35,7 @@ public class VersionInfo  implements IVoicedCommandHandler
 		}
 		return false;
 	}
+	
 	public String[] getVoicedCommandList()
 	{
 		return VOICED_COMMANDS;

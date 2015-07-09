@@ -27,25 +27,25 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public final class Attack extends L2GameServerPacket
 {
 	private static final String _S__06_ATTACK = "[S] 33 Attack";
-
+	
 	public static final int HITFLAG_USESS = 0x10;
 	public static final int HITFLAG_CRIT = 0x20;
 	public static final int HITFLAG_SHLD = 0x40;
 	public static final int HITFLAG_MISS = 0x80;
-
+	
 	public final class Hit
 	{
 		private final int _targetId;
 		private final int _damage;
 		private final int _flags;
-
+		
 		private Hit(L2Object target, int damage, boolean miss, boolean crit, byte shld)
 		{
 			_targetId = target.getObjectId();
 			_damage = damage;
 			_flags = getFlags(target, miss, crit, shld);
 		}
-
+		
 		private final int getFlags(L2Object target, boolean miss, boolean crit, byte shld)
 		{
 			if (miss)
@@ -61,7 +61,7 @@ public final class Attack extends L2GameServerPacket
 			return flags;
 		}
 	}
-
+	
 	private final int _attackerObjId;
 	private final int _targetObjId;
 	private final int _x;
@@ -70,12 +70,12 @@ public final class Attack extends L2GameServerPacket
 	private final int _tx;
 	private final int _ty;
 	private final int _tz;
-
+	
 	public final boolean soulshot;
 	public final int _ssGrade;
-
+	
 	private Hit[] _hits;
-
+	
 	/**
 	 * @param attacker the attacking L2Character
 	 * @param target the target L2Object
@@ -95,12 +95,12 @@ public final class Attack extends L2GameServerPacket
 		_ty = target.getY();
 		_tz = target.getZ();
 	}
-
+	
 	public Hit createHit(L2Object target, int damage, boolean miss, boolean crit, byte shld)
 	{
-		return new Hit( target, damage, miss, crit, shld );
+		return new Hit(target, damage, miss, crit, shld);
 	}
-
+	
 	public void hit(Hit... hits)
 	{
 		if (_hits == null)
@@ -108,22 +108,22 @@ public final class Attack extends L2GameServerPacket
 			_hits = hits;
 			return;
 		}
-
+		
 		// this will only happen with pole attacks
-		_hits = (Hit[]) ArrayUtils.addAll(hits, _hits);
+		_hits = (Hit[])ArrayUtils.addAll(hits, _hits);
 	}
-
+	
 	/** @return True if the Server-Client packet Attack contains at least 1 hit. */
 	public boolean hasHits()
 	{
 		return _hits != null;
 	}
-
+	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x33);
-
+		
 		writeD(_attackerObjId);
 		writeD(_targetObjId);
 		writeD(_hits[0]._damage);
@@ -131,7 +131,7 @@ public final class Attack extends L2GameServerPacket
 		writeD(_x);
 		writeD(_y);
 		writeD(_z);
-
+		
 		writeH(_hits.length - 1);
 		// prevent sending useless packet while there is only one target.
 		if (_hits.length > 1)
@@ -143,7 +143,7 @@ public final class Attack extends L2GameServerPacket
 				writeC(_hits[i]._flags);
 			}
 		}
-
+		
 		if (Config.PACKET_FINAL)
 		{
 			writeD(_tx);
@@ -151,7 +151,7 @@ public final class Attack extends L2GameServerPacket
 			writeD(_tz);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

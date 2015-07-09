@@ -34,17 +34,17 @@ import com.l2jfree.lang.L2TextBuilder;
  */
 public class UpdateBBSManager extends BaseBBSManager
 {
-	private final static Log	_log	= LogFactory.getLog(UpdateBBSManager.class);
-
+	private final static Log _log = LogFactory.getLog(UpdateBBSManager.class);
+	
 	public class UpdateItem
 	{
-		public Integer	id;
-		public String	author;
-		public String	introduction;
-		public String	text;
-		public String	udate;
+		public Integer id;
+		public String author;
+		public String introduction;
+		public String text;
+		public String udate;
 	}
-
+	
 	private List<UpdateItem> getChangeLog()
 	{
 		List<UpdateItem> _items = new FastList<UpdateItem>();
@@ -77,7 +77,7 @@ public class UpdateBBSManager extends BaseBBSManager
 		}
 		return _items;
 	}
-
+	
 	private UpdateItem getDetails(int id)
 	{
 		UpdateItem rit = new UpdateItem();
@@ -89,7 +89,7 @@ public class UpdateBBSManager extends BaseBBSManager
 		}
 		return rit;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -104,7 +104,7 @@ public class UpdateBBSManager extends BaseBBSManager
 		{
 			final L2TextBuilder tb = L2TextBuilder.newInstance();
 			tb.append("<html><body><br>");
-
+			
 			tb.append("<table border=0 cellspacing=0 cellpadding=2 bgcolor=808080 width=770>");
 			tb.append("<tr>");
 			tb.append("<td FIXWIDTH=5></td>");
@@ -118,9 +118,9 @@ public class UpdateBBSManager extends BaseBBSManager
 			{
 				tb.append("<tr>");
 				tb.append("<td FIXWIDTH=5></td><td FIXWIDTH=150>").append(temp.author)
-					.append("</td><td FIXWIDTH=460><a action=\"bypass _bbsupdate_details;").append(temp.id)
-					.append("\">").append(temp.introduction).append("</a></td><td FIXWIDTH=150>").append(temp.udate)
-					.append("</td><td FIXWIDTH=5></td>");
+						.append("</td><td FIXWIDTH=460><a action=\"bypass _bbsupdate_details;").append(temp.id)
+						.append("\">").append(temp.introduction).append("</a></td><td FIXWIDTH=150>")
+						.append(temp.udate).append("</td><td FIXWIDTH=5></td>");
 				tb.append("</tr>");
 			}
 			tb.append("</table>");
@@ -145,7 +145,7 @@ public class UpdateBBSManager extends BaseBBSManager
 			notImplementedYet(activeChar, command);
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -160,9 +160,9 @@ public class UpdateBBSManager extends BaseBBSManager
 	{
 		// TODO Auto-generated method stub
 	}
-
-	private static UpdateBBSManager	_instance	= new UpdateBBSManager();
-
+	
+	private static UpdateBBSManager _instance = new UpdateBBSManager();
+	
 	/**
 	 * @return
 	 */
@@ -170,5 +170,5 @@ public class UpdateBBSManager extends BaseBBSManager
 	{
 		return _instance;
 	}
-
+	
 }

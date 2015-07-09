@@ -300,7 +300,7 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 			if (o2.getType2() == L2Item.TYPE2_MONEY && o1.getType2() != L2Item.TYPE2_MONEY)
 				return (order == A2Z ? A2Z : Z2A);
 			if ((o1.isEtcItem() && o1.getItemType() == L2EtcItemType.RECEIPE)
-				&& (o2.isEtcItem() && o2.getItemType() == L2EtcItemType.RECEIPE))
+					&& (o2.isEtcItem() && o2.getItemType() == L2EtcItemType.RECEIPE))
 			{
 				try
 				{
@@ -422,8 +422,8 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isWeapon() || item.getItem().getType2() == L2Item.TYPE2_WEAPON
-				|| (item.isEtcItem() && item.getItemType() == L2EtcItemType.ARROW)
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					|| (item.isEtcItem() && item.getItemType() == L2EtcItemType.ARROW)
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -463,7 +463,7 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem() && item.getEtcItem().getItemType() == L2EtcItemType.MATERIAL
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -477,7 +477,7 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem() && item.getEtcItem().getItemType() == L2EtcItemType.RECEIPE
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -491,8 +491,8 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem()
-				&& (item.getEtcItem().getItemType() == L2EtcItemType.SPELLBOOK && item.getItemName().toUpperCase()
-					.startsWith("AMULET")) || item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					&& (item.getEtcItem().getItemType() == L2EtcItemType.SPELLBOOK && item.getItemName().toUpperCase()
+							.startsWith("AMULET")) || item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -506,8 +506,8 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem()
-				&& (item.getEtcItem().getItemType() == L2EtcItemType.SPELLBOOK && !item.getItemName().toUpperCase()
-					.startsWith("AMULET")) || item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					&& (item.getEtcItem().getItemType() == L2EtcItemType.SPELLBOOK && !item.getItemName().toUpperCase()
+							.startsWith("AMULET")) || item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -521,8 +521,8 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem()
-				&& (item.getEtcItem().getItemType() == L2EtcItemType.SCROLL || item.getEtcItem().getItemType() == L2EtcItemType.SHOT)
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					&& (item.getEtcItem().getItemType() == L2EtcItemType.SCROLL || item.getEtcItem().getItemType() == L2EtcItemType.SHOT)
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -536,7 +536,7 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem() && item.getEtcItem().getItemType() == L2EtcItemType.SHOT
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -550,7 +550,7 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem() && item.getEtcItem().getItemType() == L2EtcItemType.SCROLL
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -564,7 +564,7 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem() && item.getEtcItem().getItemType() == L2EtcItemType.SEED
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	
@@ -578,11 +578,11 @@ public final class SortedWareHouseWithdrawalList extends L2GameServerPacket
 		public boolean accept(L2ItemInstance item)
 		{
 			return item.isEtcItem()
-				&& (item.getEtcItem().getItemType() != L2EtcItemType.MATERIAL
-					&& item.getEtcItem().getItemType() != L2EtcItemType.RECEIPE
-					&& item.getEtcItem().getItemType() != L2EtcItemType.SPELLBOOK
-					&& item.getEtcItem().getItemType() != L2EtcItemType.SCROLL && item.getEtcItem().getItemType() != L2EtcItemType.SHOT)
-				|| item.getItem().getType2() == L2Item.TYPE2_MONEY;
+					&& (item.getEtcItem().getItemType() != L2EtcItemType.MATERIAL
+							&& item.getEtcItem().getItemType() != L2EtcItemType.RECEIPE
+							&& item.getEtcItem().getItemType() != L2EtcItemType.SPELLBOOK
+							&& item.getEtcItem().getItemType() != L2EtcItemType.SCROLL && item.getEtcItem()
+							.getItemType() != L2EtcItemType.SHOT) || item.getItem().getType2() == L2Item.TYPE2_MONEY;
 		}
 	};
 	

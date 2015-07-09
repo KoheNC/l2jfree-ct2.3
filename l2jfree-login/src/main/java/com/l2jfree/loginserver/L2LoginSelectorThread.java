@@ -37,7 +37,7 @@ import com.l2jfree.tools.util.HexUtil;
 import com.l2jfree.util.concurrent.ExecuteWrapper;
 
 public final class L2LoginSelectorThread extends
-	SelectorThread<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket>
+		SelectorThread<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket>
 {
 	private static final class SingletonHolder
 	{
@@ -63,8 +63,8 @@ public final class L2LoginSelectorThread extends
 		return SingletonHolder.INSTANCE;
 	}
 	
-	private L2LoginSelectorThread(SelectorConfig sc, IPacketHandler<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket> packetHandler)
-		throws IOException
+	private L2LoginSelectorThread(SelectorConfig sc,
+			IPacketHandler<L2LoginClient, L2LoginClientPacket, L2LoginServerPacket> packetHandler) throws IOException
 	{
 		super(sc, packetHandler);
 	}
@@ -99,7 +99,7 @@ public final class L2LoginSelectorThread extends
 	}
 	
 	private final ThreadPoolExecutor _generalPacketsThreadPool = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L,
-		TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+			TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 	
 	@Override
 	protected void executePacket(L2LoginClientPacket packet)

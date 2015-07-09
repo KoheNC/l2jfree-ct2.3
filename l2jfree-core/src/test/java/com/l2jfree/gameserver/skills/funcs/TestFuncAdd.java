@@ -21,14 +21,14 @@ import com.l2jfree.gameserver.skills.Stats;
 
 public class TestFuncAdd extends TestCase
 {
-
-    public void testFuncAddCalc()
-    {
-        FuncAdd fa = new FuncAdd(Stats.MAX_HP,1,null,2, null);
-        
-        Env env = new Env();
-        env.value=1;
-        fa.calc(env);
-        assertEquals(3.0,env.value);
-    }
+	
+	public void testFuncAddCalc()
+	{
+		FuncAdd fa = new FuncAdd(Stats.MAX_HP, 1, null, 2, null);
+		
+		Env env = new Env();
+		env.value = 1;
+		fa.calc(env);
+		assertEquals(3.0, env.value);
+	}
 }

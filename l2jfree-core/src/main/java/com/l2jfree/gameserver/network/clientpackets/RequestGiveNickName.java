@@ -30,25 +30,25 @@ import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
 public class RequestGiveNickName extends L2GameClientPacket
 {
 	private static final String _C__55_REQUESTGIVENICKNAME = "[C] 55 RequestGiveNickName";
-
+	
 	private String _target;
 	private String _title;
-
+	
 	@Override
 	protected void readImpl()
 	{
 		_target = readS();
-		_title  = readS();
+		_title = readS();
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
-
-		if (activeChar.getName().equals(_target) &&
-				(activeChar.isGM() || activeChar.isNoble()))
+		if (activeChar == null)
+			return;
+		
+		if (activeChar.getName().equals(_target) && (activeChar.isGM() || activeChar.isNoble()))
 		{
 			setTitle(activeChar);
 			sendAF();
@@ -69,7 +69,7 @@ public class RequestGiveNickName extends L2GameClientPacket
 			requestFailed(SystemMessageId.PLEASE_INPUT_TITLE_LESS_128_CHARACTERS);
 			return;
 		}
-
+		
 		L2ClanMember targetMember = activeChar.getClan().getClanMember(_target);
 		if (targetMember == null)
 		{
@@ -82,12 +82,12 @@ public class RequestGiveNickName extends L2GameClientPacket
 			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
 			return;
 		}
-
+		
 		setTitle(target);
-
+		
 		sendAF();
 	}
-
+	
 	private final void setTitle(L2PcInstance target)
 	{
 		target.setTitle(_title);
@@ -101,7 +101,7 @@ public class RequestGiveNickName extends L2GameClientPacket
 			sendPacket(sm);
 		}
 	}
-
+	
 	@Override
 	public String getType()
 	{

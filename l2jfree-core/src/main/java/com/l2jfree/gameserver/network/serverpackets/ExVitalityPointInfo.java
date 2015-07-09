@@ -22,29 +22,29 @@ public class ExVitalityPointInfo extends L2GameServerPacket
 {
 	private static final String _S__FE_A0_EXVITALITYPOINTINFO = "[S] FE:A0 ExVitalityPointInfo";
 	private final int _vitalityPoints;
-
+	
 	public ExVitalityPointInfo(int vitPoints)
 	{
 		_vitalityPoints = vitPoints;
 	}
-
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
-     */
-    @Override
+	
+	/* (non-Javadoc)
+	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
+	 */
+	@Override
 	protected void writeImpl()
-    {
-        writeC(0xfe);
-        writeH(0xa0);
-        writeD(_vitalityPoints);
-    }
-
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.BasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _S__FE_A0_EXVITALITYPOINTINFO;
-    }
+	{
+		writeC(0xfe);
+		writeH(0xa0);
+		writeD(_vitalityPoints);
+	}
+	
+	/* (non-Javadoc)
+	 * @see net.sf.l2j.gameserver.BasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _S__FE_A0_EXVITALITYPOINTINFO;
+	}
 }

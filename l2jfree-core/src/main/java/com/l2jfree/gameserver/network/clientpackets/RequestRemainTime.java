@@ -21,27 +21,28 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class RequestRemainTime extends L2GameClientPacket
 {
 	private static final String _C__B2_REQUESTREMAINTIME = "[C] B2 RequestRemainTime";
-
+	
 	@Override
 	protected void readImpl()
 	{
 		// Trigger packet
 	}
-
+	
 	@Override
 	protected void runImpl()
 	{
 		L2PcInstance player = getActiveChar();
 		if (player == null)
 			return;
-
+		
 		if (Config.SERVER_LIST_CLOCK)
 			// we do not support limited time/week servers
 			player.sendPacket(SystemMessageId.WEEKS_USAGE_TIME_FINISHED);
-		else // verified
+		else
+			// verified
 			player.sendPacket(SystemMessageId.RELAX_SERVER_ONLY);
 	}
-
+	
 	@Override
 	public String getType()
 	{

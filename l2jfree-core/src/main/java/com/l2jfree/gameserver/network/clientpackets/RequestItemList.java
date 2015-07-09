@@ -26,28 +26,29 @@ import com.l2jfree.gameserver.network.serverpackets.ItemList;
 public class RequestItemList extends L2GameClientPacket
 {
 	private static final String _C__0F_REQUESTITEMLIST = "[C] 0F RequestItemList";
-
+	
 	/**
 	 * packet type id 0x0f
 	 * format:		c
 	 */
-    @Override
-    protected void readImpl()
-    {
-    }
-
-    @Override
-    protected void runImpl()
+	@Override
+	protected void readImpl()
 	{
-    	L2PcInstance player = getActiveChar();
-    	if (player == null) return;
-
-    	else if (!player.isInventoryDisabled())
-    		sendPacket(new ItemList(player, true));
-
-    	sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
+	@Override
+	protected void runImpl()
+	{
+		L2PcInstance player = getActiveChar();
+		if (player == null)
+			return;
+		
+		else if (!player.isInventoryDisabled())
+			sendPacket(new ItemList(player, true));
+		
+		sendPacket(ActionFailed.STATIC_PACKET);
+	}
+	
 	@Override
 	public String getType()
 	{

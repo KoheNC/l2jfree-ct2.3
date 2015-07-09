@@ -24,19 +24,19 @@ public class L2FortDoormenInstance extends L2DoormenInstance
 	{
 		super(objectID, template);
 	}
-
+	
 	@Override
 	protected final void openDoors(L2PcInstance player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command.substring(10), ", ");
 		st.nextToken();
-
+		
 		while (st.hasMoreTokens())
 		{
 			getFort().openDoor(Integer.parseInt(st.nextToken()));
 		}
 	}
-
+	
 	@Override
 	protected final void closeDoors(L2PcInstance player, String command)
 	{
@@ -48,7 +48,7 @@ public class L2FortDoormenInstance extends L2DoormenInstance
 			getFort().closeDoor(Integer.parseInt(st.nextToken()));
 		}
 	}
-
+	
 	@Override
 	protected final boolean isOwnerClan(L2PcInstance player)
 	{

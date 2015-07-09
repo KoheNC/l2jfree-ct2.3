@@ -16,19 +16,19 @@ package com.l2jfree.gameserver.network.serverpackets;
 
 public class ExRegMax extends L2GameServerPacket
 {
-
+	
 	private static final String _S__FE_01_EXREGMAX = "[S] FE:01 ExRegenMax";
 	private final double _max;
 	private final int _count;
 	private final int _time;
-
+	
 	public ExRegMax(double max, int count, int time)
 	{
 		_max = max;
 		_count = count;
 		_time = time;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
@@ -42,7 +42,7 @@ public class ExRegMax extends L2GameServerPacket
 		writeD(_time);
 		writeF(_max);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.BasePacket#getType()
 	 */
@@ -51,5 +51,5 @@ public class ExRegMax extends L2GameServerPacket
 	{
 		return _S__FE_01_EXREGMAX;
 	}
-
+	
 }

@@ -28,97 +28,100 @@ import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2WyvernManagerInstance extends L2Npc
 {
-    public L2WyvernManagerInstance (int objectId, L2NpcTemplate template)
-    {
-        super(objectId, template);
-    }
-
-    @Override
-    public void onBypassFeedback(L2PcInstance player, String command)
-    {
-        if (command.startsWith("RideWyvern"))
-        {
-            if (!isOwnerClan(player))
-            	return;
-
-            if ((SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_STRIFE) == SevenSigns.CABAL_DUSK) && SevenSigns.getInstance().isSealValidationPeriod())
-            {
-            	player.sendPacket(SystemMessageId.SEAL_OF_STRIFE_FORBIDS_SUMMONING);
-                return;
-            }
-
-            int petItemId = 0;
-            L2ItemInstance petItem = null;
-            
-            if (player.getPet() == null)
-            {
-                if (player.isMounted())
-                {
-                    petItem = player.getInventory().getItemByObjectId(player.getMountObjectID());
-                    if (petItem != null)
-                        petItemId = petItem.getItemId();
-                }
-            }
-            else
-                petItemId = player.getPet().getControlItemId();
-
-            if (petItemId == 0 || !player.isMounted() || !PetDataTable.isStrider(PetDataTable.getPetIdByItemId(petItemId)))
-            {
-                player.sendPacket(SystemMessageId.YOU_MAY_ONLY_RIDE_WYVERN_WHILE_RIDING_STRIDER);
-                if (!isCastleManager())
-                	sendNotPossibleMessage(player);
-
-                return;
-            }
-            else if (player.isMounted() && PetDataTable.isStrider(PetDataTable.getPetIdByItemId(petItemId)) &&
-                         petItem != null && petItem.getEnchantLevel() < 55)
-            {
-                player.sendMessage("Your Strider has not reached the required level.");
-
-                if (!isCastleManager())
-                	sendNotPossibleMessage(player);
-
-                return;
-            }
-            
-            // Wyvern requires Config.MANAGER_CRYSTAL_COUNT crystal for ride...
-            if (player.getInventory().getItemByItemId(1460) != null &&
-                    player.getInventory().getItemByItemId(1460).getCount() >= Config.ALT_MANAGER_CRYSTAL_COUNT)
-            {
-                if(!player.disarmWeapons(true))
-                    return;
-                
-                if (player.isMounted())
-                    player.dismount();
-                
-                if (player.getPet() != null)
-                    player.getPet().unSummon(player);
-
-                if (player.mount(12621, 0, true))
-                {
-                    player.getInventory().destroyItemByItemId("Wyvern", 1460, Config.ALT_MANAGER_CRYSTAL_COUNT, player, player.getTarget());
-                    player.addSkill(SkillTable.getInstance().getInfo(4289, 1));
-                    player.sendMessage("The Wyvern has been summoned successfully!");
-                }
-            }
-            else
-            {
-                if (!isCastleManager())
-                	sendNotPossibleMessage(player);
-
-                player.sendMessage("You need " + Config.ALT_MANAGER_CRYSTAL_COUNT + " Crystals: B Grade.");
-            }
-        }
-    }
-
+	public L2WyvernManagerInstance(int objectId, L2NpcTemplate template)
+	{
+		super(objectId, template);
+	}
+	
+	@Override
+	public void onBypassFeedback(L2PcInstance player, String command)
+	{
+		if (command.startsWith("RideWyvern"))
+		{
+			if (!isOwnerClan(player))
+				return;
+			
+			if ((SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_STRIFE) == SevenSigns.CABAL_DUSK)
+					&& SevenSigns.getInstance().isSealValidationPeriod())
+			{
+				player.sendPacket(SystemMessageId.SEAL_OF_STRIFE_FORBIDS_SUMMONING);
+				return;
+			}
+			
+			int petItemId = 0;
+			L2ItemInstance petItem = null;
+			
+			if (player.getPet() == null)
+			{
+				if (player.isMounted())
+				{
+					petItem = player.getInventory().getItemByObjectId(player.getMountObjectID());
+					if (petItem != null)
+						petItemId = petItem.getItemId();
+				}
+			}
+			else
+				petItemId = player.getPet().getControlItemId();
+			
+			if (petItemId == 0 || !player.isMounted()
+					|| !PetDataTable.isStrider(PetDataTable.getPetIdByItemId(petItemId)))
+			{
+				player.sendPacket(SystemMessageId.YOU_MAY_ONLY_RIDE_WYVERN_WHILE_RIDING_STRIDER);
+				if (!isCastleManager())
+					sendNotPossibleMessage(player);
+				
+				return;
+			}
+			else if (player.isMounted() && PetDataTable.isStrider(PetDataTable.getPetIdByItemId(petItemId))
+					&& petItem != null && petItem.getEnchantLevel() < 55)
+			{
+				player.sendMessage("Your Strider has not reached the required level.");
+				
+				if (!isCastleManager())
+					sendNotPossibleMessage(player);
+				
+				return;
+			}
+			
+			// Wyvern requires Config.MANAGER_CRYSTAL_COUNT crystal for ride...
+			if (player.getInventory().getItemByItemId(1460) != null
+					&& player.getInventory().getItemByItemId(1460).getCount() >= Config.ALT_MANAGER_CRYSTAL_COUNT)
+			{
+				if (!player.disarmWeapons(true))
+					return;
+				
+				if (player.isMounted())
+					player.dismount();
+				
+				if (player.getPet() != null)
+					player.getPet().unSummon(player);
+				
+				if (player.mount(12621, 0, true))
+				{
+					player.getInventory().destroyItemByItemId("Wyvern", 1460, Config.ALT_MANAGER_CRYSTAL_COUNT, player,
+							player.getTarget());
+					player.addSkill(SkillTable.getInstance().getInfo(4289, 1));
+					player.sendMessage("The Wyvern has been summoned successfully!");
+				}
+			}
+			else
+			{
+				if (!isCastleManager())
+					sendNotPossibleMessage(player);
+				
+				player.sendMessage("You need " + Config.ALT_MANAGER_CRYSTAL_COUNT + " Crystals: B Grade.");
+			}
+		}
+	}
+	
 	@Override
 	public void onAction(L2PcInstance player)
 	{
 		if (!canTarget(player))
 			return;
-
+		
 		player.setLastFolkNPC(this);
-
+		
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
@@ -136,7 +139,7 @@ public class L2WyvernManagerInstance extends L2Npc
 		}
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
-
+	
 	private void showMessageWindow(L2PcInstance player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
@@ -145,13 +148,13 @@ public class L2WyvernManagerInstance extends L2Npc
 		
 		if (isCastleManager())
 			filename = "data/html/wyvernmanager/castle-wyvernmanager-no.htm";
-
+		
 		if (isOwnerClan(player))
 		{
 			if (isCastleManager())
-				filename = "data/html/wyvernmanager/castle-wyvernmanager.htm";    // Castle Owner message window
+				filename = "data/html/wyvernmanager/castle-wyvernmanager.htm"; // Castle Owner message window
 			else
-				filename = "data/html/wyvernmanager/fortress-wyvernmanager.htm";  // Fort Owner message window
+				filename = "data/html/wyvernmanager/fortress-wyvernmanager.htm"; // Fort Owner message window
 		}
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setFile(filename);
@@ -160,7 +163,7 @@ public class L2WyvernManagerInstance extends L2Npc
 		html.replace("%count%", String.valueOf(Config.ALT_MANAGER_CRYSTAL_COUNT));
 		player.sendPacket(html);
 	}
-
+	
 	protected boolean isOwnerClan(L2PcInstance player)
 	{
 		return true;
@@ -172,15 +175,15 @@ public class L2WyvernManagerInstance extends L2Npc
 		
 		if (npcId >= 36457 && npcId <= 36477)
 			return false;
-
+		
 		return true;
 	}
 	
 	private void sendNotPossibleMessage(L2PcInstance player)
 	{
-    	NpcHtmlMessage html = new NpcHtmlMessage(1);
-    	html.setFile("data/html/wyvernmanager/fortress-wyvernmanager-notpossible.htm");
-    	html.replace("%count%", String.valueOf(Config.ALT_MANAGER_CRYSTAL_COUNT));
-    	player.sendPacket(html);
+		NpcHtmlMessage html = new NpcHtmlMessage(1);
+		html.setFile("data/html/wyvernmanager/fortress-wyvernmanager-notpossible.htm");
+		html.replace("%count%", String.valueOf(Config.ALT_MANAGER_CRYSTAL_COUNT));
+		player.sendPacket(html);
 	}
 }

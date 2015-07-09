@@ -46,15 +46,15 @@ public class FactionQuestManager
 	
 	// =========================================================
 	// Data Field
-	private FastList<FactionQuest>	_quests;
-
+	private FastList<FactionQuest> _quests;
+	
 	// =========================================================
 	// Constructor
 	public FactionQuestManager()
 	{
 		load();
 	}
-
+	
 	// =========================================================
 	// Method - Public
 	public final void reload()
@@ -62,7 +62,7 @@ public class FactionQuestManager
 		getFactionQuests().clear();
 		load();
 	}
-
+	
 	// =========================================================
 	// Method - Private
 	private final void load()
@@ -72,20 +72,22 @@ public class FactionQuestManager
 		{
 			PreparedStatement statement;
 			ResultSet rs;
-
+			
 			con = L2DatabaseFactory.getInstance().getConnection(con);
-
-			statement = con.prepareStatement("Select id, faction_id, name, description, reward, mobid, amount, min_level from faction_quests order by id");
+			
+			statement =
+					con.prepareStatement("Select id, faction_id, name, description, reward, mobid, amount, min_level from faction_quests order by id");
 			rs = statement.executeQuery();
 			while (rs.next())
 			{
 				getFactionQuests().add(
-						new FactionQuest(rs.getInt("id"), rs.getInt("faction_id"), rs.getString("name"), rs.getString("description"), rs.getInt("reward"), rs
-								.getInt("mobid"), rs.getInt("amount"), rs.getInt("min_level")));
+						new FactionQuest(rs.getInt("id"), rs.getInt("faction_id"), rs.getString("name"), rs
+								.getString("description"), rs.getInt("reward"), rs.getInt("mobid"),
+								rs.getInt("amount"), rs.getInt("min_level")));
 			}
-
+			
 			statement.close();
-
+			
 			_log.info("Loaded: " + getFactionQuests().size() + " factionquests");
 		}
 		catch (Exception e)
@@ -97,7 +99,7 @@ public class FactionQuestManager
 			L2DatabaseFactory.close(con);
 		}
 	}
-
+	
 	// =========================================================
 	// Property - Public
 	public final FactionQuest getFactionQuest(int questId)
@@ -107,7 +109,7 @@ public class FactionQuestManager
 			return getFactionQuests().get(index);
 		return null;
 	}
-
+	
 	public final int getFactionQuestIndex(int questId)
 	{
 		FactionQuest quest;
@@ -119,7 +121,7 @@ public class FactionQuestManager
 		}
 		return -1;
 	}
-
+	
 	public final FastList<FactionQuest> getFactionQuests()
 	{
 		if (_quests == null)
