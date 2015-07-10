@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.model.CursedWeapon;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class CharSelectionInfo extends L2ServerPacket
@@ -40,7 +40,7 @@ public class CharSelectionInfo extends L2ServerPacket
 	private final int _sessionId;
 	private final CharSelectInfoPackage[] _characterPackages;
 	
-	public CharSelectionInfo(L2GameClient client)
+	public CharSelectionInfo(L2Client client)
 	{
 		_sessionId = client.getSessionId().playOkID1;
 		_loginName = client.getAccountName();
@@ -227,7 +227,7 @@ public class CharSelectionInfo extends L2ServerPacket
 				if (clan != null)
 					clan.removeClanMember(objectId, 0);
 				
-				L2GameClient.deleteCharByObjId(objectId);
+				L2Client.deleteCharByObjId(objectId);
 				return null;
 			}
 		}

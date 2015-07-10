@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
-import com.l2jfree.gameserver.network.L2GameClient;
-import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
+import com.l2jfree.gameserver.network.L2Client;
+import com.l2jfree.gameserver.network.L2Client.GameClientState;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
 import com.l2jfree.gameserver.network.packets.server.RestartResponse;
@@ -35,7 +35,7 @@ public final class RequestRestart extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2GameClient client = getClient();
+		L2Client client = getClient();
 		L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 			return;

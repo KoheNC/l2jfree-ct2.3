@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.model.actor.stat.PcStat;
 import com.l2jfree.gameserver.model.actor.status.PcStatus;
 import com.l2jfree.gameserver.model.actor.view.PcView;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
@@ -91,7 +91,7 @@ public final class UserInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public void packetSent(L2GameClient client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2PcInstance activeChar)
 	{
 		if (Config.PACKET_FINAL)
 		{
@@ -101,7 +101,7 @@ public final class UserInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public boolean canBeSentTo(L2GameClient client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
 	{
 		return _activeChar == activeChar;
 	}

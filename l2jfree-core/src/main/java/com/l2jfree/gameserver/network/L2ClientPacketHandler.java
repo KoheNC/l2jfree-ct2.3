@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
+import com.l2jfree.gameserver.network.L2Client.GameClientState;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.client.*;
@@ -39,12 +39,12 @@ import com.l2jfree.mmocore.network.IPacketHandler;
  * 
  * @author KenM
  */
-public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L2ClientPacket, L2ServerPacket>
+public final class L2ClientPacketHandler implements IPacketHandler<L2Client, L2ClientPacket, L2ServerPacket>
 {
-	private static final Log _log = LogFactory.getLog(L2GamePacketHandler.class);
+	private static final Log _log = LogFactory.getLog(L2ClientPacketHandler.class);
 	
 	@Override
-	public L2ClientPacket handlePacket(ByteBuffer buf, L2GameClient client, final int opcode)
+	public L2ClientPacket handlePacket(ByteBuffer buf, L2Client client, final int opcode)
 	{
 		L2ClientPacket msg = null;
 		GameClientState state = client.getState();
@@ -898,8 +898,8 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L
 		return msg;
 	}
 	
-	private void printDebug(ByteBuffer buf, L2GameClient client, int... opcodes)
+	private void printDebug(ByteBuffer buf, L2Client client, int... opcodes)
 	{
-		L2GameSelectorThread.getInstance().printDebug(buf, client, opcodes);
+		L2ClientSelectorThread.getInstance().printDebug(buf, client, opcodes);
 	}
 }

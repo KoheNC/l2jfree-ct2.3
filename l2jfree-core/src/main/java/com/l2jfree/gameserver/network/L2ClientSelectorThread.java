@@ -36,11 +36,11 @@ import com.l2jfree.mmocore.network.SelectorConfig;
 import com.l2jfree.mmocore.network.SelectorThread;
 import com.l2jfree.tools.util.HexUtil;
 
-public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2ClientPacket, L2ServerPacket>
+public final class L2ClientSelectorThread extends SelectorThread<L2Client, L2ClientPacket, L2ServerPacket>
 {
 	private static final class SingletonHolder
 	{
-		private static final L2GameSelectorThread INSTANCE;
+		private static final L2ClientSelectorThread INSTANCE;
 		
 		static
 		{
@@ -50,9 +50,9 @@ public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2C
 			try
 			{
 				if (Config.PACKET_FINAL)
-					INSTANCE = new L2GameSelectorThread(sc, new L2GamePacketHandlerFinal());
+					INSTANCE = new L2ClientSelectorThread(sc, new L2ClientPacketHandlerFinal());
 				else
-					INSTANCE = new L2GameSelectorThread(sc, new L2GamePacketHandler());
+					INSTANCE = new L2ClientSelectorThread(sc, new L2ClientPacketHandler());
 			}
 			catch (Exception e)
 			{
@@ -61,18 +61,18 @@ public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2C
 		}
 	}
 	
-	public static L2GameSelectorThread getInstance()
+	public static L2ClientSelectorThread getInstance()
 	{
 		return SingletonHolder.INSTANCE;
 	}
 	
-	private L2GameSelectorThread(SelectorConfig sc,
-			IPacketHandler<L2GameClient, L2ClientPacket, L2ServerPacket> packetHandler) throws IOException
+	private L2ClientSelectorThread(SelectorConfig sc,
+			IPacketHandler<L2Client, L2ClientPacket, L2ServerPacket> packetHandler) throws IOException
 	{
 		super(sc, packetHandler);
 	}
 	
-	public void printDebug(ByteBuffer buf, L2GameClient client, int... opcodes)
+	public void printDebug(ByteBuffer buf, L2Client client, int... opcodes)
 	{
 		report(ErrorMode.INVALID_OPCODE, client, null, null);
 		
@@ -101,9 +101,9 @@ public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2C
 	// ==============================================
 	
 	@Override
-	protected L2GameClient createClient(SocketChannel socketChannel) throws ClosedChannelException
+	protected L2Client createClient(SocketChannel socketChannel) throws ClosedChannelException
 	{
-		return new L2GameClient(this, socketChannel);
+		return new L2Client(this, socketChannel);
 	}
 	
 	@Override
@@ -156,7 +156,7 @@ public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2C
 	}
 	
 	@Override
-	public boolean canReceivePacketFrom(L2GameClient client, int opcode)
+	public boolean canReceivePacketFrom(L2Client client, int opcode)
 	{
 		if (!super.canReceivePacketFrom(client, opcode))
 			return false;

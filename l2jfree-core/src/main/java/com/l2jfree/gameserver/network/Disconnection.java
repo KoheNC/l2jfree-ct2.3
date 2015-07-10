@@ -28,7 +28,7 @@ public final class Disconnection
 {
 	private static final Log _log = LogFactory.getLog(Disconnection.class);
 	
-	public static L2GameClient getClient(L2GameClient client, L2PcInstance activeChar)
+	public static L2Client getClient(L2Client client, L2PcInstance activeChar)
 	{
 		if (client != null)
 			return client;
@@ -39,7 +39,7 @@ public final class Disconnection
 		return null;
 	}
 	
-	public static L2PcInstance getActiveChar(L2GameClient client, L2PcInstance activeChar)
+	public static L2PcInstance getActiveChar(L2Client client, L2PcInstance activeChar)
 	{
 		if (activeChar != null)
 			return activeChar;
@@ -50,10 +50,10 @@ public final class Disconnection
 		return null;
 	}
 	
-	private final L2GameClient _client;
+	private final L2Client _client;
 	private final L2PcInstance _activeChar;
 	
-	public Disconnection(L2GameClient client)
+	public Disconnection(L2Client client)
 	{
 		this(client, null);
 	}
@@ -63,7 +63,7 @@ public final class Disconnection
 		this(null, activeChar);
 	}
 	
-	public Disconnection(L2GameClient client, L2PcInstance activeChar)
+	public Disconnection(L2Client client, L2PcInstance activeChar)
 	{
 		_client = getClient(client, activeChar);
 		_activeChar = getActiveChar(client, activeChar);

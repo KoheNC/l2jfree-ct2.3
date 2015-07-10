@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class PartySmallWindowAdd extends L2ServerPacket
@@ -30,7 +30,7 @@ public class PartySmallWindowAdd extends L2ServerPacket
 	}
 	
 	@Override
-	protected final void writeImpl(L2GameClient client, L2PcInstance activeChar)
+	protected final void writeImpl(L2Client client, L2PcInstance activeChar)
 	{
 		if (activeChar == null)
 			return;

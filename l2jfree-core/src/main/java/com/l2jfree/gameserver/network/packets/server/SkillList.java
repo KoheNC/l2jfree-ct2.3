@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
@@ -33,7 +33,7 @@ public final class SkillList extends L2ServerPacket
 	}
 	
 	@Override
-	public void packetSent(L2GameClient client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2PcInstance activeChar)
 	{
 		if (activeChar != null)
 			activeChar.sendSkillCoolTime();

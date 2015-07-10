@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 
 /**
  * @author zabbix
@@ -32,7 +32,7 @@ public class GameGuardQuery extends StaticPacket
 	}
 	
 	@Override
-	public void prepareToSend(final L2GameClient client, final L2PcInstance activeChar)
+	public void prepareToSend(final L2Client client, final L2PcInstance activeChar)
 	{
 		// Lets make user as gg-unauthorized
 		// We will set him as ggOK after reply fromclient

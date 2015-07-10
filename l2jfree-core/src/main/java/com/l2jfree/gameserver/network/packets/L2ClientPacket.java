@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.mmocore.network.InvalidPacketException;
@@ -32,7 +32,7 @@ import com.l2jfree.mmocore.network.ReceivablePacket;
  * 
  * @author KenM
  */
-public abstract class L2ClientPacket extends ReceivablePacket<L2GameClient, L2ClientPacket, L2ServerPacket>
+public abstract class L2ClientPacket extends ReceivablePacket<L2Client, L2ClientPacket, L2ServerPacket>
 {
 	protected static final Log _log = LogFactory.getLog(L2ClientPacket.class);
 	

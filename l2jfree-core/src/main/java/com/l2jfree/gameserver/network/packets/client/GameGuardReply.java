@@ -18,7 +18,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 
 public class GameGuardReply extends L2ClientPacket
@@ -43,7 +43,7 @@ public class GameGuardReply extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2GameClient client = getClient();
+		L2Client client = getClient();
 		try
 		{
 			MessageDigest md = MessageDigest.getInstance("SHA");

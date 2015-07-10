@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.zone.L2Zone;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 
 /**
  * @author Luca Baldi
@@ -35,7 +35,7 @@ public final class EtcStatusUpdate extends StaticPacket
 	 * @see com.l2jfree.gameserver.network.packets.L2ServerPacket#writeImpl()
 	 */
 	@Override
-	protected void writeImpl(L2GameClient client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2PcInstance activeChar)
 	{
 		if (activeChar == null)
 			return;

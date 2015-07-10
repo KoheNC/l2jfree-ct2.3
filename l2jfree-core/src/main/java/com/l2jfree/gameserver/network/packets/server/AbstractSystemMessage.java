@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.L2Summon;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
@@ -276,7 +276,7 @@ public abstract class AbstractSystemMessage<T extends AbstractSystemMessage> ext
 	}
 	
 	@Override
-	public void prepareToSend(L2GameClient client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2PcInstance activeChar)
 	{
 		int count = 0;
 		

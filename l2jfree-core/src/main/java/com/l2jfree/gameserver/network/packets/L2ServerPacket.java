@@ -24,14 +24,14 @@ import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.mmocore.network.SendablePacket;
 
 /**
  * @author KenM
  */
-public abstract class L2ServerPacket extends SendablePacket<L2GameClient, L2ClientPacket, L2ServerPacket>
+public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPacket, L2ServerPacket>
 {
 	protected static final Log _log = LogFactory.getLog(L2ServerPacket.class);
 	
@@ -40,16 +40,16 @@ public abstract class L2ServerPacket extends SendablePacket<L2GameClient, L2Clie
 	}
 	
 	@Override
-	protected final void write(L2GameClient client)
+	protected final void write(L2Client client)
 	{
 		writeImpl(client, client.getActiveChar());
 	}
 	
-	public void prepareToSend(L2GameClient client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2PcInstance activeChar)
 	{
 	}
 	
-	public void packetSent(L2GameClient client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2PcInstance activeChar)
 	{
 	}
 	
@@ -57,12 +57,12 @@ public abstract class L2ServerPacket extends SendablePacket<L2GameClient, L2Clie
 	{
 	}
 	
-	protected void writeImpl(L2GameClient client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2PcInstance activeChar)
 	{
 		writeImpl();
 	}
 	
-	public boolean canBeSentTo(L2GameClient client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
 	{
 		return true;
 	}

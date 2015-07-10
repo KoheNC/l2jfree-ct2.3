@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.LoginServerThread;
 import com.l2jfree.gameserver.LoginServerThread.SessionKey;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 
 /**
@@ -64,7 +64,7 @@ public class AuthLogin extends L2ClientPacket
 			_log.info("Key: " + key);
 		}
 		
-		L2GameClient client = getClient();
+		L2Client client = getClient();
 		// avoid potential exploits
 		if (client.getAccountName() == null)
 		{

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 
 /**
  * Opens a dialog to change your title (nickname) and name color. 
@@ -31,7 +31,7 @@ public final class ExChangeNicknameNColor extends StaticPacket
 	}
 	
 	@Override
-	protected void writeImpl(L2GameClient client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2PcInstance activeChar)
 	{
 		writeC(0xFE);
 		writeH(0x83);

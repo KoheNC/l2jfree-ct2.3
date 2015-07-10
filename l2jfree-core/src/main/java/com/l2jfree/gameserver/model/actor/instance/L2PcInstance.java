@@ -196,7 +196,7 @@ import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.zone.L2JailZone;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.Disconnection;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -474,7 +474,7 @@ public final class L2PcInstance extends L2Playable
 		}
 	}
 	
-	private L2GameClient _client;
+	private L2Client _client;
 	
 	private final PcAppearance _appearance;
 	
@@ -3667,7 +3667,7 @@ public final class L2PcInstance extends L2Playable
 	/**
 	 * Get the client owner of this char.<BR><BR>
 	 */
-	public L2GameClient getClient()
+	public L2Client getClient()
 	{
 		return _client;
 	}
@@ -3675,7 +3675,7 @@ public final class L2PcInstance extends L2Playable
 	/**
 	 * Set the active connection with the client.<BR><BR>
 	 */
-	public void setClient(L2GameClient client)
+	public void setClient(L2Client client)
 	{
 		_client = client;
 	}
@@ -4071,7 +4071,7 @@ public final class L2PcInstance extends L2Playable
 		@Override
 		public void run()
 		{
-			L2GameClient client = getClient();
+			L2Client client = getClient();
 			if (client != null && !client.isAuthedGG() && isOnline() == 1)
 			{
 				//GmListTable.broadcastMessageToGMs("Client "+client+" failed to reply GameGuard query and is being kicked!");
@@ -4089,7 +4089,7 @@ public final class L2PcInstance extends L2Playable
 	@SuppressWarnings("deprecation")
 	public void sendPacket(L2ServerPacket packet)
 	{
-		final L2GameClient client = _client;
+		final L2Client client = _client;
 		if (client != null)
 			client.sendPacket(packet);
 	}

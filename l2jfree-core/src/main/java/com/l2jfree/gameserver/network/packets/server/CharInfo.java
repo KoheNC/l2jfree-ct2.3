@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.view.DecoyView;
 import com.l2jfree.gameserver.model.actor.view.PcLikeView;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
 
@@ -55,7 +55,7 @@ public final class CharInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public void packetSent(L2GameClient client, L2PcInstance attacker)
+	public void packetSent(L2Client client, L2PcInstance attacker)
 	{
 		RelationChanged.sendRelationChanged(_activeChar, attacker);
 	}
@@ -225,7 +225,7 @@ public final class CharInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public boolean canBeSentTo(L2GameClient client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
 	{
 		if (activeChar == null)
 			return false;

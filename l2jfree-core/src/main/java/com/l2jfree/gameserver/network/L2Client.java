@@ -55,9 +55,9 @@ import com.l2jfree.util.concurrent.RunnableStatsManager;
  * 
  * @author KenM
  */
-public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPacket, L2ServerPacket>
+public final class L2Client extends MMOConnection<L2Client, L2ClientPacket, L2ServerPacket>
 {
-	private static final Log _log = LogFactory.getLog(L2GameClient.class);
+	private static final Log _log = LogFactory.getLog(L2Client.class);
 	
 	/**
 	 * @author KenM
@@ -80,7 +80,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 	private String _hostAddress;
 	private boolean _protocol;
 	
-	public L2GameClient(SelectorThread<L2GameClient, L2ClientPacket, L2ServerPacket> selectorThread,
+	public L2Client(SelectorThread<L2Client, L2ClientPacket, L2ServerPacket> selectorThread,
 			SocketChannel socketChannel) throws ClosedChannelException
 	{
 		super(selectorThread, socketChannel);
@@ -443,7 +443,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 		@Override
 		public void run()
 		{
-			synchronized (L2GameClient.this)
+			synchronized (L2Client.this)
 			{
 				if (_serverPacketQueue != this)
 					return;

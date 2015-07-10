@@ -22,28 +22,18 @@ import com.l2jfree.gameserver.network.packets.L2ClientPacket;
  */
 public class RequestKeyMapping extends L2ClientPacket
 {
-	
-	/**
-	 * @see com.l2jfree.gameserver.network.packets.L2ClientPacket.L2GameClientPacket#getType()
-	 */
 	@Override
 	public String getType()
 	{
 		return "[C] D0:21 RequestKeyMapping";
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.packets.L2ClientPacket.L2GameClientPacket#readImpl()
-	 */
 	@Override
 	protected void readImpl()
 	{
 		// trigger (no data)
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.packets.L2ClientPacket.L2GameClientPacket#runImpl()
-	 */
 	@Override
 	protected void runImpl()
 	{
