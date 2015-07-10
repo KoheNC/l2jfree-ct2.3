@@ -17,6 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Party;
@@ -106,18 +107,18 @@ public class L2FestivalMonsterInstance extends L2MonsterInstance
 	@Override
 	public void doItemDrop(L2Creature lastAttacker)
 	{
-		L2PcInstance killingChar = null;
+		L2Player killingChar = null;
 		
-		if (!(lastAttacker instanceof L2PcInstance))
+		if (!(lastAttacker instanceof L2Player))
 			return;
 		
-		killingChar = (L2PcInstance)lastAttacker;
+		killingChar = (L2Player)lastAttacker;
 		L2Party associatedParty = killingChar.getParty();
 		
 		if (associatedParty == null)
 			return;
 		
-		L2PcInstance partyLeader = associatedParty.getPartyMembers().get(0);
+		L2Player partyLeader = associatedParty.getPartyMembers().get(0);
 		L2ItemInstance addedOfferings =
 				partyLeader.getInventory().addItem("Sign", SevenSignsFestival.FESTIVAL_OFFERING_ID, _bonusMultiplier,
 						partyLeader, this);

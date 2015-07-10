@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.model.L2Object;
@@ -33,7 +33,7 @@ public class AdminInstance implements IAdminCommandHandler
 			"admin_destroyinstance", "admin_listinstances" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
@@ -86,9 +86,9 @@ public class AdminInstance implements IAdminCommandHandler
 					return false;
 				}
 				target.setInstanceId(val);
-				if (target instanceof L2PcInstance)
+				if (target instanceof L2Player)
 				{
-					L2PcInstance player = (L2PcInstance)target;
+					L2Player player = (L2Player)target;
 					player.sendMessage("Admin set your instance to:" + val);
 					InstanceManager.getInstance().getInstance(val).addPlayer(player.getObjectId());
 					player.teleToLocation(player.getX(), player.getY(), player.getZ());

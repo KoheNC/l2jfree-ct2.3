@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -32,10 +32,10 @@ public class TeleportBookmark implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (playable == null || item == null || !(playable instanceof L2PcInstance))
+		if (playable == null || item == null || !(playable instanceof L2Player))
 			return;
 		
-		L2PcInstance player = (L2PcInstance)playable;
+		L2Player player = (L2Player)playable;
 		
 		if (player.getBookMarkSlot() >= 9)
 		{

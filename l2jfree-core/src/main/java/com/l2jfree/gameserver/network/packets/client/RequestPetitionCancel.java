@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.GmListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.PetitionManager;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -47,7 +47,7 @@ public class RequestPetitionCancel extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		

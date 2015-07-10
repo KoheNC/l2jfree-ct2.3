@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -53,11 +53,11 @@ public class RequestSendFriendMsg extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
-		L2PcInstance targetPlayer = L2World.getInstance().getPlayer(_receiver);
+		L2Player targetPlayer = L2World.getInstance().getPlayer(_receiver);
 		if (targetPlayer == null)
 		{
 			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);

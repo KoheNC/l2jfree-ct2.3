@@ -12,10 +12,10 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 
@@ -41,7 +41,7 @@ public final class ClanWarehouse extends Warehouse
 	}
 	
 	@Override
-	public L2PcInstance getOwner()
+	public L2Player getOwner()
 	{
 		return _clan.getLeader().getPlayerInstance();
 	}

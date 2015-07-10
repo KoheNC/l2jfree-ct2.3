@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.L2Client.GameClientState;
@@ -52,7 +52,7 @@ public final class CharacterSelected extends L2ClientPacket
 		if (getClient().getActiveChar() != null)
 			return;
 		
-		final L2PcInstance cha = getClient().loadCharFromDisk(_charSlot);
+		final L2Player cha = getClient().loadCharFromDisk(_charSlot);
 		
 		if (cha == null)
 		{

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.usercommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 
 public class GraduateList implements IUserCommandHandler
@@ -22,7 +22,7 @@ public class GraduateList implements IUserCommandHandler
 	private static final int[] COMMAND_IDS = { 110 };
 	
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		activeChar.sendMessage("Command /graduatelist not implemented yet.");
 		return true;

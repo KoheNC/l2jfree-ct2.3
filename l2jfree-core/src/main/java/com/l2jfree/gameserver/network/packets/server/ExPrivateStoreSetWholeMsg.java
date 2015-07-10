@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -26,13 +26,13 @@ public class ExPrivateStoreSetWholeMsg extends L2ServerPacket
 	private final int _objectId;
 	private final String _msg;
 	
-	public ExPrivateStoreSetWholeMsg(L2PcInstance player, String msg)
+	public ExPrivateStoreSetWholeMsg(L2Player player, String msg)
 	{
 		_objectId = player.getObjectId();
 		_msg = msg;
 	}
 	
-	public ExPrivateStoreSetWholeMsg(L2PcInstance player)
+	public ExPrivateStoreSetWholeMsg(L2Player player)
 	{
 		this(player, player.getSellList().getTitle());
 	}

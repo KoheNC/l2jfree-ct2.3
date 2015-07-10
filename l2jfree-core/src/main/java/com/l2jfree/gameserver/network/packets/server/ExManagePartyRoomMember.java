@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -36,9 +36,9 @@ public class ExManagePartyRoomMember extends L2ServerPacket
 	public static final int REMOVED = 0x02;
 	
 	private final int _type;
-	private final L2PcInstance _member;
+	private final L2Player _member;
 	
-	public ExManagePartyRoomMember(int changeType, L2PcInstance member)
+	public ExManagePartyRoomMember(int changeType, L2Player member)
 	{
 		_type = changeType;
 		_member = member;

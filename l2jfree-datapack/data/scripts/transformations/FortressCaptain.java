@@ -14,7 +14,7 @@
  */
 package transformations;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
 
@@ -27,7 +27,7 @@ public class FortressCaptain extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 891, 1); // Fortress Captain Twister
 		addSkill(player, 892, 1); // Fortress Captain Blaze
@@ -35,7 +35,7 @@ public class FortressCaptain extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 891); // Fortress Captain Twister
 		removeSkill(player, 892); // Fortress Captain Blaze

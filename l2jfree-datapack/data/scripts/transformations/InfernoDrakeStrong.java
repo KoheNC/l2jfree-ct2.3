@@ -14,7 +14,7 @@
  */
 package transformations;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
 
@@ -27,7 +27,7 @@ public class InfernoDrakeStrong extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 576, 4); // Paw Strike
 		addSkill(player, 577, 4); // Fire Breath
@@ -36,7 +36,7 @@ public class InfernoDrakeStrong extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 576); // Paw Strike
 		removeSkill(player, 577); // Fire Breath

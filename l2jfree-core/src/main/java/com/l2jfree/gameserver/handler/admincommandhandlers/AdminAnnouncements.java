@@ -20,7 +20,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.AutoAnnouncements;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -48,7 +48,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 	private static ScheduledFuture<?> _chatReEnable = null;
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_list_announcements"))
 		{
@@ -66,7 +66,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 		}
 		else if (command.equals("admin_announce_announcements"))
 		{
-			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 			{
 				Announcements.getInstance().showAnnouncements(player);
 			}

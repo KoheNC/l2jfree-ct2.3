@@ -12,12 +12,13 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.gameobjects.view;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 /**
- * @author NB4L1
+ * This class ...
+ * 
+ * @version $Revision: 1.3.2.1.2.12 $ $Date: 2005/04/06 16:13:42 $
  */
-public interface CharLikeView
+public abstract class Warehouse extends ItemContainer
 {
-	public void refresh();
 }

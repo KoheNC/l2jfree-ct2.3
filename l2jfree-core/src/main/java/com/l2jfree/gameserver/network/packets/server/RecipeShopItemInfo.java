@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -24,10 +24,10 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class RecipeShopItemInfo extends L2ServerPacket
 {
 	private static final String _S__DA_RecipeShopItemInfo = "[S] da RecipeShopItemInfo";
-	private final L2PcInstance _crafter;
+	private final L2Player _crafter;
 	private final int _recipeId;
 	
-	public RecipeShopItemInfo(L2PcInstance crafter, int recipeId)
+	public RecipeShopItemInfo(L2Player crafter, int recipeId)
 	{
 		_crafter = crafter;
 		_recipeId = recipeId;

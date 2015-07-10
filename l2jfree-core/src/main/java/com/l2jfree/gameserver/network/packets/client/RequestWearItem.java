@@ -24,13 +24,13 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MercManagerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2TradeList;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
@@ -60,7 +60,7 @@ public class RequestWearItem extends L2ClientPacket
 	private int[] _items;
 	
 	/** Player that request a Try on */
-	protected L2PcInstance _activeChar;
+	protected L2Player _activeChar;
 	
 	private class RemoveWearItemsTask implements Runnable
 	{
@@ -197,7 +197,7 @@ public class RequestWearItem extends L2ClientPacket
 			slots++;
 			
 			totalPrice += Config.WEAR_PRICE;
-			if (totalPrice > PcInventory.MAX_ADENA)
+			if (totalPrice > PlayerInventory.MAX_ADENA)
 			{
 				requestFailed(SystemMessageId.YOU_HAVE_EXCEEDED_QUANTITY_THAT_CAN_BE_INPUTTED);
 				return;
@@ -259,7 +259,7 @@ public class RequestWearItem extends L2ClientPacket
 		su.addAttribute(StatusUpdate.CUR_LOAD, _activeChar.getCurrentLoad());
 		sendPacket(su);
 		
-		// Send a Server->Client packet UserInfo to this L2PcInstance and CharInfo to all L2PcInstance in its _knownPlayers
+		// Send a Server->Client packet UserInfo to this L2Player and CharInfo to all L2Player in its _knownPlayers
 		_activeChar.broadcastUserInfo();
 		
 		// All weared items should be removed in ALLOW_WEAR_DELAY sec.

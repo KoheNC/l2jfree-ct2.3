@@ -17,6 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -52,7 +53,7 @@ public class L2StaticObjectInstance extends L2Creature
 	private int _y;
 	private String _texture;
 	
-	private volatile L2PcInstance _occupier = null;
+	private volatile L2Player _occupier = null;
 	
 	/** This class may be created only by L2Creature and only for AI */
 	public class AIAccessor extends L2Creature.AIAccessor
@@ -153,7 +154,7 @@ public class L2StaticObjectInstance extends L2Creature
 		return (_occupier != null);
 	}
 	
-	public void setOccupier(L2PcInstance actualPersonToSitOn)
+	public void setOccupier(L2Player actualPersonToSitOn)
 	{
 		_occupier = actualPersonToSitOn;
 	}
@@ -197,25 +198,25 @@ public class L2StaticObjectInstance extends L2Creature
 	 * @param player
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (_type < 0)
 			_log.info("L2StaticObjectInstance: StaticObject with invalid type! StaticObjectId: " + getStaticObjectId());
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!player.isInsideRadius(this, INTERACTION_DISTANCE, false, false))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 				
-				// Send a Server->Client packet ActionFailed (target is out of interaction range) to the L2PcInstance player
+				// Send a Server->Client packet ActionFailed (target is out of interaction range) to the L2Player player
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 			else
@@ -237,7 +238,7 @@ public class L2StaticObjectInstance extends L2Creature
 				else if (_type == 0)
 				{
 					player.sendPacket(new ShowTownMap(_texture, getMapX(), getMapY()));
-					// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+					// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 					player.sendPacket(ActionFailed.STATIC_PACKET);
 				}
 			}
@@ -245,7 +246,7 @@ public class L2StaticObjectInstance extends L2Creature
 	}
 	
 	@Override
-	public void onActionShift(L2PcInstance player)
+	public void onActionShift(L2Player player)
 	{
 		if (player == null)
 			return;
@@ -297,7 +298,7 @@ public class L2StaticObjectInstance extends L2Creature
 	 * @param player Player who changes wait type
 	 * @return whether the ChairSit was broadcasted
 	 */
-	public boolean onSit(L2PcInstance player)
+	public boolean onSit(L2Player player)
 	{
 		// This check is added if player that sits on the chair was not
 		// removed from the world properly
@@ -364,7 +365,7 @@ public class L2StaticObjectInstance extends L2Creature
 	}
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 		activeChar.sendPacket(new StaticObject(this));
 	}

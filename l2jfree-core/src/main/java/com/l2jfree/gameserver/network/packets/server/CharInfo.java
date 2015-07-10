@@ -16,11 +16,11 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Decoy;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
-import com.l2jfree.gameserver.gameobjects.view.PcLikeView;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.view.IPlayerView;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
@@ -30,10 +30,10 @@ public final class CharInfo extends L2ServerPacket
 	private static final String _S__31_CHARINFO =
 			"[S] 31 CharInfo [dddddsddd dddddddddddd dddddddd hhhh d hhhhhhhhhhhh d hhhh hhhhhhhhhhhhhhhh dddddd dddddddd ffff ddd s ddddd ccccccc h c d c h ddd cc d ccc ddddddddddd]";
 	
-	private final L2PcInstance _activeChar;
-	private final PcLikeView _view;
+	private final L2Player _activeChar;
+	private final IPlayerView _view;
 	
-	public CharInfo(L2PcInstance cha)
+	public CharInfo(L2Player cha)
 	{
 		_view = cha.getView();
 		_view.refresh();
@@ -55,7 +55,7 @@ public final class CharInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public void packetSent(L2Client client, L2PcInstance attacker)
+	public void packetSent(L2Client client, L2Player attacker)
 	{
 		RelationChanged.sendRelationChanged(_activeChar, attacker);
 	}
@@ -63,8 +63,8 @@ public final class CharInfo extends L2ServerPacket
 	@Override
 	protected void writeImpl()
 	{
-		final PcAppearance _appearance = _activeChar.getAppearance();
-		final PcInventory _inv = _activeChar.getInventory();
+		final PlayerAppearance _appearance = _activeChar.getAppearance();
+		final PlayerInventory _inv = _activeChar.getInventory();
 		
 		writeC(0x31);
 		writeD(_view.getX());
@@ -225,7 +225,7 @@ public final class CharInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2Player activeChar)
 	{
 		if (activeChar == null)
 			return false;

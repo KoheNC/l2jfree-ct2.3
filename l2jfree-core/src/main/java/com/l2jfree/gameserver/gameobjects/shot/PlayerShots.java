@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.l2jfree.gameserver.datatables.ShotTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -35,7 +35,7 @@ import com.l2jfree.util.LazyFastSet;
 /**
  * @author NB4L1
  */
-public final class PcShots extends CreatureShots
+public final class PlayerShots extends CreatureShots
 {
 	private static final Map<Integer, ShotInfo> SHOTS = new HashMap<Integer, ShotInfo>();
 	
@@ -124,7 +124,7 @@ public final class PcShots extends CreatureShots
 	
 	private final Set<Integer> _activeSoulShots = new LazyFastSet<Integer>().setShared();
 	
-	public PcShots(L2PcInstance activeChar)
+	public PlayerShots(L2Player activeChar)
 	{
 		super(activeChar);
 	}
@@ -158,9 +158,9 @@ public final class PcShots extends CreatureShots
 	}
 	
 	@Override
-	protected L2PcInstance getActiveChar()
+	protected L2Player getActiveChar()
 	{
-		return (L2PcInstance)_activeChar;
+		return (L2Player)_activeChar;
 	}
 	
 	@Override
@@ -249,7 +249,7 @@ public final class PcShots extends CreatureShots
 		if (item == null)
 			return false;
 		
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		
 		// Since CT2.3, Blessed Shots can be used in Olympiad.
 		/*

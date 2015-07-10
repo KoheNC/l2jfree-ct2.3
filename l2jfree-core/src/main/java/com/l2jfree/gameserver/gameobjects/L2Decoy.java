@@ -14,19 +14,18 @@
  */
 package com.l2jfree.gameserver.gameobjects;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.network.packets.server.CharInfo;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 
 public abstract class L2Decoy extends L2Creature
 {
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	
-	public L2Decoy(int objectId, L2CreatureTemplate template, L2PcInstance owner)
+	public L2Decoy(int objectId, L2CreatureTemplate template, L2Player owner)
 	{
 		super(objectId, template);
 		getKnownList();
@@ -38,7 +37,7 @@ public abstract class L2Decoy extends L2Creature
 	}
 	
 	@Override
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
 		return new DecoyView(this);
 	}
@@ -57,7 +56,7 @@ public abstract class L2Decoy extends L2Creature
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		player.setTarget(this);
 	}
@@ -90,14 +89,14 @@ public abstract class L2Decoy extends L2Creature
 		return getTemplate().getLevel();
 	}
 	
-	public void deleteMe(L2PcInstance owner)
+	public void deleteMe(L2Player owner)
 	{
 		decayMe();
 		getKnownList().removeAllKnownObjects();
 		owner.setDecoy(null);
 	}
 	
-	public synchronized void unSummon(L2PcInstance owner)
+	public synchronized void unSummon(L2Player owner)
 	{
 		if (isVisible() && !isDead())
 		{
@@ -109,13 +108,13 @@ public abstract class L2Decoy extends L2Creature
 		}
 	}
 	
-	public final L2PcInstance getOwner()
+	public final L2Player getOwner()
 	{
 		return _owner;
 	}
 	
 	@Override
-	public L2PcInstance getActingPlayer()
+	public L2Player getActingPlayer()
 	{
 		return _owner;
 	}
@@ -127,7 +126,7 @@ public abstract class L2Decoy extends L2Creature
 	}
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 		activeChar.sendPacket(new CharInfo(this));
 	}

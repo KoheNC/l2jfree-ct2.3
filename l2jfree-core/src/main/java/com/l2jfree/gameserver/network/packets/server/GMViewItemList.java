@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -26,10 +26,10 @@ public class GMViewItemList extends L2ServerPacket
 {
 	private static final String _S__AD_GMVIEWITEMLIST = "[S] 94 GMViewItemList";
 	private final L2ItemInstance[] _items;
-	private final L2PcInstance _cha;
+	private final L2Player _cha;
 	private final String _playerName;
 	
-	public GMViewItemList(L2PcInstance cha)
+	public GMViewItemList(L2Player cha)
 	{
 		_items = cha.getInventory().getItems();
 		_playerName = cha.getName();

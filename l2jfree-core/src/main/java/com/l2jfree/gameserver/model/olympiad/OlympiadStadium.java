@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.olympiad;
 import java.util.Set;
 
 import com.l2jfree.gameserver.datatables.DoorTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.util.L2FastSet;
 
@@ -28,7 +28,7 @@ public final class OlympiadStadium
 {
 	private boolean _freeToUse = true;
 	private final int[] _doorIds = new int[2];
-	private final Set<L2PcInstance> _spectators = new L2FastSet<L2PcInstance>().setShared(true);
+	private final Set<L2Player> _spectators = new L2FastSet<L2Player>().setShared(true);
 	public final Location player1Spawn;
 	public final Location player2Spawn;
 	public final Location buffer1Spawn;
@@ -70,19 +70,19 @@ public final class OlympiadStadium
 		DoorTable.getInstance().closeDoors(_doorIds);
 	}
 	
-	protected void addSpectator(int id, L2PcInstance spec, boolean storeCoords)
+	protected void addSpectator(int id, L2Player spec, boolean storeCoords)
 	{
 		spec.enterOlympiadObserverMode(player1Spawn, id, storeCoords);
 		
 		_spectators.add(spec);
 	}
 	
-	protected Set<L2PcInstance> getSpectators()
+	protected Set<L2Player> getSpectators()
 	{
 		return _spectators;
 	}
 	
-	protected void removeSpectator(L2PcInstance spec)
+	protected void removeSpectator(L2Player spec)
 	{
 		_spectators.remove(spec);
 	}

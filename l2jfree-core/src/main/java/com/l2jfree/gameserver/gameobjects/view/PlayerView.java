@@ -15,21 +15,21 @@
 package com.l2jfree.gameserver.gameobjects.view;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.L2Transformation;
 
 /**
  * @author NB4L1
  */
-public final class PcView extends CharView<L2PcInstance> implements UniversalCharView
+public final class PlayerView extends CreatureView<L2Player> implements UniversalCharView
 {
-	public PcView(L2PcInstance activeChar)
+	public PlayerView(L2Player activeChar)
 	{
 		super(activeChar);
 	}
@@ -39,10 +39,10 @@ public final class PcView extends CharView<L2PcInstance> implements UniversalCha
 	{
 		super.refreshImpl();
 		
-		final L2PcInstance cha = _activeChar;
+		final L2Player cha = _activeChar;
 		final ObjectPosition position = cha.getPosition();
-		final PcAppearance appearance = cha.getAppearance();
-		final PcStat stat = cha.getStat();
+		final PlayerAppearance appearance = cha.getAppearance();
+		final PlayerStat stat = cha.getStat();
 		final L2Transformation transformation = cha.getTransformation();
 		
 		_objectId = cha.getObjectId();
@@ -68,7 +68,7 @@ public final class PcView extends CharView<L2PcInstance> implements UniversalCha
 		}
 		else
 		{
-			final L2PcTemplate template = cha.getBaseTemplate();
+			final L2PlayerTemplate template = cha.getBaseTemplate();
 			
 			if (appearance.getSex())
 			{

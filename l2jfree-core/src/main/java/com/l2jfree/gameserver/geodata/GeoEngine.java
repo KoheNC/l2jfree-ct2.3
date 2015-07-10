@@ -31,9 +31,9 @@ import java.util.StringTokenizer;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.geodata.pathfinding.Node;
 import com.l2jfree.gameserver.geodata.pathfinding.cellnodes.CellPathFinding;
 import com.l2jfree.gameserver.model.L2Object;
@@ -285,7 +285,7 @@ final class GeoEngine extends GeoData
 	}
 	
 	@Override
-	public boolean canSeeTargetDebug(L2PcInstance gm, L2Object target)
+	public boolean canSeeTargetDebug(L2Player gm, L2Object target)
 	{
 		int z = gm.getZ() + 45;
 		int z2 = target.getZ() + 45;
@@ -319,7 +319,7 @@ final class GeoEngine extends GeoData
 	}
 	
 	@Override
-	public void addGeoDataBug(L2PcInstance gm, String comment)
+	public void addGeoDataBug(L2Player gm, String comment)
 	{
 		int gx = (gm.getX() - L2World.MAP_MIN_X) >> 4;
 		int gy = (gm.getY() - L2World.MAP_MIN_Y) >> 4;
@@ -480,7 +480,7 @@ final class GeoEngine extends GeoData
 	 * 
 	 * Coordinates here are geodata x,y but z coordinate is world coordinate
 	 */
-	private boolean canSeeDebug(L2PcInstance gm, int x, int y, double z, int tx, int ty, int tz, int instanceId)
+	private boolean canSeeDebug(L2Player gm, int x, int y, double z, int tx, int ty, int tz, int instanceId)
 	{
 		int dx = (tx - x);
 		int dy = (ty - y);

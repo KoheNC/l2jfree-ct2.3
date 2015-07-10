@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.skills.Env;
@@ -42,11 +42,11 @@ public final class EffectChameleonRest extends L2Effect
 	protected boolean onStart()
 	{
 		L2Creature effected = getEffected();
-		if (effected instanceof L2PcInstance)
+		if (effected instanceof L2Player)
 		{
 			setChameleon(true);
-			((L2PcInstance)effected).setSilentMoving(true);
-			((L2PcInstance)effected).sitDown();
+			((L2Player)effected).setSilentMoving(true);
+			((L2Player)effected).sitDown();
 		}
 		else
 			effected.getAI().setIntention(CtrlIntention.AI_INTENTION_REST);
@@ -62,8 +62,8 @@ public final class EffectChameleonRest extends L2Effect
 		setChameleon(false);
 		
 		L2Creature effected = getEffected();
-		if (effected instanceof L2PcInstance)
-			((L2PcInstance)effected).setSilentMoving(false);
+		if (effected instanceof L2Player)
+			((L2Player)effected).setSilentMoving(false);
 	}
 	
 	@Override
@@ -79,9 +79,9 @@ public final class EffectChameleonRest extends L2Effect
 		if (getSkill().getSkillType() != L2SkillType.CONT)
 			return false;
 		
-		if (effected instanceof L2PcInstance)
+		if (effected instanceof L2Player)
 		{
-			if (!((L2PcInstance)effected).isSitting())
+			if (!((L2Player)effected).isSitting())
 				retval = false;
 		}
 		
@@ -104,7 +104,7 @@ public final class EffectChameleonRest extends L2Effect
 	private void setChameleon(boolean val)
 	{
 		L2Creature effected = getEffected();
-		if (effected instanceof L2PcInstance)
-			((L2PcInstance)effected).setRelax(val);
+		if (effected instanceof L2Player)
+			((L2Player)effected).setRelax(val);
 	}
 }

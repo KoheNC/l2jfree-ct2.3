@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.zone.L2Zone;
@@ -43,7 +43,7 @@ public class InstantJump extends ISkillConditionChecker
 		// You cannot jump while rooted right ;)
 		if (activeChar.isRooted())
 		{
-			if (activeChar instanceof L2PcInstance)
+			if (activeChar instanceof L2Player)
 			{
 				// Sends message that skill cannot be used...
 				SystemMessage sm = new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED);

@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.L2World;
@@ -95,7 +95,7 @@ public class SH
 			setAnnounceName("Scavenger Hunt");
 		
 		CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Hero, getAnnounceName(), announce);
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 			player.sendPacket(cs);
 	}
 	
@@ -110,7 +110,7 @@ public class SH
 		}, 1000 * 60 * minuts);
 	}
 	
-	public static void startEvent(L2PcInstance activeChar)
+	public static void startEvent(L2Player activeChar)
 	{
 		if (!canStart())
 		{
@@ -139,7 +139,7 @@ public class SH
 		return true;
 	}
 	
-	public static void checkPlayer(L2PcInstance activeChar)
+	public static void checkPlayer(L2Player activeChar)
 	{
 		int itemCount = 0;
 		
@@ -166,7 +166,7 @@ public class SH
 			activeChar.sendMessage("You do not have all the items requested!");
 	}
 	
-	public static void processWinner(L2PcInstance activeChar)
+	public static void processWinner(L2Player activeChar)
 	{
 		// takeItems(activeChar); still thinking about it
 		Items item = getPrizes().get(getWinners().size());
@@ -187,7 +187,7 @@ public class SH
 		_started = false;
 	}
 	
-	private static void spawnEventNpc(L2PcInstance activeChar)
+	private static void spawnEventNpc(L2Player activeChar)
 	{
 		L2NpcTemplate tmpl = NpcTable.getInstance().getTemplate(_npcId);
 		
@@ -226,7 +226,7 @@ public class SH
 		}
 	}
 	
-	public static void showEventHtml(L2PcInstance eventPlayer, String objectId)
+	public static void showEventHtml(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -279,7 +279,7 @@ public class SH
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order
+			// Send a Server->Client ActionFailed to the L2Player in order
 			// to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
@@ -357,7 +357,7 @@ public class SH
 		_npcZ = locZ;
 	}
 	
-	public static void setSpawn(L2PcInstance activeChar)
+	public static void setSpawn(L2Player activeChar)
 	{
 		_npcX = activeChar.getX();
 		_npcY = activeChar.getY();

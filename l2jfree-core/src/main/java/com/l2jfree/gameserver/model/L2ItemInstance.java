@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model;
 
-import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.ADENA_ID;
-import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.MAX_ADENA;
+import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.ADENA_ID;
+import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.MAX_ADENA;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,13 +32,13 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.shot.ShotState;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -206,11 +206,11 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	 * @param owner_id :
 	 *            int designating the ID of the owner
 	 * @param creator :
-	 *            L2PcInstance Player requesting the item creation
+	 *            L2Player Player requesting the item creation
 	 * @param reference :
 	 *            L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 */
-	public void setOwnerId(String process, int owner_id, L2PcInstance creator, L2Object reference)
+	public void setOwnerId(String process, int owner_id, L2Player creator, L2Object reference)
 	{
 		setOwnerId(owner_id);
 		
@@ -309,7 +309,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	}
 	
 	// No logging (function designed for shots only)
-	public void changeCountWithoutTrace(long count, L2PcInstance creator, L2Object reference)
+	public void changeCountWithoutTrace(long count, L2Player creator, L2Object reference)
 	{
 		changeCount(null, count, creator, reference);
 	}
@@ -324,11 +324,11 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	 * @param count :
 	 *            long
 	 * @param creator :
-	 *            L2PcInstance Player requesting the item creation
+	 *            L2Player Player requesting the item creation
 	 * @param reference :
 	 *            L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 */
-	public void changeCount(String process, long count, L2PcInstance creator, L2Object reference)
+	public void changeCount(String process, long count, L2Player creator, L2Object reference)
 	{
 		if (count == 0)
 			return;
@@ -437,7 +437,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	}
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 		if (_dropperObjectId != 0)
 			activeChar.sendPacket(new DropItem(this, _dropperObjectId));
@@ -760,21 +760,21 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	 * 
 	 * @return boolean
 	 */
-	public boolean isAvailable(L2PcInstance player, boolean allowAdena, boolean allowNonTradeable)
+	public boolean isAvailable(L2Player player, boolean allowAdena, boolean allowNonTradeable)
 	{
 		return ((!isEquipped()) // Not equipped
 				&& (getItem().getType2() != 3) // Not Quest Item
 				&& (getItem().getType2() != 4 || getItem().getType1() != 1) // Not Money or Shield Armor
 				&& (player.getPet() == null || getObjectId() != player.getPet().getControlItemId()) // Not Control item of currently summoned pet
 				&& (player.getActiveEnchantItem() != this) // Not momentarily used enchant scroll
-				&& (allowAdena || getItemId() != PcInventory.ADENA_ID) // Not adena
+				&& (allowAdena || getItemId() != PlayerInventory.ADENA_ID) // Not adena
 				&& (player.getCurrentSkill() == null || player.getCurrentSkill().getSkill().getItemConsumeId() != getItemId())
 				&& (!player.isCastingSimultaneouslyNow() || player.getLastSimultaneousSkillCast() == null || player
 						.getLastSimultaneousSkillCast().getItemConsumeId() != getItemId()) && (allowNonTradeable || isTradeable()));
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (player.isFlying() || !GlobalRestrictions.canPickUp(player, this, null))
 			return;
@@ -1029,7 +1029,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 		updateItemAttributes();
 	}
 	
-	public void updateElementAttrBonus(L2PcInstance player)
+	public void updateElementAttrBonus(L2Player player)
 	{
 		if (_elementals == null)
 			return;
@@ -1125,7 +1125,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 		if (resetConsumingMana)
 			_consumingMana = false;
 		
-		final L2PcInstance player = L2World.getInstance().getPlayer(getOwnerId());
+		final L2Player player = L2World.getInstance().getPlayer(getOwnerId());
 		if (player != null)
 		{
 			SystemMessage sm;
@@ -1661,7 +1661,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	
 	public void endOfLife()
 	{
-		L2PcInstance player = ((L2PcInstance)L2World.getInstance().findObject(getOwnerId()));
+		L2Player player = ((L2Player)L2World.getInstance().findObject(getOwnerId()));
 		if (player != null)
 		{
 			if (isEquipped())
@@ -1780,9 +1780,9 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 		ItemsOnGroundManager.getInstance().removeObject(this);
 		
 		final int itemId = getItemId();
-		if (itemId == PcInventory.ADENA_ID || itemId == 6353)
+		if (itemId == PlayerInventory.ADENA_ID || itemId == 6353)
 		{
-			L2PcInstance pc = player.getActingPlayer();
+			L2Player pc = player.getActingPlayer();
 			if (pc != null)
 			{
 				QuestState qs = pc.getQuestState("255_Tutorial");

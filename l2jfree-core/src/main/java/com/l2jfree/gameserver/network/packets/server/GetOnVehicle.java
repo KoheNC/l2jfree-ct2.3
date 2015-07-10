@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -28,7 +28,7 @@ public class GetOnVehicle extends L2ServerPacket
 	private final int _x;
 	private final int _y;
 	private final int _z;
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final L2BoatInstance _boat;
 	
 	/**
@@ -38,7 +38,7 @@ public class GetOnVehicle extends L2ServerPacket
 	 * @param y
 	 * @param z
 	 */
-	public GetOnVehicle(L2PcInstance activeChar, L2BoatInstance boat, int x, int y, int z)
+	public GetOnVehicle(L2Player activeChar, L2BoatInstance boat, int x, int y, int z)
 	{
 		_activeChar = activeChar;
 		_boat = boat;

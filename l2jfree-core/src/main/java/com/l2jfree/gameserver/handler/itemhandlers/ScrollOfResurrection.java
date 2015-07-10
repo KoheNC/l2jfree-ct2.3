@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
@@ -44,10 +44,10 @@ public class ScrollOfResurrection implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		if (activeChar.isSitting())
 		{
 			activeChar.sendPacket(SystemMessageId.CANT_MOVE_SITTING);
@@ -65,10 +65,10 @@ public class ScrollOfResurrection implements IItemHandler
 		
 		if (target != null && target.isDead())
 		{
-			L2PcInstance targetPlayer = null;
+			L2Player targetPlayer = null;
 			
-			if (target instanceof L2PcInstance)
-				targetPlayer = (L2PcInstance)target;
+			if (target instanceof L2Player)
+				targetPlayer = (L2Player)target;
 			
 			L2PetInstance targetPet = null;
 			

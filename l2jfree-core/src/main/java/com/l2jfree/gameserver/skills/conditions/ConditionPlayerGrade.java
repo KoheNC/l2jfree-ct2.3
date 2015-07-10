@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 /**
@@ -43,9 +43,9 @@ final class ConditionPlayerGrade extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (env.player instanceof L2PcInstance)
+		if (env.player instanceof L2Player)
 		{
-			byte expIndex = (byte)((L2PcInstance)env.player).getExpertiseIndex();
+			byte expIndex = (byte)((L2Player)env.player).getExpertiseIndex();
 			
 			return _value == expIndex;
 		}

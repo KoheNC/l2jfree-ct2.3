@@ -35,9 +35,9 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeGuardManager;
@@ -350,7 +350,7 @@ public class FortSiege extends AbstractSiege
 		for (L2SiegeClan siegeclan : getAttackerClans())
 		{
 			clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				member.sendPacket(sm);
 			}
@@ -358,7 +358,7 @@ public class FortSiege extends AbstractSiege
 		if (getFort().getOwnerClan() != null)
 		{
 			clan = ClanTable.getInstance().getClan(getFort().getOwnerClan().getClanId());
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				member.sendPacket(sm);
 			}
@@ -378,7 +378,7 @@ public class FortSiege extends AbstractSiege
 		for (L2SiegeClan siegeclan : getAttackerClans())
 		{
 			clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				member.sendPacket(sm);
 			}
@@ -386,7 +386,7 @@ public class FortSiege extends AbstractSiege
 		if (getFort().getOwnerClan() != null)
 		{
 			clan = ClanTable.getInstance().getClan(getFort().getOwnerClan().getClanId());
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				member.sendPacket(sm);
 			}
@@ -399,7 +399,7 @@ public class FortSiege extends AbstractSiege
 		for (L2SiegeClan siegeclan : getAttackerClans())
 		{
 			clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				if (clear)
 					member.setSiegeState((byte)0);
@@ -411,7 +411,7 @@ public class FortSiege extends AbstractSiege
 		if (getFort().getOwnerClan() != null)
 		{
 			clan = ClanTable.getInstance().getClan(getFort().getOwnerClan().getClanId());
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				if (clear)
 					member.setSiegeState((byte)0);
@@ -503,40 +503,40 @@ public class FortSiege extends AbstractSiege
 		getFort().getSiegeDate().setTimeInMillis(0);
 	}
 	
-	/** Return list of L2PcInstance in the zone. */
-	public List<L2PcInstance> getPlayersInZone()
+	/** Return list of L2Player in the zone. */
+	public List<L2Player> getPlayersInZone()
 	{
-		List<L2PcInstance> lst = new FastList<L2PcInstance>();
+		List<L2Player> lst = new FastList<L2Player>();
 		for (L2Creature cha : getZone().getCharactersInside())
 		{
-			if (cha instanceof L2PcInstance)
-				lst.add((L2PcInstance)cha);
+			if (cha instanceof L2Player)
+				lst.add((L2Player)cha);
 		}
 		return lst;
 	}
 	
-	/** Return list of L2PcInstance owning the fort in the zone. */
-	public List<L2PcInstance> getOwnersInZone()
+	/** Return list of L2Player owning the fort in the zone. */
+	public List<L2Player> getOwnersInZone()
 	{
-		List<L2PcInstance> lst = new FastList<L2PcInstance>();
+		List<L2Player> lst = new FastList<L2Player>();
 		for (L2Creature cha : getZone().getCharactersInside())
 		{
-			if (cha instanceof L2PcInstance && ((L2PcInstance)cha).getClan() != null
-					&& ((L2PcInstance)cha).getClan() == getFort().getOwnerClan())
-				lst.add((L2PcInstance)cha);
+			if (cha instanceof L2Player && ((L2Player)cha).getClan() != null
+					&& ((L2Player)cha).getClan() == getFort().getOwnerClan())
+				lst.add((L2Player)cha);
 		}
 		return lst;
 	}
 	
-	/** Return list of L2PcInstance registered as attacker in the zone. */
-	public List<L2PcInstance> getAttackersInZone()
+	/** Return list of L2Player registered as attacker in the zone. */
+	public List<L2Player> getAttackersInZone()
 	{
-		List<L2PcInstance> players = new FastList<L2PcInstance>();
+		List<L2Player> players = new FastList<L2Player>();
 		L2Clan clan;
 		for (L2SiegeClan siegeclan : getAttackerClans())
 		{
 			clan = ClanTable.getInstance().getClan(siegeclan.getClanId());
-			for (L2PcInstance player : clan.getOnlineMembers(0))
+			for (L2Player player : clan.getOnlineMembers(0))
 			{
 				if (checkIfInZone(player.getX(), player.getY(), player.getZ()))
 					players.add(player);
@@ -633,9 +633,9 @@ public class FortSiege extends AbstractSiege
 	
 	/**
 	 * Register clan as attacker<BR><BR>
-	 * @param player The L2PcInstance of the player trying to register
+	 * @param player The L2Player of the player trying to register
 	 */
-	public boolean registerAttacker(L2PcInstance player, boolean force)
+	public boolean registerAttacker(L2Player player, boolean force)
 	{
 		if (player.getClan() == null)
 			return false;
@@ -714,9 +714,9 @@ public class FortSiege extends AbstractSiege
 	
 	/**
 	 * Remove clan from siege<BR><BR>
-	 * @param player The L2PcInstance of player/clan being removed
+	 * @param player The L2Player of player/clan being removed
 	 */
-	public void removeSiegeClan(L2PcInstance player)
+	public void removeSiegeClan(L2Player player)
 	{
 		removeSiegeClan(player.getClan());
 	}
@@ -747,7 +747,7 @@ public class FortSiege extends AbstractSiege
 			setSiegeDateTime();
 		if (getFort().getOwnerClan() != null)
 		{
-			for (L2PcInstance member : getFort().getOwnerClan().getOnlineMembers(0))
+			for (L2Player member : getFort().getOwnerClan().getOnlineMembers(0))
 			{
 				member.sendPacket(SystemMessageId.A_FORTRESS_IS_UNDER_ATTACK.getSystemMessage());
 			}
@@ -765,7 +765,7 @@ public class FortSiege extends AbstractSiege
 	 */
 	public void teleportPlayer(TeleportWhoType teleportWho, TeleportWhereType teleportWhere)
 	{
-		List<L2PcInstance> players;
+		List<L2Player> players;
 		switch (teleportWho)
 		{
 			case Owner:
@@ -778,7 +778,7 @@ public class FortSiege extends AbstractSiege
 				players = getPlayersInZone();
 		}
 		
-		for (L2PcInstance player : players)
+		for (L2Player player : players)
 		{
 			if (player.isGM() || player.isInJail())
 				continue;
@@ -799,9 +799,9 @@ public class FortSiege extends AbstractSiege
 	
 	/**
 	 * Return true if the player can register.<BR><BR>
-	 * @param player The L2PcInstance of the player trying to register
+	 * @param player The L2Player of the player trying to register
 	 */
-	public boolean checkIfCanRegister(L2PcInstance player)
+	public boolean checkIfCanRegister(L2Player player)
 	{
 		boolean b = true;
 		if (player.getClan() == null || player.getClan().getLevel() < Config.FORTSIEGE_CLAN_MIN_LEVEL)
@@ -1146,11 +1146,11 @@ public class FortSiege extends AbstractSiege
 	
 	public L2Npc getClosestFlag(L2Object obj)
 	{
-		if ((obj != null) && (obj instanceof L2PcInstance))
+		if ((obj != null) && (obj instanceof L2Player))
 		{
-			if (((L2PcInstance)obj).getClan() != null)
+			if (((L2Player)obj).getClan() != null)
 			{
-				L2SiegeClan sc = getAttackerClan(((L2PcInstance)obj).getClan());
+				L2SiegeClan sc = getAttackerClan(((L2Player)obj).getClan());
 				if (sc != null)
 					return sc.getClosestFlag(obj);
 			}

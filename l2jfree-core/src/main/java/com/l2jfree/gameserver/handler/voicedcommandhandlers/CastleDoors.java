@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.entity.Castle;
@@ -27,7 +27,7 @@ public class CastleDoors implements IVoicedCommandHandler
 	private static final String[] VOICED_COMMANDS = { "open", "close" };
 	
 	@Override
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
 		if (command.startsWith("open") && target.equals("doors") && (activeChar.isClanLeader()))
 		{

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class ExJumpToLocation extends L2ServerPacket
@@ -24,7 +24,7 @@ public class ExJumpToLocation extends L2ServerPacket
 	private final int _objectId, _x, _y, _z;
 	private final int _tx, _ty, _tz;
 	
-	public ExJumpToLocation(L2PcInstance player, int tx, int ty, int tz)
+	public ExJumpToLocation(L2Player player, int tx, int ty, int tz)
 	{
 		_objectId = player.getObjectId();
 		_x = player.getX();
@@ -35,7 +35,7 @@ public class ExJumpToLocation extends L2ServerPacket
 		_tz = player.getZ();
 	}
 	
-	public ExJumpToLocation(L2PcInstance player)
+	public ExJumpToLocation(L2Player player)
 	{
 		_objectId = player.getObjectId();
 		_x = player.getX();

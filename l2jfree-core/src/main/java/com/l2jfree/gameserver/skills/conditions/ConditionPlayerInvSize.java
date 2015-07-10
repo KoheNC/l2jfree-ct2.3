@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 /**
@@ -32,8 +32,8 @@ class ConditionPlayerInvSize extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (env.player instanceof L2PcInstance)
-			return env.player.getInventory().getSize() <= ((L2PcInstance)env.player).getInventoryLimit() - _size;
+		if (env.player instanceof L2Player)
+			return env.player.getInventory().getSize() <= ((L2Player)env.player).getInventoryLimit() - _size;
 		return true;
 	}
 }

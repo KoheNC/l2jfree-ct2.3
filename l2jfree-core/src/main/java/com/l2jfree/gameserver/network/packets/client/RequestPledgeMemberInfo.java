@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -37,7 +37,7 @@ public final class RequestPledgeMemberInfo extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		final L2PcInstance activeChar = getActiveChar();
+		final L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 /**
@@ -36,10 +36,10 @@ public class AdminUnblockIp implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_unblockip" };
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
+	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2Player)
 	 */
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_unblockip "))
 		{
@@ -71,7 +71,7 @@ public class AdminUnblockIp implements IAdminCommandHandler
 	 * @param ipAddress
 	 * @param activeChar
 	 */
-	private boolean unblockIp(String ipAddress, L2PcInstance activeChar)
+	private boolean unblockIp(String ipAddress, L2Player activeChar)
 	{
 		//LoginServerThread.getInstance().unBlockip(ipAddress);
 		_log.warn("IP removed by GM " + activeChar.getName());

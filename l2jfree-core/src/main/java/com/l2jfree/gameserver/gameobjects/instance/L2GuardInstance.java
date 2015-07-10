@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Guard;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.GuardKnownList;
@@ -187,18 +188,18 @@ public final class L2GuardInstance extends L2Guard
 	 * <BR>
 	 * <B><U> Actions on first click on the L2GuardInstance (Select it)</U> :</B><BR>
 	 * <BR>
-	 * <li>Set the L2GuardInstance as target of the L2PcInstance player (if necessary)</li>
-	 * <li>Send a Server->Client packet MyTargetSelected to the L2PcInstance player (display the select window)</li>
-	 * <li>Set the L2PcInstance Intention to AI_INTENTION_IDLE</li>
+	 * <li>Set the L2GuardInstance as target of the L2Player player (if necessary)</li>
+	 * <li>Send a Server->Client packet MyTargetSelected to the L2Player player (display the select window)</li>
+	 * <li>Set the L2Player Intention to AI_INTENTION_IDLE</li>
 	 * <li>Send a Server->Client packet ValidateLocation to correct the L2GuardInstance position and heading on the
 	 * client</li>
 	 * <BR>
 	 * <BR>
 	 * <B><U> Actions on second click on the L2GuardInstance (Attack it/Interact with it)</U> :</B><BR>
 	 * <BR>
-	 * <li>If L2PcInstance is in the _aggroList of the L2GuardInstance, set the L2PcInstance Intention to
+	 * <li>If L2Player is in the _aggroList of the L2GuardInstance, set the L2Player Intention to
 	 * AI_INTENTION_ATTACK</li>
-	 * <li>If L2PcInstance is NOT in the _aggroList of the L2GuardInstance, set the L2PcInstance Intention to
+	 * <li>If L2Player is NOT in the _aggroList of the L2GuardInstance, set the L2Player Intention to
 	 * AI_INTENTION_INTERACT (after a distance verification) and show message</li>
 	 * <BR>
 	 * <BR>
@@ -208,45 +209,45 @@ public final class L2GuardInstance extends L2Guard
 	 * <BR>
 	 * <BR>
 	 * 
-	 * @param player The L2PcInstance that start an action on the L2GuardInstance
+	 * @param player The L2Player that start an action on the L2GuardInstance
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
-		// Check if the L2PcInstance already target the L2GuardInstance
+		// Check if the L2Player already target the L2GuardInstance
 		if (getObjectId() != player.getTargetId())
 		{
 			if (_log.isDebugEnabled())
 				_log.debug(player.getObjectId() + ": Targetted guard " + getObjectId());
 			
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Check if the L2PcInstance is in the _aggroList of the L2GuardInstance
+			// Check if the L2Player is in the _aggroList of the L2GuardInstance
 			if (containsTarget(player))
 			{
 				if (_log.isDebugEnabled())
 					_log.debug(player.getObjectId() + ": Attacked guard " + getObjectId());
 				
-				// Set the L2PcInstance Intention to AI_INTENTION_ATTACK
+				// Set the L2Player Intention to AI_INTENTION_ATTACK
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, this);
 			}
 			else
 			{
-				// Calculate the distance between the L2PcInstance and the L2NpcInstance
+				// Calculate the distance between the L2Player and the L2NpcInstance
 				if (!canInteract(player))
 				{
-					// Set the L2PcInstance Intention to AI_INTENTION_INTERACT
+					// Set the L2Player Intention to AI_INTENTION_INTERACT
 					player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 				}
 				else
 				{
-					// Send a Server->Client packet SocialAction to the all L2PcInstance on the _knownPlayer of the L2NpcInstance
+					// Send a Server->Client packet SocialAction to the all L2Player on the _knownPlayer of the L2NpcInstance
 					// to display a social action of the L2GuardInstance on their client
 					SocialAction sa = new SocialAction(getObjectId(), Rnd.nextInt(8));
 					broadcastPacket(sa);
@@ -263,7 +264,7 @@ public final class L2GuardInstance extends L2Guard
 				}
 			}
 		}
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 }

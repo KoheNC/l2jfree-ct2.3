@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2ArtefactInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
@@ -34,10 +34,10 @@ public class TakeCastle implements ISkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		if (player.getClan() == null || player.getClan().getLeaderId() != player.getObjectId())
 			return;

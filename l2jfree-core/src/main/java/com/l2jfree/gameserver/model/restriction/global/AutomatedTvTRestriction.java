@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.restriction.global;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
@@ -45,7 +45,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		if (callingRestriction == getClass())
 			return false;
@@ -60,7 +60,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canRequestRevive(L2PcInstance activeChar)
+	public boolean canRequestRevive(L2Player activeChar)
 	{
 		if (!Config.AUTO_TVT_REVIVE_SELF && AutomatedTvT.isPlaying(activeChar))
 			return false;
@@ -69,7 +69,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canTeleport(L2PcInstance activeChar)
+	public boolean canTeleport(L2Player activeChar)
 	{
 		if (AutomatedTvT.isPlaying(activeChar))
 		{
@@ -82,7 +82,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	
 	@Override
 	public boolean canUseItemHandler(Class<? extends IItemHandler> clazz, int itemId, L2Playable activeChar,
-			L2ItemInstance item, L2PcInstance player)
+			L2ItemInstance item, L2Player player)
 	{
 		if (player != null && AutomatedTvT.isPlaying(player) && !AutomatedTvT.canUse(itemId))
 		{
@@ -94,7 +94,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public CombatState getCombatState(L2PcInstance activeChar, L2PcInstance target)
+	public CombatState getCombatState(L2Player activeChar, L2Player target)
 	{
 		if (AutomatedTvT.isPlaying(activeChar) && AutomatedTvT.isPlaying(target))
 		{
@@ -108,7 +108,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public int getNameColor(L2PcInstance activeChar)
+	public int getNameColor(L2Player activeChar)
 	{
 		return AutomatedTvT.isPlaying(activeChar) ? AutomatedTvT.getNameColor(activeChar) : -1;
 	}
@@ -139,19 +139,19 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public void playerLoggedIn(L2PcInstance activeChar)
+	public void playerLoggedIn(L2Player activeChar)
 	{
 		AutomatedTvT.getInstance().addDisconnected(activeChar);
 	}
 	
 	@Override
-	public void playerDisconnected(L2PcInstance activeChar)
+	public void playerDisconnected(L2Player activeChar)
 	{
 		AutomatedTvT.getInstance().onDisconnection(activeChar);
 	}
 	
 	@Override
-	public boolean playerKilled(L2Creature activeChar, L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, L2Player target, L2Player killer)
 	{
 		if (AutomatedTvT.isPlaying(killer) && AutomatedTvT.isPlaying(target))
 		{
@@ -163,13 +163,13 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public void playerRevived(L2PcInstance player)
+	public void playerRevived(L2Player player)
 	{
 		AutomatedTvT.getInstance().recover(player);
 	}
 	
 	@Override
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
 		if (!Config.AUTO_TVT_ENABLED)
 			return false;

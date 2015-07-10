@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -36,11 +36,11 @@ public class ExCubeGameExtendedChangePoints extends L2ServerPacket
 	int _bluePoints;
 	int _redPoints;
 	boolean _isRedTeam;
-	L2PcInstance _player;
+	L2Player _player;
 	int _playerPoints;
 	
 	public ExCubeGameExtendedChangePoints(int timeLeft, int bluePoints, int redPoints, boolean isRedTeam,
-			L2PcInstance player, int playerPoints)
+			L2Player player, int playerPoints)
 	{
 		_timeLeft = timeLeft;
 		_bluePoints = bluePoints;

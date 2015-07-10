@@ -17,7 +17,6 @@ package com.l2jfree.gameserver.gameobjects;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.PlayableKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.PlayableStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
@@ -41,7 +40,7 @@ import com.l2jfree.tools.random.Rnd;
  * This class represents all Playable characters in the world.<BR><BR>
  * 
  * L2Playable :<BR><BR>
- * <li>L2PcInstance</li>
+ * <li>L2Player</li>
  * <li>L2Summon</li><BR><BR>
  * 
  */
@@ -103,9 +102,9 @@ public abstract class L2Playable extends L2Creature
 		if (!(target instanceof L2Playable))
 			return false; // Target is not a L2Playable
 			
-		L2PcInstance player = null;
-		if (this instanceof L2PcInstance)
-			player = (L2PcInstance)this;
+		L2Player player = null;
+		if (this instanceof L2Player)
+			player = (L2Player)this;
 		else if (this instanceof L2Summon)
 			player = ((L2Summon)this).getOwner();
 		
@@ -114,9 +113,9 @@ public abstract class L2Playable extends L2Creature
 		if (player.getKarma() != 0)
 			return false; // Active player has karma
 			
-		L2PcInstance targetPlayer = null;
-		if (target instanceof L2PcInstance)
-			targetPlayer = (L2PcInstance)target;
+		L2Player targetPlayer = null;
+		if (target instanceof L2Player)
+			targetPlayer = (L2Player)target;
 		else if (target instanceof L2Summon)
 			targetPlayer = ((L2Summon)target).getOwner();
 		
@@ -142,8 +141,8 @@ public abstract class L2Playable extends L2Creature
 	public final void sendDamageMessage(L2Creature target, int damage, boolean mcrit, boolean pcrit, boolean miss)
 	{
 		// All messages are verified on retail
-		L2PcInstance attOwner = getActingPlayer();
-		L2PcInstance trgOwner = target.getActingPlayer();
+		L2Player attOwner = getActingPlayer();
+		L2Player trgOwner = target.getActingPlayer();
 		if (miss)
 		{
 			attOwner.sendPacket(new SystemMessage(SystemMessageId.C1_ATTACK_WENT_ASTRAY).addCharName(this));
@@ -155,7 +154,7 @@ public abstract class L2Playable extends L2Creature
 		{
 			attOwner.sendPacket(new SystemMessage(SystemMessageId.C1_HAD_CRITICAL_HIT).addCharName(this));
 			
-			if (this instanceof L2PcInstance && target instanceof L2Npc)
+			if (this instanceof L2Player && target instanceof L2Npc)
 			{
 				// Soul Mastery skill
 				final L2Skill skill = getKnownSkill(L2Skill.SKILL_SOUL_MASTERY);
@@ -170,7 +169,7 @@ public abstract class L2Playable extends L2Creature
 		
 		if (trgOwner != null && attOwner != trgOwner)
 		{
-			if (attOwner.isInOlympiadMode() && target instanceof L2PcInstance && trgOwner.isInOlympiadMode()
+			if (attOwner.isInOlympiadMode() && target instanceof L2Player && trgOwner.isInOlympiadMode()
 					&& trgOwner.getOlympiadGameId() == attOwner.getOlympiadGameId())
 			{
 				Olympiad.getInstance().notifyCompetitorDamage(attOwner, damage, attOwner.getOlympiadGameId());
@@ -183,7 +182,7 @@ public abstract class L2Playable extends L2Creature
 			sm = SystemMessageId.ATTACK_WAS_BLOCKED.getSystemMessage();
 		}
 		// Still needs retail verification
-		/*else if (this instanceof L2PcInstance &&
+		/*else if (this instanceof L2Player &&
 				(target instanceof L2DoorInstance ||
 						target instanceof L2ControlTowerInstance))
 		{
@@ -381,9 +380,9 @@ public abstract class L2Playable extends L2Creature
 	public abstract void updateEffectIconsImpl();
 	
 	@Override
-	public final void onForcedAttack(L2PcInstance player)
+	public final void onForcedAttack(L2Player player)
 	{
-		final L2PcInstance targetPlayer = getActingPlayer();
+		final L2Player targetPlayer = getActingPlayer();
 		
 		if (player.getOlympiadGameId() != targetPlayer.getOlympiadGameId())
 		{
@@ -566,9 +565,9 @@ public abstract class L2Playable extends L2Creature
 			else
 				removeSkill(skill);
 			
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
-				L2PcInstance player = (L2PcInstance)this;
+				L2Player player = (L2Player)this;
 				
 				player.sendEtcStatusUpdate();
 				player.broadcastUserInfo();

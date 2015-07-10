@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.L2WorldRegion;
@@ -133,10 +133,10 @@ public final class ObjectPosition
 		{
 			_log.warn(_activeObject + " at bad coords: (x: " + _x + ", y: " + _y + ", z: " + _z + ").", e);
 			
-			if (_activeObject instanceof L2PcInstance)
+			if (_activeObject instanceof L2Player)
 			{
-				((L2PcInstance)_activeObject).teleToLocation(0, 0, 0, false);
-				((L2PcInstance)_activeObject).sendMessage("Error with your coords, Please ask a GM for help!");
+				((L2Player)_activeObject).teleToLocation(0, 0, 0, false);
+				((L2Player)_activeObject).sendMessage("Error with your coords, Please ask a GM for help!");
 			}
 			else if (_activeObject instanceof L2Creature)
 				_activeObject.decayMe();

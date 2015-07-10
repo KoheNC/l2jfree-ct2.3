@@ -26,8 +26,8 @@ import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Spawn;
@@ -263,7 +263,7 @@ public class BaylorManager extends BossLair
 	}
 	
 	// Whether it is permitted to enter the baylor's lair is confirmed.
-	public int canIntoBaylorLair(L2PcInstance pc)
+	public int canIntoBaylorLair(L2Player pc)
 	{
 		if ((!Config.FWBA_ENABLESINGLEPLAYER) && !pc.isInParty())
 			return 4;
@@ -300,7 +300,7 @@ public class BaylorManager extends BossLair
 	}
 	
 	// Teleporting player to baylor's lair.
-	public void entryToBaylorLair(L2PcInstance pc)
+	public void entryToBaylorLair(L2Player pc)
 	{
 		int driftx;
 		int drifty;
@@ -320,8 +320,8 @@ public class BaylorManager extends BossLair
 		}
 		else
 		{
-			List<L2PcInstance> members = new FastList<L2PcInstance>(); // list of member of teleport candidate.
-			for (L2PcInstance mem : pc.getParty().getPartyMembers())
+			List<L2Player> members = new FastList<L2Player>(); // list of member of teleport candidate.
+			for (L2Player mem : pc.getParty().getPartyMembers())
 			{
 				// teleporting it within alive and the range of recognition of the leader of the party.
 				if (!mem.isDead() && Util.checkIfInRange(700, pc, mem, true))
@@ -329,7 +329,7 @@ public class BaylorManager extends BossLair
 					members.add(mem);
 				}
 			}
-			for (L2PcInstance mem : members)
+			for (L2Player mem : members)
 			{
 				driftx = Rnd.get(-80, 80);
 				drifty = Rnd.get(-80, 80);

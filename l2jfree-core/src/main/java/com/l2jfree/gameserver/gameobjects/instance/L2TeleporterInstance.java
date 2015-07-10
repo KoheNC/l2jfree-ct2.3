@@ -21,6 +21,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
@@ -53,7 +54,7 @@ public final class L2TeleporterInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (ObjectRestrictions.getInstance().checkRestriction(player, AvailableRestriction.PlayerTeleport))
 		{
@@ -185,7 +186,7 @@ public final class L2TeleporterInstance extends L2Npc
 	}
 	
 	@Override
-	public void showChatWindow(L2PcInstance player)
+	public void showChatWindow(L2Player player)
 	{
 		String filename = "data/html/teleporter/castleteleporter-no.htm";
 		
@@ -210,7 +211,7 @@ public final class L2TeleporterInstance extends L2Npc
 		player.sendPacket(html);
 	}
 	
-	private void doTeleport(L2PcInstance player, int val)
+	private void doTeleport(L2Player player, int val)
 	{
 		L2TeleportLocation list = TeleportLocationTable.getInstance().getTemplate(val);
 		if (list != null)
@@ -281,7 +282,7 @@ public final class L2TeleporterInstance extends L2Npc
 		}
 	}
 	
-	private int validateCondition(L2PcInstance player)
+	private int validateCondition(L2Player player)
 	{
 		if (CastleManager.getInstance().getCastle(this) == null) // Teleporter isn't on castle ground
 			return COND_REGULAR; // Regular access

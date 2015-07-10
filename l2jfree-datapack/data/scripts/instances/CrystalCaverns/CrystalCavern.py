@@ -15,7 +15,7 @@ from com.l2jfree.gameserver.datatables                  import ItemTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.instancemanager.grandbosses import BaylorManager
 from com.l2jfree.gameserver.gameobjects                 import L2Summon
-from com.l2jfree.gameserver.gameobjects.instance        import L2PcInstance
+from com.l2jfree.gameserver.gameobjects        import L2Player
 from com.l2jfree.gameserver.model.entity                import Instance
 from com.l2jfree.gameserver.model.quest                 import State
 from com.l2jfree.gameserver.model.quest                 import QuestState
@@ -947,7 +947,7 @@ class CrystalCavern(JQuest):
         return
 
     def onEnterZone(self,character,zone):
-        if isinstance(character, L2PcInstance):
+        if isinstance(character, L2Player):
             if character.getInstanceId() == 0:
                 return
             player = character
@@ -974,7 +974,7 @@ class CrystalCavern(JQuest):
         return
 
     def onExitZone(self,character,zone):
-        if isinstance(character, L2PcInstance):
+        if isinstance(character, L2Player):
             if character.getInstanceId() == 0:
                 return
             player = character

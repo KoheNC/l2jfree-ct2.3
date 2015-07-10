@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import static com.l2jfree.gameserver.gameobjects.L2Npc.INTERACTION_DISTANCE;
-import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.MAX_ADENA;
+import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.MAX_ADENA;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
@@ -23,8 +23,8 @@ import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2FishermanInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetManagerInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -102,7 +102,7 @@ public class RequestSellItem extends L2ClientPacket
 	
 	protected void processSell()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		
@@ -185,7 +185,7 @@ public class RequestSellItem extends L2ClientPacket
 		sendAF();
 	}
 	
-	private boolean canShop(L2PcInstance player, L2Merchant target)
+	private boolean canShop(L2Player player, L2Merchant target)
 	{
 		if (player.isGM())
 			return true;

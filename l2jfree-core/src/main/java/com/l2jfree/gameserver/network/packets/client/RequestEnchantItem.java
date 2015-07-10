@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
@@ -48,7 +48,7 @@ public class RequestEnchantItem extends AbstractEnchantPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -80,7 +80,7 @@ public class RequestEnchantItem extends AbstractEnchantPacket
 			requestFailed(SystemMessageId.CANNOT_PICKUP_OR_USE_ITEM_WHILE_TRADING);
 			return;
 		}
-		else if (activeChar.getPrivateStoreType() != L2PcInstance.STORE_PRIVATE_NONE)
+		else if (activeChar.getPrivateStoreType() != L2Player.STORE_PRIVATE_NONE)
 		{
 			activeChar.setActiveEnchantItem(null);
 			requestFailed(SystemMessageId.CANNOT_ENCHANT_WHILE_STORE);

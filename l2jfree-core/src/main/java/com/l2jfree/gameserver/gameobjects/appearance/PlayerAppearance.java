@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.gameobjects.appearance;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 
-public final class PcAppearance
+public final class PlayerAppearance
 {
 	/** The default hexadecimal color of players' name (white is 0xFFFFFF) */
 	public static final int DEFAULT_NAME_COLOR = 0xFFFFFF;
@@ -26,7 +26,7 @@ public final class PcAppearance
 	
 	// =========================================================
 	// Data Field
-	private L2PcInstance _owner;
+	private L2Player _owner;
 	private byte _face;
 	private byte _hairColor;
 	private byte _hairStyle;
@@ -49,7 +49,7 @@ public final class PcAppearance
 	
 	// =========================================================
 	// Constructor
-	public PcAppearance(byte face, byte hColor, byte hStyle, boolean sex)
+	public PlayerAppearance(byte face, byte hColor, byte hStyle, boolean sex)
 	{
 		_face = face;
 		_hairColor = hColor;
@@ -181,7 +181,7 @@ public final class PcAppearance
 		setTitleColor((red & 0xFF) + ((green & 0xFF) << 8) + ((blue & 0xFF) << 16));
 	}
 	
-	public void setOwner(L2PcInstance owner)
+	public void setOwner(L2Player owner)
 	{
 		_owner = owner;
 	}

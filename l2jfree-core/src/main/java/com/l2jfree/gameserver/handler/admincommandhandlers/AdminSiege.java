@@ -21,7 +21,7 @@ import javolution.text.TextBuilder;
 
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
@@ -50,7 +50,7 @@ public class AdminSiege implements IAdminCommandHandler
 			"admin_clanhallopendoors", "admin_clanhallclosedoors", "admin_clanhallteleportself" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		command = st.nextToken(); // Get actual command
@@ -97,9 +97,9 @@ public class AdminSiege implements IAdminCommandHandler
 				val = st.nextToken();
 			
 			L2Object target = activeChar.getTarget();
-			L2PcInstance player = null;
-			if (target instanceof L2PcInstance)
-				player = (L2PcInstance)target;
+			L2Player player = null;
+			if (target instanceof L2Player)
+				player = (L2Player)target;
 			
 			if (command.equalsIgnoreCase("admin_add_attacker") && castle != null)
 			{
@@ -250,7 +250,7 @@ public class AdminSiege implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void showSiegeTimePage(L2PcInstance activeChar, Castle castle)
+	private void showSiegeTimePage(L2Player activeChar, Castle castle)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/castlesiegetime.htm");
@@ -288,7 +288,7 @@ public class AdminSiege implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	private void showCastleSelectPage(L2PcInstance activeChar)
+	private void showCastleSelectPage(L2Player activeChar)
 	{
 		int i = 0;
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
@@ -346,7 +346,7 @@ public class AdminSiege implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	private void showSiegePage(L2PcInstance activeChar, String castleName)
+	private void showSiegePage(L2Player activeChar, String castleName)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/castle.htm");
@@ -354,7 +354,7 @@ public class AdminSiege implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	private void showClanHallPage(L2PcInstance activeChar, ClanHall clanhall)
+	private void showClanHallPage(L2Player activeChar, ClanHall clanhall)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/clanhall.htm");

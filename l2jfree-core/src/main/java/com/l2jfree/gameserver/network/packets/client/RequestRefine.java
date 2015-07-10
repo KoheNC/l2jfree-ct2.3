@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.datatables.AugmentationData;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Augmentation;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -48,7 +48,7 @@ public final class RequestRefine extends AbstractRefinePacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		

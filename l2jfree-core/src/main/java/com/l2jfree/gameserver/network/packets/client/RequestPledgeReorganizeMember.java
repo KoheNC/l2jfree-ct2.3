@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -47,7 +47,7 @@ public class RequestPledgeReorganizeMember extends L2ClientPacket
 		if (_isMemberSelected == 0)
 			return;
 		
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		//do we need powers to do that??

@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.gameobjects.stat;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 
 public class SummonStat extends PlayableStat
 {
@@ -46,7 +46,7 @@ public class SummonStat extends PlayableStat
 	@Override
 	public byte getAttackElement()
 	{
-		final L2PcInstance owner = getActiveChar().getOwner();
+		final L2Player owner = getActiveChar().getOwner();
 		
 		if (owner == null || !owner.getStat().summonShouldHaveAttackElemental(getActiveChar()))
 			return super.getAttackElement();
@@ -57,7 +57,7 @@ public class SummonStat extends PlayableStat
 	@Override
 	public int getAttackElementValue(byte attribute)
 	{
-		final L2PcInstance owner = getActiveChar().getOwner();
+		final L2Player owner = getActiveChar().getOwner();
 		
 		if (owner == null || !owner.getStat().summonShouldHaveAttackElemental(getActiveChar()))
 			return super.getAttackElementValue(attribute);
@@ -69,7 +69,7 @@ public class SummonStat extends PlayableStat
 	@Override
 	public int getDefenseElementValue(byte attribute)
 	{
-		final L2PcInstance owner = getActiveChar().getOwner();
+		final L2Player owner = getActiveChar().getOwner();
 		
 		if (owner == null)
 			return super.getDefenseElementValue(attribute);

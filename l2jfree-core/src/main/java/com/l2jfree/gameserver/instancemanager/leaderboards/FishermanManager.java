@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ItemList;
@@ -144,7 +144,7 @@ public class FishermanManager
 			return;
 		}
 		
-		L2PcInstance winner = L2World.getInstance().findPlayer(idTop);
+		L2Player winner = L2World.getInstance().findPlayer(idTop);
 		
 		Announcements.getInstance().announceToAll(
 				"Attention Fishermans: " + arTop.name + " is the winner for this time with " + arTop.cought + "/"

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2World;
@@ -30,13 +30,13 @@ public class AdminBuffs implements IAdminCommandHandler
 			"admin_areacancel" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_getbuffs"))
 		{
 			StringTokenizer st = new StringTokenizer(command, " ");
 			command = st.nextToken();
-			L2PcInstance target;
+			L2Player target;
 			
 			if (st.hasMoreTokens())
 			{
@@ -52,7 +52,7 @@ public class AdminBuffs implements IAdminCommandHandler
 				activeChar.sendMessage("The player " + playername + " is not online");
 				return false;
 			}
-			else if ((target = activeChar.getTarget(L2PcInstance.class)) != null)
+			else if ((target = activeChar.getTarget(L2Player.class)) != null)
 			{
 				showBuffs(target, activeChar);
 				return true;
@@ -104,7 +104,7 @@ public class AdminBuffs implements IAdminCommandHandler
 				
 				for (L2Creature knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 				{
-					if ((knownChar instanceof L2PcInstance) && !(knownChar.equals(activeChar)))
+					if ((knownChar instanceof L2Player) && !(knownChar.equals(activeChar)))
 						knownChar.stopAllEffectsExceptThoseThatLastThroughDeath();
 				}
 				
@@ -127,7 +127,7 @@ public class AdminBuffs implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	public void showBuffs(L2PcInstance player, L2PcInstance activeChar)
+	public void showBuffs(L2Player player, L2Player activeChar)
 	{
 		L2TextBuilder html = L2TextBuilder.newInstance("<html><center><font color=\"LEVEL\">Effects of ");
 		html.append(player.getName());
@@ -163,9 +163,9 @@ public class AdminBuffs implements IAdminCommandHandler
 		activeChar.sendPacket(ms);
 	}
 	
-	private void removeBuff(L2PcInstance remover, String playername, int skillId)
+	private void removeBuff(L2Player remover, String playername, int skillId)
 	{
-		L2PcInstance player = L2World.getInstance().getPlayer(playername);
+		L2Player player = L2World.getInstance().getPlayer(playername);
 		if (player != null && skillId > 0)
 		{
 			L2Effect[] effects = player.getAllEffects();
@@ -185,9 +185,9 @@ public class AdminBuffs implements IAdminCommandHandler
 		}
 	}
 	
-	private void removeAllBuffs(L2PcInstance remover, String playername)
+	private void removeAllBuffs(L2Player remover, String playername)
 	{
-		L2PcInstance player = L2World.getInstance().getPlayer(playername);
+		L2Player player = L2World.getInstance().getPlayer(playername);
 		if (player != null)
 		{
 			player.stopAllEffectsExceptThoseThatLastThroughDeath();

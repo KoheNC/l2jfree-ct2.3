@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.FactionManager;
@@ -33,23 +34,23 @@ public class L2FactionManagerInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			}
 			else
@@ -57,11 +58,11 @@ public class L2FactionManagerInstance extends L2NpcInstance
 				showMessageWindow(player);
 			}
 		}
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	private void showMessageWindow(L2PcInstance player)
+	private void showMessageWindow(L2Player player)
 	{
 		int factionId = getTemplate().getNpcFaction();
 		String filename = "data/html/npcdefault.htm";
@@ -77,7 +78,7 @@ public class L2FactionManagerInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		// Standard msg
 		String filename = "data/html/npcdefault.htm";
@@ -141,7 +142,7 @@ public class L2FactionManagerInstance extends L2NpcInstance
 		sendHtmlMessage(player, filename, replace, factionName);
 	}
 	
-	private void sendHtmlMessage(L2PcInstance player, String filename, String replace, String factionName)
+	private void sendHtmlMessage(L2Player player, String filename, String replace, String factionName)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setFile(filename);

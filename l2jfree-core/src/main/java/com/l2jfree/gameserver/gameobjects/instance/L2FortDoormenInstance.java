@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 public class L2FortDoormenInstance extends L2DoormenInstance
@@ -26,7 +27,7 @@ public class L2FortDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	protected final void openDoors(L2PcInstance player, String command)
+	protected final void openDoors(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command.substring(10), ", ");
 		st.nextToken();
@@ -38,7 +39,7 @@ public class L2FortDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	protected final void closeDoors(L2PcInstance player, String command)
+	protected final void closeDoors(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command.substring(11), ", ");
 		st.nextToken();
@@ -50,7 +51,7 @@ public class L2FortDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	protected final boolean isOwnerClan(L2PcInstance player)
+	protected final boolean isOwnerClan(L2Player player)
 	{
 		if (player.isGM())
 			return true;

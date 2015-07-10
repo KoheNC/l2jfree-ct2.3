@@ -18,11 +18,11 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2ClanHallManagerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ICubicSkillHandler;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -39,9 +39,9 @@ public class Continuous implements ICubicSkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		L2PcInstance player = null;
-		if (activeChar instanceof L2PcInstance)
-			player = (L2PcInstance)activeChar;
+		L2Player player = null;
+		if (activeChar instanceof L2Player)
+			player = (L2Player)activeChar;
 		
 		if (skill.getEffectId() != 0)
 		{
@@ -85,14 +85,14 @@ public class Continuous implements ICubicSkillHandler
 			{
 				if (target != activeChar)
 				{
-					if (target instanceof L2PcInstance && ((L2PcInstance)target).isCursedWeaponEquipped())
+					if (target instanceof L2Player && ((L2Player)target).isCursedWeaponEquipped())
 						continue;
 					else if (player != null && player.isCursedWeaponEquipped())
 						continue;
 				}
 				// TODO: boolean isn't good idea, could cause bugs
-				else if (skill.getId() == 2168 && activeChar instanceof L2PcInstance)
-					((L2PcInstance)activeChar).setCharmOfLuck(true);
+				else if (skill.getId() == 2168 && activeChar instanceof L2Player)
+					((L2Player)activeChar).setCharmOfLuck(true);
 			}
 			
 			if (skill.isOffensive())

@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Spawn;
@@ -25,7 +26,7 @@ import com.l2jfree.tools.random.Rnd;
 
 public class L2PenaltyMonsterInstance extends L2MonsterInstance
 {
-	private L2PcInstance _ptk;
+	private L2Player _ptk;
 	
 	public L2PenaltyMonsterInstance(int objectId, L2NpcTemplate template)
 	{
@@ -52,7 +53,7 @@ public class L2PenaltyMonsterInstance extends L2MonsterInstance
 		}
 	}
 	
-	public void setPlayerToKill(L2PcInstance ptk)
+	public void setPlayerToKill(L2Player ptk)
 	{
 		if (Rnd.nextInt(100) <= 80)
 		{

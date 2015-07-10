@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.chathandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
@@ -37,10 +37,10 @@ public class ChatAlliance implements IChatHandler
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.gameobjects.L2Player.player.L2Player, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
 	@Override
-	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
+	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		if (activeChar.getClan() == null)
 			return;

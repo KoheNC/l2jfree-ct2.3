@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortBallistaInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
@@ -29,7 +29,7 @@ public class BallistaBomb implements ISkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance) || targets.length == 0)
+		if (!(activeChar instanceof L2Player) || targets.length == 0)
 			return;
 		
 		L2Creature target = targets[0];

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.RecommendationManager;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -36,7 +36,7 @@ public class VoteSociality extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -47,7 +47,7 @@ public class VoteSociality extends L2ClientPacket
 		if (target == null)
 			target = L2World.getInstance().findObject(_targetId);
 		
-		if (target instanceof L2PcInstance)
+		if (target instanceof L2Player)
 			RecommendationManager.getInstance().recommend(activeChar, target.getActingPlayer());
 		else
 			sendPacket(SystemMessageId.TARGET_IS_INCORRECT);

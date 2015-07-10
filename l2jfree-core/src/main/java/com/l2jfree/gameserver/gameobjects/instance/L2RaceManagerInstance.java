@@ -19,12 +19,13 @@ import javolution.util.FastList;
 import com.l2jfree.gameserver.MonsterRace;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.RaceManagerKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -241,7 +242,7 @@ public class L2RaceManagerInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("BuyTicket") && _state != ACCEPTING_BETS)
 		{
@@ -286,7 +287,7 @@ public class L2RaceManagerInstance extends L2Npc
 		}
 	}
 	
-	public void showOdds(L2PcInstance player)
+	public void showOdds(L2Player player)
 	{
 		if (_state == ACCEPTING_BETS)
 			return;
@@ -307,7 +308,7 @@ public class L2RaceManagerInstance extends L2Npc
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showMonsterInfo(L2PcInstance player)
+	public void showMonsterInfo(L2Player player)
 	{
 		int npcId = getTemplate().getNpcId();
 		String filename, search;
@@ -325,7 +326,7 @@ public class L2RaceManagerInstance extends L2Npc
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showBuyTicket(L2PcInstance player, int val)
+	public void showBuyTicket(L2Player player, int val)
 	{
 		if (_state != ACCEPTING_BETS)
 			return;
@@ -413,7 +414,7 @@ public class L2RaceManagerInstance extends L2Npc
 			player.getInventory().addItem("Race", item, player, this);
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addItem(item);
-			L2ItemInstance adenaupdate = player.getInventory().getItemByItemId(PcInventory.ADENA_ID);
+			L2ItemInstance adenaupdate = player.getInventory().getItemByItemId(PlayerInventory.ADENA_ID);
 			iu.addModifiedItem(adenaupdate);
 			player.sendPacket(iu);
 			return;

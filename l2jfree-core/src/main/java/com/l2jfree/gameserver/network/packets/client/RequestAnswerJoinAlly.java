@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -45,10 +45,10 @@ public class RequestAnswerJoinAlly extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-		L2PcInstance requestor = activeChar.getRequest().getPartner();
+		L2Player requestor = activeChar.getRequest().getPartner();
 		if (requestor == null)
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
@@ -83,7 +83,7 @@ public class RequestAnswerJoinAlly extends L2ClientPacket
 				
 				// Added to set the Alliance Crest when a clan joins an ally.
 				activeChar.getClan().setAllyCrestId(requestor.getClan().getAllyCrestId());
-				for (L2PcInstance member : activeChar.getClan().getOnlineMembers(0))
+				for (L2Player member : activeChar.getClan().getOnlineMembers(0))
 					member.broadcastUserInfo();
 			}
 		}

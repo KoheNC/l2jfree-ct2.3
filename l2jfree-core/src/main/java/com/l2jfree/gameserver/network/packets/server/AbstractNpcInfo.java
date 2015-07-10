@@ -17,12 +17,12 @@ package com.l2jfree.gameserver.network.packets.server;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
@@ -123,7 +123,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		protected void writeImpl(L2Client client, L2PcInstance activeChar)
+		protected void writeImpl(L2Client client, L2Player activeChar)
 		{
 			writeC(0x0c);
 			writeD(_npc.getObjectId());
@@ -185,7 +185,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+		public boolean canBeSentTo(L2Client client, L2Player activeChar)
 		{
 			if (!activeChar.canSee(_npc))
 				return false;
@@ -213,7 +213,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		protected void writeImpl(L2Client client, L2PcInstance activeChar)
+		protected void writeImpl(L2Client client, L2Player activeChar)
 		{
 			writeC(0x0c);
 			writeD(_trap.getObjectId());
@@ -278,7 +278,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+		public boolean canBeSentTo(L2Client client, L2Player activeChar)
 		{
 			if (!activeChar.canSee(_trap))
 				return false;
@@ -342,7 +342,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		protected void writeImpl(L2Client client, L2PcInstance activeChar)
+		protected void writeImpl(L2Client client, L2Player activeChar)
 		{
 			writeC(0x0c);
 			writeD(_summon.getObjectId());
@@ -412,7 +412,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+		public boolean canBeSentTo(L2Client client, L2Player activeChar)
 		{
 			// Owner gets PetInfo
 			if (_summon.getOwner() == activeChar)
@@ -428,12 +428,12 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 	/**
 	 * Packet for morphed PCs
 	 */
-	public static class PcMorphInfo extends AbstractNpcInfo
+	public static class PlayerMorphInfo extends AbstractNpcInfo
 	{
-		private final L2PcInstance _pc;
+		private final L2Player _pc;
 		private final L2NpcTemplate _template;
 		
-		public PcMorphInfo(L2PcInstance cha, L2NpcTemplate template)
+		public PlayerMorphInfo(L2Player cha, L2NpcTemplate template)
 		{
 			super(cha);
 			_pc = cha;
@@ -441,7 +441,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		protected void writeImpl(L2Client client, L2PcInstance activeChar)
+		protected void writeImpl(L2Client client, L2Player activeChar)
 		{
 			writeC(0x0c);
 			writeD(_pc.getObjectId());
@@ -511,7 +511,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 		}
 		
 		@Override
-		public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+		public boolean canBeSentTo(L2Client client, L2Player activeChar)
 		{
 			// Won't work
 			if (_pc == activeChar)

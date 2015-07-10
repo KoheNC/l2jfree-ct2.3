@@ -18,8 +18,8 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -58,7 +58,7 @@ public final class RequestExEnchantSkillSafe extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		final L2PcInstance player = getClient().getActiveChar();
+		final L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		
@@ -182,7 +182,7 @@ public final class RequestExEnchantSkillSafe extends L2ClientPacket
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	private void updateSkillShortcuts(L2PcInstance player)
+	private void updateSkillShortcuts(L2Player player)
 	{
 		// update all the shortcuts to this skill
 		L2ShortCut[] allShortCuts = player.getAllShortCuts();

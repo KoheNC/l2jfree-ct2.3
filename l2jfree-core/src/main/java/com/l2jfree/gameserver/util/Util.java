@@ -35,7 +35,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.lang.L2Math;
@@ -102,12 +102,12 @@ public final class Util
 		interp.cleanup();
 	}
 	
-	public static void handleIllegalPlayerAction(L2PcInstance actor, String message)
+	public static void handleIllegalPlayerAction(L2Player actor, String message)
 	{
 		handleIllegalPlayerAction(actor, message, Config.DEFAULT_PUNISH);
 	}
 	
-	public static void handleIllegalPlayerAction(L2PcInstance actor, String message, int punishment)
+	public static void handleIllegalPlayerAction(L2Player actor, String message, int punishment)
 	{
 		actor.setIllegalWaiting(true);
 		ThreadPoolManager.getInstance().scheduleGeneral(new IllegalPlayerAction(actor, message, punishment), 5000);

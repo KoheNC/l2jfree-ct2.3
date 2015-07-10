@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -23,14 +23,14 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
  */
 public class StopMoveInVehicle extends L2ServerPacket
 {
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final int _boatId;
 	
 	/**
 	 * @param player
 	 * @param boatid
 	 */
-	public StopMoveInVehicle(L2PcInstance player, int boatId)
+	public StopMoveInVehicle(L2Player player, int boatId)
 	{
 		_activeChar = player;
 		_boatId = boatId;

@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager.AutoSpawnInstance;
@@ -42,7 +42,7 @@ public class AdminMammon implements IAdminCommandHandler
 	private final boolean _isSealValidation = SevenSigns.getInstance().isSealValidationPeriod();
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		int npcId = 0;
 		int teleportIndex = -1;

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 class ConditionPlayerSex extends Condition
@@ -30,6 +30,6 @@ class ConditionPlayerSex extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		return (((L2PcInstance)env.player).getAppearance().getSex() ? 1 : 0) == _sex;
+		return (((L2Player)env.player).getAppearance().getSex() ? 1 : 0) == _sex;
 	}
 }

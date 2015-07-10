@@ -21,8 +21,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -44,7 +44,7 @@ public class AdminKill implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_kill", "admin_kill_monster" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_kill"))
 		{
@@ -54,7 +54,7 @@ public class AdminKill implements IAdminCommandHandler
 			if (st.hasMoreTokens())
 			{
 				String firstParam = st.nextToken();
-				L2PcInstance plyr = L2World.getInstance().getPlayer(firstParam);
+				L2Player plyr = L2World.getInstance().getPlayer(firstParam);
 				if (plyr != null)
 				{
 					if (st.hasMoreTokens())
@@ -124,11 +124,11 @@ public class AdminKill implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void kill(L2PcInstance activeChar, L2Creature target)
+	private void kill(L2Player activeChar, L2Creature target)
 	{
-		if (target instanceof L2PcInstance)
+		if (target instanceof L2Player)
 		{
-			if (!((L2PcInstance)target).isGM())
+			if (!((L2Player)target).isGM())
 				target.stopAllEffects(); // e.g. invincibility effect
 			target.reduceCurrentHp(target.getMaxHp() + target.getMaxCp() + 1, activeChar);
 		}

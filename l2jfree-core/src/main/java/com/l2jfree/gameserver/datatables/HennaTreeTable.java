@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.templates.item.L2Henna;
 
 public class HennaTreeTable
@@ -98,7 +98,7 @@ public class HennaTreeTable
 		}
 	}
 	
-	public L2Henna[] getAvailableHenna(L2PcInstance player)
+	public L2Henna[] getAvailableHenna(L2Player player)
 	{
 		return _hennaTrees.get(player.getClassId().getId());
 	}
@@ -113,7 +113,7 @@ public class HennaTreeTable
 	 * @param activeChar a player (if it is null, returns false)
 	 * @param symbolId henna dye ID
 	 */
-	public final boolean isDrawable(L2PcInstance player, int symbolId)
+	public final boolean isDrawable(L2Player player, int symbolId)
 	{
 		if (player == null)
 			return false;

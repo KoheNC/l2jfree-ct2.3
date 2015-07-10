@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -45,7 +45,7 @@ public class RequestJoinAlly extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -64,13 +64,13 @@ public class RequestJoinAlly extends L2ClientPacket
 		if (obj == null)
 			obj = L2World.getInstance().getPlayer(_objectId);
 		
-		if (!(obj instanceof L2PcInstance))
+		if (!(obj instanceof L2Player))
 		{
 			requestFailed(SystemMessageId.YOU_HAVE_INVITED_THE_WRONG_TARGET);
 			return;
 		}
 		
-		L2PcInstance target = (L2PcInstance)obj;
+		L2Player target = (L2Player)obj;
 		if (!L2Clan.checkAllyJoinCondition(activeChar, target) || !activeChar.getRequest().setRequest(target, this))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);

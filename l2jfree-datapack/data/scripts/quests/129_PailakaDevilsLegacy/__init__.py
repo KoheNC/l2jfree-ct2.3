@@ -8,7 +8,7 @@ from com.l2jfree.gameserver.model.quest            import QuestState
 from com.l2jfree.gameserver.model.quest.jython     import QuestJython as JQuest
 from com.l2jfree.gameserver.network.packets.server  import SystemMessage
 from com.l2jfree.gameserver.datatables             import ItemTable
-from com.l2jfree.gameserver.gameobjects.instance   import L2PcInstance
+from com.l2jfree.gameserver.gameobjects   import L2Player
 
 qn = "129_PailakaDevilsLegacy"
 debug = False

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.usercommandhandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
@@ -30,7 +30,7 @@ public class Loc implements IUserCommandHandler
 	private static final int[] COMMAND_IDS = { 0 };
 	
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		L2MapRegionRestart restart = null;
 		SystemMessageId msg = SystemMessageId.LOC_ADEN_S1_S2_S3;

@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.model;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.ObjectKnownList;
 import com.l2jfree.gameserver.gameobjects.poly.ObjectPoly;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
@@ -83,7 +83,7 @@ public abstract class L2Object implements L2Entity<Integer>
 	 * 
 	 * @param player
 	 */
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
@@ -91,7 +91,7 @@ public abstract class L2Object implements L2Entity<Integer>
 	/**
 	 * @param player
 	 */
-	public void onActionShift(L2PcInstance player)
+	public void onActionShift(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
@@ -101,7 +101,7 @@ public abstract class L2Object implements L2Entity<Integer>
 	 * 
 	 * @param player
 	 */
-	public void onForcedAttack(L2PcInstance player)
+	public void onForcedAttack(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
@@ -447,7 +447,7 @@ public abstract class L2Object implements L2Entity<Integer>
 		if (_instanceId == instanceId)
 			return;
 		
-		if (this instanceof L2PcInstance)
+		if (this instanceof L2Player)
 		{
 			if (_instanceId != instanceId)
 			{
@@ -492,7 +492,7 @@ public abstract class L2Object implements L2Entity<Integer>
 		// If we change it for visible objects, me must clear & revalidate knownlists
 		if (isVisible())
 		{
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				// We don't want some ugly looking disappear/appear effects, so don't update
 				// the knownlist here, but players usually enter instancezones through teleporting
@@ -534,7 +534,7 @@ public abstract class L2Object implements L2Entity<Integer>
 	 * Sends the Server->Client info packet for the object.<br>
 	 * <br>
 	 */
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 	}
 	
@@ -548,12 +548,12 @@ public abstract class L2Object implements L2Entity<Integer>
 		return (obj == null ? null : obj.getActingCharacter());
 	}
 	
-	public L2PcInstance getActingPlayer()
+	public L2Player getActingPlayer()
 	{
 		return null;
 	}
 	
-	public final static L2PcInstance getActingPlayer(L2Object obj)
+	public final static L2Player getActingPlayer(L2Object obj)
 	{
 		return (obj == null ? null : obj.getActingPlayer());
 	}
@@ -570,7 +570,7 @@ public abstract class L2Object implements L2Entity<Integer>
 	
 	public boolean isInFunEvent()
 	{
-		L2PcInstance player = getActingPlayer();
+		L2Player player = getActingPlayer();
 		return (player != null && player.isInFunEvent());
 	}
 	
@@ -590,7 +590,7 @@ public abstract class L2Object implements L2Entity<Integer>
 	{
 	}
 	
-	public int getMyTargetSelectedColor(L2PcInstance player)
+	public int getMyTargetSelectedColor(L2Player player)
 	{
 		return 0;
 	}

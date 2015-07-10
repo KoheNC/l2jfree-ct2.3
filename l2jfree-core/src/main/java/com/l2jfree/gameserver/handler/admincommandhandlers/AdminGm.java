@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.gameserver.communitybbs.Manager.RegionBBSManager;
 import com.l2jfree.gameserver.communitybbs.Manager.RegionBBSManager.PlayerStateOnCommunity;
 import com.l2jfree.gameserver.datatables.GmListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 /**
@@ -35,7 +35,7 @@ public class AdminGm implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_gm" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_gm"))
 			handleGm(activeChar);
@@ -49,7 +49,7 @@ public class AdminGm implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleGm(L2PcInstance activeChar)
+	private void handleGm(L2Player activeChar)
 	{
 		if (activeChar.isGM())
 		{

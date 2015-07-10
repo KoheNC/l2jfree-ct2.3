@@ -30,10 +30,10 @@ import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Object;
@@ -286,7 +286,7 @@ public class FrintezzaManager extends BossLair
 			return;
 		
 		// set camera.
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			
 			setIdle(pc);
@@ -323,7 +323,7 @@ public class FrintezzaManager extends BossLair
 		
 		Point3D p = new Point3D(174233, -88212, -5116);
 		
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			if (pc.getX() != p.getX() && pc.getY() != p.getY() && pc.getZ() != p.getZ())
 			{
@@ -346,7 +346,7 @@ public class FrintezzaManager extends BossLair
 		if (_lastLocation == null || _lastLocation.isEmpty())
 			return;
 		
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			if (_lastLocation.containsKey(pc.getObjectId()))
 			{
@@ -468,7 +468,7 @@ public class FrintezzaManager extends BossLair
 					
 					Earthquake eq = new Earthquake(weakScarlet.getX(), weakScarlet.getY(), weakScarlet.getZ(), 50, 6);
 					
-					for (L2PcInstance pc : getPlayersInside())
+					for (L2Player pc : getPlayersInside())
 						pc.broadcastPacket(eq);
 					
 					break;
@@ -502,7 +502,7 @@ public class FrintezzaManager extends BossLair
 				case 17:
 					
 					// show movie
-					for (L2PcInstance pc : getPlayersInside())
+					for (L2Player pc : getPlayersInside())
 					{
 						pc.setTarget(null);
 						
@@ -577,7 +577,7 @@ public class FrintezzaManager extends BossLair
 				case 32:
 					
 					// reset camera.
-					for (L2PcInstance pc : getPlayersInside())
+					for (L2Player pc : getPlayersInside())
 					{
 						pc.leaveMovieMode();
 						pc.enableAllSkills();
@@ -720,7 +720,7 @@ public class FrintezzaManager extends BossLair
 			// Target is the players
 			{
 				
-				for (L2PcInstance pc : getPlayersInside())
+				for (L2Player pc : getPlayersInside())
 				{
 					if (!pc.isDead())
 						targets.add(pc);
@@ -957,7 +957,7 @@ public class FrintezzaManager extends BossLair
 		frintezza.callSkill(skill, target);
 		
 		// send target the message, the skill was launched
-		if (target instanceof L2PcInstance)
+		if (target instanceof L2Player)
 			target.getActingPlayer().sendPacket(
 					new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT).addSkillName(skill.getId()));
 		
@@ -1081,14 +1081,14 @@ public class FrintezzaManager extends BossLair
 				if (_effected == null)
 					return;
 				
-				//stun dance can be cast on L2PcInstance only
-				if (!(_effected instanceof L2PcInstance))
+				//stun dance can be cast on L2Player only
+				if (!(_effected instanceof L2Player))
 					return;
 				
 				if (_effected.getFirstEffect(_skill) != null)
 					return;
 				
-				L2PcInstance effected = (L2PcInstance)_effected;
+				L2Player effected = (L2Player)_effected;
 				if (effected.isInvul() || effected.getAppearance().isInvisible())
 					return;
 				
@@ -1104,7 +1104,7 @@ public class FrintezzaManager extends BossLair
 				_effected.callSkill(_skill, _effected);
 				
 				// send target the message
-				if (_effected instanceof L2PcInstance)
+				if (_effected instanceof L2Player)
 					_effected.getActingPlayer().sendPacket(
 							new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT).addSkillName(_skill.getId()));
 				
@@ -1271,8 +1271,8 @@ public class FrintezzaManager extends BossLair
 				return;
 			
 			/*
-			 * if (target instanceof L2PcInstance && (((L2PcInstance)target).isInvul() || ((L2PcInstance)target).getAppearance().getInvisible())) {
-			 * _mob.abortAttack(); _mob.abortCast(); _mob.setTarget(null); _mob.getKnownList().getKnownPlayers().remove((L2PcInstance)target); return; }
+			 * if (target instanceof L2Player && (((L2Player)target).isInvul() || ((L2Player)target).getAppearance().getInvisible())) {
+			 * _mob.abortAttack(); _mob.abortCast(); _mob.setTarget(null); _mob.getKnownList().getKnownPlayers().remove((L2Player)target); return; }
 			 */
 			if (target instanceof L2Creature)
 				callMinionsToAssist((L2Creature)target, _aggroDamage);
@@ -1653,19 +1653,19 @@ public class FrintezzaManager extends BossLair
 	{
 		int count = 0;
 		
-		// Server->Client packet StatusUpdate of the L2Npc to the L2PcInstance to update its HP bar
+		// Server->Client packet StatusUpdate of the L2Npc to the L2Player to update its HP bar
 		StatusUpdate su = new StatusUpdate(target.getObjectId());
 		su.addAttribute(StatusUpdate.CUR_HP, (int)target.getStatus().getCurrentHp());
 		su.addAttribute(StatusUpdate.MAX_HP, target.getMaxHp());
 		
 		// set the target again on the players that targeted this _caster
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			if (pc != null && targeted[count])
 			{
 				pc.setTarget(target);
 				
-				// Send a Server->Client packet StatusUpdate of the L2Npc to the L2PcInstance to update its HP bar
+				// Send a Server->Client packet StatusUpdate of the L2Npc to the L2Player to update its HP bar
 				pc.sendPacket(su);
 			}
 			count++;
@@ -1686,7 +1686,7 @@ public class FrintezzaManager extends BossLair
 		int count = 0;
 		
 		// get the players that targeted this _caster
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			targeted[count] = !(pc == null || pc.getTarget() != target);
 			count++;
@@ -1758,7 +1758,7 @@ public class FrintezzaManager extends BossLair
 		ThreadPoolManager.getInstance().scheduleGeneral(new SetMobilised(weakScarlet), 1100);
 		
 		// reset camera.
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			pc.leaveMovieMode();
 			pc.enableAllSkills();
@@ -1816,8 +1816,8 @@ public class FrintezzaManager extends BossLair
 				int x = tempTarget.getX() + Rnd.get(_range) - _range / 2, y =
 						tempTarget.getY() + Rnd.get(_range) - _range / 2, z = tempTarget.getZ();
 				
-				if (!_caster.isInsideRadius(x, y, _range, false) && tempTarget instanceof L2PcInstance
-						&& checkIfInZone((L2PcInstance)tempTarget))
+				if (!_caster.isInsideRadius(x, y, _range, false) && tempTarget instanceof L2Player
+						&& checkIfInZone((L2Player)tempTarget))
 				{
 					
 					// Returns a list of the players that targeted the _caster

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.TradeList;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -31,7 +31,7 @@ public class PrivateStoreListBuy extends L2ServerPacket
 	private final long _playerAdena;
 	private final TradeList.TradeItem[] _items;
 	
-	public PrivateStoreListBuy(L2PcInstance player, L2PcInstance storePlayer)
+	public PrivateStoreListBuy(L2Player player, L2Player storePlayer)
 	{
 		_objId = storePlayer.getObjectId();
 		_playerAdena = player.getAdena();

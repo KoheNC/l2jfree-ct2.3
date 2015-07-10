@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -88,9 +88,9 @@ public class PetFood implements IItemHandler
 					return true;
 				}
 			}
-			else if (activeChar instanceof L2PcInstance)
+			else if (activeChar instanceof L2Player)
 			{
-				L2PcInstance player = (L2PcInstance)activeChar;
+				L2Player player = (L2Player)activeChar;
 				int itemId = item.getItemId();
 				if (player.isMounted())
 				{

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
 import com.l2jfree.gameserver.CoreInfo;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 
 /**
@@ -27,7 +27,7 @@ public class VersionInfo implements IVoicedCommandHandler
 	private static final String[] VOICED_COMMANDS = { "version" };
 	
 	@Override
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
 		if (command.startsWith("version"))
 		{

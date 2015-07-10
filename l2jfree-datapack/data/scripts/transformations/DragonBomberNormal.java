@@ -14,7 +14,7 @@
  */
 package transformations;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
 
@@ -27,7 +27,7 @@ public class DragonBomberNormal extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 580, 3); // Death Blow
 		addSkill(player, 581, 3); // Sand Cloud
@@ -36,7 +36,7 @@ public class DragonBomberNormal extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 580); // Death Blow
 		removeSkill(player, 581); // Sand Cloud

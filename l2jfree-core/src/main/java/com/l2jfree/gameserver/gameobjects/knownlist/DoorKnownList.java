@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
 public class DoorKnownList extends CreatureKnownList
@@ -50,7 +50,7 @@ public class DoorKnownList extends CreatureKnownList
 	{
 		if (object instanceof L2SiegeGuard)
 			return 800;
-		if (!(object instanceof L2PcInstance))
+		if (!(object instanceof L2Player))
 			return 0;
 		return 4000;
 	}
@@ -60,7 +60,7 @@ public class DoorKnownList extends CreatureKnownList
 	{
 		if (object instanceof L2SiegeGuard)
 			return 600;
-		if (!(object instanceof L2PcInstance))
+		if (!(object instanceof L2Player))
 			return 0;
 		return 2000;
 	}

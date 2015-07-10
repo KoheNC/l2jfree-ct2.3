@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -55,8 +55,8 @@ public final class Action extends L2ClientPacket
 			_log.debug("ObjectID: " + _objectId);
 		}
 		
-		// Get the current L2PcInstance of the player
-		L2PcInstance activeChar = getActiveChar();
+		// Get the current L2Player of the player
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -83,9 +83,9 @@ public final class Action extends L2ClientPacket
 			sendAF();
 			return;
 		}
-		else if (obj instanceof L2PcInstance)
+		else if (obj instanceof L2Player)
 		{
-			L2PcInstance target = (L2PcInstance)obj;
+			L2Player target = (L2Player)obj;
 			if (target.getAppearance().isInvisible() && !activeChar.isGM())
 			{
 				sendAF();

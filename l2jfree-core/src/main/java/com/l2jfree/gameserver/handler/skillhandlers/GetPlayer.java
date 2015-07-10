@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -39,9 +39,9 @@ public class GetPlayer implements ISkillHandler
 		
 		for (L2Object target : targets)
 		{
-			if (target instanceof L2PcInstance)
+			if (target instanceof L2Player)
 			{
-				L2PcInstance trg = (L2PcInstance)target;
+				L2Player trg = (L2Player)target;
 				
 				if (trg.isAlikeDead())
 					continue;

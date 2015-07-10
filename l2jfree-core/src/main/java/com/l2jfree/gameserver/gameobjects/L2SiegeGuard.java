@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.gameobjects;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 /**
@@ -28,7 +27,7 @@ public abstract class L2SiegeGuard extends L2Guard
 	}
 	
 	@Override
-	public int getMyTargetSelectedColor(L2PcInstance player)
+	public int getMyTargetSelectedColor(L2Player player)
 	{
 		return player.getLevel() - getLevel();
 	}

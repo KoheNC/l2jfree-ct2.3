@@ -18,8 +18,8 @@ import java.util.Arrays;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -276,7 +276,7 @@ public abstract class AbstractSystemMessage<T extends AbstractSystemMessage> ext
 	}
 	
 	@Override
-	public void prepareToSend(L2Client client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2Player activeChar)
 	{
 		int count = 0;
 		
@@ -354,8 +354,8 @@ public abstract class AbstractSystemMessage<T extends AbstractSystemMessage> ext
 		if (cha instanceof L2Npc)
 			return addNpcName((L2Npc)cha);
 		
-		if (cha instanceof L2PcInstance)
-			return addPcName((L2PcInstance)cha);
+		if (cha instanceof L2Player)
+			return addPcName((L2Player)cha);
 		
 		if (cha instanceof L2Summon)
 			return addNpcName((L2Summon)cha);
@@ -363,7 +363,7 @@ public abstract class AbstractSystemMessage<T extends AbstractSystemMessage> ext
 		return addString(cha.getName());
 	}
 	
-	public T addPcName(L2PcInstance pc)
+	public T addPcName(L2Player pc)
 	{
 		return addString(pc.getAppearance().getVisibleName());
 	}

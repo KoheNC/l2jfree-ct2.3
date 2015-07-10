@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -63,7 +63,7 @@ public class TVTInstance
 	
 	private final CopyOnWriteArrayList<TvTITeam> _teams = new CopyOnWriteArrayList<TvTITeam>();
 	
-	private final CopyOnWriteArrayList<L2PcInstance> _tempJoinList = new CopyOnWriteArrayList<L2PcInstance>();
+	private final CopyOnWriteArrayList<L2Player> _tempJoinList = new CopyOnWriteArrayList<L2Player>();
 	
 	public TVTInstance()
 	{
@@ -85,7 +85,7 @@ public class TVTInstance
 		CreatureSay cs =
 				new CreatureSay(0, SystemChatChannelId.Chat_Inner_Partymaster, TvTIMain.getAnnounceName(), announce);
 		for (TvTITeam t : _teams)
-			for (L2PcInstance player : t.getPlayers())
+			for (L2Player player : t.getPlayers())
 				player.sendPacket(cs);
 	}
 	
@@ -102,7 +102,7 @@ public class TVTInstance
 			int idxTeam = 0;
 			int teamSize = 0;
 			int splitSize = 0;
-			L2PcInstance tempPlayer;
+			L2Player tempPlayer;
 			
 			switch (Config.TVTI_SORT_TEAMS)
 			{
@@ -121,7 +121,7 @@ public class TVTInstance
 				case 1: // Split
 					teamSize = getTeams().size();
 					splitSize = (getPlayers().size() / teamSize) + (getPlayers().size() % teamSize);
-					for (L2PcInstance player : getPlayers())
+					for (L2Player player : getPlayers())
 					{
 						getPlayers().remove(player);
 						getTeams().get(idxTeam).addPlayer(player);
@@ -133,7 +133,7 @@ public class TVTInstance
 					}
 					break;
 				case 2: // Order split
-					for (L2PcInstance player : getPlayers())
+					for (L2Player player : getPlayers())
 					{
 						getTeams().get(idxTeam).addPlayer(player);
 						idxTeam++;
@@ -189,7 +189,7 @@ public class TVTInstance
 			int idxTeam = 0;
 			int teamSize = 0;
 			int splitSize = 0;
-			L2PcInstance tempPlayer;
+			L2Player tempPlayer;
 			
 			switch (Config.TVTI_SORT_TEAMS)
 			{
@@ -208,7 +208,7 @@ public class TVTInstance
 				case 1: // Split
 					teamSize = getTeams().size();
 					splitSize = (getPlayers().size() / teamSize) + (getPlayers().size() % teamSize);
-					for (L2PcInstance player : getPlayers())
+					for (L2Player player : getPlayers())
 					{
 						getPlayers().remove(player);
 						getTeams().get(idxTeam).addPlayer(player);
@@ -220,7 +220,7 @@ public class TVTInstance
 					}
 					break;
 				case 2: // Order split
-					for (L2PcInstance player : getPlayers())
+					for (L2Player player : getPlayers())
 					{
 						getTeams().get(idxTeam).addPlayer(player);
 						idxTeam++;
@@ -490,7 +490,7 @@ public class TVTInstance
 		_log.info("TvT : Cleaning players.");
 		for (TvTITeam t : _teams)
 		{
-			for (L2PcInstance player : t.getPlayers())
+			for (L2Player player : t.getPlayers())
 				if (player != null)
 				{
 					player._joiningTvTi = false;
@@ -538,7 +538,7 @@ public class TVTInstance
 	
 	public void rewardTeam(TvTITeam t)
 	{
-		for (L2PcInstance player : t.getPlayers())
+		for (L2Player player : t.getPlayers())
 			if (player != null && player.isOnline() != 0 && player._inEventTvTi)
 			{
 				if (player._countTvTiKills > 0 || Config.TVTI_PRICE_NO_KILLS)
@@ -560,7 +560,7 @@ public class TVTInstance
 				{
 					player.sendMessage("Your team wins the event. But you did not kill anything, so no reward for you.");
 				}
-				// Send a Server->Client ActionFailed to the L2PcInstance in
+				// Send a Server->Client ActionFailed to the L2Player in
 				// order to avoid that the client wait another packet
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
@@ -568,7 +568,7 @@ public class TVTInstance
 	
 	public void showStats(TvTITeam t)
 	{
-		for (L2PcInstance player : t.getPlayers())
+		for (L2Player player : t.getPlayers())
 			if (player != null && player.isOnline() != 0 && player._inEventTvTi)
 			{
 				boolean bg = false;
@@ -584,7 +584,7 @@ public class TVTInstance
 				replyMSG.append("<td width=\"250\" align=\"center\">Players</td>");
 				replyMSG.append("<td width=\"50\" align=\"center\">Kills</td>");
 				replyMSG.append("</tr><tr>");
-				for (L2PcInstance p : t.getPlayers())
+				for (L2Player p : t.getPlayers())
 				{
 					if (bg)
 					{
@@ -607,7 +607,7 @@ public class TVTInstance
 				nhm.setHtml(replyMSG.moveToString());
 				player.sendPacket(nhm);
 				
-				// Send a Server->Client ActionFailed to the L2PcInstance in
+				// Send a Server->Client ActionFailed to the L2Player in
 				// order to avoid that the client wait another packet
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
@@ -616,7 +616,7 @@ public class TVTInstance
 	public void playAnimation(boolean tie)
 	{
 		for (TvTITeam t : _teams)
-			for (L2PcInstance player : t.getPlayers())
+			for (L2Player player : t.getPlayers())
 				if (player != null)
 				{
 					if (!_winner.getPlayers().contains(player) && !tie)
@@ -663,7 +663,7 @@ public class TVTInstance
 	
 	public void removeOfflinePlayers()
 	{
-		for (L2PcInstance player : _tempJoinList)
+		for (L2Player player : _tempJoinList)
 			if (player.isOnline() == 0)
 				_tempJoinList.remove(player);
 	}
@@ -834,17 +834,17 @@ public class TVTInstance
 		return _started;
 	}
 	
-	public void addPlayer(L2PcInstance player)
+	public void addPlayer(L2Player player)
 	{
 		_tempJoinList.add(player);
 	}
 	
-	public void removePlayer(L2PcInstance player)
+	public void removePlayer(L2Player player)
 	{
 		_tempJoinList.remove(player);
 	}
 	
-	public CopyOnWriteArrayList<L2PcInstance> getPlayers()
+	public CopyOnWriteArrayList<L2Player> getPlayers()
 	{
 		return _tempJoinList;
 	}

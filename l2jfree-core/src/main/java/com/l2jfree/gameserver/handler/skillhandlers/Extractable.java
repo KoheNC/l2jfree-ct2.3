@@ -21,12 +21,12 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ExtractableSkillsData;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.items.model.L2ExtractableProductItem;
 import com.l2jfree.gameserver.items.model.L2ExtractableSkill;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
@@ -45,10 +45,10 @@ public class Extractable implements ISkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		int itemID = skill.getReferenceItemId();
 		if (itemID == 0)
 			return;
@@ -118,7 +118,7 @@ public class Extractable implements ISkillHandler
 						player.addItem("Extract", createItemID[i], 1, targets[0], false);
 				}
 				
-				if (createItemID[i] == PcInventory.ADENA_ID)
+				if (createItemID[i] == PlayerInventory.ADENA_ID)
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
 					sm.addNumber(createAmount[i]);

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -45,7 +45,7 @@ public class RequestGiveNickName extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -77,7 +77,7 @@ public class RequestGiveNickName extends L2ClientPacket
 			requestFailed(SystemMessageId.TARGET_MUST_BE_IN_CLAN);
 			return;
 		}
-		L2PcInstance target = targetMember.getPlayerInstance();
+		L2Player target = targetMember.getPlayerInstance();
 		if (target == null)
 		{
 			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
@@ -89,7 +89,7 @@ public class RequestGiveNickName extends L2ClientPacket
 		sendAF();
 	}
 	
-	private final void setTitle(L2PcInstance target)
+	private final void setTitle(L2Player target)
 	{
 		target.setTitle(_title);
 		target.sendPacket(SystemMessageId.TITLE_CHANGED);

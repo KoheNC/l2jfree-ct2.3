@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.usercommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.entity.Castle;
@@ -26,7 +26,7 @@ public class SiegeStatus implements IUserCommandHandler
 	private static final int[] COMMAND_IDS = { 99 };
 	
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		if (!activeChar.isNoble())
 		{

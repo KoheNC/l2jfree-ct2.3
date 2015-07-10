@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.templates;
 
 import junit.framework.TestCase;
 
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 
-public class TestL2PcTemplate extends TestCase
+public class TestL2PlayerTemplate extends TestCase
 {
 	
 	/**
@@ -74,7 +74,7 @@ public class TestL2PcTemplate extends TestCase
 		set.set("lvlMpAdd", 70.f);
 		set.set("lvlMpMod", 71.f);
 		
-		L2PcTemplate template = new L2PcTemplate(set);
+		L2PlayerTemplate template = new L2PlayerTemplate(set);
 		assertNotNull(template);
 		
 		assertEquals("dummyEntry3", template.getClassId().name());

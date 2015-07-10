@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import javolution.util.FastList;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -31,7 +31,7 @@ public class PackageSendableList extends L2ServerPacket
 	private final int _targetPlayerObjId;
 	private final long _playerAdena;
 	
-	public PackageSendableList(L2PcInstance sender, int playerOID)
+	public PackageSendableList(L2Player sender, int playerOID)
 	{
 		_targetPlayerObjId = playerOID;
 		_playerAdena = sender.getAdena();

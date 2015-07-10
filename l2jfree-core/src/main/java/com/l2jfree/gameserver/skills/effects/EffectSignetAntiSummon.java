@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.instance.L2EffectPointInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.skills.Env;
@@ -65,7 +65,7 @@ public final class EffectSignetAntiSummon extends L2Effect
 			
 			if (cha instanceof L2Playable)
 			{
-				L2PcInstance owner = cha.getActingPlayer();
+				L2Player owner = cha.getActingPlayer();
 				
 				if (owner != null && owner.getPet() != null)
 				{

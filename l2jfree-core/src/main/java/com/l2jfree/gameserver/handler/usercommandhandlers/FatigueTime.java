@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.usercommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.network.SystemMessageId;
 
@@ -23,7 +23,7 @@ public class FatigueTime implements IUserCommandHandler
 	private static final int[] COMMAND_IDS = { 102 };
 	
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		// Fatigue system is not used in NA
 		// Until something is known, use the retail answer

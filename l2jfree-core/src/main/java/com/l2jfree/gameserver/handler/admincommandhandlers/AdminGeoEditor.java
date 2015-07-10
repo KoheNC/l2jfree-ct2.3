@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.geoeditorcon.GeoEditorListener;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
@@ -30,7 +30,7 @@ public class AdminGeoEditor implements IAdminCommandHandler
 			"admin_ge_leave" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (!Config.ACCEPT_GEOEDITOR_CONN)
 		{

@@ -19,8 +19,8 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_I
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_REST;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -36,9 +36,9 @@ public class L2PlayerAI extends L2CreatureAI
 	}
 	
 	@Override
-	public L2PcInstance getActor()
+	public L2Player getActor()
 	{
-		return (L2PcInstance)_actor;
+		return (L2Player)_actor;
 	}
 	
 	@Override
@@ -164,7 +164,7 @@ public class L2PlayerAI extends L2CreatureAI
 		
 		setIntention(AI_INTENTION_IDLE);
 		
-		((L2PcInstance.AIAccessor)_accessor).doPickupItem(target);
+		((L2Player.AIAccessor)_accessor).doPickupItem(target);
 	}
 	
 	private void thinkInteract()
@@ -190,7 +190,7 @@ public class L2PlayerAI extends L2CreatureAI
 		}
 		
 		if (!(target instanceof L2StaticObjectInstance))
-			((L2PcInstance.AIAccessor)_accessor).doInteract((L2Creature)target);
+			((L2Player.AIAccessor)_accessor).doInteract((L2Creature)target);
 		
 		setIntention(AI_INTENTION_IDLE);
 	}

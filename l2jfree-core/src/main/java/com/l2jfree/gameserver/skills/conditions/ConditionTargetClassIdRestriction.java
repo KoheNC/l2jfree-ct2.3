@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 class ConditionTargetClassIdRestriction extends Condition
@@ -36,9 +36,9 @@ class ConditionTargetClassIdRestriction extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.target instanceof L2PcInstance))
+		if (!(env.target instanceof L2Player))
 			return false;
 		
-		return Arrays.binarySearch(_classIds, ((L2PcInstance)env.target).getClassId().getId()) >= 0;
+		return Arrays.binarySearch(_classIds, ((L2Player)env.target).getClassId().getId()) >= 0;
 	}
 }

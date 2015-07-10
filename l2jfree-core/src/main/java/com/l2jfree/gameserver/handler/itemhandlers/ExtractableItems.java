@@ -21,12 +21,12 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ExtractableItemsData;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.items.model.L2ExtractableItem;
 import com.l2jfree.gameserver.items.model.L2ExtractableProductItem;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.tools.random.Rnd;
@@ -44,10 +44,10 @@ public class ExtractableItems implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		
 		int itemID = item.getItemId();
 		L2ExtractableItem exitem = ExtractableItemsData.getInstance().getExtractableItem(itemID);
@@ -111,7 +111,7 @@ public class ExtractableItems implements IItemHandler
 					for (int j = 0; j < createAmount[i]; j++)
 						activeChar.addItem("Extract", createItemID[i], 1, activeChar, false);
 				}
-				if (createItemID[i] == PcInventory.ADENA_ID)
+				if (createItemID[i] == PlayerInventory.ADENA_ID)
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
 					sm.addNumber(createAmount[i]);

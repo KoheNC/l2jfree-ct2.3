@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.GmListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -36,7 +36,7 @@ public class AdminGmChat implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_gmchat", "admin_snoop", "admin_gmchat_menu" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_gmchat"))
 			handleGmChat(command, activeChar);
@@ -51,7 +51,7 @@ public class AdminGmChat implements IAdminCommandHandler
 	 * @param command
 	 * @param activeChar
 	 */
-	private void snoop(String command, L2PcInstance activeChar)
+	private void snoop(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
@@ -62,7 +62,7 @@ public class AdminGmChat implements IAdminCommandHandler
 			return;
 		}
 		
-		L2PcInstance player = L2World.getInstance().getPlayer(st.nextToken());
+		L2Player player = L2World.getInstance().getPlayer(st.nextToken());
 		if (player == null)
 		{
 			activeChar.sendPacket(SystemMessageId.TARGET_CANT_FOUND);
@@ -88,7 +88,7 @@ public class AdminGmChat implements IAdminCommandHandler
 	 * @param command
 	 * @param activeChar
 	 */
-	private void handleGmChat(String command, L2PcInstance activeChar)
+	private void handleGmChat(String command, L2Player activeChar)
 	{
 		try
 		{

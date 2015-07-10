@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * @author -Nemesiss-
@@ -37,7 +37,7 @@ public final class WarehouseCacheManager implements Runnable
 		return SingletonHolder._instance;
 	}
 	
-	private final Map<L2PcInstance, Long> _cache = new FastMap<L2PcInstance, Long>();
+	private final Map<L2Player, Long> _cache = new FastMap<L2Player, Long>();
 	
 	private WarehouseCacheManager()
 	{
@@ -46,12 +46,12 @@ public final class WarehouseCacheManager implements Runnable
 		_log.info("WarehouseCacheManager: Initialized.");
 	}
 	
-	public synchronized void add(L2PcInstance player)
+	public synchronized void add(L2Player player)
 	{
 		_cache.put(player, System.currentTimeMillis());
 	}
 	
-	public synchronized void remove(L2PcInstance player)
+	public synchronized void remove(L2Player player)
 	{
 		_cache.remove(player);
 	}
@@ -59,11 +59,11 @@ public final class WarehouseCacheManager implements Runnable
 	@Override
 	public synchronized void run()
 	{
-		for (Map.Entry<L2PcInstance, Long> entry : _cache.entrySet())
+		for (Map.Entry<L2Player, Long> entry : _cache.entrySet())
 		{
 			if (System.currentTimeMillis() > entry.getValue() + Config.WAREHOUSE_CACHE_TIME * 60000L)
 			{
-				final L2PcInstance player = entry.getKey();
+				final L2Player player = entry.getKey();
 				
 				player.clearWarehouse();
 				

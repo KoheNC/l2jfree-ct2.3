@@ -34,8 +34,8 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -392,9 +392,9 @@ public class L2Zone implements FuncOwner
 	
 	private State getExpectedState(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			if (((L2PcInstance)character).getOnlineState() == L2PcInstance.ONLINE_STATE_DELETED)
+			if (((L2Player)character).getOnlineState() == L2Player.ONLINE_STATE_DELETED)
 			{
 				_log.warn("", new IllegalStateException());
 				return State.OUTSIDE;
@@ -475,7 +475,7 @@ public class L2Zone implements FuncOwner
 	
 	protected void onEnter(L2Creature character)
 	{
-		final L2PcInstance player = character instanceof L2PcInstance ? (L2PcInstance)character : null;
+		final L2Player player = character instanceof L2Player ? (L2Player)character : null;
 		
 		Quest[] quests = getQuestByEvent(Quest.QuestEventType.ON_ENTER_ZONE);
 		if (quests != null)
@@ -539,7 +539,7 @@ public class L2Zone implements FuncOwner
 	
 	protected void onExit(L2Creature character)
 	{
-		final L2PcInstance player = character instanceof L2PcInstance ? (L2PcInstance)character : null;
+		final L2Player player = character instanceof L2Player ? (L2Player)character : null;
 		
 		Quest[] quests = getQuestByEvent(Quest.QuestEventType.ON_EXIT_ZONE);
 		if (quests != null)
@@ -611,7 +611,7 @@ public class L2Zone implements FuncOwner
 		private int reason = REASON_OK;
 	}
 	
-	private void tryPortIntoInstance(L2PcInstance pl)
+	private void tryPortIntoInstance(L2Player pl)
 	{
 		InstanceResult ir = new InstanceResult();
 		
@@ -619,7 +619,7 @@ public class L2Zone implements FuncOwner
 		{
 			if (pl.isInParty())
 			{
-				List<L2PcInstance> list = pl.getParty().getPartyMembers();
+				List<L2Player> list = pl.getParty().getPartyMembers();
 				getInstanceFromGroup(ir, list, false);
 				checkPlayersInside(ir, list);
 			}
@@ -628,7 +628,7 @@ public class L2Zone implements FuncOwner
 		{
 			if (pl.getClan() != null)
 			{
-				List<L2PcInstance> list = pl.getClan().getOnlineMembersList();
+				List<L2Player> list = pl.getClan().getOnlineMembersList();
 				getInstanceFromGroup(ir, list, true);
 				checkPlayersInside(ir, list);
 			}
@@ -637,7 +637,7 @@ public class L2Zone implements FuncOwner
 		{
 			if (pl.getAllyId() > 0)
 			{
-				List<L2PcInstance> list = pl.getClan().getOnlineAllyMembers();
+				List<L2Player> list = pl.getClan().getOnlineAllyMembers();
 				getInstanceFromGroup(ir, list, true);
 				checkPlayersInside(ir, list);
 			}
@@ -673,9 +673,9 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	private void getInstanceFromGroup(InstanceResult ir, List<L2PcInstance> group, boolean allowMultiple)
+	private void getInstanceFromGroup(InstanceResult ir, List<L2Player> group, boolean allowMultiple)
 	{
-		for (L2PcInstance mem : group)
+		for (L2Player mem : group)
 		{
 			if (mem == null || !mem.isInInstance())
 				continue;
@@ -694,14 +694,14 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	private void checkPlayersInside(InstanceResult ir, List<L2PcInstance> group)
+	private void checkPlayersInside(InstanceResult ir, List<L2Player> group)
 	{
 		if (ir.reason != REASON_OK)
 			return;
 		
 		int valid = 0, all = 0;
 		
-		for (L2PcInstance mem : group)
+		for (L2Player mem : group)
 		{
 			if (mem != null && mem.isSameInstance(ir.instanceId))
 				valid++;
@@ -719,7 +719,7 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	private void portIntoInstance(L2PcInstance pl, int instanceId)
+	private void portIntoInstance(L2Player pl, int instanceId)
 	{
 		pl.setInstanceId(instanceId);
 		pl.getKnownList().updateKnownObjects();
@@ -766,7 +766,7 @@ public class L2Zone implements FuncOwner
 			case PLAYABLE:
 				return character instanceof L2Playable;
 			case PC:
-				return character instanceof L2PcInstance;
+				return character instanceof L2Player;
 			case NPC:
 				return character instanceof L2Npc;
 			case ALL:
@@ -939,7 +939,7 @@ public class L2Zone implements FuncOwner
 	public final void movePlayersTo(int x, int y, int z)
 	{
 		for (L2Creature character : getCharactersInside())
-			if (character instanceof L2PcInstance)
+			if (character instanceof L2Player)
 				character.teleToLocation(x, y, z);
 	}
 	
@@ -1004,7 +1004,7 @@ public class L2Zone implements FuncOwner
 	public void broadcastPacket(L2ServerPacket packet)
 	{
 		for (L2Creature character : getCharactersInside())
-			if (character instanceof L2PcInstance)
+			if (character instanceof L2Player)
 				character.getActingPlayer().sendPacket(packet);
 	}
 	

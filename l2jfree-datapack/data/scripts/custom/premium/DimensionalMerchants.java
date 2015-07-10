@@ -16,7 +16,7 @@ package custom.premium;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 
@@ -45,7 +45,7 @@ public final class DimensionalMerchants extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		QuestState qs = player.getQuestState(THIS);
 		if (qs == null)
@@ -85,7 +85,7 @@ public final class DimensionalMerchants extends QuestJython
 	}
 	
 	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	public String onFirstTalk(L2Npc npc, L2Player player)
 	{
 		QuestState qs = player.getQuestState(THIS);
 		if (qs == null)

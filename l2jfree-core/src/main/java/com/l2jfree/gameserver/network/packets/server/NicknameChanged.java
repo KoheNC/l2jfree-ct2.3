@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -27,7 +27,7 @@ public class NicknameChanged extends L2ServerPacket
 	private final String _title;
 	private final int _objectId;
 	
-	public NicknameChanged(L2PcInstance cha)
+	public NicknameChanged(L2Player cha)
 	{
 		_objectId = cha.getObjectId();
 		_title = cha.getTitle();

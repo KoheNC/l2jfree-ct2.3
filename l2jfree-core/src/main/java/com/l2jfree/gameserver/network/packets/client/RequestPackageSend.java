@@ -14,14 +14,14 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.ADENA_ID;
+import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.ADENA_ID;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerFreight;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.itemcontainer.ItemContainer;
-import com.l2jfree.gameserver.model.itemcontainer.PcFreight;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -70,7 +70,7 @@ public final class RequestPackageSend extends L2ClientPacket
 		if (_items == null || !Config.ALLOW_FREIGHT)
 			return;
 		
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))
@@ -84,7 +84,7 @@ public final class RequestPackageSend extends L2ClientPacket
 		if (!player.getAccountChars().containsKey(_objectID))
 			return;
 		
-		PcFreight freight = player.getDepositedFreight(_objectID);
+		PlayerFreight freight = player.getDepositedFreight(_objectID);
 		
 		player.setActiveWarehouse(freight);
 		ItemContainer warehouse = player.getActiveWarehouse();
@@ -95,7 +95,7 @@ public final class RequestPackageSend extends L2ClientPacket
 		if ((manager == null || !manager.isWarehouse() || !manager.canInteract(player)) && !player.isGM())
 			return;
 		
-		if (warehouse instanceof PcFreight && Config.GM_DISABLE_TRANSACTION
+		if (warehouse instanceof PlayerFreight && Config.GM_DISABLE_TRANSACTION
 				&& player.getAccessLevel() >= Config.GM_TRANSACTION_MIN
 				&& player.getAccessLevel() <= Config.GM_TRANSACTION_MAX)
 		{

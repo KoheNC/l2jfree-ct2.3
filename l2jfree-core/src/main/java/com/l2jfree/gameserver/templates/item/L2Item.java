@@ -19,8 +19,8 @@ import org.apache.commons.lang.ArrayUtils;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -576,7 +576,7 @@ public abstract class L2Item implements FuncOwner
 	
 	public boolean checkCondition(L2Creature activeChar, L2Object target, boolean sendMessage)
 	{
-		if (activeChar instanceof L2PcInstance && activeChar.getActingPlayer().isGM() && !Config.GM_ITEM_RESTRICTION)
+		if (activeChar instanceof L2Player && activeChar.getActingPlayer().isGM() && !Config.GM_ITEM_RESTRICTION)
 			return true;
 		
 		for (Condition preCondition : _preConditions)
@@ -592,7 +592,7 @@ public abstract class L2Item implements FuncOwner
 			{
 				if (activeChar instanceof L2Summon)
 					((L2Summon)activeChar).getOwner().sendPacket(SystemMessageId.PET_CANNOT_USE_ITEM);
-				else if (sendMessage && activeChar instanceof L2PcInstance)
+				else if (sendMessage && activeChar instanceof L2Player)
 					preCondition.sendMessage(activeChar.getActingPlayer(), this);
 				
 				return false;

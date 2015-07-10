@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -51,7 +51,7 @@ public class RequestGMCommand extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -61,7 +61,7 @@ public class RequestGMCommand extends L2ClientPacket
 			return;
 		}
 		
-		L2PcInstance player = L2World.getInstance().getPlayer(_targetName);
+		L2Player player = L2World.getInstance().getPlayer(_targetName);
 		if (player == null)
 		{
 			requestFailed(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);

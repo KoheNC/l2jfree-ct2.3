@@ -17,6 +17,6 @@ package com.l2jfree.gameserver.gameobjects.view;
 /**
  * @author NB4L1
  */
-public interface UniversalCharView extends NpcLikeView, PcLikeView
+public interface UniversalCharView extends INpcView, IPlayerView
 {
 }

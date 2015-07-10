@@ -17,11 +17,11 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.gameserver.datatables.PetSkillsTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
@@ -66,7 +66,7 @@ public class RequestActionUse extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -164,7 +164,7 @@ public class RequestActionUse extends L2ClientPacket
 					}
 					else if (activeChar.isInOlympiadMode() && !activeChar.isOlympiadStart())
 					{
-						// if L2PcInstance is in Olympiad and the match isn't already started, send a Server->Client packet ActionFailed
+						// if L2Player is in Olympiad and the match isn't already started, send a Server->Client packet ActionFailed
 						sendAF();
 						return;
 					}
@@ -249,7 +249,7 @@ public class RequestActionUse extends L2ClientPacket
 			case 37: // Manufacture - Dwarven
 				if (activeChar.getPrivateStoreType() != 0)
 				{
-					activeChar.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
+					activeChar.setPrivateStoreType(L2Player.STORE_PRIVATE_NONE);
 					activeChar.broadcastUserInfo();
 				}
 				if (activeChar.isSitting())
@@ -290,7 +290,7 @@ public class RequestActionUse extends L2ClientPacket
 			case 51: // Manufacture -  non-dwarven
 				if (activeChar.getPrivateStoreType() != 0)
 				{
-					activeChar.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
+					activeChar.setPrivateStoreType(L2Player.STORE_PRIVATE_NONE);
 					activeChar.broadcastUserInfo();
 				}
 				if (activeChar.isSitting())
@@ -647,7 +647,7 @@ public class RequestActionUse extends L2ClientPacket
 	 */
 	private void useSkill(int skillId, L2Object target)
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -686,14 +686,14 @@ public class RequestActionUse extends L2ClientPacket
 	 */
 	private void useSkill(int skillId)
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
 		useSkill(skillId, activeChar.getTarget());
 	}
 	
-	private void useSocial(int socialId, L2PcInstance activeChar)
+	private void useSocial(int socialId, L2Player activeChar)
 	{
 		if (activeChar.isFishing())
 		{

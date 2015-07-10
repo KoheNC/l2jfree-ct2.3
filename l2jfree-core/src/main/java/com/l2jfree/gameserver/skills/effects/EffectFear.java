@@ -14,11 +14,11 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeFlagInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
@@ -56,9 +56,9 @@ public final class EffectFear extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		// Fear skills cannot be used by L2PcInstance to L2PcInstance.
+		// Fear skills cannot be used by L2Player to L2Player.
 		// Heroic Dread, Curse: Fear, Fear, Horror, Sword Symphony, Word of Fear and Mass Curse Fear are the exceptions.
-		if (getEffected() instanceof L2PcInstance && getEffector() instanceof L2PcInstance)
+		if (getEffected() instanceof L2Player && getEffector() instanceof L2Player)
 		{
 			switch (getSkill().getId())
 			{

@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.restriction.global.CursedWeaponRestriction;
@@ -71,7 +71,7 @@ public class CursedWeapon
 	private long _endTime = 0;
 	
 	private int _playerId = 0;
-	private L2PcInstance _player = null;
+	private L2Player _player = null;
 	private L2ItemInstance _item = null;
 	private int _playerKarma = 0;
 	private int _playerPkKills = 0;
@@ -237,12 +237,12 @@ public class CursedWeapon
 		}
 	}
 	
-	private void dropIt(L2Attackable attackable, L2PcInstance player)
+	private void dropIt(L2Attackable attackable, L2Player player)
 	{
 		dropIt(attackable, player, null, true);
 	}
 	
-	private void dropIt(L2Attackable attackable, L2PcInstance player, L2Creature killer, boolean fromMonster)
+	private void dropIt(L2Attackable attackable, L2Player player, L2Creature killer, boolean fromMonster)
 	{
 		_isActivated = false;
 		
@@ -254,7 +254,7 @@ public class CursedWeapon
 			// RedSky and Earthquake
 			ExRedSky packet = new ExRedSky(10);
 			Earthquake eq = new Earthquake(player.getX(), player.getY(), player.getZ(), 14, 3);
-			for (L2PcInstance aPlayer : L2World.getInstance().getAllPlayers())
+			for (L2Player aPlayer : L2World.getInstance().getAllPlayers())
 			{
 				aPlayer.sendPacket(packet);
 				aPlayer.sendPacket(eq);
@@ -361,7 +361,7 @@ public class CursedWeapon
 							_durationLost * 12000L, _durationLost * 12000L);
 	}
 	
-	public boolean checkDrop(L2Attackable attackable, L2PcInstance player)
+	public boolean checkDrop(L2Attackable attackable, L2Player player)
 	{
 		if (Rnd.get(100000) < _dropRate)
 		{
@@ -380,7 +380,7 @@ public class CursedWeapon
 		return false;
 	}
 	
-	public boolean activate(L2PcInstance player, L2ItemInstance item)
+	public boolean activate(L2Player player, L2ItemInstance item)
 	{
 		if (GlobalRestrictions.isRestricted(player, CursedWeaponRestriction.class))
 		{
@@ -625,7 +625,7 @@ public class CursedWeapon
 		_endTime = endTime;
 	}
 	
-	public void setPlayer(L2PcInstance player)
+	public void setPlayer(L2Player player)
 	{
 		_player = player;
 	}
@@ -675,7 +675,7 @@ public class CursedWeapon
 		return _playerId;
 	}
 	
-	public L2PcInstance getPlayer()
+	public L2Player getPlayer()
 	{
 		return _player;
 	}
@@ -720,7 +720,7 @@ public class CursedWeapon
 		return _transformId;
 	}
 	
-	public void goTo(L2PcInstance player)
+	public void goTo(L2Player player)
 	{
 		if (player == null)
 			return;

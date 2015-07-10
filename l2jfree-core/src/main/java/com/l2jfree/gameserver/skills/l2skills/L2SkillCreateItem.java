@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
 import com.l2jfree.tools.random.Rnd;
@@ -43,11 +43,11 @@ public class L2SkillCreateItem extends L2Skill
 		if (activeChar.isAlikeDead())
 			return;
 		
-		if (activeChar instanceof L2PcInstance)
+		if (activeChar instanceof L2Player)
 		{
 			int count = _createItemCount + Rnd.nextInt(_randomCount);
 			int rndid = Rnd.nextInt(_createItemId.length);
-			((L2PcInstance)activeChar).addItem("Skill", _createItemId[rndid], count, activeChar, true);
+			((L2Player)activeChar).addItem("Skill", _createItemId[rndid], count, activeChar, true);
 		}
 	}
 }

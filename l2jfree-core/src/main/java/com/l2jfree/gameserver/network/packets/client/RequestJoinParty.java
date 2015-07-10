@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.BlockList;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2World;
@@ -49,11 +49,11 @@ public class RequestJoinParty extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance requestor = getClient().getActiveChar();
+		L2Player requestor = getClient().getActiveChar();
 		if (requestor == null)
 			return;
 		
-		L2PcInstance target = L2World.getInstance().getPlayer(_name);
+		L2Player target = L2World.getInstance().getPlayer(_name);
 		if (target == null || (target.getAppearance().isInvisible() && !requestor.isGM()))
 		{
 			requestFailed(SystemMessageId.FIRST_SELECT_USER_TO_INVITE_TO_PARTY);

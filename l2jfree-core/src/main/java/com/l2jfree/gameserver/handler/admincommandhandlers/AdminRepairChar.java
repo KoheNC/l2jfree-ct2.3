@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.CharNameTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 public class AdminRepairChar implements IAdminCommandHandler
@@ -32,7 +32,7 @@ public class AdminRepairChar implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_restore", "admin_repair" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		handleRepair(command, activeChar);
 		return true;
@@ -44,7 +44,7 @@ public class AdminRepairChar implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleRepair(String command, L2PcInstance activeChar)
+	private void handleRepair(String command, L2Player activeChar)
 	{
 		String[] parts = command.split(" ");
 		if (parts.length != 2)

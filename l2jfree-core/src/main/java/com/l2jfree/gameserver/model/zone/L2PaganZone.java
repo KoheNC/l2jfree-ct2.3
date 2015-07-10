@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
@@ -27,7 +27,7 @@ public class L2PaganZone extends L2Zone
 	@Override
 	protected void onEnter(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
 			if (character.destroyItemByItemId("Pagan Zone", MARK, 1, character, false))
 			{

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -38,7 +38,7 @@ public class RequestExOustFromMPCC extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -53,7 +53,7 @@ public class RequestExOustFromMPCC extends L2ClientPacket
 			return;
 		}
 		
-		L2PcInstance target = L2World.getInstance().getPlayer(_name);
+		L2Player target = L2World.getInstance().getPlayer(_name);
 		if (target == null || !target.isInParty() || !target.getParty().isInCommandChannel())
 		{
 			requestFailed(SystemMessageId.INCORRECT_TARGET);

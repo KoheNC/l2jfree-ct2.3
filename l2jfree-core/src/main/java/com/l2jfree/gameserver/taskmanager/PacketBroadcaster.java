@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.taskmanager;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * @author NB4L1
@@ -53,28 +53,28 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2C
 			@Override
 			protected void sendPacket(L2Creature cha)
 			{
-				((L2PcInstance)cha).broadcastRelationChangedImpl();
+				((L2Player)cha).broadcastRelationChangedImpl();
 			}
 		},
 		SEND_ETC_STATUS_UPDATE {
 			@Override
 			protected void sendPacket(L2Creature cha)
 			{
-				((L2PcInstance)cha).sendEtcStatusUpdateImpl();
+				((L2Player)cha).sendEtcStatusUpdateImpl();
 			}
 		},
 		SEND_SKILL_LIST {
 			@Override
 			protected void sendPacket(L2Creature cha)
 			{
-				((L2PcInstance)cha).sendSkillListImpl();
+				((L2Player)cha).sendSkillListImpl();
 			}
 		},
 		SEND_SKILL_COOL_TIME {
 			@Override
 			protected void sendPacket(L2Creature cha)
 			{
-				((L2PcInstance)cha).sendSkillCoolTimeImpl();
+				((L2Player)cha).sendSkillCoolTimeImpl();
 			}
 		},
 		// TODO: more packets

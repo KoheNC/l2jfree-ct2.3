@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -22,10 +22,10 @@ public final class GMViewSkillInfo extends L2ServerPacket
 {
 	private static final String _S__91_GMViewSkillInfo = "[S] 91 GMViewSkillInfo";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final L2Skill[] _skills;
 	
-	public GMViewSkillInfo(L2PcInstance activeChar)
+	public GMViewSkillInfo(L2Player activeChar)
 	{
 		_activeChar = activeChar;
 		_skills = activeChar.getSortedAllSkills(true);

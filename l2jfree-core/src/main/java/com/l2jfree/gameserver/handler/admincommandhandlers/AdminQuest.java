@@ -24,7 +24,7 @@ import java.io.File;
 
 import javax.script.ScriptException;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.scripting.L2ScriptEngineManager;
@@ -34,10 +34,10 @@ public class AdminQuest implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_quest_reload", "admin_script_load" };
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
+	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2Player)
 	 */
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_quest_reload"))
 		{

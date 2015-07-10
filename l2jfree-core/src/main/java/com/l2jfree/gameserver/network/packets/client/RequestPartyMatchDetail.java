@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -50,7 +50,7 @@ public class RequestPartyMatchDetail extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		

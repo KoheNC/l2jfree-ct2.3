@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Manor;
@@ -38,13 +38,13 @@ public class Sow implements ISkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
 		if (targets == null || targets.length == 0)
 			return;
 		
-		L2PcInstance activePlayer = (L2PcInstance)activeChar;
+		L2Player activePlayer = (L2Player)activeChar;
 		if (_log.isDebugEnabled())
 			_log.info("Casting sow");
 		
@@ -100,7 +100,7 @@ public class Sow implements ISkillHandler
 		}
 	}
 	
-	private boolean calcSuccess(L2PcInstance activeChar, L2MonsterInstance target, int seedId)
+	private boolean calcSuccess(L2Player activeChar, L2MonsterInstance target, int seedId)
 	{
 		int basicSuccess = (L2Manor.getInstance().isAlternative(seedId) ? 20 : 90);
 		int minlevelSeed = 0;

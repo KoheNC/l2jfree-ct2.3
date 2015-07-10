@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.LoginServerThread;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.network.ServerStatusAttributes;
@@ -41,10 +41,10 @@ public class AdminLogin implements IAdminCommandHandler
 	private static final String DISABLE = "0";
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
+	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2Player)
 	 */
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance GM)
+	public boolean useAdminCommand(String command, L2Player GM)
 	{
 		StringTokenizer st;
 		
@@ -123,7 +123,7 @@ public class AdminLogin implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void showMenu(L2PcInstance GM)
+	private void showMenu(L2Player GM)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setFile(HTML_ROOT + "LoginMenu.html");

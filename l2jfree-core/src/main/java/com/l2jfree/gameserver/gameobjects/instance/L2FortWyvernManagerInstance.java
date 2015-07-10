@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 /**
@@ -28,7 +29,7 @@ public class L2FortWyvernManagerInstance extends L2WyvernManagerInstance
 	}
 	
 	@Override
-	protected final boolean isOwnerClan(L2PcInstance player)
+	protected final boolean isOwnerClan(L2Player player)
 	{
 		if (player.isGM())
 			return true;

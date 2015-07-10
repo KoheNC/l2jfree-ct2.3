@@ -24,14 +24,15 @@ import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2GuardInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -45,7 +46,6 @@ import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.Siege;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -272,9 +272,9 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			if (env.player instanceof L2PcInstance)
+			if (env.player instanceof L2Player)
 			{
-				L2PcInstance p = (L2PcInstance)env.player;
+				L2Player p = (L2Player)env.player;
 				if (p.getInventory().getPaperdollItem(Inventory.PAPERDOLL_LFINGER) != null)
 					env.value -= 5;
 				if (p.getInventory().getPaperdollItem(Inventory.PAPERDOLL_RFINGER) != null)
@@ -307,9 +307,9 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			if (env.player instanceof L2PcInstance)
+			if (env.player instanceof L2Player)
 			{
-				L2PcInstance p = (L2PcInstance)env.player;
+				L2Player p = (L2Player)env.player;
 				boolean hasMagePDef = p.getClassId().isMage();
 				if (p.getInventory().getPaperdollItem(Inventory.PAPERDOLL_HEAD) != null)
 					env.value -= 12;
@@ -498,7 +498,7 @@ public final class Formulas
 			L2Creature p = env.player;
 			if (p instanceof L2Summon)
 				env.value = 40;
-			else if (p instanceof L2PcInstance && p.getActiveWeaponInstance() == null)
+			else if (p instanceof L2Player && p.getActiveWeaponInstance() == null)
 				env.value = 40;
 			else
 			{
@@ -527,7 +527,7 @@ public final class Formulas
 		{
 			if (env.player instanceof L2Summon)
 				env.value = 8; // TODO: needs retail value
-			else if (env.player instanceof L2PcInstance && env.player.getActiveWeaponInstance() != null)
+			else if (env.player instanceof L2Player && env.player.getActiveWeaponInstance() != null)
 				env.value *= WITbonus[env.player.getStat().getWIT()];
 		}
 	}
@@ -549,7 +549,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= DEXbonus[p.getStat().getDEX()];
 		}
 	}
@@ -571,7 +571,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= DEXbonus[p.getStat().getDEX()];
 		}
 	}
@@ -593,7 +593,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= WITbonus[p.getStat().getWIT()];
 		}
 	}
@@ -615,7 +615,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= CONbonus[p.getStat().getCON()];
 		}
 	}
@@ -637,8 +637,8 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
-			L2PcInstance pc = (L2PcInstance)env.player;
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
+			L2Player pc = (L2Player)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatSTR();
 		}
@@ -661,8 +661,8 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
-			L2PcInstance pc = (L2PcInstance)env.player;
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
+			L2Player pc = (L2Player)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatDEX();
 		}
@@ -685,8 +685,8 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
-			L2PcInstance pc = (L2PcInstance)env.player;
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
+			L2Player pc = (L2Player)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatINT();
 		}
@@ -709,8 +709,8 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
-			L2PcInstance pc = (L2PcInstance)env.player;
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
+			L2Player pc = (L2Player)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatMEN();
 		}
@@ -733,8 +733,8 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
-			L2PcInstance pc = (L2PcInstance)env.player;
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
+			L2Player pc = (L2Player)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatCON();
 		}
@@ -757,8 +757,8 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
-			L2PcInstance pc = (L2PcInstance)env.player;
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
+			L2Player pc = (L2Player)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatWIT();
 		}
@@ -781,7 +781,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcTemplate t = (L2PcTemplate)env.player.getTemplate();
+			L2PlayerTemplate t = (L2PlayerTemplate)env.player.getTemplate();
 			int lvl = env.player.getLevel() - t.getClassBaseLevel();
 			double hpmod = t.getLvlHpMod() * lvl;
 			double hpmax = (t.getLvlHpAdd() + hpmod) * lvl;
@@ -807,7 +807,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= CONbonus[p.getStat().getCON()];
 		}
 	}
@@ -829,7 +829,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcTemplate t = (L2PcTemplate)env.player.getTemplate();
+			L2PlayerTemplate t = (L2PlayerTemplate)env.player.getTemplate();
 			int lvl = env.player.getLevel() - t.getClassBaseLevel();
 			double cpmod = t.getLvlCpMod() * lvl;
 			double cpmax = (t.getLvlCpAdd() + cpmod) * lvl;
@@ -855,7 +855,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= CONbonus[p.getStat().getCON()];
 		}
 	}
@@ -877,7 +877,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcTemplate t = (L2PcTemplate)env.player.getTemplate();
+			L2PlayerTemplate t = (L2PlayerTemplate)env.player.getTemplate();
 			int lvl = env.player.getLevel() - t.getClassBaseLevel();
 			double mpmod = t.getLvlMpMod() * lvl;
 			double mpmax = (t.getLvlMpAdd() + mpmod) * lvl;
@@ -903,7 +903,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcInstance p = (L2PcInstance)env.player;
+			L2Player p = (L2Player)env.player;
 			env.value *= MENbonus[p.getStat().getMEN()];
 		}
 	}
@@ -981,7 +981,7 @@ public final class Formulas
 	}
 	
 	/**
-	 * Add basics Func objects to L2PcInstance and L2Summon.<BR>
+	 * Add basics Func objects to L2Player and L2Summon.<BR>
 	 * <BR>
 	 * 
 	 * <B><U> Concept</U> :</B><BR>
@@ -995,11 +995,11 @@ public final class Formulas
 	 * FuncAtkAccuracy -> Math.sqrt(_player.getDEX())*6+_player.getLevel()<BR>
 	 * <BR>
 	 * 
-	 * @param cha L2PcInstance or L2Summon that must obtain basic Func objects
+	 * @param cha L2Player or L2Summon that must obtain basic Func objects
 	 */
 	public static void addFuncsToNewCharacter(L2Creature cha)
 	{
-		if (cha instanceof L2PcInstance)
+		if (cha instanceof L2Player)
 		{
 			cha.addStatFunc(FuncMaxHpAdd.getInstance());
 			cha.addStatFunc(FuncMaxHpMul.getInstance());
@@ -1068,7 +1068,7 @@ public final class Formulas
 		
 		if (cha.isRaid())
 			hpRegenMultiplier = Config.RAID_HP_REGEN_MULTIPLIER;
-		else if (cha instanceof L2PcInstance)
+		else if (cha instanceof L2Player)
 			hpRegenMultiplier = Config.PLAYER_HP_REGEN_MULTIPLIER;
 		else
 			hpRegenMultiplier = Config.NPC_HP_REGEN_MULTIPLIER;
@@ -1090,9 +1090,9 @@ public final class Formulas
 			}
 		}
 		
-		if (cha instanceof L2PcInstance)
+		if (cha instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)cha;
+			L2Player player = (L2Player)cha;
 			
 			// Calculate correct baseHpReg value for certain level of PC
 			if (player.getLevel() >= 71)
@@ -1202,14 +1202,14 @@ public final class Formulas
 		
 		if (cha.isRaid())
 			mpRegenMultiplier = Config.RAID_MP_REGEN_MULTIPLIER;
-		else if (cha instanceof L2PcInstance)
+		else if (cha instanceof L2Player)
 			mpRegenMultiplier = Config.PLAYER_MP_REGEN_MULTIPLIER;
 		else
 			mpRegenMultiplier = Config.NPC_MP_REGEN_MULTIPLIER;
 		
-		if (cha instanceof L2PcInstance)
+		if (cha instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)cha;
+			L2Player player = (L2Player)cha;
 			
 			// Calculate correct baseMpReg value for certain level of PC
 			if (player.getLevel() >= 71)
@@ -1306,9 +1306,9 @@ public final class Formulas
 		double cpRegenMultiplier = Config.PLAYER_CP_REGEN_MULTIPLIER;
 		double cpRegenBonus = 0;
 		
-		if (cha instanceof L2PcInstance)
+		if (cha instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)cha;
+			L2Player player = (L2Player)cha;
 			
 			// Calculate correct baseHpReg value for certain level of PC
 			init += (player.getLevel() > 10) ? ((player.getLevel() - 1) / 10.0) : 0.5;
@@ -1339,7 +1339,7 @@ public final class Formulas
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static final double calcFestivalRegenModifier(L2PcInstance activeChar)
+	public static final double calcFestivalRegenModifier(L2Player activeChar)
 	{
 		final int[] festivalInfo = SevenSignsFestival.getInstance().getFestivalForPlayer(activeChar);
 		final int oracle = festivalInfo[0];
@@ -1365,7 +1365,7 @@ public final class Formulas
 		return 1.0 - (distToCenter * 0.0005); // Maximum Decreased Regen of ~ -65%;
 	}
 	
-	public static final double calcSiegeRegenModifer(L2PcInstance activeChar)
+	public static final double calcSiegeRegenModifer(L2Player activeChar)
 	{
 		if (activeChar == null || activeChar.getClan() == null)
 			return 0;
@@ -1399,9 +1399,9 @@ public final class Formulas
 			boolean crit, boolean ss)
 	{
 		boolean transformed = false;
-		if (attacker instanceof L2PcInstance)
+		if (attacker instanceof L2Player)
 		{
-			L2PcInstance pcInst = (L2PcInstance)attacker;
+			L2Player pcInst = (L2Player)attacker;
 			if (pcInst.isGM() && pcInst.getAccessLevel() < Config.GM_CAN_GIVE_DAMAGE)
 				return 0;
 			transformed = pcInst.isTransformed();
@@ -1454,7 +1454,7 @@ public final class Formulas
 		damage *= 70. / defence;
 		
 		// In C5 summons make 10 % less dmg in PvP.
-		if (attacker instanceof L2Summon && target instanceof L2PcInstance)
+		if (attacker instanceof L2Summon && target instanceof L2Player)
 			damage *= 0.9;
 		
 		// defence modifier depending of the attacker weapon
@@ -1516,9 +1516,9 @@ public final class Formulas
 			damage = 0;
 		}
 		
-		if (attacker instanceof L2PcInstance)
+		if (attacker instanceof L2Player)
 		{
-			if (((L2PcInstance)attacker).getClassId().isMage())
+			if (((L2Player)attacker).getClassId().isMage())
 				damage *= Config.ALT_MAGES_PHYSICAL_DAMAGE_MULTI;
 			else
 				damage *= Config.ALT_FIGHTERS_PHYSICAL_DAMAGE_MULTI;
@@ -1547,7 +1547,7 @@ public final class Formulas
 		}
 		
 		double damage = 91 * Math.sqrt(mAtk) / mDef * skill.getPower();
-		L2PcInstance owner = attacker.getOwner();
+		L2Player owner = attacker.getOwner();
 		// Failure calculation
 		if (Config.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(owner, target, skill))
 		{
@@ -1605,7 +1605,7 @@ public final class Formulas
 		double damage = 91 * Math.sqrt(mAtk) / mDef * skill.getPower(attacker);
 		
 		// In C5 summons make 10 % less dmg in PvP.
-		if (attacker instanceof L2Summon && target instanceof L2PcInstance)
+		if (attacker instanceof L2Summon && target instanceof L2Player)
 			damage *= 0.9;
 		
 		// Failure calculation
@@ -1613,7 +1613,7 @@ public final class Formulas
 		{
 			if (attacker instanceof L2Playable)
 			{
-				L2PcInstance attOwner = attacker.getActingPlayer();
+				L2Player attOwner = attacker.getActingPlayer();
 				if (calcMagicSuccess(attacker, target, skill) && getMagicLevelDifference(attacker, target, skill) >= -9)
 				{
 					// ~1/10 - weak resist
@@ -1647,9 +1647,9 @@ public final class Formulas
 		// CT2.3 general magic vuln
 		damage *= target.calcStat(Stats.MAGIC_DAMAGE_VULN, 1, null, null);
 		
-		if (attacker instanceof L2PcInstance)
+		if (attacker instanceof L2Player)
 		{
-			if (((L2PcInstance)attacker).getClassId().isMage())
+			if (((L2Player)attacker).getClassId().isMage())
 				damage *= Config.ALT_MAGES_MAGICAL_DAMAGE_MULTI;
 			else
 				damage *= Config.ALT_FIGHTERS_MAGICAL_DAMAGE_MULTI;
@@ -1664,9 +1664,9 @@ public final class Formulas
 	
 	public static final double calcSoulBonus(L2Creature activeChar, L2Skill skill)
 	{
-		if (skill != null && skill.getMaxSoulConsumeCount() > 0 && activeChar instanceof L2PcInstance)
+		if (skill != null && skill.getMaxSoulConsumeCount() > 0 && activeChar instanceof L2Player)
 		{
-			switch (((L2PcInstance)activeChar).getLastSoulConsume())
+			switch (((L2Player)activeChar).getLastSoulConsume())
 			{
 				case 0:
 					return 1.00;
@@ -1827,7 +1827,7 @@ public final class Formulas
 		// 2nd lethal effect activate (cp,hp to 1 or if target is npc then hp to 1)
 		if (chance < calcLethal(activeChar, target, skill.getLethalChance2(), skill))
 		{
-			if (target instanceof L2PcInstance) // If is a active player set his HP and CP to 1
+			if (target instanceof L2Player) // If is a active player set his HP and CP to 1
 			{
 				target.getStatus().reduceHp(target.getCurrentCp() + target.getCurrentHp() - 1, activeChar);
 				target.getStatus().setCurrentHp(1); // just to be sure (transfer damage, etc)
@@ -1843,7 +1843,7 @@ public final class Formulas
 		}
 		else if (chance < calcLethal(activeChar, target, skill.getLethalChance1(), skill))
 		{
-			if (target instanceof L2PcInstance) // Set CP to 1
+			if (target instanceof L2Player) // Set CP to 1
 			{
 				target.getStatus().reduceHp(target.getCurrentCp() - 1, activeChar);
 				target.getStatus().setCurrentCp(1); // just to be sure (transfer damage, etc)
@@ -1904,7 +1904,7 @@ public final class Formulas
 	/** Calculate delay (in milliseconds) before next ATTACK */
 	public static final int calcPAtkSpd(L2Creature attacker, L2Creature target, double atkSpd, double base)
 	{
-		if (attacker instanceof L2PcInstance)
+		if (attacker instanceof L2Player)
 			base *= Config.ALT_ATTACK_DELAY;
 		
 		if (atkSpd < 10)
@@ -2076,7 +2076,7 @@ public final class Formulas
 				Rnd.calcChance(Config.ALT_PERFECT_SHLD_BLOCK, 100) ? SHIELD_DEFENSE_PERFECT_BLOCK
 						: SHIELD_DEFENSE_SUCCEED;
 		
-		if (sendSysMsg && target instanceof L2PcInstance)
+		if (sendSysMsg && target instanceof L2Player)
 		{
 			switch (shldSuccess)
 			{
@@ -2498,9 +2498,9 @@ public final class Formulas
 		
 		double val = actor.getStat().calcStat(Stats.SKILL_MASTERY, 0, null, null);
 		
-		if (actor instanceof L2PcInstance)
+		if (actor instanceof L2Player)
 		{
-			if (((L2PcInstance)actor).isMageClass())
+			if (((L2Player)actor).isMageClass())
 				val *= getINTBonus(actor);
 			else
 				val *= getSTRBonus(actor);

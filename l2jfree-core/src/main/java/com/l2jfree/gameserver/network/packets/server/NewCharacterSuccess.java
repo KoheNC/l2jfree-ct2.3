@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import java.util.ArrayList;
 
 import com.l2jfree.gameserver.datatables.CharTemplateTable;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.model.base.ClassId;
 
 public class NewCharacterSuccess extends StaticPacket
@@ -42,13 +42,13 @@ public class NewCharacterSuccess extends StaticPacket
 		PACKET.finish();
 	}
 	
-	private final ArrayList<L2PcTemplate> _chars = new ArrayList<L2PcTemplate>();
+	private final ArrayList<L2PlayerTemplate> _chars = new ArrayList<L2PlayerTemplate>();
 	
 	private NewCharacterSuccess()
 	{
 	}
 	
-	public void addChar(L2PcTemplate template)
+	public void addChar(L2PlayerTemplate template)
 	{
 		_chars.add(template);
 	}
@@ -66,7 +66,7 @@ public class NewCharacterSuccess extends StaticPacket
 		
 		for (int i = 0; i < _chars.size(); i++)
 		{
-			L2PcTemplate temp = _chars.get(i);
+			L2PlayerTemplate temp = _chars.get(i);
 			if (temp == null)
 				continue;
 			

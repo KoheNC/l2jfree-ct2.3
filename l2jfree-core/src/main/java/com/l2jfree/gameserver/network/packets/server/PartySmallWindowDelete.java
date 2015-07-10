@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -25,9 +25,9 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class PartySmallWindowDelete extends L2ServerPacket
 {
 	private static final String _S__51_PARTYSMALLWINDOWDELETE = "[S] 51 PartySmallWindowDelete [ds]";
-	private final L2PcInstance _member;
+	private final L2Player _member;
 	
-	public PartySmallWindowDelete(L2PcInstance member)
+	public PartySmallWindowDelete(L2Player member)
 	{
 		_member = member;
 	}

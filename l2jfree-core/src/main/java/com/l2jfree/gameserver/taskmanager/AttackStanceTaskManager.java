@@ -19,9 +19,9 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.server.AutoAttackStop;
 
 public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
@@ -64,8 +64,8 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 			if (actor instanceof L2Summon)
 				actor = ((L2Summon)actor).getOwner();
 			
-			if (actor instanceof L2PcInstance)
-				for (L2CubicInstance cubic : ((L2PcInstance)actor).getCubics().values())
+			if (actor instanceof L2Player)
+				for (L2CubicInstance cubic : ((L2Player)actor).getCubics().values())
 					if (cubic.getId() != L2CubicInstance.LIFE_CUBIC)
 						cubic.doAction();
 			
@@ -107,9 +107,9 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 					
 					actor.broadcastPacket(new AutoAttackStop(actor.getObjectId()));
 					
-					if (actor instanceof L2PcInstance)
+					if (actor instanceof L2Player)
 					{
-						final L2Summon pet = ((L2PcInstance)actor).getPet();
+						final L2Summon pet = ((L2Player)actor).getPet();
 						if (pet != null)
 							pet.broadcastPacket(new AutoAttackStop(pet.getObjectId()));
 					}

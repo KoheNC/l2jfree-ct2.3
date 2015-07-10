@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -36,11 +36,11 @@ public final class RequestFriendInvite extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
-		L2PcInstance friend = L2World.getInstance().getPlayer(_name);
+		L2Player friend = L2World.getInstance().getPlayer(_name);
 		if (friend == null || (friend.getAppearance().isInvisible() && friend.isGM()))
 			sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
 		else if (friend == activeChar)

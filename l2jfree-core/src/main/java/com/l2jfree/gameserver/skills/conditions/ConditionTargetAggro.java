@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.skills.conditions;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.skills.Env;
 
 /**
@@ -37,8 +37,8 @@ class ConditionTargetAggro extends Condition
 		L2Creature target = env.target;
 		if (target instanceof L2MonsterInstance)
 			return ((L2MonsterInstance)target).isAggressive() == _isAggro;
-		if (target instanceof L2PcInstance)
-			return ((L2PcInstance)target).getKarma() > 0;
+		if (target instanceof L2Player)
+			return ((L2Player)target).getKarma() > 0;
 		return false;
 	}
 }

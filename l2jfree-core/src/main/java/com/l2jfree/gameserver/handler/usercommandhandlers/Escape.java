@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.handler.usercommandhandlers;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance.TeleportMode;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Player.TeleportMode;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
@@ -28,10 +28,10 @@ public class Escape implements IUserCommandHandler
 	private static final int[] COMMAND_IDS = { 52 };
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2PcInstance)
+	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2Player)
 	 */
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		if (!activeChar.canTeleport(TeleportMode.UNSTUCK))
 		{
@@ -75,9 +75,9 @@ public class Escape implements IUserCommandHandler
 	
 	static class EscapeFinalizer implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		
-		EscapeFinalizer(L2PcInstance activeChar)
+		EscapeFinalizer(L2Player activeChar)
 		{
 			_activeChar = activeChar;
 		}

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -32,12 +32,12 @@ public class WareHouseWithdrawalList extends L2ServerPacket
 	
 	private static final String _S__54_WAREHOUSEWITHDRAWALLIST = "[S] 42 WareHouseWithdrawalList";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final long _activeCharAdena;
 	private final L2ItemInstance[] _items;
 	private final int _whType;
 	
-	public WareHouseWithdrawalList(L2PcInstance player, int type)
+	public WareHouseWithdrawalList(L2Player player, int type)
 	{
 		_activeChar = player;
 		_whType = type;

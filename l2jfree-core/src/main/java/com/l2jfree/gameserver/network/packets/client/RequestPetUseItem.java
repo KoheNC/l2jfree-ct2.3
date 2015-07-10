@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.datatables.PetDataTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.ItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -48,7 +48,7 @@ public class RequestPetUseItem extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -120,7 +120,7 @@ public class RequestPetUseItem extends L2ClientPacket
 		}
 	}
 	
-	private synchronized void useItem(L2PetInstance pet, L2ItemInstance item, L2PcInstance activeChar)
+	private synchronized void useItem(L2PetInstance pet, L2ItemInstance item, L2Player activeChar)
 	{
 		if (item.isEquipable())
 		{

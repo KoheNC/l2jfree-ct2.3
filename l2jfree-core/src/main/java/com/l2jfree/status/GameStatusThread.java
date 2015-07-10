@@ -51,10 +51,11 @@ import com.l2jfree.gameserver.datatables.TeleportLocationTable;
 import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.instancemanager.Manager;
@@ -66,7 +67,6 @@ import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.TradeList;
 import com.l2jfree.gameserver.model.TradeList.TradeItem;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.zone.L2JailZone;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -379,7 +379,7 @@ public final class GameStatusThread extends Thread
 						}
 						else if (obj instanceof L2Npc)
 							npcCount++;
-						else if (obj instanceof L2PcInstance)
+						else if (obj instanceof L2Player)
 							pcCount++;
 						else if (obj instanceof L2Summon)
 							summonCount++;
@@ -516,7 +516,7 @@ public final class GameStatusThread extends Thread
 						StringTokenizer st = new StringTokenizer(val);
 						String name = st.nextToken();
 						String message = val.substring(name.length() + 1);
-						L2PcInstance reciever = L2World.getInstance().getPlayer(name);
+						L2Player reciever = L2World.getInstance().getPlayer(name);
 						CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Tell, "Telnet Priv", message);
 						if (Config.ALT_TELNET)
 							cs = new CreatureSay(0, SystemChatChannelId.Chat_Tell, _gm + "(offline)", message);
@@ -573,7 +573,7 @@ public final class GameStatusThread extends Thread
 					try
 					{
 						_usrCommand = _usrCommand.substring(3);
-						L2PcInstance player = L2World.getInstance().getPlayer(_usrCommand);
+						L2Player player = L2World.getInstance().getPlayer(_usrCommand);
 						if (player != null)
 						{
 							try
@@ -600,7 +600,7 @@ public final class GameStatusThread extends Thread
 					try
 					{
 						_usrCommand = _usrCommand.substring(5);
-						L2PcInstance player = L2World.getInstance().getPlayer(_usrCommand);
+						L2Player player = L2World.getInstance().getPlayer(_usrCommand);
 						if (player != null)
 						{
 							new Disconnection(player).defaultSequence(false);
@@ -675,7 +675,7 @@ public final class GameStatusThread extends Thread
 					String playername = st.nextToken();
 					try
 					{
-						L2PcInstance player = L2World.getInstance().getPlayer(playername);
+						L2Player player = L2World.getInstance().getPlayer(playername);
 						int itemId = Integer.parseInt(st.nextToken());
 						int amount = Integer.parseInt(st.nextToken());
 						
@@ -721,7 +721,7 @@ public final class GameStatusThread extends Thread
 					
 					try
 					{
-						L2PcInstance player = L2World.getInstance().getPlayer(st.nextToken());
+						L2Player player = L2World.getInstance().getPlayer(st.nextToken());
 						itemType = Integer.parseInt(st.nextToken());
 						enchant = Integer.parseInt(st.nextToken());
 						
@@ -803,7 +803,7 @@ public final class GameStatusThread extends Thread
 					try
 					{
 						String name = st.nextToken();
-						L2PcInstance playerObj = L2World.getInstance().getPlayer(name);
+						L2Player playerObj = L2World.getInstance().getPlayer(name);
 						int delay = 0;
 						try
 						{
@@ -815,7 +815,7 @@ public final class GameStatusThread extends Thread
 						catch (NoSuchElementException nsee)
 						{
 						}
-						// L2PcInstance playerObj =
+						// L2Player playerObj =
 						// L2World.getInstance().getPlayer(player);
 						
 						if (playerObj != null)
@@ -843,7 +843,7 @@ public final class GameStatusThread extends Thread
 					try
 					{
 						String name = st.nextToken();
-						L2PcInstance playerObj = L2World.getInstance().getPlayer(name);
+						L2Player playerObj = L2World.getInstance().getPlayer(name);
 						
 						if (playerObj != null)
 						{
@@ -1018,7 +1018,7 @@ public final class GameStatusThread extends Thread
 						// name;type;x;y;itemId:enchant:price...
 						if (type.equals("privatestore"))
 						{
-							for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+							for (L2Player player : L2World.getInstance().getAllPlayers())
 							{
 								if (player.getPrivateStoreType() == 0)
 									continue;
@@ -1158,7 +1158,7 @@ public final class GameStatusThread extends Thread
 		}
 	}
 	
-	private boolean setEnchant(Socket gm, L2PcInstance activeChar, int ench, int armorType)
+	private boolean setEnchant(Socket gm, L2Player activeChar, int ench, int armorType)
 	{
 		// now we need to find the equipped weapon of the targeted character...
 		int curEnchant = 0; // display purposes only

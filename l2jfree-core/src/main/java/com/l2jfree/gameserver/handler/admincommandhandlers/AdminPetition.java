@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.PetitionManager;
 import com.l2jfree.gameserver.model.L2Object;
@@ -34,7 +34,7 @@ public class AdminPetition implements IAdminCommandHandler
 			"admin_add_peti_chat" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		L2Object targetChar = activeChar.getTarget();
 		
@@ -87,12 +87,12 @@ public class AdminPetition implements IAdminCommandHandler
 		{
 			try
 			{
-				if (targetChar == null || !(targetChar instanceof L2PcInstance))
+				if (targetChar == null || !(targetChar instanceof L2Player))
 				{
 					activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT); // incorrect target!
 					return false;
 				}
-				L2PcInstance targetPlayer = (L2PcInstance)targetChar;
+				L2Player targetPlayer = (L2Player)targetChar;
 				
 				String val = command.substring(15);
 				
@@ -107,7 +107,7 @@ public class AdminPetition implements IAdminCommandHandler
 		}
 		else if (command.startsWith("admin_add_peti_chat"))
 		{
-			L2PcInstance player = L2World.getInstance().getPlayer(command.substring(20));
+			L2Player player = L2World.getInstance().getPlayer(command.substring(20));
 			if (player == null)
 			{
 				activeChar.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);

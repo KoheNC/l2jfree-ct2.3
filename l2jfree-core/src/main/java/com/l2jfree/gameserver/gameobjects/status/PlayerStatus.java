@@ -16,10 +16,10 @@ package com.l2jfree.gameserver.gameobjects.status;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player.ConditionListenerDependency;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance.ConditionListenerDependency;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -27,11 +27,11 @@ import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.L2Math;
 
-public final class PcStatus extends CreatureStatus
+public final class PlayerStatus extends CreatureStatus
 {
 	private double _currentCp = 0;
 	
-	public PcStatus(L2PcInstance activeChar)
+	public PlayerStatus(L2Player activeChar)
 	{
 		super(activeChar);
 	}
@@ -160,8 +160,8 @@ public final class PcStatus extends CreatureStatus
 	}
 	
 	@Override
-	public L2PcInstance getActiveChar()
+	public L2Player getActiveChar()
 	{
-		return (L2PcInstance)_activeChar;
+		return (L2Player)_activeChar;
 	}
 }

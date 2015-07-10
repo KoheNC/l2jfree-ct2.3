@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.usercommandhandlers;
 
 import java.util.Map;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -36,7 +36,7 @@ public class InstanceZone implements IUserCommandHandler
 	}
 	
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		if (id != COMMAND_IDS[0])
 			return false;

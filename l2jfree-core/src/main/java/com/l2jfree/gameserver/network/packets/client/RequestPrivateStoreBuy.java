@@ -19,7 +19,7 @@ import static com.l2jfree.gameserver.gameobjects.L2Npc.INTERACTION_DISTANCE;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.ItemRequest;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -75,7 +75,7 @@ public class RequestPrivateStoreBuy extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))
@@ -103,13 +103,13 @@ public class RequestPrivateStoreBuy extends L2ClientPacket
 		if (object == null)
 			object = L2World.getInstance().getPlayer(_storePlayerId);
 		
-		if (!(object instanceof L2PcInstance))
+		if (!(object instanceof L2Player))
 		{
 			requestFailed(SystemMessageId.TARGET_IS_INCORRECT);
 			return;
 		}
 		
-		L2PcInstance storePlayer = (L2PcInstance)object;
+		L2Player storePlayer = (L2Player)object;
 		
 		if (!player.isInsideRadius(storePlayer, INTERACTION_DISTANCE, true, false))
 		{
@@ -123,7 +123,7 @@ public class RequestPrivateStoreBuy extends L2ClientPacket
 			return;
 		}
 		
-		if (!(storePlayer.getPrivateStoreType() == L2PcInstance.STORE_PRIVATE_SELL || storePlayer.getPrivateStoreType() == L2PcInstance.STORE_PRIVATE_PACKAGE_SELL))
+		if (!(storePlayer.getPrivateStoreType() == L2Player.STORE_PRIVATE_SELL || storePlayer.getPrivateStoreType() == L2Player.STORE_PRIVATE_PACKAGE_SELL))
 		{
 			sendAF();
 			return;
@@ -143,7 +143,7 @@ public class RequestPrivateStoreBuy extends L2ClientPacket
 			return;
 		}
 		
-		if (storePlayer.getPrivateStoreType() == L2PcInstance.STORE_PRIVATE_PACKAGE_SELL)
+		if (storePlayer.getPrivateStoreType() == L2Player.STORE_PRIVATE_PACKAGE_SELL)
 		{
 			if (storeList.getItemCount() > _items.length)
 			{
@@ -163,7 +163,7 @@ public class RequestPrivateStoreBuy extends L2ClientPacket
 		
 		if (storeList.getItemCount() == 0)
 		{
-			storePlayer.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
+			storePlayer.setPrivateStoreType(L2Player.STORE_PRIVATE_NONE);
 			storePlayer.broadcastUserInfo();
 		}
 		

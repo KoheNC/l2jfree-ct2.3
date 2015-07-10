@@ -19,7 +19,7 @@ import java.io.File;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.CrestCache;
 import com.l2jfree.gameserver.cache.HtmCache;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 /**
@@ -39,7 +39,7 @@ public class AdminCache implements IAdminCommandHandler
 	}
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_cache_htm_rebuild") || command.equals("admin_cache_htm_reload"))
 		{

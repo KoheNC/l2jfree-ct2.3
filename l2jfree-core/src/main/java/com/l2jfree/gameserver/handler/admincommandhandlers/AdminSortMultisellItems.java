@@ -34,7 +34,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.ClassId;
@@ -222,7 +222,7 @@ public class AdminSortMultisellItems implements IAdminCommandHandler
 	private List<Integer> spellItemList = null;
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_sortmulti"))
 		{
@@ -294,7 +294,7 @@ public class AdminSortMultisellItems implements IAdminCommandHandler
 		}
 	}
 	
-	private void makeMulti(L2PcInstance actor)
+	private void makeMulti(L2Player actor)
 	{
 		String[] SQL_ITEM_SELECTS =
 				{ "SELECT item_id,price FROM etcitem", "SELECT item_id,price FROM armor",
@@ -1230,7 +1230,7 @@ public class AdminSortMultisellItems implements IAdminCommandHandler
 		
 	}
 	
-	private void showHelp(L2PcInstance activeChar)
+	private void showHelp(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><title>Multisells from ItemTable</title><body>");

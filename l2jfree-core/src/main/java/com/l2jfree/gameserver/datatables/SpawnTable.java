@@ -27,9 +27,9 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.instance.L2ClassMasterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2WyvernManagerInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.DayNightSpawnManager;
@@ -404,7 +404,7 @@ public class SpawnTable
 	 * @param npcId : ID of the NPC to find.
 	 * @return
 	 */
-	public void findNPCInstances(L2PcInstance activeChar, int npcId, int teleportIndex)
+	public void findNPCInstances(L2Player activeChar, int npcId, int teleportIndex)
 	{
 		int index = 0;
 		for (FastMap.Entry<Integer, L2Spawn> entry = _spawnTable.head(), end = _spawnTable.tail(); (entry =

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -95,7 +95,7 @@ public class ExPVPMatchRecord extends L2ServerPacket
 		private int _kills;
 		private int _deaths;
 		
-		public PlayerRecord(L2PcInstance player)
+		public PlayerRecord(L2Player player)
 		{
 			this(player.getName());
 		}

@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.datatables.HennaTreeTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Henna;
 
@@ -24,10 +24,10 @@ public class HennaItemRemoveInfo extends L2ServerPacket
 {
 	private static final String _S__E3_HennaItemRemoveInfo = "[S] e7 HennaItemRemoveInfo";
 	
-	private L2PcInstance _activeChar;
+	private L2Player _activeChar;
 	private L2Henna _henna;
 	
-	public HennaItemRemoveInfo(L2Henna henna, L2PcInstance player)
+	public HennaItemRemoveInfo(L2Henna henna, L2Player player)
 	{
 		_henna = henna;
 		_activeChar = player;
@@ -44,7 +44,7 @@ public class HennaItemRemoveInfo extends L2ServerPacket
 		//able to remove or not 0 is false and 1 is true
 		writeD(HennaTreeTable.getInstance().isDrawable(_activeChar, _henna.getSymbolId()));
 		writeCompQ(_activeChar.getAdena());
-		PcStat stats = _activeChar.getStat();
+		PlayerStat stats = _activeChar.getStat();
 		writeD(stats.getINT()); //current INT
 		writeC(stats.getINT() + _henna.getStatINT()); //equip INT
 		writeD(stats.getSTR()); //current STR

@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.cache.CrestCache;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -54,7 +54,7 @@ public class RequestSetAllyCrest extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -113,7 +113,7 @@ public class RequestSetAllyCrest extends L2ClientPacket
 			if (c.getAllyId() == activeChar.getAllyId())
 			{
 				c.setAllyCrestId(newId);
-				for (L2PcInstance member : c.getOnlineMembers(0))
+				for (L2Player member : c.getOnlineMembers(0))
 					member.broadcastUserInfo();
 			}
 		}

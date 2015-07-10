@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.templates.skills;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -114,7 +114,7 @@ public class L2BuffTemplate
 	}
 	
 	/**
-	 * @return Returns the Id of the buff that the L2PcInstance will receive
+	 * @return Returns the Id of the buff that the L2Player will receive
 	 */
 	public int getSkillId()
 	{
@@ -122,7 +122,7 @@ public class L2BuffTemplate
 	}
 	
 	/**
-	 * @return Returns the Id of the buff that the L2PcInstance will receive
+	 * @return Returns the Id of the buff that the L2Player will receive
 	 */
 	public int getSkillOrder()
 	{
@@ -130,7 +130,7 @@ public class L2BuffTemplate
 	}
 	
 	/**
-	 * @return Returns the Level of the buff that the L2PcInstance will receive
+	 * @return Returns the Level of the buff that the L2Player will receive
 	 */
 	public int getSkillLevel()
 	{
@@ -138,7 +138,7 @@ public class L2BuffTemplate
 	}
 	
 	/**
-	 * @return Returns the Skill that the L2PcInstance will receive
+	 * @return Returns the Skill that the L2Player will receive
 	 */
 	public L2Skill getSkill()
 	{
@@ -146,7 +146,7 @@ public class L2BuffTemplate
 	}
 	
 	/**
-	 * @return Returns the L2PcInstance minimum level to receive buff
+	 * @return Returns the L2Player minimum level to receive buff
 	 */
 	public int getMinLevel()
 	{
@@ -154,7 +154,7 @@ public class L2BuffTemplate
 	}
 	
 	/**
-	 * @return Returns the L2PcInstance maximum level to receive buff
+	 * @return Returns the L2Player maximum level to receive buff
 	 */
 	public int getMaxLevel()
 	{
@@ -196,7 +196,7 @@ public class L2BuffTemplate
 	/**
 	 * @return Returns the result of level check
 	 */
-	public boolean checkLevel(L2PcInstance player)
+	public boolean checkLevel(L2Player player)
 	{
 		return ((_minLevel == 0 || player.getLevel() >= _minLevel) && (_maxLevel == 0 || player.getLevel() <= _maxLevel));
 	}
@@ -204,7 +204,7 @@ public class L2BuffTemplate
 	/**
 	 * @return Returns the result of race check
 	 */
-	public boolean checkRace(L2PcInstance player)
+	public boolean checkRace(L2Player player)
 	{
 		boolean cond = false;
 		if (_race == 0 || _race == 31)
@@ -225,7 +225,7 @@ public class L2BuffTemplate
 	/**
 	 * @return Returns the result of Magus/Fighter class check
 	 */
-	public boolean checkClass(L2PcInstance player)
+	public boolean checkClass(L2Player player)
 	{
 		return ((_class == 0 || _class == 3) || (_class == 1 && !player.isMageClass()) || (_class == 2 && player
 				.isMageClass()));
@@ -235,7 +235,7 @@ public class L2BuffTemplate
 	 * @param player
 	 * @return Returns the result of faction check
 	 */
-	public boolean checkFaction(L2PcInstance player)
+	public boolean checkFaction(L2Player player)
 	{
 		return true;
 		// return ((_faction == 0 ||player.getFaction = _faction)
@@ -244,7 +244,7 @@ public class L2BuffTemplate
 	/**
 	 * @return Returns the result of price check
 	 */
-	public boolean checkPrice(L2PcInstance player)
+	public boolean checkPrice(L2Player player)
 	{
 		return ((_adena == 0 || player.getInventory().getAdena() >= _adena));
 		// return ((_adena == 0 || player.getInventory().getAdena()>=_adena) &&
@@ -254,7 +254,7 @@ public class L2BuffTemplate
 	/**
 	 * @return Returns the result of all player related conditions check
 	 */
-	public boolean checkPlayer(L2PcInstance player)
+	public boolean checkPlayer(L2Player player)
 	{
 		return (checkLevel(player) && checkRace(player) && checkClass(player) && checkFaction(player));
 	}

@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager.AutoSpawnInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
@@ -615,7 +615,7 @@ public class SevenSigns
 		return cabalMembers;
 	}
 	
-	public final StatsSet getPlayerData(L2PcInstance player)
+	public final StatsSet getPlayerData(L2Player player)
 	{
 		if (!hasRegisteredBefore(player))
 			return null;
@@ -623,7 +623,7 @@ public class SevenSigns
 		return _signsPlayerData.get(player.getObjectId());
 	}
 	
-	public int getPlayerStoneContrib(L2PcInstance player)
+	public int getPlayerStoneContrib(L2Player player)
 	{
 		if (!hasRegisteredBefore(player))
 			return 0;
@@ -639,7 +639,7 @@ public class SevenSigns
 		return stoneCount;
 	}
 	
-	public int getPlayerContribScore(L2PcInstance player)
+	public int getPlayerContribScore(L2Player player)
 	{
 		if (!hasRegisteredBefore(player))
 			return 0;
@@ -649,7 +649,7 @@ public class SevenSigns
 		return currPlayer.getInteger("contribution_score");
 	}
 	
-	public int getPlayerAdenaCollect(L2PcInstance player)
+	public int getPlayerAdenaCollect(L2Player player)
 	{
 		if (!hasRegisteredBefore(player))
 			return 0;
@@ -657,7 +657,7 @@ public class SevenSigns
 		return _signsPlayerData.get(player.getObjectId()).getInteger("ancient_adena_amount");
 	}
 	
-	public int getPlayerSeal(L2PcInstance player)
+	public int getPlayerSeal(L2Player player)
 	{
 		if (!hasRegisteredBefore(player))
 			return SEAL_NULL;
@@ -665,7 +665,7 @@ public class SevenSigns
 		return getPlayerData(player).getInteger("seal");
 	}
 	
-	public int getPlayerCabal(L2PcInstance player)
+	public int getPlayerCabal(L2Player player)
 	{
 		if (!hasRegisteredBefore(player))
 			return CABAL_NULL;
@@ -777,7 +777,7 @@ public class SevenSigns
 	 * @param updateSettings
 	 * @throws Exception
 	 */
-	public void saveSevenSignsData(L2PcInstance player, boolean updateSettings)
+	public void saveSevenSignsData(L2Player player, boolean updateSettings)
 	{
 		Connection con = null;
 		
@@ -899,7 +899,7 @@ public class SevenSigns
 	 * @param player
 	 * @return boolean hasRegistered
 	 */
-	private boolean hasRegisteredBefore(L2PcInstance player)
+	private boolean hasRegisteredBefore(L2Player player)
 	{
 		return _signsPlayerData.containsKey(player.getObjectId());
 	}
@@ -914,7 +914,7 @@ public class SevenSigns
 	 * @param chosenSeal
 	 * @return int cabal
 	 */
-	public int setPlayerInfo(L2PcInstance player, int chosenCabal, int chosenSeal)
+	public int setPlayerInfo(L2Player player, int chosenCabal, int chosenSeal)
 	{
 		int charObjId = player.getObjectId();
 		Connection con = null;
@@ -993,7 +993,7 @@ public class SevenSigns
 	 * @param removeReward
 	 * @return int rewardAmount
 	 */
-	public int getAncientAdenaReward(L2PcInstance player, boolean removeReward)
+	public int getAncientAdenaReward(L2Player player, boolean removeReward)
 	{
 		StatsSet currPlayer = getPlayerData(player);
 		int rewardAmount = currPlayer.getInteger("ancient_adena_amount");
@@ -1022,7 +1022,7 @@ public class SevenSigns
 	 * @param redCount
 	 * @return long contribScore
 	 */
-	public long addPlayerStoneContrib(L2PcInstance player, long blueCount, long greenCount, long redCount)
+	public long addPlayerStoneContrib(L2Player player, long blueCount, long greenCount, long redCount)
 	{
 		StatsSet currPlayer = getPlayerData(player);
 		
@@ -1091,7 +1091,7 @@ public class SevenSigns
 	 * 
 	 * @param player
 	 */
-	public void sendCurrentPeriodMsg(L2PcInstance player)
+	public void sendCurrentPeriodMsg(L2Player player)
 	{
 		SystemMessageId msg = null;
 		
@@ -1123,7 +1123,7 @@ public class SevenSigns
 	{
 		SystemMessage sm = new SystemMessage(sysMsgId);
 		
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 			player.sendPacket(sm);
 	}
 	
@@ -1306,7 +1306,7 @@ public class SevenSigns
 	 */
 	protected void teleLosingCabalFromDungeons(String compWinner)
 	{
-		for (L2PcInstance onlinePlayer : L2World.getInstance().getAllPlayers())
+		for (L2Player onlinePlayer : L2World.getInstance().getAllPlayers())
 		{
 			StatsSet currPlayer = getPlayerData(onlinePlayer);
 			
@@ -1434,7 +1434,7 @@ public class SevenSigns
 			
 			SSQInfo ss = new SSQInfo();
 			
-			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 				player.sendPacket(ss);
 			
 			spawnSevenSignsNPC();
@@ -1450,7 +1450,7 @@ public class SevenSigns
 	
 	public void giveCPMult(int StrifeOwner)
 	{
-		for (L2PcInstance character : L2World.getInstance().getAllPlayers())
+		for (L2Player character : L2World.getInstance().getAllPlayers())
 		{
 			if (getPlayerCabal(character) != CABAL_NULL)
 			{
@@ -1466,7 +1466,7 @@ public class SevenSigns
 	
 	public void removeCPMult()
 	{
-		for (L2PcInstance character : L2World.getInstance().getAllPlayers())
+		for (L2Player character : L2World.getInstance().getAllPlayers())
 		{
 			//Remove SevenSigns' buffs/debuffs.
 			character.removeSkill(SkillTable.getInstance().getInfo(5074, 1));
@@ -1474,7 +1474,7 @@ public class SevenSigns
 		}
 	}
 	
-	public boolean checkSummonConditions(L2PcInstance activeChar)
+	public boolean checkSummonConditions(L2Player activeChar)
 	{
 		if (activeChar == null)
 			return true;

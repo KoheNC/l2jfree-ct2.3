@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -41,10 +41,10 @@ public class RollingDice implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		int itemId = item.getItemId();
 		
 		if (activeChar.isInOlympiadMode())
@@ -79,7 +79,7 @@ public class RollingDice implements IItemHandler
 		}
 	}
 	
-	private int rollDice(L2PcInstance player)
+	private int rollDice(L2Player player)
 	{
 		// Check if the dice is ready
 		if (!FloodProtector.tryPerformAction(player, Protected.ROLLDICE))

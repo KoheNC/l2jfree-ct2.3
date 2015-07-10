@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -51,7 +51,7 @@ public class ItemList extends L2ServerPacket
 	private final L2ItemInstance[] _items;
 	private final boolean _showWindow;
 	
-	public ItemList(L2PcInstance cha, boolean showWindow)
+	public ItemList(L2Player cha, boolean showWindow)
 	{
 		_items = cha.getInventory().getItems();
 		_showWindow = showWindow;

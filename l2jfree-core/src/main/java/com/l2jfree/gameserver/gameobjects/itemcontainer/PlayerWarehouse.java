@@ -12,16 +12,16 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 
-public class PcWarehouse extends Warehouse
+public class PlayerWarehouse extends Warehouse
 {
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	
-	public PcWarehouse(L2PcInstance owner)
+	public PlayerWarehouse(L2Player owner)
 	{
 		_owner = owner;
 	}
@@ -33,7 +33,7 @@ public class PcWarehouse extends Warehouse
 	}
 	
 	@Override
-	public L2PcInstance getOwner()
+	public L2Player getOwner()
 	{
 		return _owner;
 	}

@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SummonItemsData;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -48,10 +48,10 @@ public class SummonItems implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
-		final L2PcInstance activeChar = (L2PcInstance)playable;
+		final L2Player activeChar = (L2Player)playable;
 		
 		if (!FloodProtector.tryPerformAction(activeChar, Protected.ITEMPETSUMMON))
 			return;
@@ -165,10 +165,10 @@ public class SummonItems implements IItemHandler
 	
 	static class PetSummonFeedWait implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		private final L2PetInstance _petSummon;
 		
-		PetSummonFeedWait(L2PcInstance activeChar, L2PetInstance petSummon)
+		PetSummonFeedWait(L2Player activeChar, L2PetInstance petSummon)
 		{
 			_activeChar = activeChar;
 			_petSummon = petSummon;
@@ -187,11 +187,11 @@ public class SummonItems implements IItemHandler
 	// TODO: this should be inside skill handler
 	static class PetSummonFinalizer implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		private final L2ItemInstance _item;
 		private final L2NpcTemplate _npcTemplate;
 		
-		PetSummonFinalizer(L2PcInstance activeChar, L2NpcTemplate npcTemplate, L2ItemInstance item)
+		PetSummonFinalizer(L2Player activeChar, L2NpcTemplate npcTemplate, L2ItemInstance item)
 		{
 			_activeChar = activeChar;
 			_npcTemplate = npcTemplate;

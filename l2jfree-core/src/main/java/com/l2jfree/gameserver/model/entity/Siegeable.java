@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.entity;
 
 import com.l2jfree.gameserver.datatables.ResidentialSkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -77,13 +77,13 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 		for (L2Creature player : _zoneTP.getCharactersInside())
 		{
 			// To random spot in defender spawn zone
-			if (player instanceof L2PcInstance)
+			if (player instanceof L2Player)
 				player.teleToLocation(_zoneDS.getRandomLocation(), true);
 		}
 	}
 	
 	@Override
-	public boolean checkBanish(L2PcInstance cha)
+	public boolean checkBanish(L2Player cha)
 	{
 		return cha.getClanId() != getOwnerId() && !cha.isGM();
 	}
@@ -147,7 +147,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 		return _residentialSkills;
 	}
 	
-	public void giveResidentialSkills(L2PcInstance player)
+	public void giveResidentialSkills(L2Player player)
 	{
 		if (_residentialSkills != null)
 		{
@@ -156,7 +156,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 		}
 	}
 	
-	public void removeResidentialSkills(L2PcInstance player)
+	public void removeResidentialSkills(L2Player player)
 	{
 		if (_residentialSkills != null)
 		{

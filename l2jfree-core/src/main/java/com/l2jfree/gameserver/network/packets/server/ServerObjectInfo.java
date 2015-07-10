@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -47,7 +47,7 @@ public final class ServerObjectInfo extends L2ServerPacket
 	 * @see L2ServerPacket.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket#writeImpl()
 	 */
 	@Override
-	protected final void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected final void writeImpl(L2Client client, L2Player activeChar)
 	{
 		boolean isAttackable = _activeChar.isAutoAttackable(activeChar);
 		

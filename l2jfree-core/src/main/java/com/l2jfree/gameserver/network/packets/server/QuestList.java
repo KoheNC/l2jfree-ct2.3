@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -41,9 +41,9 @@ public class QuestList extends L2ServerPacket
 	private static final String _S__98_QUESTLIST = "[S] 80 QuestList";
 	
 	private final Quest[] _quests;
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public QuestList(L2PcInstance player)
+	public QuestList(L2Player player)
 	{
 		_activeChar = player;
 		_quests = player.getAllActiveQuests();

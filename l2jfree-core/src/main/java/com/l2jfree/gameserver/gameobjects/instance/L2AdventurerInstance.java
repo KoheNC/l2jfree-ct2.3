@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ExShowQuestInfo;
 
@@ -28,7 +29,7 @@ public class L2AdventurerInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.equalsIgnoreCase("questlist"))
 		{

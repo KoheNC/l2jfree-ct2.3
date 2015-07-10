@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2TeleportLocation;
@@ -40,7 +41,7 @@ public class L2DoormenInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("Chat"))
 		{
@@ -81,26 +82,26 @@ public class L2DoormenInstance extends L2NpcInstance
 	 * @param player
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
 		player.setLastFolkNPC(this);
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the
+			// Calculate the distance between the L2Player and the
 			// L2NpcInstance
 			if (!canInteract(player))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			}
 			else
@@ -108,12 +109,12 @@ public class L2DoormenInstance extends L2NpcInstance
 				showMessageWindow(player);
 			}
 		}
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to
+		// Send a Server->Client ActionFailed to the L2Player in order to
 		// avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showMessageWindow(L2PcInstance player)
+	public void showMessageWindow(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -136,7 +137,7 @@ public class L2DoormenInstance extends L2NpcInstance
 		player.sendPacket(html);
 	}
 	
-	protected void openDoors(L2PcInstance player, String command)
+	protected void openDoors(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command.substring(10), ", ");
 		st.nextToken();
@@ -147,7 +148,7 @@ public class L2DoormenInstance extends L2NpcInstance
 		}
 	}
 	
-	protected void closeDoors(L2PcInstance player, String command)
+	protected void closeDoors(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command.substring(11), ", ");
 		st.nextToken();
@@ -158,7 +159,7 @@ public class L2DoormenInstance extends L2NpcInstance
 		}
 	}
 	
-	protected void cannotManageDoors(L2PcInstance player)
+	protected void cannotManageDoors(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -167,7 +168,7 @@ public class L2DoormenInstance extends L2NpcInstance
 		player.sendPacket(html);
 	}
 	
-	protected void doTeleport(L2PcInstance player, String command)
+	protected void doTeleport(L2Player player, String command)
 	{
 		final int whereTo = Integer.parseInt(command.substring(5).trim());
 		L2TeleportLocation list = TeleportLocationTable.getInstance().getTemplate(whereTo);
@@ -182,7 +183,7 @@ public class L2DoormenInstance extends L2NpcInstance
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	protected boolean isOwnerClan(L2PcInstance player)
+	protected boolean isOwnerClan(L2Player player)
 	{
 		return true;
 	}

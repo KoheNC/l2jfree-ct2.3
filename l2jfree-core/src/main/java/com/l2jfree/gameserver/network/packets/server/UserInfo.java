@@ -16,13 +16,13 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
-import com.l2jfree.gameserver.gameobjects.status.PcStatus;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
+import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.PcView;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.view.PlayerView;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
@@ -71,10 +71,10 @@ public final class UserInfo extends L2ServerPacket
 {
 	private static final String _S__04_USERINFO = "[S] 04 UserInfo";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final int _relation;
 	
-	public UserInfo(L2PcInstance cha)
+	public UserInfo(L2Player cha)
 	{
 		cha.getView().refresh();
 		
@@ -82,16 +82,16 @@ public final class UserInfo extends L2ServerPacket
 		
 		int relation = cha.isClanLeader() ? 0x40 : 0;
 		
-		if (cha.getSiegeState() == L2PcInstance.SIEGE_STATE_ATTACKER)
+		if (cha.getSiegeState() == L2Player.SIEGE_STATE_ATTACKER)
 			relation |= 0x180;
-		else if (cha.getSiegeState() == L2PcInstance.SIEGE_STATE_DEFENDER)
+		else if (cha.getSiegeState() == L2Player.SIEGE_STATE_DEFENDER)
 			relation |= 0x80;
 		
 		_relation = relation;
 	}
 	
 	@Override
-	public void packetSent(L2Client client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2Player activeChar)
 	{
 		if (Config.PACKET_FINAL)
 		{
@@ -101,7 +101,7 @@ public final class UserInfo extends L2ServerPacket
 	}
 	
 	@Override
-	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2Player activeChar)
 	{
 		return _activeChar == activeChar;
 	}
@@ -109,11 +109,11 @@ public final class UserInfo extends L2ServerPacket
 	@Override
 	protected void writeImpl()
 	{
-		final PcView view = _activeChar.getView();
-		final PcAppearance _appearance = _activeChar.getAppearance();
-		final PcInventory _inv = _activeChar.getInventory();
-		final PcStat stat = _activeChar.getStat();
-		final PcStatus status = _activeChar.getStatus();
+		final PlayerView view = _activeChar.getView();
+		final PlayerAppearance _appearance = _activeChar.getAppearance();
+		final PlayerInventory _inv = _activeChar.getInventory();
+		final PlayerStat stat = _activeChar.getStat();
+		final PlayerStatus status = _activeChar.getStatus();
 		
 		writeC(0x32);
 		

@@ -22,7 +22,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import javolution.text.TextBuilder;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.entity.events.SH;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -38,7 +38,7 @@ public class AdminSHEngine implements IAdminCommandHandler
 	private static final int REQUIRED_LEVEL = 100;
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (!(checkLevel(activeChar.getAccessLevel()) && activeChar.isGM()))
 			return false;
@@ -137,7 +137,7 @@ public class AdminSHEngine implements IAdminCommandHandler
 		return (level >= REQUIRED_LEVEL);
 	}
 	
-	public void showMainPage(L2PcInstance activeChar)
+	public void showMainPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");

@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.skills.l2skills;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -96,9 +96,9 @@ public class L2SkillDrain extends L2Skill
 			// Check to see if we should damage the target
 			if (damage > 0 && (!target.isDead() || getTargetType() != SkillTargetType.TARGET_CORPSE_MOB))
 			{
-				if (activeChar instanceof L2PcInstance)
+				if (activeChar instanceof L2Player)
 				{
-					L2PcInstance activeCaster = (L2PcInstance)activeChar;
+					L2Player activeCaster = (L2Player)activeChar;
 					
 					if (activeCaster.isGM() && activeCaster.getAccessLevel() < Config.GM_CAN_GIVE_DAMAGE)
 						damage = 0;
@@ -118,7 +118,7 @@ public class L2SkillDrain extends L2Skill
 					if ((Formulas.calcSkillReflect(target, this) & Formulas.SKILL_REFLECT_SUCCEED) > 0)
 					{
 						getEffects(target, activeChar);
-						if (activeChar instanceof L2PcInstance)
+						if (activeChar instanceof L2Player)
 							activeChar.getActingPlayer().sendPacket(
 									new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT).addSkillName(this));
 					}
@@ -160,7 +160,7 @@ public class L2SkillDrain extends L2Skill
 				_log.info("L2SkillDrain: useCubicSkill() -> damage = " + damage);
 			
 			double hpAdd = _absorbAbs + _absorbPart * damage;
-			L2PcInstance owner = activeCubic.getOwner();
+			L2Player owner = activeCubic.getOwner();
 			double hp = Math.min(owner.getStatus().getCurrentHp() + hpAdd, owner.getMaxHp());
 			
 			owner.getStatus().setCurrentHp(hp);

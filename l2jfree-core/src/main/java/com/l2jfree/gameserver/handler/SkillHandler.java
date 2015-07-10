@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.skillhandlers.BalanceLife;
 import com.l2jfree.gameserver.handler.skillhandlers.BallistaBomb;
 import com.l2jfree.gameserver.handler.skillhandlers.BeastFeed;
@@ -161,10 +161,10 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 		}
 		
 		// Increase Charges, Souls, Etc
-		if (activeChar instanceof L2PcInstance)
+		if (activeChar instanceof L2Player)
 		{
-			((L2PcInstance)activeChar).increaseChargesBySkill(skill);
-			((L2PcInstance)activeChar).increaseSoulsBySkill(skill);
+			((L2Player)activeChar).increaseChargesBySkill(skill);
+			((L2Player)activeChar).increaseSoulsBySkill(skill);
 		}
 		
 		skill.getEffectsSelf(activeChar);

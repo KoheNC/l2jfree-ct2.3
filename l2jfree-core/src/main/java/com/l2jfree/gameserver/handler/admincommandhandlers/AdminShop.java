@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.datatables.TradeListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2TradeList;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -37,7 +37,7 @@ public class AdminShop implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_buy", "admin_gmshop" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_buy"))
 		{
@@ -63,7 +63,7 @@ public class AdminShop implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleBuyRequest(L2PcInstance activeChar, String command)
+	private void handleBuyRequest(L2Player activeChar, String command)
 	{
 		int val = -1;
 		try

@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.GMAudit;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
@@ -169,7 +169,7 @@ public abstract class ItemContainer
 			{
 				if (!includeEq && item.isEquipped())
 					continue;
-				//if (item.isAvailable((L2PcInstance)getOwner(), true) || item.getItem().getType2() == 3)//available or quest item
+				//if (item.isAvailable((L2Player)getOwner(), true) || item.getItem().getType2() == 3)//available or quest item
 				if (item.isStackable())
 					count = item.getCount();
 				else
@@ -187,7 +187,7 @@ public abstract class ItemContainer
 	public long getAdena()
 	{
 		for (L2ItemInstance item : _items)
-			if (item.getItemId() == PcInventory.ADENA_ID)
+			if (item.getItemId() == PlayerInventory.ADENA_ID)
 				return item.getCount();
 		return 0;
 	}
@@ -196,11 +196,11 @@ public abstract class ItemContainer
 	* Adds item to inventory
 	 * @param process : String Identifier of process triggering this action
 	* @param item : L2ItemInstance to be added
-	 * @param actor : L2PcInstance Player requesting the item add
+	 * @param actor : L2Player Player requesting the item add
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	* @return L2ItemInstance corresponding to the new item or the updated item in inventory
 	*/
-	public L2ItemInstance addItem(String process, L2ItemInstance item, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance addItem(String process, L2ItemInstance item, L2Player actor, L2Object reference)
 	{
 		L2ItemInstance olditem = getItemByItemId(item.getItemId());
 		
@@ -217,7 +217,7 @@ public abstract class ItemContainer
 			item = olditem;
 			
 			// Updates database
-			if (item.getItemId() == PcInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
+			if (item.getItemId() == PlayerInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
 			{
 				// Small adena changes won't be saved to database all the time
 				if (GameTimeController.getGameTicks() % 5 == 0)
@@ -249,11 +249,11 @@ public abstract class ItemContainer
 	 * @param process : String Identifier of process triggering this action
 	 * @param itemId : int Item Identifier of the item to be added
 	 * @param count : long Quantity of items to be added
-	 * @param actor : L2PcInstance Player requesting the item add
+	 * @param actor : L2Player Player requesting the item add
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the new item or the updated item in inventory
 	 */
-	public L2ItemInstance addItem(String process, int itemId, long count, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance addItem(String process, int itemId, long count, L2Player actor, L2Object reference)
 	{
 		L2ItemInstance item = getItemByItemId(itemId);
 		
@@ -263,7 +263,7 @@ public abstract class ItemContainer
 			item.changeCount(process, count, actor, reference);
 			item.setLastChange(L2ItemInstance.MODIFIED);
 			// Updates database
-			if (itemId == PcInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
+			if (itemId == PlayerInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
 			{
 				// Small adena changes won't be saved to database all the time
 				if (GameTimeController.getGameTicks() % 5 == 0)
@@ -312,11 +312,11 @@ public abstract class ItemContainer
 	 * 
 	 * @param process : String Identifier of process triggering this action
 	 * @param itemId : int Item Identifier of the item to be added
-	 * @param actor : L2PcInstance Player requesting the item add
+	 * @param actor : L2Player Player requesting the item add
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the new weared item
 	 */
-	public L2ItemInstance addWearItem(String process, int itemId, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance addWearItem(String process, int itemId, L2Player actor, L2Object reference)
 	{
 		// Surch the item in the inventory of the player
 		L2ItemInstance item = getItemByItemId(itemId);
@@ -349,12 +349,12 @@ public abstract class ItemContainer
 	 * @param process : String Identifier of process triggering this action
 	 * @param objectId : int Item Identifier of the item to be transfered
 	 * @param count : long Quantity of items to be transfered
-	 * @param actor : L2PcInstance Player requesting the item transfer
+	 * @param actor : L2Player Player requesting the item transfer
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the new item or the updated item in inventory
 	 */
 	public L2ItemInstance transferItem(String process, int objectId, long count, ItemContainer target,
-			L2PcInstance actor, L2Object reference)
+			L2Player actor, L2Object reference)
 	{
 		if (target == null)
 			return null;
@@ -449,11 +449,11 @@ public abstract class ItemContainer
 	 * Destroy item from inventory and updates database
 	 * @param process : String Identifier of process triggering this action
 	 * @param item : L2ItemInstance to be destroyed
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the destroyed item or the updated item in inventory
 	 */
-	public L2ItemInstance destroyItem(String process, L2ItemInstance item, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance destroyItem(String process, L2ItemInstance item, L2Player actor, L2Object reference)
 	{
 		return destroyItem(process, item, item.getCount(), actor, reference);
 	}
@@ -462,11 +462,11 @@ public abstract class ItemContainer
 	 * Destroy item from inventory and updates database
 	 * @param process : String Identifier of process triggering this action
 	 * @param item : L2ItemInstance to be destroyed
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the destroyed item or the updated item in inventory
 	 */
-	public L2ItemInstance destroyItem(String process, L2ItemInstance item, long count, L2PcInstance actor,
+	public L2ItemInstance destroyItem(String process, L2ItemInstance item, long count, L2Player actor,
 			L2Object reference)
 	{
 		synchronized (item)
@@ -508,11 +508,11 @@ public abstract class ItemContainer
 	 * @param process : String Identifier of process triggering this action
 	 * @param objectId : int Item Instance identifier of the item to be destroyed
 	 * @param count : long Quantity of items to be destroyed
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the destroyed item or the updated item in inventory
 	 */
-	public L2ItemInstance destroyItem(String process, int objectId, long count, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance destroyItem(String process, int objectId, long count, L2Player actor, L2Object reference)
 	{
 		L2ItemInstance item = getItemByObjectId(objectId);
 		if (item == null)
@@ -527,11 +527,11 @@ public abstract class ItemContainer
 	 * @param process : String Identifier of process triggering this action
 	 * @param itemId : int Item identifier of the item to be destroyed
 	 * @param count : long Quantity of items to be destroyed
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 * @return L2ItemInstance corresponding to the destroyed item or the updated item in inventory
 	 */
-	public L2ItemInstance destroyItemByItemId(String process, int itemId, long count, L2PcInstance actor,
+	public L2ItemInstance destroyItemByItemId(String process, int itemId, long count, L2Player actor,
 			L2Object reference)
 	{
 		L2ItemInstance item = getItemByItemId(itemId);
@@ -545,10 +545,10 @@ public abstract class ItemContainer
 	/**
 	 * Destroy all items from inventory and updates database
 	 * @param process : String Identifier of process triggering this action
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in transformation
 	 */
-	public synchronized void destroyAllItems(String process, L2PcInstance actor, L2Object reference)
+	public synchronized void destroyAllItems(String process, L2Player actor, L2Object reference)
 	{
 		for (L2ItemInstance item : _items)
 			destroyItem(process, item, actor, reference);

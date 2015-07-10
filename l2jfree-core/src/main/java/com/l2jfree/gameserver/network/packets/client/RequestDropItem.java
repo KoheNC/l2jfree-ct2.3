@@ -18,10 +18,10 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.datatables.GmListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -62,7 +62,7 @@ public class RequestDropItem extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null || activeChar.isDead())
 			return;
 		
@@ -134,7 +134,7 @@ public class RequestDropItem extends L2ClientPacket
 		
 		if (_log.isDebugEnabled())
 			_log.debug("dropping " + _objectId + " item(" + _count + ") at: " + _x + " " + _y + " " + _z);
-		if (dropedItem != null && dropedItem.getItemId() == PcInventory.ADENA_ID && dropedItem.getCount() >= 1000000)
+		if (dropedItem != null && dropedItem.getItemId() == PlayerInventory.ADENA_ID && dropedItem.getCount() >= 1000000)
 		{
 			String msg =
 					"Character (" + activeChar.getName() + ") has dropped (" + dropedItem.getCount() + ")adena at ("
@@ -146,7 +146,7 @@ public class RequestDropItem extends L2ClientPacket
 	
 	private final boolean canDrop(L2ItemInstance item)
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		
 		if (activeChar.isProcessingTransaction() || activeChar.getPrivateStoreType() != 0)
 		{

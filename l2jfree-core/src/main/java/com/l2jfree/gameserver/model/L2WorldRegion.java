@@ -335,7 +335,7 @@ public final class L2WorldRegion
 			}
 			
 			// start a timer to "suggest" a deactivate to self and neighbors.
-			// suggest means: first check if a neighbor has L2PcInstances in it.  If not, deactivate.
+			// suggest means: first check if a neighbor has L2Players in it.  If not, deactivate.
 			_neighborsTask =
 					ThreadPoolManager.getInstance().schedule(new NeighborsTask(false),
 							1000 * Config.GRID_NEIGHBOR_TURNOFF_TIME);
@@ -344,8 +344,8 @@ public final class L2WorldRegion
 	
 	/**
 	 * Add the L2Object in the _visibleObjects containing L2Object visible in this L2WorldRegion <BR>
-	 * If L2Object is a L2PcInstance, Add the L2PcInstance in the L2ObjectHashSet(L2PcInstance) _allPlayable containing
-	 * L2PcInstance of all player in game in this L2WorldRegion <BR>
+	 * If L2Object is a L2Player, Add the L2Player in the L2ObjectHashSet(L2Player) _allPlayable containing
+	 * L2Player of all player in game in this L2WorldRegion <BR>
 	 * Assert : object.getCurrentWorldRegion() == this
 	 */
 	public void addVisibleObject(L2Object object, boolean addToKnownLists)
@@ -383,7 +383,7 @@ public final class L2WorldRegion
 	/**
 	 * Remove the L2Object from the L2ObjectHashSet(L2Object) _visibleObjects in this L2WorldRegion <BR>
 	 * <BR>
-	 * If L2Object is a L2PcInstance, remove it from the L2ObjectHashSet(L2PcInstance) _allPlayable of this
+	 * If L2Object is a L2Player, remove it from the L2ObjectHashSet(L2Player) _allPlayable of this
 	 * L2WorldRegion <BR>
 	 * Assert : object.getCurrentWorldRegion() == this || object.getCurrentWorldRegion() == null
 	 */

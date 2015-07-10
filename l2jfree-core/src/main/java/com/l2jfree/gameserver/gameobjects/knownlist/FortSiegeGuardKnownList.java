@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.Fort;
 
@@ -45,9 +45,9 @@ public class FortSiegeGuardKnownList extends AttackableKnownList
 		// Check if siege is in progress
 		if (fort != null && fort.getSiege().getIsInProgress())
 		{
-			L2PcInstance player = null;
-			if (object instanceof L2PcInstance)
-				player = (L2PcInstance)object;
+			L2Player player = null;
+			if (object instanceof L2Player)
+				player = (L2Player)object;
 			else if (object instanceof L2Summon)
 				player = ((L2Summon)object).getOwner();
 			

@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2Augmentation;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -27,7 +28,6 @@ import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2Multisell.MultiSellEntry;
 import com.l2jfree.gameserver.model.L2Multisell.MultiSellIngredient;
 import com.l2jfree.gameserver.model.L2Multisell.MultiSellListContainer;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.ItemList;
@@ -81,7 +81,7 @@ public final class MultiSellChoose extends L2ClientPacket
 		if (_amount < 1 || _amount > 5000)
 			return;
 		
-		L2PcInstance player = getActiveChar();
+		L2Player player = getActiveChar();
 		if (player == null)
 			return;
 		
@@ -111,10 +111,10 @@ public final class MultiSellChoose extends L2ClientPacket
 		sendAF();
 	}
 	
-	private void doExchange(L2PcInstance player, MultiSellEntry templateEntry, boolean applyTaxes,
+	private void doExchange(L2Player player, MultiSellEntry templateEntry, boolean applyTaxes,
 			boolean maintainEnchantment, int enchantment)
 	{
-		PcInventory inv = player.getInventory();
+		PlayerInventory inv = player.getInventory();
 		
 		// given the template entry and information about maintaining enchantment and applying taxes
 		// re-create the instance of the entry that will be used for this exchange
@@ -506,7 +506,7 @@ public final class MultiSellChoose extends L2ClientPacket
 			// load the ingredient from the template
 			MultiSellIngredient newIngredient = new MultiSellIngredient(ing);
 			
-			if (newIngredient.getItemId() == PcInventory.ADENA_ID && newIngredient.isTaxIngredient())
+			if (newIngredient.getItemId() == PlayerInventory.ADENA_ID && newIngredient.isTaxIngredient())
 			{
 				double taxRate = 0.0;
 				if (applyTaxes)
@@ -519,7 +519,7 @@ public final class MultiSellChoose extends L2ClientPacket
 				totalAdenaCount += _transactionTax;
 				continue; // do not yet add this adena amount to the list as non-taxIngredient adena might be entered later (order not guaranteed)
 			}
-			else if (ing.getItemId() == PcInventory.ADENA_ID) // && !ing.isTaxIngredient()
+			else if (ing.getItemId() == PlayerInventory.ADENA_ID) // && !ing.isTaxIngredient()
 			{
 				totalAdenaCount += newIngredient.getItemCount();
 				continue; // do not yet add this adena amount to the list as taxIngredient adena might be entered later (order not guaranteed)
@@ -541,7 +541,7 @@ public final class MultiSellChoose extends L2ClientPacket
 		}
 		// Next add the adena amount, if any
 		if (totalAdenaCount > 0)
-			newEntry.addIngredient(new MultiSellIngredient(PcInventory.ADENA_ID, totalAdenaCount));
+			newEntry.addIngredient(new MultiSellIngredient(PlayerInventory.ADENA_ID, totalAdenaCount));
 		
 		// Now modify the enchantment level of products, if necessary
 		for (MultiSellIngredient ing : templateEntry.getProducts())

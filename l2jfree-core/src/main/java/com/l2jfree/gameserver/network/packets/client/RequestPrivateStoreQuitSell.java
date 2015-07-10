@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 
 /**
@@ -35,11 +35,11 @@ public class RequestPrivateStoreQuitSell extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		
-		player.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
+		player.setPrivateStoreType(L2Player.STORE_PRIVATE_NONE);
 		player.standUp();
 		
 		sendAF();

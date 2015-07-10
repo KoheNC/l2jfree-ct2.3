@@ -22,7 +22,7 @@ import ai.group_template.L2AttackableAIScript;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.gameserver.network.packets.server.PlaySound;
 import com.l2jfree.tools.random.Rnd;
@@ -93,7 +93,7 @@ public class Core extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.contains("spawn_minion"))
 		{
@@ -117,7 +117,7 @@ public class Core extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet)
 	{
 		if (npc.getNpcId() == CORE)
 		{
@@ -138,7 +138,7 @@ public class Core extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		int npcId = npc.getNpcId();
 		if (npcId == CORE)

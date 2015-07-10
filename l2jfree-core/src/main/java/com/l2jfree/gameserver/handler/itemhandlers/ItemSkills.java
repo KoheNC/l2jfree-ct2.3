@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable.SkillInfo;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -31,7 +31,7 @@ public final class ItemSkills implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		L2PcInstance activeChar = playable.getActingPlayer();
+		L2Player activeChar = playable.getActingPlayer();
 		boolean isPet = playable instanceof L2PetInstance;
 		
 		if (activeChar.isInOlympiadMode())

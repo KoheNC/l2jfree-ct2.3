@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 
@@ -40,14 +41,14 @@ public class L2EffectPointInstance extends L2Npc
 	 * @param player
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
 	@Override
-	public void onActionShift(L2PcInstance player)
+	public void onActionShift(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}

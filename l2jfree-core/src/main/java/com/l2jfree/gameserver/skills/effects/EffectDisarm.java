@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
@@ -40,10 +40,10 @@ public final class EffectDisarm extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		if (!(getEffected() instanceof L2PcInstance))
+		if (!(getEffected() instanceof L2Player))
 			return false;
 		
-		((L2PcInstance)getEffected()).disarmWeapons(false);
+		((L2Player)getEffected()).disarmWeapons(false);
 		getEffected().setIsDisarmed(true);
 		return true;
 	}

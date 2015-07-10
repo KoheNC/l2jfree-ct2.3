@@ -3,7 +3,7 @@ from com.l2jfree.gameserver.model.quest 				import State
 from com.l2jfree.gameserver.model.quest 				import QuestState
 from com.l2jfree.gameserver.datatables 				import NpcTable
 from com.l2jfree.gameserver.gameobjects.templates 				import L2NpcTemplate
-from com.l2jfree.gameserver.gameobjects.instance		import L2PcInstance
+from com.l2jfree.gameserver.gameobjects		import L2Player
 from com.l2jfree.gameserver.datatables   			import SpawnTable
 from com.l2jfree.gameserver.datatables				import ItemTable
 from com.l2jfree.gameserver.network.packets.server	import RadarControl
@@ -26,7 +26,7 @@ class Quest (JQuest) :
 	def onAdvEvent (self,event,npc,player) :
 
 		def message (text) :
-			return L2PcInstance.sendMessage (player, text)
+			return L2Player.sendMessage (player, text)
 
 	#main sub begin
 		htmltext = "mobinfo.htm"

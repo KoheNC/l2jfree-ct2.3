@@ -19,6 +19,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
@@ -43,14 +44,14 @@ public class L2XmassTreeInstance extends L2Npc
 		@Override
 		public void run()
 		{
-			for (L2PcInstance player : getKnownList().getKnownPlayers().values())
+			for (L2Player player : getKnownList().getKnownPlayers().values())
 			{
 				int i = Rnd.nextInt(3);
 				handleCast(player, (4262 + i));
 			}
 		}
 		
-		private boolean handleCast(L2PcInstance player, int skillId)
+		private boolean handleCast(L2Player player, int skillId)
 		{
 			L2Skill skill = SkillTable.getInstance().getInfo(skillId, 1);
 			

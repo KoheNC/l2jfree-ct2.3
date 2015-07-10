@@ -15,13 +15,13 @@
 package com.l2jfree.gameserver.model;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
- * This class manages requests (transactions) between two L2PcInstance.
+ * This class manages requests (transactions) between two L2Player.
  *
  * @author  kriau
  */
@@ -29,13 +29,13 @@ public class L2Request
 {
 	private static final int REQUEST_TIMEOUT = 15; //in secs
 	
-	protected L2PcInstance _player;
-	protected L2PcInstance _partner;
+	protected L2Player _player;
+	protected L2Player _partner;
 	protected boolean _isRequestor;
 	protected boolean _isAnswerer;
 	protected L2ClientPacket _requestPacket;
 	
-	public L2Request(L2PcInstance player)
+	public L2Request(L2Player player)
 	{
 		_player = player;
 	}
@@ -49,17 +49,17 @@ public class L2Request
 	}
 	
 	/**
-	 * Set the L2PcInstance member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
+	 * Set the L2Player member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
 	 */
-	private synchronized void setPartner(L2PcInstance partner)
+	private synchronized void setPartner(L2Player partner)
 	{
 		_partner = partner;
 	}
 	
 	/**
-	 * Return the L2PcInstance member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
+	 * Return the L2Player member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
 	 */
-	public L2PcInstance getPartner()
+	public L2Player getPartner()
 	{
 		return _partner;
 	}
@@ -83,7 +83,7 @@ public class L2Request
 	/**
 	 * Checks if request can be made and in success case puts both PC on request state.<BR><BR>
 	 */
-	public synchronized boolean setRequest(L2PcInstance partner, L2ClientPacket packet)
+	public synchronized boolean setRequest(L2Player partner, L2ClientPacket packet)
 	{
 		if (partner == null)
 		{

@@ -34,9 +34,9 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaidBossInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
@@ -69,7 +69,7 @@ public class VanHalterManager extends BossLair
 	}
 	
 	// List of intruders.
-	protected Map<Integer, List<L2PcInstance>> _bleedingPlayers = new FastMap<Integer, List<L2PcInstance>>();
+	protected Map<Integer, List<L2Player>> _bleedingPlayers = new FastMap<Integer, List<L2Player>>();
 	
 	// Spawn data of monsters.
 	protected Map<Integer, L2Spawn> _monsterSpawn = new FastMap<Integer, L2Spawn>();
@@ -885,7 +885,7 @@ public class VanHalterManager extends BossLair
 	/**
 	 * @param intruder
 	 */
-	public void intruderDetection(L2PcInstance intruder)
+	public void intruderDetection(L2Player intruder)
 	{
 		if (_lockUpDoorOfAltarTask == null && !_isLocked && _isCaptainSpawned)
 		{
@@ -1043,7 +1043,7 @@ public class VanHalterManager extends BossLair
 		CreatureSay cs =
 				new CreatureSay(0, SystemChatChannelId.Chat_Alliance, "Altar's Gatekeeper",
 						"The door of the 3rd floor in the altar was opened.");
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			pc.sendPacket(cs);
 		}
@@ -1066,10 +1066,10 @@ public class VanHalterManager extends BossLair
 			_timeUpTask.cancel(false);
 		_timeUpTask = ThreadPoolManager.getInstance().scheduleGeneral(new TimeUp(), Config.HPH_FIGHTTIMEOFHALTER);
 		
-		Map<Integer, L2PcInstance> _targets = new FastMap<Integer, L2PcInstance>();
+		Map<Integer, L2Player> _targets = new FastMap<Integer, L2Player>();
 		int i = 0;
 		
-		for (L2PcInstance pc : _vanHalter.getKnownList().getKnownPlayers().values())
+		for (L2Player pc : _vanHalter.getKnownList().getKnownPlayers().values())
 		{
 			i++;
 			_targets.put(i, pc);
@@ -1174,12 +1174,12 @@ public class VanHalterManager extends BossLair
 		{
 			if (tr.isDead())
 				continue;
-			Iterable<L2PcInstance> seen = tr.getKnownList().getKnownPlayersInRadius(tr.getAggroRange());
+			Iterable<L2Player> seen = tr.getKnownList().getKnownPlayersInRadius(tr.getAggroRange());
 			if (!seen.iterator().hasNext())
 				continue;
 			
-			ArrayList<L2PcInstance> bpc = new ArrayList<L2PcInstance>();
-			for (L2PcInstance pc : seen)
+			ArrayList<L2Player> bpc = new ArrayList<L2Player>();
+			for (L2Player pc : seen)
 			{
 				if (!pc.getEffects().hasEffect(bleed))
 				{
@@ -1196,10 +1196,10 @@ public class VanHalterManager extends BossLair
 	
 	public void removeBleeding(int npcId)
 	{
-		List<L2PcInstance> list = _bleedingPlayers.remove(npcId);
+		List<L2Player> list = _bleedingPlayers.remove(npcId);
 		if (list == null)
 			return;
-		for (L2PcInstance pc : list)
+		for (L2Player pc : list)
 			if (pc.getFirstEffect(L2EffectType.DMG_OVER_TIME) != null)
 				pc.stopEffects(L2EffectType.DMG_OVER_TIME);
 	}
@@ -1379,7 +1379,7 @@ public class VanHalterManager extends BossLair
 	{
 		private final int _distance = 6502500;
 		private final int _taskId;
-		private final List<L2PcInstance> _players = getPlayersInside();
+		private final List<L2Player> _players = getPlayersInside();
 		
 		public Movie(int taskId)
 		{
@@ -1399,7 +1399,7 @@ public class VanHalterManager extends BossLair
 					_state.update();
 					
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_vanHalter) <= _distance)
 						{
@@ -1422,7 +1422,7 @@ public class VanHalterManager extends BossLair
 				
 				case 2:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(5)) <= _distance)
 						{
@@ -1445,7 +1445,7 @@ public class VanHalterManager extends BossLair
 				
 				case 3:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(5)) <= _distance)
 						{
@@ -1468,7 +1468,7 @@ public class VanHalterManager extends BossLair
 				
 				case 4:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(4)) <= _distance)
 						{
@@ -1491,7 +1491,7 @@ public class VanHalterManager extends BossLair
 				
 				case 5:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(4)) <= _distance)
 						{
@@ -1514,7 +1514,7 @@ public class VanHalterManager extends BossLair
 				
 				case 6:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(3)) <= _distance)
 						{
@@ -1537,7 +1537,7 @@ public class VanHalterManager extends BossLair
 				
 				case 7:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(3)) <= _distance)
 						{
@@ -1560,7 +1560,7 @@ public class VanHalterManager extends BossLair
 				
 				case 8:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(2)) <= _distance)
 						{
@@ -1583,7 +1583,7 @@ public class VanHalterManager extends BossLair
 				
 				case 9:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(2)) <= _distance)
 						{
@@ -1606,7 +1606,7 @@ public class VanHalterManager extends BossLair
 				
 				case 10:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(1)) <= _distance)
 						{
@@ -1629,7 +1629,7 @@ public class VanHalterManager extends BossLair
 				
 				case 11:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_cameraMarker.get(1)) <= _distance)
 						{
@@ -1652,7 +1652,7 @@ public class VanHalterManager extends BossLair
 				
 				case 12:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_vanHalter) <= _distance)
 						{
@@ -1707,7 +1707,7 @@ public class VanHalterManager extends BossLair
 					deleteRitualOffering();
 					
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_vanHalter) <= _distance)
 						{
@@ -1730,7 +1730,7 @@ public class VanHalterManager extends BossLair
 				
 				case 16:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_vanHalter) <= _distance)
 						{
@@ -1753,7 +1753,7 @@ public class VanHalterManager extends BossLair
 				
 				case 17:
 					// Reset camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						pc.leaveMovieMode();
 					}

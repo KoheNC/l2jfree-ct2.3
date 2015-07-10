@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -25,7 +25,7 @@ public class PartyMemberPosition extends L2ServerPacket
 {
 	private final L2Party _party;
 	
-	public PartyMemberPosition(L2PcInstance actor)
+	public PartyMemberPosition(L2Player actor)
 	{
 		_party = actor.getParty();
 	}
@@ -36,7 +36,7 @@ public class PartyMemberPosition extends L2ServerPacket
 		writeC(0xba);
 		writeD(_party.getMemberCount());
 		
-		for (L2PcInstance pm : _party.getPartyMembers())
+		for (L2Player pm : _party.getPartyMembers())
 		{
 			if (pm == null)
 				continue;

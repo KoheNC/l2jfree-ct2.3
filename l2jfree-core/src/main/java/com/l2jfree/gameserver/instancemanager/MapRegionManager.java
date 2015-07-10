@@ -33,7 +33,7 @@ import org.w3c.dom.Node;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.L2WorldRegion;
@@ -229,7 +229,7 @@ public final class MapRegionManager
 		_log.info("MapRegionManager: Loaded " + redirectCount + " race depending redirects.");
 	}
 	
-	public L2MapRegionRestart getRestartLocation(L2PcInstance activeChar)
+	public L2MapRegionRestart getRestartLocation(L2Player activeChar)
 	{
 		L2MapRegion region = getRegion(activeChar);
 		
@@ -245,7 +245,7 @@ public final class MapRegionManager
 		return _mapRegionRestart.get(restartId);
 	}
 	
-	public Location getRestartPoint(int restartId, L2PcInstance activeChar)
+	public Location getRestartPoint(int restartId, L2Player activeChar)
 	{
 		L2MapRegionRestart restart = _mapRegionRestart.get(restartId);
 		
@@ -255,7 +255,7 @@ public final class MapRegionManager
 		return restart.getRandomRestartPoint(activeChar);
 	}
 	
-	public Location getChaoticRestartPoint(int restartId, L2PcInstance activeChar)
+	public Location getChaoticRestartPoint(int restartId, L2Player activeChar)
 	{
 		L2MapRegionRestart restart = _mapRegionRestart.get(restartId);
 		
@@ -281,7 +281,7 @@ public final class MapRegionManager
 	}
 	
 	//TODO: Needs to be clean rewritten
-	public Location getTeleToLocation(L2PcInstance player, TeleportWhereType teleportWhere)
+	public Location getTeleToLocation(L2Player player, TeleportWhereType teleportWhere)
 	{
 		L2Clan clan = player.getClan();
 		
@@ -455,7 +455,7 @@ public final class MapRegionManager
 	 * @param player a player
 	 * @return L2 region used in partymatching
 	 */
-	public int getL2Region(L2PcInstance player)
+	public int getL2Region(L2Player player)
 	{
 		L2MapRegion region = getRegion(player);
 		int locName = -1;

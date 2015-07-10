@@ -1,7 +1,7 @@
 # author: evill33t
 from com.l2jfree.gameserver.network.packets.server       import NpcSay
 from com.l2jfree.tools.random                           import Rnd
-from com.l2jfree.gameserver.model.itemcontainer         import PcInventory
+from com.l2jfree.gameserver.gameobjects.itemcontainer         import PlayerInventory
 from com.l2jfree.gameserver.model                       import L2ItemInstance
 from com.l2jfree.gameserver.network.packets.server       import InventoryUpdate
 from com.l2jfree.gameserver.model                       import L2World

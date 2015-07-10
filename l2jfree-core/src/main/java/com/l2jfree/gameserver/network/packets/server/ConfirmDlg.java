@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
@@ -70,13 +70,13 @@ public final class ConfirmDlg extends AbstractSystemMessage<ConfirmDlg>
 	}
 	
 	@Override
-	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2Player activeChar)
 	{
 		return activeChar != null && _answerHandler != null;
 	}
 	
 	@Override
-	public void prepareToSend(L2Client client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2Player activeChar)
 	{
 		activeChar.setAnswerHandler(_answerHandler);
 	}

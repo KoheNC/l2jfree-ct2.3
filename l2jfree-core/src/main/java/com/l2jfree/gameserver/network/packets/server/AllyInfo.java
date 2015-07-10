@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -29,7 +29,7 @@ public final class AllyInfo extends L2ServerPacket
 	{
 	}
 	
-	public static void sendAllyInfo(final L2PcInstance activeChar)
+	public static void sendAllyInfo(final L2Player activeChar)
 	{
 		if (activeChar == null)
 			return;

@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -100,9 +100,9 @@ public class L2SkillSummon extends L2Skill
 	@Override
 	public boolean checkCondition(L2Creature activeChar, L2Object target)
 	{
-		if (activeChar instanceof L2PcInstance)
+		if (activeChar instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)activeChar;
+			L2Player player = (L2Player)activeChar;
 			if (isCubic())
 			{
 				// Player is always able to cast mass cubic skill
@@ -138,10 +138,10 @@ public class L2SkillSummon extends L2Skill
 	@Override
 	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
-		if (caster.isAlikeDead() || !(caster instanceof L2PcInstance))
+		if (caster.isAlikeDead() || !(caster instanceof L2Player))
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)caster;
+		L2Player activeChar = (L2Player)caster;
 		
 		if (_npcId == 0)
 		{
@@ -155,9 +155,9 @@ public class L2SkillSummon extends L2Skill
 			{
 				for (L2Creature obj : targets)
 				{
-					if (!(obj instanceof L2PcInstance))
+					if (!(obj instanceof L2Player))
 						continue;
-					L2PcInstance player = ((L2PcInstance)obj);
+					L2Player player = ((L2Player)obj);
 					int mastery = player.getSkillLevel(L2Skill.SKILL_CUBIC_MASTERY);
 					if (mastery < 0)
 						mastery = 0;

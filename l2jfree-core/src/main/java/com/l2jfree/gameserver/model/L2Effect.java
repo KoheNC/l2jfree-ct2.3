@@ -23,8 +23,8 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.effects.CreatureEffects;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -128,11 +128,11 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	@SuppressWarnings("deprecation")
 	private synchronized void startEffect()
 	{
-		if (_skill.isPvpSkill() && getShowIcon() && _effected instanceof L2PcInstance)
+		if (_skill.isPvpSkill() && getShowIcon() && _effected instanceof L2Player)
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT);
 			sm.addSkillName(this);
-			((L2PcInstance)_effected).sendPacket(sm);
+			((L2Player)_effected).sendPacket(sm);
 		}
 		
 		scheduleEffect(_period);
@@ -245,10 +245,10 @@ public abstract class L2Effect implements FuncOwner, Runnable
 				_effected.startSpecialEffect(_template.specialEffect);
 			}
 			
-			if (_effected instanceof L2PcInstance && ShortBuffStatusUpdate.isShortBuff(L2Effect.this))
+			if (_effected instanceof L2Player && ShortBuffStatusUpdate.isShortBuff(L2Effect.this))
 			{
 				// short buff icon for healing potions
-				((L2PcInstance)_effected).startShortBuffStatusUpdate(L2Effect.this);
+				((L2Player)_effected).startShortBuffStatusUpdate(L2Effect.this);
 			}
 			else if (_effected instanceof L2Playable)
 				((L2Playable)_effected).updateEffectIcons();
@@ -292,10 +292,10 @@ public abstract class L2Effect implements FuncOwner, Runnable
 			
 			_startConditionsCorrect = false;
 			
-			if (_effected instanceof L2PcInstance && ShortBuffStatusUpdate.isShortBuff(L2Effect.this))
+			if (_effected instanceof L2Player && ShortBuffStatusUpdate.isShortBuff(L2Effect.this))
 			{
 				// short buff icon for healing potions
-				((L2PcInstance)_effected).stopShortBuffStatusUpdate(L2Effect.this);
+				((L2Player)_effected).stopShortBuffStatusUpdate(L2Effect.this);
 			}
 			else if (_effected instanceof L2Playable)
 				((L2Playable)_effected).updateEffectIcons();
@@ -390,7 +390,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 			{
 				if (isActing())
 				{
-					if (getShowIcon() && shouldSendExitMessage() && _effected instanceof L2PcInstance)
+					if (getShowIcon() && shouldSendExitMessage() && _effected instanceof L2Player)
 					{
 						SystemMessage sm;
 						if (getCount() == 0)
@@ -401,7 +401,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 							sm = new SystemMessage(SystemMessageId.EFFECT_S1_DISAPPEARED);
 						sm.addSkillName(this);
 						
-						((L2PcInstance)_effected).sendPacket(sm);
+						((L2Player)_effected).sendPacket(sm);
 					}
 					
 					_currentFuture.cancel(false);
@@ -424,7 +424,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	
 	private boolean shouldSendExitMessage()
 	{
-		if (!(_effected instanceof L2PcInstance))
+		if (!(_effected instanceof L2Player))
 			return false;
 		
 		final L2Effect e = _effected.getFirstEffect(getId());

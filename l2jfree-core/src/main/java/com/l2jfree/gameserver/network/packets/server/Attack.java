@@ -18,7 +18,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -57,7 +57,7 @@ public final class Attack extends L2ServerPacket
 			if (crit)
 				flags |= HITFLAG_CRIT;
 			// dirty fix for lags on olympiad
-			if (shld > 0 && !(target instanceof L2PcInstance && ((L2PcInstance)target).isInOlympiadMode()))
+			if (shld > 0 && !(target instanceof L2Player && ((L2Player)target).isInOlympiadMode()))
 				flags |= HITFLAG_SHLD;
 			return flags;
 		}

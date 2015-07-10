@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.model.base.ClassId;
 import com.l2jfree.gameserver.templates.StatsSet;
 
@@ -60,7 +60,7 @@ public class CharTemplateTable
 			"Female Soulbreaker", "Arbalester", "Doombringer", "Male Soulhound", "Female Soulhound", "Trickster",
 			"Inspector", "Judicator" };
 	
-	private final L2PcTemplate[] _templates = new L2PcTemplate[ClassId.values().length];
+	private final L2PlayerTemplate[] _templates = new L2PlayerTemplate[ClassId.values().length];
 	
 	public static CharTemplateTable getInstance()
 	{
@@ -124,14 +124,14 @@ public class CharTemplateTable
 				set.set("spawnZ", rset.getInt("z"));
 				*/
 				
-				L2PcTemplate ct;
+				L2PlayerTemplate ct;
 				
 				set.set("collision_radius", rset.getDouble("m_col_r"));
 				set.set("collision_height", rset.getDouble("m_col_h"));
 				// Add-on for females
 				set.set("fcollision_radius", rset.getDouble("f_col_r"));
 				set.set("fcollision_height", rset.getDouble("f_col_h"));
-				ct = new L2PcTemplate(set);
+				ct = new L2PlayerTemplate(set);
 				
 				_templates[ct.getClassId().getId()] = ct;
 				size++;
@@ -167,7 +167,7 @@ public class CharTemplateTable
 				{
 					if (classId == -1)
 					{
-						for (L2PcTemplate pct : _templates)
+						for (L2PlayerTemplate pct : _templates)
 						{
 							if (pct == null)
 								continue;
@@ -177,7 +177,7 @@ public class CharTemplateTable
 					}
 					else
 					{
-						L2PcTemplate pct = _templates[classId];
+						L2PlayerTemplate pct = _templates[classId];
 						if (pct != null)
 						{
 							pct.addItem(itemId, amount, equipped);
@@ -206,12 +206,12 @@ public class CharTemplateTable
 		}
 	}
 	
-	public L2PcTemplate getTemplate(ClassId classId)
+	public L2PlayerTemplate getTemplate(ClassId classId)
 	{
 		return getTemplate(classId.getId());
 	}
 	
-	public L2PcTemplate getTemplate(int classId)
+	public L2PlayerTemplate getTemplate(int classId)
 	{
 		if (classId < 0 || classId >= _templates.length)
 			return null;

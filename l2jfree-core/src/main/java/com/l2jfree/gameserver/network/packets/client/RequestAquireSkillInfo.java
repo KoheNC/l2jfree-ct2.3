@@ -19,8 +19,8 @@ import com.l2jfree.gameserver.datatables.SkillSpellbookTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2TransformManagerInstance;
 import com.l2jfree.gameserver.model.L2CertificationSkillsLearn;
 import com.l2jfree.gameserver.model.L2PledgeSkillLearn;
@@ -62,7 +62,7 @@ public class RequestAquireSkillInfo extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		final L2PcInstance activeChar = getClient().getActiveChar();
+		final L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		

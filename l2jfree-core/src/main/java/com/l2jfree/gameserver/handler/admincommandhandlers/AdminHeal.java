@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 
@@ -30,7 +30,7 @@ public class AdminHeal implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_heal" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_heal"))
 		{
@@ -55,7 +55,7 @@ public class AdminHeal implements IAdminCommandHandler
 				}
 				catch (NumberFormatException e)
 				{
-					L2PcInstance target = L2World.getInstance().getPlayer(val);
+					L2Player target = L2World.getInstance().getPlayer(val);
 					
 					if (target != null)
 						handleHeal(target);
@@ -78,7 +78,7 @@ public class AdminHeal implements IAdminCommandHandler
 	private void handleHeal(L2Creature target)
 	{
 		target.getStatus().setCurrentHpMp(target.getMaxHp(), target.getMaxMp());
-		if (target instanceof L2PcInstance)
+		if (target instanceof L2Player)
 			target.getStatus().setCurrentCp(target.getMaxCp());
 	}
 }

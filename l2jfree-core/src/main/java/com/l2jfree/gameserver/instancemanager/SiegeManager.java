@@ -33,9 +33,9 @@ import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2ArtefactInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -65,7 +65,7 @@ public class SiegeManager
 		loadTowerArtefacts();
 	}
 	
-	public final void addSiegeSkills(L2PcInstance character)
+	public final void addSiegeSkills(L2Player character)
 	{
 		for (L2Skill sk : SkillTable.getInstance().getSiegeSkills(character.isNoble()))
 			character.addSkill(sk, false);
@@ -87,12 +87,12 @@ public class SiegeManager
 	 * Return true if character can place a flag<BR><BR>
 	 * 
 	 * @param player
-	 *            The L2PcInstance of the character placing the flag
+	 *            The L2Player of the character placing the flag
 	 * @param isCheckOnly
 	 *            if false, it will send a notification to the player telling
 	 *            him why it failed
 	 */
-	public static boolean checkIfOkToPlaceFlag(L2PcInstance player, boolean isCheckOnly)
+	public static boolean checkIfOkToPlaceFlag(L2Player player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		L2Clan clan = player.getClan();
@@ -121,9 +121,9 @@ public class SiegeManager
 	 * Return true if character can summon<BR><BR>
 	 * 
 	 * @param player
-	 *            The L2PcInstance of the character can summon
+	 *            The L2Player of the character can summon
 	 */
-	public final boolean checkIfOkToSummon(L2PcInstance player, boolean isCheckOnly)
+	public final boolean checkIfOkToSummon(L2Player player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		Siege siege = SiegeManager.getInstance().getSiege(player);
@@ -156,7 +156,7 @@ public class SiegeManager
 	 *            if false, it will send a notification to the player telling
 	 *            him why it failed
 	 */
-	public static boolean checkIfOkToUseStriderSiegeAssault(L2PcInstance player, boolean isCheckOnly)
+	public static boolean checkIfOkToUseStriderSiegeAssault(L2Player player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		Siege siege = SiegeManager.getInstance().getSiege(player);
@@ -181,11 +181,11 @@ public class SiegeManager
 	
 	public boolean checkIfOkToCastSealOfRule(L2Creature activeChar, Castle castle)
 	{
-		if (activeChar == null || !(activeChar instanceof L2PcInstance))
+		if (activeChar == null || !(activeChar instanceof L2Player))
 			return false;
 		
 		SystemMessageId sm = null;
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		if (castle == null || castle.getCastleId() <= 0 || castle.getSiege().getAttackerClan(player.getClan()) == null)
 			sm = SystemMessageId.YOU_ARE_NOT_IN_SIEGE;
@@ -252,7 +252,7 @@ public class SiegeManager
 		return register;
 	}
 	
-	public final void removeSiegeSkills(L2PcInstance character)
+	public final void removeSiegeSkills(L2Player character)
 	{
 		for (L2Skill sk : SkillTable.getInstance().getSiegeSkills(character.isNoble()))
 			character.removeSkill(sk);

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.model.entity.Duel;
 public final class DuelRestriction extends AbstractRestriction
 {
 	@Override
-	public boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		if (activeChar.isInDuel())
 		{
@@ -40,7 +40,7 @@ public final class DuelRestriction extends AbstractRestriction
 	
 	@Override
 	@DisabledRestriction
-	public boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target)
+	public boolean canInviteToParty(L2Player activeChar, L2Player target)
 	{
 		if (activeChar.isInDuel() || target.isInDuel())
 			return false;
@@ -50,13 +50,13 @@ public final class DuelRestriction extends AbstractRestriction
 	
 	@Override
 	public boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
+			L2Player attacker_, L2Player target_, boolean isOffensive)
 	{
 		return Duel.isInvul(target, activeChar);
 	}
 	
 	@Override
-	public boolean canTeleport(L2PcInstance activeChar)
+	public boolean canTeleport(L2Player activeChar)
 	{
 		// Check to see if player is in a duel
 		if (activeChar.isInDuel())
@@ -74,7 +74,7 @@ public final class DuelRestriction extends AbstractRestriction
 		// Let the duel manager know about it, to remove it after the duel
 		// so the debuff can be removed after the duel
 		// (player & target must be in the same duel)
-		L2PcInstance effectedPlayer = effect.getEffected().getActingPlayer();
+		L2Player effectedPlayer = effect.getEffected().getActingPlayer();
 		
 		if (effectedPlayer == null || !effectedPlayer.isInDuel() || !effect.getSkill().isOffensive())
 			return;

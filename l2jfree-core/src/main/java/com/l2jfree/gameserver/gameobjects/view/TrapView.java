@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.L2Trap;
 /**
  * @author NB4L1
  */
-public final class TrapView extends CharView<L2Trap> implements NpcLikeView
+public final class TrapView extends CreatureView<L2Trap> implements INpcView
 {
 	public TrapView(L2Trap activeChar)
 	{

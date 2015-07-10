@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.Formulas;
@@ -63,7 +63,7 @@ public class CpDam implements ISkillHandler
 			
 			if (target.isAlikeDead())
 			{
-				if (activeChar instanceof L2PcInstance && target instanceof L2PcInstance && target.isFakeDeath())
+				if (activeChar instanceof L2Player && target instanceof L2Player && target.isFakeDeath())
 					target.stopFakeDeath(true);
 				else
 					continue;

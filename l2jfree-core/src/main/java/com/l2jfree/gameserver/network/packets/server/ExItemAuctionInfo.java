@@ -27,9 +27,9 @@ public final class ExItemAuctionInfo extends L2ServerPacket
 		private final AuctionInfo _auction;
 
 		// Just an example constructor
-		public ExItemAuctionInfo(L2PcInstance player)
+		public ExItemAuctionInfo(L2Player player)
 		{
-			L2ItemInstance chest = player.getInventory().getPaperdollItem(PcInventory.PAPERDOLL_CHEST);
+			L2ItemInstance chest = player.getInventory().getPaperdollItem(PlayerInventory.PAPERDOLL_CHEST);
 			_auction = new AuctionInfo(chest, 1, 25000000);
 		}
 

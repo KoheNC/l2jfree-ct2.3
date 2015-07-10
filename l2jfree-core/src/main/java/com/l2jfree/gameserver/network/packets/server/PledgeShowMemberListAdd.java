@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -34,7 +34,7 @@ public class PledgeShowMemberListAdd extends L2ServerPacket
 	private final int _sex;
 	private final int _race;
 	
-	public PledgeShowMemberListAdd(L2PcInstance player)
+	public PledgeShowMemberListAdd(L2Player player)
 	{
 		_name = player.getName();
 		_lvl = player.getLevel();

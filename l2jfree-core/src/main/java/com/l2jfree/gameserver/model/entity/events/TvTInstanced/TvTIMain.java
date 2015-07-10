@@ -30,8 +30,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.L2World;
@@ -74,11 +74,11 @@ public class TvTIMain
 			_announceName = "TvTi";
 		
 		CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Hero, _announceName, announce);
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 			player.sendPacket(cs);
 	}
 	
-	public static void startJoin(L2PcInstance activeChar)
+	public static void startJoin(L2Player activeChar)
 	{
 		if (!canStart())
 		{
@@ -140,7 +140,7 @@ public class TvTIMain
 		return true;
 	}
 	
-	private static void spawnEventNpc(L2PcInstance activeChar)
+	private static void spawnEventNpc(L2Player activeChar)
 	{
 		L2NpcTemplate tmpl = NpcTable.getInstance().getTemplate(_npcId);
 		
@@ -199,7 +199,7 @@ public class TvTIMain
 		}, Config.TVTI_JOIN_NPC_DO_SKILL_AGAIN);
 	}
 	
-	public static void showEventHtml(L2PcInstance eventPlayer, String objectId)
+	public static void showEventHtml(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -262,7 +262,7 @@ public class TvTIMain
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order
+			// Send a Server->Client ActionFailed to the L2Player in order
 			// to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
@@ -272,7 +272,7 @@ public class TvTIMain
 		}
 	}
 	
-	public static void showInstancesHtml(L2PcInstance eventPlayer, String objectId)
+	public static void showInstancesHtml(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -321,7 +321,7 @@ public class TvTIMain
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order
+			// Send a Server->Client ActionFailed to the L2Player in order
 			// to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
@@ -331,7 +331,7 @@ public class TvTIMain
 		}
 	}
 	
-	public synchronized static void addDisconnectedPlayer(L2PcInstance player)
+	public synchronized static void addDisconnectedPlayer(L2Player player)
 	{
 		if (Config.TVTI_ON_START_REMOVE_ALL_EFFECTS)
 			player.stopAllEffects();
@@ -340,7 +340,7 @@ public class TvTIMain
 		{
 			if (i.isJoining())
 			{
-				for (L2PcInstance p : i.getPlayers())
+				for (L2Player p : i.getPlayers())
 				{
 					if (p == null)
 						continue;
@@ -357,7 +357,7 @@ public class TvTIMain
 			}
 			
 			for (TvTITeam t : i.getTeams())
-				for (L2PcInstance p : t.getPlayers())
+				for (L2Player p : t.getPlayers())
 				{
 					if (p == null)
 						continue;
@@ -393,7 +393,7 @@ public class TvTIMain
 		_isNpcSpawned = false;
 	}
 	
-	public static void removePlayer(L2PcInstance player)
+	public static void removePlayer(L2Player player)
 	{
 		for (TVTInstance i : _instances)
 			if (i.getPlayers().contains(player))
@@ -419,9 +419,9 @@ public class TvTIMain
 	 *            3 = You have been kicked from event because you have obtained
 	 *            a cursed weapon!<br>
 	 */
-	public static void kickPlayerFromEvent(L2PcInstance player, int reason)
+	public static void kickPlayerFromEvent(L2Player player, int reason)
 	{
-		L2PcInstance p = null;
+		L2Player p = null;
 		
 		for (TVTInstance i : _instances)
 		{
@@ -473,7 +473,7 @@ public class TvTIMain
 		}
 	}
 	
-	public static void addKill(L2PcInstance player)
+	public static void addKill(L2Player player)
 	{
 		for (TVTInstance i : _instances)
 			for (TvTITeam t : i.getTeams())
@@ -481,7 +481,7 @@ public class TvTIMain
 					t.setTeamScore(t.getTeamScore() + 1);
 	}
 	
-	public static void removePoint(L2PcInstance player)
+	public static void removePoint(L2Player player)
 	{
 		for (TVTInstance i : _instances)
 			for (TvTITeam t : i.getTeams())
@@ -489,7 +489,7 @@ public class TvTIMain
 					t.setTeamScore(t.getTeamScore() - 1);
 	}
 	
-	public static boolean checkSameTeam(L2PcInstance target, L2PcInstance player)
+	public static boolean checkSameTeam(L2Player target, L2Player player)
 	{
 		for (TVTInstance i : _instances)
 			for (TvTITeam t : i.getTeams())
@@ -498,7 +498,7 @@ public class TvTIMain
 		return false;
 	}
 	
-	public static void respawnPlayer(final L2PcInstance player)
+	public static void respawnPlayer(final L2Player player)
 	{
 		player.sendMessage("You will be revived and teleported to spot in " + Config.TVTI_REVIVE_DELAY / 1000
 				+ " seconds!");
@@ -536,7 +536,7 @@ public class TvTIMain
 		}, Config.TVTI_REVIVE_DELAY);
 	}
 	
-	public static void addPlayer(L2PcInstance player, int instanceId)
+	public static void addPlayer(L2Player player, int instanceId)
 	{
 		if (GlobalRestrictions.isRestricted(player, TvTiRestriction.class))
 		{
@@ -557,13 +557,13 @@ public class TvTIMain
 			}
 	}
 	
-	public static boolean isPlayerInList(L2PcInstance player)
+	public static boolean isPlayerInList(L2Player player)
 	{
 		for (TVTInstance i : getInstances())
 		{
 			if (i.isJoining())
 			{
-				for (L2PcInstance eventPlayer : i.getPlayers())
+				for (L2Player eventPlayer : i.getPlayers())
 				{
 					if (eventPlayer.getName().equals(player.getName()))
 						return true;
@@ -573,7 +573,7 @@ public class TvTIMain
 			{
 				for (TvTITeam t : i.getTeams())
 				{
-					for (L2PcInstance eventPlayer : t.getPlayers())
+					for (L2Player eventPlayer : t.getPlayers())
 					{
 						if (eventPlayer.getName().equals(player.getName()))
 							return true;
@@ -622,7 +622,7 @@ public class TvTIMain
 		return true;
 	}
 	
-	public static boolean levelIncreased(L2PcInstance player)
+	public static boolean levelIncreased(L2Player player)
 	{
 		for (TVTInstance i : _instances)
 		{
@@ -728,7 +728,7 @@ public class TvTIMain
 		_npcZ = locZ;
 	}
 	
-	public static void setSpawn(L2PcInstance activeChar)
+	public static void setSpawn(L2Player activeChar)
 	{
 		_npcX = activeChar.getX();
 		_npcY = activeChar.getY();

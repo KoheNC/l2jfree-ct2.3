@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -22,15 +22,15 @@ public class PartySmallWindowAdd extends L2ServerPacket
 {
 	private static final String _S__4F_PARTYSMALLWINDOWADD = "[S] 4f PartySmallWindowAdd [dddsdddddddddd]";
 	
-	private final L2PcInstance _member;
+	private final L2Player _member;
 	
-	public PartySmallWindowAdd(L2PcInstance member)
+	public PartySmallWindowAdd(L2Player member)
 	{
 		_member = member;
 	}
 	
 	@Override
-	protected final void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected final void writeImpl(L2Client client, L2Player activeChar)
 	{
 		if (activeChar == null)
 			return;

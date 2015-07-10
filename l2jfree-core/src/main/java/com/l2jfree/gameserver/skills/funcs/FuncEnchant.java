@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.funcs;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.skills.Stats;
@@ -38,7 +38,7 @@ public final class FuncEnchant extends Func
 		int enchant = item.getEnchantLevel();
 		
 		if (Config.ALT_OLY_ENCHANT_LIMIT >= 0)
-			if (env.player instanceof L2PcInstance && ((L2PcInstance)env.player).isInOlympiadMode())
+			if (env.player instanceof L2Player && ((L2Player)env.player).isInOlympiadMode())
 				enchant = Math.min(Config.ALT_OLY_ENCHANT_LIMIT, enchant);
 		
 		if (enchant > 0)

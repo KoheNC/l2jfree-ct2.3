@@ -19,6 +19,7 @@ import java.util.concurrent.Future;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.SummonStatus;
@@ -46,7 +47,7 @@ public class L2SummonInstance extends L2Summon
 	private Future<?> _summonConsumeTask;
 	private static int _lifeTime = SUMMON_LIFETIME_INTERVAL; // summon life time for life scale bar
 	
-	public L2SummonInstance(int objectId, L2NpcTemplate template, L2PcInstance owner, L2SkillSummon skill)
+	public L2SummonInstance(int objectId, L2NpcTemplate template, L2Player owner, L2SkillSummon skill)
 	{
 		super(objectId, template, owner);
 		setShowSummonAnimation(true);
@@ -206,10 +207,10 @@ public class L2SummonInstance extends L2Summon
 	
 	static class SummonConsume implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		private final L2SummonInstance _summon;
 		
-		SummonConsume(L2PcInstance activeChar, L2SummonInstance newpet)
+		SummonConsume(L2Player activeChar, L2SummonInstance newpet)
 		{
 			_activeChar = activeChar;
 			_summon = newpet;
@@ -286,7 +287,7 @@ public class L2SummonInstance extends L2Summon
 	}
 	
 	@Override
-	public void unSummon(L2PcInstance owner)
+	public void unSummon(L2Player owner)
 	{
 		if (_log.isDebugEnabled())
 			_log.warn("L2SummonInstance: " + getTemplate().getName() + " (" + owner.getName() + ") unsummoned.");

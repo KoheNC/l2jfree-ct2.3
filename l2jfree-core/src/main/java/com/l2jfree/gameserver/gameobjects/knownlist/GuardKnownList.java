@@ -18,11 +18,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2GuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
 public class GuardKnownList extends AttackableKnownList
@@ -47,10 +47,10 @@ public class GuardKnownList extends AttackableKnownList
 		if (!super.addKnownObject(object))
 			return false;
 		
-		if (object instanceof L2PcInstance)
+		if (object instanceof L2Player)
 		{
-			// Check if the object added is a L2PcInstance that owns Karma
-			L2PcInstance player = (L2PcInstance)object;
+			// Check if the object added is a L2Player that owns Karma
+			L2Player player = (L2Player)object;
 			
 			if ((player.getKarma() > 0))
 			{

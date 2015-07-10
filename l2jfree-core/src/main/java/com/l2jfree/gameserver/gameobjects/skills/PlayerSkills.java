@@ -30,23 +30,23 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.util.LookupTable;
 
-public final class PcSkills
+public final class PlayerSkills
 {
-	private static final Log _log = LogFactory.getLog(PcSkills.class);
+	private static final Log _log = LogFactory.getLog(PlayerSkills.class);
 	
 	private final LookupTable<SkillMap> _storedSkills = new LookupTable<SkillMap>();
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	
-	public PcSkills(L2PcInstance owner)
+	public PlayerSkills(L2Player owner)
 	{
 		_owner = owner;
 	}
 	
-	private L2PcInstance getOwner()
+	private L2Player getOwner()
 	{
 		return _owner;
 	}

@@ -29,12 +29,12 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.DoorTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -176,7 +176,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 						dbSave(newfc);
 						if (_cwh)
 						{
-							getOwnerClan().getWarehouse().destroyItemByItemId("CH_function_fee", PcInventory.ADENA_ID,
+							getOwnerClan().getWarehouse().destroyItemByItemId("CH_function_fee", PlayerInventory.ADENA_ID,
 									fee, null, null);
 							if (_log.isDebugEnabled())
 								_log.warn("deducted " + fee + " adena from " + getName()
@@ -414,7 +414,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 	}
 	
 	/** Open or Close Door */
-	public void openCloseDoor(L2PcInstance activeChar, int doorId, boolean open)
+	public void openCloseDoor(L2Player activeChar, int doorId, boolean open)
 	{
 		if (activeChar != null && activeChar.getClanId() == getOwnerId())
 			openCloseDoor(doorId, open);
@@ -436,7 +436,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 		}
 	}
 	
-	public void openCloseDoors(L2PcInstance activeChar, boolean open)
+	public void openCloseDoors(L2Player activeChar, boolean open)
 	{
 		if (activeChar != null && activeChar.getClanId() == getOwnerId())
 			openCloseDoors(open);
@@ -457,7 +457,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 	}
 	
 	@Override
-	public boolean checkBanish(L2PcInstance cha)
+	public boolean checkBanish(L2Player cha)
 	{
 		return cha.getClanId() != getOwnerId();
 	}
@@ -518,7 +518,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 		}
 	}
 	
-	public boolean updateFunctions(L2PcInstance player, int type, int lvl, int lease, long rate, boolean addNew)
+	public boolean updateFunctions(L2Player player, int type, int lvl, int lease, long rate, boolean addNew)
 	{
 		if (player == null)
 			return false;
@@ -529,7 +529,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 		
 		if (lease > 0)
 		{
-			if (!player.destroyItemByItemId("Consume", PcInventory.ADENA_ID, lease, null, true))
+			if (!player.destroyItemByItemId("Consume", PlayerInventory.ADENA_ID, lease, null, true))
 				return false;
 		}
 		
@@ -634,7 +634,7 @@ public class ClanHall extends Siegeable<CCHSiege>
 					else
 						_paidUntil = System.currentTimeMillis() + _chRate;
 					
-					getOwnerClan().getWarehouse().destroyItemByItemId("CH_rental_fee", PcInventory.ADENA_ID,
+					getOwnerClan().getWarehouse().destroyItemByItemId("CH_rental_fee", PlayerInventory.ADENA_ID,
 							getLease(), null, null);
 					if (_log.isDebugEnabled())
 						_log.warn("deducted " + getLease() + " adena from " + getName()

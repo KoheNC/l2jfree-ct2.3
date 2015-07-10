@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.model.L2RecipeList;
@@ -28,11 +28,11 @@ public class RecipeShopManageList extends L2ServerPacket
 {
 	
 	private static final String _S__D8_RecipeShopManageList = "[S] de RecipeShopManageList";
-	private final L2PcInstance _seller;
+	private final L2Player _seller;
 	private final boolean _isDwarven;
 	private L2RecipeList[] _recipes;
 	
-	public RecipeShopManageList(L2PcInstance seller, boolean isDwarven)
+	public RecipeShopManageList(L2Player seller, boolean isDwarven)
 	{
 		_seller = seller;
 		_isDwarven = isDwarven;

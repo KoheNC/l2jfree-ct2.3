@@ -22,6 +22,7 @@ import javolution.util.FastMap;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Multisell;
@@ -51,7 +52,7 @@ public class L2OlympiadManagerInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("OlympiadDesc"))
 		{
@@ -278,7 +279,7 @@ public class L2OlympiadManagerInstance extends L2Npc
 			super.onBypassFeedback(player, command);
 	}
 	
-	private void showChatWindow(L2PcInstance player, int val, String suffix)
+	private void showChatWindow(L2Player player, int val, String suffix)
 	{
 		String filename = Olympiad.OLYMPIAD_HTML_PATH;
 		

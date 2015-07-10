@@ -18,8 +18,8 @@ import java.util.Map;
 
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.quest.Quest;
@@ -64,7 +64,7 @@ public class DrChaos extends Quest
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.equalsIgnoreCase("1"))
 		{
@@ -110,7 +110,7 @@ public class DrChaos extends Quest
 	}
 	
 	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	public String onFirstTalk(L2Npc npc, L2Player player)
 	{
 		if (npc.getNpcId() == DOCTER_CHAOS)
 		{

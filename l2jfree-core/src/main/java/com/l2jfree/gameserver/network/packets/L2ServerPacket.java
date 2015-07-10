@@ -20,10 +20,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.Elementals;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.mmocore.network.SendablePacket;
@@ -45,11 +45,11 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 		writeImpl(client, client.getActiveChar());
 	}
 	
-	public void prepareToSend(L2Client client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2Player activeChar)
 	{
 	}
 	
-	public void packetSent(L2Client client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2Player activeChar)
 	{
 	}
 	
@@ -57,12 +57,12 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 	{
 	}
 	
-	protected void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2Player activeChar)
 	{
 		writeImpl();
 	}
 	
-	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2Player activeChar)
 	{
 		return true;
 	}
@@ -103,7 +103,7 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 		}
 	}
 	
-	protected final void writePlayerElementAttribute(L2PcInstance player)
+	protected final void writePlayerElementAttribute(L2Player player)
 	{
 		byte attackAttribute = player.getAttackElement();
 		writeCompH(attackAttribute);
@@ -162,19 +162,19 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 		return slots.toNativeArray();
 	}
 	
-	protected final void writePaperdollObjectIds(PcInventory inv, boolean writeJewels)
+	protected final void writePaperdollObjectIds(PlayerInventory inv, boolean writeJewels)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(writeJewels))
 			writeD(inv.getPaperdollObjectId(slot));
 	}
 	
-	protected final void writePaperdollItemDisplayIds(PcInventory inv, boolean writeJewels)
+	protected final void writePaperdollItemDisplayIds(PlayerInventory inv, boolean writeJewels)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(writeJewels))
 			writeD(inv.getPaperdollItemDisplayId(slot));
 	}
 	
-	protected final void writePaperdollAugmentationIds(PcInventory inv, boolean writeJewels)
+	protected final void writePaperdollAugmentationIds(PlayerInventory inv, boolean writeJewels)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(writeJewels))
 			writeD(inv.getPaperdollAugmentationId(slot));

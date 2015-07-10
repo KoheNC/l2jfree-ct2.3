@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.server.SSQStatus;
@@ -29,9 +29,9 @@ public class SevenSignsRecord implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (playable instanceof L2PcInstance)
+		if (playable instanceof L2Player)
 		{
-			L2PcInstance player = playable.getActingPlayer();
+			L2Player player = playable.getActingPlayer();
 			player.sendPacket(new SSQStatus(player, 1));
 		}
 	}

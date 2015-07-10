@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.events.CTF;
 import com.l2jfree.gameserver.model.entity.events.CTF.CTFPlayerInfo;
 
@@ -84,20 +84,20 @@ public final class CTFRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	boolean teamEquals(L2PcInstance participant1, L2PcInstance participant2)
+	boolean teamEquals(L2Player participant1, L2Player participant2)
 	{
 		return participant1.as(CTFPlayerInfo.class)._teamNameCTF
 				.equals(participant2.as(CTFPlayerInfo.class)._teamNameCTF);
 	}
 	
 	@Override
-	boolean isInFunEvent(L2PcInstance player)
+	boolean isInFunEvent(L2Player player)
 	{
 		return player.isInEvent(CTFPlayerInfo.class);
 	}
 	
 	@Override
-	public int getNameColor(L2PcInstance activeChar)
+	public int getNameColor(L2Player activeChar)
 	{
 		CTFPlayerInfo info = activeChar.getPlayerInfo(CTFPlayerInfo.class);
 		
@@ -105,7 +105,7 @@ public final class CTFRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public void levelChanged(L2PcInstance activeChar)
+	public void levelChanged(L2Player activeChar)
 	{
 		if (activeChar.isInEvent(CTFPlayerInfo.class) && CTF._maxlvl == activeChar.getLevel() && !CTF._started)
 		{
@@ -116,14 +116,14 @@ public final class CTFRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public void playerLoggedIn(L2PcInstance activeChar)
+	public void playerLoggedIn(L2Player activeChar)
 	{
 		if (CTF._savePlayers.contains(activeChar.getName()))
 			CTF.addDisconnectedPlayer(activeChar);
 	}
 	
 	@Override
-	public boolean playerKilled(L2Creature activeChar, final L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, final L2Player target, L2Player killer)
 	{
 		final CTFPlayerInfo targetInfo = target.getPlayerInfo(CTFPlayerInfo.class);
 		
@@ -164,7 +164,7 @@ public final class CTFRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean onBypassFeedback(L2Npc npc, L2PcInstance activeChar, String command)
+	public boolean onBypassFeedback(L2Npc npc, L2Player activeChar, String command)
 	{
 		if (command.startsWith("ctf_player_join "))
 		{
@@ -187,7 +187,7 @@ public final class CTFRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean onAction(L2Npc npc, L2PcInstance activeChar)
+	public boolean onAction(L2Npc npc, L2Player activeChar)
 	{
 		if (npc._isEventMobCTF)
 		{

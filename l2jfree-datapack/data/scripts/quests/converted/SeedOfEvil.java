@@ -15,9 +15,9 @@
 package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -49,7 +49,7 @@ public final class SeedOfEvil extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		QuestState qs = player.getQuestState(SEED_OF_EVIL);
 		if (qs.isCompleted())
@@ -66,7 +66,7 @@ public final class SeedOfEvil extends QuestJython
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
@@ -84,10 +84,10 @@ public final class SeedOfEvil extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		npc.broadcastPacket(new NpcSay(npc, NERKAS_KILLED));
-		L2PcInstance quester = killer/*npc.getQuestFirstAttacker()*/;
+		L2Player quester = killer/*npc.getQuestFirstAttacker()*/;
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(SEED_OF_EVIL);
@@ -105,7 +105,7 @@ public final class SeedOfEvil extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		QuestState qs = talker.getQuestState(SEED_OF_EVIL);
 		if (qs == null)
@@ -129,7 +129,7 @@ public final class SeedOfEvil extends QuestJython
 			if (qs.getQuestItemsCount(CLAY_TABLET) != 0)
 			{
 				qs.exitQuest(false);
-				qs.rewardItems(PcInventory.ADENA_ID, 1495);
+				qs.rewardItems(PlayerInventory.ADENA_ID, 1495);
 				qs.giveItems(956, 1);
 				qs.addExpAndSp(17818, 927);
 				talker.sendPacket(SND_FINISH);

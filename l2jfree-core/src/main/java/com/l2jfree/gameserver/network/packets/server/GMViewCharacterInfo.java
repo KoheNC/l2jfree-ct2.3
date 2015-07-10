@@ -15,13 +15,13 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
-import com.l2jfree.gameserver.gameobjects.status.PcStatus;
-import com.l2jfree.gameserver.gameobjects.view.PcView;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
+import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
+import com.l2jfree.gameserver.gameobjects.view.PlayerView;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -34,9 +34,9 @@ public final class GMViewCharacterInfo extends L2ServerPacket
 {
 	private static final String _S__8F_GMVIEWCHARINFO = "[S] 8F GMViewCharacterInfo";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public GMViewCharacterInfo(L2PcInstance character)
+	public GMViewCharacterInfo(L2Player character)
 	{
 		character.getView().refresh();
 		
@@ -46,11 +46,11 @@ public final class GMViewCharacterInfo extends L2ServerPacket
 	@Override
 	protected final void writeImpl()
 	{
-		final PcView view = _activeChar.getView();
-		final PcAppearance appearance = _activeChar.getAppearance();
-		final PcInventory _inv = _activeChar.getInventory();
-		final PcStat stat = _activeChar.getStat();
-		final PcStatus status = _activeChar.getStatus();
+		final PlayerView view = _activeChar.getView();
+		final PlayerAppearance appearance = _activeChar.getAppearance();
+		final PlayerInventory _inv = _activeChar.getInventory();
+		final PlayerStat stat = _activeChar.getStat();
+		final PlayerStatus status = _activeChar.getStatus();
 		
 		writeC(0x95);
 		

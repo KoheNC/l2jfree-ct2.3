@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.datatables.PetDataTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class Ride extends L2ServerPacket
@@ -34,7 +34,7 @@ public class Ride extends L2ServerPacket
 	 * @param _
 	 */
 	
-	public Ride(L2PcInstance cha, boolean mount, int npcId)
+	public Ride(L2Player cha, boolean mount, int npcId)
 	{
 		_id = cha.getObjectId();
 		_bRide = mount ? 1 : 0;

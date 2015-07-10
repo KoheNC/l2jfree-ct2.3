@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -33,7 +33,7 @@ public class RequestWithdrawAlly extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getActiveChar();
+		L2Player player = getActiveChar();
 		if (player == null)
 			return;
 		else if (player.getClan() == null)
@@ -70,7 +70,7 @@ public class RequestWithdrawAlly extends L2ClientPacket
 		
 		sendAF();
 		
-		for (L2PcInstance member : player.getClan().getOnlineMembers(0))
+		for (L2Player member : player.getClan().getOnlineMembers(0))
 			member.broadcastUserInfo();
 	}
 	

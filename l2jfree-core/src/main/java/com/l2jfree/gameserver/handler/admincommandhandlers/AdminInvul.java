@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
 
@@ -35,7 +35,7 @@ public class AdminInvul implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_invul", "admin_setinvul" };
 	
 	@Override
-	public boolean useAdminCommand(String command0, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command0, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command0, " ");
 		String command = st.nextToken();
@@ -55,9 +55,9 @@ public class AdminInvul implements IAdminCommandHandler
 		if (command.equals("admin_setinvul"))
 		{
 			L2Object target = activeChar.getTarget();
-			if (target instanceof L2PcInstance)
+			if (target instanceof L2Player)
 			{
-				handleInvul((L2PcInstance)target, isInvul);
+				handleInvul((L2Player)target, isInvul);
 			}
 		}
 		return true;
@@ -69,7 +69,7 @@ public class AdminInvul implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleInvul(L2PcInstance activeChar, Boolean isInvul)
+	private void handleInvul(L2Player activeChar, Boolean isInvul)
 	{
 		if (isInvul == null)
 			isInvul = !activeChar.isInvul();

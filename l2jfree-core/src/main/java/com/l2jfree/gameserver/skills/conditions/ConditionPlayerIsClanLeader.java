@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 public class ConditionPlayerIsClanLeader extends Condition
@@ -29,8 +29,8 @@ public class ConditionPlayerIsClanLeader extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.player instanceof L2PcInstance))
+		if (!(env.player instanceof L2Player))
 			return false;
-		return (((L2PcInstance)env.player).isClanLeader() == _val);
+		return (((L2Player)env.player).isClanLeader() == _val);
 	}
 }

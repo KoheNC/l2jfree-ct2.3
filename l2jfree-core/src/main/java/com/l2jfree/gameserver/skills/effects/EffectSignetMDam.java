@@ -20,10 +20,10 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.instance.L2EffectPointInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -75,10 +75,10 @@ public final class EffectSignetMDam extends L2Effect
 		int y = getEffector().getY();
 		int z = getEffector().getZ();
 		
-		if (getEffector() instanceof L2PcInstance
+		if (getEffector() instanceof L2Player
 				&& getSkill().getTargetType() == L2Skill.SkillTargetType.TARGET_GROUND)
 		{
-			Point3D wordPosition = ((L2PcInstance)getEffector()).getCurrentSkillWorldPosition();
+			Point3D wordPosition = ((L2Player)getEffector()).getCurrentSkillWorldPosition();
 			
 			if (wordPosition != null)
 			{
@@ -101,7 +101,7 @@ public final class EffectSignetMDam extends L2Effect
 			return true; // do nothing first 2 times
 		int mpConsume = getSkill().getMpConsume();
 		
-		L2PcInstance caster = (L2PcInstance)getEffector();
+		L2Player caster = (L2Player)getEffector();
 		
 		boolean ss = false;
 		boolean bss = false;

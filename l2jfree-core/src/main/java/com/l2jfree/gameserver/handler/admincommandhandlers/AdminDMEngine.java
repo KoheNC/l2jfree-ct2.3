@@ -22,7 +22,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import javolution.text.TextBuilder;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.entity.events.DM;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -38,7 +38,7 @@ public class AdminDMEngine implements IAdminCommandHandler
 			"admin_dmevent_save", "admin_dmevent_load" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_dmevent"))
 			showMainPage(activeChar);
@@ -154,7 +154,7 @@ public class AdminDMEngine implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	public void showMainPage(L2PcInstance activeChar)
+	public void showMainPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");

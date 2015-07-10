@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -33,9 +33,9 @@ public class MoveOnVehicle extends L2ServerPacket
 	private static final String _S__71_MOVEONVEICLE = "[S] 71 MoveOnVehicle";
 	private final int _id;
 	private final int _x, _y, _z;
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public MoveOnVehicle(int vehicleID, L2PcInstance player, int x, int y, int z)
+	public MoveOnVehicle(int vehicleID, L2Player player, int x, int y, int z)
 	{
 		_id = vehicleID;
 		_activeChar = player;

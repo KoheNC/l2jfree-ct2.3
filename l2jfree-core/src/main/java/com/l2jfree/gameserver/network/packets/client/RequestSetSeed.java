@@ -15,14 +15,14 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import static com.l2jfree.gameserver.gameobjects.L2Npc.INTERACTION_DISTANCE;
-import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.MAX_ADENA;
+import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.MAX_ADENA;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2CastleChamberlainInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.SeedProduction;
@@ -86,7 +86,7 @@ public class RequestSetSeed extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Item;
@@ -27,7 +27,7 @@ public class ExShowBaseAttributeCancelWindow extends L2ServerPacket
 	
 	private final L2ItemInstance[] _items;
 	
-	public ExShowBaseAttributeCancelWindow(L2PcInstance player)
+	public ExShowBaseAttributeCancelWindow(L2Player player)
 	{
 		_items = player.getInventory().getElementItems();
 	}

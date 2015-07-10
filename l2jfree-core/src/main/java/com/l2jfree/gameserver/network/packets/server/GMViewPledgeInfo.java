@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -29,9 +29,9 @@ public class GMViewPledgeInfo extends L2ServerPacket
 {
 	private static final String _S__A9_GMVIEWPLEDGEINFO = "[S] 90 GMViewPledgeInfo";
 	private final L2Clan _clan;
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public GMViewPledgeInfo(L2Clan clan, L2PcInstance activeChar)
+	public GMViewPledgeInfo(L2Clan clan, L2Player activeChar)
 	{
 		_clan = clan;
 		_activeChar = activeChar;

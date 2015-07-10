@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.entity.Castle;
@@ -103,7 +103,7 @@ public class SiegeGuardManager
 	
 	/**
 	 * Add a mercenary spawn to the guard list.<BR>
-	 * <B><U>Not to be called from {@link MercTicketManager#addPosition(L2PcInstance)}
+	 * <B><U>Not to be called from {@link MercTicketManager#addPosition(L2Player)}
 	 * or any subsequent methods!</U></B><BR>
 	 * This method is used to build the spawn list just before spawning the
 	 * siege guards in siege (think of it as an alternative to
@@ -142,7 +142,7 @@ public class SiegeGuardManager
 	 * @param gm Game Master (player)
 	 * @param npc any NPC's ID
 	 */
-	public final void addAnyGuard(L2PcInstance gm, int npc, int respawn)
+	public final void addAnyGuard(L2Player gm, int npc, int respawn)
 	{
 		Castle c = CastleManager.getInstance().getCastle(gm);
 		if (c == null)
@@ -181,9 +181,9 @@ public class SiegeGuardManager
 	 * <CODE>addAnyGuard(gm, npc, {@link #DEFAULT_GUARD_RESPAWN})</CODE>
 	 * @param gm Game Master (player)
 	 * @param npc any NPC's ID
-	 * @see #addAnyGuard(L2PcInstance, int, int)
+	 * @see #addAnyGuard(L2Player, int, int)
 	 */
-	public final void addAnyGuard(L2PcInstance gm, int npc)
+	public final void addAnyGuard(L2Player gm, int npc)
 	{
 		addAnyGuard(gm, npc, DEFAULT_GUARD_RESPAWN);
 	}

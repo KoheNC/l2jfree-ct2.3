@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance.TeleportBookmark;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Player.TeleportBookmark;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -27,9 +27,9 @@ public class ExGetBookMarkInfoPacket extends L2ServerPacket
 {
 	private static final String _S__FE_84_EXGETBOOKMARKINFOPACKET = "[S] FE:84 ExGetBookMarkInfoPacket";
 	
-	private final L2PcInstance player;
+	private final L2Player player;
 	
-	public ExGetBookMarkInfoPacket(L2PcInstance cha)
+	public ExGetBookMarkInfoPacket(L2Player cha)
 	{
 		player = cha;
 	}

@@ -23,8 +23,9 @@ import com.l2jfree.gameserver.communitybbs.Manager.RegionBBSManager;
 import com.l2jfree.gameserver.communitybbs.Manager.RegionBBSManager.PlayerStateOnCommunity;
 import com.l2jfree.gameserver.datatables.GmListTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2ClassMasterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.handler.AdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.CoupleManager;
 import com.l2jfree.gameserver.instancemanager.CrownManager;
@@ -46,7 +47,6 @@ import com.l2jfree.gameserver.model.entity.FortSiege;
 import com.l2jfree.gameserver.model.entity.Hero;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.model.entity.Siege;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.quest.Quest;
@@ -96,7 +96,7 @@ public class EnterWorld extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 		{
 			_log.warn("EnterWorld failed! activeChar is null...");
@@ -471,7 +471,7 @@ public class EnterWorld extends L2ClientPacket
 	/**
 	 * @param activeChar
 	 */
-	private void engage(L2PcInstance cha)
+	private void engage(L2Player cha)
 	{
 		int _chaid = cha.getObjectId();
 		
@@ -495,11 +495,11 @@ public class EnterWorld extends L2ClientPacket
 	/**
 	 * @param activeChar partnerid
 	 */
-	private void notifyPartner(L2PcInstance cha)
+	private void notifyPartner(L2Player cha)
 	{
 		if (cha.getPartnerId() != 0)
 		{
-			L2PcInstance partner = L2World.getInstance().getPlayer(cha.getPartnerId());
+			L2Player partner = L2World.getInstance().getPlayer(cha.getPartnerId());
 			if (partner != null)
 				partner.sendMessage("Your Partner " + cha.getName() + " has logged in.");
 		}
@@ -508,14 +508,14 @@ public class EnterWorld extends L2ClientPacket
 	/**
 	 * @param activeChar
 	 */
-	private void notifyFriends(L2PcInstance cha)
+	private void notifyFriends(L2Player cha)
 	{
 		SystemMessage sm = new SystemMessage(SystemMessageId.FRIEND_S1_HAS_LOGGED_IN);
 		sm.addPcName(cha);
 		
 		for (Integer objId : cha.getFriendList().getFriendIds())
 		{
-			L2PcInstance friend = L2World.getInstance().findPlayer(objId);
+			L2Player friend = L2World.getInstance().findPlayer(objId);
 			if (friend != null)
 			{
 				friend.sendPacket(new FriendList(friend));
@@ -527,7 +527,7 @@ public class EnterWorld extends L2ClientPacket
 	/**
 	 * @param activeChar
 	 */
-	private void notifyClanMembers(L2PcInstance activeChar)
+	private void notifyClanMembers(L2Player activeChar)
 	{
 		L2Clan clan = activeChar.getClan();
 		if (clan != null)
@@ -556,11 +556,11 @@ public class EnterWorld extends L2ClientPacket
 	/**
 	 * @param activeChar
 	 */
-	private void notifySponsorOrApprentice(L2PcInstance activeChar)
+	private void notifySponsorOrApprentice(L2Player activeChar)
 	{
 		if (activeChar.getSponsor() != 0)
 		{
-			L2PcInstance sponsor = L2World.getInstance().getPlayer(activeChar.getSponsor());
+			L2Player sponsor = L2World.getInstance().getPlayer(activeChar.getSponsor());
 			
 			if (sponsor != null)
 			{
@@ -571,7 +571,7 @@ public class EnterWorld extends L2ClientPacket
 		}
 		else if (activeChar.getApprentice() != 0)
 		{
-			L2PcInstance apprentice = L2World.getInstance().getPlayer(activeChar.getApprentice());
+			L2Player apprentice = L2World.getInstance().getPlayer(activeChar.getApprentice());
 			
 			if (apprentice != null)
 			{
@@ -582,7 +582,7 @@ public class EnterWorld extends L2ClientPacket
 		}
 	}
 	
-	private void loadTutorial(L2PcInstance player)
+	private void loadTutorial(L2Player player)
 	{
 		QuestState qs = player.getQuestState("255_Tutorial");
 		if (qs != null)

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -23,9 +23,9 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ExDuelUpdateUserInfo extends L2ServerPacket
 {
 	private static final String _S__FE_50_EXDUELUPDATEUSERINFO = "[S] FE:50 ExDuelUpdateUserInfo [sddddddddd]";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public ExDuelUpdateUserInfo(L2PcInstance cha)
+	public ExDuelUpdateUserInfo(L2Player cha)
 	{
 		_activeChar = cha;
 	}

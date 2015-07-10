@@ -26,6 +26,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -68,7 +69,7 @@ public class L2CubicInstance
 	public static final int SKILL_CUBIC_HEAL = 4051;
 	public static final int SKILL_CUBIC_CURE = 5579;
 	
-	protected L2PcInstance _owner;
+	protected L2Player _owner;
 	protected L2Creature _target;
 	
 	protected int _id;
@@ -82,7 +83,7 @@ public class L2CubicInstance
 	private Future<?> _disappearTask;
 	private Future<?> _actionTask;
 	
-	public L2CubicInstance(L2PcInstance owner, int id, int level, int mAtk, int activationtime, int activationchance,
+	public L2CubicInstance(L2Player owner, int id, int level, int mAtk, int activationtime, int activationchance,
 			int totallifetime)
 	{
 		_owner = owner;
@@ -286,7 +287,7 @@ public class L2CubicInstance
 		return _id;
 	}
 	
-	public L2PcInstance getOwner()
+	public L2Player getOwner()
 	{
 		return _owner;
 	}
@@ -335,8 +336,8 @@ public class L2CubicInstance
 			// Duel targeting
 			if (_owner.isInDuel())
 			{
-				L2PcInstance PlayerA = DuelManager.getInstance().getDuel(_owner.getDuelId()).getPlayerA();
-				L2PcInstance PlayerB = DuelManager.getInstance().getDuel(_owner.getDuelId()).getPlayerB();
+				L2Player PlayerA = DuelManager.getInstance().getDuel(_owner.getDuelId()).getPlayerA();
+				L2Player PlayerB = DuelManager.getInstance().getDuel(_owner.getDuelId()).getPlayerB();
 				
 				if (DuelManager.getInstance().getDuel(_owner.getDuelId()).isPartyDuel())
 				{
@@ -393,7 +394,7 @@ public class L2CubicInstance
 			{
 				if (_owner.isOlympiadStart())
 				{
-					L2PcInstance[] players = Olympiad.getInstance().getPlayers(_owner.getOlympiadGameId());
+					L2Player[] players = Olympiad.getInstance().getPlayers(_owner.getOlympiadGameId());
 					if (players != null)
 					{
 						if (_owner.getOlympiadSide() == 1)
@@ -437,7 +438,7 @@ public class L2CubicInstance
 				}
 				
 				// get target in pvp or in siege
-				L2PcInstance enemy = null;
+				L2Player enemy = null;
 				
 				if ((_owner.getPvpFlag() > 0 && !_owner.isInsideZone(L2Zone.FLAG_PEACE))
 						|| _owner.isInsideZone(L2Zone.FLAG_PVP))
@@ -628,7 +629,7 @@ public class L2CubicInstance
 		{
 			// Get all visible objects in a spheric area near the L2Creature
 			// Get a list of Party Members
-			List<L2PcInstance> partyList = party.getPartyMembers();
+			List<L2Player> partyList = party.getPartyMembers();
 			for (L2Creature partyMember : partyList)
 			{
 				if (!partyMember.isDead())

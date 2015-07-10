@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -47,7 +47,7 @@ public class Monastery extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isPet)
+	public String onAggroRangeEnter(L2Npc npc, L2Player player, boolean isPet)
 	{
 		if (contains(BASIC_MOBS, npc.getNpcId()) && !npc.isInCombat() && !npc.isRunning())// && npc.getTarget() == null)
 		{
@@ -86,7 +86,7 @@ public class Monastery extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onSkillSee(L2Npc npc, L2PcInstance caster, L2Skill skill, L2Object[] targets, boolean isPet)
+	public String onSkillSee(L2Npc npc, L2Player caster, L2Skill skill, L2Object[] targets, boolean isPet)
 	{
 		if (contains(GUARDIAN_AND_BEHOLDER, npc.getNpcId()))
 		{
@@ -116,7 +116,7 @@ public class Monastery extends L2AttackableAIScript
 			Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
 			for (L2Object obj : objs)
 			{
-				if (obj instanceof L2PcInstance || obj instanceof L2PetInstance)
+				if (obj instanceof L2Player || obj instanceof L2PetInstance)
 				{
 					if (Util.checkIfInRange(npc.getAggroRange(), npc, obj, true) && !((L2Creature)obj).isDead())
 						result.add((L2Playable)obj);
@@ -126,7 +126,7 @@ public class Monastery extends L2AttackableAIScript
 			{
 				for (L2Playable obj : result)
 				{
-					L2PcInstance target = obj.getActingPlayer();
+					L2Player target = obj.getActingPlayer();
 					if (target.getActiveWeaponInstance() != null && !npc.isInCombat() && npc.getTarget() == null)
 					{
 						npc.setTarget(target);
@@ -157,7 +157,7 @@ public class Monastery extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onSpellFinished(L2Npc npc, L2PcInstance player, L2Skill skill)
+	public String onSpellFinished(L2Npc npc, L2Player player, L2Skill skill)
 	{
 		if (contains(BASIC_MOBS, npc.getNpcId()) && skill.getId() == 4589)
 		{

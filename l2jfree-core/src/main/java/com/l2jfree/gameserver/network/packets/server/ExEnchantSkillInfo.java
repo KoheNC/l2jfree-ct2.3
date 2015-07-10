@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList.EnchantSkillType;
@@ -56,7 +56,7 @@ public final class ExEnchantSkillInfo extends L2ServerPacket
 			_expCost = expCost;
 		}
 		
-		public SkillEnchantDetailElement(L2PcInstance cha, EnchantSkillDetail esd)
+		public SkillEnchantDetailElement(L2Player cha, EnchantSkillDetail esd)
 		{
 			this(esd.getLevel(), esd.getRate(cha), esd.getSpCost(), esd.getExp());
 		}
@@ -67,7 +67,7 @@ public final class ExEnchantSkillInfo extends L2ServerPacket
 		}
 	}
 	
-	public void addEnchantSkillDetail(L2PcInstance cha, EnchantSkillDetail esd)
+	public void addEnchantSkillDetail(L2Player cha, EnchantSkillDetail esd)
 	{
 		_routes.add(new SkillEnchantDetailElement(cha, esd));
 	}

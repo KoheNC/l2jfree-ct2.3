@@ -34,7 +34,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Object;
@@ -268,7 +268,7 @@ public class DimensionalRiftManager
 		return _rooms.get((byte)0).get((byte)0).checkIfInZone(x, y, z);
 	}
 	
-	public void teleportToWaitingRoom(L2PcInstance player)
+	public void teleportToWaitingRoom(L2Player player)
 	{
 		int[] coords = getRoom((byte)0, (byte)0).getTeleportCoords();
 		player.teleToLocation(coords[0], coords[1], coords[2]);
@@ -280,7 +280,7 @@ public class DimensionalRiftManager
 		return new Location(coords[0], coords[1], coords[2]);
 	}
 	
-	public void start(L2PcInstance player, byte type, L2Npc npc)
+	public void start(L2Player player, byte type, L2Npc npc)
 	{
 		boolean canPass = true;
 		if (!player.isInParty())
@@ -311,7 +311,7 @@ public class DimensionalRiftManager
 			return;
 		}
 		
-		for (L2PcInstance p : player.getParty().getPartyMembers())
+		for (L2Player p : player.getParty().getPartyMembers())
 			if (!checkIfInPeaceZone(p.getX(), p.getY(), p.getZ()))
 				canPass = false;
 		
@@ -322,7 +322,7 @@ public class DimensionalRiftManager
 		}
 		
 		L2ItemInstance i;
-		for (L2PcInstance p : player.getParty().getPartyMembers())
+		for (L2Player p : player.getParty().getPartyMembers())
 		{
 			i = p.getInventory().getItemByItemId(DIMENSIONAL_FRAGMENT_ITEM_ID);
 			
@@ -347,7 +347,7 @@ public class DimensionalRiftManager
 			return;
 		}
 		
-		for (L2PcInstance p : player.getParty().getPartyMembers())
+		for (L2Player p : player.getParty().getPartyMembers())
 		{
 			i = p.getInventory().getItemByItemId(DIMENSIONAL_FRAGMENT_ITEM_ID);
 			p.destroyItem("RiftEntrance", i.getObjectId(), getNeededItems(type), null, false);
@@ -497,7 +497,7 @@ public class DimensionalRiftManager
 		}
 	}
 	
-	public void showHtmlFile(L2PcInstance player, String file, L2Npc npc)
+	public void showHtmlFile(L2Player player, String file, L2Npc npc)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 		html.setFile(file);
@@ -505,7 +505,7 @@ public class DimensionalRiftManager
 		player.sendPacket(html);
 	}
 	
-	public void handleCheat(L2PcInstance player, L2Npc npc)
+	public void handleCheat(L2Player player, L2Npc npc)
 	{
 		showHtmlFile(player, "data/html/seven_signs/rift/Cheater.htm", npc);
 		if (!player.isGM())

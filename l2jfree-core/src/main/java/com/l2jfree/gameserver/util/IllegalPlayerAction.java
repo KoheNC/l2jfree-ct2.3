@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.GmListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.SystemMessageId;
 
@@ -32,14 +32,14 @@ public final class IllegalPlayerAction implements Runnable
 	
 	protected String _message;
 	protected int _punishment;
-	protected L2PcInstance _actor;
+	protected L2Player _actor;
 	
 	public static final int PUNISH_BROADCAST = 1;
 	public static final int PUNISH_KICK = 2;
 	public static final int PUNISH_KICKBAN = 3;
 	public static final int PUNISH_JAIL = 4;
 	
-	public IllegalPlayerAction(L2PcInstance actor, String message, int punishment)
+	public IllegalPlayerAction(L2Player actor, String message, int punishment)
 	{
 		_message = message;
 		_punishment = punishment;

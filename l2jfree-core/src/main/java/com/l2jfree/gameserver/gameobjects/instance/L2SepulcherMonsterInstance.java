@@ -19,6 +19,7 @@ import java.util.concurrent.Future;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -232,7 +233,7 @@ public class L2SepulcherMonsterInstance extends L2MonsterInstance
 			case 25342:
 			case 25346:
 			case 25349:
-				L2PcInstance pc = killer.getActingPlayer();
+				L2Player pc = killer.getActingPlayer();
 				if (pc != null)
 					giveCup(pc);
 				if (_onDeadEventTask != null)
@@ -260,7 +261,7 @@ public class L2SepulcherMonsterInstance extends L2MonsterInstance
 		super.deleteMe();
 	}
 	
-	private void giveCup(L2PcInstance player)
+	private void giveCup(L2Player player)
 	{
 		String questId = "620_FourGoblets";
 		int cupId = 0;
@@ -284,7 +285,7 @@ public class L2SepulcherMonsterInstance extends L2MonsterInstance
 		
 		if (player.getParty() != null)
 		{
-			for (L2PcInstance mem : player.getParty().getPartyMembers())
+			for (L2Player mem : player.getParty().getPartyMembers())
 			{
 				QuestState qs = mem.getQuestState(questId);
 				if (qs != null && (qs.isStarted() || qs.isCompleted())

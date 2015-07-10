@@ -30,8 +30,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.DoorTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance.ConditionListenerDependency;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Player.ConditionListenerDependency;
 import com.l2jfree.gameserver.instancemanager.DayNightSpawnManager;
 import com.l2jfree.gameserver.instancemanager.hellbound.HellboundManager;
 import com.l2jfree.gameserver.model.L2World;
@@ -191,7 +191,7 @@ public final class GameTimeController
 				{
 					DayNightSpawnManager.getInstance().notifyChangeMode();
 					
-					for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+					for (L2Player player : L2World.getInstance().getAllPlayers())
 						player.refreshConditionListeners(ConditionListenerDependency.GAME_TIME);
 				}
 				

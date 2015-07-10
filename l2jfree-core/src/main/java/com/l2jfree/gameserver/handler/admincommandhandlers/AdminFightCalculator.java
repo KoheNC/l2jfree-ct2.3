@@ -20,8 +20,8 @@ import javolution.text.TextBuilder;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.idfactory.IdFactory;
@@ -41,7 +41,7 @@ public class AdminFightCalculator implements IAdminCommandHandler
 			"admin_fcs", };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		try
 		{
@@ -64,7 +64,7 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleStart(String params, L2PcInstance activeChar)
+	private void handleStart(String params, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(params);
 		int lvl1 = 0;
@@ -164,7 +164,7 @@ public class AdminFightCalculator implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	private void handleShow(String params, L2PcInstance activeChar)
+	private void handleShow(String params, L2Player activeChar)
 	{
 		params = params.trim();
 		

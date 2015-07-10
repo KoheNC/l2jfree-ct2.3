@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -47,7 +47,7 @@ public class MyTargetSelected extends L2ServerPacket
 	 * @param int objectId of the target
 	 * @param int level difference to the target. name color is calculated from that
 	 */
-	public MyTargetSelected(L2PcInstance player, L2Object target)
+	public MyTargetSelected(L2Player player, L2Object target)
 	{
 		_objectId = target.getObjectId();
 		_color = target.getMyTargetSelectedColor(player);

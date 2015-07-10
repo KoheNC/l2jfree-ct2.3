@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.events.TvT;
 import com.l2jfree.gameserver.model.entity.events.TvT.TvTPlayerInfo;
 import com.l2jfree.gameserver.model.quest.Quest;
@@ -85,20 +85,20 @@ public final class TvTRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	boolean teamEquals(L2PcInstance participant1, L2PcInstance participant2)
+	boolean teamEquals(L2Player participant1, L2Player participant2)
 	{
 		return participant1.as(TvTPlayerInfo.class)._teamNameTvT
 				.equals(participant2.as(TvTPlayerInfo.class)._teamNameTvT);
 	}
 	
 	@Override
-	boolean isInFunEvent(L2PcInstance player)
+	boolean isInFunEvent(L2Player player)
 	{
 		return player.isInEvent(TvTPlayerInfo.class);
 	}
 	
 	@Override
-	public int getNameColor(L2PcInstance activeChar)
+	public int getNameColor(L2Player activeChar)
 	{
 		TvTPlayerInfo info = activeChar.getPlayerInfo(TvTPlayerInfo.class);
 		
@@ -106,7 +106,7 @@ public final class TvTRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public void levelChanged(L2PcInstance activeChar)
+	public void levelChanged(L2Player activeChar)
 	{
 		if (activeChar.isInEvent(TvTPlayerInfo.class) && TvT._maxlvl == activeChar.getLevel() && !TvT._started)
 		{
@@ -117,14 +117,14 @@ public final class TvTRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public void playerLoggedIn(L2PcInstance activeChar)
+	public void playerLoggedIn(L2Player activeChar)
 	{
 		if (TvT._savePlayers.contains(activeChar.getName()))
 			TvT.addDisconnectedPlayer(activeChar);
 	}
 	
 	@Override
-	public boolean playerKilled(L2Creature activeChar, final L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, final L2Player target, L2Player killer)
 	{
 		final TvTPlayerInfo targetInfo = target.getPlayerInfo(TvTPlayerInfo.class);
 		
@@ -182,7 +182,7 @@ public final class TvTRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean onBypassFeedback(L2Npc npc, L2PcInstance activeChar, String command)
+	public boolean onBypassFeedback(L2Npc npc, L2Player activeChar, String command)
 	{
 		if (command.startsWith("tvt_player_join "))
 		{
@@ -205,7 +205,7 @@ public final class TvTRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean onAction(L2Npc npc, L2PcInstance activeChar)
+	public boolean onAction(L2Npc npc, L2Player activeChar)
 	{
 		if (npc._isEventMobTvT)
 		{

@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import javolution.util.FastList;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -38,7 +38,7 @@ public class WareHouseDepositList extends L2ServerPacket
 	private final FastList<L2ItemInstance> _items;
 	private final int _whType;
 	
-	public WareHouseDepositList(L2PcInstance player, int type)
+	public WareHouseDepositList(L2Player player, int type)
 	{
 		_whType = type;
 		

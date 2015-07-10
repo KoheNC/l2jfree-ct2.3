@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.chathandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -38,7 +38,7 @@ public class ChatCommander implements IChatHandler
 	}
 	
 	@Override
-	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
+	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		if (activeChar == null)
 			return;

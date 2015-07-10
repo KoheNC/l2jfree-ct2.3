@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.handler.itemhandlers.Potions;
 import com.l2jfree.gameserver.handler.itemhandlers.SummonItems;
@@ -54,12 +54,12 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 		return false;
 	}
 	
-	abstract boolean teamEquals(L2PcInstance participant1, L2PcInstance participant2);
+	abstract boolean teamEquals(L2Player participant1, L2Player participant2);
 	
-	abstract boolean isInFunEvent(L2PcInstance player);
+	abstract boolean isInFunEvent(L2Player player);
 	
 	@Override
-	public final boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public final boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		if (isInFunEvent(activeChar))
 		{
@@ -77,7 +77,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canRequestRevive(L2PcInstance activeChar)
+	public boolean canRequestRevive(L2Player activeChar)
 	{
 		if (isInFunEvent(activeChar) && started())
 			return false;
@@ -86,7 +86,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public final boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target)
+	public final boolean canInviteToParty(L2Player activeChar, L2Player target)
 	{
 		if (started() && !allowInterference() && !activeChar.isGM())
 		{
@@ -102,7 +102,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	
 	@Override
 	public final boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_)
+			L2Player attacker_, L2Player target_)
 	{
 		if (attacker_ == null || target_ == null || attacker_ == target_)
 			return true;
@@ -121,7 +121,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public final boolean canTeleport(L2PcInstance activeChar)
+	public final boolean canTeleport(L2Player activeChar)
 	{
 		if (isInFunEvent(activeChar))
 		{
@@ -134,7 +134,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	
 	@Override
 	public final boolean canUseItemHandler(Class<? extends IItemHandler> clazz, int itemId, L2Playable activeChar,
-			L2ItemInstance item, L2PcInstance player)
+			L2ItemInstance item, L2Player player)
 	{
 		if (clazz == SummonItems.class)
 		{
@@ -157,7 +157,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public final CombatState getCombatState(L2PcInstance activeChar, L2PcInstance target)
+	public final CombatState getCombatState(L2Player activeChar, L2Player target)
 	{
 		if (isInFunEvent(activeChar) && isInFunEvent(target) && started())
 		{
@@ -193,7 +193,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canStandUp(L2PcInstance activeChar)
+	public boolean canStandUp(L2Player activeChar)
 	{
 		if (sitForced() && isInFunEvent(activeChar))
 		{
@@ -205,7 +205,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public void playerRevived(L2PcInstance player)
+	public void playerRevived(L2Player player)
 	{
 		if (started() && reviveRecovery() && isInFunEvent(player))
 		{

@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -42,7 +43,7 @@ public class L2FortSupportUnitInstance extends L2MerchantInstance
 			9965, 9966, 10141, 10142, 10158 };
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("Chat"))
 		{
@@ -93,22 +94,22 @@ public class L2FortSupportUnitInstance extends L2MerchantInstance
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			else
 				showChatWindow(player, 0);
@@ -117,7 +118,7 @@ public class L2FortSupportUnitInstance extends L2MerchantInstance
 	}
 	
 	@Override
-	public void showChatWindow(L2PcInstance player, int val)
+	public void showChatWindow(L2Player player, int val)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		String filename = "data/html/fortress/support_unit_captain-no.htm";
@@ -143,7 +144,7 @@ public class L2FortSupportUnitInstance extends L2MerchantInstance
 		player.sendPacket(html);
 	}
 	
-	protected int validateCondition(L2PcInstance player)
+	protected int validateCondition(L2Player player)
 	{
 		if (getFort() != null && getFort().getFortId() > 0)
 		{

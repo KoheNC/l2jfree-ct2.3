@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 
 /**
@@ -31,10 +31,10 @@ public class Banking implements IVoicedCommandHandler
 	
 	/**
 	 * 
-	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(java.lang.String, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance, java.lang.String)
+	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(java.lang.String, L2Player.sf.l2j.gameserver.model.actor.instance.L2Player, java.lang.String)
 	 */
 	@Override
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
 		if (!Config.BANKING_SYSTEM_ENABLED)
 			return false;
@@ -48,7 +48,7 @@ public class Banking implements IVoicedCommandHandler
 		}
 		else if (command.equalsIgnoreCase("deposit"))
 		{
-			if (activeChar.getInventory().getInventoryItemCount(PcInventory.ADENA_ID, 0) >= Config.BANKING_SYSTEM_ADENA)
+			if (activeChar.getInventory().getInventoryItemCount(PlayerInventory.ADENA_ID, 0) >= Config.BANKING_SYSTEM_ADENA)
 			{
 				InventoryUpdate iu = new InventoryUpdate();
 				activeChar.getInventory().reduceAdena("Goldbar", Config.BANKING_SYSTEM_ADENA, activeChar, null);

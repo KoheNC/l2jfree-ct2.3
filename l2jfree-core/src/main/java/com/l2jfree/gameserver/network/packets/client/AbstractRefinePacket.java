@@ -20,7 +20,7 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -171,7 +171,7 @@ public abstract class AbstractRefinePacket extends L2ClientPacket
 	/**
 	 * Checks player, source item, lifestone and gemstone validity for augmentation process
 	 */
-	protected static final boolean isValid(L2PcInstance player, L2ItemInstance item, L2ItemInstance refinerItem,
+	protected static final boolean isValid(L2Player player, L2ItemInstance item, L2ItemInstance refinerItem,
 			L2ItemInstance gemStones)
 	{
 		if (!isValid(player, item, refinerItem))
@@ -200,7 +200,7 @@ public abstract class AbstractRefinePacket extends L2ClientPacket
 	/**
 	 * Checks player, source item and lifestone validity for augmentation process
 	 */
-	protected static final boolean isValid(L2PcInstance player, L2ItemInstance item, L2ItemInstance refinerItem)
+	protected static final boolean isValid(L2Player player, L2ItemInstance item, L2ItemInstance refinerItem)
 	{
 		if (!isValid(player, item))
 			return false;
@@ -231,7 +231,7 @@ public abstract class AbstractRefinePacket extends L2ClientPacket
 	/**
 	 * Check both player and source item conditions for augmentation process
 	 */
-	protected static final boolean isValid(L2PcInstance player, L2ItemInstance item)
+	protected static final boolean isValid(L2Player player, L2ItemInstance item)
 	{
 		//if (!isValid(player))
 		//	return false;
@@ -305,9 +305,9 @@ public abstract class AbstractRefinePacket extends L2ClientPacket
 	/**
 	 * Check if player's conditions valid for augmentation process
 	 */
-	protected static final boolean isValid(L2PcInstance player)
+	protected static final boolean isValid(L2Player player)
 	{
-		if (player.getPrivateStoreType() != L2PcInstance.STORE_PRIVATE_NONE)
+		if (player.getPrivateStoreType() != L2Player.STORE_PRIVATE_NONE)
 		{
 			player.sendPacket(SystemMessageId.YOU_CANNOT_AUGMENT_ITEMS_WHILE_IN_PRIVATE_STORE);
 			return false;

@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 /**
@@ -35,7 +35,7 @@ public class AdminVitality implements IAdminCommandHandler
 			"admin_full_vitality", "admin_empty_vitality", "admin_get_vitality" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (!Config.ENABLE_VITALITY)
 			activeChar.sendMessage("Vitality is not enabled on the server!");
@@ -43,10 +43,10 @@ public class AdminVitality implements IAdminCommandHandler
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String cmd = st.nextToken();
 		
-		if (activeChar.getTarget() instanceof L2PcInstance)
+		if (activeChar.getTarget() instanceof L2Player)
 		{
-			L2PcInstance target;
-			target = (L2PcInstance)activeChar.getTarget();
+			L2Player target;
+			target = (L2Player)activeChar.getTarget();
 			
 			if (cmd.equals("admin_set_vitality"))
 			{
@@ -75,7 +75,7 @@ public class AdminVitality implements IAdminCommandHandler
 				
 				if (level >= 0 && level <= 4)
 				{
-					target.setVitalityPoints(PcStat.VITALITY_LEVELS[level], true);
+					target.setVitalityPoints(PlayerStat.VITALITY_LEVELS[level], true);
 					target.sendMessage("Admin set your Vitality level to " + level);
 				}
 				else
@@ -83,7 +83,7 @@ public class AdminVitality implements IAdminCommandHandler
 			}
 			else if (cmd.equals("admin_full_vitality"))
 			{
-				target.setVitalityPoints(PcStat.VITALITY_LEVELS[4], true);
+				target.setVitalityPoints(PlayerStat.VITALITY_LEVELS[4], true);
 				target.sendMessage("Admin completly recharged your Vitality");
 			}
 			else if (cmd.equals("admin_empty_vitality"))

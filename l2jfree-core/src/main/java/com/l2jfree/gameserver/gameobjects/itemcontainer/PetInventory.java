@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
@@ -40,7 +40,7 @@ public class PetInventory extends Inventory
 	@Override
 	public int getOwnerId()
 	{
-		// gets the L2PcInstance-owner's ID
+		// gets the L2Player-owner's ID
 		int id = 0;
 		
 		if (_owner.getOwner() != null)

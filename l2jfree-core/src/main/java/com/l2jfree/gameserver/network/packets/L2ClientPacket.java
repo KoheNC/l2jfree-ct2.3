@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -68,7 +68,7 @@ public abstract class L2ClientPacket extends ReceivablePacket<L2Client, L2Client
 		getClient().sendPacket(sm.getSystemMessage());
 	}
 	
-	protected final L2PcInstance getActiveChar()
+	protected final L2Player getActiveChar()
 	{
 		return getClient().getActiveChar();
 	}

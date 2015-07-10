@@ -35,7 +35,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.base.Race;
@@ -64,7 +64,7 @@ public class VIP
 		public int _nameColourVIP = -1;
 		public int _originalKarmaVIP;
 		
-		private VIPPlayerInfo(L2PcInstance player)
+		private VIPPlayerInfo(L2Player player)
 		{
 			super(player);
 		}
@@ -92,10 +92,10 @@ public class VIP
 	
 	public static L2Spawn _endSpawn, _joinSpawn;
 	public static CopyOnWriteArrayList<String> _savePlayers = new CopyOnWriteArrayList<String>();
-	public static CopyOnWriteArrayList<L2PcInstance> _playersVIP = new CopyOnWriteArrayList<L2PcInstance>(),
-			_playersNotVIP = new CopyOnWriteArrayList<L2PcInstance>();
+	public static CopyOnWriteArrayList<L2Player> _playersVIP = new CopyOnWriteArrayList<L2Player>(),
+			_playersNotVIP = new CopyOnWriteArrayList<L2Player>();
 	
-	public static void setTeam(String team, L2PcInstance activeChar)
+	public static void setTeam(String team, L2Player activeChar)
 	{
 		if (team.compareToIgnoreCase("Human") == 0)
 		{
@@ -163,7 +163,7 @@ public class VIP
 	/**
 	 * @param activeChar
 	 */
-	public static void setRandomTeam(L2PcInstance activeChar)
+	public static void setRandomTeam(L2Player activeChar)
 	{
 		int random = Rnd.nextInt(5) + 1; // (0 - 4) + 1
 		
@@ -274,7 +274,7 @@ public class VIP
 		}
 	}
 	
-	public static void endNPC(int npcId, L2PcInstance activeChar)
+	public static void endNPC(int npcId, L2Player activeChar)
 	{
 		if (_team == 0)
 		{
@@ -327,7 +327,7 @@ public class VIP
 		}
 	}
 	
-	public static void joinNPC(int npcId, L2PcInstance activeChar)
+	public static void joinNPC(int npcId, L2Player activeChar)
 	{
 		if (_joinX == 0)
 		{
@@ -432,7 +432,7 @@ public class VIP
 	 * @param id
 	 * @param activeChar
 	 */
-	public static String getNPCName(int id, L2PcInstance activeChar)
+	public static String getNPCName(int id, L2Player activeChar)
 	{
 		if (id == 0)
 			return "";
@@ -463,7 +463,7 @@ public class VIP
 	 * @param id
 	 * @param activeChar
 	 */
-	public static String getItemName(int id, L2PcInstance activeChar)
+	public static String getItemName(int id, L2Player activeChar)
 	{
 		if (id == 0)
 			return "";
@@ -497,7 +497,7 @@ public class VIP
 		_joinZ = Integer.valueOf(z);
 	}
 	
-	public static void startJoin(L2PcInstance activeChar)
+	public static void startJoin(L2Player activeChar)
 	{
 		if (_teamName.isEmpty() || _joinArea.isEmpty() || _time == 0 || _vipReward == 0 || _vipRewardAmount == 0
 				|| _notVipReward == 0 || _notVipRewardAmount == 0 || _theVipReward == 0 || _theVipRewardAmount == 0
@@ -704,7 +704,7 @@ public class VIP
 		}
 	}
 	
-	public static void showEndHTML(L2PcInstance eventPlayer, String objectId)
+	public static void showEndHTML(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -735,7 +735,7 @@ public class VIP
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+			// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 		catch (Exception e)
@@ -748,7 +748,7 @@ public class VIP
 	/**
 	 * @param activeChar
 	 */
-	public static void vipWin(L2PcInstance activeChar)
+	public static void vipWin(L2Player activeChar)
 	{
 		if (!_started)
 		{
@@ -766,7 +766,7 @@ public class VIP
 	
 	public static void rewardNotVIP()
 	{
-		for (L2PcInstance player : _playersNotVIP)
+		for (L2Player player : _playersNotVIP)
 		{
 			if (player != null)
 			{
@@ -780,7 +780,7 @@ public class VIP
 				nhm.setHtml(replyMSG.moveToString());
 				player.sendPacket(nhm);
 				
-				// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+				// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 		}
@@ -788,7 +788,7 @@ public class VIP
 	
 	public static void rewardVIP()
 	{
-		for (L2PcInstance player : _playersVIP)
+		for (L2Player player : _playersVIP)
 		{
 			if (player == null)
 				continue;
@@ -817,7 +817,7 @@ public class VIP
 				nhm.setHtml(replyMSG.moveToString());
 				player.sendPacket(nhm);
 				
-				// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+				// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 		}
@@ -832,13 +832,13 @@ public class VIP
 			@Override
 			public void run()
 			{
-				for (L2PcInstance player : _playersVIP)
+				for (L2Player player : _playersVIP)
 				{
 					if (player != null)
 						player.teleToLocation(_joinX, _joinY, _joinZ);
 				}
 				
-				for (L2PcInstance player : _playersNotVIP)
+				for (L2Player player : _playersNotVIP)
 				{
 					if (player != null)
 						player.teleToLocation(_joinX, _joinY, _joinZ);
@@ -871,7 +871,7 @@ public class VIP
 		_started = _joining = _sitForced = false;
 		_teamName = _joinArea = _theVIPName = "";
 		
-		for (L2PcInstance player : _playersVIP)
+		for (L2Player player : _playersVIP)
 		{
 			final VIPPlayerInfo info = player.as(VIPPlayerInfo.class);
 			info._nameColourVIP = -1;
@@ -883,7 +883,7 @@ public class VIP
 			info._isVIP = false;
 		}
 		
-		for (L2PcInstance player : _playersNotVIP)
+		for (L2Player player : _playersNotVIP)
 		{
 			final VIPPlayerInfo info = player.as(VIPPlayerInfo.class);
 			info._nameColourVIP = -1;
@@ -895,8 +895,8 @@ public class VIP
 			info._isVIP = false;
 		}
 		_savePlayers = new CopyOnWriteArrayList<String>();
-		_playersVIP = new CopyOnWriteArrayList<L2PcInstance>();
-		_playersNotVIP = new CopyOnWriteArrayList<L2PcInstance>();
+		_playersVIP = new CopyOnWriteArrayList<L2Player>();
+		_playersNotVIP = new CopyOnWriteArrayList<L2Player>();
 	}
 	
 	public static void chooseVIP()
@@ -911,7 +911,7 @@ public class VIP
 		if (_log.isDebugEnabled())
 			_log.debug("Random number chosen in VIP: " + random);
 		
-		L2PcInstance VIP = _playersVIP.get(random);
+		L2Player VIP = _playersVIP.get(random);
 		VIP.as(VIPPlayerInfo.class)._isTheVIP = true;
 		_theVIPName = VIP.getName();
 	}
@@ -920,12 +920,12 @@ public class VIP
 	{
 		VIP.sit();
 		
-		for (L2PcInstance player : _playersVIP)
+		for (L2Player player : _playersVIP)
 		{
 			if (player != null)
 				player.teleToLocation(_startX, _startY, _startZ);
 		}
-		for (L2PcInstance player : _playersNotVIP)
+		for (L2Player player : _playersNotVIP)
 		{
 			if (player != null)
 				player.teleToLocation(_endX, _endY, _endZ);
@@ -936,7 +936,7 @@ public class VIP
 	{
 		_sitForced = !_sitForced;
 		
-		for (L2PcInstance player : _playersVIP)
+		for (L2Player player : _playersVIP)
 		{
 			if (player != null)
 			{
@@ -957,7 +957,7 @@ public class VIP
 			}
 		}
 		
-		for (L2PcInstance player : _playersNotVIP)
+		for (L2Player player : _playersNotVIP)
 		{
 			if (player != null)
 			{
@@ -981,7 +981,7 @@ public class VIP
 	
 	public static void setUserData()
 	{
-		for (L2PcInstance player : _playersVIP)
+		for (L2Player player : _playersVIP)
 		{
 			final VIPPlayerInfo info = player.as(VIPPlayerInfo.class);
 			
@@ -997,7 +997,7 @@ public class VIP
 				player.stopAllEffects();
 			}
 		}
-		for (L2PcInstance player : _playersNotVIP)
+		for (L2Player player : _playersNotVIP)
 		{
 			player.as(VIPPlayerInfo.class)._nameColourVIP = 0x00ff00;
 			player.setKarma(0);
@@ -1009,7 +1009,7 @@ public class VIP
 		}
 	}
 	
-	public static void showJoinHTML(L2PcInstance eventPlayer, String objectId)
+	public static void showJoinHTML(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -1110,7 +1110,7 @@ public class VIP
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+			// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 		catch (Exception e)
@@ -1120,7 +1120,7 @@ public class VIP
 		}
 	}
 	
-	public static void addPlayerVIP(L2PcInstance activeChar)
+	public static void addPlayerVIP(L2Player activeChar)
 	{
 		if (GlobalRestrictions.isRestricted(activeChar, VIPRestriction.class))
 		{
@@ -1142,7 +1142,7 @@ public class VIP
 		_savePlayers.add(activeChar.getName());
 	}
 	
-	public static void addPlayerNotVIP(L2PcInstance activeChar)
+	public static void addPlayerNotVIP(L2Player activeChar)
 	{
 		if (GlobalRestrictions.isRestricted(activeChar, VIPRestriction.class))
 		{
@@ -1164,7 +1164,7 @@ public class VIP
 		_savePlayers.add(activeChar.getName());
 	}
 	
-	public static synchronized void addDisconnectedPlayer(L2PcInstance player)
+	public static synchronized void addDisconnectedPlayer(L2Player player)
 	{
 		if (_started)
 		{
@@ -1175,7 +1175,7 @@ public class VIP
 					player.stopAllEffects();
 				}
 				
-				for (L2PcInstance p : _playersVIP)
+				for (L2Player p : _playersVIP)
 				{
 					if (p == null)
 						continue;
@@ -1202,7 +1202,7 @@ public class VIP
 					}
 				}
 				
-				for (L2PcInstance p : _playersNotVIP)
+				for (L2Player p : _playersNotVIP)
 				{
 					if (p == null)
 						continue;

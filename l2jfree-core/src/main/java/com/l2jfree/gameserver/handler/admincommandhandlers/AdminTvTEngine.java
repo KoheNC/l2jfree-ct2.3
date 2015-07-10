@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
 import javolution.text.TextBuilder;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.entity.events.TvT;
@@ -43,7 +43,7 @@ public class AdminTvTEngine implements IAdminCommandHandler
 			"admin_tvt_minplayers", "admin_tvt_maxplayers", "admin_tvtkick" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_tvt"))
 			showMainPage(activeChar);
@@ -212,7 +212,7 @@ public class AdminTvTEngine implements IAdminCommandHandler
 			{
 				st.nextToken();
 				String plyr = st.nextToken();
-				L2PcInstance playerToKick = L2World.getInstance().getPlayer(plyr);
+				L2Player playerToKick = L2World.getInstance().getPlayer(plyr);
 				if (playerToKick != null)
 				{
 					TvT.kickPlayerFromTvt(playerToKick);
@@ -231,7 +231,7 @@ public class AdminTvTEngine implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	public void showMainPage(L2PcInstance activeChar)
+	public void showMainPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");

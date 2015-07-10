@@ -19,6 +19,7 @@ import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.FolkStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -61,7 +62,7 @@ public class L2NpcInstance extends L2Npc
 	 * this displays SkillList to the player.
 	 * @param player
 	 */
-	public void showSkillList(L2PcInstance player, ClassId classId, boolean closable)
+	public void showSkillList(L2Player player, ClassId classId, boolean closable)
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("SkillList activated on: " + getObjectId());
@@ -130,7 +131,7 @@ public class L2NpcInstance extends L2Npc
 	 * this displays EnchantSkillList to the player.
 	 * @param player
 	 */
-	public void showEnchantSkillList(L2PcInstance player, boolean isSafeEnchant)
+	public void showEnchantSkillList(L2Player player, boolean isSafeEnchant)
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("EnchantSkillList activated on: " + getObjectId());
@@ -202,7 +203,7 @@ public class L2NpcInstance extends L2Npc
 	 * @param player
 	 * @param classId
 	 */
-	public void showEnchantChangeSkillList(L2PcInstance player)
+	public void showEnchantChangeSkillList(L2Player player)
 	{
 		if (_log.isDebugEnabled())
 			_log.info("Enchanted Skill List activated on: " + getObjectId());
@@ -265,7 +266,7 @@ public class L2NpcInstance extends L2Npc
 	 * @param player
 	 * @param classId
 	 */
-	public void showEnchantUntrainSkillList(L2PcInstance player, ClassId classId)
+	public void showEnchantUntrainSkillList(L2Player player, ClassId classId)
 	{
 		if (_log.isDebugEnabled())
 			_log.info("Enchanted Skill List activated on: " + getObjectId());
@@ -323,7 +324,7 @@ public class L2NpcInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (player.inObserverMode())
 			return;
@@ -422,7 +423,7 @@ public class L2NpcInstance extends L2Npc
 		}
 	}
 	
-	private void showNoTeachHtml(L2PcInstance player)
+	private void showNoTeachHtml(L2Player player)
 	{
 		int npcId = getNpcId();
 		String html = null;

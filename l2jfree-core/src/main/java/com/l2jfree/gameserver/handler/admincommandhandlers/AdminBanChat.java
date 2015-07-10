@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.restriction.AvailableRestriction;
@@ -38,9 +38,9 @@ public final class AdminBanChat implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_banchat", "admin_unbanchat" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
-		L2PcInstance targetPlayer = null;
+		L2Player targetPlayer = null;
 		long banLength = -1;
 		
 		final String[] cmdParams = command.split(" ");
@@ -61,7 +61,7 @@ public final class AdminBanChat implements IAdminCommandHandler
 		}
 		else
 		{
-			targetPlayer = activeChar.getTarget(L2PcInstance.class);
+			targetPlayer = activeChar.getTarget(L2Player.class);
 		}
 		
 		if (targetPlayer == null)

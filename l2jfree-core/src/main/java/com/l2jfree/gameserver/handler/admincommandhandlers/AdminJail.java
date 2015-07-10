@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.zone.L2JailZone;
@@ -38,7 +38,7 @@ public class AdminJail implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_jail", "admin_unjail" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		st.nextToken();
@@ -59,7 +59,7 @@ public class AdminJail implements IAdminCommandHandler
 					activeChar.sendMessage("Usage: //jail <charname> [penalty_minutes]");
 				}
 				
-				L2PcInstance playerObj = L2World.getInstance().getPlayer(player);
+				L2Player playerObj = L2World.getInstance().getPlayer(player);
 				if (playerObj != null)
 				{
 					playerObj.setInJail(true, delay);
@@ -83,7 +83,7 @@ public class AdminJail implements IAdminCommandHandler
 			try
 			{
 				player = st.nextToken();
-				L2PcInstance playerObj = L2World.getInstance().getPlayer(player);
+				L2Player playerObj = L2World.getInstance().getPlayer(player);
 				
 				if (playerObj != null)
 				{
@@ -105,7 +105,7 @@ public class AdminJail implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void jailOfflinePlayer(L2PcInstance activeChar, String name, int delay)
+	private void jailOfflinePlayer(L2Player activeChar, String name, int delay)
 	{
 		Connection con = null;
 		try
@@ -142,7 +142,7 @@ public class AdminJail implements IAdminCommandHandler
 		}
 	}
 	
-	private void unjailOfflinePlayer(L2PcInstance activeChar, String name)
+	private void unjailOfflinePlayer(L2Player activeChar, String name)
 	{
 		Connection con = null;
 		try

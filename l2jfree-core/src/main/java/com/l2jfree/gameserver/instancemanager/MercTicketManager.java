@@ -34,7 +34,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeTeleporterInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -862,7 +862,7 @@ public class MercTicketManager
 	 * @param player The castle owning clan member
 	 * @param merc The mercenary posting ticket
 	 */
-	public final void reqPosition(final L2PcInstance player, final L2ItemInstance merc)
+	public final void reqPosition(final L2Player player, final L2ItemInstance merc)
 	{
 		if (player == null || merc == null)
 			return;
@@ -900,7 +900,7 @@ public class MercTicketManager
 	 * <LI>A non-dawn mercenary is positioned <I>(when Seal of Strife is unclaimed)</I></LI>
 	 * @param player which confirmed mercenary positioning
 	 */
-	public final void addPosition(L2PcInstance player, Integer itemObjId)
+	public final void addPosition(L2Player player, Integer itemObjId)
 	{
 		L2ItemInstance ticket = player.getInventory().getItemByObjectId(itemObjId);
 		if (ticket == null)
@@ -1051,7 +1051,7 @@ public class MercTicketManager
 	 * @param ticket an item
 	 * @return allow player to pick up this item
 	 */
-	public final boolean canPickUp(L2PcInstance player, L2ItemInstance ticket)
+	public final boolean canPickUp(L2Player player, L2ItemInstance ticket)
 	{
 		// not a mercenary posting ticket
 		if (ticket == null || !isTicket(ticket.getItemId()))

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CCHManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
@@ -64,9 +64,9 @@ public class Die extends L2ServerPacket
 			_sweepable = ((L2Attackable)cha).isSweepActive() ? 1 : 0;
 		else
 			_sweepable = 0;
-		if (cha instanceof L2PcInstance)
+		if (cha instanceof L2Player)
 		{
-			L2PcInstance player = cha.getActingPlayer();
+			L2Player player = cha.getActingPlayer();
 			if (!GlobalRestrictions.canRequestRevive(player))
 			{
 				_showVillage = 0;

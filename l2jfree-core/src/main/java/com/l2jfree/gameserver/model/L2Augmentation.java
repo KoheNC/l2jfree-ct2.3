@@ -18,7 +18,7 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.AugmentationData;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.funcs.Func;
 import com.l2jfree.gameserver.skills.funcs.FuncAdd;
 import com.l2jfree.gameserver.skills.funcs.FuncOwner;
@@ -69,7 +69,7 @@ public final class L2Augmentation
 			}
 		}
 		
-		public void applyBonus(L2PcInstance player)
+		public void applyBonus(L2Player player)
 		{
 			// make sure the bonuses are not applied twice..
 			if (_active)
@@ -80,7 +80,7 @@ public final class L2Augmentation
 			_active = true;
 		}
 		
-		public void removeBonus(L2PcInstance player)
+		public void removeBonus(L2Player player)
 		{
 			// make sure the bonuses are not removed twice
 			if (!_active)
@@ -127,7 +127,7 @@ public final class L2Augmentation
 	 * Applies the bonuses to the player.
 	 * @param player
 	 */
-	public void applyBonus(L2PcInstance player)
+	public void applyBonus(L2Player player)
 	{
 		_boni.applyBonus(player);
 		
@@ -142,7 +142,7 @@ public final class L2Augmentation
 	 * Removes the augmentation bonuses from the player.
 	 * @param player
 	 */
-	public void removeBonus(L2PcInstance player)
+	public void removeBonus(L2Player player)
 	{
 		_boni.removeBonus(player);
 		

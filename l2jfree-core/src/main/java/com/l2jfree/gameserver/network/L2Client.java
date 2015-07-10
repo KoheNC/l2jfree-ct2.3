@@ -32,7 +32,7 @@ import com.l2jfree.gameserver.LoginServerThread;
 import com.l2jfree.gameserver.LoginServerThread.SessionKey;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.CharSelectInfoPackage;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -72,7 +72,7 @@ public final class L2Client extends MMOConnection<L2Client, L2ClientPacket, L2Se
 	private GameClientState _state = GameClientState.CONNECTED;
 	private String _accountName;
 	private SessionKey _sessionId;
-	private L2PcInstance _activeChar;
+	private L2Player _activeChar;
 	private boolean _isAuthedGG;
 	private int[] _charSlotMapping;
 	private GameCrypt _crypt;
@@ -126,12 +126,12 @@ public final class L2Client extends MMOConnection<L2Client, L2ClientPacket, L2Se
 		return true;
 	}
 	
-	public L2PcInstance getActiveChar()
+	public L2Player getActiveChar()
 	{
 		return _activeChar;
 	}
 	
-	public void setActiveChar(L2PcInstance pActiveChar)
+	public void setActiveChar(L2Player pActiveChar)
 	{
 		_activeChar = pActiveChar;
 	}
@@ -324,9 +324,9 @@ public final class L2Client extends MMOConnection<L2Client, L2ClientPacket, L2Se
 		}
 	}
 	
-	public L2PcInstance loadCharFromDisk(int charslot)
+	public L2Player loadCharFromDisk(int charslot)
 	{
-		return L2PcInstance.load(getObjectIdForSlot(charslot));
+		return L2Player.load(getObjectIdForSlot(charslot));
 	}
 	
 	/**
@@ -372,7 +372,7 @@ public final class L2Client extends MMOConnection<L2Client, L2ClientPacket, L2Se
 		if (account != null)
 			tb.append(" | Account: ").append(String.format("%-15s", account));
 		
-		L2PcInstance player = getActiveChar();
+		L2Player player = getActiveChar();
 		if (player != null)
 			tb.append(" | Character: ").append(String.format("%-15s", player.getName()));
 		
@@ -519,7 +519,7 @@ public final class L2Client extends MMOConnection<L2Client, L2ClientPacket, L2Se
 	private void sendPacketImpl(L2ServerPacket sp)
 	{
 		final long begin = System.nanoTime();
-		final L2PcInstance activeChar = getActiveChar();
+		final L2Player activeChar = getActiveChar();
 		
 		try
 		{

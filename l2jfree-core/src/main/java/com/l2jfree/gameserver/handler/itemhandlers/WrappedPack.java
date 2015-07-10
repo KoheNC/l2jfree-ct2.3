@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -47,10 +47,10 @@ public class WrappedPack implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance) || item == null)
+		if (!(playable instanceof L2Player) || item == null)
 			return;
 		
-		L2PcInstance player = playable.getActingPlayer();
+		L2Player player = playable.getActingPlayer();
 		if (!player.destroyItemByItemId("Consume", item.getItemId(), 1, player, true))
 			return;
 		

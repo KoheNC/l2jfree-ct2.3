@@ -19,6 +19,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ClanTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -42,7 +43,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (_hasEvolve && command.startsWith("evolve"))
 		{
@@ -93,7 +94,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	public void showMessageWindow(L2PcInstance player)
+	public void showMessageWindow(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -135,7 +136,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	protected final void openDoors(L2PcInstance player, String command)
+	protected final void openDoors(L2Player player, String command)
 	{
 		getClanHall().openCloseDoors(true);
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
@@ -145,7 +146,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	protected final void closeDoors(L2PcInstance player, String command)
+	protected final void closeDoors(L2Player player, String command)
 	{
 		getClanHall().openCloseDoors(false);
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
@@ -173,7 +174,7 @@ public class L2ClanHallDoormenInstance extends L2DoormenInstance
 	}
 	
 	@Override
-	protected final boolean isOwnerClan(L2PcInstance player)
+	protected final boolean isOwnerClan(L2Player player)
 	{
 		if (player.isGM())
 			return true;

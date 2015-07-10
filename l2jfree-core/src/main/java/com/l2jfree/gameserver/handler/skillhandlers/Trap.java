@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2TrapInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -53,8 +53,8 @@ public class Trap implements ISkillHandler
 					if (target.getLevel() <= skill.getPower())
 					{
 						target.setDetected();
-						if (activeChar instanceof L2PcInstance)
-							((L2PcInstance)activeChar).sendMessage("A Trap has been detected!");
+						if (activeChar instanceof L2Player)
+							((L2Player)activeChar).sendMessage("A Trap has been detected!");
 					}
 				}
 				break;
@@ -74,11 +74,11 @@ public class Trap implements ISkillHandler
 					if (target.getLevel() > skill.getPower())
 						continue;
 					
-					L2PcInstance trapOwner = null;
+					L2Player trapOwner = null;
 					trapOwner = target.getOwner();
 					
 					target.unSummon(trapOwner);
-					if (activeChar instanceof L2PcInstance)
+					if (activeChar instanceof L2Player)
 						activeChar.sendPacket(SystemMessageId.A_TRAP_DEVICE_HAS_BEEN_STOPPED);
 				}
 			}

@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.cache.CrestCache;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -52,7 +52,7 @@ public class RequestSetPledgeCrest extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -87,7 +87,7 @@ public class RequestSetPledgeCrest extends L2ClientPacket
 			clan.setHasCrest(false);
 			sendPacket(SystemMessageId.CLAN_CREST_HAS_BEEN_DELETED);
 			
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 				member.broadcastUserInfo();
 		}
 		else
@@ -127,7 +127,7 @@ public class RequestSetPledgeCrest extends L2ClientPacket
 			clan.setCrestId(newId);
 			clan.setHasCrest(true);
 			
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 				member.broadcastUserInfo();
 		}
 		

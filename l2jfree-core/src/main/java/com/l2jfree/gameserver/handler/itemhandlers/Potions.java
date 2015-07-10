@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -38,10 +38,10 @@ public class Potions implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		L2PcInstance activeChar; // use activeChar only for L2PcInstance checks where cannot be used PetInstance
+		L2Player activeChar; // use activeChar only for L2Player checks where cannot be used PetInstance
 		boolean res = false;
-		if (playable instanceof L2PcInstance)
-			activeChar = (L2PcInstance)playable;
+		if (playable instanceof L2Player)
+			activeChar = (L2Player)playable;
 		else if (playable instanceof L2PetInstance)
 			activeChar = ((L2PetInstance)playable).getOwner();
 		else
@@ -208,8 +208,8 @@ public class Potions implements IItemHandler
 	
 	private boolean isUseable(L2Playable playable, L2ItemInstance item, int skillid)
 	{
-		L2PcInstance activeChar =
-				((playable instanceof L2PcInstance) ? ((L2PcInstance)playable) : ((L2Summon)playable).getOwner());
+		L2Player activeChar =
+				((playable instanceof L2Player) ? ((L2Player)playable) : ((L2Summon)playable).getOwner());
 		if (activeChar.isSkillDisabled(skillid))
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_PREPARED_FOR_REUSE);
@@ -253,9 +253,9 @@ public class Potions implements IItemHandler
 				// activeChar.doCast(skill);
 			}
 			
-			if (activeChar instanceof L2PcInstance)
+			if (activeChar instanceof L2Player)
 			{
-				L2PcInstance player = (L2PcInstance)activeChar;
+				L2Player player = (L2Player)activeChar;
 				
 				if (!(player.isSitting() && !skill.isPotion()))
 					return true;

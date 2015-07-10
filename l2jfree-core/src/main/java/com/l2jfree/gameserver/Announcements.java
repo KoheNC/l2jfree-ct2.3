@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -78,7 +78,7 @@ public class Announcements
 		}
 	}
 	
-	public void showAnnouncements(L2PcInstance activeChar)
+	public void showAnnouncements(L2Player activeChar)
 	{
 		for (int i = 0; i < _announcements.size(); i++)
 		{
@@ -115,7 +115,7 @@ public class Announcements
 		_eventAnnouncements.add(entry);
 	}
 	
-	public void listAnnouncements(L2PcInstance activeChar)
+	public void listAnnouncements(L2Player activeChar)
 	{
 		String content = HtmCache.getInstance().getHtmForce("data/html/admin/announce.htm");
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
@@ -224,7 +224,7 @@ public class Announcements
 		if (Config.IRC_ENABLED && Config.IRC_ANNOUNCE)
 			IrcManager.getInstance().getConnection().sendChan("10Announce: " + text);
 		
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			player.sendPacket(cs);
 		}
@@ -232,7 +232,7 @@ public class Announcements
 	
 	public void announceToAll(L2ServerPacket gsp)
 	{
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			player.sendPacket(gsp);
 		}
@@ -240,7 +240,7 @@ public class Announcements
 	
 	public void announceToAll(SystemMessageId sm)
 	{
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			player.sendPacket(sm);
 		}
@@ -248,7 +248,7 @@ public class Announcements
 	
 	public void announceToInstance(L2ServerPacket gsp, int instanceId)
 	{
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			if (player.isSameInstance(instanceId))
 				player.sendPacket(gsp);
@@ -282,7 +282,7 @@ public class Announcements
 	public void announceToPlayers(String message)
 	{
 		// Get all players
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 			player.sendMessage(message);
 	}
 	
