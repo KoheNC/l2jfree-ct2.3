@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.instancemanager.AutoSpawnManager.AutoSpawnInstance
 import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * Admin Command Handler for Mammon NPCs

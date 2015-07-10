@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExCursedWeaponList;
+import com.l2jfree.gameserver.network.packets.server.ExCursedWeaponList;
 
 /**
  * Format: (ch)

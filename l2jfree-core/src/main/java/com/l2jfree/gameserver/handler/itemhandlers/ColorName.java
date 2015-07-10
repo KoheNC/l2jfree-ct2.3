@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.client.RequestChangeNicknameColor;
-import com.l2jfree.gameserver.network.serverpackets.ExChangeNicknameNColor;
+import com.l2jfree.gameserver.network.packets.server.ExChangeNicknameNColor;
 
 public class ColorName implements IItemHandler
 {

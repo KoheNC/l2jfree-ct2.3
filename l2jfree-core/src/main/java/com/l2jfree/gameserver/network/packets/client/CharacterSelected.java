@@ -20,8 +20,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.CharSelected;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.CharSelected;
 
 public final class CharacterSelected extends L2ClientPacket
 {

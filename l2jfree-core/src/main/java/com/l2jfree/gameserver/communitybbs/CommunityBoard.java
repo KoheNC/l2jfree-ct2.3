@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.communitybbs.Manager.UpdateBBSManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.L2GameClient;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ShowBoard;
+import com.l2jfree.gameserver.network.packets.server.ShowBoard;
 
 public class CommunityBoard
 {

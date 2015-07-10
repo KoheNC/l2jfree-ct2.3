@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.gameserver.instancemanager.RaidPointsManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExGetBossRecord;
+import com.l2jfree.gameserver.network.packets.server.ExGetBossRecord;
 
 public class RequestGetBossRecord extends L2ClientPacket
 {

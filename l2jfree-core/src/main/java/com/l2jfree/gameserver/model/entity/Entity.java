@@ -25,8 +25,8 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.zone.L2Zone;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.tools.random.Rnd;
 
 public class Entity
@@ -155,7 +155,7 @@ public class Entity
 		}
 	}
 	
-	public void broadcastToPlayers(L2GameServerPacket gsp)
+	public void broadcastToPlayers(L2ServerPacket gsp)
 	{
 		for (L2PcInstance player : getPlayersInside())
 		{

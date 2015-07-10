@@ -37,7 +37,7 @@ import com.l2jfree.gameserver.model.zone.L2JailZone;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.Die;
+import com.l2jfree.gameserver.network.packets.server.Die;
 
 public class RequestRestartPoint extends L2ClientPacket
 {

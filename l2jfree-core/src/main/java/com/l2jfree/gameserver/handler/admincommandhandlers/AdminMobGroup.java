@@ -22,8 +22,8 @@ import com.l2jfree.gameserver.model.MobGroupTable;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillUse;
-import com.l2jfree.gameserver.network.serverpackets.SetupGauge;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
+import com.l2jfree.gameserver.network.packets.server.SetupGauge;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.util.Broadcast;
 

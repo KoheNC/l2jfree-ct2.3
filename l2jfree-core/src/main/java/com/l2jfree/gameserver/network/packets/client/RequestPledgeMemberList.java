@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowMemberListAll;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowMemberListAll;
 
 public class RequestPledgeMemberList extends L2ClientPacket
 {

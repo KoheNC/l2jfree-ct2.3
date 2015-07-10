@@ -18,12 +18,12 @@ import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.JoinPledge;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowInfoUpdate;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowMemberListAdd;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowMemberListAll;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.JoinPledge;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowMemberListAdd;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowMemberListAll;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * This class represents a packet that is sent by the client when a player confirms/denies
@@ -98,7 +98,7 @@ public class RequestAnswerJoinPledge extends L2ClientPacket
 				sm.addString(activeChar.getName());
 				clan.broadcastToOnlineMembers(sm);
 				
-				L2GameServerPacket pledge = new PledgeShowMemberListAdd(activeChar);
+				L2ServerPacket pledge = new PledgeShowMemberListAdd(activeChar);
 				clan.broadcastToOtherOnlineMembers(pledge, activeChar);
 				pledge = new PledgeShowInfoUpdate(clan);
 				clan.broadcastToOnlineMembers(pledge);

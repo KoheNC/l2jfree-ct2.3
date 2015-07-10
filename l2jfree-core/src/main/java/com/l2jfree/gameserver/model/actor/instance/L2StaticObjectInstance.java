@@ -29,11 +29,11 @@ import com.l2jfree.gameserver.model.actor.knownlist.StaticObjectKnownList;
 import com.l2jfree.gameserver.model.actor.stat.CharStat;
 import com.l2jfree.gameserver.model.actor.stat.StaticObjStat;
 import com.l2jfree.gameserver.model.entity.Castle;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.ChairSit;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.network.serverpackets.ShowTownMap;
-import com.l2jfree.gameserver.network.serverpackets.StaticObject;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ChairSit;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.ShowTownMap;
+import com.l2jfree.gameserver.network.packets.server.StaticObject;
 import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 import com.l2jfree.lang.L2TextBuilder;
 

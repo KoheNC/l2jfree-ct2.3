@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.CharSelectionInfo;
-import com.l2jfree.gameserver.network.serverpackets.CharacterDeleteFail;
-import com.l2jfree.gameserver.network.serverpackets.CharacterDeleteSuccess;
+import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
+import com.l2jfree.gameserver.network.packets.server.CharacterDeleteFail;
+import com.l2jfree.gameserver.network.packets.server.CharacterDeleteSuccess;
 
 /**
  * This class represents a packet sent by the client when a character is being marked for deletion ("Yes" is clicked in the deletion confirmation dialog)

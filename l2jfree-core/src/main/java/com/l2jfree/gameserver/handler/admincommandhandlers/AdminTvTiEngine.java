@@ -29,7 +29,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TVTInstance;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TvTIMain;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TvTITeam;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
 
 public class AdminTvTiEngine implements IAdminCommandHandler

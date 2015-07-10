@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ExClosePartyRoom;
+import com.l2jfree.gameserver.network.packets.server.ExClosePartyRoom;
 
 /**
  * Party room and party matching waiting list manager.

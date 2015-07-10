@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExBrProductList;
+import com.l2jfree.gameserver.network.packets.server.ExBrProductList;
 
 public final class BrProductList extends L2ClientPacket
 {

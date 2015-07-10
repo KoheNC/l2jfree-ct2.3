@@ -31,9 +31,9 @@ import com.l2jfree.gameserver.model.actor.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2SummonInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.RecipeShopManageList;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.RecipeShopManageList;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.gameserver.util.FloodProtector;
 import com.l2jfree.gameserver.util.FloodProtector.Protected;
 

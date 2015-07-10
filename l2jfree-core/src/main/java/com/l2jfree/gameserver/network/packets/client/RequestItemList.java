@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.ItemList;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ItemList;
 
 /**
  * This class represents a packet sent by the client when a player opens the inventory.

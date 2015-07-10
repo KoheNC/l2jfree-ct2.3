@@ -26,9 +26,9 @@ import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 
 /**
  * MC show script

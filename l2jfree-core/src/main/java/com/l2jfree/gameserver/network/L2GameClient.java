@@ -36,9 +36,9 @@ import com.l2jfree.gameserver.model.CharSelectInfoPackage;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.LeaveWorld;
-import com.l2jfree.gameserver.network.serverpackets.ServerClose;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.LeaveWorld;
+import com.l2jfree.gameserver.network.packets.server.ServerClose;
 import com.l2jfree.gameserver.threadmanager.FIFORunnableQueue;
 import com.l2jfree.gameserver.util.TableOptimizer;
 import com.l2jfree.gameserver.util.TableOptimizer.CharacterRelatedTable;
@@ -55,7 +55,7 @@ import com.l2jfree.util.concurrent.RunnableStatsManager;
  * 
  * @author KenM
  */
-public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPacket, L2GameServerPacket>
+public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPacket, L2ServerPacket>
 {
 	private static final Log _log = LogFactory.getLog(L2GameClient.class);
 	
@@ -80,7 +80,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 	private String _hostAddress;
 	private boolean _protocol;
 	
-	public L2GameClient(SelectorThread<L2GameClient, L2ClientPacket, L2GameServerPacket> selectorThread,
+	public L2GameClient(SelectorThread<L2GameClient, L2ClientPacket, L2ServerPacket> selectorThread,
 			SocketChannel socketChannel) throws ClosedChannelException
 	{
 		super(selectorThread, socketChannel);
@@ -431,7 +431,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 		return _packetQueue;
 	}
 	
-	private final class ServerPacketQueue extends FastList<L2GameServerPacket> implements Runnable
+	private final class ServerPacketQueue extends FastList<L2ServerPacket> implements Runnable
 	{
 		private static final long serialVersionUID = 6715576112277597425L;
 		
@@ -478,7 +478,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 	private ServerPacketQueue _serverPacketQueue;
 	
 	@Override
-	public void sendPacket(L2GameServerPacket sp)
+	public void sendPacket(L2ServerPacket sp)
 	{
 		if (_serverPacketQueue != null)
 		{
@@ -516,7 +516,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 	 * {@link RunnableStatsManager} used here mostly for counting, since constructors - usually the longest parts - are
 	 * excluded.
 	 */
-	private void sendPacketImpl(L2GameServerPacket sp)
+	private void sendPacketImpl(L2ServerPacket sp)
 	{
 		final long begin = System.nanoTime();
 		final L2PcInstance activeChar = getActiveChar();
@@ -549,7 +549,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 	}
 	
 	@Override
-	public void close(L2GameServerPacket sp)
+	public void close(L2ServerPacket sp)
 	{
 		new Disconnection(this).defaultSequence(false);
 	}
@@ -561,7 +561,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPack
 	}
 	
 	@Override
-	protected L2GameServerPacket getDefaultClosePacket()
+	protected L2ServerPacket getDefaultClosePacket()
 	{
 		return LeaveWorld.STATIC_PACKET;
 	}

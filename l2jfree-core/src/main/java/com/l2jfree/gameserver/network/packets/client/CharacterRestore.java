@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
 
 /**
  * This class represents a packet sent by the client when a marked to delete character is being restored ("Yes" is clicked in the restore confirmation dialog)

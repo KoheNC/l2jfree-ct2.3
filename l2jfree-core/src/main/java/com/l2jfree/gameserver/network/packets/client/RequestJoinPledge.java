@@ -20,8 +20,8 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.AskJoinPledge;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.AskJoinPledge;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 public class RequestJoinPledge extends L2ClientPacket
 {

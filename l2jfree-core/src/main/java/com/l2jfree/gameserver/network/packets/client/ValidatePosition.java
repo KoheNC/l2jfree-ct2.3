@@ -19,9 +19,9 @@ import com.l2jfree.gameserver.geoeditorcon.GeoEditorListener;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExValidateLocationInAirShip;
-import com.l2jfree.gameserver.network.serverpackets.ValidateLocation;
-import com.l2jfree.gameserver.network.serverpackets.ValidateLocationInVehicle;
+import com.l2jfree.gameserver.network.packets.server.ExValidateLocationInAirShip;
+import com.l2jfree.gameserver.network.packets.server.ValidateLocation;
+import com.l2jfree.gameserver.network.packets.server.ValidateLocationInVehicle;
 
 /**
  * Sent by client during movement.

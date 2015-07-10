@@ -29,10 +29,10 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.ExHeroList;
-import com.l2jfree.gameserver.network.serverpackets.GMViewPledgeInfo;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ExHeroList;
+import com.l2jfree.gameserver.network.packets.server.GMViewPledgeInfo;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.mmocore.network.InvalidPacketException;
 
 /**

@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2AutoInitialization;
-import com.l2jfree.gameserver.network.serverpackets.AbstractNpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.AbstractNpcHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
 
 /**

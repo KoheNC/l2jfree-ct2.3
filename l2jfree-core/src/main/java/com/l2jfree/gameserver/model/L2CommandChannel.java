@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.model.actor.L2Boss;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.ExCloseMPCC;
-import com.l2jfree.gameserver.network.serverpackets.ExMultiPartyCommandChannelInfo;
-import com.l2jfree.gameserver.network.serverpackets.ExOpenMPCC;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.ExCloseMPCC;
+import com.l2jfree.gameserver.network.packets.server.ExMultiPartyCommandChannelInfo;
+import com.l2jfree.gameserver.network.packets.server.ExOpenMPCC;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.util.L2FastSet;
 
 /**
@@ -147,7 +147,7 @@ public class L2CommandChannel
 	 * Broadcast packet to every channel member
 	 * @param gsp a sendable packet
 	 */
-	public void broadcastToChannelMembers(L2GameServerPacket gsp)
+	public void broadcastToChannelMembers(L2ServerPacket gsp)
 	{
 		if (_partys != null)
 			for (L2Party party : _partys)
@@ -163,7 +163,7 @@ public class L2CommandChannel
 					party.broadcastCSToPartyMembers(gsp, broadcaster);
 	}
 	
-	public void broadcastToChannelMembers(L2PcInstance exclude, L2GameServerPacket gsp)
+	public void broadcastToChannelMembers(L2PcInstance exclude, L2ServerPacket gsp)
 	{
 		if (_partys != null)
 			for (L2Party party : _partys)

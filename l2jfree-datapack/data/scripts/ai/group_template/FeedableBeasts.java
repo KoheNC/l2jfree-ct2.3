@@ -28,8 +28,8 @@ import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2TamedBeastInstance;
 import com.l2jfree.gameserver.model.quest.QuestState;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.tools.random.Rnd;
 

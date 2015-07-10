@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2BoatInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.PartyMemberPosition;
+import com.l2jfree.gameserver.network.packets.server.PartyMemberPosition;
 
 /**
  * Used to revalidate/update/broadcast/execute tasks depending on current coordinates.<br>

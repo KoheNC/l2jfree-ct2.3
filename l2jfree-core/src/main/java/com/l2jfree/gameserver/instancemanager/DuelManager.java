@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Duel;
 import com.l2jfree.gameserver.model.restriction.global.DuelRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class DuelManager
 {
@@ -218,7 +218,7 @@ public class DuelManager
 	 * @param player
 	 * @param packet
 	 */
-	public void broadcastToOppositTeam(L2PcInstance player, L2GameServerPacket packet)
+	public void broadcastToOppositTeam(L2PcInstance player, L2ServerPacket packet)
 	{
 		if (player == null || !player.isInDuel())
 			return;

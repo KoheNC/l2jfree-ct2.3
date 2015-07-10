@@ -12,7 +12,7 @@ from com.l2jfree.gameserver.model.quest            import State
 from com.l2jfree.gameserver.model.quest            import QuestState
 from com.l2jfree.gameserver.model.quest.jython     import QuestJython as JQuest
 from com.l2jfree.gameserver.network                import SystemMessageId
-from com.l2jfree.gameserver.network.serverpackets  import SystemMessage
+from com.l2jfree.gameserver.network.packets.server  import SystemMessage
 
 qn = "Kamaloka"
 

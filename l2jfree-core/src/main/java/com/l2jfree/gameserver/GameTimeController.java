@@ -35,7 +35,7 @@ import com.l2jfree.gameserver.instancemanager.hellbound.HellboundManager;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance.ConditionListenerDependency;
-import com.l2jfree.gameserver.network.serverpackets.ClientSetTime;
+import com.l2jfree.gameserver.network.packets.server.ClientSetTime;
 import com.l2jfree.gameserver.util.Broadcast;
 import com.l2jfree.lang.L2Thread;
 

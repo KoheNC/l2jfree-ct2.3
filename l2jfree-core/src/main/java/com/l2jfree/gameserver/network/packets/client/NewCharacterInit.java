@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.NewCharacterSuccess;
+import com.l2jfree.gameserver.network.packets.server.NewCharacterSuccess;
 
 /**
  * This class represents a packet sent by the client when the "Create [character]" button

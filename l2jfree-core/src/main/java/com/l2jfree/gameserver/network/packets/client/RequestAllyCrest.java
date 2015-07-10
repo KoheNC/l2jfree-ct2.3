@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.cache.CrestCache;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.AllyCrest;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.AllyCrest;
 
 /**
  * This class represents a packet sent by the client when it needs to display an alliance

@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance.TeleportMode;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillRecall;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillTeleport;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;

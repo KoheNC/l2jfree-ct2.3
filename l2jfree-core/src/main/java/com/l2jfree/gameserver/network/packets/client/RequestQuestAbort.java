@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.QuestList;
+import com.l2jfree.gameserver.network.packets.server.QuestList;
 
 public class RequestQuestAbort extends L2ClientPacket
 {

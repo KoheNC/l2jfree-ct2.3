@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.status.CharStatus;
 import com.l2jfree.gameserver.model.actor.status.NpcWalkerStatus;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**

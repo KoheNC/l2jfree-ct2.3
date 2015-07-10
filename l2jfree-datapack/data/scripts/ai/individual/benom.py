@@ -10,9 +10,9 @@ from com.l2jfree.gameserver.model import L2CharPosition
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets import NpcSay
-from com.l2jfree.gameserver.network.serverpackets import SocialAction
-from com.l2jfree.gameserver.network.serverpackets import SpecialCamera
+from com.l2jfree.gameserver.network.packets.server import NpcSay
+from com.l2jfree.gameserver.network.packets.server import SocialAction
+from com.l2jfree.gameserver.network.packets.server import SpecialCamera
 from com.l2jfree.tools.random import Rnd
 
 Benom = 29054

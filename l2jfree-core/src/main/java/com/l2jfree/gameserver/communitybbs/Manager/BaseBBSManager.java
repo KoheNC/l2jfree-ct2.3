@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.ShowBoard;
+import com.l2jfree.gameserver.network.packets.server.ShowBoard;
 import com.l2jfree.lang.L2TextBuilder;
 
 public abstract class BaseBBSManager

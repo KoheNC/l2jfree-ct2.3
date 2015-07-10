@@ -28,14 +28,14 @@ import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ExManagePartyRoomMember;
-import com.l2jfree.gameserver.network.serverpackets.ExVitalityPointInfo;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.network.serverpackets.StatusUpdate;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.network.serverpackets.TutorialShowQuestionMark;
-import com.l2jfree.gameserver.network.serverpackets.UserInfo;
+import com.l2jfree.gameserver.network.packets.server.ExManagePartyRoomMember;
+import com.l2jfree.gameserver.network.packets.server.ExVitalityPointInfo;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowMemberListUpdate;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.TutorialShowQuestionMark;
+import com.l2jfree.gameserver.network.packets.server.UserInfo;
 import com.l2jfree.gameserver.skills.Stats;
 
 public class PcStat extends PlayableStat

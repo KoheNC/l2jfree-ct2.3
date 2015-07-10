@@ -4,9 +4,9 @@
 # v1.1.r0 2008.03.27: Update/Rewrite by Emperorc
 import sys
 from com.l2jfree.gameserver.datatables            import SkillTable
-from com.l2jfree.gameserver.network.serverpackets import NpcSay
-from com.l2jfree.gameserver.network.serverpackets import MagicSkillUse
-from com.l2jfree.gameserver.network.serverpackets import SocialAction
+from com.l2jfree.gameserver.network.packets.server import NpcSay
+from com.l2jfree.gameserver.network.packets.server import MagicSkillUse
+from com.l2jfree.gameserver.network.packets.server import SocialAction
 from com.l2jfree.gameserver.model.quest           import State
 from com.l2jfree.gameserver.model.quest           import QuestState
 from com.l2jfree.gameserver.model.quest.jython    import QuestJython as JQuest

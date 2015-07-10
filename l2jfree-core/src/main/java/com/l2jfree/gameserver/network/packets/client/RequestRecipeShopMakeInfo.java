@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.RecipeShopItemInfo;
+import com.l2jfree.gameserver.network.packets.server.RecipeShopItemInfo;
 
 /**
  * This class ...

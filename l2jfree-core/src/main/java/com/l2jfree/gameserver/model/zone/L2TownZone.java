@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.ClanHall;
-import com.l2jfree.gameserver.network.serverpackets.AgitDecoInfo;
+import com.l2jfree.gameserver.network.packets.server.AgitDecoInfo;
 
 public class L2TownZone extends L2Zone
 {

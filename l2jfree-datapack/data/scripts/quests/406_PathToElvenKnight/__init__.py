@@ -6,7 +6,7 @@ from com.l2jfree import Config
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets import SocialAction
+from com.l2jfree.gameserver.network.packets.server import SocialAction
 
 qn = "406_PathToElvenKnight"
 

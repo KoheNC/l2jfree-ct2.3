@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.L2Summon;
 import com.l2jfree.gameserver.model.actor.instance.L2CubicInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.AutoAttackStop;
+import com.l2jfree.gameserver.network.packets.server.AutoAttackStop;
 
 public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 {

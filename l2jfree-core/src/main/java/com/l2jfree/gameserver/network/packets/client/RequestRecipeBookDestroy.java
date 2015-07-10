@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.model.L2RecipeList;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.RecipeBookItemList;
+import com.l2jfree.gameserver.network.packets.server.RecipeBookItemList;
 
 public class RequestRecipeBookDestroy extends L2ClientPacket
 {

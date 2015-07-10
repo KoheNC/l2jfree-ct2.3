@@ -30,8 +30,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2TransformManagerInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.AcquireSkillInfo;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.AcquireSkillInfo;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 
 /**
  * This class represents a packet that is sent by the client when a player selects a

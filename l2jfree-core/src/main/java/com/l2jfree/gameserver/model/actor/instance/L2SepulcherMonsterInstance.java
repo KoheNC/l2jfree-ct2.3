@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.quest.QuestState;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**

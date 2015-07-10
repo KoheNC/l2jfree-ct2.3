@@ -28,7 +28,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.CoreInfo;
 import com.l2jfree.gameserver.LoginServerThread;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.mmocore.network.FloodManager.ErrorMode;
 import com.l2jfree.mmocore.network.IPacketHandler;
@@ -36,7 +36,7 @@ import com.l2jfree.mmocore.network.SelectorConfig;
 import com.l2jfree.mmocore.network.SelectorThread;
 import com.l2jfree.tools.util.HexUtil;
 
-public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2ClientPacket, L2GameServerPacket>
+public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2ClientPacket, L2ServerPacket>
 {
 	private static final class SingletonHolder
 	{
@@ -67,7 +67,7 @@ public final class L2GameSelectorThread extends SelectorThread<L2GameClient, L2C
 	}
 	
 	private L2GameSelectorThread(SelectorConfig sc,
-			IPacketHandler<L2GameClient, L2ClientPacket, L2GameServerPacket> packetHandler) throws IOException
+			IPacketHandler<L2GameClient, L2ClientPacket, L2ServerPacket> packetHandler) throws IOException
 	{
 		super(sc, packetHandler);
 	}

@@ -19,13 +19,13 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.GMHennaInfo;
-import com.l2jfree.gameserver.network.serverpackets.GMViewCharacterInfo;
-import com.l2jfree.gameserver.network.serverpackets.GMViewItemList;
-import com.l2jfree.gameserver.network.serverpackets.GMViewPledgeInfo;
-import com.l2jfree.gameserver.network.serverpackets.GMViewQuestInfo;
-import com.l2jfree.gameserver.network.serverpackets.GMViewSkillInfo;
-import com.l2jfree.gameserver.network.serverpackets.GMViewWarehouseWithdrawList;
+import com.l2jfree.gameserver.network.packets.server.GMHennaInfo;
+import com.l2jfree.gameserver.network.packets.server.GMViewCharacterInfo;
+import com.l2jfree.gameserver.network.packets.server.GMViewItemList;
+import com.l2jfree.gameserver.network.packets.server.GMViewPledgeInfo;
+import com.l2jfree.gameserver.network.packets.server.GMViewQuestInfo;
+import com.l2jfree.gameserver.network.packets.server.GMViewSkillInfo;
+import com.l2jfree.gameserver.network.packets.server.GMViewWarehouseWithdrawList;
 
 /**
  * This class represents a packet that is sent whenever a GM clicks something

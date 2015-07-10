@@ -22,8 +22,8 @@ import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.SiegeAttackerList;
-import com.l2jfree.gameserver.network.serverpackets.SiegeDefenderList;
+import com.l2jfree.gameserver.network.packets.server.SiegeAttackerList;
+import com.l2jfree.gameserver.network.packets.server.SiegeDefenderList;
 
 public class RequestJoinSiege extends L2ClientPacket
 {

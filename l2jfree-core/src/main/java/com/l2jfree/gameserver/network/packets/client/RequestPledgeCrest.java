@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.cache.CrestCache;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.PledgeCrest;
+import com.l2jfree.gameserver.network.packets.server.PledgeCrest;
 
 public class RequestPledgeCrest extends L2ClientPacket
 {

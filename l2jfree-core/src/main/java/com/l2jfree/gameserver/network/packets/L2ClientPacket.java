@@ -23,8 +23,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.L2GameClient;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.mmocore.network.InvalidPacketException;
 import com.l2jfree.mmocore.network.ReceivablePacket;
 
@@ -33,7 +32,7 @@ import com.l2jfree.mmocore.network.ReceivablePacket;
  * 
  * @author KenM
  */
-public abstract class L2ClientPacket extends ReceivablePacket<L2GameClient, L2ClientPacket, L2GameServerPacket>
+public abstract class L2ClientPacket extends ReceivablePacket<L2GameClient, L2ClientPacket, L2ServerPacket>
 {
 	protected static final Log _log = LogFactory.getLog(L2ClientPacket.class);
 	
@@ -79,7 +78,7 @@ public abstract class L2ClientPacket extends ReceivablePacket<L2GameClient, L2Cl
 		requestFailed(sm.getSystemMessage());
 	}
 	
-	protected final void requestFailed(L2GameServerPacket gsp)
+	protected final void requestFailed(L2ServerPacket gsp)
 	{
 		sendPacket(gsp);
 		sendAF();

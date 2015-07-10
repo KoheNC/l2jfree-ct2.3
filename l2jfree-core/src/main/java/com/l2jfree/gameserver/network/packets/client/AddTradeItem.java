@@ -22,8 +22,8 @@ import com.l2jfree.gameserver.model.TradeList;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.TradeOtherAdd;
-import com.l2jfree.gameserver.network.serverpackets.TradeOwnAdd;
+import com.l2jfree.gameserver.network.packets.server.TradeOtherAdd;
+import com.l2jfree.gameserver.network.packets.server.TradeOwnAdd;
 
 /**
  * This class represents a packet that is sent by the client when you are adding an item

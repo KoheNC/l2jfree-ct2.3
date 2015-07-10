@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.SSQStatus;
+import com.l2jfree.gameserver.network.packets.server.SSQStatus;
 
 /**
  * Seven Signs Record Update Request

@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.model.actor.L2Attackable;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.tools.random.Rnd;
 
 public class PrisonGuards extends L2AttackableAIScript

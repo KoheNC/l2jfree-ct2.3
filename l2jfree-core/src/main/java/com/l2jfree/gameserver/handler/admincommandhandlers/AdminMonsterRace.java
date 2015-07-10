@@ -19,10 +19,10 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.DeleteObject;
-import com.l2jfree.gameserver.network.serverpackets.MonRaceInfo;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.DeleteObject;
+import com.l2jfree.gameserver.network.packets.server.MonRaceInfo;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * This class handles following admin commands: - mons = handles monster race

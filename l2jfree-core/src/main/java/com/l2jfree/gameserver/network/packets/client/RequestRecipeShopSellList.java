@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.RecipeShopSellList;
+import com.l2jfree.gameserver.network.packets.server.RecipeShopSellList;
 
 /**
  * Packet sent when player clicks "< Previous" button when viewing a selected recipe in the

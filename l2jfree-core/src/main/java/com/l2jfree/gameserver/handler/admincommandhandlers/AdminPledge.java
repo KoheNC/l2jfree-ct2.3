@@ -23,8 +23,8 @@ import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.GMViewPledgeInfo;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.GMViewPledgeInfo;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * <B>Pledge Manipulation:</B><BR>

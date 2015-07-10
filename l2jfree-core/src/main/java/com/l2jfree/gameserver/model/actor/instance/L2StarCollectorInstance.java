@@ -19,9 +19,9 @@ import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2SkillLearn;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.AcquireSkillDone;
-import com.l2jfree.gameserver.network.serverpackets.AcquireSkillList;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.AcquireSkillDone;
+import com.l2jfree.gameserver.network.packets.server.AcquireSkillList;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2StarCollectorInstance extends L2MerchantInstance

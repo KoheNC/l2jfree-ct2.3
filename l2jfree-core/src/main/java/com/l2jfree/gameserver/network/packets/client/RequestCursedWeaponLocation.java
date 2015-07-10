@@ -21,8 +21,8 @@ import com.l2jfree.gameserver.model.CursedWeapon;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExCursedWeaponLocation;
-import com.l2jfree.gameserver.network.serverpackets.ExCursedWeaponLocation.CursedWeaponInfo;
+import com.l2jfree.gameserver.network.packets.server.ExCursedWeaponLocation;
+import com.l2jfree.gameserver.network.packets.server.ExCursedWeaponLocation.CursedWeaponInfo;
 
 /**
  * Format: (ch)

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.network.L2GameClient;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.KeyPacket;
+import com.l2jfree.gameserver.network.packets.server.KeyPacket;
 
 /**
  * This class represents the first packet that is sent by the client to the game server.

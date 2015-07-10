@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.PledgeReceiveMemberInfo;
+import com.l2jfree.gameserver.network.packets.server.PledgeReceiveMemberInfo;
 
 public final class RequestPledgeMemberInfo extends L2ClientPacket
 {

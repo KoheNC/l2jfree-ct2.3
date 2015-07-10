@@ -19,8 +19,8 @@ import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.L2GameClient;
 import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.CharSelectionInfo;
-import com.l2jfree.gameserver.network.serverpackets.RestartResponse;
+import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
+import com.l2jfree.gameserver.network.packets.server.RestartResponse;
 
 public final class RequestRestart extends L2ClientPacket
 {

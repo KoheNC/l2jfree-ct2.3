@@ -45,8 +45,8 @@ import com.l2jfree.gameserver.model.actor.instance.L2SiegeTeleporterInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
-import com.l2jfree.gameserver.network.serverpackets.ConfirmDlg;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.ConfirmDlg;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**

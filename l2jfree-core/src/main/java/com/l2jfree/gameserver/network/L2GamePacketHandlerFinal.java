@@ -22,8 +22,8 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.client.*;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jfree.mmocore.network.IPacketHandler;
 
 /**
@@ -40,7 +40,7 @@ import com.l2jfree.mmocore.network.IPacketHandler;
  * @author KenM
  */
 public final class L2GamePacketHandlerFinal implements
-		IPacketHandler<L2GameClient, L2ClientPacket, L2GameServerPacket>
+		IPacketHandler<L2GameClient, L2ClientPacket, L2ServerPacket>
 {
 	private static final Log _log = LogFactory.getLog(L2GamePacketHandlerFinal.class);
 	

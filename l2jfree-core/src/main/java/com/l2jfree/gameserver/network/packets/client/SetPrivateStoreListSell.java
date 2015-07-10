@@ -24,9 +24,9 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExPrivateStoreSetWholeMsg;
-import com.l2jfree.gameserver.network.serverpackets.PrivateStoreManageListSell;
-import com.l2jfree.gameserver.network.serverpackets.PrivateStoreMsgSell;
+import com.l2jfree.gameserver.network.packets.server.ExPrivateStoreSetWholeMsg;
+import com.l2jfree.gameserver.network.packets.server.PrivateStoreManageListSell;
+import com.l2jfree.gameserver.network.packets.server.PrivateStoreMsgSell;
 
 /**
  * This class ...

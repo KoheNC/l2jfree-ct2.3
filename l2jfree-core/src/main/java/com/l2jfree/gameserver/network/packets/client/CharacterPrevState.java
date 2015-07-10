@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
 
 public final class CharacterPrevState extends L2ClientPacket
 {

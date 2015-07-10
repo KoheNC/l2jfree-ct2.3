@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.ExShowFortressInfo;
+import com.l2jfree.gameserver.network.packets.server.ExShowFortressInfo;
 
 /** Sent when player opens the world map or the relevant World Info dialog. */
 public class RequestAllFortressInfo extends L2ClientPacket

@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.HennaRemoveList;
+import com.l2jfree.gameserver.network.packets.server.HennaRemoveList;
 
 public final class RequestHennaRemoveList extends L2ClientPacket
 {
