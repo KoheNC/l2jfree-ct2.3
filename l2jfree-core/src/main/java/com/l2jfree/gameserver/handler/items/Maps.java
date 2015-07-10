@@ -12,20 +12,20 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
-import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.gameobjects.instance.L2FeedableBeastInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.network.SystemMessageId;
+import com.l2jfree.gameserver.network.packets.server.ShowMiniMap;
 
-public class BeastSpice implements IItemHandler
+/**
+ * This class provides handling for items that should display a map when double clicked.
+ */
+public final class Maps implements IItemHandler
 {
-	// All the item IDs that this handler knows.
-	private static final int[] ITEM_IDS = { 6643, 6644 };
+	private static final int[] ITEM_IDS = { 1665, 1863 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
@@ -33,23 +33,7 @@ public class BeastSpice implements IItemHandler
 		if (!(playable instanceof L2Player))
 			return;
 		
-		L2Player activeChar = (L2Player)playable;
-		
-		if (!(activeChar.getTarget() instanceof L2FeedableBeastInstance))
-		{
-			activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
-			return;
-		}
-		
-		int itemId = item.getItemId();
-		if (itemId == 6643)
-		{ // Golden Spice
-			activeChar.useMagic(SkillTable.getInstance().getInfo(2188, 1), false, false);
-		}
-		else if (itemId == 6644)
-		{ // Crystal Spice
-			activeChar.useMagic(SkillTable.getInstance().getInfo(2189, 1), false, false);
-		}
+		((L2Player)playable).sendPacket(new ShowMiniMap(item.getItemId()));
 	}
 	
 	@Override

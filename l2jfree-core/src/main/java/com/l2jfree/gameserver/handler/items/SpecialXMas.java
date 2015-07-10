@@ -12,20 +12,22 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.network.packets.server.ShowMiniMap;
+import com.l2jfree.gameserver.network.packets.server.ShowXMasSeal;
 
 /**
- * This class provides handling for items that should display a map when double clicked.
+ *
+ * @author devScarlet & mrTJO
  */
-public final class Maps implements IItemHandler
+public class SpecialXMas implements IItemHandler
 {
-	private static final int[] ITEM_IDS = { 1665, 1863 };
+	// All the item IDs that this handler knows.
+	private static final int[] ITEM_IDS = { 5555 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
@@ -33,9 +35,12 @@ public final class Maps implements IItemHandler
 		if (!(playable instanceof L2Player))
 			return;
 		
-		((L2Player)playable).sendPacket(new ShowMiniMap(item.getItemId()));
+		playable.broadcastPacket(new ShowXMasSeal(item.getItemId()));
 	}
 	
+	/**
+	 * @see com.l2jfree.gameserver.handler.IItemHandler#getItemIds()
+	 */
 	@Override
 	public int[] getItemIds()
 	{

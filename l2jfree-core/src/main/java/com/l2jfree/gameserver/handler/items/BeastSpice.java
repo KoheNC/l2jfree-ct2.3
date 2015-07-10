@@ -12,23 +12,44 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
+import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2FeedableBeastInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.network.SystemMessageId;
 
-public final class SpiritShot implements IItemHandler
+public class BeastSpice implements IItemHandler
 {
-	private static final int[] ITEM_IDS =
-			{ 5790, 2509, 2510, 2511, 2512, 2513, 2514, 22077, 22078, 22079, 22080, 22081 };
+	// All the item IDs that this handler knows.
+	private static final int[] ITEM_IDS = { 6643, 6644 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (playable instanceof L2Player)
-			playable.getShots().chargeSpiritshot(item);
+		if (!(playable instanceof L2Player))
+			return;
+		
+		L2Player activeChar = (L2Player)playable;
+		
+		if (!(activeChar.getTarget() instanceof L2FeedableBeastInstance))
+		{
+			activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
+			return;
+		}
+		
+		int itemId = item.getItemId();
+		if (itemId == 6643)
+		{ // Golden Spice
+			activeChar.useMagic(SkillTable.getInstance().getInfo(2188, 1), false, false);
+		}
+		else if (itemId == 6644)
+		{ // Crystal Spice
+			activeChar.useMagic(SkillTable.getInstance().getInfo(2189, 1), false, false);
+		}
 	}
 	
 	@Override

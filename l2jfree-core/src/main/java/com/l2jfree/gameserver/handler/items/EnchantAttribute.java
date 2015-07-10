@@ -12,44 +12,44 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
+import com.l2jfree.gameserver.Shutdown;
+import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
+import com.l2jfree.gameserver.network.packets.server.ExChooseInventoryAttributeItem;
 
-/**
- * @author Tempy
- */
-public final class BeastSoulShot implements IItemHandler
+public class EnchantAttribute implements IItemHandler
 {
-	private static final int[] ITEM_IDS = { 6645, 20332 };
+	// All the item IDs that this handler knows.
+	private static final int ITEM_IDS[] = { 9546, 9547, 9548, 9549, 9550, 9551, 9552, 9553, 9554, 9555, 9556, 9557,
+			9558, 9559, 9560, 9561, 9562, 9563, 9564, 9565, 9566, 9567, 9568, 9569, 10521, 10522, 10523, 10524, 10525,
+			10526 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (playable instanceof L2Summon)
+		if (!(playable instanceof L2Player))
+			return;
+		
+		L2Player activeChar = (L2Player)playable;
+		if (activeChar.isCastingNow())
+			return;
+		
+		// Restrict enchant during restart/shutdown (because of an existing exploit)
+		if (Shutdown.isActionDisabled(DisableType.ENCHANT))
 		{
-			((L2Summon)playable).getOwner().sendPacket(SystemMessageId.PET_CANNOT_USE_ITEM);
+			activeChar.sendPacket(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
 		
-		if (playable instanceof L2Player)
-		{
-			L2Player activeOwner = (L2Player)playable;
-			L2Summon activePet = activeOwner.getPet();
-			
-			if (activePet == null)
-			{
-				activeOwner.sendPacket(SystemMessageId.PETS_ARE_NOT_AVAILABLE_AT_THIS_TIME);
-				return;
-			}
-			
-			activePet.getShots().chargeSoulshot(item);
-		}
+		//activeChar.sendPacket(SystemMessageId.SELECT_ITEM_TO_ADD_ELEMENTAL_POWER);
+		activeChar.setActiveEnchantAttrItem(item);
+		activeChar.sendPacket(new ExChooseInventoryAttributeItem(item.getItemId()));
 	}
 	
 	@Override

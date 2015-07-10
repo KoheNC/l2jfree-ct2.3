@@ -12,33 +12,26 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
+import com.l2jfree.gameserver.instancemanager.MercTicketManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.network.packets.server.SSQStatus;
 
-public class SevenSignsRecord implements IItemHandler
+public class MercTicket implements IItemHandler
 {
-	// All the item IDs that this handler knows.
-	private static final int[] ITEM_IDS = { SevenSigns.RECORD_SEVEN_SIGNS_ID };
-	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (playable instanceof L2Player)
-		{
-			L2Player player = playable.getActingPlayer();
-			player.sendPacket(new SSQStatus(player, 1));
-		}
+		L2Player player = playable.getActingPlayer();
+		MercTicketManager.getInstance().reqPosition(player, item);
 	}
 	
 	@Override
 	public int[] getItemIds()
 	{
-		return ITEM_IDS;
+		return MercTicketManager.getInstance().getItemIds();
 	}
 }

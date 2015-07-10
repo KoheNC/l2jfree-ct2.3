@@ -12,22 +12,23 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 
-public final class BlessedSpiritShot implements IItemHandler
+public final class SpiritShot implements IItemHandler
 {
-	private static final int[] ITEM_IDS = { 3947, 3948, 3949, 3950, 3951, 3952, 22072, 22073, 22074, 22075, 22076 };
+	private static final int[] ITEM_IDS =
+			{ 5790, 2509, 2510, 2511, 2512, 2513, 2514, 22077, 22078, 22079, 22080, 22081 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (playable instanceof L2Player)
-			playable.getShots().chargeBlessedSpiritshot(item);
+			playable.getShots().chargeSpiritshot(item);
 	}
 	
 	@Override

@@ -12,51 +12,52 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
- * Teleport Bookmark Slot Handler
- *
- * @author ShanSoft
+ * @author Tempy
  */
-public class TeleportBookmark implements IItemHandler
+public final class BeastSpiritShot implements IItemHandler
 {
+	private static final int[] ITEM_IDS = { 6646, 6647, 20333, 20334 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (playable == null || item == null || !(playable instanceof L2Player))
-			return;
-		
-		L2Player player = (L2Player)playable;
-		
-		if (player.getBookMarkSlot() >= 9)
+		if (playable instanceof L2Summon)
 		{
-			player.sendPacket(SystemMessageId.YOUR_NUMBER_OF_MY_TELEPORTS_SLOTS_HAS_REACHED_ITS_MAXIMUM_LIMIT);
+			((L2Summon)playable).getOwner().sendPacket(SystemMessageId.PET_CANNOT_USE_ITEM);
 			return;
 		}
 		
-		player.destroyItem("Consume", item.getObjectId(), 1, null, false);
-		
-		player.setBookMarkSlot(player.getBookMarkSlot() + 3);
-		player.sendPacket(SystemMessageId.THE_NUMBER_OF_MY_TELEPORTS_SLOTS_HAS_BEEN_INCREASED);
-		
-		SystemMessage sm = new SystemMessage(SystemMessageId.S1_DISAPPEARED);
-		sm.addItemName(item.getItemId());
-		player.sendPacket(sm);
+		if (playable instanceof L2Player)
+		{
+			L2Player activeOwner = (L2Player)playable;
+			L2Summon activePet = activeOwner.getPet();
+			
+			if (activePet == null)
+			{
+				activeOwner.sendPacket(SystemMessageId.PETS_ARE_NOT_AVAILABLE_AT_THIS_TIME);
+				return;
+			}
+			
+			if (item.getItemId() == 6647 || item.getItemId() == 20334)
+				activePet.getShots().chargeBlessedSpiritshot(item);
+			else
+				activePet.getShots().chargeSpiritshot(item);
+		}
 	}
 	
 	@Override
 	public int[] getItemIds()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return ITEM_IDS;
 	}
 }

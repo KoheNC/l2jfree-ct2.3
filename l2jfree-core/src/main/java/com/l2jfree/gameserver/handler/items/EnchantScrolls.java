@@ -12,30 +12,37 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.itemhandlers;
+package com.l2jfree.gameserver.handler.items;
 
+import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.packets.server.ExChooseInventoryAttributeItem;
+import com.l2jfree.gameserver.network.packets.server.ChooseInventoryItem;
 
-public class EnchantAttribute implements IItemHandler
+public class EnchantScrolls implements IItemHandler
 {
 	// All the item IDs that this handler knows.
-	private static final int ITEM_IDS[] = { 9546, 9547, 9548, 9549, 9550, 9551, 9552, 9553, 9554, 9555, 9556, 9557,
-			9558, 9559, 9560, 9561, 9562, 9563, 9564, 9565, 9566, 9567, 9568, 9569, 10521, 10522, 10523, 10524, 10525,
-			10526 };
+	private static final int[] ITEM_IDS = {
+			// A grade
+			729, 730, 731, 732, 6569, 6570, 22009, 22013, 22015, 22017, 22019, 22021,
+			// B grade
+			947, 948, 949, 950, 6571, 6572, 22008, 22012, 22014, 22016, 22018, 22020,
+			// C grade
+			951, 952, 953, 954, 6573, 6574, 22007, 22011,
+			// D grade
+			955, 956, 957, 958, 6575, 6576, 22006, 22010,
+			// S grade
+			959, 960, 961, 962, 6577, 6578 };
 	
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2Player))
 			return;
-		
 		L2Player activeChar = (L2Player)playable;
 		if (activeChar.isCastingNow())
 			return;
@@ -43,13 +50,28 @@ public class EnchantAttribute implements IItemHandler
 		// Restrict enchant during restart/shutdown (because of an existing exploit)
 		if (Shutdown.isActionDisabled(DisableType.ENCHANT))
 		{
-			activeChar.sendPacket(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
+			activeChar.sendMessage("Enchanting items is not allowed during restart/shutdown.");
 			return;
 		}
 		
-		//activeChar.sendPacket(SystemMessageId.SELECT_ITEM_TO_ADD_ELEMENTAL_POWER);
-		activeChar.setActiveEnchantAttrItem(item);
-		activeChar.sendPacket(new ExChooseInventoryAttributeItem(item.getItemId()));
+		if (activeChar.getActiveEnchantItem() != null)
+		{
+			if (_log.isDebugEnabled())
+				_log.warn(activeChar + " has got already an active enchant item");
+			return;
+		}
+		
+		activeChar.setActiveEnchantItem(item);
+		//activeChar.sendPacket(SystemMessageId.SELECT_ITEM_TO_ENCHANT);
+		
+		int itemId = item.getItemId();
+		
+		if (Config.ALLOW_CRYSTAL_SCROLL && (itemId == 957 || itemId == 958 || itemId == 953 || itemId == 954 || // Crystal scrolls D and C Grades
+				itemId == 949 || itemId == 950 || itemId == 731 || itemId == 732 || // Crystal scrolls B and A Grades
+				itemId == 961 || itemId == 962)) // Crystal scrolls S Grade
+			activeChar.sendPacket(new ChooseInventoryItem(itemId - 2));
+		else
+			activeChar.sendPacket(new ChooseInventoryItem(itemId));
 	}
 	
 	@Override
