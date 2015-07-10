@@ -23,7 +23,7 @@ import com.l2jfree.tools.random.Rnd;
 /**
  * @author NB4L1
  */
-public final class NpcShots extends CharShots
+public final class NpcShots extends CreatureShots
 {
 	private ShotState _shotState;
 	

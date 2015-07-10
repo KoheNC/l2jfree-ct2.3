@@ -21,9 +21,9 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 /**
  * @author NB4L1
  */
-public abstract class CharShots implements Runnable
+public abstract class CreatureShots implements Runnable
 {
-	private static final CharShots _instance = new CharShots(null) {
+	private static final CreatureShots _instance = new CreatureShots(null) {
 		@Override
 		public void scheduleShotRecharge(int delay)
 		{
@@ -35,14 +35,14 @@ public abstract class CharShots implements Runnable
 		}
 	};
 	
-	public static CharShots getEmptyInstance()
+	public static CreatureShots getEmptyInstance()
 	{
 		return _instance;
 	}
 	
 	protected final L2Character _activeChar;
 	
-	protected CharShots(L2Character activeChar)
+	protected CreatureShots(L2Character activeChar)
 	{
 		_activeChar = activeChar;
 	}

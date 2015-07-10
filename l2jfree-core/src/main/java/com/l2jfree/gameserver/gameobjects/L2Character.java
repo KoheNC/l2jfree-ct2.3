@@ -50,7 +50,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2NpcWalkerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
-import com.l2jfree.gameserver.gameobjects.shot.CharShots;
+import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
@@ -6963,14 +6963,14 @@ public abstract class L2Character extends L2Object
 		return this;
 	}
 	
-	protected final CharShots _shots;
+	protected final CreatureShots _shots;
 	
-	protected CharShots initShots()
+	protected CreatureShots initShots()
 	{
-		return CharShots.getEmptyInstance();
+		return CreatureShots.getEmptyInstance();
 	}
 	
-	public CharShots getShots()
+	public CreatureShots getShots()
 	{
 		return _shots;
 	}

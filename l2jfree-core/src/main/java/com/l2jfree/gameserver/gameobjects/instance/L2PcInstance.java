@@ -90,7 +90,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.PcKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
-import com.l2jfree.gameserver.gameobjects.shot.CharShots;
+import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.PcShots;
 import com.l2jfree.gameserver.gameobjects.skills.PcSkills;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
@@ -13538,7 +13538,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharShots initShots()
+	protected CreatureShots initShots()
 	{
 		return new PcShots(this);
 	}

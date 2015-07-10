@@ -62,7 +62,7 @@ public class ShotState
 	 * 
 	 */
 	
-	public void chargeSoulshot(CharShots shots, L2ItemInstance consume)
+	public void chargeSoulshot(CreatureShots shots, L2ItemInstance consume)
 	{
 		if (_soulshotState > 0)
 			return;
@@ -73,7 +73,7 @@ public class ShotState
 			_soulshotState = NONE;
 	}
 	
-	public void chargeSpiritshot(CharShots shots, L2ItemInstance consume)
+	public void chargeSpiritshot(CreatureShots shots, L2ItemInstance consume)
 	{
 		if (_spiritshotState > 0)
 			return;
@@ -84,7 +84,7 @@ public class ShotState
 			_spiritshotState = NONE;
 	}
 	
-	public void chargeBlessedSpiritshot(CharShots shots, L2ItemInstance consume)
+	public void chargeBlessedSpiritshot(CreatureShots shots, L2ItemInstance consume)
 	{
 		if (_spiritshotState > 0)
 			return;
@@ -95,7 +95,7 @@ public class ShotState
 			_spiritshotState = NONE;
 	}
 	
-	public void chargeFishshot(CharShots shots, L2ItemInstance consume)
+	public void chargeFishshot(CreatureShots shots, L2ItemInstance consume)
 	{
 		if (_fishshotState > 0)
 			return;
@@ -189,22 +189,22 @@ public class ShotState
 		 */
 		
 		@Override
-		public void chargeSoulshot(CharShots shots, L2ItemInstance consume)
+		public void chargeSoulshot(CreatureShots shots, L2ItemInstance consume)
 		{
 		}
 		
 		@Override
-		public void chargeSpiritshot(CharShots shots, L2ItemInstance consume)
+		public void chargeSpiritshot(CreatureShots shots, L2ItemInstance consume)
 		{
 		}
 		
 		@Override
-		public void chargeBlessedSpiritshot(CharShots shots, L2ItemInstance consume)
+		public void chargeBlessedSpiritshot(CreatureShots shots, L2ItemInstance consume)
 		{
 		}
 		
 		@Override
-		public void chargeFishshot(CharShots shots, L2ItemInstance consume)
+		public void chargeFishshot(CreatureShots shots, L2ItemInstance consume)
 		{
 		}
 		

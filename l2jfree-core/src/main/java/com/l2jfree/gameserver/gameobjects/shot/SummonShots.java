@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 /**
  * @author NB4L1
  */
-public final class SummonShots extends CharShots
+public final class SummonShots extends CreatureShots
 {
 	private ShotState _shotState;
 	

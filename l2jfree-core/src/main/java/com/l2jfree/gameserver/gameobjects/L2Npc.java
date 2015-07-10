@@ -54,7 +54,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2TeleporterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2WarehouseInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.NpcKnownList;
-import com.l2jfree.gameserver.gameobjects.shot.CharShots;
+import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.NpcShots;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.NpcStat;
@@ -2892,7 +2892,7 @@ public class L2Npc extends L2Character
 	}
 	
 	@Override
-	protected final CharShots initShots()
+	protected final CreatureShots initShots()
 	{
 		return new NpcShots(this);
 	}
