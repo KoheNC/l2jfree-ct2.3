@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.SiegeFlagStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CCHManager;
@@ -169,7 +169,7 @@ public final class L2SiegeFlagInstance extends L2Npc
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new SiegeFlagStatus(this);
 	}

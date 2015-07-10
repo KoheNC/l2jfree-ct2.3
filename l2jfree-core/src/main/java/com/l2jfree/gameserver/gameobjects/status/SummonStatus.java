@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
-public final class SummonStatus extends CharStatus
+public final class SummonStatus extends CreatureStatus
 {
 	public SummonStatus(L2SummonInstance activeChar)
 	{

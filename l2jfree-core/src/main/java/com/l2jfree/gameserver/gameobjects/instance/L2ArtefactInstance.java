@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.status.ArtefactStatus;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 
@@ -95,7 +95,7 @@ public final class L2ArtefactInstance extends L2Npc
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new ArtefactStatus(this);
 	}

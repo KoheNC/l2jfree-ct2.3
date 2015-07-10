@@ -30,9 +30,9 @@ import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.LazyFastSet;
 
-public class CharStatus
+public class CreatureStatus
 {
-	protected static final Log _log = LogFactory.getLog(CharStatus.class);
+	protected static final Log _log = LogFactory.getLog(CreatureStatus.class);
 	
 	protected final L2Character _activeChar;
 	private final int _period;
@@ -40,7 +40,7 @@ public class CharStatus
 	private double _currentHp = 0;
 	private double _currentMp = 0;
 	
-	public CharStatus(L2Character activeChar)
+	public CreatureStatus(L2Character activeChar)
 	{
 		_activeChar = activeChar;
 		_period = Formulas.getRegeneratePeriod(_activeChar);
@@ -288,7 +288,7 @@ public class CharStatus
 	
 	// ========================================================================
 	
-	private static final class RegenTaskManager extends AbstractIterativePeriodicTaskManager<CharStatus>
+	private static final class RegenTaskManager extends AbstractIterativePeriodicTaskManager<CreatureStatus>
 	{
 		private static final RegenTaskManager _instance = new RegenTaskManager();
 		
@@ -303,7 +303,7 @@ public class CharStatus
 		}
 		
 		@Override
-		protected void callTask(CharStatus task)
+		protected void callTask(CreatureStatus task)
 		{
 			if (task.regenTask())
 				startTask(task);

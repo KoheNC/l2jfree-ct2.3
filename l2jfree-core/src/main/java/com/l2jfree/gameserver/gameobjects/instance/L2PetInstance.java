@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.PetStat;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PetStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
@@ -1199,7 +1199,7 @@ public class L2PetInstance extends L2Summon
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new PetStatus(this);
 	}

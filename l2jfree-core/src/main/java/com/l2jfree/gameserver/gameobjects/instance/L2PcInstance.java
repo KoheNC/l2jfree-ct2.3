@@ -95,7 +95,7 @@ import com.l2jfree.gameserver.gameobjects.shot.PcShots;
 import com.l2jfree.gameserver.gameobjects.skills.PcSkills;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PcStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
@@ -1087,7 +1087,7 @@ public final class L2PcInstance extends L2Playable
 		getKnownList(); // Init knownlist
 		getStat(); // Init stats
 		getStatus(); // Init status
-		super.initCharStatusUpdateValues();
+		super.initCreatureStatusUpdateValues();
 		initPcStatusUpdateValues();
 		
 		_accountName = accountName;
@@ -1142,7 +1142,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new PcStatus(this);
 	}

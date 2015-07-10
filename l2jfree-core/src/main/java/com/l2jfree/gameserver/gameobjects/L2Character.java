@@ -52,7 +52,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
@@ -196,7 +196,7 @@ public abstract class L2Character extends L2Object
 	private final int[] lastPosition = { 0, 0, 0 };
 	protected final CharLikeView _view;
 	protected final CharStat _stat;
-	protected final CharStatus _status;
+	protected final CreatureStatus _status;
 	private L2CharTemplate _template; // The link on the L2CharTemplate
 	protected boolean _showSummonAnimation = false;
 	// object containing generic and
@@ -374,7 +374,7 @@ public abstract class L2Character extends L2Object
 		return true;
 	}
 	
-	protected void initCharStatusUpdateValues()
+	protected void initCreatureStatusUpdateValues()
 	{
 		_hpUpdateInterval = getMaxHp() / 352.0; // MAX_HP div MAX_HP_BAR_PX
 		_hpUpdateIncCheck = getMaxHp();
@@ -2703,12 +2703,12 @@ public abstract class L2Character extends L2Object
 		return _stat;
 	}
 	
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
-		return new CharStatus(this);
+		return new CreatureStatus(this);
 	}
 	
-	public CharStatus getStatus()
+	public CreatureStatus getStatus()
 	{
 		return _status;
 	}

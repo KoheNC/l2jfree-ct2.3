@@ -43,7 +43,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.AttackableKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.status.AttackableStatus;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
@@ -379,7 +379,7 @@ public class L2Attackable extends L2Npc
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new AttackableStatus(this);
 	}

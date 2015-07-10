@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2NpcWalkerAI;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.NpcWalkerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -104,7 +104,7 @@ public class L2NpcWalkerInstance extends L2Npc
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new NpcWalkerStatus(this);
 	}

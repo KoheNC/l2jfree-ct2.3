@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
-public final class PetStatus extends CharStatus
+public final class PetStatus extends CreatureStatus
 {
 	public PetStatus(L2PetInstance activeChar)
 	{

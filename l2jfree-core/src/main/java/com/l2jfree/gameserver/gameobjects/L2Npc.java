@@ -58,7 +58,7 @@ import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.NpcShots;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.NpcStat;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.NpcStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate.AIType;
@@ -334,7 +334,7 @@ public class L2Npc extends L2Character
 		getKnownList(); // init knownlist
 		getStat(); // init stats
 		getStatus(); // init status
-		super.initCharStatusUpdateValues(); // init status upadte values
+		super.initCreatureStatusUpdateValues(); // init status upadte values
 		
 		// Initialize the "current" equipment
 		_currentLHandId = getTemplate().getLhand();
@@ -394,7 +394,7 @@ public class L2Npc extends L2Character
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new NpcStatus(this);
 	}

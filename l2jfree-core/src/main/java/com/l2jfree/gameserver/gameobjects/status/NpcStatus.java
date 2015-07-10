@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.status;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 
-public class NpcStatus extends CharStatus
+public class NpcStatus extends CreatureStatus
 {
 	public NpcStatus(L2Npc activeChar)
 	{
