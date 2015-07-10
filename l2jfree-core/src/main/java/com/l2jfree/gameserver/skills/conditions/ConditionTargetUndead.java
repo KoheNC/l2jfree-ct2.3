@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SummonInstance;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.skills.Env;
 
 class ConditionTargetUndead extends Condition

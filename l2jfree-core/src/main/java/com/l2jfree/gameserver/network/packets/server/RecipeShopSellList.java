@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

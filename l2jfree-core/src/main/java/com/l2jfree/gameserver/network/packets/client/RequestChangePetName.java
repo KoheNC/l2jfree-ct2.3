@@ -16,10 +16,10 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.PetNameTable;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;

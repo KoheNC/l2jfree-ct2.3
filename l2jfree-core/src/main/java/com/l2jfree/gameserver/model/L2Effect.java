@@ -21,11 +21,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Playable;
-import com.l2jfree.gameserver.model.actor.effects.CharEffects;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SummonInstance;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.effects.CharEffects;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;

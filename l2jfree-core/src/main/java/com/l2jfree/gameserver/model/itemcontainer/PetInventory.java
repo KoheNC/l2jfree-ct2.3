@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.model.itemcontainer;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jfree.gameserver.network.packets.server.PetInventoryUpdate;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 import com.l2jfree.gameserver.templates.item.L2Item;

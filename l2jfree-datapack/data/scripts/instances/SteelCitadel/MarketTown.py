@@ -1,7 +1,7 @@
 # author: Psycho(killer1888) / L2jFree
 
 import sys
-from com.l2jfree.gameserver.ai                          import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai                          import CtrlIntention
 from com.l2jfree.gameserver.datatables                  import ItemTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.instancemanager.hellbound   import HellboundManager

@@ -25,7 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.server.ExAutoSoulShot;
 import com.l2jfree.gameserver.network.packets.server.ShortCutInit;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;

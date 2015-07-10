@@ -4,7 +4,7 @@
 
 import sys
 from com.l2jfree.gameserver.datatables import DoorTable
-from com.l2jfree.gameserver.model.actor.instance import L2PcInstance
+from com.l2jfree.gameserver.gameobjects.instance import L2PcInstance
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.instancemanager.grandbosses;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Entity;
 import com.l2jfree.gameserver.model.entity.GrandBossState;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;

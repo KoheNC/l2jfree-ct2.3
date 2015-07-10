@@ -16,11 +16,11 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ClanTable;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;

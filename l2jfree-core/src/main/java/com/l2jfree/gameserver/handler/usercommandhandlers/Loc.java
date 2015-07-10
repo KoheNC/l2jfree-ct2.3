@@ -15,10 +15,10 @@
 package com.l2jfree.gameserver.handler.usercommandhandlers;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Town;
 import com.l2jfree.gameserver.model.mapregion.L2MapRegion;
 import com.l2jfree.gameserver.model.mapregion.L2MapRegionRestart;

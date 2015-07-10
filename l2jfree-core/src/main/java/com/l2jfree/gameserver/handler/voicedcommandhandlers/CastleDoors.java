@@ -15,10 +15,10 @@
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.network.SystemMessageId;
 

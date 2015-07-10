@@ -20,12 +20,12 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ExtractableSkillsData;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.items.model.L2ExtractableProductItem;
 import com.l2jfree.gameserver.items.model.L2ExtractableSkill;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -40,7 +40,7 @@ public class Extractable implements ISkillHandler
 	
 	/**
 	 * 
-	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.model.actor.L2Character, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.model.actor.L2Character...)
+	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.gameobjects.L2Character, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.gameobjects.L2Character...)
 	 */
 	@Override
 	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)

@@ -15,11 +15,11 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.actor.L2Decoy;
-import com.l2jfree.gameserver.model.actor.appearance.PcAppearance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.view.DecoyView;
-import com.l2jfree.gameserver.model.actor.view.PcLikeView;
+import com.l2jfree.gameserver.gameobjects.L2Decoy;
+import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.view.DecoyView;
+import com.l2jfree.gameserver.gameobjects.view.PcLikeView;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;

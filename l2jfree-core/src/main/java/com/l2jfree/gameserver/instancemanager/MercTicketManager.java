@@ -32,22 +32,22 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeTeleporterInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.AutoChatHandler;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeGuardInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeTeleporterInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
 import com.l2jfree.gameserver.network.packets.server.ConfirmDlg;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * Completely revamped mercenary manager.

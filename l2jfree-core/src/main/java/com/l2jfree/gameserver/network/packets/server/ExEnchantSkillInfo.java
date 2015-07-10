@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.network.packets.server;
 import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList.EnchantSkillType;
 

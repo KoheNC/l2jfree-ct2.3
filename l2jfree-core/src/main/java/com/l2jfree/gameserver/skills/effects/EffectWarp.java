@@ -15,11 +15,11 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.network.packets.server.FlyToLocation;
 import com.l2jfree.gameserver.network.packets.server.ValidateLocation;
 import com.l2jfree.gameserver.network.packets.server.FlyToLocation.FlyType;

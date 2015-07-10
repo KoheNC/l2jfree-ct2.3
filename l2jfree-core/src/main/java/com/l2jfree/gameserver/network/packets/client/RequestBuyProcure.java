@@ -14,16 +14,16 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import static com.l2jfree.gameserver.model.actor.L2Npc.INTERACTION_DISTANCE;
+import static com.l2jfree.gameserver.gameobjects.L2Npc.INTERACTION_DISTANCE;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2ManorManagerInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Manor;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.instance.L2ManorManagerInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;

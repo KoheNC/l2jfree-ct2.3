@@ -2,7 +2,7 @@
 import sys
 from java.lang import System
 from com.l2jfree import L2DatabaseFactory
-from com.l2jfree.gameserver.ai import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.datatables import DoorTable
 from com.l2jfree.gameserver.datatables import SpawnTable
 from com.l2jfree.gameserver.instancemanager import CastleManager

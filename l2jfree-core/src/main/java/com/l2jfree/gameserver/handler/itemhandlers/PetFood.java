@@ -17,12 +17,12 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Playable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -35,7 +35,7 @@ public class PetFood implements IItemHandler
 	private static final int[] ITEM_IDS = { 2515, 4038, 5168, 5169, 6316, 7582, 9668, 10425 };
 	
 	/**
-	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.actor.instance.L2Playable, com.l2jfree.gameserver.model.L2ItemInstance)
+	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.gameobjects.instance.L2Playable, com.l2jfree.gameserver.model.L2ItemInstance)
 	 */
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)

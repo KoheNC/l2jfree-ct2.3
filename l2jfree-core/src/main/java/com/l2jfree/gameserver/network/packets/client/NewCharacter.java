@@ -27,6 +27,10 @@ import com.l2jfree.gameserver.datatables.CharTemplateTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate.PcTemplateItem;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.instancemanager.RecommendationManager;
@@ -35,8 +39,6 @@ import com.l2jfree.gameserver.model.L2ShortCut;
 import com.l2jfree.gameserver.model.L2SkillLearn;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.stat.PcStat;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.network.Disconnection;
@@ -45,8 +47,6 @@ import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
 import com.l2jfree.gameserver.network.packets.server.CharacterCreateFail;
 import com.l2jfree.gameserver.network.packets.server.CharacterCreateSuccess;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
-import com.l2jfree.gameserver.templates.chars.L2PcTemplate;
-import com.l2jfree.gameserver.templates.chars.L2PcTemplate.PcTemplateItem;
 
 /**
  * This class represents a packet sent by the client when a new character is being created.

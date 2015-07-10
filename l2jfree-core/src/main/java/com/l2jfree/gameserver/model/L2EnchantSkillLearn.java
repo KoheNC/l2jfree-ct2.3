@@ -18,7 +18,7 @@ import java.util.List;
 
 import javolution.util.FastTable;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 
 /**
  * This class ...

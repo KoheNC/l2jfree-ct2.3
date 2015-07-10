@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 
 /**
  * @author savormix

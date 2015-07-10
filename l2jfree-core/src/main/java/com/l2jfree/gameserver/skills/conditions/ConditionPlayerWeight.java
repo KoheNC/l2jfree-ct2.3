@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.model.actor.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.skills.Env;
 
 /**

@@ -15,15 +15,15 @@
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import com.l2jfree.gameserver.communitybbs.Manager.AdminBBSManager;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class AdminBBS implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS = { "admin_bbs" };
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
+	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.gameobjects.instance.L2PcInstance)
 	 */
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)

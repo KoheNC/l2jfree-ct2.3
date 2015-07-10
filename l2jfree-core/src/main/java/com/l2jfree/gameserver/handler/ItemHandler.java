@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.handler.itemhandlers.BeastSoulShot;
 import com.l2jfree.gameserver.handler.itemhandlers.BeastSpice;
 import com.l2jfree.gameserver.handler.itemhandlers.BeastSpiritShot;
@@ -49,7 +50,6 @@ import com.l2jfree.gameserver.handler.itemhandlers.SummonItems;
 import com.l2jfree.gameserver.handler.itemhandlers.TeleportBookmark;
 import com.l2jfree.gameserver.handler.itemhandlers.WrappedPack;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.templates.item.L2EtcItem;
 import com.l2jfree.gameserver.templates.item.L2Item;

@@ -16,10 +16,10 @@ package com.l2jfree.gameserver.templates.item;
 
 import javolution.util.FastList;
 
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.templates.StatsSet;
 import com.l2jfree.tools.random.Rnd;
 

@@ -17,10 +17,10 @@ package com.l2jfree.gameserver.handler.irccommandhandlers;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IIrcCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
 
 public class IrcKick implements IIrcCommandHandler

@@ -19,10 +19,10 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.network.packets.server.AgitDecoInfo;
 

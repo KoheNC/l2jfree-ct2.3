@@ -18,7 +18,7 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.AugmentationData;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.skills.funcs.Func;
 import com.l2jfree.gameserver.skills.funcs.FuncAdd;
 import com.l2jfree.gameserver.skills.funcs.FuncOwner;

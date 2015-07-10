@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.network.packets.server;
 import java.util.ArrayList;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

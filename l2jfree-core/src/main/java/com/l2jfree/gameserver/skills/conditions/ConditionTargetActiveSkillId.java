@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.skills.Env;
 
 class ConditionTargetActiveSkillId extends AbstractConditionActiveSkillId

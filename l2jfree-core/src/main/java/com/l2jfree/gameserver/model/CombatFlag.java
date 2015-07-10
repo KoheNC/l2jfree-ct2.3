@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 import com.l2jfree.gameserver.network.packets.server.ItemList;

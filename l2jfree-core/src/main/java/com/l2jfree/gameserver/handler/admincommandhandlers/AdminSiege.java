@@ -21,6 +21,7 @@ import javolution.text.TextBuilder;
 
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.ClanTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
@@ -28,7 +29,6 @@ import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.model.zone.L2Zone;

@@ -30,9 +30,9 @@ import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.SpawnData;
-import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.L2FastSet;
 

@@ -22,12 +22,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.TradeList;
 import com.l2jfree.gameserver.model.TradeList.TradeItem;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.server.RecipeShopMsg;
 
 /**

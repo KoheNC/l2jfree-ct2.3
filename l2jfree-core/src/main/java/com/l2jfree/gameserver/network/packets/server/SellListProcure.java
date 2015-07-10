@@ -20,10 +20,10 @@ import java.util.Map;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.CropProcure;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class SellListProcure extends L2ServerPacket

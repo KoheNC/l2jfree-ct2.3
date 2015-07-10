@@ -3,7 +3,7 @@
 # '''''''''''''''''''''''''''''''''''
 # Psycho: Room 5 might be incorrect, but at least is working. Info concerning it are poor
 from com.l2jfree.gameserver.instancemanager        import InstanceManager
-from com.l2jfree.gameserver.model.actor            import L2Summon
+from com.l2jfree.gameserver.gameobjects            import L2Summon
 from com.l2jfree.gameserver.model.entity           import Instance
 from com.l2jfree.gameserver.model.quest            import State
 from com.l2jfree.gameserver.model.quest            import QuestState

@@ -17,10 +17,10 @@ package com.l2jfree.gameserver.skills.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jfree.gameserver.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
 import com.l2jfree.gameserver.templates.skills.L2EffectType;

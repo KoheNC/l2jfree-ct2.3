@@ -15,11 +15,11 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.actor.appearance.PcAppearance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.stat.PcStat;
-import com.l2jfree.gameserver.model.actor.status.PcStatus;
-import com.l2jfree.gameserver.model.actor.view.PcView;
+import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.status.PcStatus;
+import com.l2jfree.gameserver.gameobjects.view.PcView;
 import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;

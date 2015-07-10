@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.script;
 
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2DropData;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * @author Luis Arias

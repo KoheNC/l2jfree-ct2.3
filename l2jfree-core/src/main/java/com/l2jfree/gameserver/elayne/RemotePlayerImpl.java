@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.elayne;
 
 import java.rmi.RemoteException;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 
 /**
  * 

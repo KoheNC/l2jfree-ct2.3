@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.handler.chathandlers;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IChatHandler;
 import com.l2jfree.gameserver.model.BlockList;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 

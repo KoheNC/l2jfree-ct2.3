@@ -14,20 +14,20 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import static com.l2jfree.gameserver.model.actor.L2Npc.INTERACTION_DISTANCE;
+import static com.l2jfree.gameserver.gameobjects.L2Npc.INTERACTION_DISTANCE;
 import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.MAX_ADENA;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.instance.L2CastleChamberlainInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.CropProcure;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.instance.L2CastleChamberlainInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;

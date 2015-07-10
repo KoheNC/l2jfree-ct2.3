@@ -1,5 +1,5 @@
 import sys
-from com.l2jfree.gameserver.ai import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
 from com.l2jfree.gameserver.network.packets.server import NpcSay
 from com.l2jfree.tools.random import Rnd

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.skills.Env;
 

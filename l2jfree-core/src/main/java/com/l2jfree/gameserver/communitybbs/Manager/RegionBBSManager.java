@@ -35,9 +35,9 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameServer;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.datatables.RecordTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.BlockList;
 import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -54,7 +54,7 @@ public class RegionBBSManager extends BaseBBSManager
 	 * 
 	 * @see
 	 * com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java
-	 * .lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
+	 * .lang.String, com.l2jfree.gameserver.gameobjects.instance.L2PcInstance)
 	 */
 	@Override
 	public void parsecmd(String command, L2PcInstance activeChar)
@@ -195,7 +195,7 @@ public class RegionBBSManager extends BaseBBSManager
 	 * com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite
 	 * (java.lang.String, java.lang.String, java.lang.String, java.lang.String,
 	 * java.lang.String,
-	 * com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
+	 * com.l2jfree.gameserver.gameobjects.instance.L2PcInstance)
 	 */
 	@Override
 	public void parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2PcInstance activeChar)

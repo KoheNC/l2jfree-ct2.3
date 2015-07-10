@@ -25,12 +25,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
+import com.l2jfree.gameserver.gameobjects.instance.OrfenInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.L2MinionData;
-import com.l2jfree.gameserver.model.actor.instance.L2MinionInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.model.actor.instance.OrfenInstance;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.L2FastSet;
 

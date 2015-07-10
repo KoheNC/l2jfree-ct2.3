@@ -17,7 +17,7 @@ package com.l2jfree.gameserver;
 import java.util.Date;
 
 import com.l2jfree.L2AutoInitialization;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.mmocore.network.SelectorThread;
 import com.l2jfree.versionning.Version;
 

@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2Augmentation;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -25,8 +27,6 @@ import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2Multisell.MultiSellEntry;
 import com.l2jfree.gameserver.model.L2Multisell.MultiSellIngredient;
 import com.l2jfree.gameserver.model.L2Multisell.MultiSellListContainer;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;

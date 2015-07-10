@@ -16,11 +16,11 @@ package com.l2jfree.gameserver.model;
 
 import java.lang.reflect.Constructor;
 
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2MinionInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -35,7 +35,7 @@ public class L2GroupSpawn extends L2Spawn
 	{
 		super(mobTemplate);
 		_constructor =
-				Class.forName("com.l2jfree.gameserver.model.actor.instance.L2ControllableMobInstance")
+				Class.forName("com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance")
 						.getConstructors()[0];
 		_template = mobTemplate;
 		

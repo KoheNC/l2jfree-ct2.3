@@ -24,12 +24,13 @@ import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.ZoneManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.zone.L2BossZone;
 import com.l2jfree.gameserver.model.zone.L2Zone;
@@ -37,7 +38,6 @@ import com.l2jfree.gameserver.model.zone.L2Zone.ZoneType;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.ExShowScreenMessage;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * Ice Fairy Sirra AI<br>

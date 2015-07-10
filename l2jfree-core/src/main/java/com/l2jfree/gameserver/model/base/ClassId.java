@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.base;
 
 import java.util.EnumSet;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 
 public enum ClassId
 {

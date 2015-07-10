@@ -19,8 +19,8 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.skills.Env;
 
 /**

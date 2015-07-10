@@ -37,16 +37,16 @@ import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.TradeListTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2DropCategory;
 import com.l2jfree.gameserver.model.L2DropData;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2TradeList;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.templates.item.L2Item;
 
 /**
@@ -1339,7 +1339,7 @@ public class AdminEditNpc implements IAdminCommandHandler
 			}
 			else if (statToSet.equals("type"))
 			{
-				Class.forName("com.l2jfree.gameserver.model.actor.instance." + value + "Instance");
+				Class.forName("com.l2jfree.gameserver.gameobjects.instance." + value + "Instance");
 				newNpcData.set("type", value);
 			}
 			else if (statToSet.equals("attackRange"))
