@@ -56,7 +56,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.NpcKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.NpcShots;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.NpcStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.NpcStatus;
@@ -382,7 +382,7 @@ public class L2Npc extends L2Character
 	}
 	
 	@Override
-	protected CharStat initStat()
+	protected CreatureStat initStat()
 	{
 		return new NpcStat(this);
 	}

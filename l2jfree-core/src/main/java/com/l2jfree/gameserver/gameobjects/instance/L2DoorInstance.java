@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2DoorAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.DoorKnownList;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.DoorStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
@@ -202,7 +202,7 @@ public class L2DoorInstance extends L2Character
 	}
 	
 	@Override
-	protected CharStat initStat()
+	protected CreatureStat initStat()
 	{
 		return new DoorStat(this);
 	}

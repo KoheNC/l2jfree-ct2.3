@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.stat;
 
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 
-public class DoorStat extends CharStat
+public class DoorStat extends CreatureStat
 {
 	// =========================================================
 	// Data Field

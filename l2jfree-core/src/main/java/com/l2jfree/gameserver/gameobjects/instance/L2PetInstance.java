@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.PetStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PetStatus;
@@ -251,7 +251,7 @@ public class L2PetInstance extends L2Summon
 	}
 	
 	@Override
-	protected CharStat initStat()
+	protected CreatureStat initStat()
 	{
 		return new PetStat(this);
 	}

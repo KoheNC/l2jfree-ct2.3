@@ -29,7 +29,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.SummonKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.SummonShots;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.SummonStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
@@ -165,7 +165,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	protected CharStat initStat()
+	protected CreatureStat initStat()
 	{
 		return new SummonStat(this);
 	}

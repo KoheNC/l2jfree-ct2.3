@@ -30,9 +30,9 @@ import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.gameserver.templates.item.L2WeaponType;
 
-public class CharStat
+public class CreatureStat
 {
-	protected final static Log _log = LogFactory.getLog(CharStat.class);
+	protected final static Log _log = LogFactory.getLog(CreatureStat.class);
 	
 	// =========================================================
 	// Data Field
@@ -43,7 +43,7 @@ public class CharStat
 	
 	// =========================================================
 	// Constructor
-	public CharStat(L2Character activeChar)
+	public CreatureStat(L2Character activeChar)
 	{
 		_activeChar = activeChar;
 	}

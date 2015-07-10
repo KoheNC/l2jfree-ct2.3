@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.Duel;
 import com.l2jfree.gameserver.skills.Formulas;
@@ -343,7 +343,7 @@ public class CreatureStatus
 		
 		_lastRunTime = System.currentTimeMillis();
 		
-		CharStat cs = getActiveChar().getStat();
+		CreatureStat cs = getActiveChar().getStat();
 		
 		boolean requireRegen = false;
 		

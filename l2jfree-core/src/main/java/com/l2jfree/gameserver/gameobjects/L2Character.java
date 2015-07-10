@@ -51,7 +51,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -195,7 +195,7 @@ public abstract class L2Character extends L2Object
 	protected boolean _isEradicated = false;
 	private final int[] lastPosition = { 0, 0, 0 };
 	protected final CharLikeView _view;
-	protected final CharStat _stat;
+	protected final CreatureStat _stat;
 	protected final CreatureStatus _status;
 	private L2CharTemplate _template; // The link on the L2CharTemplate
 	protected boolean _showSummonAnimation = false;
@@ -2693,12 +2693,12 @@ public abstract class L2Character extends L2Object
 		return _view;
 	}
 	
-	protected CharStat initStat()
+	protected CreatureStat initStat()
 	{
-		return new CharStat(this);
+		return new CreatureStat(this);
 	}
 	
-	public CharStat getStat()
+	public CreatureStat getStat()
 	{
 		return _stat;
 	}
@@ -6603,7 +6603,7 @@ public abstract class L2Character extends L2Object
 	// =========================================================
 	
 	// =========================================================
-	// Stat - NEED TO REMOVE ONCE L2CHARSTAT IS COMPLETE
+	// Stat - NEED TO REMOVE ONCE CREATURESTAT IS COMPLETE
 	// Property - Public
 	public final double calcStat(Stats stat, double init, L2Character target, L2Skill skill)
 	{

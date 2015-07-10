@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 
-public abstract class PlayableStat extends CharStat
+public abstract class PlayableStat extends CreatureStat
 {
 	// =========================================================
 	// Data Field
