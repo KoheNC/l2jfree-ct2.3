@@ -20,7 +20,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.MonsterKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -45,10 +45,10 @@ public class L2MonsterInstance extends L2Attackable
 	private static final int MONSTER_MAINTENANCE_INTERVAL = 1000;
 	
 	/**
-	 * Constructor of L2MonsterInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
+	 * Constructor of L2MonsterInstance (use L2Creature and L2NpcInstance constructor).<BR><BR>
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to set the _template of the L2MonsterInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
+	 * <li>Call the L2Creature constructor to set the _template of the L2MonsterInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
 	 * <li>Set the name of the L2MonsterInstance</li>
 	 * <li>Create a RandomAnimation Task that will be launched after the calculated delay if the server allow it </li><BR><BR>
 	 * 
@@ -81,7 +81,7 @@ public class L2MonsterInstance extends L2Attackable
 	 * Return True if the attacker is not another L2MonsterInstance.<BR><BR>
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		if (attacker instanceof L2MonsterInstance)
 			return false;
@@ -170,7 +170,7 @@ public class L2MonsterInstance extends L2Attackable
 		}
 	}
 	
-	public void callMinionsToAssist(L2Character attacker)
+	public void callMinionsToAssist(L2Creature attacker)
 	{
 		if (hasMinions())
 		{
@@ -189,7 +189,7 @@ public class L2MonsterInstance extends L2Attackable
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!isKillable())
 			return false;
@@ -244,7 +244,7 @@ public class L2MonsterInstance extends L2Attackable
 	}
 	
 	@Override
-	public void addDamageHate(L2Character attacker, int damage, int aggro)
+	public void addDamageHate(L2Creature attacker, int damage, int aggro)
 	{
 		if (!(attacker instanceof L2MonsterInstance))
 		{

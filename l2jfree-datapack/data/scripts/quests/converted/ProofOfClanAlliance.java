@@ -19,7 +19,7 @@ import javolution.util.FastMap;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -248,7 +248,7 @@ public final class ProofOfClanAlliance extends QuestJython
 	}
 	
 	@Override
-	public String onDeath(L2Character killer, L2Character victim, QuestState qs)
+	public String onDeath(L2Creature killer, L2Creature victim, QuestState qs)
 	{
 		if (victim instanceof L2PcInstance)
 		{

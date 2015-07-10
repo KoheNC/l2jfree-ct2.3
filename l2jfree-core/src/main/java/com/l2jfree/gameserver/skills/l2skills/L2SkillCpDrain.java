@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.l2skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.Formulas;
@@ -28,9 +28,9 @@ public class L2SkillCpDrain extends L2Skill
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Creature... targets)
 	{
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

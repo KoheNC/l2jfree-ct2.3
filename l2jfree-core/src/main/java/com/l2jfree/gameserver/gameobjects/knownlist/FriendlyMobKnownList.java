@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2FriendlyMobInstance;
@@ -53,12 +53,12 @@ public class FriendlyMobKnownList extends AttackableKnownList
 		if (!super.removeKnownObject(object))
 			return false;
 		
-		if (!(object instanceof L2Character))
+		if (!(object instanceof L2Creature))
 			return true;
 		
 		if (getActiveChar().hasAI())
 		{
-			L2Character temp = (L2Character)object;
+			L2Creature temp = (L2Creature)object;
 			getActiveChar().getAI().notifyEvent(CtrlEvent.EVT_FORGET_OBJECT, object);
 			if (getActiveChar().getTarget() == temp)
 				getActiveChar().setTarget(null);

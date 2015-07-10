@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Guard;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -79,11 +79,11 @@ public final class L2GuardInstance extends L2Guard
 	private static final int RETURN_INTERVAL = 60000;
 	
 	/**
-	 * Constructor of L2GuardInstance (use L2Character and L2NpcInstance constructor).<BR>
+	 * Constructor of L2GuardInstance (use L2Creature and L2NpcInstance constructor).<BR>
 	 * <BR>
 	 * <B><U> Actions</U> :</B><BR>
 	 * <BR>
-	 * <li>Call the L2Character constructor to set the _template of the L2GuardInstance (copy skills from template to
+	 * <li>Call the L2Creature constructor to set the _template of the L2GuardInstance (copy skills from template to
 	 * object and link _calculators to NPC_STD_CALCULATOR)</li>
 	 * <li>Set the name of the L2GuardInstance</li>
 	 * <li>Create a RandomAnimation Task that will be launched after the calculated delay if the server allow it</li>
@@ -118,7 +118,7 @@ public final class L2GuardInstance extends L2Guard
 	 * <BR>
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return attacker instanceof L2MonsterInstance;
 	}

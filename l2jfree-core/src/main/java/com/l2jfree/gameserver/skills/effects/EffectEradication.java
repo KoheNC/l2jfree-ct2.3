@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.packets.server.Die;
 import com.l2jfree.gameserver.skills.Env;
@@ -56,7 +56,7 @@ public class EffectEradication extends L2Effect
 	@Override
 	protected void onExit()
 	{
-		L2Character actor = getEffected();
+		L2Creature actor = getEffected();
 		actor.setIsEradicated(false);
 		if (actor.isDead() && actor.getActingPlayer() != null)
 			actor.getActingPlayer().sendPacket(new Die(actor));

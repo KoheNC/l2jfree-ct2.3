@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.zone;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -36,7 +36,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 	private Siege _siege;
 	
 	@Override
-	protected void checkForDamage(L2Character character)
+	protected void checkForDamage(L2Creature character)
 	{
 		super.checkForDamage(character);
 		
@@ -50,7 +50,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 	}
 	
 	@Override
-	protected boolean checkDynamicConditions(L2Character character)
+	protected boolean checkDynamicConditions(L2Creature character)
 	{
 		if (_siege == null || !_siege.getIsInProgress() || !(character instanceof L2Playable) || !isActive())
 			return false;
@@ -86,7 +86,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 	public void deactivate()
 	{
 		_applyEnter = null;
-		for (L2Character c : getCharactersInside())
+		for (L2Creature c : getCharactersInside())
 			removeFromZone(c);
 		_removeExit = null;
 	}

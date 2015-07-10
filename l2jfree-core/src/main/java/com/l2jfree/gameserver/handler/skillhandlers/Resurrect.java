@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 
 import javolution.util.FastList;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
@@ -37,16 +37,16 @@ public class Resurrect implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.RESURRECT };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		L2PcInstance player = null;
 		if (activeChar instanceof L2PcInstance)
 			player = (L2PcInstance)activeChar;
 		
 		L2PcInstance targetPlayer;
-		FastList<L2Character> targetToRes = new FastList<L2Character>();
+		FastList<L2Creature> targetToRes = new FastList<L2Creature>();
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;
@@ -70,7 +70,7 @@ public class Resurrect implements ISkillHandler
 				targetToRes.add(target);
 		}
 		
-		for (L2Character cha : targetToRes)
+		for (L2Creature cha : targetToRes)
 		{
 			if (activeChar instanceof L2PcInstance)
 			{

@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
@@ -68,7 +68,7 @@ public final class L2ChestInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	public void doItemDrop(L2NpcTemplate npcTemplate, L2Character lastAttacker)
+	public void doItemDrop(L2NpcTemplate npcTemplate, L2Creature lastAttacker)
 	{
 		int id = getTemplate().getNpcId();
 		
@@ -95,7 +95,7 @@ public final class L2ChestInstance extends L2MonsterInstance
 	}
 	
 	// Cast - Trap Chest
-	public void chestTrap(L2Character player)
+	public void chestTrap(L2Creature player)
 	{
 		int trapSkillId = 0;
 		int rnd = Rnd.get(120);
@@ -151,7 +151,7 @@ public final class L2ChestInstance extends L2MonsterInstance
 	//<--
 	//cast casse
 	//<--
-	private boolean handleCast(L2Character player, int skillId)
+	private boolean handleCast(L2Creature player, int skillId)
 	{
 		int skillLevel = 1;
 		byte lvl = getTemplate().getLevel();

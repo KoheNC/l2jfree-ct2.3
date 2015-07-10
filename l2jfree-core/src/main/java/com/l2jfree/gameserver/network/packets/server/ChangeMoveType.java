@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class ChangeMoveType extends L2ServerPacket
@@ -26,7 +26,7 @@ public class ChangeMoveType extends L2ServerPacket
 	private final int _chaObjId;
 	private final boolean _running;
 	
-	public ChangeMoveType(L2Character character)
+	public ChangeMoveType(L2Creature character)
 	{
 		_chaObjId = character.getObjectId();
 		_running = character.isRunning();

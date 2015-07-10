@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 public class L2CoreBarrierZone extends L2DamageZone
 {
 	@Override
-	protected void checkForDamage(L2Character character)
+	protected void checkForDamage(L2Creature character)
 	{
 		super.checkForDamage(character);
 		

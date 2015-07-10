@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -57,7 +57,7 @@ public class EffectHide extends L2Effect
 				activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 			
 			final DeleteObject del = new DeleteObject(activeChar);
-			for (L2Character obj : activeChar.getKnownList().getKnownCharacters())
+			for (L2Creature obj : activeChar.getKnownList().getKnownCharacters())
 			{
 				if (obj == null)
 					continue;

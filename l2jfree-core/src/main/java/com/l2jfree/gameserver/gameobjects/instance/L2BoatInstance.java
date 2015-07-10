@@ -30,7 +30,7 @@ import org.apache.commons.io.IOUtils;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.BoatKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -51,7 +51,7 @@ import com.l2jfree.gameserver.util.Util;
 /**
  * @author Maktakien
  */
-public class L2BoatInstance extends L2Character
+public class L2BoatInstance extends L2Creature
 {
 	public float boatSpeed;
 	
@@ -324,7 +324,7 @@ public class L2BoatInstance extends L2Character
 		// Calculate the Nb of ticks between the current position and the destination
 		int ticksToMove = (int)(GameTimeController.TICKS_PER_SECOND * distance / speed);
 		
-		// Calculate and set the heading of the L2Character
+		// Calculate and set the heading of the L2Creature
 		int heading = (int)(Math.atan2(-sin, -cos) * 10430.378350470452724949566316381);
 		heading += 32768;
 		getPosition().setHeading(heading);
@@ -342,7 +342,7 @@ public class L2BoatInstance extends L2Character
 		if (_log.isDebugEnabled())
 			_log.debug("time to target:" + ticksToMove);
 		
-		// Set the L2Character _move object to MoveData object
+		// Set the L2Creature _move object to MoveData object
 		_move = m;
 		
 		MovementController.getInstance().add(this, ticksToMove);
@@ -815,7 +815,7 @@ public class L2BoatInstance extends L2Character
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.l2jfree.gameserver.gameobjects.L2Character#getLevel()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Creature#getLevel()
 	 */
 	@Override
 	public int getLevel()
@@ -842,7 +842,7 @@ public class L2BoatInstance extends L2Character
 	/*
 	 * boat AI can't be detached
 	 */
-	public class AIAccessor extends L2Character.AIAccessor
+	public class AIAccessor extends L2Creature.AIAccessor
 	{
 		/*@Override
 		public void detachAI()

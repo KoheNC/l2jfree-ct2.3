@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2CabaleBufferInstance;
@@ -60,7 +60,7 @@ public class NpcKnownList extends CreatureKnownList
 		if (object instanceof L2FestivalGuideInstance)
 			return 4000;
 		
-		if (object instanceof L2NpcInstance || !(object instanceof L2Character))
+		if (object instanceof L2NpcInstance || !(object instanceof L2Creature))
 			return 0;
 		
 		if (object instanceof L2CabaleBufferInstance)

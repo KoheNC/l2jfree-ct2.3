@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.Town;
 import com.l2jfree.gameserver.model.mapregion.L2MapRegion;
@@ -348,7 +348,7 @@ public class TownManager
 		return _towns;
 	}
 	
-	public String getClosestTownName(L2Character activeChar)
+	public String getClosestTownName(L2Creature activeChar)
 	{
 		return getTownName(getClosestTown(activeChar).getTownId());
 	}

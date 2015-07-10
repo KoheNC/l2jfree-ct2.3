@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -34,7 +34,7 @@ public class TakeFort implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.TAKEFORT };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
@@ -65,17 +65,17 @@ public class TakeFort implements ISkillHandler
 	/**
 	 * Return true if character clan place a flag<BR><BR>
 	 *
-	 * @param activeChar The L2Character of the character placing the flag
+	 * @param activeChar The L2Creature of the character placing the flag
 	 *
 	 */
-	public static boolean checkIfOkToCastFlagDisplay(L2Character activeChar, boolean isCheckOnly, L2Skill skill,
+	public static boolean checkIfOkToCastFlagDisplay(L2Creature activeChar, boolean isCheckOnly, L2Skill skill,
 			L2Object target)
 	{
 		return checkIfOkToCastFlagDisplay(activeChar, FortManager.getInstance().getFort(activeChar), isCheckOnly,
 				skill, target);
 	}
 	
-	public static boolean checkIfOkToCastFlagDisplay(L2Character activeChar, Fort fort, boolean isCheckOnly,
+	public static boolean checkIfOkToCastFlagDisplay(L2Creature activeChar, Fort fort, boolean isCheckOnly,
 			L2Skill skill, L2Object target)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))

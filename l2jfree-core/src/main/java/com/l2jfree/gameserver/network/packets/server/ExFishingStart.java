@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ExFishingStart extends L2ServerPacket
 {
 	private static final String _S__FE_1E_EXFISHINGSTART = "[S] FE:1e ExFishingStart [ddddd cccc]";
-	private final L2Character _activeChar;
+	private final L2Creature _activeChar;
 	private final int _x, _y, _z, _fishType;
 	
 	//	private final boolean _isNightLure;
 	
-	public ExFishingStart(L2Character character, int fishType, int x, int y, int z, boolean isNightLure)
+	public ExFishingStart(L2Creature character, int fishType, int x, int y, int z, boolean isNightLure)
 	{
 		_activeChar = character;
 		_fishType = fishType;

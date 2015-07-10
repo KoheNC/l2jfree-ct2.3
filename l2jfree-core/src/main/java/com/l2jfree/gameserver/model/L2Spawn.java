@@ -24,7 +24,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2DecoyInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2EffectPointInstance;
@@ -541,8 +541,8 @@ public class L2Spawn
 			// Must be done before object is spawned into visible world
 			tmp.setInstanceId(_instanceId);
 			
-			if (isSummonSpawn && tmp instanceof L2Character)
-				((L2Character)tmp).setShowSummonAnimation(isSummonSpawn);
+			if (isSummonSpawn && tmp instanceof L2Creature)
+				((L2Creature)tmp).setShowSummonAnimation(isSummonSpawn);
 			// Check if the Instance is a L2Npc
 			if (!(tmp instanceof L2Npc))
 				return mob;

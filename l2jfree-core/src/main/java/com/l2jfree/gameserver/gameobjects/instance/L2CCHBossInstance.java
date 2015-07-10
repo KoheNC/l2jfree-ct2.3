@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.status.CCHLeaderStatus;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -71,7 +71,7 @@ public final class L2CCHBossInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	public final boolean doDie(L2Character killer)
+	public final boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;

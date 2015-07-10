@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.skills.Env;
@@ -31,7 +31,7 @@ class ConditionTargetUndead extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		L2Character target = (L2Character)env.player.getTarget();
+		L2Creature target = (L2Creature)env.player.getTarget();
 		
 		if (target == null)
 			return false;

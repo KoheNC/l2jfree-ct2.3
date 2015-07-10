@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -48,7 +48,7 @@ public final class EffectClanGate extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		L2Character effected = getEffected();
+		L2Creature effected = getEffected();
 		L2PcInstance lord;
 		if (effected instanceof L2PcInstance)
 			lord = (L2PcInstance)effected;

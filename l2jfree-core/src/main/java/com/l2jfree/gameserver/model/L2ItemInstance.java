@@ -31,7 +31,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.shot.ShotState;
@@ -1216,7 +1216,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	 * enhanched for a particular player.
 	 * 
 	 * @param player :
-	 *            L2Character designating the player
+	 *            L2Creature designating the player
 	 * @return Func[]
 	 */
 	private Func[] _statFuncs;
@@ -1422,7 +1422,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	 * <li> Call Pet</li>
 	 * <BR>
 	 */
-	public final void dropMe(L2Character dropper, int x, int y, int z)
+	public final void dropMe(L2Creature dropper, int x, int y, int z)
 	{
 		if (Config.ASSERT)
 			assert getPosition().getWorldRegion() == null;
@@ -1763,7 +1763,7 @@ public final class L2ItemInstance extends L2Object implements FuncOwner, Element
 	 * 
 	 * @param player Player that pick up the item
 	 */
-	public final void pickupMe(L2Character player)
+	public final void pickupMe(L2Creature player)
 	{
 		MercTicketManager.getInstance().remPosition(this);
 		

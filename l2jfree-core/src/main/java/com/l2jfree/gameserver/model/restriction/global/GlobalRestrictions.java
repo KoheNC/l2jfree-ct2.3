@@ -22,7 +22,7 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
@@ -261,7 +261,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static boolean canCreateEffect(L2Character activeChar, L2Character target, L2Skill skill)
+	public static boolean canCreateEffect(L2Creature activeChar, L2Creature target, L2Skill skill)
 	{
 		if (skill.isPassive())
 			return false;
@@ -297,7 +297,7 @@ public final class GlobalRestrictions
 	/**
 	 * Indicates if the character can't harm another, but can hit/cast a skill on it.
 	 */
-	public static boolean isInvul(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage)
+	public static boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage)
 	{
 		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
 		final L2PcInstance target_ = L2Object.getActingPlayer(target);
@@ -307,13 +307,13 @@ public final class GlobalRestrictions
 		return isInvul(activeChar, target, skill, sendMessage, attacker_, target_, isOffensive);
 	}
 	
-	private static boolean isInvul(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	private static boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
 	{
 		if (isProtected(activeChar, target, skill, sendMessage, attacker_, target_, isOffensive))
 			return true;
 		
-		// L2Character.isInvul() calls this method
+		// L2Creature.isInvul() calls this method
 		//if (target.isInvul())
 		//	return true;
 		
@@ -327,7 +327,7 @@ public final class GlobalRestrictions
 	/**
 	 * Indicates if the character can't hit/cast a skill on another, but can target it.
 	 */
-	public static boolean isProtected(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage)
+	public static boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage)
 	{
 		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
 		final L2PcInstance target_ = L2Object.getActingPlayer(target);
@@ -337,7 +337,7 @@ public final class GlobalRestrictions
 		return isProtected(activeChar, target, skill, sendMessage, attacker_, target_, isOffensive);
 	}
 	
-	private static boolean isProtected(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	private static boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
 	{
 		if (!canTarget(activeChar, target, sendMessage, attacker_, target_))
@@ -374,7 +374,7 @@ public final class GlobalRestrictions
 		}
 		
 		// Checking if target has moved to peace zone
-		if (isOffensive && L2Character.isInsidePeaceZone(activeChar, target))
+		if (isOffensive && L2Creature.isInsidePeaceZone(activeChar, target))
 		{
 			if (sendMessage)
 				activeChar.sendPacket(SystemMessageId.TARGET_IN_PEACEZONE);
@@ -394,7 +394,7 @@ public final class GlobalRestrictions
 	/**
 	 * Indicates if the character can't even target another.
 	 */
-	public static boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage)
+	public static boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage)
 	{
 		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
 		final L2PcInstance target_ = L2Object.getActingPlayer(target);
@@ -402,7 +402,7 @@ public final class GlobalRestrictions
 		return canTarget(activeChar, target, sendMessage, attacker_, target_);
 	}
 	
-	private static boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage,
+	private static boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_)
 	{
 		// if GM is invisible, exclude him from the normal gameplay
@@ -579,7 +579,7 @@ public final class GlobalRestrictions
 	 *         <li><code>null</code> if not influenced</li>
 	 *         </ul>
 	 */
-	public static Boolean isInsideZone(L2Character activeChar, byte zone)
+	public static Boolean isInsideZone(L2Creature activeChar, byte zone)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.isInsideZone.ordinal()])
 		{
@@ -592,7 +592,7 @@ public final class GlobalRestrictions
 		return null;
 	}
 	
-	public static double calcDamage(L2Character activeChar, L2Character target, double damage, L2Skill skill)
+	public static double calcDamage(L2Creature activeChar, L2Creature target, double damage, L2Skill skill)
 	{
 		// PvP bonus
 		if (activeChar instanceof L2Playable && target instanceof L2Playable)
@@ -625,12 +625,12 @@ public final class GlobalRestrictions
 		return Math.max(1, damage);
 	}
 	
-	public static List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
-			L2Character target)
+	public static List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill,
+			L2Creature target)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.getTargetList.ordinal()])
 		{
-			final List<L2Character> value = restriction.getTargetList(type, activeChar, skill, target);
+			final List<L2Creature> value = restriction.getTargetList(type, activeChar, skill, target);
 			
 			if (value != null)
 				return value;
@@ -665,7 +665,7 @@ public final class GlobalRestrictions
 			restriction.playerDisconnected(activeChar);
 	}
 	
-	public static boolean playerKilled(L2Character activeChar, L2PcInstance target)
+	public static boolean playerKilled(L2Creature activeChar, L2PcInstance target)
 	{
 		final L2PcInstance killer = L2Object.getActingPlayer(activeChar);
 		
@@ -682,7 +682,7 @@ public final class GlobalRestrictions
 			restriction.playerRevived(player);
 	}
 	
-	public static void isInsideZoneStateChanged(L2Character activeChar, byte zone, boolean isInsideZone)
+	public static void isInsideZoneStateChanged(L2Creature activeChar, byte zone, boolean isInsideZone)
 	{
 		switch (zone)
 		{

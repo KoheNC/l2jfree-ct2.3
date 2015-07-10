@@ -56,7 +56,7 @@ public class SiegeGuardKnownList extends AttackableKnownList
 					&& (player.getClan() == null || castle.getSiege().getAttackerClan(player.getClan()) != null))
 			{
 				if (getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
-					getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);//(L2Character)object);
+					getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);//(L2Creature)object);
 			}
 		}
 		return true;

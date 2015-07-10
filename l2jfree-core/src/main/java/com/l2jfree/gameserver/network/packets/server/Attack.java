@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -78,12 +78,12 @@ public final class Attack extends L2ServerPacket
 	private Hit[] _hits;
 	
 	/**
-	 * @param attacker the attacking L2Character
+	 * @param attacker the attacking L2Creature
 	 * @param target the target L2Object
 	 * @param useShots true if soulshots used
 	 * @param ssGrade the grade of the soulshots
 	 */
-	public Attack(L2Character attacker, L2Object target, boolean useShots, int ssGrade)
+	public Attack(L2Creature attacker, L2Object target, boolean useShots, int ssGrade)
 	{
 		_attackerObjId = attacker.getObjectId();
 		_targetObjId = target.getObjectId();

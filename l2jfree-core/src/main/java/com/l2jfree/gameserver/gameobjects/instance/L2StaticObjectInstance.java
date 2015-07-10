@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -40,7 +40,7 @@ import com.l2jfree.lang.L2TextBuilder;
 /**
  * @author godson
  */
-public class L2StaticObjectInstance extends L2Character
+public class L2StaticObjectInstance extends L2Creature
 {
 	/** The interaction distance of the L2StaticObjectInstance */
 	public static final int INTERACTION_DISTANCE = 150;
@@ -54,8 +54,8 @@ public class L2StaticObjectInstance extends L2Character
 	
 	private volatile L2PcInstance _occupier = null;
 	
-	/** This class may be created only by L2Character and only for AI */
-	public class AIAccessor extends L2Character.AIAccessor
+	/** This class may be created only by L2Creature and only for AI */
+	public class AIAccessor extends L2Creature.AIAccessor
 	{
 		protected AIAccessor()
 		{
@@ -83,7 +83,7 @@ public class L2StaticObjectInstance extends L2Character
 		}
 		
 		@Override
-		public void doAttack(L2Character target)
+		public void doAttack(L2Creature target)
 		{
 		}
 		

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -46,7 +46,7 @@ public class Harvester implements IItemHandler
 		L2PcInstance activeChar = (L2PcInstance)playable;
 		L2Object target = activeChar.getTarget();
 		
-		if (target instanceof L2MonsterInstance && ((L2Character)target).isDead())
+		if (target instanceof L2MonsterInstance && ((L2Creature)target).isDead())
 		{
 			activeChar.useMagic(SkillTable.getInstance().getInfo(2098, 1), false, false);
 		}

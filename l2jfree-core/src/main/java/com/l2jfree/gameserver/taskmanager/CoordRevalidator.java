@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.taskmanager;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -48,9 +48,9 @@ public final class CoordRevalidator extends AbstractFIFOPeriodicTaskManager<L2Ob
 	@Override
 	protected void callTask(L2Object obj)
 	{
-		if (obj instanceof L2Character && obj.isVisible())
+		if (obj instanceof L2Creature && obj.isVisible())
 		{
-			final L2Character cha = (L2Character)obj;
+			final L2Creature cha = (L2Creature)obj;
 			
 			cha.getKnownList().updateKnownObjects();
 			

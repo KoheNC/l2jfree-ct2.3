@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 
 /**
@@ -22,12 +22,12 @@ import com.l2jfree.gameserver.model.L2Skill;
  */
 public abstract class ISkillConditionChecker implements ISkillHandler
 {
-	public boolean checkConditions(L2Character activeChar, L2Skill skill)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
 		return true;
 	}
 	
-	public boolean checkConditions(L2Character activeChar, L2Skill skill, L2Character target)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill, L2Creature target)
 	{
 		return true;
 	}

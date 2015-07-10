@@ -20,7 +20,7 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_I
 
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
@@ -89,10 +89,10 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	/**
 	 * Constructor of L2AttackableAI.<BR><BR>
 	 * 
-	 * @param accessor The AI accessor of the L2Character
+	 * @param accessor The AI accessor of the L2Creature
 	 * 
 	 */
-	public L2SiegeGuardAI(L2Character.AIAccessor accessor)
+	public L2SiegeGuardAI(L2Creature.AIAccessor accessor)
 	{
 		super(accessor);
 		
@@ -142,7 +142,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	 * @param target The targeted L2Object
 	 * 
 	 */
-	private boolean autoAttackCondition(L2Character target)
+	private boolean autoAttackCondition(L2Creature target)
 	{
 		// Check if the target isn't another guard, folk or a door
 		if (target == null || target instanceof L2SiegeGuardInstance || target instanceof L2NpcInstance
@@ -234,11 +234,11 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	/**
 	 * Manage the Attack Intention : Stop current Attack (if necessary), Calculate attack timeout, Start a new Attack and Launch Think Event.<BR><BR>
 	 *
-	 * @param target The L2Character to attack
+	 * @param target The L2Creature to attack
 	 *
 	 */
 	@Override
-	protected void onIntentionAttack(L2Character target)
+	protected void onIntentionAttack(L2Creature target)
 	{
 		// Calculate the attack timeout
 		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
@@ -253,7 +253,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Update every 1s the _globalAggro counter to come close to 0</li>
-	 * <li>If the actor is Aggressive and can attack, add all autoAttackable L2Character in its Aggro Range to its _aggroList, chose a target and order to attack it</li>
+	 * <li>If the actor is Aggressive and can attack, add all autoAttackable L2Creature in its Aggro Range to its _aggroList, chose a target and order to attack it</li>
 	 * <li>If the actor  can't attack, order to it to return to its home location</li>
 	 * 
 	 */
@@ -270,17 +270,17 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 				_globalAggro--;
 		}
 		
-		// Add all autoAttackable L2Character in L2Attackable Aggro Range to its _aggroList with 0 damage and 1 hate
+		// Add all autoAttackable L2Creature in L2Attackable Aggro Range to its _aggroList with 0 damage and 1 hate
 		// A L2Attackable isn't aggressive during 10s after its spawn because _globalAggro is set to -10
 		if (_globalAggro >= 0)
 		{
-			for (L2Character target : npc.getKnownList().getKnownCharactersInRadius(_attackRange))
+			for (L2Creature target : npc.getKnownList().getKnownCharactersInRadius(_attackRange))
 			{
 				if (target == null)
 					continue;
 				if (autoAttackCondition(target)) // check aggression
 				{
-					// Get the hate level of the L2Attackable against this L2Character target contained in _aggroList
+					// Get the hate level of the L2Attackable against this L2Creature target contained in _aggroList
 					int hating = npc.getHating(target);
 					
 					// Add the attacker to the L2Attackable _aggroList with 0 damage and 1 hate
@@ -290,7 +290,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 			}
 			
 			// Chose a target from its aggroList
-			L2Character hated;
+			L2Creature hated;
 			if (_actor.isConfused())
 				hated = getAttackTarget(); // Force mobs to attack anybody if confused
 			else
@@ -301,12 +301,12 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 			// Order to the L2Attackable to attack the target
 			if (hated != null)
 			{
-				// Get the hate level of the L2Attackable against this L2Character target contained in _aggroList
+				// Get the hate level of the L2Attackable against this L2Creature target contained in _aggroList
 				int aggro = npc.getHating(hated);
 				
 				if (aggro + _globalAggro > 0)
 				{
-					// Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+					// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 					if (!_actor.isRunning())
 						_actor.setRunning();
 					
@@ -352,7 +352,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 			}
 		}
 		
-		L2Character attackTarget = getAttackTarget();
+		L2Creature attackTarget = getAttackTarget();
 		// Check if target is dead or if timeout is expired to stop this attack
 		if (attackTarget == null || attackTarget.isAlikeDead() || _attackTimeout < GameTimeController.getGameTicks())
 		{
@@ -379,15 +379,15 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	
 	private final void factionNotifyAndSupport()
 	{
-		final L2Character target = getAttackTarget();
+		final L2Creature target = getAttackTarget();
 		final String faction_id = ((L2Npc)_actor).getFactionId();
 		// Call all L2Object of its Faction inside the Faction Range
 		if (faction_id == null || target == null || target.isInvul())
 			return;
 		
-		// Go through all L2Character that belong to its faction
-		//for (L2Character cha : _actor.getKnownList().getKnownCharactersInRadius(((L2Npc) _actor).getFactionRange()+_actor.getTemplate().getCollisionRadius()))
-		for (L2Character cha : _actor.getKnownList().getKnownCharactersInRadius(1000))
+		// Go through all L2Creature that belong to its faction
+		//for (L2Creature cha : _actor.getKnownList().getKnownCharactersInRadius(((L2Npc) _actor).getFactionRange()+_actor.getTemplate().getCollisionRadius()))
+		for (L2Creature cha : _actor.getKnownList().getKnownCharactersInRadius(1000))
 		{
 			if (cha == null)
 				continue;
@@ -485,7 +485,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 		double dist_2 = 0;
 		int range = 0;
 		L2SiegeGuardInstance sGuard = (L2SiegeGuardInstance)_actor;
-		L2Character attackTarget = getAttackTarget();
+		L2Creature attackTarget = getAttackTarget();
 		
 		if (attackTarget != null)
 		{
@@ -630,7 +630,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 		else if (dist_2 <= range * range)
 		{
 			// Force mobs to attack anybody if confused
-			L2Character hated = null;
+			L2Creature hated = null;
 			if (_actor.isConfused())
 				hated = attackTarget;
 			else
@@ -722,14 +722,14 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Init the attack : Calculate the attack timeout, Set the _globalAggro to 0, Add the attacker to the actor _aggroList</li>
-	 * <li>Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance</li>
+	 * <li>Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance</li>
 	 * <li>Set the Intention to AI_INTENTION_ATTACK</li><BR><BR>
 	 * 
-	 * @param attacker The L2Character that attacks the actor
+	 * @param attacker The L2Creature that attacks the actor
 	 * 
 	 */
 	@Override
-	protected void onEvtAttacked(L2Character attacker)
+	protected void onEvtAttacked(L2Creature attacker)
 	{
 		// Calculate the attack timeout
 		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
@@ -741,7 +741,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 		// Add the attacker to the _aggroList of the actor
 		((L2Attackable)_actor).addDamageHate(attacker, 0, 1);
 		
-		// Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+		// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 		if (!_actor.isRunning())
 			_actor.setRunning();
 		
@@ -761,12 +761,12 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 	 * <li>Add the target to the actor _aggroList or update hate if already present </li>
 	 * <li>Set the actor Intention to AI_INTENTION_ATTACK (if actor is L2GuardInstance check if it isn't too far from its home location)</li><BR><BR>
 	 * 
-	 * @param target The L2Character that attacks
+	 * @param target The L2Creature that attacks
 	 * @param aggro The value of hate to add to the actor against the target
 	 * 
 	 */
 	@Override
-	protected void onEvtAggression(L2Character target, int aggro)
+	protected void onEvtAggression(L2Creature target, int aggro)
 	{
 		L2Attackable me = (L2Attackable)_actor;
 		
@@ -792,7 +792,7 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 			// Set the actor AI Intention to AI_INTENTION_ATTACK
 			if (getIntention() != CtrlIntention.AI_INTENTION_ATTACK)
 			{
-				// Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+				// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 				if (!_actor.isRunning())
 					_actor.setRunning();
 				
@@ -811,13 +811,13 @@ public class L2SiegeGuardAI extends L2CreatureAI implements Runnable
 			if (aggro >= 0)
 				return;
 			
-			L2Character mostHated = me.getMostHated();
+			L2Creature mostHated = me.getMostHated();
 			if (mostHated == null)
 			{
 				_globalAggro = -25;
 				return;
 			}
-			for (L2Character aggroed : me.getAggroListRP().keySet())
+			for (L2Creature aggroed : me.getAggroListRP().keySet())
 				me.addDamageHate(aggroed, 0, aggro);
 			
 			aggro = me.getHating(mostHated);

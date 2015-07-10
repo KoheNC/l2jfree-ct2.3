@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.l2skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -42,10 +42,10 @@ public class L2SkillChangeWeapon extends L2Skill
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.model.L2Skill#useSkill(com.l2jfree.gameserver.gameobjects.L2Character, com.l2jfree.gameserver.gameobjects.L2Character...)
+	 * @see com.l2jfree.gameserver.model.L2Skill#useSkill(com.l2jfree.gameserver.gameobjects.L2Creature, com.l2jfree.gameserver.gameobjects.L2Creature...)
 	 */
 	@Override
-	public void useSkill(L2Character caster, L2Character... targets)
+	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
 		if (caster.isAlikeDead())
 			return;

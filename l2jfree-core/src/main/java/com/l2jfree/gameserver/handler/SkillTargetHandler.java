@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler;
 
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
@@ -49,10 +49,10 @@ public class SkillTargetHandler extends EnumHandlerRegistry<SkillTargetType, ISk
 		registerAll(skillTargetList, skillTargetList.getSkillTargetTypes());
 	}
 	
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
-			L2Character target)
+	public List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill,
+			L2Creature target)
 	{
-		final List<L2Character> targets = GlobalRestrictions.getTargetList(type, activeChar, skill, target);
+		final List<L2Creature> targets = GlobalRestrictions.getTargetList(type, activeChar, skill, target);
 		
 		if (targets != null)
 			return targets;
@@ -65,18 +65,18 @@ public class SkillTargetHandler extends EnumHandlerRegistry<SkillTargetType, ISk
 		return null;
 	}
 	
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill)
+	public List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill)
 	{
-		return getTargetList(type, activeChar, skill, activeChar.getTarget(L2Character.class));
+		return getTargetList(type, activeChar, skill, activeChar.getTarget(L2Creature.class));
 	}
 	
-	public List<L2Character> getTargetList(L2Character activeChar, L2Skill skill, L2Character target)
+	public List<L2Creature> getTargetList(L2Creature activeChar, L2Skill skill, L2Creature target)
 	{
 		return getTargetList(skill.getTargetType(), activeChar, skill, target);
 	}
 	
-	public List<L2Character> getTargetList(L2Character activeChar, L2Skill skill)
+	public List<L2Creature> getTargetList(L2Creature activeChar, L2Skill skill)
 	{
-		return getTargetList(skill.getTargetType(), activeChar, skill, activeChar.getTarget(L2Character.class));
+		return getTargetList(skill.getTargetType(), activeChar, skill, activeChar.getTarget(L2Creature.class));
 	}
 }

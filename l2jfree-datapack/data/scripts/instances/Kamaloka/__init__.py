@@ -5,7 +5,7 @@ from java.lang                                     import System
 from com.l2jfree.gameserver.instancemanager        import InstanceManager
 from com.l2jfree.gameserver.model                  import L2World
 from com.l2jfree.gameserver.model                  import Location
-from com.l2jfree.gameserver.gameobjects            import L2Character
+from com.l2jfree.gameserver.gameobjects            import L2Creature
 from com.l2jfree.gameserver.gameobjects            import L2Summon
 from com.l2jfree.gameserver.model.entity           import Instance
 from com.l2jfree.gameserver.model.quest            import State

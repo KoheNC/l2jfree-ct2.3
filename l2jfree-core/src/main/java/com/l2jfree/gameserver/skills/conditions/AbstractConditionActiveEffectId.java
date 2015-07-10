@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.skills.conditions;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.skills.Env;
 
@@ -38,7 +38,7 @@ abstract class AbstractConditionActiveEffectId extends Condition
 	@Override
 	boolean testImpl(Env env)
 	{
-		final L2Character owner = getEffectOwner(env);
+		final L2Creature owner = getEffectOwner(env);
 		
 		if (owner != null)
 			for (L2Effect e : owner.getAllEffects())
@@ -49,5 +49,5 @@ abstract class AbstractConditionActiveEffectId extends Condition
 		return false;
 	}
 	
-	abstract L2Character getEffectOwner(Env env);
+	abstract L2Creature getEffectOwner(Env env);
 }

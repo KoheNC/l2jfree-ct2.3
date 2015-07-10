@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.ChanceCondition;
@@ -56,7 +56,7 @@ public final class EffectChanceSkillTrigger extends EffectBuff implements IChanc
 	}
 	
 	@Override
-	public L2Skill getChanceTriggeredSkill(L2Character activeChar, L2Character evtInitiator)
+	public L2Skill getChanceTriggeredSkill(L2Creature activeChar, L2Creature evtInitiator)
 	{
 		return getEffectTemplate().triggeredSkill.getTriggeredSkill();
 	}

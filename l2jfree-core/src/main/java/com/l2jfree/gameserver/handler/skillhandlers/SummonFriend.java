@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
@@ -208,7 +208,7 @@ public class SummonFriend implements ISkillHandler
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, final L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, final L2Skill skill, L2Creature... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return; // currently not implemented for others
@@ -217,7 +217,7 @@ public class SummonFriend implements ISkillHandler
 		if (!checkSummonerStatus(activePlayer))
 			return;
 		
-		for (L2Character element : targets)
+		for (L2Creature element : targets)
 		{
 			if (!(element instanceof L2PcInstance))
 				continue;

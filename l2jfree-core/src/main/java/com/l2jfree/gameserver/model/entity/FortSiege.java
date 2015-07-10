@@ -33,7 +33,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
@@ -507,7 +507,7 @@ public class FortSiege extends AbstractSiege
 	public List<L2PcInstance> getPlayersInZone()
 	{
 		List<L2PcInstance> lst = new FastList<L2PcInstance>();
-		for (L2Character cha : getZone().getCharactersInside())
+		for (L2Creature cha : getZone().getCharactersInside())
 		{
 			if (cha instanceof L2PcInstance)
 				lst.add((L2PcInstance)cha);
@@ -519,7 +519,7 @@ public class FortSiege extends AbstractSiege
 	public List<L2PcInstance> getOwnersInZone()
 	{
 		List<L2PcInstance> lst = new FastList<L2PcInstance>();
-		for (L2Character cha : getZone().getCharactersInside())
+		for (L2Creature cha : getZone().getCharactersInside())
 		{
 			if (cha instanceof L2PcInstance && ((L2PcInstance)cha).getClan() != null
 					&& ((L2PcInstance)cha).getClan() == getFort().getOwnerClan())

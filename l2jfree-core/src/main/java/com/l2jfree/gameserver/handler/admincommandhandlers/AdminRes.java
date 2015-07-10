@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 
 /**
  * This class handles following admin commands:
- * - res = resurrects target L2Character
+ * - res = resurrects target L2Creature
  * 
  * @version $Revision: 1.2.4.5 $ $Date: 2005/04/11 10:06:06 $
  */
@@ -106,7 +106,7 @@ public class AdminRes implements IAdminCommandHandler
 			return;
 		}
 		
-		doResurrect((L2Character)obj);
+		doResurrect((L2Creature)obj);
 		
 		if (_log.isDebugEnabled())
 			_log.debug("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") resurrected character "
@@ -130,7 +130,7 @@ public class AdminRes implements IAdminCommandHandler
 			{
 				radius = Integer.parseInt(radiusStr);
 				
-				for (L2Character knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+				for (L2Creature knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 					if (!(knownChar instanceof L2PcInstance) && !(knownChar instanceof L2ControllableMobInstance))
 						doResurrect(knownChar);
 				
@@ -149,10 +149,10 @@ public class AdminRes implements IAdminCommandHandler
 			return;
 		}
 		
-		doResurrect((L2Character)obj);
+		doResurrect((L2Creature)obj);
 	}
 	
-	private void doResurrect(L2Character targetChar)
+	private void doResurrect(L2Creature targetChar)
 	{
 		if (!targetChar.isDead())
 			return;

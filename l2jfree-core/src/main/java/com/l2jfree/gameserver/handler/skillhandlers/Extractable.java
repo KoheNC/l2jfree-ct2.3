@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ExtractableSkillsData;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.items.model.L2ExtractableProductItem;
@@ -40,10 +40,10 @@ public class Extractable implements ISkillHandler
 	
 	/**
 	 * 
-	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.gameobjects.L2Character, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.gameobjects.L2Character...)
+	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.gameobjects.L2Creature, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.gameobjects.L2Creature...)
 	 */
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Object;
@@ -31,7 +31,7 @@ public class NpcInfoPoly extends L2ServerPacket
 	//   ddddddddddddddddddffffdddcccccSSddd dddddc
 	
 	private static final String _S__22_NPCINFO = "[S] 16 NpcInfo";
-	private L2Character _activeChar;
+	private L2Creature _activeChar;
 	private final L2Object _obj;
 	private int _x, _y, _z, _heading;
 	private final int _npcId;
@@ -50,7 +50,7 @@ public class NpcInfoPoly extends L2ServerPacket
 	/**
 	 * @param _activeCharracters
 	 */
-	public NpcInfoPoly(L2Object obj, L2Character attacker)
+	public NpcInfoPoly(L2Object obj, L2Creature attacker)
 	{
 		_obj = obj;
 		_npcId = obj.getPoly().getPolyId();
@@ -61,9 +61,9 @@ public class NpcInfoPoly extends L2ServerPacket
 		_isSummoned = false;
 		_collisionRadius = _template.getCollisionRadius();
 		_collisionHeight = _template.getCollisionHeight();
-		if (_obj instanceof L2Character)
+		if (_obj instanceof L2Creature)
 		{
-			_activeChar = (L2Character)obj;
+			_activeChar = (L2Creature)obj;
 			_isAttackable = obj.isAutoAttackable(attacker);
 			_rhand = _template.getRhand();
 			_lhand = _template.getLhand();

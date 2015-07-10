@@ -18,7 +18,7 @@ import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.threadmanager.FIFOExecutableQueue;
 import com.l2jfree.lang.L2System;
@@ -32,11 +32,11 @@ public final class FactionAggressionNotificationQueue extends FIFOExecutableQueu
 	private static final class NotificationInfo
 	{
 		private final L2Npc _npc;
-		private final L2Character _target;
+		private final L2Creature _target;
 		
 		private volatile long _lastNotificationTime;
 		
-		private NotificationInfo(L2Npc npc, L2Character target)
+		private NotificationInfo(L2Npc npc, L2Creature target)
 		{
 			_npc = npc;
 			_target = target;
@@ -65,7 +65,7 @@ public final class FactionAggressionNotificationQueue extends FIFOExecutableQueu
 	
 	private final Object _lock = new Object();
 	
-	public void add(L2Npc npc, L2Character target)
+	public void add(L2Npc npc, L2Creature target)
 	{
 		final NotificationInfo ni = new NotificationInfo(npc, target);
 		
@@ -145,7 +145,7 @@ public final class FactionAggressionNotificationQueue extends FIFOExecutableQueu
 	private static final HashMap<String, FactionAggressionNotificationQueue> _queues =
 			new HashMap<String, FactionAggressionNotificationQueue>();
 	
-	public static void add(String factionId, L2Npc npc, L2Character target)
+	public static void add(String factionId, L2Npc npc, L2Creature target)
 	{
 		FactionAggressionNotificationQueue queue = _queues.get(factionId);
 		

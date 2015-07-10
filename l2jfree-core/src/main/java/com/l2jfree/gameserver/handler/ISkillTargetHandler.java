@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler;
 
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
 
@@ -25,8 +25,8 @@ import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
  */
 public interface ISkillTargetHandler
 {
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
-			L2Character target);
+	public List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill,
+			L2Creature target);
 	
 	public SkillTargetType[] getSkillTargetTypes();
 }

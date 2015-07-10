@@ -23,7 +23,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.TradeListTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
 import com.l2jfree.gameserver.gameobjects.instance.L2FishermanInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantInstance;
@@ -297,7 +297,7 @@ public class RequestBuyItem extends L2ClientPacket
 		
 		if (!player.isGM() || (player.isGM() && (player.getAccessLevel() < Config.GM_FREE_SHOP)))
 		{
-			if ((taxedPriceTotal < 0) || !player.reduceAdena("Buy", taxedPriceTotal, (L2Character)merchant, false))
+			if ((taxedPriceTotal < 0) || !player.reduceAdena("Buy", taxedPriceTotal, (L2Creature)merchant, false))
 			{
 				requestFailed(SystemMessageId.YOU_NOT_ENOUGH_ADENA);
 				return;
@@ -340,7 +340,7 @@ public class RequestBuyItem extends L2ClientPacket
 			
 			// Add item to Inventory and adjust update packet
 			player.getInventory().addItem(list.isGm() ? "GMShop" : "Buy", i.getItemId(), i.getCount(), player,
-					(L2Character)merchant);
+					(L2Creature)merchant);
 		}
 		
 		if (merchant != null)
@@ -376,7 +376,7 @@ public class RequestBuyItem extends L2ClientPacket
 		if (target == null)
 			return false;
 		
-		L2Character merchant = (L2Character)target;
+		L2Creature merchant = (L2Creature)target;
 		if (!player.isSameInstance(merchant))
 			return false;
 		

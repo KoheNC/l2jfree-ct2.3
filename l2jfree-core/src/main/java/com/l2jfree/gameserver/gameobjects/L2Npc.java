@@ -125,13 +125,13 @@ import com.l2jfree.tools.random.Rnd;
  * This class represents a Non-Player-Character in the world. It can be a monster or a friendly character.
  * It also uses a template to fetch some static values. The templates are hardcoded in the client, so we can rely on them.<BR><BR>
  *
- * L2Character :<BR><BR>
+ * L2Creature :<BR><BR>
  * <li>L2Attackable</li>
  * <li>L2NpcInstance</li>
  *
  * @version $Revision: 1.32.2.7.2.24 $ $Date: 2005/04/11 10:06:09 $
  */
-public class L2Npc extends L2Character
+public class L2Npc extends L2Creature
 {
 	private static final class RandomAnimationTaskManager extends AbstractIterativePeriodicTaskManager<L2Npc>
 	{
@@ -315,11 +315,11 @@ public class L2Npc extends L2Character
 	}
 	
 	/**
-	 * Constructor of L2Npc (use L2Character constructor).<BR><BR>
+	 * Constructor of L2Npc (use L2Creature constructor).<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to set the _template of the L2Character (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR)  </li>
-	 * <li>Set the name of the L2Character</li>
+	 * <li>Call the L2Creature constructor to set the _template of the L2Creature (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR)  </li>
+	 * <li>Set the name of the L2Creature</li>
 	 * <li>Create a RandomAnimation Task that will be launched after the calculated delay if the server allow it </li><BR><BR>
 	 *
 	 * @param objectId Identifier of the object to initialized
@@ -328,7 +328,7 @@ public class L2Npc extends L2Character
 	 */
 	public L2Npc(int objectId, L2NpcTemplate template)
 	{
-		// Call the L2Character constructor to set the _template of the L2Character, copy skills from template to object
+		// Call the L2Creature constructor to set the _template of the L2Creature, copy skills from template to object
 		// and link _calculators to NPC_STD_CALCULATOR
 		super(objectId, template);
 		getKnownList(); // init knownlist
@@ -349,7 +349,7 @@ public class L2Npc extends L2Character
 			return;
 		}
 		
-		// Set the name and the title of the L2Character
+		// Set the name and the title of the L2Creature
 		setName(template.getName());
 		setTitle(template.getTitle());
 		
@@ -2659,18 +2659,18 @@ public class L2Npc extends L2Character
 	 * <li>Set target to null and cancel Attack or Cast </li>
 	 * <li>Stop movement </li>
 	 * <li>Stop HP/MP/CP Regeneration task </li>
-	 * <li>Stop all active skills effects in progress on the L2Character </li>
+	 * <li>Stop all active skills effects in progress on the L2Creature </li>
 	 * <li>Send the Server->Client packet StatusUpdate with current HP and MP to all other L2PcInstance to inform </li>
-	 * <li>Notify L2Character AI </li><BR><BR>
+	 * <li>Notify L2Creature AI </li><BR><BR>
 	 *
 	 * <B><U> Overridden in </U> :</B><BR><BR>
 	 * <li> L2Attackable </li><BR><BR>
 	 *
-	 * @param killer The L2Character who killed it
+	 * @param killer The L2Creature who killed it
 	 *
 	 */
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -2789,7 +2789,7 @@ public class L2Npc extends L2Character
 			if (_fusionSkill != null)
 				abortCast();
 			
-			for (L2Character character : getKnownList().getKnownCharacters())
+			for (L2Creature character : getKnownList().getKnownCharacters())
 				if (character.getFusionSkill() != null && character.getFusionSkill().getTarget() == this)
 					character.abortCast();
 		}
@@ -2801,7 +2801,7 @@ public class L2Npc extends L2Character
 		if (region != null)
 			region.removeFromZones(this);
 		
-		// Remove all L2Object from _knownObjects and _knownPlayer of the L2Character then cancel Attack or Cast and notify AI
+		// Remove all L2Object from _knownObjects and _knownPlayer of the L2Creature then cancel Attack or Cast and notify AI
 		try
 		{
 			getKnownList().removeAllKnownObjects();

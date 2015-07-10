@@ -32,7 +32,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2ArtefactInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -151,7 +151,7 @@ public class SiegeManager
 	 * Return true if character can use Strider Siege Assault skill <BR><BR>
 	 * 
 	 * @param player
-	 *            The L2Character of the character placing the flag
+	 *            The L2Creature of the character placing the flag
 	 * @param isCheckOnly
 	 *            if false, it will send a notification to the player telling
 	 *            him why it failed
@@ -179,7 +179,7 @@ public class SiegeManager
 		return false;
 	}
 	
-	public boolean checkIfOkToCastSealOfRule(L2Character activeChar, Castle castle)
+	public boolean checkIfOkToCastSealOfRule(L2Creature activeChar, Castle castle)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;

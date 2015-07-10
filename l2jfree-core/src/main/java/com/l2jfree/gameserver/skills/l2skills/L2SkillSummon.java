@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -98,7 +98,7 @@ public class L2SkillSummon extends L2Skill
 	}
 	
 	@Override
-	public boolean checkCondition(L2Character activeChar, L2Object target)
+	public boolean checkCondition(L2Creature activeChar, L2Object target)
 	{
 		if (activeChar instanceof L2PcInstance)
 		{
@@ -136,7 +136,7 @@ public class L2SkillSummon extends L2Skill
 	}
 	
 	@Override
-	public void useSkill(L2Character caster, L2Character... targets)
+	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
 		if (caster.isAlikeDead() || !(caster instanceof L2PcInstance))
 			return;
@@ -153,7 +153,7 @@ public class L2SkillSummon extends L2Skill
 		{
 			if (targets.length > 1) //Mass cubic skill
 			{
-				for (L2Character obj : targets)
+				for (L2Creature obj : targets)
 				{
 					if (!(obj instanceof L2PcInstance))
 						continue;

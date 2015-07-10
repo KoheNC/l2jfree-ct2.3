@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
@@ -29,7 +29,7 @@ public final class BalanceLife implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.BALANCE_LIFE };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		SkillHandler.getInstance().useSkill(L2SkillType.BUFF, activeChar, skill, targets);
 		
@@ -40,7 +40,7 @@ public final class BalanceLife implements ISkillHandler
 		double fullHP = 0;
 		double currentHPs = 0;
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null || target.isDead())
 				continue;
@@ -59,7 +59,7 @@ public final class BalanceLife implements ISkillHandler
 		final double percentHP = currentHPs / fullHP;
 		final String message = "HP of the party has been balanced to " + ((int)(100 * percentHP)) + "%.";
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null || target.isDead())
 				continue;

@@ -18,7 +18,7 @@ import javolution.util.FastMap;
 import javolution.util.FastMap.Entry;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
@@ -53,7 +53,7 @@ public class L2DoorAI extends L2CreatureAI
 	}
 	
 	@Override
-	protected void onIntentionAttack(L2Character target)
+	protected void onIntentionAttack(L2Creature target)
 	{
 	}
 	
@@ -68,7 +68,7 @@ public class L2DoorAI extends L2CreatureAI
 	}
 	
 	@Override
-	protected void onIntentionFollow(L2Character target)
+	protected void onIntentionFollow(L2Creature target)
 	{
 	}
 	
@@ -90,7 +90,7 @@ public class L2DoorAI extends L2CreatureAI
 	private GuardNotificationQueue _guardNotificationTasks;
 	
 	@Override
-	protected void onEvtAttacked(L2Character attacker)
+	protected void onEvtAttacked(L2Creature attacker)
 	{
 		if (_guardNotificationTasks == null)
 			_guardNotificationTasks = new GuardNotificationQueue();
@@ -99,22 +99,22 @@ public class L2DoorAI extends L2CreatureAI
 	}
 	
 	@Override
-	protected void onEvtAggression(L2Character target, int aggro)
+	protected void onEvtAggression(L2Creature target, int aggro)
 	{
 	}
 	
 	@Override
-	protected void onEvtStunned(L2Character attacker)
+	protected void onEvtStunned(L2Creature attacker)
 	{
 	}
 	
 	@Override
-	protected void onEvtSleeping(L2Character attacker)
+	protected void onEvtSleeping(L2Creature attacker)
 	{
 	}
 	
 	@Override
-	protected void onEvtRooted(L2Character attacker)
+	protected void onEvtRooted(L2Creature attacker)
 	{
 	}
 	
@@ -187,13 +187,13 @@ public class L2DoorAI extends L2CreatureAI
 	
 	private final class GuardNotificationQueue extends FIFOExecutableQueue
 	{
-		private final FastMap<L2Character, Integer> _map = new FastMap<L2Character, Integer>();
+		private final FastMap<L2Creature, Integer> _map = new FastMap<L2Creature, Integer>();
 		
-		private void add(L2Character attacker)
+		private void add(L2Creature attacker)
 		{
 			synchronized (_map)
 			{
-				Entry<L2Character, Integer> entry = _map.getEntry(attacker);
+				Entry<L2Creature, Integer> entry = _map.getEntry(attacker);
 				if (entry != null)
 					entry.setValue(entry.getValue() + 15);
 				else
@@ -214,12 +214,12 @@ public class L2DoorAI extends L2CreatureAI
 		@Override
 		protected void removeAndExecuteFirst()
 		{
-			L2Character attacker = null;
+			L2Creature attacker = null;
 			int aggro = 0;
 			
 			synchronized (_map)
 			{
-				Entry<L2Character, Integer> first = _map.head().getNext();
+				Entry<L2Creature, Integer> first = _map.head().getNext();
 				
 				attacker = first.getKey();
 				aggro = first.getValue();

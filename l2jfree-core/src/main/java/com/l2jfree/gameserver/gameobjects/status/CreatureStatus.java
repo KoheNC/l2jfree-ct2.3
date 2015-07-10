@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -34,13 +34,13 @@ public class CreatureStatus
 {
 	protected static final Log _log = LogFactory.getLog(CreatureStatus.class);
 	
-	protected final L2Character _activeChar;
+	protected final L2Creature _activeChar;
 	private final int _period;
 	
 	private double _currentHp = 0;
 	private double _currentMp = 0;
 	
-	public CreatureStatus(L2Character activeChar)
+	public CreatureStatus(L2Creature activeChar)
 	{
 		_activeChar = activeChar;
 		_period = Formulas.getRegeneratePeriod(_activeChar);
@@ -48,7 +48,7 @@ public class CreatureStatus
 	
 	// ========================================================================
 	
-	protected L2Character getActiveChar()
+	protected L2Creature getActiveChar()
 	{
 		return _activeChar;
 	}
@@ -170,7 +170,7 @@ public class CreatureStatus
 	
 	// ========================================================================
 	
-	boolean canReduceHp(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	boolean canReduceHp(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		if (attacker == null || getActiveChar().isDead())
 			return false;
@@ -205,7 +205,7 @@ public class CreatureStatus
 		setCurrentHp(getCurrentHp() + value);
 	}
 	
-	public final void reduceHp(double value, L2Character attacker)
+	public final void reduceHp(double value, L2Creature attacker)
 	{
 		reduceHp(value, attacker, true);
 	}
@@ -214,12 +214,12 @@ public class CreatureStatus
 	 * @deprecated the last boolean parameter was used for awake/isConsume as well, so this is confusing
 	 */
 	@Deprecated
-	public final void reduceHp(double value, L2Character attacker, boolean awake)
+	public final void reduceHp(double value, L2Creature attacker, boolean awake)
 	{
 		reduceHp(value, attacker, awake, false, false);
 	}
 	
-	public final void reduceHp(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	public final void reduceHp(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		if (!canReduceHp(value, attacker, awake, isDOT, isConsume))
 			return;
@@ -227,7 +227,7 @@ public class CreatureStatus
 		reduceHp0(value, attacker, awake, isDOT, isConsume);
 	}
 	
-	public final void reduceHpByDOT(double value, L2Character attacker, L2Skill skill)
+	public final void reduceHpByDOT(double value, L2Creature attacker, L2Skill skill)
 	{
 		reduceHp(value, attacker, !skill.isToggle(), true, false);
 	}
@@ -237,7 +237,7 @@ public class CreatureStatus
 		reduceHp(value, getActiveChar(), false, false, true);
 	}
 	
-	void reduceHp0(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	void reduceHp0(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		if (!isConsume)
 		{

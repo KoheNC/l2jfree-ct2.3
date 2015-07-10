@@ -19,7 +19,7 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.gameobjects.L2Boss;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.lang.L2TextBuilder;
@@ -34,14 +34,14 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 		return SingletonHolder._instance;
 	}
 	
-	private final FastMap<L2Character, Long> _decayTasks = new FastMap<L2Character, Long>();
+	private final FastMap<L2Creature, Long> _decayTasks = new FastMap<L2Creature, Long>();
 	
 	private DecayTaskManager()
 	{
 		super(1000);
 	}
 	
-	public boolean hasDecayTask(L2Character actor)
+	public boolean hasDecayTask(L2Creature actor)
 	{
 		readLock();
 		try
@@ -54,7 +54,7 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 		}
 	}
 	
-	public double getRemainingDecayTime(L2Character actor)
+	public double getRemainingDecayTime(L2Creature actor)
 	{
 		readLock();
 		try
@@ -69,7 +69,7 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 		}
 	}
 	
-	public void addDecayTask(L2Character actor)
+	public void addDecayTask(L2Creature actor)
 	{
 		writeLock();
 		try
@@ -82,7 +82,7 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 		}
 	}
 	
-	private int getDecayTime0(L2Character actor)
+	private int getDecayTime0(L2Creature actor)
 	{
 		if (actor instanceof L2MonsterInstance)
 		{
@@ -116,7 +116,7 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 		return ATTACKABLE_DECAY_TIME;
 	}
 	
-	public void cancelDecayTask(L2Character actor)
+	public void cancelDecayTask(L2Creature actor)
 	{
 		writeLock();
 		try
@@ -135,11 +135,11 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 		writeLock();
 		try
 		{
-			for (Map.Entry<L2Character, Long> entry : _decayTasks.entrySet())
+			for (Map.Entry<L2Creature, Long> entry : _decayTasks.entrySet())
 			{
 				if (System.currentTimeMillis() > entry.getValue())
 				{
-					final L2Character actor = entry.getKey();
+					final L2Creature actor = entry.getKey();
 					
 					actor.onDecay();
 					
@@ -163,7 +163,7 @@ public final class DecayTaskManager extends AbstractPeriodicTaskManager
 			sb.append("Tasks count: ").append(_decayTasks.size()).append("\r\n");
 			sb.append("Tasks dump:").append("\r\n");
 			
-			for (L2Character actor : _decayTasks.keySet())
+			for (L2Creature actor : _decayTasks.keySet())
 			{
 				sb.append("(").append(_decayTasks.get(actor) - System.currentTimeMillis()).append(") - ");
 				sb.append(actor.getClass().getSimpleName()).append("/").append(actor.getName()).append("\r\n");

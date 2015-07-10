@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
@@ -53,7 +53,7 @@ public class MonsterKnownList extends AttackableKnownList
 		if (!super.removeKnownObject(object))
 			return false;
 		
-		if (!(object instanceof L2Character))
+		if (!(object instanceof L2Creature))
 			return true;
 		
 		if (getActiveChar().hasAI())

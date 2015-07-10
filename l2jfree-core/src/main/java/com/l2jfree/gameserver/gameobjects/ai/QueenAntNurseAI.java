@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.gameobjects.ai;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.instancemanager.grandbosses.QueenAntManager;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -95,8 +95,8 @@ public class QueenAntNurseAI extends L2AttackableAI
 		if (larva == null)
 			return queen;
 		
-		final L2Character queenMostHated = queen.getMostHated();
-		final L2Character larvaMostHated = larva.getMostHated();
+		final L2Creature queenMostHated = queen.getMostHated();
+		final L2Creature larvaMostHated = larva.getMostHated();
 		
 		if (queenMostHated == null && larvaMostHated == null)
 			return null;

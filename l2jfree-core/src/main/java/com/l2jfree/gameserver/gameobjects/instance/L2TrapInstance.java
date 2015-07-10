@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.TrapKnownList;
@@ -75,7 +75,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -107,7 +107,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 		
 		if (_timeRemaining < 0)
 		{
-			L2Character trg;
+			L2Creature trg;
 			
 			switch (_skill.getTargetType())
 			{
@@ -132,10 +132,10 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 					{
 						unSummon(getOwner());
 						
-						final L2Character[] targetList = _skill.getTargetList(L2TrapInstance.this);
+						final L2Creature[] targetList = _skill.getTargetList(L2TrapInstance.this);
 						
 						if (targetList != null)
-							for (L2Character attacked : targetList)
+							for (L2Creature attacked : targetList)
 								if (attacked instanceof L2Attackable)
 									((L2Attackable)attacked).addDamage(getOwner(), 1);
 					}
@@ -148,9 +148,9 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 		}
 	}
 	
-	private L2Character getRandomTarget()
+	private L2Creature getRandomTarget()
 	{
-		for (L2Character trg : getKnownList().getKnownCharactersInRadius(_skill.getSkillRadius()))
+		for (L2Creature trg : getKnownList().getKnownCharactersInRadius(_skill.getSkillRadius()))
 		{
 			if (trg == getOwner() || trg.isInsideZone(L2Zone.FLAG_PEACE))
 				continue;

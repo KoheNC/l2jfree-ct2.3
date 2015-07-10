@@ -49,7 +49,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
 import com.l2jfree.gameserver.datatables.TradeListTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
@@ -360,8 +360,8 @@ public final class GameStatusThread extends Thread
 					{
 						if (obj == null)
 							continue;
-						if (obj instanceof L2Character)
-							if (((L2Character)obj).hasAI())
+						if (obj instanceof L2Creature)
+							if (((L2Creature)obj).hasAI())
 								AICount++;
 						
 						if (obj instanceof L2ItemInstance)

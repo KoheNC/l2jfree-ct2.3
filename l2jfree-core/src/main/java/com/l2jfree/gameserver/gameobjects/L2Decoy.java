@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.network.packets.server.CharInfo;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 
-public abstract class L2Decoy extends L2Character
+public abstract class L2Decoy extends L2Creature
 {
 	private final L2PcInstance _owner;
 	
@@ -74,7 +74,7 @@ public abstract class L2Decoy extends L2Character
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return _owner.isAutoAttackable(attacker);
 	}

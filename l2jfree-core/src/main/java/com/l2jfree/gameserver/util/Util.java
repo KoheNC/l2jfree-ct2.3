@@ -34,7 +34,7 @@ import org.python.util.InteractiveConsole;
 import com.l2jfree.Config;
 import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.model.L2Object;
@@ -327,11 +327,11 @@ public final class Util
 		if (range == -1)
 			return true; // not limited
 			
-		if (obj1 instanceof L2Character)
-			range += ((L2Character)obj1).getTemplate().getCollisionRadius();
+		if (obj1 instanceof L2Creature)
+			range += ((L2Creature)obj1).getTemplate().getCollisionRadius();
 		
-		if (obj2 instanceof L2Character)
-			range += ((L2Character)obj2).getTemplate().getCollisionRadius();
+		if (obj2 instanceof L2Creature)
+			range += ((L2Creature)obj2).getTemplate().getCollisionRadius();
 		
 		final ObjectPosition pos1 = obj1.getPosition();
 		final ObjectPosition pos2 = obj2.getPosition();

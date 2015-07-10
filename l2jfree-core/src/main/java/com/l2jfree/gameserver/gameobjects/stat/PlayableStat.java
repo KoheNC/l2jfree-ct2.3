@@ -193,7 +193,7 @@ public abstract class PlayableStat extends CreatureStat
 	}
 	
 	/**
-	 * Return the RunSpeed (base+modifier) of the L2Character in function of the
+	 * Return the RunSpeed (base+modifier) of the L2Creature in function of the
 	 * Armour Expertise Penalty.
 	 */
 	@Override

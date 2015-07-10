@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.skills.Env;
 
 class ConditionTargetActiveEffectId extends AbstractConditionActiveEffectId
@@ -25,7 +25,7 @@ class ConditionTargetActiveEffectId extends AbstractConditionActiveEffectId
 	}
 	
 	@Override
-	L2Character getEffectOwner(Env env)
+	L2Creature getEffectOwner(Env env)
 	{
 		return env.target;
 	}

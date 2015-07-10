@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -29,7 +29,7 @@ public final class DrainSoul extends ISkillConditionChecker
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.DRAIN_SOUL };
 	
 	@Override
-	public boolean checkConditions(L2Character activeChar, L2Skill skill, L2Character target)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill, L2Creature target)
 	{
 		// Check if the skill is Drain Soul (Soul Crystals) and if the target is a MOB
 		if (!(target instanceof L2MonsterInstance))
@@ -43,7 +43,7 @@ public final class DrainSoul extends ISkillConditionChecker
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		// This is just a dummy skill handler for the soul crystal skill,
 		// since the Soul Crystal item handler already does everything.

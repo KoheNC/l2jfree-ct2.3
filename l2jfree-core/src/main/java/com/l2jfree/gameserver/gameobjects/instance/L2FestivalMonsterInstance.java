@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.SevenSignsFestival;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Party;
@@ -36,10 +36,10 @@ public class L2FestivalMonsterInstance extends L2MonsterInstance
 	protected int _bonusMultiplier = 1;
 	
 	/**
-	 * Constructor of L2FestivalMonsterInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
+	 * Constructor of L2FestivalMonsterInstance (use L2Creature and L2NpcInstance constructor).<BR><BR>
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to set the _template of the L2FestivalMonsterInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
+	 * <li>Call the L2Creature constructor to set the _template of the L2FestivalMonsterInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
 	 * <li>Set the name of the L2MonsterInstance</li>
 	 * <li>Create a RandomAnimation Task that will be launched after the calculated delay if the server allow it </li><BR><BR>
 	 * 
@@ -62,7 +62,7 @@ public class L2FestivalMonsterInstance extends L2MonsterInstance
 	 * Return True if the attacker is not another L2FestivalMonsterInstance.<BR><BR>
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return !(attacker instanceof L2FestivalMonsterInstance);
 	}
@@ -104,7 +104,7 @@ public class L2FestivalMonsterInstance extends L2MonsterInstance
 	 * <li>Update the party leader's inventory to show the new item addition.</li>
 	 */
 	@Override
-	public void doItemDrop(L2Character lastAttacker)
+	public void doItemDrop(L2Creature lastAttacker)
 	{
 		L2PcInstance killingChar = null;
 		

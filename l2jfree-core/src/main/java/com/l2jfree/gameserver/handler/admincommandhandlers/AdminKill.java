@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 
 /**
  * This class handles following admin commands:
- * - kill = kills target L2Character
+ * - kill = kills target L2Creature
  * - kill_monster = kills target non-player
  * 
  * - kill <radius> = If radius is specified, then ALL players only in that radius will be killed.
@@ -62,7 +62,7 @@ public class AdminKill implements IAdminCommandHandler
 						try
 						{
 							int radius = Integer.parseInt(st.nextToken());
-							for (L2Character knownChar : plyr.getKnownList().getKnownCharactersInRadius(radius))
+							for (L2Creature knownChar : plyr.getKnownList().getKnownCharactersInRadius(radius))
 							{
 								if (knownChar instanceof L2ControllableMobInstance || knownChar == activeChar)
 									continue;
@@ -88,7 +88,7 @@ public class AdminKill implements IAdminCommandHandler
 					{
 						int radius = Integer.parseInt(firstParam);
 						
-						for (L2Character knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+						for (L2Creature knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 						{
 							if (knownChar instanceof L2ControllableMobInstance || knownChar == activeChar)
 								continue;
@@ -110,13 +110,13 @@ public class AdminKill implements IAdminCommandHandler
 			{
 				L2Object obj = activeChar.getTarget();
 				
-				if (obj instanceof L2ControllableMobInstance || !(obj instanceof L2Character))
+				if (obj instanceof L2ControllableMobInstance || !(obj instanceof L2Creature))
 				{
 					activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 				}
 				else
 				{
-					kill(activeChar, (L2Character)obj);
+					kill(activeChar, (L2Creature)obj);
 				}
 			}
 		}
@@ -124,7 +124,7 @@ public class AdminKill implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void kill(L2PcInstance activeChar, L2Character target)
+	private void kill(L2PcInstance activeChar, L2Creature target)
 	{
 		if (target instanceof L2PcInstance)
 		{

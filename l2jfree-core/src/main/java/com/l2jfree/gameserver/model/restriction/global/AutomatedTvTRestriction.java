@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -114,7 +114,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public Boolean isInsideZone(L2Character activeChar, byte zone)
+	public Boolean isInsideZone(L2Creature activeChar, byte zone)
 	{
 		if (activeChar instanceof L2Playable && AutomatedTvT.isPlaying(activeChar.getActingPlayer()))
 		{
@@ -151,7 +151,7 @@ public final class AutomatedTvTRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean playerKilled(L2Character activeChar, L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, L2PcInstance target, L2PcInstance killer)
 	{
 		if (AutomatedTvT.isPlaying(killer) && AutomatedTvT.isPlaying(target))
 		{

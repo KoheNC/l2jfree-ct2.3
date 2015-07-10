@@ -24,7 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
@@ -163,12 +163,12 @@ public final class L2World
 		return _objects.get(objectId);
 	}
 	
-	public L2Character findCharacter(int objectId)
+	public L2Creature findCharacter(int objectId)
 	{
 		L2Object obj = _objects.get(objectId);
 		
-		if (obj instanceof L2Character)
-			return (L2Character)obj;
+		if (obj instanceof L2Creature)
+			return (L2Creature)obj;
 		
 		return null;
 	}
@@ -440,7 +440,7 @@ public final class L2World
 	 * <BR>
 	 * <B><U> Example of use </U> :</B><BR>
 	 * <BR>
-	 * <li> Find Close Objects for L2Character </li>
+	 * <li> Find Close Objects for L2Creature </li>
 	 * <BR>
 	 * 
 	 * @param object L2object that determine the current L2WorldRegion

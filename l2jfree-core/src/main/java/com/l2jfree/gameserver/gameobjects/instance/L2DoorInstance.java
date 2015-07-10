@@ -19,7 +19,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
@@ -51,7 +51,7 @@ import com.l2jfree.gameserver.network.packets.server.StaticObject;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.lang.L2TextBuilder;
 
-public class L2DoorInstance extends L2Character
+public class L2DoorInstance extends L2Creature
 {
 	/** The castle index in the array of L2Castle this L2DoorInstance belongs to */
 	private int _castleIndex = -2;
@@ -89,8 +89,8 @@ public class L2DoorInstance extends L2Character
 	
 	private boolean _seedOfDestructionAttackableDoor = false;
 	
-	/** This class may be created only by L2Character and only for AI */
-	public class AIAccessor extends L2Character.AIAccessor
+	/** This class may be created only by L2Creature and only for AI */
+	public class AIAccessor extends L2Creature.AIAccessor
 	{
 		protected AIAccessor()
 		{
@@ -118,7 +118,7 @@ public class L2DoorInstance extends L2Character
 		}
 		
 		@Override
-		public void doAttack(L2Character target)
+		public void doAttack(L2Creature target)
 		{
 		}
 		
@@ -349,7 +349,7 @@ public class L2DoorInstance extends L2Character
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		if (isUnlockable() && getFort() == null)
 			return true;
@@ -404,7 +404,7 @@ public class L2DoorInstance extends L2Character
 		return (isCastle || isFort || isHideout);
 	}
 	
-	public boolean isAttackable(L2Character attacker)
+	public boolean isAttackable(L2Creature attacker)
 	{
 		return isAutoAttackable(attacker);
 	}
@@ -712,7 +712,7 @@ public class L2DoorInstance extends L2Character
 	// BADLY IMPLEMENTED METHODS END
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;

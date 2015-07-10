@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -69,7 +69,7 @@ public class L2CubicInstance
 	public static final int SKILL_CUBIC_CURE = 5579;
 	
 	protected L2PcInstance _owner;
-	protected L2Character _target;
+	protected L2Creature _target;
 	
 	protected int _id;
 	protected int _matk;
@@ -291,7 +291,7 @@ public class L2CubicInstance
 		return _owner;
 	}
 	
-	public final int getMCriticalHit(L2Character target, L2Skill skill)
+	public final int getMCriticalHit(L2Creature target, L2Skill skill)
 	{
 		// TODO: Temporary now mcrit for cubics is the baseMCritRate of its owner
 		return _owner.getTemplate().getBaseMCritRate();
@@ -371,7 +371,7 @@ public class L2CubicInstance
 					if (partyEnemy != null)
 					{
 						if (partyEnemy.getPartyMembers().contains(ownerTarget))
-							_target = (L2Character)ownerTarget;
+							_target = (L2Creature)ownerTarget;
 						return;
 					}
 				}
@@ -416,7 +416,7 @@ public class L2CubicInstance
 			}
 			
 			// Test owners target if it is valid then use it
-			if (ownerTarget instanceof L2Character && ownerTarget != _owner.getPet() && ownerTarget != _owner)
+			if (ownerTarget instanceof L2Creature && ownerTarget != _owner.getPet() && ownerTarget != _owner)
 			{
 				// target mob which has aggro on you or your summon
 				if (ownerTarget instanceof L2Attackable)
@@ -424,14 +424,14 @@ public class L2CubicInstance
 					if (((L2Attackable)ownerTarget).getAggroListRP().get(_owner) != null
 							&& !((L2Attackable)ownerTarget).isDead())
 					{
-						_target = (L2Character)ownerTarget;
+						_target = (L2Creature)ownerTarget;
 						return;
 					}
 					if (_owner.getPet() != null)
 						if (((L2Attackable)ownerTarget).getAggroListRP().get(_owner.getPet()) != null
 								&& !((L2Attackable)ownerTarget).isDead())
 						{
-							_target = (L2Character)ownerTarget;
+							_target = (L2Creature)ownerTarget;
 							return;
 						}
 				}
@@ -442,7 +442,7 @@ public class L2CubicInstance
 				if ((_owner.getPvpFlag() > 0 && !_owner.isInsideZone(L2Zone.FLAG_PEACE))
 						|| _owner.isInsideZone(L2Zone.FLAG_PVP))
 				{
-					if (ownerTarget instanceof L2Character && !((L2Character)ownerTarget).isDead())
+					if (ownerTarget instanceof L2Creature && !((L2Creature)ownerTarget).isDead())
 						enemy = ownerTarget.getActingPlayer();
 					
 					if (enemy != null)
@@ -599,7 +599,7 @@ public class L2CubicInstance
 	}
 	
 	/** returns true if the target is inside of the owner's max Cubic range */
-	public boolean isInCubicRange(L2Character owner, L2Character target)
+	public boolean isInCubicRange(L2Creature owner, L2Creature target)
 	{
 		if (owner == null || target == null)
 			return false;
@@ -614,7 +614,7 @@ public class L2CubicInstance
 	/** this sets the friendly target for a cubic */
 	public void setCubicTargetForHeal()
 	{
-		L2Character target = null;
+		L2Creature target = null;
 		double percentleft = 100.0;
 		L2Party party = _owner.getParty();
 		
@@ -626,10 +626,10 @@ public class L2CubicInstance
 		
 		if (party != null && !_owner.isInOlympiadMode())
 		{
-			// Get all visible objects in a spheric area near the L2Character
+			// Get all visible objects in a spheric area near the L2Creature
 			// Get a list of Party Members
 			List<L2PcInstance> partyList = party.getPartyMembers();
-			for (L2Character partyMember : partyList)
+			for (L2Creature partyMember : partyList)
 			{
 				if (!partyMember.isDead())
 				{
@@ -720,7 +720,7 @@ public class L2CubicInstance
 			if (skill != null)
 			{
 				setCubicTargetForHeal();
-				L2Character target = _target;
+				L2Creature target = _target;
 				if (target != null && !target.isDead())
 				{
 					if (target.getMaxHp() - target.getStatus().getCurrentHp() > skill.getPower())

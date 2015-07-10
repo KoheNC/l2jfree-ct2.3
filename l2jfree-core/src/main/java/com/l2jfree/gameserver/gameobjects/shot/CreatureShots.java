@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.shot;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 
 /**
@@ -40,14 +40,14 @@ public abstract class CreatureShots implements Runnable
 		return _instance;
 	}
 	
-	protected final L2Character _activeChar;
+	protected final L2Creature _activeChar;
 	
-	protected CreatureShots(L2Character activeChar)
+	protected CreatureShots(L2Creature activeChar)
 	{
 		_activeChar = activeChar;
 	}
 	
-	protected L2Character getActiveChar()
+	protected L2Creature getActiveChar()
 	{
 		return _activeChar;
 	}

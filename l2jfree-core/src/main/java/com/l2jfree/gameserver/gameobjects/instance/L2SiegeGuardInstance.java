@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
@@ -68,16 +68,16 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 	}
 	
 	/**
-	 * Return True if a siege is in progress and the L2Character attacker isn't
+	 * Return True if a siege is in progress and the L2Creature attacker isn't
 	 * a Defender.<BR>
 	 * <BR>
 	 * 
-	 * @param attacker The L2Character that the L2SiegeGuardInstance try to
+	 * @param attacker The L2Creature that the L2SiegeGuardInstance try to
 	 *            attack
 	 * 
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		// Summons and traps are attackable, too
 		L2PcInstance player = L2Object.getActingPlayer(attacker);
@@ -231,7 +231,7 @@ public class L2SiegeGuardInstance extends L2SiegeGuard
 	}
 	
 	@Override
-	public void addDamageHate(L2Character attacker, int damage, int aggro)
+	public void addDamageHate(L2Creature attacker, int damage, int aggro)
 	{
 		if (attacker == null)
 			return;

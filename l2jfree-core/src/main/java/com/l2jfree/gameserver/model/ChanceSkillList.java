@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
@@ -34,9 +34,9 @@ public final class ChanceSkillList
 {
 	private IChanceSkillTrigger[] _triggers = IChanceSkillTrigger.EMPTY_ARRAY;
 	
-	private final L2Character _owner;
+	private final L2Creature _owner;
 	
-	public ChanceSkillList(L2Character owner)
+	public ChanceSkillList(L2Creature owner)
 	{
 		_owner = owner;
 	}
@@ -83,7 +83,7 @@ public final class ChanceSkillList
 			_triggers = L2Arrays.compact(_triggers);
 	}
 	
-	public void onHit(L2Character evtInitiator, boolean ownerWasHit, boolean wasCrit, boolean wasRange)
+	public void onHit(L2Creature evtInitiator, boolean ownerWasHit, boolean wasCrit, boolean wasRange)
 	{
 		int event;
 		if (ownerWasHit)
@@ -108,12 +108,12 @@ public final class ChanceSkillList
 		onEvent(event, evtInitiator, Elementals.NONE);
 	}
 	
-	public void onEvadedHit(L2Character attacker)
+	public void onEvadedHit(L2Creature attacker)
 	{
 		onEvent(ChanceCondition.EVT_EVADED_HIT, attacker, Elementals.NONE);
 	}
 	
-	public void onSkillHit(L2Character evtInitiator, boolean ownerWasHit, L2Skill trigger)
+	public void onSkillHit(L2Creature evtInitiator, boolean ownerWasHit, L2Skill trigger)
 	{
 		int event;
 		if (ownerWasHit)
@@ -139,7 +139,7 @@ public final class ChanceSkillList
 		onEvent(event, evtInitiator, trigger.getElement());
 	}
 	
-	public static boolean canTriggerByCast(L2Character caster, L2Character target, L2Skill trigger)
+	public static boolean canTriggerByCast(L2Creature caster, L2Creature target, L2Skill trigger)
 	{
 		// crafting does not trigger any chance skills
 		// possibly should be unhardcoded
@@ -162,7 +162,7 @@ public final class ChanceSkillList
 		return true;
 	}
 	
-	public void onEvent(int event, L2Character evtInitiator, byte element)
+	public void onEvent(int event, L2Creature evtInitiator, byte element)
 	{
 		final boolean playable = evtInitiator instanceof L2Playable;
 		for (IChanceSkillTrigger trigger : _triggers)
@@ -174,7 +174,7 @@ public final class ChanceSkillList
 		}
 	}
 	
-	private void makeCast(L2Skill skill, L2Character evtInitiator)
+	private void makeCast(L2Skill skill, L2Creature evtInitiator)
 	{
 		if (skill == null || skill.getSkillType() == L2SkillType.NOTDONE)
 			return;
@@ -185,7 +185,7 @@ public final class ChanceSkillList
 		if (skill.getReuseDelay() > 0)
 			_owner.disableSkill(skill.getId(), skill.getReuseDelay());
 		
-		L2Character[] targets = skill.getTargetList(_owner, false, evtInitiator);
+		L2Creature[] targets = skill.getTargetList(_owner, false, evtInitiator);
 		
 		if (targets == null || targets.length == 0)
 			return;
@@ -194,7 +194,7 @@ public final class ChanceSkillList
 		boolean hasValidTarget = false;
 		for (int i = 0; i < targets.length; i++)
 		{
-			final L2Character target = targets[i];
+			final L2Creature target = targets[i];
 			
 			if (target == null)
 				continue;

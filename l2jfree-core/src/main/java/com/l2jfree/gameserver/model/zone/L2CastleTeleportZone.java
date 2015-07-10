@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 
 public class L2CastleTeleportZone extends SiegeableEntityZone
 {
@@ -26,7 +26,7 @@ public class L2CastleTeleportZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		character.setInsideZone(FLAG_NOSUMMON, true);
 		
@@ -34,7 +34,7 @@ public class L2CastleTeleportZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		character.setInsideZone(FLAG_NOSUMMON, false);
 		

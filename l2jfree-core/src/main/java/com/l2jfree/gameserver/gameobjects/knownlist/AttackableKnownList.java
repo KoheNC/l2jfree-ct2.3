@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
@@ -43,7 +43,7 @@ public class AttackableKnownList extends NpcKnownList
 			return false;
 		
 		// Remove the L2Object from the _aggrolist of the L2Attackable
-		if (object instanceof L2Character)
+		if (object instanceof L2Creature)
 			getActiveChar().getAggroList().remove(object);
 		
 		// Set the L2Attackable Intention to AI_INTENTION_IDLE
@@ -78,7 +78,7 @@ public class AttackableKnownList extends NpcKnownList
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{
-		if (object instanceof L2NpcInstance || !(object instanceof L2Character))
+		if (object instanceof L2NpcInstance || !(object instanceof L2Creature))
 			return 0;
 		
 		if (object instanceof L2Playable)

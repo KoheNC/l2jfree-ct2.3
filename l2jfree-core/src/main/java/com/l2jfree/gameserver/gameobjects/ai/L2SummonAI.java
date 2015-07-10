@@ -18,9 +18,9 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_A
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_FOLLOW;
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -69,7 +69,7 @@ public class L2SummonAI extends L2CreatureAI
 		if (_actor instanceof L2MerchantSummonInstance)
 			return;
 		
-		final L2Character target = getAttackTarget();
+		final L2Creature target = getAttackTarget();
 		
 		if (checkTargetLostOrDead(target))
 			return;
@@ -87,7 +87,7 @@ public class L2SummonAI extends L2CreatureAI
 			return;
 		
 		final L2Skill skill = getCastSkill();
-		final L2Character target = getCastTarget();
+		final L2Creature target = getCastTarget();
 		
 		if (checkTargetLost(target))
 			return;

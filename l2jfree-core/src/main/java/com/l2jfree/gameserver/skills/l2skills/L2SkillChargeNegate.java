@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.l2skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -35,12 +35,12 @@ public class L2SkillChargeNegate extends L2Skill
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Creature... targets)
 	{
 		if (activeChar.isAlikeDead() || !(activeChar instanceof L2PcInstance))
 			return;
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target.isAlikeDead())
 				continue;

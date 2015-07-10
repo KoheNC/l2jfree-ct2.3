@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
@@ -48,9 +48,9 @@ public class AdminPolymorph implements IAdminCommandHandler
 		if (command.startsWith("admin_untransform"))
 		{
 			L2Object obj = activeChar.getTarget();
-			if (obj instanceof L2Character)
+			if (obj instanceof L2Creature)
 			{
-				((L2Character)obj).stopTransformation(true);
+				((L2Creature)obj).stopTransformation(true);
 			}
 			else
 			{
@@ -145,9 +145,9 @@ public class AdminPolymorph implements IAdminCommandHandler
 				return;
 			}
 			//animation
-			if (obj instanceof L2Character)
+			if (obj instanceof L2Creature)
 			{
-				L2Character Char = (L2Character)obj;
+				L2Creature Char = (L2Creature)obj;
 				MagicSkillUse msk = new MagicSkillUse(Char, 1008, 1, 4000, 0);
 				Char.broadcastPacket(msk);
 				SetupGauge sg = new SetupGauge(0, 4000);

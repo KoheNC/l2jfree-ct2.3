@@ -78,7 +78,7 @@ public abstract class L2Summon extends L2Playable
 	//private int				_soulShotsPerHit		= 1;
 	//private int				_spiritShotsPerHit		= 1;
 	
-	public class AIAccessor extends L2Character.AIAccessor
+	public class AIAccessor extends L2Creature.AIAccessor
 	{
 		protected AIAccessor()
 		{
@@ -309,7 +309,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -321,7 +321,7 @@ public abstract class L2Summon extends L2Playable
 		
 		if (owner != null)
 		{
-			for (L2Character TgMob : getKnownList().getKnownCharacters())
+			for (L2Creature TgMob : getKnownList().getKnownCharacters())
 			{
 				// get the mobs which have aggro on the this instance
 				if (TgMob instanceof L2Attackable)
@@ -340,7 +340,7 @@ public abstract class L2Summon extends L2Playable
 		return true;
 	}
 	
-	public boolean doDie(L2Character killer, boolean decayed)
+	public boolean doDie(L2Creature killer, boolean decayed)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -501,7 +501,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return _owner.isAutoAttackable(attacker);
 	}
@@ -563,7 +563,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	/**
-	 * Return True if the L2Character has a Party in progress.<BR><BR>
+	 * Return True if the L2Creature has a Party in progress.<BR><BR>
 	 */
 	@Override
 	public boolean isInParty()
@@ -590,7 +590,7 @@ public abstract class L2Summon extends L2Playable
 		//************************************* Check Target *******************************************
 		
 		// Get the target for the skill
-		final L2Character target = skill.getFirstOfTargetList(this);
+		final L2Creature target = skill.getFirstOfTargetList(this);
 		
 		// Check the validity of the target
 		if (target == null)

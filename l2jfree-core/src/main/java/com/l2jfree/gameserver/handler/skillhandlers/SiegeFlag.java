@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeFlagInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -43,7 +43,7 @@ public class SiegeFlag extends ISkillConditionChecker
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SIEGEFLAG };
 	
 	@Override
-	public boolean checkConditions(L2Character activeChar, L2Skill skill)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return false;
@@ -70,7 +70,7 @@ public class SiegeFlag extends ISkillConditionChecker
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill0, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill0, L2Creature... targets)
 	{
 		L2SkillSiegeFlag skill = (L2SkillSiegeFlag)skill0;
 		

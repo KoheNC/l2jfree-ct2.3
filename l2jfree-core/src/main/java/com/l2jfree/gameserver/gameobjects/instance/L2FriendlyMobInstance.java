@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.FriendlyMobKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -48,7 +48,7 @@ public class L2FriendlyMobInstance extends L2Attackable
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		if (attacker instanceof L2PcInstance)
 			return ((L2PcInstance)attacker).getKarma() > 0;

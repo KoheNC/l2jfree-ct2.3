@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -35,7 +35,7 @@ public class L2FortZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		super.onEnter(character);
 		
@@ -58,7 +58,7 @@ public class L2FortZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		super.onExit(character);
 		
@@ -69,7 +69,7 @@ public class L2FortZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onDieInside(L2Character character)
+	protected void onDieInside(L2Creature character)
 	{
 		// debuff participants only if they die inside siege zone
 		if (character instanceof L2PcInstance && isSiegeInProgress())

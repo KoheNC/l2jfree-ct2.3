@@ -31,7 +31,7 @@ import org.apache.commons.io.IOUtils;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.AirShipKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -51,7 +51,7 @@ import com.l2jfree.gameserver.templates.item.L2Weapon;
  *
  * @author  DrHouse
  */
-public final class L2AirShipInstance extends L2Character
+public final class L2AirShipInstance extends L2Creature
 {
 	public float boatSpeed;
 	protected final FastList<L2PcInstance> _passengers = new FastList<L2PcInstance>();
@@ -242,7 +242,7 @@ public final class L2AirShipInstance extends L2Character
 		// destination
 		int ticksToMove = (int)(GameTimeController.TICKS_PER_SECOND * distance / speed);
 		
-		// Calculate and set the heading of the L2Character
+		// Calculate and set the heading of the L2Creature
 		int heading = (int)(Math.atan2(-sin, -cos) * 10430.378350470452724949566316381);
 		heading += 32768;
 		getPosition().setHeading(heading);
@@ -260,10 +260,10 @@ public final class L2AirShipInstance extends L2Character
 		if (_log.isDebugEnabled())
 			_log.debug("time to target:" + ticksToMove);
 		
-		// Set the L2Character _move object to MoveData object
+		// Set the L2Creature _move object to MoveData object
 		_move = m;
 		
-		// Add the L2Character to movingObjects of the GameTimeController
+		// Add the L2Creature to movingObjects of the GameTimeController
 		// The GameTimeController manage objects movement
 		MovementController.getInstance().add(this, ticksToMove);
 	}
@@ -610,7 +610,7 @@ public final class L2AirShipInstance extends L2Character
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return false;
 	}
@@ -627,7 +627,7 @@ public final class L2AirShipInstance extends L2Character
 		return new L2CreatureAI(new AIAccessor());
 	}
 	
-	public class AIAccessor extends L2Character.AIAccessor
+	public class AIAccessor extends L2Creature.AIAccessor
 	{
 		/*@Override
 		public void detachAI()

@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
@@ -37,7 +37,7 @@ public class Harvest implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.HARVEST };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
@@ -49,7 +49,7 @@ public class Harvest implements ISkillHandler
 		if (_log.isDebugEnabled())
 			_log.info("Casting harvest");
 		
-		for (L2Character element : targets)
+		for (L2Creature element : targets)
 		{
 			if (!(element instanceof L2MonsterInstance))
 				continue;

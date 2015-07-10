@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
@@ -28,7 +28,7 @@ public class AirShipKnownList extends CreatureKnownList
 	/**
 	 * @param activeChar
 	 */
-	public AirShipKnownList(L2Character activeChar)
+	public AirShipKnownList(L2Creature activeChar)
 	{
 		super(activeChar);
 	}

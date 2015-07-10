@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
 import javolution.text.TextBuilder;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -168,12 +168,12 @@ public class AdminFightCalculator implements IAdminCommandHandler
 	{
 		params = params.trim();
 		
-		L2Character npc1 = null;
-		L2Character npc2 = null;
+		L2Creature npc1 = null;
+		L2Creature npc2 = null;
 		if (params.length() == 0)
 		{
 			npc1 = activeChar;
-			npc2 = (L2Character)activeChar.getTarget();
+			npc2 = (L2Creature)activeChar.getTarget();
 			if (npc2 == null)
 			{
 				activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);

@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -133,7 +133,7 @@ public class L2Party
 	 * get random member from party
 	 * @return
 	 */
-	private L2PcInstance getCheckedRandomMember(int ItemId, L2Character target)
+	private L2PcInstance getCheckedRandomMember(int ItemId, L2Creature target)
 	{
 		List<L2PcInstance> availableMembers = new ArrayList<L2PcInstance>(getPartyMembers().size());
 		for (L2PcInstance member : getPartyMembers())
@@ -152,7 +152,7 @@ public class L2Party
 	 * get next item looter
 	 * @return
 	 */
-	private L2PcInstance getCheckedNextLooter(int ItemId, L2Character target)
+	private L2PcInstance getCheckedNextLooter(int ItemId, L2Creature target)
 	{
 		for (int i = 0; i < getMemberCount(); i++)
 		{
@@ -180,7 +180,7 @@ public class L2Party
 	 * get next item looter
 	 * @return
 	 */
-	private L2PcInstance getActualLooter(L2PcInstance player, int ItemId, boolean spoil, L2Character target)
+	private L2PcInstance getActualLooter(L2PcInstance player, int ItemId, boolean spoil, L2Creature target)
 	{
 		L2PcInstance looter = player;
 		switch (_itemDistribution)
@@ -446,7 +446,7 @@ public class L2Party
 				if (player.getFusionSkill() != null)
 					player.abortCast();
 				
-				for (L2Character character : player.getKnownList().getKnownCharacters())
+				for (L2Creature character : player.getKnownList().getKnownCharacters())
 					if (character.getFusionSkill() != null && character.getFusionSkill().getTarget() == player)
 						character.abortCast();
 			}
@@ -721,7 +721,7 @@ public class L2Party
 	 * distribute adena to party members
 	 * @param adena
 	 */
-	public void distributeAdena(L2PcInstance player, long adena, L2Character target)
+	public void distributeAdena(L2PcInstance player, long adena, L2Creature target)
 	{
 		// Get all the party members
 		List<L2PcInstance> membersList = getPartyMembers();
@@ -787,7 +787,7 @@ public class L2Party
 		// Go through the L2PcInstances and L2PetInstances (not L2SummonInstances) that must be rewarded
 		synchronized (rewardedMembers)
 		{
-			for (L2Character member : rewardedMembers)
+			for (L2Creature member : rewardedMembers)
 			{
 				if (member.isDead())
 					continue;
@@ -857,7 +857,7 @@ public class L2Party
 	 * Calculates and gives final XP and SP rewards to the party member.<BR>
 	 * This method takes in consideration number of members, members' levels, rewarder's level and bonus modifier for the actual party.<BR><BR>
 	 * 
-	 * @param member is the L2Character to be rewarded
+	 * @param member is the L2Creature to be rewarded
 	 * @param xpReward is the total amount of XP to be "splited" and given to the member
 	 * @param spReward is the total amount of SP to be "splited" and given to the member
 	 * @param penalty is the penalty that must be applied to the XP rewards of the requested member

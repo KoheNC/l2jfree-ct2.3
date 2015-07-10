@@ -21,7 +21,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.cache.HtmCache;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
 import com.l2jfree.gameserver.gameobjects.instance.L2FishermanInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -161,7 +161,7 @@ public class RequestSellItem extends L2ClientPacket
 			
 			item = player.getInventory().destroyItem("Sell", i.getObjectId(), i.getCount(), player, null);
 		}
-		player.addAdena("Sell", totalPrice, (L2Character)merchant, false);
+		player.addAdena("Sell", totalPrice, (L2Creature)merchant, false);
 		
 		if (merchant != null)
 		{
@@ -196,7 +196,7 @@ public class RequestSellItem extends L2ClientPacket
 		if (target == null)
 			return false;
 		
-		L2Character merchant = (L2Character)target;
+		L2Creature merchant = (L2Creature)target;
 		if (!player.isSameInstance(merchant))
 			return false;
 		

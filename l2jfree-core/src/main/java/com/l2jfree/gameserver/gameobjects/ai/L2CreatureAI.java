@@ -27,7 +27,7 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_R
 import java.util.ArrayList;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
@@ -52,7 +52,7 @@ import com.l2jfree.tools.geometry.Point3D;
 import com.l2jfree.util.L2Collections;
 
 /**
- * This class manages AI of L2Character.<BR><BR>
+ * This class manages AI of L2Creature.<BR><BR>
  *
  * L2CreatureAI :<BR><BR>
  * <li>L2AttackableAI</li>
@@ -64,7 +64,7 @@ import com.l2jfree.util.L2Collections;
 public class L2CreatureAI extends AbstractAI
 {
 	@Override
-	protected void onEvtAttacked(L2Character attacker)
+	protected void onEvtAttacked(L2Creature attacker)
 	{
 		if (!(attacker instanceof L2Attackable) || !attacker.isCoreAIDisabled())
 			clientStartAutoAttack();
@@ -73,10 +73,10 @@ public class L2CreatureAI extends AbstractAI
 	/**
 	 * Constructor of L2CreatureAI.<BR><BR>
 	 *
-	 * @param accessor The AI accessor of the L2Character
+	 * @param accessor The AI accessor of the L2Creature
 	 *
 	 */
-	public L2CreatureAI(L2Character.AIAccessor accessor)
+	public L2CreatureAI(L2Creature.AIAccessor accessor)
 	{
 		super(accessor);
 	}
@@ -132,7 +132,7 @@ public class L2CreatureAI extends AbstractAI
 			// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 			clientStopAutoAttack();
 			
-			// Also enable random animations for this L2Character if allowed
+			// Also enable random animations for this L2Creature if allowed
 			// This is only for mobs - town npcs are handled in their constructor
 			if (_actor instanceof L2Attackable)
 				((L2Npc)_actor).broadcastRandomAnimation(false);
@@ -171,7 +171,7 @@ public class L2CreatureAI extends AbstractAI
 	 *
 	 */
 	@Override
-	protected void onIntentionAttack(L2Character target)
+	protected void onIntentionAttack(L2Creature target)
 	{
 		if (target == null)
 		{
@@ -198,7 +198,7 @@ public class L2CreatureAI extends AbstractAI
 		// Check if the Intention is already AI_INTENTION_ATTACK
 		if (getIntention() == AI_INTENTION_ATTACK && getAttackTarget() == target)
 		{
-			// Check if the AI already targets the L2Character
+			// Check if the AI already targets the L2Creature
 			clientActionFailed(); // else client freezes until cancel target
 			return;
 		}
@@ -238,7 +238,7 @@ public class L2CreatureAI extends AbstractAI
 		// Stop actions client-side to cast the skill
 		if (skill.getHitTime() > 50)
 		{
-			// Abort the attack of the L2Character and send Server->Client ActionFailed packet
+			// Abort the attack of the L2Creature and send Server->Client ActionFailed packet
 			_actor.abortAttack();
 			
 			// Cancel action client side by sending Server->Client packet ActionFailed to the L2PcInstance actor
@@ -288,7 +288,7 @@ public class L2CreatureAI extends AbstractAI
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		clientStopAutoAttack();
 		
-		// Abort the attack of the L2Character and send Server->Client ActionFailed packet
+		// Abort the attack of the L2Creature and send Server->Client ActionFailed packet
 		_actor.abortAttack();
 		
 		// Move the actor to Location (x,y,z) server side AND client side by sending Server->Client packet MoveToLocation (broadcast)
@@ -315,7 +315,7 @@ public class L2CreatureAI extends AbstractAI
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		clientStopAutoAttack();
 		
-		// Abort the attack of the L2Character and send Server->Client ActionFailed packet
+		// Abort the attack of the L2Creature and send Server->Client ActionFailed packet
 		_actor.abortAttack();
 		
 		// Move the actor to Location (x,y,z) server side AND client side by sending Server->Client packet MoveToLocation (broadcast)
@@ -342,7 +342,7 @@ public class L2CreatureAI extends AbstractAI
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		clientStopAutoAttack();
 		
-		// Abort the attack of the L2Character and send Server->Client ActionFailed packet
+		// Abort the attack of the L2Creature and send Server->Client ActionFailed packet
 		_actor.abortAttack();
 		
 		// Move the actor to Location (x,y,z) server side AND client side by sending Server->Client packet CharMoveToLocation (broadcast)
@@ -359,7 +359,7 @@ public class L2CreatureAI extends AbstractAI
 	 *
 	 */
 	@Override
-	protected void onIntentionFollow(L2Character target)
+	protected void onIntentionFollow(L2Creature target)
 	{
 		if (getIntention() == AI_INTENTION_REST)
 		{
@@ -489,7 +489,7 @@ public class L2CreatureAI extends AbstractAI
 	 * Do nothing.<BR><BR>
 	 */
 	@Override
-	protected void onEvtAggression(L2Character target, int aggro)
+	protected void onEvtAggression(L2Creature target, int aggro)
 	{
 		// do nothing
 	}
@@ -500,13 +500,13 @@ public class L2CreatureAI extends AbstractAI
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)</li>
 	 * <li>Stop the actor movement server side AND client side by sending Server->Client packet StopMove/StopRotation (broadcast)</li>
-	 * <li>Break an attack and send Server->Client ActionFailed packet and a System Message to the L2Character </li>
-	 * <li>Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Character </li>
+	 * <li>Break an attack and send Server->Client ActionFailed packet and a System Message to the L2Creature </li>
+	 * <li>Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Creature </li>
 	 * <li>Launch actions corresponding to the Event onAttacked (only for L2AttackableAI after the stunning periode) </li><BR><BR>
 	 *
 	 */
 	@Override
-	protected void onEvtStunned(L2Character attacker)
+	protected void onEvtStunned(L2Creature attacker)
 	{
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		_actor.broadcastPacket(new AutoAttackStop(_actor.getObjectId()));
@@ -524,7 +524,7 @@ public class L2CreatureAI extends AbstractAI
 	}
 	
 	@Override
-	protected void onEvtParalyzed(L2Character attacker)
+	protected void onEvtParalyzed(L2Creature attacker)
 	{
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		_actor.broadcastPacket(new AutoAttackStop(_actor.getObjectId()));
@@ -547,12 +547,12 @@ public class L2CreatureAI extends AbstractAI
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)</li>
 	 * <li>Stop the actor movement server side AND client side by sending Server->Client packet StopMove/StopRotation (broadcast)</li>
-	 * <li>Break an attack and send Server->Client ActionFailed packet and a System Message to the L2Character </li>
-	 * <li>Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Character </li><BR><BR>
+	 * <li>Break an attack and send Server->Client ActionFailed packet and a System Message to the L2Creature </li>
+	 * <li>Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Creature </li><BR><BR>
 	 *
 	 */
 	@Override
-	protected void onEvtSleeping(L2Character attacker)
+	protected void onEvtSleeping(L2Creature attacker)
 	{
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		_actor.broadcastPacket(new AutoAttackStop(_actor.getObjectId()));
@@ -575,7 +575,7 @@ public class L2CreatureAI extends AbstractAI
 	 *
 	 */
 	@Override
-	protected void onEvtRooted(L2Character attacker)
+	protected void onEvtRooted(L2Creature attacker)
 	{
 		// Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
 		//_actor.broadcastPacket(new AutoAttackStop(_actor.getObjectId()));
@@ -598,7 +598,7 @@ public class L2CreatureAI extends AbstractAI
 	 *
 	 */
 	@Override
-	protected void onEvtConfused(L2Character attacker)
+	protected void onEvtConfused(L2Creature attacker)
 	{
 		// Stop the actor movement server side AND client side by sending Server->Client packet StopMove/StopRotation (broadcast)
 		clientStopMoving(null);
@@ -611,13 +611,13 @@ public class L2CreatureAI extends AbstractAI
 	 * Launch actions corresponding to the Event Muted.<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Character </li><BR><BR>
+	 * <li>Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Creature </li><BR><BR>
 	 *
 	 */
 	@Override
-	protected void onEvtMuted(L2Character attacker)
+	protected void onEvtMuted(L2Creature attacker)
 	{
-		// Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Character
+		// Break a cast and send Server->Client ActionFailed packet and a System Message to the L2Creature
 		notifyEvent(CtrlEvent.EVT_ATTACKED, attacker);
 	}
 	
@@ -943,7 +943,7 @@ public class L2CreatureAI extends AbstractAI
 	 * Manage the Move to Pawn action in function of the distance and of the Interact area.<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Get the distance between the current position of the L2Character and the target (x,y)</li>
+	 * <li>Get the distance between the current position of the L2Creature and the target (x,y)</li>
 	 * <li>If the distance > offset+20, move the actor (by running) to Pawn server side AND client side by sending Server->Client packet MoveToPawn (broadcast)</li>
 	 * <li>If the distance <= offset+20, Stop the actor movement server side AND client side by sending Server->Client packet StopMove/StopRotation (broadcast)</li><BR><BR>
 	 *
@@ -960,7 +960,7 @@ public class L2CreatureAI extends AbstractAI
 	{
 		final int originalOffset = offset;
 		
-		// Get the distance between the current position of the L2Character and the target (x,y)
+		// Get the distance between the current position of the L2Creature and the target (x,y)
 		if (target == null)
 		{
 			_log.warn("maybeMoveToPawn: target == NULL!");
@@ -970,8 +970,8 @@ public class L2CreatureAI extends AbstractAI
 			return false; // skill radius -1
 			
 		offset += _actor.getTemplate().getCollisionRadius();
-		if (target instanceof L2Character)
-			offset += ((L2Character)target).getTemplate().getCollisionRadius();
+		if (target instanceof L2Creature)
+			offset += ((L2Creature)target).getTemplate().getCollisionRadius();
 		
 		final double distance = Util.calculateDistance(_actor, target, false);
 		
@@ -1014,14 +1014,14 @@ public class L2CreatureAI extends AbstractAI
 				}
 			}
 			
-			// If not running, set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+			// If not running, set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 			if (!_actor.isRunning() && !(this instanceof L2PlayerAI) && !(this instanceof L2SummonAI))
 				_actor.setRunning();
 			
 			stopFollow();
-			if ((target instanceof L2Character) && !(target instanceof L2DoorInstance))
+			if ((target instanceof L2Creature) && !(target instanceof L2DoorInstance))
 			{
-				startFollow((L2Character)target, originalOffset);
+				startFollow((L2Creature)target, originalOffset);
 			}
 			else
 			{
@@ -1060,7 +1060,7 @@ public class L2CreatureAI extends AbstractAI
 	 * @return True if the target is lost or dead (false if fakedeath)
 	 *
 	 */
-	protected boolean checkTargetLostOrDead(L2Character target)
+	protected boolean checkTargetLostOrDead(L2Creature target)
 	{
 		if (target == null || target.isAlikeDead())
 		{
@@ -1146,7 +1146,7 @@ public class L2CreatureAI extends AbstractAI
 		{
 		}
 		
-		protected void init(L2Character actor)
+		protected void init(L2Creature actor)
 		{
 			switch (((L2NpcTemplate)actor.getTemplate()).getAI())
 			{
@@ -1326,7 +1326,7 @@ public class L2CreatureAI extends AbstractAI
 	
 	protected static final class TargetAnalysis
 	{
-		protected L2Character character;
+		protected L2Creature character;
 		protected boolean isMage;
 		protected boolean isBalanced;
 		protected boolean isArcher;
@@ -1339,7 +1339,7 @@ public class L2CreatureAI extends AbstractAI
 		{
 		}
 		
-		protected void update(L2Character actor, L2Character target)
+		protected void update(L2Creature actor, L2Creature target)
 		{
 			// update status once in 4 tries
 			if (target == character && System.nanoTime() % 4 == 0)

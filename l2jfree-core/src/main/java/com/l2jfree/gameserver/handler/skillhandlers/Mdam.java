@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -29,7 +29,7 @@ public final class Mdam implements ICubicSkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.MDAM, L2SkillType.DEATHLINK };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (activeChar.isAlikeDead())
 			return;
@@ -48,7 +48,7 @@ public final class Mdam implements ICubicSkillHandler
 			activeChar.useSpiritshotCharge();
 		}
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;
@@ -83,9 +83,9 @@ public final class Mdam implements ICubicSkillHandler
 	}
 	
 	@Override
-	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Character... targets)
+	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Creature... targets)
 	{
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

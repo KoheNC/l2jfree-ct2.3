@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.templates.item;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -574,7 +574,7 @@ public abstract class L2Item implements FuncOwner
 		_preConditions = (Condition[])ArrayUtils.add(_preConditions, c);
 	}
 	
-	public boolean checkCondition(L2Character activeChar, L2Object target, boolean sendMessage)
+	public boolean checkCondition(L2Creature activeChar, L2Object target, boolean sendMessage)
 	{
 		if (activeChar instanceof L2PcInstance && activeChar.getActingPlayer().isGM() && !Config.GM_ITEM_RESTRICTION)
 			return true;
@@ -583,7 +583,7 @@ public abstract class L2Item implements FuncOwner
 		{
 			Env env = new Env();
 			env.player = activeChar;
-			if (target instanceof L2Character)
+			if (target instanceof L2Creature)
 				env.target = target.getActingCharacter();
 			else
 				env.target = activeChar;

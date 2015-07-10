@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
@@ -995,7 +995,7 @@ public class Duel
 	
 	//handled by the boolean
 	@SuppressWarnings("null")
-	public static boolean isInvul(L2Character targetChar, L2Character attackerChar)
+	public static boolean isInvul(L2Creature targetChar, L2Creature attackerChar)
 	{
 		if (targetChar == null || attackerChar == null)
 			return false;

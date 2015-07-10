@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -41,7 +41,7 @@ public final class EffectChameleonRest extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		L2Character effected = getEffected();
+		L2Creature effected = getEffected();
 		if (effected instanceof L2PcInstance)
 		{
 			setChameleon(true);
@@ -61,7 +61,7 @@ public final class EffectChameleonRest extends L2Effect
 	{
 		setChameleon(false);
 		
-		L2Character effected = getEffected();
+		L2Creature effected = getEffected();
 		if (effected instanceof L2PcInstance)
 			((L2PcInstance)effected).setSilentMoving(false);
 	}
@@ -69,7 +69,7 @@ public final class EffectChameleonRest extends L2Effect
 	@Override
 	protected boolean onActionTime()
 	{
-		L2Character effected = getEffected();
+		L2Creature effected = getEffected();
 		boolean retval = true;
 		
 		if (effected.isDead())
@@ -103,7 +103,7 @@ public final class EffectChameleonRest extends L2Effect
 	
 	private void setChameleon(boolean val)
 	{
-		L2Character effected = getEffected();
+		L2Creature effected = getEffected();
 		if (effected instanceof L2PcInstance)
 			((L2PcInstance)effected).setRelax(val);
 	}

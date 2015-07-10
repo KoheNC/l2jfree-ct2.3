@@ -18,7 +18,7 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -85,7 +85,7 @@ public class SagasSuperClass extends QuestJython
 			addKillId(Guardian_Angel);
 	}
 	
-	public void Cast(L2Npc npc, L2Character target, int skillId, int level)
+	public void Cast(L2Npc npc, L2Creature target, int skillId, int level)
 	{
 		target.broadcastPacket(new MagicSkillUse(target, target, skillId, level, 6000, 1));
 		target.broadcastPacket(new MagicSkillUse(npc, npc, skillId, level, 6000, 1));

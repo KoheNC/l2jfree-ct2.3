@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.GmListTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.Location;
 
@@ -25,7 +25,7 @@ public class L2JailZone extends L2Zone
 	public static final Location JAIL_LOCATION = new Location(-114356, -249645, -2984);
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		if (character instanceof L2PcInstance)
 		{
@@ -40,7 +40,7 @@ public class L2JailZone extends L2Zone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		if (character instanceof L2PcInstance)
 		{

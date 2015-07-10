@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.l2skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -45,7 +45,7 @@ public class L2SkillRecover extends L2Skill
 		_power = Math.min(95, getPower());
 	}
 	
-	public void recover(L2Character target)
+	public void recover(L2Creature target)
 	{
 		if (_cp == -1)
 			target.getStatus().setCurrentCp(target.getStat().getMaxCp());

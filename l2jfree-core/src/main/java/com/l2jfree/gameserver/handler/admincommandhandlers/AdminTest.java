@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -81,14 +81,14 @@ public class AdminTest implements IAdminCommandHandler
 		else if (cmd.equals("admin_docast") || cmd.equals("admin_docastself"))
 		{
 			L2Object obj = activeChar.getTarget();
-			L2Character caster = null;
-			if (!(obj instanceof L2Character))
+			L2Creature caster = null;
+			if (!(obj instanceof L2Creature))
 			{
 				caster = activeChar;
 			}
 			else
 			{
-				caster = (L2Character)obj;
+				caster = (L2Creature)obj;
 			}
 			
 			int skillId = 0, skillLevel = 0, skillTime = 0;
@@ -103,13 +103,13 @@ public class AdminTest implements IAdminCommandHandler
 				activeChar.sendMessage("Usage: //docast <skill id> <skill level> <skill time>");
 				return false;
 			}
-			L2Character target = null;
-			if (!(caster.getTarget() instanceof L2Character) || cmd.equals("admin_docastself"))
+			L2Creature target = null;
+			if (!(caster.getTarget() instanceof L2Creature) || cmd.equals("admin_docastself"))
 			{
 				target = caster;
 			}
 			else
-				target = (L2Character)caster.getTarget();
+				target = (L2Creature)caster.getTarget();
 			
 			caster.broadcastPacket(new MagicSkillUse(caster, target, skillId, skillLevel, skillTime, 0));
 			activeChar.sendMessage("Did a cast for skill: " + skillId + ", level: " + skillLevel);
@@ -180,7 +180,7 @@ public class AdminTest implements IAdminCommandHandler
 		}
 		else if (cmd.equals("admin_heading"))
 		{
-			L2Character charTarget = activeChar.getTarget(L2Character.class);
+			L2Creature charTarget = activeChar.getTarget(L2Creature.class);
 			
 			if (charTarget != null)
 			{
@@ -214,13 +214,13 @@ public class AdminTest implements IAdminCommandHandler
 	{
 		L2Object target;
 		
-		if (activeChar.getTarget() instanceof L2Character)
+		if (activeChar.getTarget() instanceof L2Creature)
 			target = activeChar.getTarget();
 		else
 			target = activeChar;
 		
 		SocialAction sa = new SocialAction(target.getObjectId(), socId);
-		((L2Character)target).broadcastPacket(sa);
+		((L2Creature)target).broadcastPacket(sa);
 	}
 	
 	/**

@@ -269,7 +269,7 @@ final class GeoEngine extends GeoData
 		// Basically the +45 is character height. Raid bosses are naturally higher,
 		// dwarves shorter, but this should work relatively well.
 		// If this is going to be improved, use e.g.
-		// ((L2Character)cha).getTemplate().collisionHeight
+		// ((L2Creature)cha).getTemplate().collisionHeight
 		int z = cha.getZ() + 45;
 		if (cha instanceof L2SiegeGuard)
 			z += 30; // well they don't move closer to balcony fence at the moment :(

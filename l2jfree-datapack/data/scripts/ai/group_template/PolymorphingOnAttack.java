@@ -19,7 +19,7 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -81,7 +81,7 @@ public class PolymorphingOnAttack extends L2AttackableAIScript
 				L2Attackable newNpc =
 						(L2Attackable)addSpawn(tmp[0], npc.getX(), npc.getY(), npc.getZ() + 10, npc.getHeading(),
 								false, 0, true);
-				L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
+				L2Creature originalAttacker = isPet ? attacker.getPet() : attacker;
 				newNpc.setRunning();
 				newNpc.addDamageHate(originalAttacker, 0, 500);
 				newNpc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalAttacker);

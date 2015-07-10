@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Boss;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.GrandBossStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -70,7 +70,7 @@ public class L2GrandBossInstance extends L2Boss
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -92,7 +92,7 @@ public class L2GrandBossInstance extends L2Boss
 	}
 	
 	@Override
-	public void doAttack(L2Character target)
+	public void doAttack(L2Creature target)
 	{
 		if (_isInSocialAction)
 			return;

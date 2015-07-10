@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -101,7 +101,7 @@ public final class Action extends L2ClientPacket
 		
 		if (activeChar.getActiveRequester() == null)
 		{
-			L2Character target = obj.getActingCharacter();
+			L2Creature target = obj.getActingCharacter();
 			if (!_shift || (target != null && target.isAlikeDead() && !activeChar.isGM()))
 				obj.onAction(activeChar);
 			else

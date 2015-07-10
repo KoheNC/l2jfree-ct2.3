@@ -25,7 +25,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
@@ -81,7 +81,7 @@ public final class L2WorldRegion
 		_zones = new L2Zone[0];
 	}
 	
-	public void revalidateZones(L2Character character)
+	public void revalidateZones(L2Creature character)
 	{
 		// do NOT update the world region while the character is still in the process of teleporting
 		// Once the teleport is COMPLETED, revalidation occurs safely, at that time.
@@ -93,7 +93,7 @@ public final class L2WorldRegion
 			z.revalidateInZone(character);
 	}
 	
-	public void removeFromZones(L2Character character)
+	public void removeFromZones(L2Creature character)
 	{
 		for (L2Zone z : _zones)
 			z.removeFromZone(character);
@@ -118,13 +118,13 @@ public final class L2WorldRegion
 		return null;
 	}
 	
-	public void onDie(L2Character character)
+	public void onDie(L2Creature character)
 	{
 		for (L2Zone z : _zones)
 			z.onDie(character);
 	}
 	
-	public void onRevive(L2Character character)
+	public void onRevive(L2Creature character)
 	{
 		for (L2Zone z : _zones)
 			z.onRevive(character);

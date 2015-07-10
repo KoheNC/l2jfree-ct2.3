@@ -25,7 +25,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
@@ -103,10 +103,10 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	/**
 	 * Constructor of L2AttackableAI.<BR><BR>
 	 * 
-	 * @param accessor The AI accessor of the L2Character
+	 * @param accessor The AI accessor of the L2Creature
 	 * 
 	 */
-	public L2AttackableAI(L2Character.AIAccessor accessor)
+	public L2AttackableAI(L2Creature.AIAccessor accessor)
 	{
 		super(accessor);
 		
@@ -154,7 +154,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * @param target The targeted L2Object
 	 * 
 	 */
-	private boolean autoAttackCondition(L2Character target)
+	private boolean autoAttackCondition(L2Creature target)
 	{
 		if (target == null || !(_actor instanceof L2Attackable))
 			return false;
@@ -368,11 +368,11 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	/**
 	 * Manage the Attack Intention : Stop current Attack (if necessary), Calculate attack timeout, Start a new Attack and Launch Think Event.<BR><BR>
 	 *
-	 * @param target The L2Character to attack
+	 * @param target The L2Creature to attack
 	 *
 	 */
 	@Override
-	protected void onIntentionAttack(L2Character target)
+	protected void onIntentionAttack(L2Creature target)
 	{
 		// Calculate the attack timeout
 		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
@@ -410,7 +410,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Update every 1s the _globalAggro counter to come close to 0</li>
-	 * <li>If the actor is Aggressive and can attack, add all autoAttackable L2Character in its Aggro Range to its _aggroList, chose a target and order to attack it</li>
+	 * <li>If the actor is Aggressive and can attack, add all autoAttackable L2Creature in its Aggro Range to its _aggroList, chose a target and order to attack it</li>
 	 * <li>If the actor is a L2GuardInstance that can't attack, order to it to return to its home location</li>
 	 * <li>If the actor is a L2MonsterInstance that can't attack, order to it to random walk (1/100)</li><BR><BR>
 	 * 
@@ -437,7 +437,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 					return;
 				}
 		*/
-		// Add all autoAttackable L2Character in L2Attackable Aggro Range to its _aggroList with 0 damage and 1 hate
+		// Add all autoAttackable L2Creature in L2Attackable Aggro Range to its _aggroList with 0 damage and 1 hate
 		// A L2Attackable isn't aggressive during 10s after its spawn because _globalAggro is set to -10
 		if (_globalAggro >= 0)
 		{
@@ -446,9 +446,9 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			// Go through visible objects
 			for (L2Object obj : npc.getKnownList().getKnownObjects().values())
 			{
-				if (!(obj instanceof L2Character))
+				if (!(obj instanceof L2Creature))
 					continue;
-				L2Character target = (L2Character)obj;
+				L2Creature target = (L2Creature)obj;
 				
 				/*
 				 * Check to see if this is a festival mob spawn.
@@ -473,7 +473,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				// notify AI that a playable instance came within aggro range
 				if ((obj instanceof L2PcInstance) || (obj instanceof L2Summon))
 				{
-				    if ( !((L2Character)obj).isAlikeDead()
+				    if ( !((L2Creature)obj).isAlikeDead()
 				            && !npc.isInsideRadius(obj, npc.getAggroRange(), true, false) )
 				    {
 				        L2PcInstance targetPlayer = (obj instanceof L2PcInstance)? (L2PcInstance) obj: ((L2Summon) obj).getOwner();
@@ -485,10 +485,10 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				*/
 				// TODO: The AI Script ought to handle aggro behaviors in onSee.  Once implemented, aggro behaviors ought
 				// to be removed from here.  (Fulminus)
-				// For each L2Character check if the target is autoattackable
+				// For each L2Creature check if the target is autoattackable
 				if (autoAttackCondition(target)) // check aggression
 				{
-					// Get the hate level of the L2Attackable against this L2Character target contained in _aggroList
+					// Get the hate level of the L2Attackable against this L2Creature target contained in _aggroList
 					int hating = npc.getHating(target);
 					
 					// Add the attacker to the L2Attackable _aggroList with 0 damage and 1 hate
@@ -498,7 +498,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			}
 			
 			// Chose a target from its aggroList
-			L2Character hated;
+			L2Creature hated;
 			if (_actor.isConfused())
 				hated = getAttackTarget(); // effect handles selection
 			else
@@ -507,12 +507,12 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			// Order to the L2Attackable to attack the target
 			if (hated != null)
 			{
-				// Get the hate level of the L2Attackable against this L2Character target contained in _aggroList
+				// Get the hate level of the L2Attackable against this L2Creature target contained in _aggroList
 				int aggro = npc.getHating(hated);
 				
 				if (aggro + _globalAggro > 0)
 				{
-					// Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+					// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 					if (!_actor.isRunning())
 						_actor.setRunning();
 					
@@ -720,7 +720,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			}
 		}
 		
-		L2Character originalAttackTarget = getAttackTarget();
+		L2Creature originalAttackTarget = getAttackTarget();
 		// Check if target is dead or if timeout is expired to stop this attack
 		if (originalAttackTarget == null || originalAttackTarget.isAlikeDead()
 				|| _attackTimeout < GameTimeController.getGameTicks())
@@ -886,13 +886,13 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		}
 		
 		// Get 2 most hated chars
-		L2Character[] hated = ((L2Attackable)_actor).get2MostHated();
+		L2Creature[] hated = ((L2Attackable)_actor).get2MostHated();
 		if (_actor.isConfused())
 		{
 			if (hated != null)
 				hated[0] = originalAttackTarget; // effect handles selection
 			else
-				hated = new L2Character[] { originalAttackTarget, null };
+				hated = new L2Creature[] { originalAttackTarget, null };
 		}
 		
 		if (hated == null || hated[0] == null)
@@ -1575,14 +1575,14 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Init the attack : Calculate the attack timeout, Set the _globalAggro to 0, Add the attacker to the actor _aggroList</li>
-	 * <li>Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance</li>
+	 * <li>Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance</li>
 	 * <li>Set the Intention to AI_INTENTION_ATTACK</li><BR><BR>
 	 * 
-	 * @param attacker The L2Character that attacks the actor
+	 * @param attacker The L2Creature that attacks the actor
 	 * 
 	 */
 	@Override
-	protected void onEvtAttacked(L2Character attacker)
+	protected void onEvtAttacked(L2Creature attacker)
 	{
 		/*if (_actor instanceof L2ChestInstance && !((L2ChestInstance)_actor).isOpenFailed())
 		{
@@ -1601,7 +1601,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		if (!_actor.isCoreAIDisabled())
 			((L2Attackable)_actor).addDamageHate(attacker, 0, 1);
 		
-		// Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+		// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 		if (!_actor.isRunning())
 			_actor.setRunning();
 		
@@ -1627,12 +1627,12 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * <li>Add the target to the actor _aggroList or update hate if already present </li>
 	 * <li>Set the actor Intention to AI_INTENTION_ATTACK (if actor is L2GuardInstance check if it isn't too far from its home location)</li><BR><BR>
 	 * 
-	 * @param target The L2Character that attacks
+	 * @param target The L2Creature that attacks
 	 * @param aggro The value of hate to add to the actor against the target
 	 * 
 	 */
 	@Override
-	protected void onEvtAggression(L2Character target, int aggro)
+	protected void onEvtAggression(L2Creature target, int aggro)
 	{
 		L2Attackable me = (L2Attackable)_actor;
 		
@@ -1644,7 +1644,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			// Set the actor AI Intention to AI_INTENTION_ATTACK
 			if (getIntention() != CtrlIntention.AI_INTENTION_ATTACK)
 			{
-				// Set the L2Character movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+				// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
 				if (!_actor.isRunning())
 					_actor.setRunning();
 				

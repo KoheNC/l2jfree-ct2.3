@@ -30,7 +30,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -795,7 +795,7 @@ public class AutoChatHandler implements SpawnListener
 						L2Npc chatNpc = chatDef._npcInstance;
 						FastList<L2PcInstance> nearbyPlayers = new FastList<L2PcInstance>();
 						
-						for (L2Character player : chatNpc.getKnownList().getKnownCharactersInRadius(chatDef._chatRange))
+						for (L2Creature player : chatNpc.getKnownList().getKnownCharactersInRadius(chatDef._chatRange))
 							if (player instanceof L2PcInstance && !((L2PcInstance)player).isGM())
 								nearbyPlayers.add((L2PcInstance)player);
 						

@@ -19,7 +19,7 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
@@ -37,7 +37,7 @@ public class L2TownZone extends L2Zone
 	private final Map<Integer, Byte> _map = new FastMap<Integer, Byte>().setShared(true);
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		byte flag = FLAG_PEACE;
 		
@@ -79,7 +79,7 @@ public class L2TownZone extends L2Zone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		Byte flag = _map.remove(character.getObjectId());
 		if (flag != null) // just incase something would happen

@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -102,7 +102,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			{
 				int radius = Integer.parseInt(val);
 				
-				for (L2Character knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+				for (L2Creature knownChar : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 				{
 					if ((knownChar instanceof L2PcInstance) && !(knownChar.equals(activeChar)))
 						knownChar.stopAllEffectsExceptThoseThatLastThroughDeath();

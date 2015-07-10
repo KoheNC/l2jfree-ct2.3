@@ -14,20 +14,20 @@
  */
 package com.l2jfree.gameserver.taskmanager;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 
 /**
  * @author NB4L1
  */
-public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2Character>
+public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2Creature>
 {
 	public static enum BroadcastMode
 	{
 		BROADCAST_FULL_INFO {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				if (cha.isDying())
 					return;
@@ -37,42 +37,42 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2C
 		},
 		UPDATE_EFFECT_ICONS {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				((L2Playable)cha).updateEffectIconsImpl();
 			}
 		},
 		BROADCAST_STATUS_UPDATE {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				cha.broadcastStatusUpdateImpl();
 			}
 		},
 		BROADCAST_RELATION_CHANGED {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				((L2PcInstance)cha).broadcastRelationChangedImpl();
 			}
 		},
 		SEND_ETC_STATUS_UPDATE {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				((L2PcInstance)cha).sendEtcStatusUpdateImpl();
 			}
 		},
 		SEND_SKILL_LIST {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				((L2PcInstance)cha).sendSkillListImpl();
 			}
 		},
 		SEND_SKILL_COOL_TIME {
 			@Override
-			protected void sendPacket(L2Character cha)
+			protected void sendPacket(L2Creature cha)
 			{
 				((L2PcInstance)cha).sendSkillCoolTimeImpl();
 			}
@@ -92,9 +92,9 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2C
 			return _mask;
 		}
 		
-		protected abstract void sendPacket(L2Character cha);
+		protected abstract void sendPacket(L2Creature cha);
 		
-		protected final void trySendPacket(L2Character cha, byte mask)
+		protected final void trySendPacket(L2Creature cha, byte mask)
 		{
 			if ((mask & mask()) == mask())
 			{
@@ -123,7 +123,7 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<L2C
 	}
 	
 	@Override
-	protected void callTask(L2Character cha)
+	protected void callTask(L2Creature cha)
 	{
 		for (byte mask; (mask = cha.getPacketBroadcastMask()) != 0;)
 			for (BroadcastMode mode : VALUES)

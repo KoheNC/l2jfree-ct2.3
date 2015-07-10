@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.datatables.PetSkillsTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
@@ -169,7 +169,7 @@ public class RequestActionUse extends L2ClientPacket
 						return;
 					}
 					
-					if (L2Character.isInsidePeaceZone(pet, target))
+					if (L2Creature.isInsidePeaceZone(pet, target))
 					{
 						requestFailed(SystemMessageId.TARGET_IN_PEACEZONE);
 						return;
@@ -682,7 +682,7 @@ public class RequestActionUse extends L2ClientPacket
 	/**
 	 * Cast a skill for active pet/servitor.
 	 * Target is retrieved from owner' target,
-	 * then validated by overloaded method useSkill(int, L2Character).
+	 * then validated by overloaded method useSkill(int, L2Creature).
 	 */
 	private void useSkill(int skillId)
 	{

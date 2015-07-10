@@ -213,7 +213,7 @@ public final class L2NpcTemplate extends L2CreatureTemplate
 	}
 	
 	/**
-	 * Constructor of L2Character.<BR>
+	 * Constructor of L2Creature.<BR>
 	 * 
 	 * @param set The StatsSet object to transfer data to the method
 	 * @throws ClassNotFoundException

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.TradeListTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
@@ -85,7 +85,7 @@ public class L2MerchantSummonInstance extends L2SummonInstance implements L2Merc
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return false;
 	}

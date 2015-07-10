@@ -18,8 +18,8 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_C
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_REST;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
-import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.model.L2Object;
@@ -69,7 +69,7 @@ public class L2PlayerAI extends L2CreatureAI
 	
 	private void thinkAttack()
 	{
-		final L2Character target = getAttackTarget();
+		final L2Creature target = getAttackTarget();
 		
 		if (target == null)
 		{
@@ -95,7 +95,7 @@ public class L2PlayerAI extends L2CreatureAI
 	private void thinkCast()
 	{
 		final L2Skill skill = getCastSkill();
-		final L2Character target = getCastTarget();
+		final L2Creature target = getCastTarget();
 		
 		if (skill.getTargetType() == SkillTargetType.TARGET_GROUND)
 		{
@@ -190,7 +190,7 @@ public class L2PlayerAI extends L2CreatureAI
 		}
 		
 		if (!(target instanceof L2StaticObjectInstance))
-			((L2PcInstance.AIAccessor)_accessor).doInteract((L2Character)target);
+			((L2PcInstance.AIAccessor)_accessor).doInteract((L2Creature)target);
 		
 		setIntention(AI_INTENTION_IDLE);
 	}
