@@ -85,7 +85,7 @@ import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2PlayerAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
-import com.l2jfree.gameserver.gameobjects.effects.PcEffects;
+import com.l2jfree.gameserver.gameobjects.effects.PlayerEffects;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.PcKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
@@ -1154,15 +1154,15 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected PcEffects initEffects()
+	protected PlayerEffects initEffects()
 	{
-		return new PcEffects(this);
+		return new PlayerEffects(this);
 	}
 	
 	@Override
-	public PcEffects getEffects()
+	public PlayerEffects getEffects()
 	{
-		return (PcEffects)_effects;
+		return (PlayerEffects)_effects;
 	}
 	
 	public final PlayerAppearance getAppearance()

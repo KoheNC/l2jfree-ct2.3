@@ -32,7 +32,7 @@ import com.l2jfree.util.concurrent.ForEachExecutable;
 /**
  * @author NB4L1
  */
-public final class PcEffects extends CreatureEffects
+public final class PlayerEffects extends CreatureEffects
 {
 	protected static final class StoredEffect
 	{
@@ -60,7 +60,7 @@ public final class PcEffects extends CreatureEffects
 	
 	private final LookupTable<ArrayList<StoredEffect>> _storedEffects = new LookupTable<ArrayList<StoredEffect>>();
 	
-	public PcEffects(L2PcInstance owner)
+	public PlayerEffects(L2PcInstance owner)
 	{
 		super(owner);
 	}
