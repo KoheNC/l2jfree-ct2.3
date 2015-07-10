@@ -25,15 +25,15 @@ import com.l2jfree.gameserver.instancemanager.CastleManorManager.SeedProduction;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2TradeList;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.BuyListSeed;
-import com.l2jfree.gameserver.network.serverpackets.ExShowCropInfo;
-import com.l2jfree.gameserver.network.serverpackets.ExShowManorDefaultInfo;
-import com.l2jfree.gameserver.network.serverpackets.ExShowProcureCropDetail;
-import com.l2jfree.gameserver.network.serverpackets.ExShowSeedInfo;
-import com.l2jfree.gameserver.network.serverpackets.ExShowSellCropList;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.BuyListSeed;
+import com.l2jfree.gameserver.network.packets.server.ExShowCropInfo;
+import com.l2jfree.gameserver.network.packets.server.ExShowManorDefaultInfo;
+import com.l2jfree.gameserver.network.packets.server.ExShowProcureCropDetail;
+import com.l2jfree.gameserver.network.packets.server.ExShowSeedInfo;
+import com.l2jfree.gameserver.network.packets.server.ExShowSellCropList;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2ManorManagerInstance extends L2MerchantInstance

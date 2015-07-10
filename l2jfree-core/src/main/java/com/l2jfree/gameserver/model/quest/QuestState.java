@@ -38,16 +38,16 @@ import com.l2jfree.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ExShowQuestMark;
-import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.QuestList;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.network.serverpackets.TutorialCloseHtml;
-import com.l2jfree.gameserver.network.serverpackets.TutorialEnableClientEvent;
-import com.l2jfree.gameserver.network.serverpackets.TutorialShowHtml;
-import com.l2jfree.gameserver.network.serverpackets.TutorialShowQuestionMark;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.ExShowQuestMark;
+import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.QuestList;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.TutorialCloseHtml;
+import com.l2jfree.gameserver.network.packets.server.TutorialEnableClientEvent;
+import com.l2jfree.gameserver.network.packets.server.TutorialShowHtml;
+import com.l2jfree.gameserver.network.packets.server.TutorialShowQuestionMark;
 import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.tools.random.Rnd;
@@ -856,7 +856,7 @@ public final class QuestState
 	 * Send a packet in order to play sound at client terminal
 	 * @param sound
 	 */
-	public void sendPacket(L2GameServerPacket packet)
+	public void sendPacket(L2ServerPacket packet)
 	{
 		getPlayer().sendPacket(packet);
 	}

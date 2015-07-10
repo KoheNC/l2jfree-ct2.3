@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.actor;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.view.CharLikeView;
 import com.l2jfree.gameserver.model.actor.view.DecoyView;
-import com.l2jfree.gameserver.network.serverpackets.CharInfo;
+import com.l2jfree.gameserver.network.packets.server.CharInfo;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;

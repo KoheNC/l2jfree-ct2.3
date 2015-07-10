@@ -23,8 +23,8 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.L2Summon;
 import com.l2jfree.gameserver.model.actor.status.CharStatus;
 import com.l2jfree.gameserver.model.actor.status.SummonStatus;
-import com.l2jfree.gameserver.network.serverpackets.SetSummonRemainTime;
-import com.l2jfree.gameserver.network.serverpackets.UserInfo;
+import com.l2jfree.gameserver.network.packets.server.SetSummonRemainTime;
+import com.l2jfree.gameserver.network.packets.server.UserInfo;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillSummon;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 

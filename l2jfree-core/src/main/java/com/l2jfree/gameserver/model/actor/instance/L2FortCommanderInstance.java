@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2FortCommanderInstance extends L2FortSiegeGuardInstance

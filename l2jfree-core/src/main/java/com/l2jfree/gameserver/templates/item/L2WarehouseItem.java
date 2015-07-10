@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.templates.item;
 
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket.ElementalOwner;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket.ElementalOwner;
 
 /**
  * This class contains L2ItemInstance<BR>

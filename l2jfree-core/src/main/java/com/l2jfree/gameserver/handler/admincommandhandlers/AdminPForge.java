@@ -20,8 +20,8 @@ import javolution.text.TextBuilder;
 
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.AdminForgePacket;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.AdminForgePacket;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 
 /**
  * This class handles commands for gm to forge packets

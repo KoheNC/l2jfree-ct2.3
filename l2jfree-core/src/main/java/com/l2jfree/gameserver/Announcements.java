@@ -35,10 +35,10 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.script.DateRange;
 import com.l2jfree.lang.L2TextBuilder;
 
@@ -230,7 +230,7 @@ public class Announcements
 		}
 	}
 	
-	public void announceToAll(L2GameServerPacket gsp)
+	public void announceToAll(L2ServerPacket gsp)
 	{
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 		{
@@ -246,7 +246,7 @@ public class Announcements
 		}
 	}
 	
-	public void announceToInstance(L2GameServerPacket gsp, int instanceId)
+	public void announceToInstance(L2ServerPacket gsp, int instanceId)
 	{
 		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
 		{

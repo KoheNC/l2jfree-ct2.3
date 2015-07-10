@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.actor.instance;
 
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.network.serverpackets.ExShowDominionRegistry;
+import com.l2jfree.gameserver.network.packets.server.ExShowDominionRegistry;
 import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**

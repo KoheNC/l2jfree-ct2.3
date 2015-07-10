@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.TradeList;
 import com.l2jfree.gameserver.model.TradeList.TradeItem;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.RecipeShopMsg;
+import com.l2jfree.gameserver.network.packets.server.RecipeShopMsg;
 
 /**
  * @author hex1r0

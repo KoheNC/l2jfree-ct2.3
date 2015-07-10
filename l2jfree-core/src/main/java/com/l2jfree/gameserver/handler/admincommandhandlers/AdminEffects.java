@@ -29,16 +29,16 @@ import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.actor.instance.L2ChestInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.Earthquake;
-import com.l2jfree.gameserver.network.serverpackets.ExRedSky;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillUse;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.SSQInfo;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.network.serverpackets.StopMove;
-import com.l2jfree.gameserver.network.serverpackets.SunRise;
-import com.l2jfree.gameserver.network.serverpackets.SunSet;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.Earthquake;
+import com.l2jfree.gameserver.network.packets.server.ExRedSky;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.SSQInfo;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.StopMove;
+import com.l2jfree.gameserver.network.packets.server.SunRise;
+import com.l2jfree.gameserver.network.packets.server.SunSet;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
 
 /**
@@ -702,7 +702,7 @@ public class AdminEffects implements IAdminCommandHandler
 	 */
 	private void adminAtmosphere(String type, String state, L2PcInstance activeChar)
 	{
-		L2GameServerPacket packet = null;
+		L2ServerPacket packet = null;
 		
 		if (type.equals("signsky"))
 		{

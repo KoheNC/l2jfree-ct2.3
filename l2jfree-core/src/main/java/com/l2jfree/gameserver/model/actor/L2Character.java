@@ -79,25 +79,25 @@ import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.Attack;
-import com.l2jfree.gameserver.network.serverpackets.ChangeMoveType;
-import com.l2jfree.gameserver.network.serverpackets.ChangeWaitType;
-import com.l2jfree.gameserver.network.serverpackets.DeleteObject;
-import com.l2jfree.gameserver.network.serverpackets.FlyToLocation;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillCanceled;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillLaunched;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillUse;
-import com.l2jfree.gameserver.network.serverpackets.MoveToLocation;
-import com.l2jfree.gameserver.network.serverpackets.Revive;
-import com.l2jfree.gameserver.network.serverpackets.SetupGauge;
-import com.l2jfree.gameserver.network.serverpackets.StaticPacket;
-import com.l2jfree.gameserver.network.serverpackets.StatusUpdate;
-import com.l2jfree.gameserver.network.serverpackets.StopMove;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.network.serverpackets.TeleportToLocation;
-import com.l2jfree.gameserver.network.serverpackets.ValidateLocation;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.Attack;
+import com.l2jfree.gameserver.network.packets.server.ChangeMoveType;
+import com.l2jfree.gameserver.network.packets.server.ChangeWaitType;
+import com.l2jfree.gameserver.network.packets.server.DeleteObject;
+import com.l2jfree.gameserver.network.packets.server.FlyToLocation;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillCanceled;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
+import com.l2jfree.gameserver.network.packets.server.MoveToLocation;
+import com.l2jfree.gameserver.network.packets.server.Revive;
+import com.l2jfree.gameserver.network.packets.server.SetupGauge;
+import com.l2jfree.gameserver.network.packets.server.StaticPacket;
+import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
+import com.l2jfree.gameserver.network.packets.server.StopMove;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.TeleportToLocation;
+import com.l2jfree.gameserver.network.packets.server.ValidateLocation;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
 import com.l2jfree.gameserver.skills.Calculator;
 import com.l2jfree.gameserver.skills.Formulas;
@@ -450,7 +450,7 @@ public abstract class L2Character extends L2Object
 	 * the L2Character, server just need to go through _knownPlayers to send Server->Client Packet<BR>
 	 * <BR>
 	 */
-	public final void broadcastPacket(L2GameServerPacket mov)
+	public final void broadcastPacket(L2ServerPacket mov)
 	{
 		Broadcast.toSelfAndKnownPlayers(this, mov);
 	}
@@ -464,7 +464,7 @@ public abstract class L2Character extends L2Object
 	 * the L2Character, server just need to go through _knownPlayers to send Server->Client Packet<BR>
 	 * <BR>
 	 */
-	public final void broadcastPacket(L2GameServerPacket mov, int radiusInKnownlist)
+	public final void broadcastPacket(L2ServerPacket mov, int radiusInKnownlist)
 	{
 		Broadcast.toSelfAndKnownPlayersInRadius(this, mov, radiusInKnownlist);
 	}
@@ -552,7 +552,7 @@ public abstract class L2Character extends L2Object
 	 * @param gsp
 	 */
 	@Deprecated
-	public void sendPacket(L2GameServerPacket gsp)
+	public void sendPacket(L2ServerPacket gsp)
 	{
 	}
 	

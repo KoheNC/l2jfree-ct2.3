@@ -20,12 +20,12 @@ import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ExClosePartyRoom;
-import com.l2jfree.gameserver.network.serverpackets.ExManagePartyRoomMember;
-import com.l2jfree.gameserver.network.serverpackets.ExPartyRoomMember;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.PartyRoomInfo;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.ExClosePartyRoom;
+import com.l2jfree.gameserver.network.packets.server.ExManagePartyRoomMember;
+import com.l2jfree.gameserver.network.packets.server.ExPartyRoomMember;
+import com.l2jfree.gameserver.network.packets.server.PartyRoomInfo;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.lang.L2Math;
 
 /**
@@ -135,13 +135,13 @@ public class L2PartyRoom
 		updateRoomStatus(false);
 	}
 	
-	public void broadcastPacket(L2GameServerPacket packet)
+	public void broadcastPacket(L2ServerPacket packet)
 	{
 		for (L2PcInstance player : getMembers())
 			player.sendPacket(packet);
 	}
 	
-	public void broadcastPacket(L2GameServerPacket toLeader, L2GameServerPacket toMember)
+	public void broadcastPacket(L2ServerPacket toLeader, L2ServerPacket toMember)
 	{
 		L2PcInstance leader = getLeader();
 		for (L2PcInstance player : getMembers())

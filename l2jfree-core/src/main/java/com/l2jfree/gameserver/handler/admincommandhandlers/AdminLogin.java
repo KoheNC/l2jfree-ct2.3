@@ -20,7 +20,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.LoginServerThread;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.network.ServerStatusAttributes;
 
 /**

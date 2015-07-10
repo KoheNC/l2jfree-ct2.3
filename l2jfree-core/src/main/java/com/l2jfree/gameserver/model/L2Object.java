@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.model.actor.poly.ObjectPoly;
 import com.l2jfree.gameserver.model.actor.position.ObjectPosition;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.lang.L2Entity;
 import com.l2jfree.lang.L2Integer;
 import com.l2jfree.lang.L2TextBuilder;

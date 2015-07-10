@@ -28,10 +28,10 @@ import com.l2jfree.gameserver.datatables.GmListTable;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.lang.L2TextBuilder;
 
 /**
@@ -197,7 +197,7 @@ public final class PetitionManager
 			return _type.toString().replace("_", " ");
 		}
 		
-		public void sendPetitionerPacket(L2GameServerPacket responsePacket)
+		public void sendPetitionerPacket(L2ServerPacket responsePacket)
 		{
 			if (getPetitioner() == null || getPetitioner().isOnline() == 0)
 			{
@@ -209,7 +209,7 @@ public final class PetitionManager
 			getPetitioner().sendPacket(responsePacket);
 		}
 		
-		public void sendResponderPacket(L2GameServerPacket responsePacket)
+		public void sendResponderPacket(L2ServerPacket responsePacket)
 		{
 			if (getResponder() == null || getResponder().isOnline() == 0)
 			{

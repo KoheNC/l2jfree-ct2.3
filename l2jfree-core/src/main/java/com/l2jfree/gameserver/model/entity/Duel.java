@@ -31,15 +31,15 @@ import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.ExDuelEnd;
-import com.l2jfree.gameserver.network.serverpackets.ExDuelReady;
-import com.l2jfree.gameserver.network.serverpackets.ExDuelStart;
-import com.l2jfree.gameserver.network.serverpackets.ExDuelUpdateUserInfo;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ExDuelEnd;
+import com.l2jfree.gameserver.network.packets.server.ExDuelReady;
+import com.l2jfree.gameserver.network.packets.server.ExDuelStart;
+import com.l2jfree.gameserver.network.packets.server.ExDuelUpdateUserInfo;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.util.L2FastSet;
 
 public class Duel
@@ -561,7 +561,7 @@ public class Duel
 	 * Broadcast a packet to the challanger team
 	 *
 	 */
-	public void broadcastToTeam1(L2GameServerPacket packet)
+	public void broadcastToTeam1(L2ServerPacket packet)
 	{
 		if (_playerA == null)
 			return;
@@ -579,7 +579,7 @@ public class Duel
 	 * Broadcast a packet to the challenged team
 	 *
 	 */
-	public void broadcastToTeam2(L2GameServerPacket packet)
+	public void broadcastToTeam2(L2ServerPacket packet)
 	{
 		if (_playerB == null)
 			return;

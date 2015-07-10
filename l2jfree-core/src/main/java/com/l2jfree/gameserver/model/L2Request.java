@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.model;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.clientpackets.L2GameClientPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ClientPacket;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * This class manages requests (transactions) between two L2PcInstance.
@@ -33,7 +33,7 @@ public class L2Request
 	protected L2PcInstance _partner;
 	protected boolean _isRequestor;
 	protected boolean _isAnswerer;
-	protected L2GameClientPacket _requestPacket;
+	protected L2ClientPacket _requestPacket;
 	
 	public L2Request(L2PcInstance player)
 	{
@@ -67,7 +67,7 @@ public class L2Request
 	/**
 	 * Set the packet incomed from requestor.<BR><BR>
 	 */
-	private synchronized void setRequestPacket(L2GameClientPacket packet)
+	private synchronized void setRequestPacket(L2ClientPacket packet)
 	{
 		_requestPacket = packet;
 	}
@@ -75,7 +75,7 @@ public class L2Request
 	/**
 	 * Return the packet originally incomed from requestor.<BR><BR>
 	 */
-	public L2GameClientPacket getRequestPacket()
+	public L2ClientPacket getRequestPacket()
 	{
 		return _requestPacket;
 	}
@@ -83,7 +83,7 @@ public class L2Request
 	/**
 	 * Checks if request can be made and in success case puts both PC on request state.<BR><BR>
 	 */
-	public synchronized boolean setRequest(L2PcInstance partner, L2GameClientPacket packet)
+	public synchronized boolean setRequest(L2PcInstance partner, L2ClientPacket packet)
 	{
 		if (partner == null)
 		{

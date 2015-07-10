@@ -6,9 +6,9 @@ from com.l2jfree.gameserver.model.entity           import Instance
 from com.l2jfree.gameserver.model.quest            import State
 from com.l2jfree.gameserver.model.quest            import QuestState
 from com.l2jfree.gameserver.model.quest.jython     import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets  import CreatureSay
-from com.l2jfree.gameserver.network.serverpackets  import MagicSkillUse
-from com.l2jfree.gameserver.network.serverpackets  import SystemMessage
+from com.l2jfree.gameserver.network.packets.server  import CreatureSay
+from com.l2jfree.gameserver.network.packets.server  import MagicSkillUse
+from com.l2jfree.gameserver.network.packets.server  import SystemMessage
 from com.l2jfree.tools.random                      import Rnd
 from com.l2jfree.gameserver.datatables             import ItemTable
 from com.l2jfree.gameserver.model.actor.instance   import L2PcInstance

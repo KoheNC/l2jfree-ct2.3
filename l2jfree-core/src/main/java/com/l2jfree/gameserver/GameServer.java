@@ -134,7 +134,7 @@ import com.l2jfree.gameserver.model.entity.Hero;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
-import com.l2jfree.gameserver.network.L2GameSelectorThread;
+import com.l2jfree.gameserver.network.L2ClientSelectorThread;
 import com.l2jfree.gameserver.script.faenor.FaenorScriptEngine;
 import com.l2jfree.gameserver.scripting.CompiledScriptCache;
 import com.l2jfree.gameserver.scripting.L2ScriptEngineManager;
@@ -437,8 +437,8 @@ public final class GameServer extends L2AutoInitialization
 		Util.printSection("ServerThreads");
 		LoginServerThread.getInstance().start();
 		
-		L2GameSelectorThread.getInstance().openServerSocket(Config.GAMESERVER_HOSTNAME, Config.PORT_GAME);
-		L2GameSelectorThread.getInstance().start();
+		L2ClientSelectorThread.getInstance().openServerSocket(Config.GAMESERVER_HOSTNAME, Config.PORT_GAME);
+		L2ClientSelectorThread.getInstance().start();
 		
 		if (Config.IRC_ENABLED)
 			IrcManager.getInstance().getConnection().sendChan("GameServer Started");

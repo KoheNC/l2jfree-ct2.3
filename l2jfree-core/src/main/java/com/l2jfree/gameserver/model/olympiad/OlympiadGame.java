@@ -35,12 +35,12 @@ import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad.COMP_TYPE;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.ExOlympiadMatchEnd;
-import com.l2jfree.gameserver.network.serverpackets.ExOlympiadMode;
-import com.l2jfree.gameserver.network.serverpackets.ExOlympiadUserInfo;
-import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.ExOlympiadMatchEnd;
+import com.l2jfree.gameserver.network.packets.server.ExOlympiadMode;
+import com.l2jfree.gameserver.network.packets.server.ExOlympiadUserInfo;
+import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillSummon;
 import com.l2jfree.gameserver.templates.StatsSet;
 

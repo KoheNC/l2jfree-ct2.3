@@ -34,20 +34,20 @@ import com.l2jfree.gameserver.model.actor.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.entity.DimensionalRift;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.ExCloseMPCC;
-import com.l2jfree.gameserver.network.serverpackets.ExClosePartyRoom;
-import com.l2jfree.gameserver.network.serverpackets.ExManagePartyRoomMember;
-import com.l2jfree.gameserver.network.serverpackets.ExMultiPartyCommandChannelInfo;
-import com.l2jfree.gameserver.network.serverpackets.ExOpenMPCC;
-import com.l2jfree.gameserver.network.serverpackets.ExPartyPetWindowAdd;
-import com.l2jfree.gameserver.network.serverpackets.ExPartyPetWindowDelete;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.PartySmallWindowAdd;
-import com.l2jfree.gameserver.network.serverpackets.PartySmallWindowAll;
-import com.l2jfree.gameserver.network.serverpackets.PartySmallWindowDelete;
-import com.l2jfree.gameserver.network.serverpackets.PartySmallWindowDeleteAll;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.ExCloseMPCC;
+import com.l2jfree.gameserver.network.packets.server.ExClosePartyRoom;
+import com.l2jfree.gameserver.network.packets.server.ExManagePartyRoomMember;
+import com.l2jfree.gameserver.network.packets.server.ExMultiPartyCommandChannelInfo;
+import com.l2jfree.gameserver.network.packets.server.ExOpenMPCC;
+import com.l2jfree.gameserver.network.packets.server.ExPartyPetWindowAdd;
+import com.l2jfree.gameserver.network.packets.server.ExPartyPetWindowDelete;
+import com.l2jfree.gameserver.network.packets.server.PartySmallWindowAdd;
+import com.l2jfree.gameserver.network.packets.server.PartySmallWindowAll;
+import com.l2jfree.gameserver.network.packets.server.PartySmallWindowDelete;
+import com.l2jfree.gameserver.network.packets.server.PartySmallWindowDeleteAll;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
@@ -229,7 +229,7 @@ public class L2Party
 	 * Broadcasts packet to every party member
 	 * @param msg
 	 */
-	public void broadcastToPartyMembers(L2GameServerPacket msg)
+	public void broadcastToPartyMembers(L2ServerPacket msg)
 	{
 		for (L2PcInstance member : getPartyMembers())
 		{
@@ -262,7 +262,7 @@ public class L2Party
 	/**
 	 * Send a Server->Client packet to all other L2PcInstance of the Party.<BR><BR>
 	 */
-	public void broadcastToPartyMembers(L2PcInstance player, L2GameServerPacket msg)
+	public void broadcastToPartyMembers(L2PcInstance player, L2ServerPacket msg)
 	{
 		for (L2PcInstance member : getPartyMembers())
 		{

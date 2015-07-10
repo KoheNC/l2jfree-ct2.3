@@ -24,8 +24,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * This class stores references to all online game masters. (access level > 100)
@@ -168,7 +168,7 @@ public final class GmListTable
 	 * Sends a packet to all online GMs
 	 * @param packet the packet
 	 */
-	public static void broadcastToGMs(L2GameServerPacket packet)
+	public static void broadcastToGMs(L2ServerPacket packet)
 	{
 		for (L2PcInstance gm : getAllGms(true))
 			gm.sendPacket(packet);

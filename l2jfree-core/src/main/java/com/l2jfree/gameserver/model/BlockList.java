@@ -19,7 +19,7 @@ import java.util.Set;
 import com.l2jfree.gameserver.instancemanager.BlockListManager;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * @author luisantonioa

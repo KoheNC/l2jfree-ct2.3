@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.MonsterRace;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.actor.instance.L2RaceManagerInstance;
-import com.l2jfree.gameserver.network.serverpackets.DeleteObject;
+import com.l2jfree.gameserver.network.packets.server.DeleteObject;
 
 public class RaceManagerKnownList extends NpcKnownList
 {

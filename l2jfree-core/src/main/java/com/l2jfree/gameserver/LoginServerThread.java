@@ -33,9 +33,9 @@ import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.Disconnection;
-import com.l2jfree.gameserver.network.L2GameClient;
-import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
-import com.l2jfree.gameserver.network.L2GameSelectorThread;
+import com.l2jfree.gameserver.network.L2Client;
+import com.l2jfree.gameserver.network.L2Client.GameClientState;
+import com.l2jfree.gameserver.network.L2ClientSelectorThread;
 import com.l2jfree.gameserver.network.gameserverpackets.AuthRequest;
 import com.l2jfree.gameserver.network.gameserverpackets.BlowFishKey;
 import com.l2jfree.gameserver.network.gameserverpackets.ChangeAccessLevel;
@@ -50,8 +50,8 @@ import com.l2jfree.gameserver.network.loginserverpackets.KickPlayer;
 import com.l2jfree.gameserver.network.loginserverpackets.LoginServerFail;
 import com.l2jfree.gameserver.network.loginserverpackets.PlayerAuthResponse;
 import com.l2jfree.gameserver.network.loginserverpackets.PlayerLoginAttempt;
-import com.l2jfree.gameserver.network.serverpackets.CharSelectionInfo;
-import com.l2jfree.gameserver.network.serverpackets.LoginFail;
+import com.l2jfree.gameserver.network.packets.server.CharSelectionInfo;
+import com.l2jfree.gameserver.network.packets.server.LoginFail;
 import com.l2jfree.network.NetworkThread;
 import com.l2jfree.network.ServerStatus;
 import com.l2jfree.network.ServerStatusAttributes;
@@ -79,7 +79,7 @@ public final class LoginServerThread extends NetworkThread
 	private int _serverID;
 	private final boolean _reserveHost;
 	private final Map<String, WaitingClient> _waitingClients;
-	private final Map<String, L2GameClient> _accountsInGameServer;
+	private final Map<String, L2Client> _accountsInGameServer;
 	private ServerStatus _status = ServerStatus.STATUS_AUTO;
 	private String _gameExternalHost; // External host for old login server
 	private String _gameInternalHost; // Internal host for old login server
@@ -107,7 +107,7 @@ public final class LoginServerThread extends NetworkThread
 		_gameExternalHost = Config.EXTERNAL_HOSTNAME;
 		_gameInternalHost = Config.INTERNAL_HOSTNAME;
 		_waitingClients = new FastMap<String, WaitingClient>().setShared(true);
-		_accountsInGameServer = new FastMap<String, L2GameClient>().setShared(true);
+		_accountsInGameServer = new FastMap<String, L2Client>().setShared(true);
 		
 		if (Config.SUBNETWORKS != null && Config.SUBNETWORKS.length() > 0)
 		{
@@ -116,7 +116,7 @@ public final class LoginServerThread extends NetworkThread
 		}
 	}
 	
-	public void addWaitingClientAndSendRequest(String acc, L2GameClient client, SessionKey key)
+	public void addWaitingClientAndSendRequest(String acc, L2Client client, SessionKey key)
 	{
 		_waitingClients.put(acc, new WaitingClient(client, key));
 		
@@ -173,10 +173,10 @@ public final class LoginServerThread extends NetworkThread
 	
 	private static final class WaitingClient
 	{
-		public final L2GameClient gameClient;
+		public final L2Client gameClient;
 		public final SessionKey session;
 		
-		public WaitingClient(L2GameClient client, SessionKey key)
+		public WaitingClient(L2Client client, SessionKey key)
 		{
 			gameClient = client;
 			session = key;
@@ -430,7 +430,7 @@ public final class LoginServerThread extends NetworkThread
 							
 							if (wcToRemove != null)
 							{
-								final L2GameClient client = wcToRemove.gameClient;
+								final L2Client client = wcToRemove.gameClient;
 								
 								if (par.isAuthed())
 								{
@@ -466,7 +466,7 @@ public final class LoginServerThread extends NetworkThread
 						{
 							KickPlayer kp = new KickPlayer(decrypt);
 							
-							L2GameClient client = _accountsInGameServer.get(kp.getAccount());
+							L2Client client = _accountsInGameServer.get(kp.getAccount());
 							
 							if (client != null)
 								client.closeNow();
@@ -484,7 +484,7 @@ public final class LoginServerThread extends NetworkThread
 							if (_supportsNewLoginProtocol)
 							{
 								PlayerLoginAttempt pla = new PlayerLoginAttempt(decrypt);
-								L2GameSelectorThread.getInstance().legalize(pla.getIP());
+								L2ClientSelectorThread.getInstance().legalize(pla.getIP());
 								break;
 							}
 						}
