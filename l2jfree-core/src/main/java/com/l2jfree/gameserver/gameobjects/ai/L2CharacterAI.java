@@ -12,17 +12,17 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.ai;
+package com.l2jfree.gameserver.gameobjects.ai;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_CAST;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_FOLLOW;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_INTERACT;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_MOVE_TO;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_PICK_UP;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_REST;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ACTIVE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_CAST;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_FOLLOW;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_INTERACT;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_MOVE_TO;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_PICK_UP;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_REST;
 
 import java.util.ArrayList;
 
@@ -296,7 +296,7 @@ public class L2CharacterAI extends AbstractAI
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.ai.AbstractAI#onIntentionMoveToInABoat(com.l2jfree.gameserver.model.L2CharPosition, com.l2jfree.gameserver.model.L2CharPosition)
+	 * @see com.l2jfree.gameserver.gameobjects.ai.AbstractAI#onIntentionMoveToInABoat(com.l2jfree.gameserver.model.L2CharPosition, com.l2jfree.gameserver.model.L2CharPosition)
 	 */
 	@Override
 	protected void onIntentionMoveToInABoat(L2CharPosition destination, L2CharPosition origin)
@@ -323,7 +323,7 @@ public class L2CharacterAI extends AbstractAI
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.ai.AbstractAI#onIntentionMoveToInAirShip(com.l2jfree.gameserver.model.L2CharPosition, com.l2jfree.gameserver.model.L2CharPosition)
+	 * @see com.l2jfree.gameserver.gameobjects.ai.AbstractAI#onIntentionMoveToInAirShip(com.l2jfree.gameserver.model.L2CharPosition, com.l2jfree.gameserver.model.L2CharPosition)
 	 */
 	@Override
 	protected void onIntentionMoveToInAirShip(L2CharPosition destination, L2CharPosition origin)

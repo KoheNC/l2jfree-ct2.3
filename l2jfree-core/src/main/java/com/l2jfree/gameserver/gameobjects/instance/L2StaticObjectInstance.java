@@ -15,10 +15,10 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.ai.L2CharacterAI;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.StaticObjectKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;

@@ -2,7 +2,7 @@
 
 import sys
 from java.lang                                          import System
-from com.l2jfree.gameserver.ai                          import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai                          import CtrlIntention
 from com.l2jfree.gameserver.datatables                  import SkillTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.model                       import L2CharPosition

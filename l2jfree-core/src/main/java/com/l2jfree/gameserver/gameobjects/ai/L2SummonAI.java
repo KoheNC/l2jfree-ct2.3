@@ -12,11 +12,11 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.ai;
+package com.l2jfree.gameserver.gameobjects.ai;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_FOLLOW;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_FOLLOW;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
 
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Summon;

@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.gameobjects;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_FOLLOW;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_MOVE_TO;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ACTIVE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_FOLLOW;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_MOVE_TO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,10 @@ import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.ai.CtrlEvent;
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.ai.L2CharacterAI;
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
 import com.l2jfree.gameserver.gameobjects.effects.CharEffects;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;

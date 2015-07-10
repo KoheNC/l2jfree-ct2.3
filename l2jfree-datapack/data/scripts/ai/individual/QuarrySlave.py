@@ -1,6 +1,6 @@
 # Author: Psycho(killer1888) / L2jFree
 import sys
-from com.l2jfree.gameserver.ai 						import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai 						import CtrlIntention
 from com.l2jfree.gameserver.instancemanager.hellbound       import HellboundManager
 from com.l2jfree.gameserver.network.packets.server 	import NpcSay
 from com.l2jfree.gameserver.model.quest 			import State

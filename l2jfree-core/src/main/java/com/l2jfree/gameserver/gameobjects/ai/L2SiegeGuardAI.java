@@ -12,11 +12,11 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.ai;
+package com.l2jfree.gameserver.gameobjects.ai;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ACTIVE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
 
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
@@ -25,11 +25,9 @@ import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2FortBallistaInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -42,25 +40,24 @@ import com.l2jfree.tools.random.Rnd;
  * This class manages AI of L2Attackable.<BR><BR>
  * 
  */
-public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
+public class L2SiegeGuardAI extends L2CharacterAI implements Runnable
 {
-	private static final class FortSiegeGuardAiTaskManager extends
-			AbstractIterativePeriodicTaskManager<L2FortSiegeGuardAI>
+	private static final class SiegeGuardAiTaskManager extends AbstractIterativePeriodicTaskManager<L2SiegeGuardAI>
 	{
-		private static final FortSiegeGuardAiTaskManager _instance = new FortSiegeGuardAiTaskManager();
+		private static final SiegeGuardAiTaskManager _instance = new SiegeGuardAiTaskManager();
 		
-		private static FortSiegeGuardAiTaskManager getInstance()
+		private static SiegeGuardAiTaskManager getInstance()
 		{
 			return _instance;
 		}
 		
-		private FortSiegeGuardAiTaskManager()
+		private SiegeGuardAiTaskManager()
 		{
 			super(1000);
 		}
 		
 		@Override
-		protected void callTask(L2FortSiegeGuardAI task)
+		protected void callTask(L2SiegeGuardAI task)
 		{
 			task.run();
 		}
@@ -95,7 +92,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 	 * @param accessor The AI accessor of the L2Character
 	 * 
 	 */
-	public L2FortSiegeGuardAI(L2Character.AIAccessor accessor)
+	public L2SiegeGuardAI(L2Character.AIAccessor accessor)
 	{
 		super(accessor);
 		
@@ -147,24 +144,10 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 	 */
 	private boolean autoAttackCondition(L2Character target)
 	{
-		if (target == null)
-			return false;
-		
 		// Check if the target isn't another guard, folk or a door
-		if (target instanceof L2FortSiegeGuardInstance || target instanceof L2FortCommanderInstance
-				|| target instanceof L2FortBallistaInstance || target instanceof L2NpcInstance
-				|| target instanceof L2DoorInstance || target instanceof L2Playable)
-		{
-			L2PcInstance player = null;
-			if (target instanceof L2PcInstance)
-				player = ((L2PcInstance)target);
-			else if (target instanceof L2Summon)
-				player = ((L2Summon)target).getOwner();
-			if (player == null
-					|| (player.getClan() != null && player.getClan().getHasFort() == ((L2Npc)_actor).getFort()
-							.getFortId()))
-				return false;
-		}
+		if (target == null || target instanceof L2SiegeGuardInstance || target instanceof L2NpcInstance
+				|| target instanceof L2DoorInstance)
+			return false;
 		
 		// Check if the target isn't invulnerable
 		if (target.isInvul())
@@ -245,7 +228,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 		super.changeIntention(intention, arg0, arg1);
 		
 		// If not idle - create an AI task (schedule onEvtThink repeatedly)
-		FortSiegeGuardAiTaskManager.getInstance().startTask(this);
+		SiegeGuardAiTaskManager.getInstance().startTask(this);
 	}
 	
 	/**
@@ -335,15 +318,8 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 			}
 			
 		}
-		
 		// Order to the L2SiegeGuardInstance to return to its home location because there's no target to attack
-		if (_actor.getStat().getWalkSpeed() >= 0)
-		{
-			if (_actor instanceof L2FortSiegeGuardInstance)
-				((L2FortSiegeGuardInstance)_actor).returnHome();
-			else
-				((L2FortCommanderInstance)_actor).returnHome();
-		}
+		((L2SiegeGuardInstance)_actor).returnHome();
 	}
 	
 	/**
@@ -361,8 +337,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 	private void thinkAttack()
 	{
 		if (_log.isDebugEnabled())
-			_log.info("L2FortSiegeGuardAI.thinkAttack(); timeout="
-					+ (_attackTimeout - GameTimeController.getGameTicks()));
+			_log.info("L2SiegeGuardAI.thinkAttack(); timeout=" + (_attackTimeout - GameTimeController.getGameTicks()));
 		
 		if (_attackTimeout < GameTimeController.getGameTicks())
 		{
@@ -509,7 +484,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 		L2Skill[] skills = null;
 		double dist_2 = 0;
 		int range = 0;
-		L2FortSiegeGuardInstance sGuard = (L2FortSiegeGuardInstance)_actor;
+		L2SiegeGuardInstance sGuard = (L2SiegeGuardInstance)_actor;
 		L2Character attackTarget = getAttackTarget();
 		
 		if (attackTarget != null)
@@ -533,7 +508,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 		
 		// never attack defenders
 		if (attackTarget instanceof L2PcInstance
-				&& sGuard.getFort().getSiege().checkIsDefender(((L2PcInstance)attackTarget).getClan()))
+				&& sGuard.getCastle().getSiege().checkIsDefender(((L2PcInstance)attackTarget).getClan()))
 		{
 			// Cancel the target
 			sGuard.stopHating(attackTarget);
@@ -821,11 +796,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 				if (!_actor.isRunning())
 					_actor.setRunning();
 				
-				L2FortSiegeGuardInstance sGuard;
-				if (_actor instanceof L2FortSiegeGuardInstance)
-					sGuard = (L2FortSiegeGuardInstance)_actor;
-				else
-					sGuard = (L2FortCommanderInstance)_actor;
+				L2SiegeGuardInstance sGuard = (L2SiegeGuardInstance)_actor;
 				double homeX = target.getX() - sGuard.getSpawn().getLocx();
 				double homeY = target.getY() - sGuard.getSpawn().getLocy();
 				
@@ -869,7 +840,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 	@Override
 	public void stopAITask()
 	{
-		FortSiegeGuardAiTaskManager.getInstance().stopTask(this);
+		SiegeGuardAiTaskManager.getInstance().stopTask(this);
 		_accessor.detachAI();
 	}
 	

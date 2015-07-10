@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ACTIVE;
 
 import java.text.DateFormat;
 import java.util.List;
@@ -28,7 +28,6 @@ import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.BuffTemplateTable;
 import com.l2jfree.gameserver.datatables.ClanTable;
@@ -38,6 +37,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2AuctioneerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2CCHBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;

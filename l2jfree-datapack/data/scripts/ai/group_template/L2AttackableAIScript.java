@@ -14,18 +14,18 @@
  */
 package ai.group_template;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
 
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ai.CtrlEvent;
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.ai.FactionAggressionNotificationQueue;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.ai.FactionAggressionNotificationQueue;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;

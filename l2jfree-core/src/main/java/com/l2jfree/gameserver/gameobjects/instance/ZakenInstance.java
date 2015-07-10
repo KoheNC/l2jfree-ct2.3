@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.ai.L2CharacterAI;
-import com.l2jfree.gameserver.ai.ZakenAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.ZakenAI;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 /**

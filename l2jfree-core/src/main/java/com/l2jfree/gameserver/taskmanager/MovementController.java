@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.taskmanager;
 import java.util.ArrayList;
 
 import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.threadmanager.FIFOSimpleExecutableQueue;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2FastSet;

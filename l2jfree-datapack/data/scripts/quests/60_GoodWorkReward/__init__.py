@@ -3,7 +3,7 @@
 # Visit http://www.l2jdp.com/forum/ for more details.
 
 import sys
-from com.l2jfree.gameserver.ai import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest

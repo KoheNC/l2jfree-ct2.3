@@ -15,10 +15,10 @@
 package com.l2jfree.gameserver.gameobjects;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.ai.L2CharacterAI;
-import com.l2jfree.gameserver.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.L2Attackable.AggroInfo;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
