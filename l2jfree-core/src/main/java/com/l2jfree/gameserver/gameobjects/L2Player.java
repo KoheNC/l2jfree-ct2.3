@@ -116,7 +116,7 @@ import com.l2jfree.gameserver.gameobjects.view.PlayerView;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.handler.ItemHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminEditChar;
+import com.l2jfree.gameserver.handler.admincommands.AdminEditChar;
 import com.l2jfree.gameserver.handler.skillhandlers.TakeCastle;
 import com.l2jfree.gameserver.handler.skillhandlers.TakeFort;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
