@@ -12,26 +12,27 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.voicedcommandhandlers;
+package com.l2jfree.gameserver.handler.voicedcommands;
 
-import com.l2jfree.gameserver.CoreInfo;
+import com.l2jfree.gameserver.communitybbs.Manager.AuctionBBSManager;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 
 /**
- * @author evill33t
+ * 
+ * @author Vital
  * 
  */
-public class VersionInfo implements IVoicedCommandHandler
+public class Auction implements IVoicedCommandHandler
 {
-	private static final String[] VOICED_COMMANDS = { "version" };
+	private static final String[] VOICED_COMMANDS = { "auction" };
 	
 	@Override
 	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
-		if (command.startsWith("version"))
+		if (command.equals("auction"))
 		{
-			CoreInfo.versionInfo(activeChar);
+			AuctionBBSManager.getInstance().parsecmd("_bbsauction", activeChar);
 			return true;
 		}
 		return false;

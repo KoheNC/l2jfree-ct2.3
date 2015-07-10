@@ -12,27 +12,22 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.voicedcommandhandlers;
+package com.l2jfree.gameserver.handler.voicedcommands;
 
-import com.l2jfree.gameserver.communitybbs.Manager.AuctionBBSManager;
+import com.l2jfree.gameserver.communitybbs.Manager.MailBBSManager;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 
-/**
- * 
- * @author Vital
- * 
- */
-public class Auction implements IVoicedCommandHandler
+public class Mail implements IVoicedCommandHandler
 {
-	private static final String[] VOICED_COMMANDS = { "auction" };
+	private static final String[] VOICED_COMMANDS = { "mail" };
 	
 	@Override
 	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
-		if (command.equals("auction"))
+		if (command.equals("mail"))
 		{
-			AuctionBBSManager.getInstance().parsecmd("_bbsauction", activeChar);
+			MailBBSManager.getInstance().parsecmd("_maillist_0_1_0_", activeChar); //inbox
 			return true;
 		}
 		return false;

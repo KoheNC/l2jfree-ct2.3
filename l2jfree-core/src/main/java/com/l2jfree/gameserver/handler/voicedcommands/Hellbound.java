@@ -12,29 +12,40 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.voicedcommandhandlers;
+package com.l2jfree.gameserver.handler.voicedcommands;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
+import com.l2jfree.gameserver.instancemanager.hellbound.HellboundManager;
 
 /**
- * 
- * @author Vital
- * 
+ * @author Psycho(killer1888) / L2jFree
  */
-public class Report implements IVoicedCommandHandler
+public class Hellbound implements IVoicedCommandHandler
 {
-	private static final String[] VOICED_COMMANDS = { "report" };
+	private static final String[] VOICED_COMMANDS = { "trust" };
 	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#useVoicedCommand(String, com.l2jfree.gameserver.model.L2Player), String)
+	 */
 	@Override
 	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
-		if (command.equals("report"))
+		if (command.startsWith("trust"))
 		{
+			int points = HellboundManager.getInstance().getTrustPoints();
+			int level = HellboundManager.getInstance().getCurrentLevel();
+			
+			activeChar.sendMessage("Hellbound current trust points: " + points);
+			activeChar.sendMessage("Hellbound current level: " + level);
+			return true;
 		}
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.l2jfree.gameserver.handler.IVoicedCommandHandler#getVoicedCommandList()
+	 */
 	@Override
 	public String[] getVoicedCommandList()
 	{
