@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.L2Transformation;
 
@@ -68,7 +68,7 @@ public final class PcView extends CharView<L2PcInstance> implements UniversalCha
 		}
 		else
 		{
-			final L2PcTemplate template = cha.getBaseTemplate();
+			final L2PlayerTemplate template = cha.getBaseTemplate();
 			
 			if (appearance.getSex())
 			{

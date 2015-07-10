@@ -29,8 +29,8 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate.PcTemplateItem;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate.PcTemplateItem;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.instancemanager.RecommendationManager;
@@ -128,7 +128,7 @@ public class NewCharacter extends L2ClientPacket
 			if (_log.isDebugEnabled())
 				_log.debug("charname: " + _name + " classId: " + _classId);
 			
-			L2PcTemplate template = CharTemplateTable.getInstance().getTemplate(_classId);
+			L2PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(_classId);
 			if (template == null || template.getClassBaseLevel() > 1)
 			{
 				sendPacket(new CharacterCreateFail(CharacterCreateFail.REASON_CREATION_FAILED));
@@ -166,7 +166,7 @@ public class NewCharacter extends L2ClientPacket
 		
 		L2World.getInstance().storeObject(newChar);
 		
-		L2PcTemplate template = newChar.getTemplate();
+		L2PlayerTemplate template = newChar.getTemplate();
 		
 		newChar.addAdena("Init", Config.STARTING_ADENA, null, false);
 		

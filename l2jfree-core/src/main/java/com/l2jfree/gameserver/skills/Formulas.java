@@ -31,7 +31,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2GuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -637,7 +637,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
 			L2PcInstance pc = (L2PcInstance)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatSTR();
@@ -661,7 +661,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
 			L2PcInstance pc = (L2PcInstance)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatDEX();
@@ -685,7 +685,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
 			L2PcInstance pc = (L2PcInstance)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatINT();
@@ -709,7 +709,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
 			L2PcInstance pc = (L2PcInstance)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatMEN();
@@ -733,7 +733,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
 			L2PcInstance pc = (L2PcInstance)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatCON();
@@ -757,7 +757,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			//          L2PcTemplate t = (L2PcTemplate)env._player.getTemplate();
+			//          L2PlayerTemplate t = (L2PlayerTemplate)env._player.getTemplate();
 			L2PcInstance pc = (L2PcInstance)env.player;
 			if (pc != null)
 				env.value += pc.getHennaStatWIT();
@@ -781,7 +781,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcTemplate t = (L2PcTemplate)env.player.getTemplate();
+			L2PlayerTemplate t = (L2PlayerTemplate)env.player.getTemplate();
 			int lvl = env.player.getLevel() - t.getClassBaseLevel();
 			double hpmod = t.getLvlHpMod() * lvl;
 			double hpmax = (t.getLvlHpAdd() + hpmod) * lvl;
@@ -829,7 +829,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcTemplate t = (L2PcTemplate)env.player.getTemplate();
+			L2PlayerTemplate t = (L2PlayerTemplate)env.player.getTemplate();
 			int lvl = env.player.getLevel() - t.getClassBaseLevel();
 			double cpmod = t.getLvlCpMod() * lvl;
 			double cpmax = (t.getLvlCpAdd() + cpmod) * lvl;
@@ -877,7 +877,7 @@ public final class Formulas
 		@Override
 		public void calc(Env env)
 		{
-			L2PcTemplate t = (L2PcTemplate)env.player.getTemplate();
+			L2PlayerTemplate t = (L2PlayerTemplate)env.player.getTemplate();
 			int lvl = env.player.getLevel() - t.getClassBaseLevel();
 			double mpmod = t.getLvlMpMod() * lvl;
 			double mpmax = (t.getLvlMpAdd() + mpmod) * lvl;

@@ -97,7 +97,7 @@ import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
-import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.gameobjects.view.PcView;
 import com.l2jfree.gameserver.geodata.GeoData;
@@ -899,7 +899,7 @@ public final class L2PcInstance extends L2Playable
 	 * <li>Add the player in the characters table of the database</li><BR><BR>
 	 *
 	 * @param objectId Identifier of the object to initialized
-	 * @param template The L2PcTemplate to apply to the L2PcInstance
+	 * @param template The L2PlayerTemplate to apply to the L2PcInstance
 	 * @param accountName The name of the L2PcInstance
 	 * @param name The name of the L2PcInstance
 	 * @param hairStyle The hair style Identifier of the L2PcInstance
@@ -909,7 +909,7 @@ public final class L2PcInstance extends L2Playable
 	 * @return The L2PcInstance added to the database or null
 	 *
 	 */
-	public static L2PcInstance create(int objectId, L2PcTemplate template, String accountName, String name,
+	public static L2PcInstance create(int objectId, L2PlayerTemplate template, String accountName, String name,
 			byte hairStyle, byte hairColor, byte face, boolean sex)
 	{
 		// Create a new L2PcInstance with an account name
@@ -1077,11 +1077,11 @@ public final class L2PcInstance extends L2Playable
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : This method SET the level of the L2PcInstance to 1</B></FONT><BR><BR>
 	 *
 	 * @param objectId Identifier of the object to initialized
-	 * @param template The L2PcTemplate to apply to the L2PcInstance
+	 * @param template The L2PlayerTemplate to apply to the L2PcInstance
 	 * @param accountName The name of the account including this L2PcInstance
 	 *
 	 */
-	private L2PcInstance(int objectId, L2PcTemplate template, String accountName, PlayerAppearance app)
+	private L2PcInstance(int objectId, L2PlayerTemplate template, String accountName, PlayerAppearance app)
 	{
 		super(objectId, template);
 		getKnownList(); // Init knownlist
@@ -1189,18 +1189,18 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Return the base L2PcTemplate link to the L2PcInstance.<BR><BR>
+	 * Return the base L2PlayerTemplate link to the L2PcInstance.<BR><BR>
 	 */
-	public final L2PcTemplate getBaseTemplate()
+	public final L2PlayerTemplate getBaseTemplate()
 	{
 		return CharTemplateTable.getInstance().getTemplate(_baseClass);
 	}
 	
-	/** Return the L2PcTemplate link to the L2PcInstance. */
+	/** Return the L2PlayerTemplate link to the L2PcInstance. */
 	@Override
-	public final L2PcTemplate getTemplate()
+	public final L2PlayerTemplate getTemplate()
 	{
-		return (L2PcTemplate)super.getTemplate();
+		return (L2PlayerTemplate)super.getTemplate();
 	}
 	
 	public void setTemplate(ClassId newclass)
@@ -2091,7 +2091,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Return the ClassId object of the L2PcInstance contained in L2PcTemplate.<BR><BR>
+	 * Return the ClassId object of the L2PcInstance contained in L2PlayerTemplate.<BR><BR>
 	 */
 	public ClassId getClassId()
 	{
@@ -2128,7 +2128,7 @@ public final class L2PcInstance extends L2Playable
 	/**
 	 * Set the template of the L2PcInstance.<BR><BR>
 	 *
-	 * @param Id The Identifier of the L2PcTemplate to set to the L2PcInstance
+	 * @param Id The Identifier of the L2PlayerTemplate to set to the L2PcInstance
 	 *
 	 */
 	public void setClassId(int Id)
@@ -2585,7 +2585,7 @@ public final class L2PcInstance extends L2Playable
 		if (!isSubClassActive())
 			return getTemplate().getRace();
 		
-		L2PcTemplate charTemp = CharTemplateTable.getInstance().getTemplate(_baseClass);
+		L2PlayerTemplate charTemp = CharTemplateTable.getInstance().getTemplate(_baseClass);
 		return charTemp.getRace();
 	}
 	
@@ -6691,7 +6691,7 @@ public final class L2PcInstance extends L2Playable
 			{
 				final int activeClassId = rset.getInt("classid");
 				final boolean female = rset.getInt("sex") != 0;
-				final L2PcTemplate template = CharTemplateTable.getInstance().getTemplate(activeClassId);
+				final L2PlayerTemplate template = CharTemplateTable.getInstance().getTemplate(activeClassId);
 				PlayerAppearance app =
 						new PlayerAppearance(rset.getByte("face"), rset.getByte("hairColor"),
 								rset.getByte("hairStyle"), female);
@@ -9997,7 +9997,7 @@ public final class L2PcInstance extends L2Playable
 	{
 		_activeClass = classId;
 		
-		L2PcTemplate t = CharTemplateTable.getInstance().getTemplate(classId);
+		L2PlayerTemplate t = CharTemplateTable.getInstance().getTemplate(classId);
 		
 		if (t == null)
 		{

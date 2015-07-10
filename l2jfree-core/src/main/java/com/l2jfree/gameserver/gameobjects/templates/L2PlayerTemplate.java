@@ -37,7 +37,7 @@ import com.l2jfree.tools.random.Rnd;
  * of characters !</b>
  * </font>
  */
-public class L2PcTemplate extends L2CreatureTemplate
+public class L2PlayerTemplate extends L2CreatureTemplate
 {
 	private static final Location[][] START_POINTS = {
 			// Human Fighter (0)
@@ -119,7 +119,7 @@ public class L2PcTemplate extends L2CreatureTemplate
 	
 	private final List<PcTemplateItem> _items = new FastList<PcTemplateItem>();
 	
-	public L2PcTemplate(StatsSet set)
+	public L2PlayerTemplate(StatsSet set)
 	{
 		super(set);
 		classId = ClassId.values()[set.getInteger("classId")];
