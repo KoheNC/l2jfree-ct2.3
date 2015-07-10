@@ -35,7 +35,7 @@ import com.l2jfree.util.LazyFastSet;
 /**
  * @author NB4L1
  */
-public final class PcShots extends CreatureShots
+public final class PlayerShots extends CreatureShots
 {
 	private static final Map<Integer, ShotInfo> SHOTS = new HashMap<Integer, ShotInfo>();
 	
@@ -124,7 +124,7 @@ public final class PcShots extends CreatureShots
 	
 	private final Set<Integer> _activeSoulShots = new LazyFastSet<Integer>().setShared();
 	
-	public PcShots(L2PcInstance activeChar)
+	public PlayerShots(L2PcInstance activeChar)
 	{
 		super(activeChar);
 	}
