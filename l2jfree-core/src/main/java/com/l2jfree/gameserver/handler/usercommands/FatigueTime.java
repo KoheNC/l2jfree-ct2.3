@@ -12,20 +12,22 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.usercommandhandlers;
+package com.l2jfree.gameserver.handler.usercommands;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
+import com.l2jfree.gameserver.network.SystemMessageId;
 
-public class Time implements IUserCommandHandler
+public class FatigueTime implements IUserCommandHandler
 {
-	private static final int[] COMMAND_IDS = { 77 };
+	private static final int[] COMMAND_IDS = { 102 };
 	
 	@Override
 	public boolean useUserCommand(int id, L2Player activeChar)
 	{
-		activeChar.sendMessage("The current date is " + GameTimeController.getInstance().getFormattedGameTime());
+		// Fatigue system is not used in NA
+		// Until something is known, use the retail answer
+		activeChar.sendPacket(SystemMessageId.FATIGUE_TIME_NONE);
 		return true;
 	}
 	

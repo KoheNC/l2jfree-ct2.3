@@ -12,34 +12,23 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.usercommandhandlers;
+package com.l2jfree.gameserver.handler.usercommands;
 
+import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 
-/**
- * Support for /mount command.
- * @author Tempy
- */
-public class Mount implements IUserCommandHandler
+public class Time implements IUserCommandHandler
 {
-	private static final int[] COMMAND_IDS = { 61 };
+	private static final int[] COMMAND_IDS = { 77 };
 	
-	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2Player)
-	 */
 	@Override
-	public synchronized boolean useUserCommand(int id, L2Player activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
-		if (id != COMMAND_IDS[0])
-			return false;
-		
-		return activeChar.mountPlayer(activeChar.getPet());
+		activeChar.sendMessage("The current date is " + GameTimeController.getInstance().getFormattedGameTime());
+		return true;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#getUserCommandList()
-	 */
 	@Override
 	public int[] getUserCommandList()
 	{

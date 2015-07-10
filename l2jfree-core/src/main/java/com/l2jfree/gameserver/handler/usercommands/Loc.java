@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.usercommandhandlers;
+package com.l2jfree.gameserver.handler.usercommands;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Player;

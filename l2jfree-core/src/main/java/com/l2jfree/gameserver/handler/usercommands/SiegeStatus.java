@@ -12,22 +12,31 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.usercommandhandlers;
+package com.l2jfree.gameserver.handler.usercommands;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
+import com.l2jfree.gameserver.instancemanager.CastleManager;
+import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.network.SystemMessageId;
+import com.l2jfree.gameserver.network.packets.server.SiegeInfo;
 
-public class FatigueTime implements IUserCommandHandler
+public class SiegeStatus implements IUserCommandHandler
 {
-	private static final int[] COMMAND_IDS = { 102 };
+	private static final int[] COMMAND_IDS = { 99 };
 	
 	@Override
 	public boolean useUserCommand(int id, L2Player activeChar)
 	{
-		// Fatigue system is not used in NA
-		// Until something is known, use the retail answer
-		activeChar.sendPacket(SystemMessageId.FATIGUE_TIME_NONE);
+		if (!activeChar.isNoble())
+		{
+			// verified
+			activeChar.sendPacket(SystemMessageId.ONLY_NOBLESSE_LEADER_CAN_VIEW_SIEGE_STATUS_WINDOW);
+			return false;
+		}
+		Castle c = CastleManager.getInstance().getCastle(activeChar);
+		if (c != null)
+			activeChar.sendPacket(new SiegeInfo(c));
 		return true;
 	}
 	

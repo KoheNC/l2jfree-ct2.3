@@ -12,33 +12,34 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.usercommandhandlers;
+package com.l2jfree.gameserver.handler.usercommands;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
+import com.l2jfree.gameserver.network.packets.server.ExMultiPartyCommandChannelInfo;
 
 /**
- * Support for /dismount command.
- * @author Micht
+ *
+ * @author chris_00
+ * when User press the "List Update" button in CCInfo window
  */
-public class DisMount implements IUserCommandHandler
+public class ChannelListUpdate implements IUserCommandHandler
 {
-	private static final int[] COMMAND_IDS = { 62 };
+	private static final int[] COMMAND_IDS = { 97 };
 	
 	/* (non-Javadoc)
 	 * @see com.l2jfree.gameserver.handler.IUserCommandHandler#useUserCommand(int, com.l2jfree.gameserver.model.L2Player)
 	 */
 	@Override
-	public synchronized boolean useUserCommand(int id, L2Player activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		if (id != COMMAND_IDS[0])
 			return false;
 		
-		if (activeChar.isRentedPet())
-			activeChar.stopRentPet();
-		else if (activeChar.isMounted())
-			activeChar.dismount();
+		if (activeChar.getParty() == null || activeChar.getParty().getCommandChannel() == null)
+			return false;
 		
+		activeChar.sendPacket(new ExMultiPartyCommandChannelInfo(activeChar.getParty().getCommandChannel()));
 		return true;
 	}
 	

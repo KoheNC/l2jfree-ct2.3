@@ -12,19 +12,32 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.usercommandhandlers;
+package com.l2jfree.gameserver.handler.usercommands;
+
+import java.util.Calendar;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
+import com.l2jfree.gameserver.network.SystemMessageId;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
-public class GraduateList implements IUserCommandHandler
+public class Birthday implements IUserCommandHandler
 {
-	private static final int[] COMMAND_IDS = { 110 };
+	// 161714928 in Gracia P2
+	private static final int[] COMMAND_IDS = { 126 };
 	
 	@Override
 	public boolean useUserCommand(int id, L2Player activeChar)
 	{
-		activeChar.sendMessage("Command /graduatelist not implemented yet.");
+		Calendar bDay = activeChar.getCreationDate();
+		SystemMessage sm = new SystemMessage(SystemMessageId.C1_BIRTHDAY_IS_S3_S4_S2);
+		sm.addPcName(activeChar);
+		sm.addNumber(bDay.get(Calendar.DAY_OF_MONTH));
+		sm.addNumber(bDay.get(Calendar.YEAR));
+		sm.addNumber(bDay.get(Calendar.MONTH));
+		activeChar.sendPacket(sm);
+		if (activeChar.isBirthdayIllegal())
+			activeChar.sendPacket(SystemMessageId.CHARACTERS_CREATED_FEB_29_WILL_RECEIVE_GIFT_FEB_28);
 		return true;
 	}
 	
