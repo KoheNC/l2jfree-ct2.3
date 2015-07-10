@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.StaticObjectKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.StaticObjStat;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -115,7 +115,7 @@ public class L2StaticObjectInstance extends L2Character
 	
 	/**
 	 */
-	public L2StaticObjectInstance(int objectId, L2CharTemplate template, int staticId)
+	public L2StaticObjectInstance(int objectId, L2CreatureTemplate template, int staticId)
 	{
 		super(objectId, template);
 		getKnownList();

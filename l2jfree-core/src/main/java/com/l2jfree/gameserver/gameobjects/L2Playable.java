@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.PlayableKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.PlayableStat;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
@@ -64,10 +64,10 @@ public abstract class L2Playable extends L2Character
 	 * <li>Call the L2Character constructor to create an empty _skills slot and link copy basic Calculator set to this L2Playable </li><BR><BR>
 	 * 
 	 * @param objectId Identifier of the object to initialized
-	 * @param template The L2CharTemplate to apply to the L2Playable
+	 * @param template The L2CreatureTemplate to apply to the L2Playable
 	 * 
 	 */
-	public L2Playable(int objectId, L2CharTemplate template)
+	public L2Playable(int objectId, L2CreatureTemplate template)
 	{
 		super(objectId, template);
 		getKnownList(); // Init knownlist

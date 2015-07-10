@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects;
 
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
@@ -26,7 +26,7 @@ public abstract class L2Decoy extends L2Character
 {
 	private final L2PcInstance _owner;
 	
-	public L2Decoy(int objectId, L2CharTemplate template, L2PcInstance owner)
+	public L2Decoy(int objectId, L2CreatureTemplate template, L2PcInstance owner)
 	{
 		super(objectId, template);
 		getKnownList();

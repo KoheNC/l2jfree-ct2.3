@@ -35,7 +35,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.AirShipKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.server.ExAirShipInfo;
@@ -184,7 +184,7 @@ public final class L2AirShipInstance extends L2Character
 	protected int _runstate = 0;
 	protected ExMoveToLocationAirShip _easi = null;
 	
-	public L2AirShipInstance(int objectId, L2CharTemplate template)
+	public L2AirShipInstance(int objectId, L2CreatureTemplate template)
 	{
 		super(objectId, template);
 		getKnownList();

@@ -512,7 +512,7 @@ public class L2Spawn
 	 * <li>Set the HP and MP of the L2Npc to the max </li>
 	 * <li>Set the heading of the L2Npc (random heading if not defined : value=-1) </li>
 	 * <li>Link the L2Npc to this L2Spawn </li>
-	 * <li>Init other values of the L2Npc (ex : from its L2CharTemplate for INT, STR, DEX...) and add it in the world </li>
+	 * <li>Init other values of the L2Npc (ex : from its L2CreatureTemplate for INT, STR, DEX...) and add it in the world </li>
 	 * <li>Lauch the action onSpawn fo the L2Npc </li><BR><BR>
 	 * <li>Increase the current number of L2Npc managed by this L2Spawn  </li><BR><BR>
 	 * 
@@ -629,7 +629,7 @@ public class L2Spawn
 		// Link the L2Npc to this L2Spawn
 		mob.setSpawn(this);
 		
-		// Init other values of the L2Npc (ex : from its L2CharTemplate for INT, STR, DEX...) and add it in the world as a visible object
+		// Init other values of the L2Npc (ex : from its L2CreatureTemplate for INT, STR, DEX...) and add it in the world as a visible object
 		mob.spawnMe(newlocx, newlocy, newlocz, firstspawn);
 		
 		L2Spawn.notifyNpcSpawned(mob);

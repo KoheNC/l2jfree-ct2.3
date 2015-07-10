@@ -27,7 +27,7 @@ import com.l2jfree.tools.random.Rnd;
 
 /**
  * Base template for all type of playable characters
- * Override {@link com.l2jfree.gameserver.templates.L2CharTemplate} to add some properties
+ * Override {@link com.l2jfree.gameserver.templates.L2CreatureTemplate} to add some properties
  * specific to pc.
  *
  * <br/>
@@ -37,7 +37,7 @@ import com.l2jfree.tools.random.Rnd;
  * of characters !</b>
  * </font>
  */
-public class L2PcTemplate extends L2CharTemplate
+public class L2PcTemplate extends L2CreatureTemplate
 {
 	private static final Location[][] START_POINTS = {
 			// Human Fighter (0)

@@ -29,7 +29,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.DoorKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.DoorStat;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -177,7 +177,7 @@ public class L2DoorInstance extends L2Character
 		}
 	}
 	
-	public L2DoorInstance(int objectId, L2CharTemplate template, int doorId, String name, boolean unlockable)
+	public L2DoorInstance(int objectId, L2CreatureTemplate template, int doorId, String name, boolean unlockable)
 	{
 		super(objectId, template);
 		getKnownList(); // init knownlist

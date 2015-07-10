@@ -53,7 +53,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.geodata.GeoData;
@@ -142,7 +142,7 @@ import com.l2jfree.util.LazyFastSet;
  * <li>L2Playable </li>
  * <BR>
  * <BR>
- * <B><U> Concept of L2CharTemplate</U> :</B><BR>
+ * <B><U> Concept of L2CreatureTemplate</U> :</B><BR>
  * <BR>
  * Each L2Character owns generic and static properties (ex : all Keltir have the same number of HP...). All of those properties are stored in a different
  * template for each type of L2Character. Each template is loaded once in the server cache memory (reduce memory use). When a new instance of L2Character is
@@ -197,7 +197,7 @@ public abstract class L2Character extends L2Object
 	protected final CharLikeView _view;
 	protected final CreatureStat _stat;
 	protected final CreatureStatus _status;
-	private L2CharTemplate _template; // The link on the L2CharTemplate
+	private L2CreatureTemplate _template; // The link on the L2CreatureTemplate
 	protected boolean _showSummonAnimation = false;
 	// object containing generic and
 	// static properties of this
@@ -254,9 +254,9 @@ public abstract class L2Character extends L2Object
 	 * @param objectId
 	 *            Identifier of the object to initialized
 	 * @param template
-	 *            The L2CharTemplate to apply to the object
+	 *            The L2CreatureTemplate to apply to the object
 	 */
-	public L2Character(int objectId, L2CharTemplate template)
+	public L2Character(int objectId, L2CreatureTemplate template)
 	{
 		super(objectId);
 		
@@ -2713,7 +2713,7 @@ public abstract class L2Character extends L2Object
 		return _status;
 	}
 	
-	public L2CharTemplate getTemplate()
+	public L2CreatureTemplate getTemplate()
 	{
 		return _template;
 	}
@@ -2733,7 +2733,7 @@ public abstract class L2Character extends L2Object
 	 * <BR>
 	 * <BR
 	 */
-	protected final void setTemplate(L2CharTemplate template)
+	protected final void setTemplate(L2CreatureTemplate template)
 	{
 		_template = template;
 	}

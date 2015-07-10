@@ -61,7 +61,7 @@ import com.l2jfree.gameserver.templates.StatsSet;
  * 
  * @version $Revision: 1.1.2.4 $ $Date: 2005/04/02 15:57:51 $
  */
-public final class L2NpcTemplate extends L2CharTemplate
+public final class L2NpcTemplate extends L2CreatureTemplate
 {
 	/**
 	 * Logger

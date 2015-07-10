@@ -34,7 +34,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.BoatKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -266,7 +266,7 @@ public class L2BoatInstance extends L2Character
 		startCycle();
 	}
 	
-	public L2BoatInstance(int objectId, L2CharTemplate template, String name)
+	public L2BoatInstance(int objectId, L2CreatureTemplate template, String name)
 	{
 		super(objectId, template);
 		getKnownList();

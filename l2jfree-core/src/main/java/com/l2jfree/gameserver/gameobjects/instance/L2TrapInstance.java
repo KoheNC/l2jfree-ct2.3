@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.TrapKnownList;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.packets.server.SocialAction;
@@ -62,7 +62,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 	private int _timeRemaining;
 	private boolean _isDetected;
 	
-	public L2TrapInstance(int objectId, L2CharTemplate template, L2PcInstance owner, int lifeTime, L2Skill skill)
+	public L2TrapInstance(int objectId, L2CreatureTemplate template, L2PcInstance owner, int lifeTime, L2Skill skill)
 	{
 		super(objectId, template, owner);
 		

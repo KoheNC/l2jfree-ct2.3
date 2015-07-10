@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.templates.StatsSet;
 
@@ -152,7 +152,7 @@ public class StaticObjects
 		npcDat.set("basePDef", 1);
 		npcDat.set("baseMDef", 1);
 		
-		L2CharTemplate template = new L2CharTemplate(npcDat);
+		L2CreatureTemplate template = new L2CreatureTemplate(npcDat);
 		L2StaticObjectInstance obj = new L2StaticObjectInstance(IdFactory.getInstance().getNextId(), template, id);
 		obj.setType(type);
 		obj.getPosition().setXYZ(x, y, z);

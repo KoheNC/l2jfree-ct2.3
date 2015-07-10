@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.templates.StatsSet;
  * of characters !</b>
  * </font>
  */
-public class L2CharTemplate
+public class L2CreatureTemplate
 {
 	// BaseStats
 	private int baseSTR;
@@ -105,15 +105,15 @@ public class L2CharTemplate
 	/**
 	 * Empty constructor (we have to use setter to initialize the object).
 	 * 
-	 * Be carefull, setter don't do the same verification that instantiation with statset {@link #L2CharTemplate(StatsSet)}
+	 * Be carefull, setter don't do the same verification that instantiation with statset {@link #L2CreatureTemplate(StatsSet)}
 	 * Don't use it !
 	 * This constructor is designed for hibernate
 	 */
-	public L2CharTemplate()
+	public L2CreatureTemplate()
 	{
 	}
 	
-	public L2CharTemplate(StatsSet set)
+	public L2CreatureTemplate(StatsSet set)
 	{
 		// Base stats
 		baseSTR = set.getInteger("baseSTR");
