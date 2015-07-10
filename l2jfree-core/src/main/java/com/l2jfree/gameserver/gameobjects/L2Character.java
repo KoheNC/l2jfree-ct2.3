@@ -41,7 +41,7 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
-import com.l2jfree.gameserver.gameobjects.effects.CharEffects;
+import com.l2jfree.gameserver.gameobjects.effects.CreatureEffects;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
@@ -2955,14 +2955,14 @@ public abstract class L2Character extends L2Object
 	/** Map 32 bits (0x0000) containing all abnormal effect in progress */
 	private int _AbnormalEffects;
 	
-	protected final CharEffects _effects;
+	protected final CreatureEffects _effects;
 	
-	protected CharEffects initEffects()
+	protected CreatureEffects initEffects()
 	{
-		return new CharEffects(this);
+		return new CreatureEffects(this);
 	}
 	
-	public CharEffects getEffects()
+	public CreatureEffects getEffects()
 	{
 		return _effects;
 	}

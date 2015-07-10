@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.effects.CharEffects;
+import com.l2jfree.gameserver.gameobjects.effects.CreatureEffects;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
@@ -215,7 +215,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	}
 	
 	/**
-	 * Must be called from synchronized context from {@link CharEffects}.
+	 * Must be called from synchronized context from {@link CreatureEffects}.
 	 */
 	public synchronized final void setInUse(boolean inUse)
 	{

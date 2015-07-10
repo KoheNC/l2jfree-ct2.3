@@ -36,9 +36,9 @@ import com.l2jfree.util.ObjectPool;
 /**
  * @author NB4L1
  */
-public class CharEffects
+public class CreatureEffects
 {
-	protected static final Log _log = LogFactory.getLog(CharEffects.class);
+	protected static final Log _log = LogFactory.getLog(CreatureEffects.class);
 	
 	protected final L2Character _owner;
 	
@@ -46,7 +46,7 @@ public class CharEffects
 	private List<L2Effect> _effects;
 	private Map<String, StackQueue> _stackedEffects;
 	
-	public CharEffects(L2Character owner)
+	public CreatureEffects(L2Character owner)
 	{
 		_owner = owner;
 	}
@@ -228,7 +228,7 @@ public class CharEffects
 			}
 		};
 		
-		private static StackQueue newInstance(CharEffects effects, String stackType)
+		private static StackQueue newInstance(CreatureEffects effects, String stackType)
 		{
 			StackQueue stackQueue = POOL.get();
 			
@@ -251,7 +251,7 @@ public class CharEffects
 		}
 		
 		private final ArrayList<L2Effect> _queue = new ArrayList<L2Effect>(4);
-		private CharEffects _effects;
+		private CreatureEffects _effects;
 		private String _stackType;
 		
 		private synchronized L2Effect[] getAllEffects()
