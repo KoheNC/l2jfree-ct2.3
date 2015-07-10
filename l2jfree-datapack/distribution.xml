@@ -24,10 +24,6 @@
 			<outputDirectory>gameserver/sql/</outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>tools/</directory>
-			<outputDirectory>gameserver/tools/</outputDirectory>
-		</fileSet>
-		<fileSet>
 			<directory>optional/</directory>
 			<outputDirectory>gameserver/optional/</outputDirectory>
 		</fileSet>

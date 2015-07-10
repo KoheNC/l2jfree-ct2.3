@@ -19,7 +19,13 @@
 package com.l2jfree.tools.dbinstaller;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 import javax.swing.JOptionPane;
@@ -37,7 +43,6 @@ public class RunTasks extends Thread
 	boolean _cleanInstall;
 	String _db;
 	String _sqlDir;
-	String _cleanUpFile;
 	
 	public RunTasks(DBOutputInterface frame, String db, String sqlDir, String cleanUpFile, boolean cleanInstall)
 	{
@@ -45,7 +50,6 @@ public class RunTasks extends Thread
 		_db = db;
 		_cleanInstall = cleanInstall;
 		_sqlDir = sqlDir;
-		_cleanUpFile = cleanUpFile;
 	}
 	
 	@Override
@@ -54,7 +58,6 @@ public class RunTasks extends Thread
 		new DBDumper(_frame, _db);
 		ScriptExecutor exec = new ScriptExecutor(_frame);
 		
-		File clnFile = new File(_cleanUpFile);
 		File updDir = new File(_sqlDir, "updates");
 		File[] files = updDir.listFiles(new SQLFilter());
 		
@@ -62,16 +65,38 @@ public class RunTasks extends Thread
 		
 		if (_cleanInstall)
 		{
-			if (clnFile.exists())
+			_frame.appendToProgressArea("Cleaning Database...");
+			
+			List<String> tables = new ArrayList<>();
+			Connection con = _frame.getConnection();
+			try (
+				PreparedStatement statement = con.prepareStatement("SHOW TABLES");
+				ResultSet rset = statement.executeQuery();)
 			{
-				_frame.appendToProgressArea("Cleaning Database...");
-				exec.execSqlFile(clnFile);
-				_frame.appendToProgressArea("Database Cleaned!");
+				while (rset.next())
+				{
+					tables.add(rset.getString(1));
+				}
 			}
-			else
+			catch (SQLException e)
 			{
-				_frame.appendToProgressArea("Database Cleaning Script Not Found!");
+				e.printStackTrace();
 			}
+			
+			for (String tableName : tables)
+			{
+				try (Statement stmt = con.createStatement();)
+				{
+					stmt.execute("DROP TABLE " + tableName);
+					_frame.appendToProgressArea("'" + tableName + "' table dropped.");
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			
+			_frame.appendToProgressArea("Database Cleaned!");
 			
 			if (updDir.exists())
 			{
