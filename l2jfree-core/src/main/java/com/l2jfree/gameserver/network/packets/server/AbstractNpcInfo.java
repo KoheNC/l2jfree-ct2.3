@@ -428,12 +428,12 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 	/**
 	 * Packet for morphed PCs
 	 */
-	public static class PcMorphInfo extends AbstractNpcInfo
+	public static class PlayerMorphInfo extends AbstractNpcInfo
 	{
 		private final L2Player _pc;
 		private final L2NpcTemplate _template;
 		
-		public PcMorphInfo(L2Player cha, L2NpcTemplate template)
+		public PlayerMorphInfo(L2Player cha, L2NpcTemplate template)
 		{
 			super(cha);
 			_pc = cha;

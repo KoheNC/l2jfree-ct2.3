@@ -117,7 +117,7 @@ public class L2PlayerTemplate extends L2CreatureTemplate
 	private final double fCollisionRadius;
 	private final double fCollisionHeight;
 	
-	private final List<PcTemplateItem> _items = new FastList<PcTemplateItem>();
+	private final List<PlayerTemplateItem> _items = new FastList<PlayerTemplateItem>();
 	
 	public L2PlayerTemplate(StatsSet set)
 	{
@@ -151,14 +151,14 @@ public class L2PlayerTemplate extends L2CreatureTemplate
 	 */
 	public void addItem(int itemId, int amount, boolean equipped)
 	{
-		_items.add(new PcTemplateItem(itemId, amount, equipped));
+		_items.add(new PlayerTemplateItem(itemId, amount, equipped));
 	}
 	
 	/**
 	 *
 	 * @return itemIds of all the starter equipment
 	 */
-	public List<PcTemplateItem> getItems()
+	public List<PlayerTemplateItem> getItems()
 	{
 		return _items;
 	}
@@ -464,7 +464,7 @@ public class L2PlayerTemplate extends L2CreatureTemplate
 		 */
 	}
 	
-	public static final class PcTemplateItem
+	public static final class PlayerTemplateItem
 	{
 		private final int _itemId;
 		private final int _amount;
@@ -474,7 +474,7 @@ public class L2PlayerTemplate extends L2CreatureTemplate
 		 * @param amount
 		 * @param itemId
 		 */
-		public PcTemplateItem(int itemId, int amount, boolean equipped)
+		public PlayerTemplateItem(int itemId, int amount, boolean equipped)
 		{
 			_itemId = itemId;
 			_amount = amount;

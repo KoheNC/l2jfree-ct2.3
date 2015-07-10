@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
-import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate.PcTemplateItem;
+import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate.PlayerTemplateItem;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.instancemanager.RecommendationManager;
@@ -193,7 +193,7 @@ public class NewCharacter extends L2ClientPacket
 		shortcut = new L2ShortCut(10, 0, 3, 0, 0, 1);
 		newChar.registerShortCut(shortcut);
 		
-		for (PcTemplateItem ia : template.getItems())
+		for (PlayerTemplateItem ia : template.getItems())
 		{
 			L2ItemInstance item = newChar.getInventory().addItem("Init", ia.getItemId(), ia.getAmount(), newChar, null);
 			

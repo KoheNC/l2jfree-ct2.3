@@ -13455,7 +13455,7 @@ public final class L2Player extends L2Playable
 		
 		if (getPoly().isMorphed())
 		{
-			activeChar.sendPacket(new AbstractNpcInfo.PcMorphInfo(this, getPoly().getNpcTemplate()));
+			activeChar.sendPacket(new AbstractNpcInfo.PlayerMorphInfo(this, getPoly().getNpcTemplate()));
 		}
 		else
 		{
@@ -13506,7 +13506,7 @@ public final class L2Player extends L2Playable
 		sendPacket(new UserInfo(this));
 		if (getPoly().isMorphed())
 		{
-			Broadcast.toKnownPlayers(this, new AbstractNpcInfo.PcMorphInfo(this, getPoly().getNpcTemplate()));
+			Broadcast.toKnownPlayers(this, new AbstractNpcInfo.PlayerMorphInfo(this, getPoly().getNpcTemplate()));
 		}
 		else
 		{
