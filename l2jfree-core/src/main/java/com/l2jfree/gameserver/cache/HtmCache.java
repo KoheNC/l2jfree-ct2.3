@@ -192,7 +192,7 @@ public final class HtmCache
 	
 	private File getCacheFile()
 	{
-		return new File(Config.DATAPACK_ROOT, Config.HTML_CACHE_FILE);
+		return new File(Config.HTML_CACHE_FILE);
 	}
 	
 	private void validate()
