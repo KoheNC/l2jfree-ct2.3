@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public final class InstanceEquipmentRestriction extends AbstractRestriction
 {
 	@Override
-	public void instanceChanged(L2PcInstance activeChar, int oldInstance, int newInstance)
+	public void instanceChanged(L2Player activeChar, int oldInstance, int newInstance)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(true))
 		{

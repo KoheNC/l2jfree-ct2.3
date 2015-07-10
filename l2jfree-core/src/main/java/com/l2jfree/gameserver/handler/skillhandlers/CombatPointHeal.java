@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -45,11 +45,11 @@ public class CombatPointHeal implements ISkillHandler
 			// From CT2 u will receive exact CP, you can't go over it, if you have full CP and you get CP buff, you will receive 0CP restored message
 			cp = Math.min(cp, target.getMaxCp() - target.getStatus().getCurrentCp());
 			
-			if (target instanceof L2PcInstance)
+			if (target instanceof L2Player)
 			{
 				SystemMessage sm = new SystemMessage(SystemMessageId.S1_CP_WILL_BE_RESTORED);
 				sm.addNumber((int)cp);
-				((L2PcInstance)target).sendPacket(sm);
+				((L2Player)target).sendPacket(sm);
 			}
 			
 			target.getStatus().setCurrentCp(cp + target.getStatus().getCurrentCp());

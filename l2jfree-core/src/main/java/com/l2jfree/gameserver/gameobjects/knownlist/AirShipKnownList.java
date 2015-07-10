@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 
 /**
@@ -36,7 +36,7 @@ public class AirShipKnownList extends CreatureKnownList
 	@Override
 	public int getDistanceToForgetObject(L2Object object)
 	{
-		if (!(object instanceof L2PcInstance))
+		if (!(object instanceof L2Player))
 			return 0;
 		return 8000;
 	}
@@ -44,7 +44,7 @@ public class AirShipKnownList extends CreatureKnownList
 	@Override
 	public int getDistanceToWatchObject(L2Object object)
 	{
-		if (!(object instanceof L2PcInstance))
+		if (!(object instanceof L2Player))
 			return 0;
 		return 4000;
 	}

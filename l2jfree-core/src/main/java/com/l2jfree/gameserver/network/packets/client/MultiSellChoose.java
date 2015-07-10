@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2Augmentation;
@@ -81,7 +81,7 @@ public final class MultiSellChoose extends L2ClientPacket
 		if (_amount < 1 || _amount > 5000)
 			return;
 		
-		L2PcInstance player = getActiveChar();
+		L2Player player = getActiveChar();
 		if (player == null)
 			return;
 		
@@ -111,7 +111,7 @@ public final class MultiSellChoose extends L2ClientPacket
 		sendAF();
 	}
 	
-	private void doExchange(L2PcInstance player, MultiSellEntry templateEntry, boolean applyTaxes,
+	private void doExchange(L2Player player, MultiSellEntry templateEntry, boolean applyTaxes,
 			boolean maintainEnchantment, int enchantment)
 	{
 		PlayerInventory inv = player.getInventory();

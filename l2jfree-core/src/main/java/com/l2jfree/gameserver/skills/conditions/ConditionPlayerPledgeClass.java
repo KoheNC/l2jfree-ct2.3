@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 /**
@@ -35,15 +35,15 @@ final class ConditionPlayerPledgeClass extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.player instanceof L2PcInstance))
+		if (!(env.player instanceof L2Player))
 			return false;
 		
-		if (((L2PcInstance)env.player).getClan() == null)
+		if (((L2Player)env.player).getClan() == null)
 			return false;
 		
 		if (_pledgeClass == -1)
-			return ((L2PcInstance)env.player).isClanLeader();
+			return ((L2Player)env.player).isClanLeader();
 		
-		return ((L2PcInstance)env.player).getPledgeClass() >= _pledgeClass;
+		return ((L2Player)env.player).getPledgeClass() >= _pledgeClass;
 	}
 }

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.events.SH;
 
 public final class SHRestriction extends AbstractRestriction
@@ -35,7 +35,7 @@ public final class SHRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean onAction(L2Npc npc, L2PcInstance activeChar)
+	public boolean onAction(L2Npc npc, L2Player activeChar)
 	{
 		if (npc._isEventMobSH)
 		{

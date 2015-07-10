@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.LoginServerThread;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -39,16 +39,16 @@ public class AdminBan implements IAdminCommandHandler
 	
 	@Override
 	@SuppressWarnings("null")
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		command = st.nextToken();
 		String nameToBan = null;
 		if (st.hasMoreTokens())
 			nameToBan = st.nextToken().trim();
-		L2PcInstance player = null;
+		L2Player player = null;
 		L2Object target = activeChar.getTarget();
-		if (target != null && target instanceof L2PcInstance && target != activeChar)
+		if (target != null && target instanceof L2Player && target != activeChar)
 			player = target.getActingPlayer();
 		
 		if (nameToBan == null && player == null)
@@ -147,7 +147,7 @@ public class AdminBan implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void sendBanSelect(L2PcInstance gm, String account)
+	private void sendBanSelect(L2Player gm, String account)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(gm.getObjectId());
 		html.setFile("data/html/admin/ban_selection.htm");

@@ -17,7 +17,6 @@ package com.l2jfree.gameserver.gameobjects;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.BossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.RaidPointsManager;
@@ -53,13 +52,13 @@ public abstract class L2Boss extends L2MonsterInstance
 		if (!super.doDie(killer))
 			return false;
 		
-		L2PcInstance player = killer.getActingPlayer();
+		L2Player player = killer.getActingPlayer();
 		if (player != null)
 		{
 			broadcastPacket(SystemMessageId.RAID_WAS_SUCCESSFUL.getSystemMessage());
 			if (player.getParty() != null)
 			{
-				for (L2PcInstance member : player.getParty().getPartyMembers())
+				for (L2Player member : player.getParty().getPartyMembers())
 					rewardRaidPoints(member);
 			}
 			else
@@ -68,7 +67,7 @@ public abstract class L2Boss extends L2MonsterInstance
 		return true;
 	}
 	
-	private void rewardRaidPoints(L2PcInstance player)
+	private void rewardRaidPoints(L2Player player)
 	{
 		int points = (getLevel() / 2) + Rnd.get(-5, 5);
 		RaidPointsManager.addPoints(player, getNpcId(), points);
@@ -84,7 +83,7 @@ public abstract class L2Boss extends L2MonsterInstance
 	}
 	
 	@Override
-	public boolean canInteract(L2PcInstance player)
+	public boolean canInteract(L2Player player)
 	{
 		// TODO: NPC busy check etc...
 		return isInsideRadius(player, BOSS_INTERACTION_DISTANCE, false, false);

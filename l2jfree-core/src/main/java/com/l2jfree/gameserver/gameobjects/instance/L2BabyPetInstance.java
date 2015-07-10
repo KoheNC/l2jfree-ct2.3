@@ -25,6 +25,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.PetSkillsTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -47,7 +48,7 @@ public final class L2BabyPetInstance extends L2PetInstance
 	
 	protected long _buffControlTimestamp = 0;
 	
-	public L2BabyPetInstance(int objectId, L2NpcTemplate template, L2PcInstance owner, L2ItemInstance control)
+	public L2BabyPetInstance(int objectId, L2NpcTemplate template, L2Player owner, L2ItemInstance control)
 	{
 		super(objectId, template, owner, control);
 	}
@@ -113,14 +114,14 @@ public final class L2BabyPetInstance extends L2PetInstance
 	}
 	
 	@Override
-	public synchronized void deleteMe(L2PcInstance owner)
+	public synchronized void deleteMe(L2Player owner)
 	{
 		super.deleteMe(owner);
 		stopCastTask();
 	}
 	
 	@Override
-	public synchronized void unSummon(L2PcInstance owner)
+	public synchronized void unSummon(L2Player owner)
 	{
 		stopCastTask();
 		abortCast();
@@ -192,7 +193,7 @@ public final class L2BabyPetInstance extends L2PetInstance
 		public void run()
 		{
 			final L2BabyPetInstance _baby = L2BabyPetInstance.this;
-			L2PcInstance owner = _baby.getOwner();
+			L2Player owner = _baby.getOwner();
 			
 			// if the owner is dead, merely wait for the owner to be resurrected
 			// if the pet is still casting from the previous iteration, allow the cast to complete...

@@ -18,7 +18,7 @@ import java.util.List;
 
 import javolution.util.FastTable;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * This class ...
@@ -171,7 +171,7 @@ public final class L2EnchantSkillLearn
 			return _exp;
 		}
 		
-		public byte getRate(L2PcInstance ply)
+		public byte getRate(L2Player ply)
 		{
 			byte result;
 			switch (ply.getLevel())

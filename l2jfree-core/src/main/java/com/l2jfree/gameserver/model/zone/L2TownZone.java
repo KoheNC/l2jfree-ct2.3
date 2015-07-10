@@ -20,7 +20,7 @@ import javolution.util.FastMap;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.entity.ClanHall;
@@ -45,7 +45,7 @@ public class L2TownZone extends L2Zone
 		{
 			case 1: // PvP allowed for siege participants
 			{
-				if (character instanceof L2PcInstance && ((L2PcInstance)character).getSiegeState() != 0)
+				if (character instanceof L2Player && ((L2Player)character).getSiegeState() != 0)
 					flag = FLAG_PVP;
 				break;
 			}
@@ -68,7 +68,7 @@ public class L2TownZone extends L2Zone
 		
 		// Players must always see deco, not only inside clan hall.
 		// retail server behavior
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
 			ClanHall[] townHalls = ClanHallManager.getInstance().getTownClanHalls(getTownId());
 			if (townHalls != null)

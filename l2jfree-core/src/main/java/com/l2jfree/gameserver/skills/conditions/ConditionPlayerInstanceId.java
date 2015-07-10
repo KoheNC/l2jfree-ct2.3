@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager.InstanceWorld;
 import com.l2jfree.gameserver.model.entity.Instance;
@@ -39,9 +39,9 @@ public class ConditionPlayerInstanceId extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.player instanceof L2PcInstance))
+		if (!(env.player instanceof L2Player))
 			return false;
-		L2PcInstance player = env.player.getActingPlayer();
+		L2Player player = env.player.getActingPlayer();
 		if (!player.isInInstance())
 			return false;
 		

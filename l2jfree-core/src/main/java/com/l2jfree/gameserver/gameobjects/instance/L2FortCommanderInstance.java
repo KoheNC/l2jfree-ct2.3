@@ -18,6 +18,7 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -48,12 +49,12 @@ public class L2FortCommanderInstance extends L2FortSiegeGuardInstance
 	@Override
 	public boolean isAutoAttackable(L2Creature attacker)
 	{
-		if (attacker == null || !(attacker instanceof L2PcInstance))
+		if (attacker == null || !(attacker instanceof L2Player))
 			return false;
 		
 		boolean isFort =
 				(getFort() != null && getFort().getFortId() > 0 && getFort().getSiege().getIsInProgress() && !getFort()
-						.getSiege().checkIsDefender(((L2PcInstance)attacker).getClan()));
+						.getSiege().checkIsDefender(((L2Player)attacker).getClan()));
 		
 		// Attackable during siege by all except defenders
 		return isFort;

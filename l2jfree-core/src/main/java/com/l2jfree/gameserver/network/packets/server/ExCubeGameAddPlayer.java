@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -29,10 +29,10 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ExCubeGameAddPlayer extends L2ServerPacket
 {
 	private static final String _S__FE_97_01_EXCUBEGAMEADDPLAYER = "[S] FE:97:01 ExCubeGameAddPlayer";
-	L2PcInstance _player;
+	L2Player _player;
 	boolean _isRedTeam;
 	
-	public ExCubeGameAddPlayer(L2PcInstance player, boolean isRedTeam)
+	public ExCubeGameAddPlayer(L2Player player, boolean isRedTeam)
 	{
 		_player = player;
 		_isRedTeam = isRedTeam;

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.appearance;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 
 public final class PlayerAppearance
@@ -26,7 +26,7 @@ public final class PlayerAppearance
 	
 	// =========================================================
 	// Data Field
-	private L2PcInstance _owner;
+	private L2Player _owner;
 	private byte _face;
 	private byte _hairColor;
 	private byte _hairStyle;
@@ -181,7 +181,7 @@ public final class PlayerAppearance
 		setTitleColor((red & 0xFF) + ((green & 0xFF) << 8) + ((blue & 0xFF) << 16));
 	}
 	
-	public void setOwner(L2PcInstance owner)
+	public void setOwner(L2Player owner)
 	{
 		_owner = owner;
 	}

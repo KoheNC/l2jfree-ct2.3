@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
@@ -71,7 +71,7 @@ public class SiegeInfo extends L2ServerPacket
 	}
 	
 	@Override
-	protected final void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected final void writeImpl(L2Client client, L2Player activeChar)
 	{
 		if (activeChar == null)
 			return;

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.entity.events;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * Used to store extra informations that could be useful later.<br>
@@ -24,14 +24,14 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
  */
 public abstract class AbstractFunEventPlayerInfo
 {
-	private final L2PcInstance _player;
+	private final L2Player _player;
 	
-	protected AbstractFunEventPlayerInfo(L2PcInstance player)
+	protected AbstractFunEventPlayerInfo(L2Player player)
 	{
 		_player = player;
 	}
 	
-	public final L2PcInstance getPlayer()
+	public final L2Player getPlayer()
 	{
 		return _player;
 	}

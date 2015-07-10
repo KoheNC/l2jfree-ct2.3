@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.datatables.HennaTreeTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Henna;
@@ -24,10 +24,10 @@ public class HennaItemDrawInfo extends L2ServerPacket
 {
 	private static final String _S__E4_HennaItemDrawInfo = "[S] e4 HennaItemDrawInfo";
 	
-	private L2PcInstance _activeChar;
+	private L2Player _activeChar;
 	private L2Henna _henna;
 	
-	public HennaItemDrawInfo(L2Henna henna, L2PcInstance player)
+	public HennaItemDrawInfo(L2Henna henna, L2Player player)
 	{
 		_henna = henna;
 		_activeChar = player;

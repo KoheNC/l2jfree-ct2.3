@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket.ElementalOwner;
@@ -174,8 +174,8 @@ public class TradeList
 	
 	private final static Log _log = LogFactory.getLog(TradeList.class);
 	
-	private final L2PcInstance _owner;
-	private L2PcInstance _partner;
+	private final L2Player _owner;
+	private L2Player _partner;
 	private final FastList<TradeItem> _items;
 	private String _title;
 	private boolean _packaged;
@@ -183,23 +183,23 @@ public class TradeList
 	private boolean _confirmed = false;
 	private boolean _locked = false;
 	
-	public TradeList(L2PcInstance owner)
+	public TradeList(L2Player owner)
 	{
 		_items = new FastList<TradeItem>();
 		_owner = owner;
 	}
 	
-	public L2PcInstance getOwner()
+	public L2Player getOwner()
 	{
 		return _owner;
 	}
 	
-	public void setPartner(L2PcInstance partner)
+	public void setPartner(L2Player partner)
 	{
 		_partner = partner;
 	}
 	
-	public L2PcInstance getPartner()
+	public L2Player getPartner()
 	{
 		return _partner;
 	}
@@ -601,7 +601,7 @@ public class TradeList
 	/**
 	 * Transfers all TradeItems from inventory to partner
 	 */
-	private boolean transferItems(L2PcInstance partner, InventoryUpdate ownerIU, InventoryUpdate partnerIU)
+	private boolean transferItems(L2Player partner, InventoryUpdate ownerIU, InventoryUpdate partnerIU)
 	{
 		for (TradeItem titem : _items)
 		{
@@ -637,7 +637,7 @@ public class TradeList
 	/**
 	 * Count items slots
 	 */
-	public int countItemsSlots(L2PcInstance partner)
+	public int countItemsSlots(L2Player partner)
 	{
 		int slots = 0;
 		
@@ -736,7 +736,7 @@ public class TradeList
 	 * Buy items from this PrivateStore list
 	 * @return : boolean true if success
 	 */
-	public synchronized boolean privateStoreBuy(L2PcInstance player, ItemRequest[] items)
+	public synchronized boolean privateStoreBuy(L2Player player, ItemRequest[] items)
 	{
 		if (_locked)
 			return false;
@@ -922,7 +922,7 @@ public class TradeList
 	 * Sell items to this PrivateStore list
 	 * @return : boolean true if success
 	 */
-	public synchronized boolean privateStoreSell(L2PcInstance player, ItemRequest[] items)
+	public synchronized boolean privateStoreSell(L2Player player, ItemRequest[] items)
 	{
 		if (_locked)
 			return false;

@@ -15,10 +15,10 @@
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2FriendlyMobInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
 public class FriendlyMobKnownList extends AttackableKnownList
@@ -41,7 +41,7 @@ public class FriendlyMobKnownList extends AttackableKnownList
 		if (!super.addKnownObject(object))
 			return false;
 		
-		if (object instanceof L2PcInstance && getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
+		if (object instanceof L2Player && getActiveChar().getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)
 			getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE, null);
 		
 		return true;

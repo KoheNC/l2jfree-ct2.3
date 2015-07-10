@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.network.packets.server.AgitDecoInfo;
@@ -34,9 +34,9 @@ public class L2ClanhallZone extends L2Zone
 	@Override
 	protected void onEnter(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)character;
+			L2Player player = (L2Player)character;
 			// Set as in clan hall
 			player.setInsideZone(FLAG_CLANHALL, true);
 			
@@ -51,7 +51,7 @@ public class L2ClanhallZone extends L2Zone
 	@Override
 	protected void onExit(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
 			// Unset clanhall zone
 			character.setInsideZone(FLAG_CLANHALL, false);

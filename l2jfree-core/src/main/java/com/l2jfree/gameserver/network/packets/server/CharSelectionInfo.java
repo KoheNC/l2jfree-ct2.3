@@ -22,7 +22,7 @@ import java.util.List;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.CharSelectInfoPackage;
@@ -135,7 +135,7 @@ public class CharSelectionInfo extends L2ServerPacket
 	
 	private CharSelectInfoPackage[] loadCharacterSelectInfo()
 	{
-		L2PcInstance.disconnectIfOnline(_loginName);
+		L2Player.disconnectIfOnline(_loginName);
 		
 		CharSelectInfoPackage charInfopackage;
 		List<CharSelectInfoPackage> characterList = new ArrayList<CharSelectInfoPackage>();
@@ -213,7 +213,7 @@ public class CharSelectionInfo extends L2ServerPacket
 	{
 		int objectId = chardata.getInt("charId");
 		
-		L2PcInstance.disconnectIfOnline(objectId);
+		L2Player.disconnectIfOnline(objectId);
 		
 		String name = chardata.getString("char_name");
 		

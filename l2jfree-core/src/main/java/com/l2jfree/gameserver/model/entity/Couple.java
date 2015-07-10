@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 
 /**
@@ -81,7 +81,7 @@ public class Couple
 		}
 	}
 	
-	public Couple(L2PcInstance player1, L2PcInstance player2)
+	public Couple(L2Player player1, L2Player player2)
 	{
 		int _tempPlayer1Id = player1.getObjectId();
 		int _tempPlayer2Id = player2.getObjectId();

@@ -15,7 +15,7 @@
 package village_master;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * @author savormix
@@ -31,7 +31,7 @@ public final class Alliance extends VillageMaster
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (player.getClan() == null)
 			return "9001-no.htm";
@@ -40,7 +40,7 @@ public final class Alliance extends VillageMaster
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		return "9001-01.htm";
 	}

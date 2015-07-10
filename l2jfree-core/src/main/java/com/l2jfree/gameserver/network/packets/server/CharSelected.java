@@ -16,20 +16,20 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class CharSelected extends L2ServerPacket
 {
 	private static final String _S__0B_activeCharRSELECTED =
 			"[S] 0b CharSelected [sdsddddddddddffdqdddddddddddd ddddddddddddddddddddddddddd ff ddd c hh d]";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final int _sessionId;
 	
 	/**
 	 * @param _activeCharracters
 	 */
-	public CharSelected(L2PcInstance cha, int sessionId)
+	public CharSelected(L2Player cha, int sessionId)
 	{
 		_activeChar = cha;
 		_sessionId = sessionId;

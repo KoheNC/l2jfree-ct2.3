@@ -21,6 +21,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Party;
@@ -138,7 +139,7 @@ public final class L2FestivalGuideInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("FestivalDesc"))
 		{
@@ -256,7 +257,7 @@ public final class L2FestivalGuideInstance extends L2Npc
 						return;
 					}
 					
-					List<L2PcInstance> prevParticipants =
+					List<L2Player> prevParticipants =
 							SevenSignsFestival.getInstance().getPreviousParticipants(_festivalOracle, _festivalType);
 					
 					// Check if there are any past participants.
@@ -431,13 +432,13 @@ public final class L2FestivalGuideInstance extends L2Npc
 		}
 	}
 	
-	private void showChatWindow(L2PcInstance player, int val, String suffix, boolean isDescription)
+	private void showChatWindow(L2Player player, int val, String suffix, boolean isDescription)
 	{
 		String filename = SevenSigns.SEVEN_SIGNS_HTML_PATH + "festival/";
 		filename += (isDescription) ? "desc_" : "festival_";
 		filename += (suffix != null) ? val + suffix + ".htm" : val + ".htm";
 		
-		// Send a Server->Client NpcHtmlMessage containing the text of the L2NpcInstance to the L2PcInstance
+		// Send a Server->Client NpcHtmlMessage containing the text of the L2NpcInstance to the L2Player
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		html.setFile(filename);
 		html.replace("%objectId%", String.valueOf(getObjectId()));
@@ -462,7 +463,7 @@ public final class L2FestivalGuideInstance extends L2Npc
 		
 		player.sendPacket(html);
 		
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	

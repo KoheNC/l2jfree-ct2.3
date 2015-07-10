@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2CertificationSkillsLearn;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
@@ -485,7 +485,7 @@ public class SkillTreeTable
 		return _skillTrees;
 	}
 	
-	public L2SkillLearn[] getAvailableSkills(L2PcInstance cha, ClassId classId)
+	public L2SkillLearn[] getAvailableSkills(L2Player cha, ClassId classId)
 	{
 		ArrayBunch<L2SkillLearn> result = new ArrayBunch<L2SkillLearn>();
 		Collection<L2SkillLearn> skills = getAllowedSkills(classId);
@@ -530,7 +530,7 @@ public class SkillTreeTable
 		return result.moveToArray(new L2SkillLearn[result.size()]);
 	}
 	
-	public String giveAvailableSkills(L2PcInstance activeChar)
+	public String giveAvailableSkills(L2Player activeChar)
 	{
 		Map<Integer, L2Skill> skillsToAdd = new HashMap<Integer, L2Skill>();
 		
@@ -594,7 +594,7 @@ public class SkillTreeTable
 		return skillsAdded + " (" + newSkillsAdded + " new) skill(s)";
 	}
 	
-	public L2SkillLearn[] getAvailableSpecialSkills(L2PcInstance cha)
+	public L2SkillLearn[] getAvailableSpecialSkills(L2Player cha)
 	{
 		ArrayBunch<L2SkillLearn> result = new ArrayBunch<L2SkillLearn>();
 		
@@ -628,7 +628,7 @@ public class SkillTreeTable
 		return result.moveToArray(new L2SkillLearn[result.size()]);
 	}
 	
-	public L2SkillLearn[] getAvailableFishingSkills(L2PcInstance cha)
+	public L2SkillLearn[] getAvailableFishingSkills(L2Player cha)
 	{
 		ArrayBunch<L2SkillLearn> result = new ArrayBunch<L2SkillLearn>();
 		
@@ -697,7 +697,7 @@ public class SkillTreeTable
 		return _enchantSkillTrees.values();
 	}
 	
-	public L2PledgeSkillLearn[] getAvailablePledgeSkills(L2PcInstance cha)
+	public L2PledgeSkillLearn[] getAvailablePledgeSkills(L2Player cha)
 	{
 		ArrayBunch<L2PledgeSkillLearn> result = new ArrayBunch<L2PledgeSkillLearn>();
 		List<L2PledgeSkillLearn> skills = _pledgeSkillTrees;
@@ -740,7 +740,7 @@ public class SkillTreeTable
 		return result.moveToArray(new L2PledgeSkillLearn[result.size()]);
 	}
 	
-	public L2TransformSkillLearn[] getAvailableTransformSkills(L2PcInstance cha)
+	public L2TransformSkillLearn[] getAvailableTransformSkills(L2Player cha)
 	{
 		ArrayBunch<L2TransformSkillLearn> result = new ArrayBunch<L2TransformSkillLearn>();
 		List<L2TransformSkillLearn> skills = _transformSkillTrees;
@@ -787,7 +787,7 @@ public class SkillTreeTable
 		return result.moveToArray(new L2TransformSkillLearn[result.size()]);
 	}
 	
-	public L2CertificationSkillsLearn[] getAvailableCertificationSkills(L2PcInstance cha)
+	public L2CertificationSkillsLearn[] getAvailableCertificationSkills(L2Player cha)
 	{
 		ArrayBunch<L2CertificationSkillsLearn> result = new ArrayBunch<L2CertificationSkillsLearn>();
 		List<L2CertificationSkillsLearn> skills = _certificationSkillsTrees;
@@ -850,7 +850,7 @@ public class SkillTreeTable
 		return getSkillTrees()[classId.ordinal()].keySet();
 	}
 	
-	public int getMinLevelForNewSkill(L2PcInstance cha, ClassId classId)
+	public int getMinLevelForNewSkill(L2Player cha, ClassId classId)
 	{
 		int minLevel = 0;
 		Collection<L2SkillLearn> skills = getAllowedSkills(classId);
@@ -872,7 +872,7 @@ public class SkillTreeTable
 		return minLevel;
 	}
 	
-	public int getMinLevelForNewFishingSkill(L2PcInstance cha)
+	public int getMinLevelForNewFishingSkill(L2Player cha)
 	{
 		int minLevel = 0;
 		List<L2SkillLearn> skills = new FastList<L2SkillLearn>();
@@ -901,7 +901,7 @@ public class SkillTreeTable
 		return minLevel;
 	}
 	
-	public int getMinLevelForNewTransformSkill(L2PcInstance cha)
+	public int getMinLevelForNewTransformSkill(L2Player cha)
 	{
 		int minLevel = 0;
 		List<L2TransformSkillLearn> skills = new FastList<L2TransformSkillLearn>();
@@ -925,7 +925,7 @@ public class SkillTreeTable
 		return minLevel;
 	}
 	
-	public int getSkillCost(L2PcInstance player, L2Skill skill)
+	public int getSkillCost(L2Player player, L2Skill skill)
 	{
 		int skillCost = 100000000;
 		ClassId classId = player.getSkillLearningClassId();
@@ -975,7 +975,7 @@ public class SkillTreeTable
 		return Integer.MAX_VALUE;
 	}
 	
-	public byte getEnchantSkillRate(L2PcInstance player, L2Skill skill)
+	public byte getEnchantSkillRate(L2Player player, L2Skill skill)
 	{
 		L2EnchantSkillLearn enchantSkillLearn = _enchantSkillTrees.get(skill.getId());
 		if (enchantSkillLearn != null)

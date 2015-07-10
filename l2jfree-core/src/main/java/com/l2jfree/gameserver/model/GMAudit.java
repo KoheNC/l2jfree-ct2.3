@@ -22,13 +22,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 public class GMAudit
 {
 	private static final Log _log = LogFactory.getLog(GMAudit.class);
 	
-	public static void auditGMAction(L2PcInstance gm, String type, String action, String param)
+	public static void auditGMAction(L2Player gm, String type, String action, String param)
 	{
 		if (Config.GM_AUDIT)
 		{

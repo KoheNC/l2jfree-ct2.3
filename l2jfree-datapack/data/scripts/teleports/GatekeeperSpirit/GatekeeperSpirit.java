@@ -16,7 +16,7 @@ package teleports.GatekeeperSpirit;
 
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.quest.Quest;
 
 public class GatekeeperSpirit extends Quest
@@ -32,7 +32,7 @@ public class GatekeeperSpirit extends Quest
 	}
 	
 	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	public String onFirstTalk(L2Npc npc, L2Player player)
 	{
 		String htmltext = "";
 		int playerCabal = SevenSigns.getInstance().getPlayerCabal(player);

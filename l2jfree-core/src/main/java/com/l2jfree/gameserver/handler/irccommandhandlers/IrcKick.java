@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.irccommandhandlers;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IIrcCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.model.L2World;
@@ -40,7 +40,7 @@ public class IrcKick implements IIrcCommandHandler
 		if (command.startsWith("!kick_nongm"))
 		{
 			int counter = 0;
-			for (L2PcInstance plyr : L2World.getInstance().getAllPlayers())
+			for (L2Player plyr : L2World.getInstance().getAllPlayers())
 			{
 				if (!plyr.isGM())
 				{
@@ -55,7 +55,7 @@ public class IrcKick implements IIrcCommandHandler
 			try
 			{
 				player = st.nextToken();
-				L2PcInstance plyr = L2World.getInstance().getPlayer(player);
+				L2Player plyr = L2World.getInstance().getPlayer(player);
 				if (plyr != null)
 				{
 					new Disconnection(plyr).defaultSequence(false);
@@ -80,7 +80,7 @@ public class IrcKick implements IIrcCommandHandler
 		{
 			try
 			{
-				L2PcInstance plyr = null;
+				L2Player plyr = null;
 				try
 				{
 					player = st.nextToken();

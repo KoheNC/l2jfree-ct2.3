@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -28,9 +28,9 @@ public class RecipeShopSellList extends L2ServerPacket
 {
 	private static final String _S__D9_RecipeShopSellList = "[S] d9 RecipeShopSellList";
 	
-	private final L2PcInstance _buyer, _manufacturer;
+	private final L2Player _buyer, _manufacturer;
 	
-	public RecipeShopSellList(L2PcInstance buyer, L2PcInstance manufacturer)
+	public RecipeShopSellList(L2Player buyer, L2Player manufacturer)
 	{
 		_buyer = buyer;
 		_manufacturer = manufacturer;

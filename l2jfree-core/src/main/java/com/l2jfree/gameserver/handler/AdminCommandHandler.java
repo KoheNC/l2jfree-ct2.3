@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAI;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAdmin;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAnnouncements;
@@ -212,7 +212,7 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 				_log.warn("Command \"" + element + "\" have no access level definition. Can't be used.");
 	}
 	
-	public void useAdminCommand(final L2PcInstance activeChar, String message0)
+	public void useAdminCommand(final L2Player activeChar, String message0)
 	{
 		final String message = message0.trim();
 		
@@ -309,7 +309,7 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 		protected static final AdminCommandHandler _instance = new AdminCommandHandler();
 	}
 	
-	private static final ThreadLocal<L2PcInstance> _activeGm = new ThreadLocal<L2PcInstance>();
+	private static final ThreadLocal<L2Player> _activeGm = new ThreadLocal<L2Player>();
 	
 	static
 	{
@@ -317,7 +317,7 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 			@Override
 			public void write(String s)
 			{
-				final L2PcInstance gm = _activeGm.get();
+				final L2Player gm = _activeGm.get();
 				
 				if (gm != null)
 					gm.sendMessage(s);

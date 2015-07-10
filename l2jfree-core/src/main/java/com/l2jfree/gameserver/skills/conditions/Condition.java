@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.skills.funcs.FuncOwner;
@@ -59,7 +59,7 @@ public abstract class Condition
 		return 0;
 	}
 	
-	public void sendMessage(L2PcInstance player, FuncOwner funcOwner)
+	public void sendMessage(L2Player player, FuncOwner funcOwner)
 	{
 		int msgId = getMessageId();
 		if (msgId != 0)

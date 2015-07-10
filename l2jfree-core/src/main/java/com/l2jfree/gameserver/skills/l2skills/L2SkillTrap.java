@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.skills.l2skills;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2TrapInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
@@ -49,13 +49,13 @@ public class L2SkillTrap extends L2SkillSummon
 	@Override
 	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
-		if (caster.isAlikeDead() || !(caster instanceof L2PcInstance))
+		if (caster.isAlikeDead() || !(caster instanceof L2Player))
 			return;
 		
 		if (_trapNpcId == 0)
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)caster;
+		L2Player activeChar = (L2Player)caster;
 		
 		if (activeChar.getTrap() != null)
 			return;

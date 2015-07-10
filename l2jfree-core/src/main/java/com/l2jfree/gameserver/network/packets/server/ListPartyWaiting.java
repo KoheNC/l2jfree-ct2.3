@@ -18,7 +18,7 @@ import static com.l2jfree.gameserver.instancemanager.PartyRoomManager.ENTRIES_PE
 
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -36,7 +36,7 @@ public class ListPartyWaiting extends L2ServerPacket
 	private final int _offset;
 	private final int _last;
 	
-	public ListPartyWaiting(L2PcInstance player, int page)
+	public ListPartyWaiting(L2Player player, int page)
 	{
 		_rooms = PartyRoomManager.getInstance().getRooms(player);
 		_offset = (page - 1) * ENTRIES_PER_PAGE;

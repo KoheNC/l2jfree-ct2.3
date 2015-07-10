@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 /**
@@ -33,6 +33,6 @@ final class ConditionPlayerSubclass extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		return (env.player instanceof L2PcInstance) ? ((L2PcInstance)env.player).isSubClassActive() == _val : true;
+		return (env.player instanceof L2Player) ? ((L2Player)env.player).isSubClassActive() == _val : true;
 	}
 }

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
@@ -38,11 +38,11 @@ public class RequestExAskJoinMPCC extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
-		L2PcInstance player = L2World.getInstance().getPlayer(_name);
+		L2Player player = L2World.getInstance().getPlayer(_name);
 		if (player == null)
 		{
 			requestFailed(SystemMessageId.NO_USER_INVITED_TO_COMMAND_CHANNEL);
@@ -97,7 +97,7 @@ public class RequestExAskJoinMPCC extends L2ClientPacket
 	
 	private final void tryInvite(L2Party invited, boolean newCC)
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (newCC)
 		{
 			if (!canCreateCC(activeChar))
@@ -107,7 +107,7 @@ public class RequestExAskJoinMPCC extends L2ClientPacket
 			}
 		}
 		
-		L2PcInstance contact = invited.getLeader();
+		L2Player contact = invited.getLeader();
 		if (!contact.isProcessingRequest())
 		{
 			activeChar.onTransactionRequest(contact);
@@ -121,7 +121,7 @@ public class RequestExAskJoinMPCC extends L2ClientPacket
 			sendPacket(new SystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER).addString(contact.getName()));
 	}
 	
-	private final boolean canCreateCC(L2PcInstance creator)
+	private final boolean canCreateCC(L2Player creator)
 	{
 		if (creator == null)
 			return false;

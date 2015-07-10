@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager;
@@ -111,7 +111,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	public static Log _log = LogFactory.getLog(AdminSpawn.class);
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		
@@ -308,7 +308,7 @@ public class AdminSpawn implements IAdminCommandHandler
 		}
 		else if (cmd.equals("admin_unspawnall"))
 		{
-			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 			{
 				player.sendPacket(SystemMessageId.NPC_SERVER_NOT_OPERATING);
 			}
@@ -371,7 +371,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * @param respawn if false spawn only once
 	 * @param custom if true then spawn will be custom
 	 */
-	private void spawnNpc(L2PcInstance activeChar, int npcId, int count, int radius, boolean saveInDb, boolean respawn,
+	private void spawnNpc(L2Player activeChar, int npcId, int count, int radius, boolean saveInDb, boolean respawn,
 			boolean custom)
 	{
 		L2Object target = activeChar.getTarget();
@@ -482,7 +482,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * @param respawn if false spawn only once
 	 * @param custom if true then spawn will be custom
 	 */
-	private void spawnNpc(L2PcInstance activeChar, String npcName, int count, int radius, boolean saveInDb,
+	private void spawnNpc(L2Player activeChar, String npcName, int count, int radius, boolean saveInDb,
 			boolean respawn, boolean custom)
 	{
 		int npcId = getNpcIdByName(npcName);
@@ -499,7 +499,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * @param string parameter of search: level or part name
 	 * @param page number of html page to show
 	 */
-	private void showNpcs(L2PcInstance activeChar, String mode, String string, int page)
+	private void showNpcs(L2Player activeChar, String mode, String string, int page)
 	{
 		int level = 0;
 		
@@ -585,7 +585,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * @param activeChar
 	 * @param npc name
 	 */
-	private void showSpawns(L2PcInstance activeChar, String npcName)
+	private void showSpawns(L2Player activeChar, String npcName)
 	{
 		int npcId = getNpcIdByName(npcName);
 		
@@ -599,7 +599,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * List all spawns of NPC.
 	 * @param npcId NPC template ID
 	 */
-	private void showSpawns(L2PcInstance activeChar, int npcId)
+	private void showSpawns(L2Player activeChar, int npcId)
 	{
 		if (NpcTable.getInstance().getTemplate(npcId) != null)
 			showSpawns(activeChar, npcId, 0, false);
@@ -613,7 +613,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * @param page html page number
 	 * @param html show spawns as html page, if false list spawns in chat
 	 */
-	private void showSpawns(L2PcInstance activeChar, String npcName, int page, boolean html)
+	private void showSpawns(L2Player activeChar, String npcName, int page, boolean html)
 	{
 		int npcId = getNpcIdByName(npcName);
 		
@@ -629,7 +629,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * @param page html page number
 	 * @param html show spawns as html page, if false list spawns in chat
 	 */
-	private void showSpawns(L2PcInstance activeChar, int npcId, int page, boolean html)
+	private void showSpawns(L2Player activeChar, int npcId, int page, boolean html)
 	{
 		FastList<L2Spawn> list = new FastList<L2Spawn>();
 		
@@ -712,7 +712,7 @@ public class AdminSpawn implements IAdminCommandHandler
 	 * Show tips about command usage and syntax.
 	 * @param command admin command name
 	 */
-	private void showAdminCommandHelp(L2PcInstance activeChar, String command)
+	private void showAdminCommandHelp(L2Player activeChar, String command)
 	{
 		for (String[] element : ADMIN_COMMANDS)
 		{

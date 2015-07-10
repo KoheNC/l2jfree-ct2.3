@@ -31,8 +31,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.StaticObjects;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -349,7 +349,7 @@ public class Fort extends Siegeable<FortSiege>
 		{
 			updateClansReputation(clan, true);
 			
-			L2PcInstance oldLord = getOwnerClan().getLeader().getPlayerInstance();
+			L2Player oldLord = getOwnerClan().getLeader().getPlayerInstance();
 			if (oldLord != null && oldLord.getMountType() == 2)
 				oldLord.dismount();
 			
@@ -587,7 +587,7 @@ public class Fort extends Siegeable<FortSiege>
 		}
 	}
 	
-	public boolean updateFunctions(L2PcInstance player, int type, int lvl, int lease, long rate, boolean addNew)
+	public boolean updateFunctions(L2Player player, int type, int lvl, int lease, long rate, boolean addNew)
 	{
 		if (player == null)
 			return false;
@@ -826,8 +826,8 @@ public class Fort extends Siegeable<FortSiege>
 				sm = new SystemMessage(SystemMessageId.S1_CLAN_IS_VICTORIOUS_IN_THE_FORTRESS_BATTLE_OF_S2);
 				sm.addString(clan.getName());
 				sm.addFortId(getFortId());
-				Collection<L2PcInstance> pls = L2World.getInstance().getAllPlayers();
-				for (L2PcInstance player : pls)
+				Collection<L2Player> pls = L2World.getInstance().getAllPlayers();
+				for (L2Player player : pls)
 				{
 					player.sendPacket(sm);
 				}

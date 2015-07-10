@@ -15,7 +15,7 @@
 package instances.SteelCitadel;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 
@@ -47,7 +47,7 @@ public class TowerOfNaia extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		if (npc.getNpcId() == TowerOfNaiaManager.DARION_ID)
 			TowerOfNaiaManager.getInstance().openEnteranceDoors();
@@ -69,7 +69,7 @@ public class TowerOfNaia extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.equalsIgnoreCase("startinstance"))
 		{
@@ -81,7 +81,7 @@ public class TowerOfNaia extends QuestJython
 				final int instanceId = TowerOfNaiaManager.getInstance().startInstance();
 				if (instanceId != Integer.MIN_VALUE)
 				{
-					for (L2PcInstance partyMember : player.getParty().getPartyMembers())
+					for (L2Player partyMember : player.getParty().getPartyMembers())
 					{
 						partyMember.teleToLocation(TowerOfNaiaManager.WAITING_ROOM_START_POINT, true);
 						partyMember.setInstanceId(instanceId);
@@ -110,7 +110,7 @@ public class TowerOfNaia extends QuestJython
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet)
 	{
 		//		if (npc.getNpcId() == TowerOfNaiaManager.ROOF_LOCK_ID)
 		//		{

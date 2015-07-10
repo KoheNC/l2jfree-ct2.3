@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeFlagInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
@@ -45,10 +45,10 @@ public class SiegeFlag extends ISkillConditionChecker
 	@Override
 	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return false;
 		
-		final L2PcInstance player = (L2PcInstance)activeChar;
+		final L2Player player = (L2Player)activeChar;
 		
 		if (player.isInsideZone(L2Zone.FLAG_NO_HQ))
 		{
@@ -74,10 +74,10 @@ public class SiegeFlag extends ISkillConditionChecker
 	{
 		L2SkillSiegeFlag skill = (L2SkillSiegeFlag)skill0;
 		
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		Siege siege = SiegeManager.getInstance().getSiege(player);
 		FortSiege fsiege = FortSiegeManager.getInstance().getSiege(player);

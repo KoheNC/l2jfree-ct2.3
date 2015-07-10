@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
@@ -29,7 +29,7 @@ public class AdminGeodata implements IAdminCommandHandler
 			"admin_geo_los", "admin_geo_position", "admin_geo_bug", "admin_geo_load", "admin_geo_unload" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (Config.GEODATA < 1)
 		{

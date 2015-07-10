@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.gameobjects;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
@@ -28,13 +27,13 @@ import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
  */
 public class L2Trap extends L2Creature
 {
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	
 	/**
 	 * @param objectId
 	 * @param template
 	 */
-	public L2Trap(int objectId, L2CreatureTemplate template, L2PcInstance owner)
+	public L2Trap(int objectId, L2CreatureTemplate template, L2Player owner)
 	{
 		super(objectId, template);
 		getKnownList();
@@ -69,16 +68,16 @@ public class L2Trap extends L2Creature
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.gameobjects.L2Object#onAction(com.l2jfree.gameserver.gameobjects.instance.L2PcInstance)
+	 * @see com.l2jfree.gameserver.gameobjects.L2Object#onAction(com.l2jfree.gameserver.gameobjects.L2Player)
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		player.setTarget(this);
 	}
 	
 	@Override
-	public int getMyTargetSelectedColor(L2PcInstance player)
+	public int getMyTargetSelectedColor(L2Player player)
 	{
 		return player.getLevel() - getLevel();
 	}
@@ -125,7 +124,7 @@ public class L2Trap extends L2Creature
 	 *
 	 * @param owner
 	 */
-	public void deleteMe(L2PcInstance owner)
+	public void deleteMe(L2Player owner)
 	{
 		decayMe();
 		getKnownList().removeAllKnownObjects();
@@ -136,7 +135,7 @@ public class L2Trap extends L2Creature
 	 *
 	 * @param owner
 	 */
-	public synchronized void unSummon(L2PcInstance owner)
+	public synchronized void unSummon(L2Player owner)
 	{
 		if (isVisible() && !isDead())
 		{
@@ -162,13 +161,13 @@ public class L2Trap extends L2Creature
 	 *
 	 * @return
 	 */
-	public final L2PcInstance getOwner()
+	public final L2Player getOwner()
 	{
 		return _owner;
 	}
 	
 	@Override
-	public L2PcInstance getActingPlayer()
+	public L2Player getActingPlayer()
 	{
 		return _owner;
 	}
@@ -202,7 +201,7 @@ public class L2Trap extends L2Creature
 	}
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 		activeChar.sendPacket(new AbstractNpcInfo.TrapInfo(this));
 	}

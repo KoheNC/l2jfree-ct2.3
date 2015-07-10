@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -38,7 +38,7 @@ public class RequestStopPledgeWar extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		L2Clan clan = player.getClan();
@@ -79,7 +79,7 @@ public class RequestStopPledgeWar extends L2ClientPacket
 		//_log.info("RequestStopPledgeWar: By leader: " + playerClan.getLeaderName() + " of clan: "
 		//	+ playerClan.getName() + " to clan: " + _pledgeName);
 		
-		//        L2PcInstance leader = L2World.getInstance().getPlayer(clan.getLeaderName());
+		//        L2Player leader = L2World.getInstance().getPlayer(clan.getLeaderName());
 		//        if(leader != null && leader.isOnline() == 0)
 		//        {
 		//            player.sendMessage("Clan leader isn't online.");

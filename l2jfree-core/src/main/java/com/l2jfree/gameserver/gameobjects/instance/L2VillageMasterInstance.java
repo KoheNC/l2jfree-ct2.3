@@ -21,6 +21,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.CharTemplateTable;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -70,7 +71,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		String[] commandStr = command.split(" ");
 		String actualCommand = commandStr[0]; // Get actual command
@@ -743,7 +744,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 	 * @param player
 	 * @param clanId
 	 */
-	private static final void dissolveClan(L2PcInstance player, int clanId)
+	private static final void dissolveClan(L2Player player, int clanId)
 	{
 		if (!player.isClanLeader())
 		{
@@ -807,7 +808,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 	 * @param player
 	 * @param clanId
 	 */
-	private static final void recoverClan(L2PcInstance player, int clanId)
+	private static final void recoverClan(L2Player player, int clanId)
 	{
 		if (!player.isClanLeader())
 		{
@@ -820,7 +821,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		clan.updateClanInDB();
 	}
 	
-	private static final void changeClanLeader(L2PcInstance player, String target)
+	private static final void changeClanLeader(L2Player player, String target)
 	{
 		if (!player.isClanLeader())
 		{
@@ -869,7 +870,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		clan.setNewLeader(member);
 	}
 	
-	private static final void createSubPledge(L2PcInstance player, String clanName, String leaderName, int pledgeType,
+	private static final void createSubPledge(L2Player player, String clanName, String leaderName, int pledgeType,
 			int minClanLvl)
 	{
 		if (!player.isClanLeader())
@@ -958,7 +959,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		if (pledgeType != L2Clan.SUBUNIT_ACADEMY)
 		{
 			L2ClanMember leaderSubPledge = clan.getClanMember(leaderName);
-			L2PcInstance subLeader = leaderSubPledge.getPlayerInstance();
+			L2Player subLeader = leaderSubPledge.getPlayerInstance();
 			if (subLeader == null)
 				return;
 			subLeader.setPledgeClass(L2ClanMember.getCurrentPledgeClass(subLeader));
@@ -988,7 +989,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		}
 	}
 	
-	public void renameSubPledge(L2PcInstance player, String newName, String command)
+	public void renameSubPledge(L2Player player, String newName, String command)
 	{
 		if (player == null || player.getClan() == null || !player.isClanLeader())
 		{
@@ -1074,7 +1075,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		}
 	}
 	
-	private static final void assignSubPledgeLeader(L2PcInstance player, String clanName, String leaderName)
+	private static final void assignSubPledgeLeader(L2Player player, String clanName, String leaderName)
 	{
 		final L2Clan clan = player.getClan();
 		if (clan == null || !player.isClanLeader())
@@ -1102,7 +1103,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 			return;
 		}
 		
-		L2PcInstance newLeader = L2World.getInstance().getPlayer(leaderName);
+		L2Player newLeader = L2World.getInstance().getPlayer(leaderName);
 		if (newLeader == null || newLeader.getClan() == null || newLeader.getClan() != clan)
 		{
 			player.sendMessage(leaderName + " is not in your clan!");
@@ -1141,7 +1142,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		subPledge.setLeaderId(leaderId);
 		clan.updateSubPledgeInDB(subPledge.getId());
 		L2ClanMember leaderSubPledge = clan.getClanMember(leaderName);
-		L2PcInstance subLeader = leaderSubPledge.getPlayerInstance();
+		L2Player subLeader = leaderSubPledge.getPlayerInstance();
 		if (subLeader != null)
 		{
 			subLeader.setPledgeClass(L2ClanMember.getCurrentPledgeClass(subLeader));
@@ -1160,7 +1161,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 	 * is contains in allowed subclasses)
 	 * Base class not added into allowed subclasses.
 	 */
-	private final boolean isValidNewSubClass(L2PcInstance player, int classId)
+	private final boolean isValidNewSubClass(L2Player player, int classId)
 	{
 		if (!checkVillageMaster(classId))
 			return false;
@@ -1251,7 +1252,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 	 * Returns list of available subclasses
 	 * Base class and already used subclasses removed
 	 */
-	private final Set<ClassId> getAvailableSubClasses(L2PcInstance player)
+	private final Set<ClassId> getAvailableSubClasses(L2Player player)
 	{
 		// get player base class
 		final int currentBaseId = player.getBaseClass();
@@ -1324,7 +1325,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 	 * this displays PledgeSkillList to the player.
 	 * @param player
 	 */
-	public static final void showPledgeSkillList(L2PcInstance player, boolean closable)
+	public static final void showPledgeSkillList(L2Player player, boolean closable)
 	{
 		if (player.getClan() == null || !player.isClanLeader())
 		{
@@ -1407,7 +1408,7 @@ public final class L2VillageMasterInstance extends L2NpcInstance
 		return ClassType.Fighter;
 	}
 	
-	private static final Iterator<SubClass> iterSubClasses(L2PcInstance player)
+	private static final Iterator<SubClass> iterSubClasses(L2Player player)
 	{
 		return player.getSubClasses().values().iterator();
 	}

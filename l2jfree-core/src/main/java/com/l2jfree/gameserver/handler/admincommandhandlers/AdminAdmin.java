@@ -31,7 +31,7 @@ import com.l2jfree.gameserver.datatables.NpcWalkerRoutesTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
 import com.l2jfree.gameserver.datatables.TradeListTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
@@ -80,7 +80,7 @@ public class AdminAdmin implements IAdminCommandHandler
 			"admin_summon_npc", "admin_unsummon", "admin_memusage", "admin_process_auction", "admin_debug" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_admin"))
 		{
@@ -445,7 +445,7 @@ public class AdminAdmin implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	public void showMainPage(L2PcInstance activeChar, String command)
+	public void showMainPage(L2Player activeChar, String command)
 	{
 		int mode = 0;
 		String filename = null;
@@ -483,7 +483,7 @@ public class AdminAdmin implements IAdminCommandHandler
 		AdminHelpPage.showHelpPage(activeChar, filename + "_menu.htm");
 	}
 	
-	public void showConfigPage2(L2PcInstance activeChar)
+	public void showConfigPage2(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(activeChar.getObjectId());
 		
@@ -538,7 +538,7 @@ public class AdminAdmin implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showConfigPage(L2PcInstance activeChar)
+	public void showConfigPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		
@@ -610,7 +610,7 @@ public class AdminAdmin implements IAdminCommandHandler
 	}
 	
 	//[L2J_JP_ADD]
-	public void adminSummon(L2PcInstance activeChar, int npcId)
+	public void adminSummon(L2Player activeChar, int npcId)
 	{
 		if (activeChar.getPet() != null)
 		{

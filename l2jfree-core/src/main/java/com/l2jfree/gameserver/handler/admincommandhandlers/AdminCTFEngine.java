@@ -23,7 +23,7 @@ import javolution.text.TextBuilder;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.entity.events.CTF;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -41,7 +41,7 @@ public class AdminCTFEngine implements IAdminCommandHandler
 			"admin_ctf_autoevent", "admin_ctf_minplayers", "admin_ctf_maxplayers" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		try
 		{
@@ -271,7 +271,7 @@ public class AdminCTFEngine implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	public void showEditPage(L2PcInstance activeChar)
+	public void showEditPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
@@ -310,7 +310,7 @@ public class AdminCTFEngine implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showControlPage(L2PcInstance activeChar)
+	public void showControlPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
@@ -336,7 +336,7 @@ public class AdminCTFEngine implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showMainPage(L2PcInstance activeChar)
+	public void showMainPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");

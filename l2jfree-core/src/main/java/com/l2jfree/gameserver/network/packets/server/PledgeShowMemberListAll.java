@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Clan.SubPledge;
 import com.l2jfree.gameserver.model.L2ClanMember;
@@ -38,7 +38,7 @@ public final class PledgeShowMemberListAll extends L2ServerPacket
 	}
 	
 	@Override
-	public void packetSent(L2Client client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2Player activeChar)
 	{
 		for (SubPledge element : _clan.getAllSubPledges())
 			activeChar.sendPacket(new PledgeReceiveSubPledgeCreated(element, _clan));

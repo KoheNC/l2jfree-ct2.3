@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 
@@ -29,7 +29,7 @@ public class AdminIRC implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_ircc", "admin_ircm" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		String text = command.substring(10);
 		

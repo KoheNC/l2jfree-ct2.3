@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.util.LookupTable;
@@ -60,15 +60,15 @@ public final class PlayerEffects extends CreatureEffects
 	
 	private final LookupTable<ArrayList<StoredEffect>> _storedEffects = new LookupTable<ArrayList<StoredEffect>>();
 	
-	public PlayerEffects(L2PcInstance owner)
+	public PlayerEffects(L2Player owner)
 	{
 		super(owner);
 	}
 	
 	@Override
-	protected L2PcInstance getOwner()
+	protected L2Player getOwner()
 	{
-		return (L2PcInstance)_owner;
+		return (L2Player)_owner;
 	}
 	
 	public void storeEffects(boolean storeActiveEffects)

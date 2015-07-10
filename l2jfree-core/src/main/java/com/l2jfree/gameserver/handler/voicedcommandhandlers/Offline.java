@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -25,22 +25,22 @@ public class Offline implements IVoicedCommandHandler
 	private static final String[] VOICED_COMMANDS = { "offline" };
 	
 	@Override
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
 		if (!Config.ALLOW_OFFLINE_TRADE)
 			return false;
 		
 		switch (activeChar.getPrivateStoreType())
 		{
-			case L2PcInstance.STORE_PRIVATE_MANUFACTURE:
+			case L2Player.STORE_PRIVATE_MANUFACTURE:
 			{
 				if (!Config.ALLOW_OFFLINE_TRADE_CRAFT)
 					break;
 			}
 			//$FALL-THROUGH$
-			case L2PcInstance.STORE_PRIVATE_SELL:
-			case L2PcInstance.STORE_PRIVATE_BUY:
-			case L2PcInstance.STORE_PRIVATE_PACKAGE_SELL:
+			case L2Player.STORE_PRIVATE_SELL:
+			case L2Player.STORE_PRIVATE_BUY:
+			case L2Player.STORE_PRIVATE_PACKAGE_SELL:
 			{
 				if (activeChar.isInsideZone(L2Zone.FLAG_PEACE) || activeChar.isGM())
 				{

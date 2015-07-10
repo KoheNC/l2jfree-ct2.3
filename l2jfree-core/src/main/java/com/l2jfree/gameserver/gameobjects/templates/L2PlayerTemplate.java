@@ -93,7 +93,7 @@ public class L2PlayerTemplate extends L2CreatureTemplate
 			new Location(-90256, 249792, -3570), new Location(-89968, 249936, -3570),
 			new Location(-90096, 249856, -3570) };
 	
-	/** The Class object of the L2PcInstance */
+	/** The Class object of the L2Player */
 	private ClassId classId;
 	
 	private Race race;

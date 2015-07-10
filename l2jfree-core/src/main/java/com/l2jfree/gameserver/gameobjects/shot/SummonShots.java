@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.gameobjects.shot;
 
 import com.l2jfree.gameserver.datatables.ShotTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -101,7 +101,7 @@ public final class SummonShots extends CreatureShots
 	
 	private boolean canCharge(ShotType type, L2ItemInstance item)
 	{
-		L2PcInstance activeOwner = getActiveChar().getOwner();
+		L2Player activeOwner = getActiveChar().getOwner();
 		
 		if (item == null || activeOwner == null)
 			return false;

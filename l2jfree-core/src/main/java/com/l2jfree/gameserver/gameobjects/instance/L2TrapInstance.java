@@ -17,6 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.TrapKnownList;
@@ -62,7 +63,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 	private int _timeRemaining;
 	private boolean _isDetected;
 	
-	public L2TrapInstance(int objectId, L2CreatureTemplate template, L2PcInstance owner, int lifeTime, L2Skill skill)
+	public L2TrapInstance(int objectId, L2CreatureTemplate template, L2Player owner, int lifeTime, L2Skill skill)
 	{
 		super(objectId, template, owner);
 		
@@ -165,7 +166,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 	}
 	
 	@Override
-	public void unSummon(L2PcInstance owner)
+	public void unSummon(L2Player owner)
 	{
 		TrapTaskManager.getInstance().stopTask(this);
 		

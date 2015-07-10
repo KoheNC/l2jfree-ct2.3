@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jfree.gameserver.datatables.CharNameTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -31,7 +31,7 @@ public final class FriendList extends L2ServerPacket
 	
 	private final List<FriendStatus> _friends = new ArrayList<FriendStatus>();
 	
-	public FriendList(L2PcInstance owner)
+	public FriendList(L2Player owner)
 	{
 		for (Integer objId : owner.getFriendList().getFriendIds())
 			_friends.add(new FriendStatus(objId));

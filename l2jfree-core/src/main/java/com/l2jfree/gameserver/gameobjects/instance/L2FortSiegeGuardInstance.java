@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
@@ -68,7 +69,7 @@ public class L2FortSiegeGuardInstance extends L2SiegeGuard
 	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		// Summons and traps are attackable, too
-		L2PcInstance player = L2Object.getActingPlayer(attacker);
+		L2Player player = L2Object.getActingPlayer(attacker);
 		if (player == null)
 			return false;
 		if (player.getClan() == null)
@@ -117,21 +118,21 @@ public class L2FortSiegeGuardInstance extends L2SiegeGuard
 	 * 
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
 			if (_log.isDebugEnabled())
 				_log.debug("new target selected:" + getObjectId());
 			
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 			
-			// Send a Server->Client packet StatusUpdate of the L2NpcInstance to the L2PcInstance to update its HP bar
+			// Send a Server->Client packet StatusUpdate of the L2NpcInstance to the L2Player to update its HP bar
 			StatusUpdate su = new StatusUpdate(getObjectId());
 			su.addAttribute(StatusUpdate.CUR_HP, (int)getStatus().getCurrentHp());
 			su.addAttribute(StatusUpdate.MAX_HP, getMaxHp());
@@ -147,7 +148,7 @@ public class L2FortSiegeGuardInstance extends L2SiegeGuard
 				}
 				else
 				{
-					// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+					// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 					player.sendPacket(ActionFailed.STATIC_PACKET);
 				}
 			}
@@ -155,14 +156,14 @@ public class L2FortSiegeGuardInstance extends L2SiegeGuard
 			{
 				if (!canInteract(player))
 				{
-					// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+					// Notify the L2Player AI with AI_INTENTION_INTERACT
 					player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 				}
 				else
 				{
 					showChatWindow(player, 0);
 				}
-				// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+				// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 			}
 		}
@@ -178,9 +179,9 @@ public class L2FortSiegeGuardInstance extends L2SiegeGuard
 		{
 			if (attacker instanceof L2Playable)
 			{
-				L2PcInstance player = null;
-				if (attacker instanceof L2PcInstance)
-					player = ((L2PcInstance)attacker);
+				L2Player player = null;
+				if (attacker instanceof L2Player)
+					player = ((L2Player)attacker);
 				else if (attacker instanceof L2Summon)
 					player = ((L2Summon)attacker).getOwner();
 				if (player != null && player.getClan() != null

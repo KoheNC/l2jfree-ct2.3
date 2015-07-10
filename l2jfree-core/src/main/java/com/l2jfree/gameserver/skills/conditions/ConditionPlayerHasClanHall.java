@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.skills.Env;
 
@@ -40,10 +40,10 @@ final class ConditionPlayerHasClanHall extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.player instanceof L2PcInstance))
+		if (!(env.player instanceof L2Player))
 			return false;
 		
-		L2Clan clan = ((L2PcInstance)env.player).getClan();
+		L2Clan clan = ((L2Player)env.player).getClan();
 		if (clan == null)
 			return _clanHall.length == 1 && _clanHall[0] == 0;
 		

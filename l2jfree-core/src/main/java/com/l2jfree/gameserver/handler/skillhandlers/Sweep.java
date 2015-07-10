@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -47,14 +47,14 @@ public class Sweep extends ISkillConditionChecker
 			{
 				if (!((L2Attackable)target).isSpoil())
 				{
-					// Send a System Message to the L2PcInstance
+					// Send a System Message to the L2Player
 					activeChar.sendPacket(SystemMessageId.SWEEPER_FAILED_TARGET_NOT_SPOILED);
 					return false;
 				}
 				
-				if (activeChar.getObjectId() != spoilerId && !((L2PcInstance)activeChar).isInLooterParty(spoilerId))
+				if (activeChar.getObjectId() != spoilerId && !((L2Player)activeChar).isInLooterParty(spoilerId))
 				{
-					// Send a System Message to the L2PcInstance
+					// Send a System Message to the L2Player
 					activeChar.sendPacket(SystemMessageId.SWEEP_NOT_ALLOWED);
 					return false;
 				}
@@ -67,14 +67,14 @@ public class Sweep extends ISkillConditionChecker
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill tmpSkill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 		{
 			return;
 		}
 		
 		L2SkillSweep skill = (L2SkillSweep)tmpSkill;
 		
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		InventoryUpdate iu = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		boolean send = false;
 		

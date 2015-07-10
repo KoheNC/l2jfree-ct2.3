@@ -19,7 +19,7 @@ import java.util.Comparator;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.HennaTreeTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Henna;
@@ -28,10 +28,10 @@ public final class HennaEquipList extends L2ServerPacket
 {
 	private static final String _S__EE_HennaEquipList = "[S] EE HennaEquipList";
 	
-	private final L2PcInstance _player;
+	private final L2Player _player;
 	private final L2Henna[] _hennas;
 	
-	public HennaEquipList(L2PcInstance player)
+	public HennaEquipList(L2Player player)
 	{
 		_player = player;
 		_hennas = HennaTreeTable.getInstance().getAvailableHenna(player).clone();

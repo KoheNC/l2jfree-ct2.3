@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -34,25 +35,25 @@ public final class L2MercManagerInstance extends L2MerchantInstance
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
 		player.setLastFolkNPC(this);
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			}
 			else
@@ -60,12 +61,12 @@ public final class L2MercManagerInstance extends L2MerchantInstance
 				showMessageWindow(player);
 			}
 		}
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		int condition = validateCondition(player);
 		if (condition <= COND_ALL_FALSE)
@@ -97,7 +98,7 @@ public final class L2MercManagerInstance extends L2MerchantInstance
 			super.onBypassFeedback(player, command);
 	}
 	
-	public void showMessageWindow(L2PcInstance player)
+	public void showMessageWindow(L2Player player)
 	{
 		String filename = "data/html/mercmanager/mercmanager-no.htm";
 		
@@ -115,7 +116,7 @@ public final class L2MercManagerInstance extends L2MerchantInstance
 		player.sendPacket(html);
 	}
 	
-	private int validateCondition(L2PcInstance player)
+	private int validateCondition(L2Player player)
 	{
 		if (getCastle() != null && getCastle().getCastleId() > 0)
 		{

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.skills.Env;
@@ -38,9 +38,9 @@ public class ConditionUsingItemType extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.player instanceof L2PcInstance))
+		if (!(env.player instanceof L2Player))
 			return false;
-		Inventory inv = ((L2PcInstance)env.player).getInventory();
+		Inventory inv = ((L2Player)env.player).getInventory();
 		
 		//If ConditionUsingItemType is one between Light, Heavy or Magic
 		if (_mask == L2ArmorType.LIGHT.mask() || _mask == L2ArmorType.HEAVY.mask() || _mask == L2ArmorType.MAGIC.mask())

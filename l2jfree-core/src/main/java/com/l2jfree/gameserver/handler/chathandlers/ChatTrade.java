@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.chathandlers;
 
 import com.l2jfree.Config;
 import com.l2jfree.Config.ChatMode;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
@@ -46,10 +46,10 @@ public class ChatTrade implements IChatHandler
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.gameobjects.L2Player.player.L2Player, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
 	@Override
-	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
+	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
 		if (!FloodProtector.tryPerformAction(activeChar, Protected.TRADE_CHAT) && !activeChar.isGM())
 		{
@@ -71,7 +71,7 @@ public class ChatTrade implements IChatHandler
 		{
 			L2MapRegion region =
 					MapRegionManager.getInstance().getRegion(activeChar.getX(), activeChar.getY(), activeChar.getZ());
-			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 			{
 				if (region == MapRegionManager.getInstance().getRegion(player.getX(), player.getY(), player.getZ())
 						&& !(Config.REGION_CHAT_ALSO_BLOCKED && BlockList.isBlocked(player, activeChar))
@@ -84,7 +84,7 @@ public class ChatTrade implements IChatHandler
 		else if (Config.DEFAULT_TRADE_CHAT == ChatMode.GLOBAL || Config.DEFAULT_TRADE_CHAT == ChatMode.GM
 				&& activeChar.isGM())
 		{
-			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 			{
 				if (!(Config.REGION_CHAT_ALSO_BLOCKED && BlockList.isBlocked(player, activeChar))
 						&& player.isSameInstance(activeChar))

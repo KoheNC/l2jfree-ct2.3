@@ -15,6 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.HennaEquipList;
 import com.l2jfree.gameserver.network.packets.server.HennaRemoveList;
@@ -29,7 +30,7 @@ public class L2SymbolMakerInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.equals("Draw"))
 			player.sendPacket(new HennaEquipList(player));

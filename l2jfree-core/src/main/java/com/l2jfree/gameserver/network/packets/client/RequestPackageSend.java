@@ -18,7 +18,7 @@ import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.A
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerFreight;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -70,7 +70,7 @@ public final class RequestPackageSend extends L2ClientPacket
 		if (_items == null || !Config.ALLOW_FREIGHT)
 			return;
 		
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		else if (!FloodProtector.tryPerformAction(player, Protected.TRANSACTION))

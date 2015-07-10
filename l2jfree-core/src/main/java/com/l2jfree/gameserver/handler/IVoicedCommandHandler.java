@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 public interface IVoicedCommandHandler
 {
@@ -31,7 +31,7 @@ public interface IVoicedCommandHandler
 	 * @param target
 	 * @return <code>true</code> if handler was triggered by the call, <code>false</code> otherwise
 	 */
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target);
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target);
 	
 	/**
 	 * this method is called at initialization to register all the handlers automatically

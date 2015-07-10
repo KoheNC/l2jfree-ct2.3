@@ -26,12 +26,12 @@ import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2AttackableAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.handler.ICubicSkillHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
@@ -72,7 +72,7 @@ public class Disablers implements ICubicSkillHandler
 		
 		L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
 		
-		if (activeChar instanceof L2PcInstance)
+		if (activeChar instanceof L2Player)
 		{
 			if (weaponInst == null && skill.isOffensive())
 			{
@@ -267,7 +267,7 @@ public class Disablers implements ICubicSkillHandler
 					if (Formulas.calcSkillSuccess(activeChar, target, skill, shld, ss, sps, bss)
 							&& !(target instanceof L2SiegeSummonInstance))
 					{
-						L2PcInstance summonOwner = null;
+						L2Player summonOwner = null;
 						L2Summon summonPet = null;
 						summonOwner = ((L2Summon)target).getOwner();
 						summonPet = summonOwner.getPet();
@@ -716,11 +716,11 @@ public class Disablers implements ICubicSkillHandler
 			
 			// Since there is a previous check that limits allowed effects to those which come from L2SkillType.BUFF,
 			// it is not needed another check for L2SkillType
-			if (stealer instanceof L2PcInstance && e != null)
+			if (stealer instanceof L2Player && e != null)
 			{
 				SystemMessage smsg = new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT);
 				smsg.addSkillName(eff);
-				((L2PcInstance)stealer).sendPacket(smsg);
+				((L2Player)stealer).sendPacket(smsg);
 			}
 			// Finishing stolen effect
 			eff.exit();

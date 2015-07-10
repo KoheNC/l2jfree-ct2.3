@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -52,7 +52,7 @@ public class AdminEnchant implements IAdminCommandHandler
 	private final static Log _log = LogFactory.getLog(AdminEnchant.class);
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_enchant"))
 		{
@@ -126,16 +126,16 @@ public class AdminEnchant implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void setEnchant(L2PcInstance activeChar, int ench, int armorType)
+	private void setEnchant(L2Player activeChar, int ench, int armorType)
 	{
 		// get the target
 		L2Object target = activeChar.getTarget();
 		if (target == null)
 			target = activeChar;
-		L2PcInstance player = null;
-		if (target instanceof L2PcInstance)
+		L2Player player = null;
+		if (target instanceof L2Player)
 		{
-			player = (L2PcInstance)target;
+			player = (L2Player)target;
 		}
 		else
 		{
@@ -185,7 +185,7 @@ public class AdminEnchant implements IAdminCommandHandler
 		}
 	}
 	
-	public void showMainPage(L2PcInstance activeChar)
+	public void showMainPage(L2Player activeChar)
 	{
 		AdminHelpPage.showHelpPage(activeChar, "enchant.htm");
 	}

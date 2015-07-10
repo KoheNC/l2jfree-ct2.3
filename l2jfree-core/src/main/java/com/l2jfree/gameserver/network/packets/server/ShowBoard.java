@@ -17,14 +17,14 @@ package com.l2jfree.gameserver.network.packets.server;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class ShowBoard extends L2ServerPacket
 {
 	private static final String _S__6E_SHOWBOARD = "[S] 6e ShowBoard";
 	
-	public static void notImplementedYet(L2PcInstance activeChar, String command)
+	public static void notImplementedYet(L2Player activeChar, String command)
 	{
 		if (activeChar == null || command == null)
 			return;
@@ -33,7 +33,7 @@ public class ShowBoard extends L2ServerPacket
 				+ "] isn't implemented yet!</center><br><br></body></html>");
 	}
 	
-	public static void separateAndSend(L2PcInstance activeChar, String html)
+	public static void separateAndSend(L2Player activeChar, String html)
 	{
 		if (activeChar == null || html == null)
 			return;

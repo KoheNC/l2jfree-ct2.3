@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.mmocore.network.InvalidPacketException;
 
@@ -37,7 +37,7 @@ public final class ConfirmDlgAnswer extends L2ClientPacket
 	@Override
 	protected void runImpl() throws InvalidPacketException
 	{
-		L2PcInstance cha = getActiveChar();
+		L2Player cha = getActiveChar();
 		if (cha == null)
 			return;
 		

@@ -27,9 +27,9 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Spawn;
@@ -206,7 +206,7 @@ public class ValakasManager extends BossLair
 		private final int _distance = 6502500;
 		private final int _taskId;
 		private L2GrandBossInstance _valakas = null;
-		private final List<L2PcInstance> _players = getPlayersInside();
+		private final List<L2Player> _players = getPlayersInside();
 		
 		ValakasSpawn(int taskId, L2GrandBossInstance valakas)
 		{
@@ -252,7 +252,7 @@ public class ValakasManager extends BossLair
 					_valakas.broadcastPacket(sa);
 					
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -277,7 +277,7 @@ public class ValakasManager extends BossLair
 				
 				case 3:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -302,7 +302,7 @@ public class ValakasManager extends BossLair
 				
 				case 4:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -327,7 +327,7 @@ public class ValakasManager extends BossLair
 				
 				case 5:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -352,7 +352,7 @@ public class ValakasManager extends BossLair
 				
 				case 6:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -377,7 +377,7 @@ public class ValakasManager extends BossLair
 				
 				case 7:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -402,7 +402,7 @@ public class ValakasManager extends BossLair
 				
 				case 8:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -427,7 +427,7 @@ public class ValakasManager extends BossLair
 				
 				case 9:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -452,7 +452,7 @@ public class ValakasManager extends BossLair
 				
 				case 10:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -477,7 +477,7 @@ public class ValakasManager extends BossLair
 				
 				case 11:
 					// Set camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						if (pc.getPlanDistanceSq(_valakas) <= _distance)
 						{
@@ -502,7 +502,7 @@ public class ValakasManager extends BossLair
 				
 				case 12:
 					// Reset camera.
-					for (L2PcInstance pc : _players)
+					for (L2Player pc : _players)
 					{
 						pc.leaveMovieMode();
 					}

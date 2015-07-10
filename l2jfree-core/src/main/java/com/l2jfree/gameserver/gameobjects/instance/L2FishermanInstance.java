@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2SkillLearn;
@@ -52,7 +53,7 @@ public class L2FishermanInstance extends L2MerchantInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("FishSkillList"))
 		{
@@ -80,7 +81,7 @@ public class L2FishermanInstance extends L2MerchantInstance
 		}
 	}
 	
-	public void showSkillList(L2PcInstance player, boolean closable)
+	public void showSkillList(L2Player player, boolean closable)
 	{
 		L2SkillLearn[] skills = SkillTreeTable.getInstance().getAvailableFishingSkills(player);
 		AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.SkillType.Fishing);

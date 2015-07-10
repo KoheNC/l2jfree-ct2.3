@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -39,11 +39,11 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ExCubeGameTeamList extends L2ServerPacket
 {
 	private static final String _S__FE_97_00_EXCUBEGAMETEAMLIST = "[S] FE:97:00 ExCubeGameTeamList";
-	List<L2PcInstance> _bluePlayers;
-	List<L2PcInstance> _redPlayers;
+	List<L2Player> _bluePlayers;
+	List<L2Player> _redPlayers;
 	int _roomNumber;
 	
-	public ExCubeGameTeamList(List<L2PcInstance> redPlayers, List<L2PcInstance> bluePlayers, int roomNumber)
+	public ExCubeGameTeamList(List<L2Player> redPlayers, List<L2Player> bluePlayers, int roomNumber)
 	{
 		_redPlayers = redPlayers;
 		_bluePlayers = bluePlayers;
@@ -64,13 +64,13 @@ public class ExCubeGameTeamList extends L2ServerPacket
 		writeD(0xffffffff);
 		
 		writeD(_bluePlayers.size());
-		for (L2PcInstance player : _bluePlayers)
+		for (L2Player player : _bluePlayers)
 		{
 			writeD(player.getObjectId());
 			writeS(player.getName());
 		}
 		writeD(_redPlayers.size());
-		for (L2PcInstance player : _redPlayers)
+		for (L2Player player : _redPlayers)
 		{
 			writeD(player.getObjectId());
 			writeS(player.getName());

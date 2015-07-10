@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -37,9 +37,9 @@ public final class BeastSpiritShot implements IItemHandler
 			return;
 		}
 		
-		if (playable instanceof L2PcInstance)
+		if (playable instanceof L2Player)
 		{
-			L2PcInstance activeOwner = (L2PcInstance)playable;
+			L2Player activeOwner = (L2Player)playable;
 			L2Summon activePet = activeOwner.getPet();
 			
 			if (activePet == null)

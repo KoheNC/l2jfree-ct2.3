@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
@@ -26,7 +26,7 @@ public class AdminKick implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_kick", "admin_kick_non_gm" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_kick"))
 		{
@@ -35,7 +35,7 @@ public class AdminKick implements IAdminCommandHandler
 			{
 				st.nextToken();
 				String plyr = st.nextToken();
-				L2PcInstance player = L2World.getInstance().getPlayer(plyr);
+				L2Player player = L2World.getInstance().getPlayer(plyr);
 				if (player != null)
 				{
 					new Disconnection(player).defaultSequence(false);
@@ -46,7 +46,7 @@ public class AdminKick implements IAdminCommandHandler
 		if (command.startsWith("admin_kick_non_gm"))
 		{
 			int counter = 0;
-			for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 			{
 				if (!player.isGM())
 				{

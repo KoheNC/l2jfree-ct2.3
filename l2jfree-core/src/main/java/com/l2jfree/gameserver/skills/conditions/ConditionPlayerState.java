@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.base.PlayerState;
 import com.l2jfree.gameserver.skills.Env;
 
@@ -35,12 +35,12 @@ public final class ConditionPlayerState extends Condition
 	@Override
 	boolean testImpl(Env env)
 	{
-		L2PcInstance player;
+		L2Player player;
 		switch (_check)
 		{
 			case RESTING:
-				if (env.player instanceof L2PcInstance)
-					return ((L2PcInstance)env.player).isSitting() == _required;
+				if (env.player instanceof L2Player)
+					return ((L2Player)env.player).isSitting() == _required;
 				break;
 			case MOVING:
 				return env.player.isMoving() == _required;

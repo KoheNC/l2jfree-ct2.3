@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -40,7 +40,7 @@ public class ExMPCCShowPartyMemberInfo extends L2ServerPacket
 		writeH(0x4b);
 		
 		writeD(_party.getMemberCount());
-		for (L2PcInstance mem : _party.getPartyMembers())
+		for (L2Player mem : _party.getPartyMembers())
 		{
 			writeS(mem.getName());
 			writeD(mem.getObjectId());

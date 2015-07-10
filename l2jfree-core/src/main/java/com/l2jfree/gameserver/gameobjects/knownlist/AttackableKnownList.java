@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
 public class AttackableKnownList extends NpcKnownList
@@ -48,7 +48,7 @@ public class AttackableKnownList extends NpcKnownList
 		
 		// Set the L2Attackable Intention to AI_INTENTION_IDLE
 		//FIXME: This is a temporary solution
-		if (getActiveChar().hasAI() && object instanceof L2PcInstance && getKnownPlayers().isEmpty())
+		if (getActiveChar().hasAI() && object instanceof L2Player && getKnownPlayers().isEmpty())
 		{
 			getActiveChar().getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		}

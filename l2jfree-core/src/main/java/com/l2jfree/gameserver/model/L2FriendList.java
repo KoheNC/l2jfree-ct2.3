@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model;
 import java.util.Set;
 
 import com.l2jfree.gameserver.datatables.CharNameTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.FriendListManager;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.FriendList;
@@ -28,16 +28,16 @@ import com.l2jfree.gameserver.network.packets.server.SystemMessage;
  */
 public final class L2FriendList
 {
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	private final Set<Integer> _set;
 	
-	public L2FriendList(L2PcInstance owner)
+	public L2FriendList(L2Player owner)
 	{
 		_owner = owner;
 		_set = FriendListManager.getInstance().getFriendList(owner.getObjectId());
 	}
 	
-	public boolean contains(L2PcInstance player)
+	public boolean contains(L2Player player)
 	{
 		return player != null && _set.contains(player.getObjectId());
 	}
@@ -47,7 +47,7 @@ public final class L2FriendList
 		return _set;
 	}
 	
-	public void add(L2PcInstance friend)
+	public void add(L2Player friend)
 	{
 		if (_owner == friend)
 		{
@@ -81,7 +81,7 @@ public final class L2FriendList
 					.addString(name));
 			_owner.sendPacket(new FriendList(_owner));
 			
-			L2PcInstance friend = L2World.getInstance().findPlayer(objId);
+			L2Player friend = L2World.getInstance().findPlayer(objId);
 			if (friend != null)
 			{
 				friend.sendPacket(new SystemMessage(SystemMessageId.C1_HAS_BEEN_DELETED_FROM_YOUR_FRIENDS_LIST)

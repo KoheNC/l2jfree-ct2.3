@@ -23,7 +23,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import javolution.text.TextBuilder;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TVTInstance;
@@ -61,7 +61,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 	private static final int REQUIRED_LEVEL = 100;
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (!(checkLevel(activeChar.getAccessLevel()) && activeChar.isGM()))
 			return false;
@@ -361,7 +361,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		/** Misc Commands */
 		else if (command.startsWith("admin_tvtikick "))
 		{
-			L2PcInstance playerToKick = L2World.getInstance().getPlayer(command.substring(15));
+			L2Player playerToKick = L2World.getInstance().getPlayer(command.substring(15));
 			if (playerToKick != null)
 			{
 				TvTIMain.kickPlayerFromEvent(playerToKick, 2);
@@ -372,7 +372,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		}
 		else if (command.equals("admin_tvtikick"))
 		{
-			L2PcInstance playerToKick = (L2PcInstance)activeChar.getTarget();
+			L2Player playerToKick = (L2Player)activeChar.getTarget();
 			if (playerToKick != null)
 			{
 				TvTIMain.kickPlayerFromEvent(playerToKick, 2);
@@ -400,7 +400,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		return TvTIMain.getTvTInstance(instanceId).getTeams().get(teamIdx);
 	}
 	
-	public void showMainPage(L2PcInstance activeChar)
+	public void showMainPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
@@ -468,7 +468,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showInstancePage(L2PcInstance activeChar, int instanceId)
+	public void showInstancePage(L2Player activeChar, int instanceId)
 	{
 		TVTInstance i = TvTIMain.getTvTInstance(instanceId);
 		
@@ -588,7 +588,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showTeamPage(L2PcInstance activeChar, int instanceId, int teamIdx)
+	public void showTeamPage(L2Player activeChar, int instanceId, int teamIdx)
 	{
 		TvTITeam t = getTeam(instanceId, teamIdx);
 		// String color;
@@ -672,7 +672,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showControlAllPage(L2PcInstance activeChar)
+	public void showControlAllPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");
@@ -692,7 +692,7 @@ public class AdminTvTiEngine implements IAdminCommandHandler
 		activeChar.sendPacket(adminReply);
 	}
 	
-	public void showControlInstancePage(L2PcInstance activeChar, int instanceId)
+	public void showControlInstancePage(L2Player activeChar, int instanceId)
 	{
 		TVTInstance i = TvTIMain.getTvTInstance(instanceId);
 		

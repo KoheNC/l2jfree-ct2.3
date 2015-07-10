@@ -18,8 +18,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.geodata.pathfinding.Node;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.Location;
@@ -142,7 +142,7 @@ public class GeoData
 	 * @param target
 	 * @return True if cha can see target (LOS) and send usful info to PC
 	 */
-	public boolean canSeeTargetDebug(L2PcInstance gm, L2Object target)
+	public boolean canSeeTargetDebug(L2Player gm, L2Object target)
 	{
 		return true;
 	}
@@ -182,7 +182,7 @@ public class GeoData
 	 * @param gm
 	 * @param comment
 	 */
-	public void addGeoDataBug(L2PcInstance gm, String comment)
+	public void addGeoDataBug(L2Player gm, String comment)
 	{
 		//Do Nothing
 	}

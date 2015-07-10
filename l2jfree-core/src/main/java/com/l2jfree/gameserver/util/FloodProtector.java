@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.util;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * Flood protector
@@ -55,7 +55,7 @@ public final class FloodProtector
 		public static final int VALUES_LENGTH = Protected.values().length;
 	}
 	
-	public static boolean tryPerformAction(L2PcInstance player, Protected action)
+	public static boolean tryPerformAction(L2Player player, Protected action)
 	{
 		if (player.isGM())
 			return true;

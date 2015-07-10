@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.Elementals;
@@ -45,11 +45,11 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 		writeImpl(client, client.getActiveChar());
 	}
 	
-	public void prepareToSend(L2Client client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2Player activeChar)
 	{
 	}
 	
-	public void packetSent(L2Client client, L2PcInstance activeChar)
+	public void packetSent(L2Client client, L2Player activeChar)
 	{
 	}
 	
@@ -57,12 +57,12 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 	{
 	}
 	
-	protected void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2Player activeChar)
 	{
 		writeImpl();
 	}
 	
-	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2Player activeChar)
 	{
 		return true;
 	}
@@ -103,7 +103,7 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 		}
 	}
 	
-	protected final void writePlayerElementAttribute(L2PcInstance player)
+	protected final void writePlayerElementAttribute(L2Player player)
 	{
 		byte attackAttribute = player.getAttackElement();
 		writeCompH(attackAttribute);

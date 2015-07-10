@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -37,7 +37,7 @@ public class RequestStartPledgeWar extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		
@@ -85,7 +85,7 @@ public class RequestStartPledgeWar extends L2ClientPacket
 		
 		//_log.warn("RequestStartPledgeWar, leader: " + clan.getLeaderName() + " clan: " + _clan.getName());
 		
-		//        L2PcInstance leader = L2World.getInstance().getPlayer(clan.getLeaderName());
+		//        L2Player leader = L2World.getInstance().getPlayer(clan.getLeaderName());
 		
 		//        if(leader == null)
 		//            return;

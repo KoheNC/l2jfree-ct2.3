@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -56,7 +56,7 @@ public class AttackRequest extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -82,9 +82,9 @@ public class AttackRequest extends L2ClientPacket
 			sendAF();
 			return;
 		}
-		else if (target instanceof L2PcInstance)
+		else if (target instanceof L2Player)
 		{
-			L2PcInstance tgt = (L2PcInstance)target;
+			L2Player tgt = (L2Player)target;
 			if (tgt.getAppearance().isInvisible() && !activeChar.isGM())
 			{
 				sendAF();

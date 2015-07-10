@@ -20,7 +20,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.RecipeController;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.model.L2RecipeList;
@@ -65,13 +65,13 @@ public class RequestRecipeShopListSet extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		
 		if (_items == null)
 		{
-			player.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_NONE);
+			player.setPrivateStoreType(L2Player.STORE_PRIVATE_NONE);
 			player.broadcastUserInfo();
 			sendAF();
 			return;
@@ -115,7 +115,7 @@ public class RequestRecipeShopListSet extends L2ClientPacket
 		createList.setStoreName(player.getCreateList() != null ? player.getCreateList().getStoreName() : "");
 		player.setCreateList(createList);
 		
-		player.setPrivateStoreType(L2PcInstance.STORE_PRIVATE_MANUFACTURE);
+		player.setPrivateStoreType(L2Player.STORE_PRIVATE_MANUFACTURE);
 		player.sitDown();
 		player.broadcastUserInfo();
 		sendPacket(new RecipeShopMsg(player));

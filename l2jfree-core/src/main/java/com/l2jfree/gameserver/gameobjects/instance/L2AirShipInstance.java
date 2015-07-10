@@ -32,6 +32,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.AirShipKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -54,7 +55,7 @@ import com.l2jfree.gameserver.templates.item.L2Weapon;
 public final class L2AirShipInstance extends L2Creature
 {
 	public float boatSpeed;
-	protected final FastList<L2PcInstance> _passengers = new FastList<L2PcInstance>();
+	protected final FastList<L2Player> _passengers = new FastList<L2Player>();
 	
 	private class L2AirShipTrajet
 	{
@@ -152,7 +153,7 @@ public final class L2AirShipInstance extends L2Creature
 				// _boat.getTemplate().baseRunSpd = bp.speed1;
 				boatSpeed = bp.speed1;
 				_boat.moveAirShipToLocation(bp.x, bp.y, bp.z, bp.speed1);
-				Collection<L2PcInstance> knownPlayers = _boat.getKnownList().getKnownPlayers().values();
+				Collection<L2Player> knownPlayers = _boat.getKnownList().getKnownPlayers().values();
 				if (bp.time == 0)
 				{
 					bp.time = 1;
@@ -161,7 +162,7 @@ public final class L2AirShipInstance extends L2Creature
 					return bp.time;
 				//synchronized (_boat.getKnownList().getKnownPlayers())
 				{
-					for (L2PcInstance player : knownPlayers)
+					for (L2Player player : knownPlayers)
 					{
 						player.sendPacket(_boat._easi);
 					}
@@ -327,7 +328,7 @@ public final class L2AirShipInstance extends L2Creature
 				if (time == 0)
 				{
 					setIsInDock(true);
-					for (L2PcInstance player : _passengers)
+					for (L2Player player : _passengers)
 					{
 						if (player == null)
 							continue;
@@ -360,7 +361,7 @@ public final class L2AirShipInstance extends L2Creature
 				if (time == 0)
 				{
 					setIsInDock(true);
-					for (L2PcInstance player : _passengers)
+					for (L2Player player : _passengers)
 					{
 						if (player == null)
 							continue;
@@ -452,7 +453,7 @@ public final class L2AirShipInstance extends L2Creature
 			lastx = x;
 			lasty = y;
 		}
-		for (L2PcInstance player : _passengers)
+		for (L2Player player : _passengers)
 		{
 			if (player != null && player.isInAirShip())
 			{
@@ -491,13 +492,13 @@ public final class L2AirShipInstance extends L2Creature
 	
 	public void spawn()
 	{
-		Collection<L2PcInstance> knownPlayers = getKnownList().getKnownPlayers().values();
+		Collection<L2Player> knownPlayers = getKnownList().getKnownPlayers().values();
 		_cycle = 0;
 		beginCycle();
 		if (knownPlayers == null || knownPlayers.isEmpty())
 			return;
 		ExAirShipInfo easi = new ExAirShipInfo(this);
-		for (L2PcInstance player : knownPlayers)
+		for (L2Player player : knownPlayers)
 			player.sendPacket(easi);
 	}
 	
@@ -534,7 +535,7 @@ public final class L2AirShipInstance extends L2Creature
 		return _isInDock;
 	}
 	
-	public void onPlayerBoarding(L2PcInstance player)
+	public void onPlayerBoarding(L2Player player)
 	{
 		// cannot board
 		if (!isInDock() || _passengers.contains(player))
@@ -546,7 +547,7 @@ public final class L2AirShipInstance extends L2Creature
 		//player.sendPacket(new ExSetCompassZoneCode(ExSetCompassZoneCode.GENERALZONE));
 	}
 	
-	public void oustPlayer(L2PcInstance player)
+	public void oustPlayer(L2Player player)
 	{
 		int x, y, z;
 		if (_cycle == 1 || _cycle == 4)
@@ -569,7 +570,7 @@ public final class L2AirShipInstance extends L2Creature
 	public void teleportAirShip(int x, int y, int z, int heading)
 	{
 		teleToLocation(x, y, z, heading, false);
-		for (L2PcInstance player : _passengers)
+		for (L2Player player : _passengers)
 		{
 			if (player == null)
 				continue;
@@ -646,7 +647,7 @@ public final class L2AirShipInstance extends L2Creature
 	}
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 		if (this != activeChar.getAirShip())
 		{

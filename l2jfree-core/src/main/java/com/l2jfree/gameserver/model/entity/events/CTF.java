@@ -37,8 +37,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -79,7 +79,7 @@ public class CTF
 		public boolean _haveFlagCTF;
 		public Future<?> _posCheckerCTF;
 		
-		private CTFPlayerInfo(L2PcInstance player)
+		private CTFPlayerInfo(L2Player player)
 		{
 			super(player);
 		}
@@ -96,8 +96,8 @@ public class CTF
 	public static String _eventName = "", _eventDesc = "", _topTeam = "", _joiningLocationName = "";
 	public static CopyOnWriteArrayList<String> _teams = new CopyOnWriteArrayList<String>(),
 			_savePlayers = new CopyOnWriteArrayList<String>(), _savePlayerTeams = new CopyOnWriteArrayList<String>();
-	public static CopyOnWriteArrayList<L2PcInstance> _players = new CopyOnWriteArrayList<L2PcInstance>(),
-			_playersShuffle = new CopyOnWriteArrayList<L2PcInstance>();
+	public static CopyOnWriteArrayList<L2Player> _players = new CopyOnWriteArrayList<L2Player>(),
+			_playersShuffle = new CopyOnWriteArrayList<L2Player>();
 	public static CopyOnWriteArrayList<Integer> _teamPlayersCount = new CopyOnWriteArrayList<Integer>(),
 			_teamColors = new CopyOnWriteArrayList<Integer>(), _teamsX = new CopyOnWriteArrayList<Integer>(),
 			_teamsY = new CopyOnWriteArrayList<Integer>(), _teamsZ = new CopyOnWriteArrayList<Integer>();
@@ -114,7 +114,7 @@ public class CTF
 	public static CopyOnWriteArrayList<Boolean> _flagsTaken = new CopyOnWriteArrayList<Boolean>();
 	public static int _topScore = 0, eventCenterX = 0, eventCenterY = 0, eventCenterZ = 0, eventOffset = 0;
 	
-	public static void showFlagHtml(L2PcInstance eventPlayer, String objectId, String teamName)
+	public static void showFlagHtml(L2Player eventPlayer, String objectId, String teamName)
 	{
 		if (eventPlayer == null)
 			return;
@@ -153,7 +153,7 @@ public class CTF
 		CopyOnWriteArrayList<Integer> teamsTakenFlag = new CopyOnWriteArrayList<Integer>();
 		try
 		{
-			for (L2PcInstance player : _players)
+			for (L2Player player : _players)
 			{ //if there's a player with a flag
 				//add the index of the team who's FLAG WAS TAKEN to the list
 				if (player != null)
@@ -200,7 +200,7 @@ public class CTF
 				}
 			}
 			//Check if a player ran away from the event holding a flag:
-			for (L2PcInstance player : _players)
+			for (L2Player player : _players)
 			{
 				if (player == null)
 					continue;
@@ -241,7 +241,7 @@ public class CTF
 		}
 	}
 	
-	public static void kickPlayerFromCTf(L2PcInstance playerToKick)
+	public static void kickPlayerFromCTf(L2Player playerToKick)
 	{
 		removePlayer(playerToKick, true);
 	}
@@ -255,7 +255,7 @@ public class CTF
 			CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Announce, "", announce);
 			if (_players != null && !_players.isEmpty())
 			{
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null && player.isOnline() != 0)
 						player.sendPacket(cs);
@@ -264,7 +264,7 @@ public class CTF
 		}
 	}
 	
-	public static void Started(L2PcInstance player)
+	public static void Started(L2Player player)
 	{
 		player.as(CTFPlayerInfo.class)._teamNameHaveFlagCTF = null;
 		player.as(CTFPlayerInfo.class)._haveFlagCTF = false;
@@ -272,7 +272,7 @@ public class CTF
 	
 	public static void StartEvent()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -283,7 +283,7 @@ public class CTF
 		AnnounceToPlayers(false, _eventName + "(CTF): Started. Go Capture the Flags!");
 	}
 	
-	public static void addFlagToPlayer(L2PcInstance _player)
+	public static void addFlagToPlayer(L2Player _player)
 	{
 		//remove items from the player hands (right, left, both)
 		// This is NOT a BUG, I don't want them to see the icon they have 8D
@@ -313,7 +313,7 @@ public class CTF
 		_player.sendPacket(cs);
 	}
 	
-	public static void removeFlagFromPlayer(L2PcInstance player)
+	public static void removeFlagFromPlayer(L2Player player)
 	{
 		L2ItemInstance wpn = player.getInventory().getPaperdollItem(Inventory.PAPERDOLL_RHAND);
 		player.as(CTFPlayerInfo.class)._haveFlagCTF = false;
@@ -339,7 +339,7 @@ public class CTF
 		}
 	}
 	
-	public static void setTeamFlag(String teamName, L2PcInstance activeChar)
+	public static void setTeamFlag(String teamName, L2Player activeChar)
 	{
 		int index = _teams.indexOf(teamName);
 		
@@ -534,7 +534,7 @@ public class CTF
 		}
 	}
 	
-	public static boolean InRangeOfFlag(L2PcInstance _player, int flagIndex, int offset)
+	public static boolean InRangeOfFlag(L2Player _player, int flagIndex, int offset)
 	{
 		return _player.getX() > CTF._flagsX.get(flagIndex) - offset
 				&& _player.getX() < CTF._flagsX.get(flagIndex) + offset
@@ -544,7 +544,7 @@ public class CTF
 				&& _player.getZ() < CTF._flagsZ.get(flagIndex) + offset;
 	}
 	
-	public static void processInFlagRange(L2PcInstance _player)
+	public static void processInFlagRange(L2Player _player)
 	{
 		try
 		{
@@ -611,11 +611,11 @@ public class CTF
 		}
 	}
 	
-	public static void pointTeamTo(L2PcInstance hasFlag, String ourFlag)
+	public static void pointTeamTo(L2Player hasFlag, String ourFlag)
 	{
 		try
 		{
-			for (L2PcInstance player : _players)
+			for (L2Player player : _players)
 			{
 				if (player != null && player.isOnline() != 0)
 				{
@@ -645,9 +645,9 @@ public class CTF
 	
 	public static class RadarOnPlayer implements Runnable
 	{
-		private final L2PcInstance _myTarget, _me;
+		private final L2Player _myTarget, _me;
 		
-		public RadarOnPlayer(L2PcInstance target, L2PcInstance me)
+		public RadarOnPlayer(L2Player target, L2Player me)
 		{
 			_me = me;
 			_myTarget = target;
@@ -709,7 +709,7 @@ public class CTF
 		_teamPlayersCount.set(index, teamPlayersCount);
 	}
 	
-	public static void setNpcPos(L2PcInstance activeChar)
+	public static void setNpcPos(L2Player activeChar)
 	{
 		_npcX = activeChar.getX();
 		_npcY = activeChar.getY();
@@ -824,7 +824,7 @@ public class CTF
 		_flagsZ.remove(index);
 	}
 	
-	public static void setTeamPos(String teamName, L2PcInstance activeChar)
+	public static void setTeamPos(String teamName, L2Player activeChar)
 	{
 		int index = _teams.indexOf(teamName);
 		
@@ -866,7 +866,7 @@ public class CTF
 		return !(_started || _teleport || _joining);
 	}
 	
-	public static void startJoin(L2PcInstance activeChar)
+	public static void startJoin(L2Player activeChar)
 	{
 		if (!startJoinOk())
 		{
@@ -947,7 +947,7 @@ public class CTF
 		return true;
 	}
 	
-	private static void spawnEventNpc(L2PcInstance activeChar)
+	private static void spawnEventNpc(L2Player activeChar)
 	{
 		L2NpcTemplate tmpl = NpcTable.getInstance().getTemplate(_npcId);
 		
@@ -1044,7 +1044,7 @@ public class CTF
 			{
 				CTF.sit();
 				CTF.spawnAllFlags();
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null)
 					{
@@ -1113,7 +1113,7 @@ public class CTF
 				sit();
 				spawnAllFlags();
 				
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null)
 					{
@@ -1155,7 +1155,7 @@ public class CTF
 		return true;
 	}
 	
-	public static void startEvent(L2PcInstance activeChar)
+	public static void startEvent(L2Player activeChar)
 	{
 		if (!startEventOk())
 		{
@@ -1306,7 +1306,7 @@ public class CTF
 		}
 		else if (Config.CTF_EVEN_TEAMS.equals("SHUFFLE"))
 		{
-			CopyOnWriteArrayList<L2PcInstance> playersShuffleTemp = new CopyOnWriteArrayList<L2PcInstance>();
+			CopyOnWriteArrayList<L2Player> playersShuffleTemp = new CopyOnWriteArrayList<L2Player>();
 			int loopCount = 0;
 			
 			loopCount = _playersShuffle.size();
@@ -1338,7 +1338,7 @@ public class CTF
 				break;
 			
 			int playerToAddIndex = Rnd.nextInt(_playersShuffle.size());
-			L2PcInstance player = null;
+			L2Player player = null;
 			player = _playersShuffle.get(playerToAddIndex);
 			player.as(CTFPlayerInfo.class)._originalKarmaCTF = player.getKarma();
 			
@@ -1359,7 +1359,7 @@ public class CTF
 	
 	public static void setUserData()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			final CTFPlayerInfo info = player.as(CTFPlayerInfo.class);
 			
@@ -1402,7 +1402,7 @@ public class CTF
 	//show loosers and winners animations
 	public static void playKneelAnimation(String teamName)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null && player.isOnline() != 0 && player.isInEvent(CTFPlayerInfo.class))
 			{
@@ -1425,7 +1425,7 @@ public class CTF
 	
 	public static void rewardTeam(String teamName)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -1441,7 +1441,7 @@ public class CTF
 					nhm.setHtml(replyMSG.moveToString());
 					player.sendPacket(nhm);
 					
-					// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+					// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 					player.sendPacket(ActionFailed.STATIC_PACKET);
 				}
 			}
@@ -1473,7 +1473,7 @@ public class CTF
 	{
 		_sitForced = !_sitForced;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -1542,10 +1542,10 @@ public class CTF
 		{
 			_log.info("");
 			_log.info("#########################################");
-			_log.info("# _playersShuffle(CopyOnWriteArrayList<L2PcInstance>) #");
+			_log.info("# _playersShuffle(CopyOnWriteArrayList<L2Player>) #");
 			_log.info("#########################################");
 			
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player != null)
 					_log.info("Name: " + player.getName());
@@ -1554,10 +1554,10 @@ public class CTF
 		
 		_log.info("");
 		_log.info("##################################");
-		_log.info("# _players(CopyOnWriteArrayList<L2PcInstance>) #");
+		_log.info("# _players(CopyOnWriteArrayList<L2Player>) #");
 		_log.info("##################################");
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 				_log.info("Name: " + player.getName() + "   Team: " + player.as(CTFPlayerInfo.class)._teamNameCTF
@@ -1596,8 +1596,8 @@ public class CTF
 		_teams = new CopyOnWriteArrayList<String>();
 		_savePlayers = new CopyOnWriteArrayList<String>();
 		_savePlayerTeams = new CopyOnWriteArrayList<String>();
-		_players = new CopyOnWriteArrayList<L2PcInstance>();
-		_playersShuffle = new CopyOnWriteArrayList<L2PcInstance>();
+		_players = new CopyOnWriteArrayList<L2Player>();
+		_playersShuffle = new CopyOnWriteArrayList<L2Player>();
 		_teamPlayersCount = new CopyOnWriteArrayList<Integer>();
 		_teamPointsCount = new CopyOnWriteArrayList<Integer>();
 		_teamColors = new CopyOnWriteArrayList<Integer>();
@@ -1782,7 +1782,7 @@ public class CTF
 		}
 	}
 	
-	public static void showEventHtml(L2PcInstance eventPlayer, String objectId)
+	public static void showEventHtml(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -1893,7 +1893,7 @@ public class CTF
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+			// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 		catch (Exception e)
@@ -1902,7 +1902,7 @@ public class CTF
 		}
 	}
 	
-	public static void addPlayer(L2PcInstance player, String teamName)
+	public static void addPlayer(L2Player player, String teamName)
 	{
 		if (!addPlayerOk(teamName, player))
 			return;
@@ -1927,7 +1927,7 @@ public class CTF
 		{
 			if (_playersShuffle != null && !_playersShuffle.isEmpty())
 			{
-				for (L2PcInstance player : _playersShuffle)
+				for (L2Player player : _playersShuffle)
 				{
 					if (player == null)
 						_playersShuffle.remove(player);
@@ -1944,11 +1944,11 @@ public class CTF
 		}
 	}
 	
-	public static boolean checkShufflePlayers(L2PcInstance eventPlayer)
+	public static boolean checkShufflePlayers(L2Player eventPlayer)
 	{
 		try
 		{
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player == null || player.isOnline() == 0)
 				{
@@ -1975,7 +1975,7 @@ public class CTF
 		return false;
 	}
 	
-	public static boolean addPlayerOk(String teamName, L2PcInstance eventPlayer)
+	public static boolean addPlayerOk(String teamName, L2Player eventPlayer)
 	{
 		if (GlobalRestrictions.isRestricted(eventPlayer, CTFRestriction.class))
 		{
@@ -1991,7 +1991,7 @@ public class CTF
 				return false;
 			}
 			
-			for (L2PcInstance player : _players)
+			for (L2Player player : _players)
 			{
 				if (player.getObjectId() == eventPlayer.getObjectId())
 				{
@@ -2070,7 +2070,7 @@ public class CTF
 		return false;
 	}
 	
-	public static synchronized void addDisconnectedPlayer(L2PcInstance player)
+	public static synchronized void addDisconnectedPlayer(L2Player player)
 	{
 		/*
 		 * !!! CAUTION !!!
@@ -2090,7 +2090,7 @@ public class CTF
 			final CTFPlayerInfo info = new CTFPlayerInfo(player);
 			player.setPlayerInfo(info);
 			info._teamNameCTF = _savePlayerTeams.get(_savePlayers.indexOf(player.getName()));
-			for (L2PcInstance p : _players)
+			for (L2Player p : _players)
 			{
 				if (p == null)
 				{
@@ -2117,12 +2117,12 @@ public class CTF
 		}
 	}
 	
-	public static void removePlayer(L2PcInstance player)
+	public static void removePlayer(L2Player player)
 	{
 		removePlayer(player, false);
 	}
 	
-	public static void removePlayer(L2PcInstance player, boolean kick)
+	public static void removePlayer(L2Player player, boolean kick)
 	{
 		final CTFPlayerInfo info = player.getPlayerInfo(CTFPlayerInfo.class);
 		
@@ -2159,7 +2159,7 @@ public class CTF
 	public static void cleanCTF()
 	{
 		_log.info("CTF : Cleaning players.");
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -2175,7 +2175,7 @@ public class CTF
 		}
 		if (_playersShuffle != null && !_playersShuffle.isEmpty())
 		{
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player != null)
 					player.setPlayerInfo(null);
@@ -2223,7 +2223,7 @@ public class CTF
 			@Override
 			public void run()
 			{
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null)
 					{
@@ -2349,7 +2349,7 @@ public class CTF
 			eventOffset = maxZ;
 	}
 	
-	public static boolean isOutsideCTFArea(L2PcInstance _player)
+	public static boolean isOutsideCTFArea(L2Player _player)
 	{
 		if (_player == null || _player.isOnline() == 0)
 			return true;

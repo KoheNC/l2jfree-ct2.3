@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -37,9 +37,9 @@ public class Elixir implements IItemHandler
 	@Override
 	public synchronized void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		L2PcInstance activeChar; // use activeChar only for L2PcInstance checks where cannot be used PetInstance
-		if (playable instanceof L2PcInstance)
-			activeChar = (L2PcInstance)playable;
+		L2Player activeChar; // use activeChar only for L2Player checks where cannot be used PetInstance
+		if (playable instanceof L2Player)
+			activeChar = (L2Player)playable;
 		else
 		{
 			playable.sendPacket(SystemMessageId.ITEM_NOT_FOR_PETS);
@@ -133,7 +133,7 @@ public class Elixir implements IItemHandler
 	 * @param level
 	 * @return
 	 */
-	public boolean usePotion(L2PcInstance activeChar, int magicId, int skillToCheck, int level)
+	public boolean usePotion(L2Player activeChar, int magicId, int skillToCheck, int level)
 	{
 		boolean check = skillToCheck != 0 ? true : false;
 		L2Skill skill = SkillTable.getInstance().getInfo(magicId, level);

@@ -20,7 +20,7 @@ import java.util.Map;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -170,7 +170,7 @@ public abstract class AbstractEnchantPacket extends L2ClientPacket
 			return isValid(enchantItem);
 		}
 		
-		public final int getChance(L2ItemInstance enchantItem, EnchantItem supportItem, L2PcInstance player)
+		public final int getChance(L2ItemInstance enchantItem, EnchantItem supportItem, L2Player player)
 		{
 			if (!isValid(enchantItem, supportItem))
 				return -1;

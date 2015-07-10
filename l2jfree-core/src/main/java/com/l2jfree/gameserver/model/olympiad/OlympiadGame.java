@@ -22,9 +22,9 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.HeroSkillTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Party;
@@ -75,18 +75,18 @@ public class OlympiadGame
 	public int _damageP1 = 0;
 	public int _damageP2 = 0;
 	
-	public L2PcInstance _playerOne;
-	public L2PcInstance _playerTwo;
+	public L2Player _playerOne;
+	public L2Player _playerTwo;
 	public L2Spawn _spawnOne;
 	public L2Spawn _spawnTwo;
-	protected FastList<L2PcInstance> _players;
+	protected FastList<L2Player> _players;
 	private int x1, y1, z1, x2, y2, z2;
 	public final int _stadiumID;
 	private SystemMessage _sm;
 	private SystemMessage _sm2;
 	private SystemMessage _sm3;
 	
-	protected OlympiadGame(int id, COMP_TYPE type, FastList<L2PcInstance> list)
+	protected OlympiadGame(int id, COMP_TYPE type, FastList<L2Player> list)
 	{
 		_aborted = false;
 		_gamestarted = false;
@@ -170,7 +170,7 @@ public class OlympiadGame
 		_playerTwoID = 0;
 	}
 	
-	protected void handleDisconnect(L2PcInstance player)
+	protected void handleDisconnect(L2Player player)
 	{
 		if (_gamestarted)
 		{
@@ -211,7 +211,7 @@ public class OlympiadGame
 		if (_playerOneDisconnected || _playerTwoDisconnected)
 			return;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			try
 			{
@@ -383,7 +383,7 @@ public class OlympiadGame
 		if (_playerOneDisconnected || _playerTwoDisconnected)
 			return;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player == null)
 				continue;
@@ -414,7 +414,7 @@ public class OlympiadGame
 	
 	protected void PlayersStatusBack()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			try
 			{
@@ -869,7 +869,7 @@ public class OlympiadGame
 		_gameIsStarted = true;
 		try
 		{
-			for (L2PcInstance player : _players)
+			for (L2Player player : _players)
 			{
 				player.setIsOlympiadStart(true);
 			}
@@ -882,7 +882,7 @@ public class OlympiadGame
 		return true;
 	}
 	
-	protected void addDamage(L2PcInstance player, int damage)
+	protected void addDamage(L2Player player, int damage)
 	{
 		if (_playerOne == null || _playerTwo == null)
 			return;
@@ -897,12 +897,12 @@ public class OlympiadGame
 		return _playerOneName + " / " + _playerTwoName;
 	}
 	
-	protected L2PcInstance[] getPlayers()
+	protected L2Player[] getPlayers()
 	{
 		if (_players == null || _players.isEmpty())
 			return null;
 		
-		final L2PcInstance[] players = new L2PcInstance[_players.size()];
+		final L2Player[] players = new L2Player[_players.size()];
 		_players.toArray(players);
 		
 		return players;
@@ -910,7 +910,7 @@ public class OlympiadGame
 	
 	protected void broadcastMessage(SystemMessage sm, boolean toAll)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 				player.sendPacket(sm);
@@ -918,7 +918,7 @@ public class OlympiadGame
 		
 		if (toAll)
 		{
-			for (L2PcInstance spec : OlympiadManager.STADIUMS[_stadiumID].getSpectators())
+			for (L2Player spec : OlympiadManager.STADIUMS[_stadiumID].getSpectators())
 			{
 				if (spec != null)
 					spec.sendPacket(sm);
@@ -992,10 +992,10 @@ class OlympiadGameTask implements Runnable
 		for (int i = 0; i < 2; i++)
 		{
 			boolean defaulted = false;
-			L2PcInstance player = _game._players.get(i);
+			L2Player player = _game._players.get(i);
 			if (player != null)
 				player.setOlympiadGameId(_game._stadiumID);
-			L2PcInstance otherPlayer = _game._players.get(i ^ 1);
+			L2Player otherPlayer = _game._players.get(i ^ 1);
 			SystemMessage sm = null;
 			
 			if (player == null)
@@ -1078,7 +1078,7 @@ class OlympiadGameTask implements Runnable
 				}
 			}
 			
-			for (L2PcInstance spec : OlympiadManager.STADIUMS[_game._stadiumID].getSpectators())
+			for (L2Player spec : OlympiadManager.STADIUMS[_game._stadiumID].getSpectators())
 			{
 				if (spec != null)
 					spec.sendPacket(ExOlympiadMatchEnd.PACKET);
@@ -1168,7 +1168,7 @@ class OlympiadGameTask implements Runnable
 		
 		_game._playerOne.updateEffectIcons();
 		_game._playerTwo.updateEffectIcons();
-		for (L2PcInstance spec : OlympiadManager.STADIUMS[_game._stadiumID].getSpectators())
+		for (L2Player spec : OlympiadManager.STADIUMS[_game._stadiumID].getSpectators())
 		{
 			if (spec != null)
 			{

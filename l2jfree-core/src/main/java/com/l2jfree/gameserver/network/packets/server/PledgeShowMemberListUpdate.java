@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class PledgeShowMemberListUpdate extends L2ServerPacket
 {
 	private static final String _S__54_PLEDGESHOWMEMBERLISTUPDATE = "[S] 54 PledgeShowMemberListUpdate";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final int _pledgeType;
 	private int _hasSponsor;
 	private final String _name;
@@ -37,7 +37,7 @@ public class PledgeShowMemberListUpdate extends L2ServerPacket
 	private final int _race;
 	private final int _sex;
 	
-	public PledgeShowMemberListUpdate(L2PcInstance player)
+	public PledgeShowMemberListUpdate(L2Player player)
 	{
 		_activeChar = player;
 		_pledgeType = _activeChar.getSubPledgeType();

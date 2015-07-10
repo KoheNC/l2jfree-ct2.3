@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public final class CursedWeaponRestriction extends AbstractRestriction
 {
 	@Override
-	public boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		if (activeChar.isCursedWeaponEquipped())
 		{
@@ -38,7 +38,7 @@ public final class CursedWeaponRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target)
+	public boolean canInviteToParty(L2Player activeChar, L2Player target)
 	{
 		if (activeChar.isCursedWeaponEquipped() || target.isCursedWeaponEquipped())
 		{
@@ -51,7 +51,7 @@ public final class CursedWeaponRestriction extends AbstractRestriction
 	
 	@Override
 	public boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
+			L2Player attacker_, L2Player target_, boolean isOffensive)
 	{
 		if (attacker_ == null || target_ == null || attacker_ == target_)
 			return false;
@@ -73,14 +73,14 @@ public final class CursedWeaponRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public void playerLoggedIn(L2PcInstance activeChar)
+	public void playerLoggedIn(L2Player activeChar)
 	{
 		if (activeChar.isCursedWeaponEquipped())
 			CursedWeaponsManager.getInstance().getCursedWeapon(activeChar.getCursedWeaponEquippedId()).cursedOnLogin();
 	}
 	
 	@Override
-	public void playerDisconnected(L2PcInstance activeChar)
+	public void playerDisconnected(L2Player activeChar)
 	{
 		if (activeChar.isCursedWeaponEquipped())
 			CursedWeaponsManager.getInstance().onExit(activeChar);

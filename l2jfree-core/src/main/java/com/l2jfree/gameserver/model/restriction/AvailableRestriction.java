@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemMessageId;
 
 /**
@@ -31,14 +31,14 @@ public enum AvailableRestriction
 	PlayerSummonFriend,
 	PlayerChat() {
 		@Override
-		public void activatedOn(L2PcInstance player)
+		public void activatedOn(L2Player player)
 		{
 			player.sendMessage("You have been chat banned.");
 			player.sendEtcStatusUpdate();
 		}
 		
 		@Override
-		public void deactivatedOn(L2PcInstance player)
+		public void deactivatedOn(L2Player player)
 		{
 			player.sendPacket(SystemMessageId.CHATBAN_REMOVED);
 			player.sendEtcStatusUpdate();
@@ -50,11 +50,11 @@ public enum AvailableRestriction
 	{
 	}
 	
-	public void activatedOn(L2PcInstance player)
+	public void activatedOn(L2Player player)
 	{
 	}
 	
-	public void deactivatedOn(L2PcInstance player)
+	public void deactivatedOn(L2Player player)
 	{
 	}
 	

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver;
 import java.util.Date;
 
 import com.l2jfree.L2AutoInitialization;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.mmocore.network.SelectorThread;
 import com.l2jfree.versionning.Version;
 
@@ -50,7 +50,7 @@ public final class CoreInfo
 		System.out.println("                   \\/___/  [starting version: " + coreVersion.getVersionNumber() + "]");
 	}
 	
-	public static final void versionInfo(L2PcInstance activeChar)
+	public static final void versionInfo(L2Player activeChar)
 	{
 		activeChar.sendMessage(":__.     :_____:_____:_____:_____:_____:_____:");
 		activeChar.sendMessage("|    |__|___   |__.     |     __|        |     __|     __|");

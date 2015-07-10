@@ -30,7 +30,7 @@ import javolution.util.FastMap;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2AutoInitialization;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.L2Client;
@@ -265,7 +265,7 @@ public final class LoginServerThread extends NetworkThread
 	private void kickPlayers()
 	{
 		int counter = 0;
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			if (player.isGM())
 				continue;
@@ -412,7 +412,7 @@ public final class LoginServerThread extends NetworkThread
 							if (L2World.getInstance().getAllPlayersCount() > 0)
 							{
 								ArrayList<String> playerList = new ArrayList<String>();
-								for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+								for (L2Player player : L2World.getInstance().getAllPlayers())
 								{
 									if (player.getClient() == null)
 										continue;
@@ -476,7 +476,7 @@ public final class LoginServerThread extends NetworkThread
 							if (wc != null)
 								wc.gameClient.closeNow();
 							
-							L2PcInstance.disconnectIfOnline(kp.getAccount());
+							L2Player.disconnectIfOnline(kp.getAccount());
 							break;
 						}
 						case 0x10:

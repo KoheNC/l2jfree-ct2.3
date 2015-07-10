@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
@@ -43,9 +43,9 @@ public final class EffectCharmOfCourage extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		if (getEffected() instanceof L2PcInstance)
+		if (getEffected() instanceof L2Player)
 		{
-			((L2PcInstance)getEffected()).setCharmOfCourage(true);
+			((L2Player)getEffected()).setCharmOfCourage(true);
 			return true;
 		}
 		return false;
@@ -55,6 +55,6 @@ public final class EffectCharmOfCourage extends L2Effect
 	@Override
 	protected void onExit()
 	{
-		((L2PcInstance)getEffected()).setCharmOfCourage(false);
+		((L2Player)getEffected()).setCharmOfCourage(false);
 	}
 }

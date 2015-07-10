@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.chathandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
 import com.l2jfree.gameserver.model.BlockList;
 import com.l2jfree.gameserver.model.L2World;
@@ -42,12 +42,12 @@ public class ChatWhisper implements IChatHandler
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.character.player.L2PcInstance, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.gameobjects.L2Player.player.L2Player, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
 	 */
 	@Override
-	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text)
+	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
-		L2PcInstance receiver = L2World.getInstance().getPlayer(target);
+		L2Player receiver = L2World.getInstance().getPlayer(target);
 		
 		if (receiver != null)
 		{

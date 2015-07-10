@@ -19,6 +19,7 @@ import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -34,7 +35,7 @@ public class L2WyvernManagerInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("RideWyvern"))
 		{
@@ -115,24 +116,24 @@ public class L2WyvernManagerInstance extends L2Npc
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
 		player.setLastFolkNPC(this);
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			else
 				showMessageWindow(player);
@@ -140,7 +141,7 @@ public class L2WyvernManagerInstance extends L2Npc
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	private void showMessageWindow(L2PcInstance player)
+	private void showMessageWindow(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -164,7 +165,7 @@ public class L2WyvernManagerInstance extends L2Npc
 		player.sendPacket(html);
 	}
 	
-	protected boolean isOwnerClan(L2PcInstance player)
+	protected boolean isOwnerClan(L2Player player)
 	{
 		return true;
 	}
@@ -179,7 +180,7 @@ public class L2WyvernManagerInstance extends L2Npc
 		return true;
 	}
 	
-	private void sendNotPossibleMessage(L2PcInstance player)
+	private void sendNotPossibleMessage(L2Player player)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setFile("data/html/wyvernmanager/fortress-wyvernmanager-notpossible.htm");

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Object;
@@ -37,7 +37,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 			"admin_untransform_menu" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (activeChar.isMounted())
 		{
@@ -64,9 +64,9 @@ public class AdminPolymorph implements IAdminCommandHandler
 			String[] parts = command.split(" ");
 			if (parts.length == 2)
 			{
-				if (obj instanceof L2PcInstance)
+				if (obj instanceof L2Player)
 				{
-					final L2PcInstance cha = (L2PcInstance)obj;
+					final L2Player cha = (L2Player)obj;
 					try
 					{
 						final int id = Integer.parseInt(parts[1]);
@@ -135,7 +135,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 	}
 	
 	@SuppressWarnings("deprecation")
-	private void doPolymorph(L2PcInstance activeChar, L2Object obj, String id, String type)
+	private void doPolymorph(L2Player activeChar, L2Object obj, String id, String type)
 	{
 		if (obj != null)
 		{
@@ -166,7 +166,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 	 * @param activeChar
 	 * @param target
 	 */
-	private void doUnpoly(L2PcInstance activeChar, L2Object target)
+	private void doUnpoly(L2Player activeChar, L2Object target)
 	{
 		if (target != null && target.getPoly().isMorphed())
 		{
@@ -179,7 +179,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 	}
 	
-	private void showMainPage(L2PcInstance activeChar, String command)
+	private void showMainPage(L2Player activeChar, String command)
 	{
 		if (command.contains("transform"))
 			AdminHelpPage.showHelpPage(activeChar, "transform.htm");

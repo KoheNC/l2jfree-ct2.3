@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.Auction;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.Banking;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.CastleDoors;
@@ -67,7 +67,7 @@ public final class VoicedCommandHandler extends HandlerRegistry<String, IVoicedC
 		registerAll(handler, handler.getVoicedCommandList());
 	}
 	
-	public boolean useVoicedCommand(String text, L2PcInstance activeChar)
+	public boolean useVoicedCommand(String text, L2Player activeChar)
 	{
 		if (!text.startsWith(".") || text.length() < 2)
 			return false;

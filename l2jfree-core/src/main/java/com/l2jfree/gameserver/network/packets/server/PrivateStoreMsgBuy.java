@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -28,7 +28,7 @@ public class PrivateStoreMsgBuy extends L2ServerPacket
 	private final int _objId;
 	private String _storeMsg;
 	
-	public PrivateStoreMsgBuy(L2PcInstance player)
+	public PrivateStoreMsgBuy(L2Player player)
 	{
 		_objId = player.getObjectId();
 		if (player.getBuyList() != null)

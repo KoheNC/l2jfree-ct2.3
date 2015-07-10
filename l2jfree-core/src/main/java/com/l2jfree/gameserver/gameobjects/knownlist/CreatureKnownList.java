@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 import java.util.Map;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.util.Util;
@@ -29,7 +29,7 @@ public class CreatureKnownList extends ObjectKnownList
 	protected final L2Creature _activeChar;
 	
 	private final Map<Integer, L2Object> _knownObjects = new LazyFastMap<Integer, L2Object>().setShared();
-	private final Map<Integer, L2PcInstance> _knownPlayers = new LazyFastMap<Integer, L2PcInstance>().setShared();
+	private final Map<Integer, L2Player> _knownPlayers = new LazyFastMap<Integer, L2Player>().setShared();
 	
 	public CreatureKnownList(L2Creature activeChar)
 	{
@@ -53,8 +53,8 @@ public class CreatureKnownList extends ObjectKnownList
 		if (getKnownObjects().put(object.getObjectId(), object) != null)
 			return false;
 		
-		if (object instanceof L2PcInstance)
-			getKnownPlayers().put(object.getObjectId(), (L2PcInstance)object);
+		if (object instanceof L2Player)
+			getKnownPlayers().put(object.getObjectId(), (L2Player)object);
 		
 		return true;
 	}
@@ -66,7 +66,7 @@ public class CreatureKnownList extends ObjectKnownList
 						&& _knownObjects.containsKey(object.getObjectId()));
 	}
 	
-	public final boolean knowsThePlayer(L2PcInstance player)
+	public final boolean knowsThePlayer(L2Player player)
 	{
 		return player != null
 				&& (getActiveChar() == player || _knownPlayers != null
@@ -79,7 +79,7 @@ public class CreatureKnownList extends ObjectKnownList
 		return getKnownObjects().get(objectId);
 	}
 	
-	public final L2PcInstance getKnownPlayer(int objectId)
+	public final L2Player getKnownPlayer(int objectId)
 	{
 		return getKnownPlayers().get(objectId);
 	}
@@ -115,7 +115,7 @@ public class CreatureKnownList extends ObjectKnownList
 		if (getKnownObjects().remove(object.getObjectId()) == null)
 			return false;
 		
-		if (object instanceof L2PcInstance)
+		if (object instanceof L2Player)
 			getKnownPlayers().remove(object.getObjectId());
 		
 		// If object is targeted by the L2Creature, cancel Attack or Cast
@@ -168,17 +168,17 @@ public class CreatureKnownList extends ObjectKnownList
 		return _knownObjects;
 	}
 	
-	public final Map<Integer, L2PcInstance> getKnownPlayers()
+	public final Map<Integer, L2Player> getKnownPlayers()
 	{
 		return _knownPlayers;
 	}
 	
-	public final Iterable<L2PcInstance> getKnownPlayersInRadius(final int radius)
+	public final Iterable<L2Player> getKnownPlayersInRadius(final int radius)
 	{
-		return L2Collections.filteredIterable(L2PcInstance.class, getKnownPlayers().values(),
-				new L2Collections.Filter<L2PcInstance>() {
+		return L2Collections.filteredIterable(L2Player.class, getKnownPlayers().values(),
+				new L2Collections.Filter<L2Player>() {
 					@Override
-					public boolean accept(L2PcInstance player)
+					public boolean accept(L2Player player)
 					{
 						return Util.checkIfInRange(radius, getActiveChar(), player, true);
 					}

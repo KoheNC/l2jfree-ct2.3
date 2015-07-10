@@ -17,6 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -47,23 +48,23 @@ public final class L2UrnInstance extends L2NpcInstance
 	protected static int tempChance;
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			}
 			else
@@ -75,7 +76,7 @@ public final class L2UrnInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
@@ -187,7 +188,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		}
 	}
 	
-	protected void runUrnMix(L2PcInstance player, int ingId1, long ingCount1, int ingId2, long ingCount2, int prodId,
+	protected void runUrnMix(L2Player player, int ingId1, long ingCount1, int ingId2, long ingCount2, int prodId,
 			int tempSet, boolean mixLvl, String prodName2)
 	{
 		boolean correctMix1 = false;
@@ -229,7 +230,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		}
 	}
 	
-	public void takeUrnItems(L2PcInstance player, int itemId, long count)
+	public void takeUrnItems(L2Player player, int itemId, long count)
 	{
 		// Get object item from player's inventory list
 		L2ItemInstance item = player.getInventory().getItemByItemId(itemId);
@@ -248,7 +249,7 @@ public final class L2UrnInstance extends L2NpcInstance
 			player.destroyItemByItemId("Quest", itemId, count, player, true);
 	}
 	
-	public void giveUrnItems(L2PcInstance player, int itemId, long count, int enchantlevel)
+	public void giveUrnItems(L2Player player, int itemId, long count, int enchantlevel)
 	{
 		if (count <= 0)
 			return;
@@ -289,12 +290,12 @@ public final class L2UrnInstance extends L2NpcInstance
 		}
 	}
 	
-	public void playSound(L2PcInstance player, String sound)
+	public void playSound(L2Player player, String sound)
 	{
 		player.sendPacket(new PlaySound(0, sound));
 	}
 	
-	public int getUrnItemsCount(L2PcInstance player, int itemId)
+	public int getUrnItemsCount(L2Player player, int itemId)
 	{
 		int count = 0;
 		
@@ -319,7 +320,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		return (mixChance < tempChance);
 	}
 	
-	public void showSuccessWindow(L2PcInstance player, boolean urnLvl, String prodName3, int prodNum3)
+	public void showSuccessWindow(L2Player player, boolean urnLvl, String prodName3, int prodNum3)
 	{
 		String rankName = "";
 		String urnEffect = "";
@@ -362,7 +363,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		sendHtmlMessage(player, msg.moveToString());
 	}
 	
-	public void showFailureWindow(L2PcInstance player)
+	public void showFailureWindow(L2Player player)
 	{
 		
 		L2TextBuilder msg = L2TextBuilder.newInstance("<html><body>");
@@ -378,7 +379,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		sendHtmlMessage(player, msg.moveToString());
 	}
 	
-	public void showMessageWindow(L2PcInstance player)
+	public void showMessageWindow(L2Player player)
 	{
 		L2TextBuilder msg = L2TextBuilder.newInstance("<html><body>");
 		msg.append("%npcname%:<br><br>");
@@ -391,7 +392,7 @@ public final class L2UrnInstance extends L2NpcInstance
 		sendHtmlMessage(player, msg.moveToString());
 	}
 	
-	private void sendHtmlMessage(L2PcInstance player, String htmlMessage)
+	private void sendHtmlMessage(L2Player player, String htmlMessage)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
 		html.setHtml(htmlMessage);

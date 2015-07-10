@@ -11,7 +11,7 @@ from com.l2jfree.gameserver.network.packets.server  import MagicSkillUse
 from com.l2jfree.gameserver.network.packets.server  import SystemMessage
 from com.l2jfree.tools.random                      import Rnd
 from com.l2jfree.gameserver.datatables             import ItemTable
-from com.l2jfree.gameserver.gameobjects.instance   import L2PcInstance
+from com.l2jfree.gameserver.gameobjects   import L2Player
 
 qn = "128_PailakaSongOfIceAndFire"
 debug = False

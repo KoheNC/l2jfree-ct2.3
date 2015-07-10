@@ -33,7 +33,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.items.model.Item;
@@ -653,12 +653,12 @@ public final class ItemTable
 	 * @param process : String Identifier of process triggering this action
 	 * @param itemId : int Item Identifier of the item to be created
 	 * @param count : long Quantity of items to be created for stackable items
-	 * @param actor : L2PcInstance Player requesting the item creation
+	 * @param actor : L2Player Player requesting the item creation
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in
 	 *            transformation
 	 * @return L2ItemInstance corresponding to the new item
 	 */
-	public L2ItemInstance createItem(String process, int itemId, long count, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance createItem(String process, int itemId, long count, L2Player actor, L2Object reference)
 	{
 		// Create and Init the L2ItemInstance corresponding to the Item Identifier
 		L2ItemInstance item = new L2ItemInstance(IdFactory.getInstance().getNextId(), itemId);
@@ -716,7 +716,7 @@ public final class ItemTable
 		return item;
 	}
 	
-	public L2ItemInstance createItem(String process, int itemId, long count, L2PcInstance actor)
+	public L2ItemInstance createItem(String process, int itemId, long count, L2Player actor)
 	{
 		return createItem(process, itemId, count, actor, null);
 	}
@@ -752,11 +752,11 @@ public final class ItemTable
 	 * 
 	 * @param process : String Identifier of process triggering this action
 	 * @param item : L2ItemInstance Item Identifier of the item to be created
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in
 	 *            transformation
 	 */
-	public void destroyItem(String process, L2ItemInstance item, L2PcInstance actor, L2Object reference)
+	public void destroyItem(String process, L2ItemInstance item, L2Player actor, L2Object reference)
 	{
 		synchronized (item)
 		{

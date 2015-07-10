@@ -37,8 +37,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
@@ -225,7 +225,7 @@ public class Instance
 	
 	public void ejectPlayer(Integer objectId)
 	{
-		L2PcInstance player = L2World.getInstance().findPlayer(objectId);
+		L2Player player = L2World.getInstance().findPlayer(objectId);
 		if (player != null && player.isSameInstance(getId()))
 		{
 			if (!player.isInMultiverse())
@@ -613,7 +613,7 @@ public class Instance
 		{
 			for (int objectId : _players)
 			{
-				L2PcInstance player = L2World.getInstance().findPlayer(objectId);
+				L2Player player = L2World.getInstance().findPlayer(objectId);
 				if (player != null && player.isSameInstance(getId()))
 				{
 					player.sendPacket(cs);

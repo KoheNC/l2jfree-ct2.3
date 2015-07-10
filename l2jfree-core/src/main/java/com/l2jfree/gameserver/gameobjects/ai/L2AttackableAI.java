@@ -28,6 +28,7 @@ import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
@@ -37,7 +38,6 @@ import com.l2jfree.gameserver.gameobjects.instance.L2GuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Object;
@@ -129,7 +129,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * <li>The target isn't a Folk or a Door</li>
 	 * <li>The target isn't dead, isn't invulnerable, isn't in silent moving mode AND too far (>100)</li>
 	 * <li>The target is in the actor Aggro range and is at the same height</li>
-	 * <li>The L2PcInstance target has karma (=PK)</li>
+	 * <li>The L2Player target has karma (=PK)</li>
 	 * <li>The L2MonsterInstance target is aggressive</li><BR><BR>
 	 * 
 	 * <B><U> Actor is a L2SiegeGuardInstance</U> :</B><BR><BR>
@@ -137,13 +137,13 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * <li>The target isn't dead, isn't invulnerable, isn't in silent moving mode AND too far (>100)</li>
 	 * <li>The target is in the actor Aggro range and is at the same height</li>
 	 * <li>A siege is in progress</li>
-	 * <li>The L2PcInstance target isn't a Defender</li><BR><BR>
+	 * <li>The L2Player target isn't a Defender</li><BR><BR>
 	 * 
 	 * <B><U> Actor is a L2FriendlyMobInstance</U> :</B><BR><BR>
 	 * <li>The target isn't a Folk, a Door or another L2Npc</li>
 	 * <li>The target isn't dead, isn't invulnerable, isn't in silent moving mode AND too far (>100)</li>
 	 * <li>The target is in the actor Aggro range and is at the same height</li>
-	 * <li>The L2PcInstance target has karma (=PK)</li><BR><BR>
+	 * <li>The L2Player target has karma (=PK)</li><BR><BR>
 	 * 
 	 * <B><U> Actor is a L2MonsterInstance</U> :</B><BR><BR>
 	 * <li>The target isn't a Folk, a Door or another L2Npc</li>
@@ -188,10 +188,10 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				return false;
 		}
 		
-		// Check if the target is a L2PcInstance
-		if (target instanceof L2PcInstance)
+		// Check if the target is a L2Player
+		if (target instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)target;
+			L2Player player = (L2Player)target;
 			// Don't take the aggro if the GM has the access level below or equal to GM_DONT_TAKE_AGGRO
 			if (player.isGM() && player.getAccessLevel() <= Config.GM_DONT_TAKE_AGGRO)
 				return false;
@@ -222,7 +222,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		// Check if the target is a L2Summon
 		if (target instanceof L2Summon)
 		{
-			L2PcInstance owner = ((L2Summon)target).getOwner();
+			L2Player owner = ((L2Summon)target).getOwner();
 			if (owner != null)
 			{
 				// Don't take the aggro if the GM has the access level below or equal to GM_DONT_TAKE_AGGRO
@@ -238,8 +238,8 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		// Check if the actor is a L2GuardInstance
 		if (_actor instanceof L2GuardInstance)
 		{
-			// Check if the L2PcInstance target has karma (=PK)
-			if (target instanceof L2PcInstance && ((L2PcInstance)target).getKarma() > 0)
+			// Check if the L2Player target has karma (=PK)
+			if (target instanceof L2Player && ((L2Player)target).getKarma() > 0)
 				// Los Check
 				return GeoData.getInstance().canSeeTarget(me, target);
 			
@@ -261,8 +261,8 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			if (target instanceof L2Npc)
 				return false;
 			
-			// Check if the L2PcInstance target has karma (=PK)
-			if (target instanceof L2PcInstance && ((L2PcInstance)target).getKarma() > 0)
+			// Check if the L2Player target has karma (=PK)
+			if (target instanceof L2Player && ((L2Player)target).getKarma() > 0)
 				// Los Check
 				return GeoData.getInstance().canSeeTarget(me, target);
 			return false;
@@ -455,9 +455,9 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				 * If it is, then check to see if the aggro trigger
 				 * is a festival participant...if so, move to attack it.
 				 */
-				if ((_actor instanceof L2FestivalMonsterInstance) && obj instanceof L2PcInstance)
+				if ((_actor instanceof L2FestivalMonsterInstance) && obj instanceof L2Player)
 				{
-					L2PcInstance targetPlayer = (L2PcInstance)obj;
+					L2Player targetPlayer = (L2Player)obj;
 					
 					if (!(targetPlayer.isFestivalParticipant()))
 						continue;
@@ -471,12 +471,12 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				 * the range.  Perhaps we need a short knownlist of range = aggroRange for just
 				 * people who are actively within the npc's aggro range?...(Fulminus)
 				// notify AI that a playable instance came within aggro range
-				if ((obj instanceof L2PcInstance) || (obj instanceof L2Summon))
+				if ((obj instanceof L2Player) || (obj instanceof L2Summon))
 				{
 				    if ( !((L2Creature)obj).isAlikeDead()
 				            && !npc.isInsideRadius(obj, npc.getAggroRange(), true, false) )
 				    {
-				        L2PcInstance targetPlayer = (obj instanceof L2PcInstance)? (L2PcInstance) obj: ((L2Summon) obj).getOwner();
+				        L2Player targetPlayer = (obj instanceof L2Player)? (L2Player) obj: ((L2Summon) obj).getOwner();
 				        if (npc.getTemplate().getEventQuests(Quest.QuestEventType.ON_AGGRO_RANGE_ENTER) !=null)
 				            for (Quest quest: npc.getTemplate().getEventQuests(Quest.QuestEventType.ON_AGGRO_RANGE_ENTER))
 				                quest.notifyAggroRangeEnter(npc, targetPlayer, (obj instanceof L2Summon));
@@ -512,7 +512,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				
 				if (aggro + _globalAggro > 0)
 				{
-					// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+					// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2Player
 					if (!_actor.isRunning())
 						_actor.setRunning();
 					
@@ -712,7 +712,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			// Check if the actor is running
 			if (_actor.isRunning())
 			{
-				// Set the actor movement type to walk and send Server->Client packet ChangeMoveType to all others L2PcInstance
+				// Set the actor movement type to walk and send Server->Client packet ChangeMoveType to all others L2Player
 				_actor.setWalking();
 				
 				// Calculate a new attack timeout
@@ -777,12 +777,12 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 										.getIntention() == CtrlIntention.AI_INTENTION_ACTIVE)
 								&& GeoData.getInstance().canSeeTarget(_actor, npc))
 						{
-							if ((originalAttackTarget instanceof L2PcInstance)
+							if ((originalAttackTarget instanceof L2Player)
 									|| (originalAttackTarget instanceof L2Summon))
 							{
-								L2PcInstance player =
-										(originalAttackTarget instanceof L2PcInstance)
-												? (L2PcInstance)originalAttackTarget : ((L2Summon)originalAttackTarget)
+								L2Player player =
+										(originalAttackTarget instanceof L2Player)
+												? (L2Player)originalAttackTarget : ((L2Summon)originalAttackTarget)
 														.getOwner();
 								Quest[] quests = npc.getTemplate().getEventQuests(Quest.QuestEventType.ON_FACTION_CALL);
 								if (quests != null)
@@ -1575,7 +1575,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Init the attack : Calculate the attack timeout, Set the _globalAggro to 0, Add the attacker to the actor _aggroList</li>
-	 * <li>Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance</li>
+	 * <li>Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2Player</li>
 	 * <li>Set the Intention to AI_INTENTION_ATTACK</li><BR><BR>
 	 * 
 	 * @param attacker The L2Creature that attacks the actor
@@ -1601,7 +1601,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		if (!_actor.isCoreAIDisabled())
 			((L2Attackable)_actor).addDamageHate(attacker, 0, 1);
 		
-		// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+		// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2Player
 		if (!_actor.isRunning())
 			_actor.setRunning();
 		
@@ -1644,7 +1644,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 			// Set the actor AI Intention to AI_INTENTION_ATTACK
 			if (getIntention() != CtrlIntention.AI_INTENTION_ATTACK)
 			{
-				// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance
+				// Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2Player
 				if (!_actor.isRunning())
 					_actor.setRunning();
 				

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -25,13 +25,13 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ValidateLocationInVehicle extends L2ServerPacket
 {
 	private static final String _S__73_ValidateLocationInVehicle = "[S] 73 ValidateLocationInVehicle";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
 	/**
 	 * 0x73 ValidateLocationInVehicle         hdd
 	 * @param _characters
 	 */
-	public ValidateLocationInVehicle(L2PcInstance player)
+	public ValidateLocationInVehicle(L2Player player)
 	{
 		_activeChar = player;
 	}

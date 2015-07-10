@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.usercommandhandlers;
 
 import java.util.Calendar;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -27,7 +27,7 @@ public class Birthday implements IUserCommandHandler
 	private static final int[] COMMAND_IDS = { 126 };
 	
 	@Override
-	public boolean useUserCommand(int id, L2PcInstance activeChar)
+	public boolean useUserCommand(int id, L2Player activeChar)
 	{
 		Calendar bDay = activeChar.getCreationDate();
 		SystemMessage sm = new SystemMessage(SystemMessageId.C1_BIRTHDAY_IS_S3_S4_S2);

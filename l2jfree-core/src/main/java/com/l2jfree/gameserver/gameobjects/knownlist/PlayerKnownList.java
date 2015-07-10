@@ -17,42 +17,42 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.server.DeleteObject;
 import com.l2jfree.gameserver.network.packets.server.SpawnItem;
 
 public final class PlayerKnownList extends PlayableKnownList
 {
-	public PlayerKnownList(L2PcInstance activeChar)
+	public PlayerKnownList(L2Player activeChar)
 	{
 		super(activeChar);
 	}
 	
 	/**
-	 * Add a visible L2Object to L2PcInstance _knownObjects and _knownPlayer (if necessary) and send Server-Client Packets needed to inform the L2PcInstance of its state and actions in progress.<BR><BR>
+	 * Add a visible L2Object to L2Player _knownObjects and _knownPlayer (if necessary) and send Server-Client Packets needed to inform the L2Player of its state and actions in progress.<BR><BR>
 	 *
 	 * <B><U> object is a L2ItemInstance </U> :</B><BR><BR>
-	 * <li> Send Server-Client Packet DropItem/SpawnItem to the L2PcInstance </li><BR><BR>
+	 * <li> Send Server-Client Packet DropItem/SpawnItem to the L2Player </li><BR><BR>
 	 *
 	 * <B><U> object is a L2DoorInstance </U> :</B><BR><BR>
-	 * <li> Send Server-Client Packets DoorInfo and DoorStatusUpdate to the L2PcInstance </li>
-	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance </li><BR><BR>
+	 * <li> Send Server-Client Packets DoorInfo and DoorStatusUpdate to the L2Player </li>
+	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2Player </li><BR><BR>
 	 *
 	 * <B><U> object is a L2Npc </U> :</B><BR><BR>
-	 * <li> Send Server-Client Packet NpcInfo to the L2PcInstance </li>
-	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance </li><BR><BR>
+	 * <li> Send Server-Client Packet NpcInfo to the L2Player </li>
+	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2Player </li><BR><BR>
 	 *
 	 * <B><U> object is a L2Summon </U> :</B><BR><BR>
-	 * <li> Send Server-Client Packet NpcInfo/PetItemList (if the L2PcInstance is the owner) to the L2PcInstance </li>
-	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance </li><BR><BR>
+	 * <li> Send Server-Client Packet NpcInfo/PetItemList (if the L2Player is the owner) to the L2Player </li>
+	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2Player </li><BR><BR>
 	 *
-	 * <B><U> object is a L2PcInstance </U> :</B><BR><BR>
-	 * <li> Send Server-Client Packet CharInfo to the L2PcInstance </li>
-	 * <li> If the object has a private store, Send Server-Client Packet PrivateStoreMsgSell to the L2PcInstance </li>
-	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance </li><BR><BR>
+	 * <B><U> object is a L2Player </U> :</B><BR><BR>
+	 * <li> Send Server-Client Packet CharInfo to the L2Player </li>
+	 * <li> If the object has a private store, Send Server-Client Packet PrivateStoreMsgSell to the L2Player </li>
+	 * <li> Send Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2Player </li><BR><BR>
 	 *
 	 * @param object The L2Object to add to _knownObjects and _knownPlayer
 	 */
@@ -62,7 +62,7 @@ public final class PlayerKnownList extends PlayableKnownList
 		if (!super.addKnownObject(object))
 			return false;
 		
-		if (object instanceof L2PcInstance && ((L2PcInstance)object).inObserverMode())
+		if (object instanceof L2Player && ((L2Player)object).inObserverMode())
 			return false;
 		
 		sendInfoOf(object);
@@ -74,7 +74,7 @@ public final class PlayerKnownList extends PlayableKnownList
 	{
 		for (L2Object object : getKnownObjects().values())
 		{
-			if (object instanceof L2PcInstance && ((L2PcInstance)object).inObserverMode())
+			if (object instanceof L2Player && ((L2Player)object).inObserverMode())
 				continue;
 			
 			sendInfoOf(object);
@@ -96,7 +96,7 @@ public final class PlayerKnownList extends PlayableKnownList
 			
 			if (object instanceof L2Creature)
 			{
-				// Update the state of the L2Creature object client side by sending Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance
+				// Update the state of the L2Creature object client side by sending Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2Player
 				L2Creature obj = (L2Creature)object;
 				if (obj.getAI() != null)
 					obj.getAI().describeStateToPlayer(getActiveChar());
@@ -105,7 +105,7 @@ public final class PlayerKnownList extends PlayableKnownList
 	}
 	
 	/**
-	 * Remove a L2Object from L2PcInstance _knownObjects and _knownPlayer (if necessary) and send Server-Client Packet DeleteObject to the L2PcInstance.<BR><BR>
+	 * Remove a L2Object from L2Player _knownObjects and _knownPlayer (if necessary) and send Server-Client Packet DeleteObject to the L2Player.<BR><BR>
 	 *
 	 * @param object The L2Object to remove from _knownObjects and _knownPlayer
 	 *
@@ -116,7 +116,7 @@ public final class PlayerKnownList extends PlayableKnownList
 		if (!super.removeKnownObject(object))
 			return false;
 		
-		// Send Server-Client Packet DeleteObject to the L2PcInstance
+		// Send Server-Client Packet DeleteObject to the L2Player
 		getActiveChar().sendPacket(new DeleteObject(object));
 		
 		if (Config.TEST_KNOWNLIST && getActiveChar().isGM() && object instanceof L2Npc)
@@ -130,9 +130,9 @@ public final class PlayerKnownList extends PlayableKnownList
 	// =========================================================
 	// Property - Public
 	@Override
-	public final L2PcInstance getActiveChar()
+	public final L2Player getActiveChar()
 	{
-		return (L2PcInstance)_activeChar;
+		return (L2Player)_activeChar;
 	}
 	
 	@Override
@@ -173,7 +173,7 @@ public final class PlayerKnownList extends PlayableKnownList
 	@Override
 	public final boolean tryRemoveObject(L2Object obj)
 	{
-		final L2PcInstance pc = getActiveChar();
+		final L2Player pc = getActiveChar();
 		
 		if (obj instanceof L2BoatInstance)
 		{

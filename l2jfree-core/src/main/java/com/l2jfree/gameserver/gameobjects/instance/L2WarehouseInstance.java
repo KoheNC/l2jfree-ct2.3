@@ -18,6 +18,7 @@ import java.util.Map;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerFreight;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.TownManager;
@@ -69,7 +70,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		return "data/html/warehouse/" + pom + ".htm";
 	}
 	
-	private void showRetrieveWindow(L2PcInstance player, WarehouseListType itemtype, byte sortorder)
+	private void showRetrieveWindow(L2Player player, WarehouseListType itemtype, byte sortorder)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		player.setActiveWarehouse(player.getWarehouse());
@@ -90,7 +91,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 			player.sendPacket(new WareHouseWithdrawalList(player, WareHouseWithdrawalList.PRIVATE));
 	}
 	
-	private void showDepositWindow(L2PcInstance player)
+	private void showDepositWindow(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		player.setActiveWarehouse(player.getWarehouse());
@@ -101,7 +102,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		player.sendPacket(new WareHouseDepositList(player, WareHouseDepositList.PRIVATE));
 	}
 	
-	private void showDepositWindowClan(L2PcInstance player)
+	private void showDepositWindowClan(L2Player player)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		if (player.getClan() != null)
@@ -123,7 +124,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		}
 	}
 	
-	private void showWithdrawWindowClan(L2PcInstance player, WarehouseListType itemtype, byte sortorder)
+	private void showWithdrawWindowClan(L2Player player, WarehouseListType itemtype, byte sortorder)
 	{
 		if (player.getClan() == null || player.getClan().getLevel() == 0)
 		{
@@ -149,7 +150,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	private void showWithdrawWindowFreight(L2PcInstance player, WarehouseListType itemtype, byte sortorder)
+	private void showWithdrawWindowFreight(L2Player player, WarehouseListType itemtype, byte sortorder)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		if (_log.isDebugEnabled())
@@ -189,7 +190,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		}
 	}
 	
-	private void showDepositWindowFreight(L2PcInstance player)
+	private void showDepositWindowFreight(L2Player player)
 	{
 		// No other chars in the account of this player
 		if (player.getAccountChars().size() == 0)
@@ -215,7 +216,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		}
 	}
 	
-	private void showDepositWindowFreight(L2PcInstance player, int obj_Id)
+	private void showDepositWindowFreight(L2Player player, int obj_Id)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -237,7 +238,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		// Lil check to prevent enchant exploit
 		if (player.getActiveEnchantItem() != null)

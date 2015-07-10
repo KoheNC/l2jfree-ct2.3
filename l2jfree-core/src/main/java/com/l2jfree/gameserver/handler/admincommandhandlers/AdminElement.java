@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.Elementals;
@@ -29,7 +29,7 @@ public class AdminElement implements IAdminCommandHandler
 			"admin_setlb", "admin_setlw", "admin_setls" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		int armorType = -1;
 		
@@ -82,16 +82,16 @@ public class AdminElement implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void setElement(L2PcInstance activeChar, byte type, int value, int armorType)
+	private void setElement(L2Player activeChar, byte type, int value, int armorType)
 	{
 		// get the target
 		L2Object target = activeChar.getTarget();
 		if (target == null)
 			target = activeChar;
-		L2PcInstance player = null;
-		if (target instanceof L2PcInstance)
+		L2Player player = null;
+		if (target instanceof L2Player)
 		{
-			player = (L2PcInstance)target;
+			player = (L2Player)target;
 		}
 		else
 		{

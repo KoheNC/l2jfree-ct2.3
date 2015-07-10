@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.entity.Castle;
@@ -46,7 +47,7 @@ public class L2CastleMagicianInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void showChatWindow(L2PcInstance player, int val)
+	public void showChatWindow(L2Player player, int val)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		String filename = "data/html/castlemagician/magician-no.htm";
@@ -73,7 +74,7 @@ public class L2CastleMagicianInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.equals("gotoleader"))
 		{
@@ -130,7 +131,7 @@ public class L2CastleMagicianInstance extends L2NpcInstance
 			super.onBypassFeedback(player, command);
 	}
 	
-	protected int validateCondition(L2PcInstance player)
+	protected int validateCondition(L2Player player)
 	{
 		if (player.isGM())
 			return COND_OWNER;

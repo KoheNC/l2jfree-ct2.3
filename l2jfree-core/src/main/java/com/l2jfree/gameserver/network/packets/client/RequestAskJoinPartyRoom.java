@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -44,7 +44,7 @@ public class RequestAskJoinPartyRoom extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -55,7 +55,7 @@ public class RequestAskJoinPartyRoom extends L2ClientPacket
 		}
 		
 		L2PartyRoom room = activeChar.getPartyRoom();
-		L2PcInstance target = L2World.getInstance().getPlayer(_name);
+		L2Player target = L2World.getInstance().getPlayer(_name);
 		if (target == null || target == activeChar || room == null)
 		{
 			sendAF();

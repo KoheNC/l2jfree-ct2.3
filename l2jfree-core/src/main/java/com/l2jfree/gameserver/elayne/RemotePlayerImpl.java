@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.elayne;
 
 import java.rmi.RemoteException;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * 
@@ -25,9 +25,9 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 public class RemotePlayerImpl implements IRemotePlayer
 {
 	
-	private L2PcInstance _player;
+	private L2Player _player;
 	
-	public RemotePlayerImpl(L2PcInstance character)
+	public RemotePlayerImpl(L2Player character)
 	{
 		_player = character;
 	}

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.util;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -31,7 +31,7 @@ public final class Broadcast
 	public static void toKnownPlayers(L2Creature character, L2ServerPacket mov)
 	{
 		if (!character.getKnownList().getKnownPlayers().isEmpty())
-			for (L2PcInstance player : character.getKnownList().getKnownPlayers().values())
+			for (L2Player player : character.getKnownList().getKnownPlayers().values())
 				if (player != null)
 					player.sendPacket(mov);
 	}
@@ -50,7 +50,7 @@ public final class Broadcast
 		}
 		
 		if (!character.getKnownList().getKnownPlayers().isEmpty())
-			for (L2PcInstance player : character.getKnownList().getKnownPlayers().values())
+			for (L2Player player : character.getKnownList().getKnownPlayers().values())
 				if (character.isInsideRadius(player, radius, false, false))
 					if (player != null)
 						player.sendPacket(mov);
@@ -70,7 +70,7 @@ public final class Broadcast
 		}
 		
 		if (!character.getKnownList().getKnownPlayers().isEmpty())
-			for (L2PcInstance player : character.getKnownList().getKnownPlayers().values())
+			for (L2Player player : character.getKnownList().getKnownPlayers().values())
 				if (character.getDistanceSq(player) <= radiusSq)
 					if (player != null)
 						player.sendPacket(mov);
@@ -78,31 +78,31 @@ public final class Broadcast
 	
 	public static void toSelfAndKnownPlayers(L2Creature character, L2ServerPacket mov)
 	{
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).sendPacket(mov);
+		if (character instanceof L2Player)
+			((L2Player)character).sendPacket(mov);
 		
 		toKnownPlayers(character, mov);
 	}
 	
 	public static void toSelfAndKnownPlayersInRadius(L2Creature character, L2ServerPacket mov, int radius)
 	{
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).sendPacket(mov);
+		if (character instanceof L2Player)
+			((L2Player)character).sendPacket(mov);
 		
 		toKnownPlayersInRadius(character, mov, radius);
 	}
 	
 	public static void toSelfAndKnownPlayersInRadius(L2Creature character, L2ServerPacket mov, long radiusSq)
 	{
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).sendPacket(mov);
+		if (character instanceof L2Player)
+			((L2Player)character).sendPacket(mov);
 		
 		toKnownPlayersInRadius(character, mov, radiusSq);
 	}
 	
 	public static void toAllOnlinePlayers(L2ServerPacket mov)
 	{
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 			if (player != null)
 				player.sendPacket(mov);
 	}

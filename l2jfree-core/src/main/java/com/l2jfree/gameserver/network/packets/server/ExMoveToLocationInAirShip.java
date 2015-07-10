@@ -14,13 +14,13 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class ExMoveToLocationInAirShip extends L2ServerPacket
 {
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final L2CharPosition _destination;
 	
 	//private L2CharPosition _origin;
@@ -29,7 +29,7 @@ public class ExMoveToLocationInAirShip extends L2ServerPacket
 	 * @param destination
 	 * @param origin
 	 */
-	public ExMoveToLocationInAirShip(L2PcInstance player, L2CharPosition destination)
+	public ExMoveToLocationInAirShip(L2Player player, L2CharPosition destination)
 	{
 		_activeChar = player;
 		_destination = destination;

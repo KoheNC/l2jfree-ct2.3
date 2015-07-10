@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillLearnSkill;
@@ -37,10 +37,10 @@ public class LearnSkill implements ISkillHandler
 	{
 		L2SkillLearnSkill skill = (L2SkillLearnSkill)skill0;
 		
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
-		final L2PcInstance player = ((L2PcInstance)activeChar);
+		final L2Player player = ((L2Player)activeChar);
 		
 		for (int i = 0; i < skill.getNewSkillId().length; i++)
 		{

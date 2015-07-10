@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -26,7 +26,7 @@ public class ExBrExtraUserInfo extends L2ServerPacket
 	private final int _charObjId;
 	private final int _val;
 	
-	protected ExBrExtraUserInfo(L2PcInstance player)
+	protected ExBrExtraUserInfo(L2Player player)
 	{
 		_charObjId = player.getObjectId();
 		_val = player.getAfroHaircutId();

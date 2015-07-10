@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -43,7 +43,7 @@ public class AnswerTradeRequest extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getActiveChar(), partner = null;
+		L2Player player = getActiveChar(), partner = null;
 		if (player == null)
 			return;
 		
@@ -99,7 +99,7 @@ public class AnswerTradeRequest extends L2ClientPacket
 		}
 	}
 	
-	private final void clearRequestStatus(L2PcInstance player, L2PcInstance partner)
+	private final void clearRequestStatus(L2Player player, L2Player partner)
 	{
 		if (player != null)
 			player.setActiveRequester(null);

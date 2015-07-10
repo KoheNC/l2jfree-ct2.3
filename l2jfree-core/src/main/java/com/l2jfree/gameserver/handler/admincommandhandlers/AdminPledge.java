@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
@@ -41,12 +41,12 @@ public class AdminPledge implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_pledge" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		L2Object target = activeChar.getTarget();
-		L2PcInstance player = null;
-		if (target instanceof L2PcInstance)
-			player = (L2PcInstance)target;
+		L2Player player = null;
+		if (target instanceof L2Player)
+			player = (L2Player)target;
 		else
 		{
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);

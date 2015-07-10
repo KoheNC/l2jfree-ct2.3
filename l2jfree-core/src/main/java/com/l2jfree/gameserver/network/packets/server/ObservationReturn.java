@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -26,12 +26,12 @@ public class ObservationReturn extends L2ServerPacket
 {
 	// ddSS
 	private static final String _S__E0_OBSERVRETURN = "[S] E0 ObservationReturn";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
 	/**
 	 * @param _characters
 	 */
-	public ObservationReturn(L2PcInstance observer)
+	public ObservationReturn(L2Player observer)
 	{
 		_activeChar = observer;
 	}

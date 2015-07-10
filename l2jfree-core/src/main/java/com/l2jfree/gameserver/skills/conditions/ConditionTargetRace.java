@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.skills.Env;
 
@@ -30,9 +30,9 @@ final class ConditionTargetRace extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		if (!(env.target instanceof L2PcInstance))
+		if (!(env.target instanceof L2Player))
 			return false;
 		
-		return ((L2PcInstance)env.target).getRace() == _race;
+		return ((L2Player)env.target).getRace() == _race;
 	}
 }

@@ -29,7 +29,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.ClanWarehouse;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -465,7 +465,7 @@ public class CastleManorManager
 			}
 			
 			// Sending notification to a clan leader
-			L2PcInstance clanLeader = L2World.getInstance().getPlayer(clan.getLeader().getName());
+			L2Player clanLeader = L2World.getInstance().getPlayer(clan.getLeader().getName());
 			if (clanLeader != null)
 				clanLeader.sendPacket(SystemMessageId.THE_MANOR_INFORMATION_HAS_BEEN_UPDATED);
 			
@@ -520,7 +520,7 @@ public class CastleManorManager
 			if (notFunc)
 			{
 				L2Clan clan = ClanTable.getInstance().getClan(c.getOwnerId());
-				L2PcInstance clanLeader = null;
+				L2Player clanLeader = null;
 				if (clan != null)
 					clanLeader = L2World.getInstance().getPlayer(clan.getLeader().getName());
 				if (clanLeader != null)

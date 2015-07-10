@@ -23,8 +23,8 @@ package com.l2jfree.gameserver.model.entity.events.TvTInstanced;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
@@ -42,7 +42,7 @@ public class TvTITeam
 	
 	private boolean _sitForced = false;
 	
-	private final CopyOnWriteArrayList<L2PcInstance> _players = new CopyOnWriteArrayList<L2PcInstance>();
+	private final CopyOnWriteArrayList<L2Player> _players = new CopyOnWriteArrayList<L2Player>();
 	
 	public TvTITeam(String teamName)
 	{
@@ -78,7 +78,7 @@ public class TvTITeam
 	
 	public void setUserData(int i)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			switch (i)
 			{
@@ -112,7 +112,7 @@ public class TvTITeam
 		else
 			setSitForce(true);
 		
-		for (L2PcInstance player : getPlayers())
+		for (L2Player player : getPlayers())
 		{
 			if (player != null)
 			{
@@ -146,14 +146,14 @@ public class TvTITeam
 		if (!Config.TVTI_ON_START_REMOVE_ALL_EFFECTS)
 			return;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 			if (player != null)
 				player.stopAllEffects();
 	}
 	
 	public void removeParty()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 			if (player != null)
 				// Remove player from thier party
 				if (player.getParty() != null)
@@ -165,7 +165,7 @@ public class TvTITeam
 		if (!Config.TVTI_ON_START_UNSUMMON_PET)
 			return;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 			if (player != null)
 				// Remove Summon's buffs
 				if (player.getPet() != null)
@@ -180,7 +180,7 @@ public class TvTITeam
 	
 	public void teleportToSpawn()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 			if (player != null)
 			{
 				int offSetX = Rnd.get(-getSpawnRadius(), getSpawnRadius());
@@ -189,7 +189,7 @@ public class TvTITeam
 			}
 	}
 	
-	public void teleportToSpawn(L2PcInstance player)
+	public void teleportToSpawn(L2Player player)
 	{
 		int offSetX = Rnd.get(-getSpawnRadius(), getSpawnRadius());
 		int offSetY = Rnd.get(-getSpawnRadius(), getSpawnRadius());
@@ -198,7 +198,7 @@ public class TvTITeam
 	
 	public void teleportToFinish()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 			if (player != null)
 				if (player.isOnline() == 1)
 				{
@@ -211,13 +211,13 @@ public class TvTITeam
 					player.getPosition().setWorldPosition(TvTIMain.getNpcX(), TvTIMain.getNpcY(), TvTIMain.getNpcZ());
 	}
 	
-	public void addPlayer(L2PcInstance player)
+	public void addPlayer(L2Player player)
 	{
 		_players.add(player);
 		player._inEventTvTi = true;
 	}
 	
-	public void removePlayer(L2PcInstance player)
+	public void removePlayer(L2Player player)
 	{
 		player._inEventTvTi = false;
 		player.getAppearance().setNameColor(player._originalNameColorTvTi);
@@ -229,11 +229,11 @@ public class TvTITeam
 	
 	public void setInstance(int instanceId)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 			player.setInstanceId(instanceId);
 	}
 	
-	public CopyOnWriteArrayList<L2PcInstance> getPlayers()
+	public CopyOnWriteArrayList<L2Player> getPlayers()
 	{
 		return _players;
 	}
@@ -275,7 +275,7 @@ public class TvTITeam
 		_spawnLocZ = locZ;
 	}
 	
-	public void setSpawn(L2PcInstance activeChar)
+	public void setSpawn(L2Player activeChar)
 	{
 		_spawnLocX = activeChar.getX();
 		_spawnLocY = activeChar.getY();

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -25,7 +25,7 @@ public final class PartySmallWindowAll extends L2ServerPacket
 	private static final String _S__4E_PARTYSMALLWINDOWALL = "[S] 4e PartySmallWindowAll [ddd (dsddddddddddd)]";
 	
 	private final L2Party _party;
-	private final L2PcInstance _leader;
+	private final L2Player _leader;
 	
 	public PartySmallWindowAll(L2Party party)
 	{
@@ -34,14 +34,14 @@ public final class PartySmallWindowAll extends L2ServerPacket
 	}
 	
 	@Override
-	protected void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2Player activeChar)
 	{
 		writeC(0x4e);
 		writeD(_leader.getObjectId()); // c3 party leader id
 		writeD(_party.getLootDistribution());//c3 party loot type (0,1,2,....)
 		writeD(_party.getPartyMembers().size() - 1);
 		
-		for (L2PcInstance member : _party.getPartyMembers())
+		for (L2Player member : _party.getPartyMembers())
 		{
 			if (member != null && member != activeChar)
 			{

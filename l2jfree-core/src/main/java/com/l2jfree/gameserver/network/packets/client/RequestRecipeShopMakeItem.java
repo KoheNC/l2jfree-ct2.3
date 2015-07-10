@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.RecipeController;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -47,7 +47,7 @@ public class RequestRecipeShopMakeItem extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -61,13 +61,13 @@ public class RequestRecipeShopMakeItem extends L2ClientPacket
 		if (object == null)
 			object = L2World.getInstance().getPlayer(_id);
 		
-		if (!(object instanceof L2PcInstance))
+		if (!(object instanceof L2Player))
 		{
 			requestFailed(SystemMessageId.TARGET_IS_INCORRECT);
 			return;
 		}
 		
-		L2PcInstance manufacturer = (L2PcInstance)object;
+		L2Player manufacturer = (L2Player)object;
 		
 		if (!activeChar.isSameInstance(manufacturer))
 		{

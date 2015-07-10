@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.gameobjects.view;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -27,9 +27,9 @@ import com.l2jfree.gameserver.model.L2Transformation;
 /**
  * @author NB4L1
  */
-public final class PlayerView extends CreatureView<L2PcInstance> implements UniversalCharView
+public final class PlayerView extends CreatureView<L2Player> implements UniversalCharView
 {
-	public PlayerView(L2PcInstance activeChar)
+	public PlayerView(L2Player activeChar)
 	{
 		super(activeChar);
 	}
@@ -39,7 +39,7 @@ public final class PlayerView extends CreatureView<L2PcInstance> implements Univ
 	{
 		super.refreshImpl();
 		
-		final L2PcInstance cha = _activeChar;
+		final L2Player cha = _activeChar;
 		final ObjectPosition position = cha.getPosition();
 		final PlayerAppearance appearance = cha.getAppearance();
 		final PlayerStat stat = cha.getStat();

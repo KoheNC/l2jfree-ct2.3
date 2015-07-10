@@ -34,8 +34,8 @@ import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Party;
@@ -62,7 +62,7 @@ public class DM
 		public int _countDMkills;
 		public int _originalKarmaDM;
 		
-		private DMPlayerInfo(L2PcInstance player)
+		private DMPlayerInfo(L2Player player)
 		{
 			super(player);
 		}
@@ -77,14 +77,14 @@ public class DM
 	private final static Log _log = LogFactory.getLog(DM.class);
 	public static String _eventName = "", _eventDesc = "", _joiningLocationName = "";
 	public static CopyOnWriteArrayList<String> _savePlayers = new CopyOnWriteArrayList<String>();
-	public static CopyOnWriteArrayList<L2PcInstance> _players = new CopyOnWriteArrayList<L2PcInstance>();
+	public static CopyOnWriteArrayList<L2Player> _players = new CopyOnWriteArrayList<L2Player>();
 	public static boolean _joining = false, _teleport = false, _started = false, _sitForced = false;
 	public static L2Spawn _npcSpawn;
-	public static L2PcInstance _topPlayer;
+	public static L2Player _topPlayer;
 	public static int _npcId = 0, _npcX = 0, _npcY = 0, _npcZ = 0, _rewardId = 0, _rewardAmount = 0, _topKills = 0,
 			_minlvl = 0, _maxlvl = 0, _playerColors = 0, _playerX = 0, _playerY = 0, _playerZ = 0;
 	
-	public static void setNpcPos(L2PcInstance activeChar)
+	public static void setNpcPos(L2Player activeChar)
 	{
 		_npcX = activeChar.getX();
 		_npcY = activeChar.getY();
@@ -101,7 +101,7 @@ public class DM
 		return _maxlvl > minlvl;
 	}
 	
-	public static void setPlayersPos(L2PcInstance activeChar)
+	public static void setPlayersPos(L2Player activeChar)
 	{
 		_playerX = activeChar.getX();
 		_playerY = activeChar.getY();
@@ -113,7 +113,7 @@ public class DM
 		return !(_started || _teleport || _joining);
 	}
 	
-	public static void startJoin(L2PcInstance activeChar)
+	public static void startJoin(L2Player activeChar)
 	{
 		if (!startJoinOk())
 		{
@@ -134,7 +134,7 @@ public class DM
 				|| _rewardAmount == 0 || _playerX == 0 || _playerY == 0 || _playerZ == 0);
 	}
 	
-	private static void spawnEventNpc(L2PcInstance activeChar)
+	private static void spawnEventNpc(L2Player activeChar)
 	{
 		L2NpcTemplate tmpl = NpcTable.getInstance().getTemplate(_npcId);
 		
@@ -185,7 +185,7 @@ public class DM
 			{
 				DM.sit();
 				
-				for (L2PcInstance player : DM._players)
+				for (L2Player player : DM._players)
 				{
 					if (player != null)
 					{
@@ -221,7 +221,7 @@ public class DM
 		_teleport = true;
 	}
 	
-	public static void startEvent(L2PcInstance activeChar)
+	public static void startEvent(L2Player activeChar)
 	{
 		if (!startEventOk())
 		{
@@ -243,7 +243,7 @@ public class DM
 	
 	public static void setUserData()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			final DMPlayerInfo info = player.as(DMPlayerInfo.class);
 			info._originalKarmaDM = player.getKarma();
@@ -256,7 +256,7 @@ public class DM
 	
 	public static void removeUserData()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			final DMPlayerInfo info = player.as(DMPlayerInfo.class);
 			info._nameColorDM = -1;
@@ -267,7 +267,7 @@ public class DM
 		}
 	}
 	
-	public static void finishEvent(L2PcInstance activeChar)
+	public static void finishEvent(L2Player activeChar)
 	{
 		if (!finishEventOk())
 		{
@@ -299,7 +299,7 @@ public class DM
 	
 	public static void processTopPlayer()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player.as(DMPlayerInfo.class)._countDMkills > _topKills)
 			{
@@ -312,7 +312,7 @@ public class DM
 	/**
 	 * @param activeChar
 	 */
-	public static void rewardPlayer(L2PcInstance activeChar)
+	public static void rewardPlayer(L2Player activeChar)
 	{
 		if (_topPlayer != null)
 		{
@@ -330,7 +330,7 @@ public class DM
 			nhm.setHtml(replyMSG.moveToString());
 			_topPlayer.sendPacket(nhm);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+			// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 			_topPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 	}
@@ -352,7 +352,7 @@ public class DM
 	{
 		_sitForced = !_sitForced;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -412,12 +412,12 @@ public class DM
 		
 		_log.info("");
 		_log.info("##################################");
-		_log.info("# _players(CopyOnWriteArrayList<L2PcInstance>) #");
+		_log.info("# _players(CopyOnWriteArrayList<L2Player>) #");
 		_log.info("##################################");
 		
 		_log.info("Total Players : " + _players.size());
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 				_log.info("Name: " + player.getName() + " kills :" + player.as(DMPlayerInfo.class)._countDMkills);
@@ -441,7 +441,7 @@ public class DM
 		_eventDesc = "";
 		_joiningLocationName = "";
 		_savePlayers = new CopyOnWriteArrayList<String>();
-		_players = new CopyOnWriteArrayList<L2PcInstance>();
+		_players = new CopyOnWriteArrayList<L2Player>();
 		_topPlayer = null;
 		_npcSpawn = null;
 		_joining = false;
@@ -546,7 +546,7 @@ public class DM
 		}
 	}
 	
-	public static void showEventHtml(L2PcInstance eventPlayer, String objectId)
+	public static void showEventHtml(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -602,7 +602,7 @@ public class DM
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+			// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 		catch (Exception e)
@@ -611,7 +611,7 @@ public class DM
 		}
 	}
 	
-	public static void addPlayer(L2PcInstance player)
+	public static void addPlayer(L2Player player)
 	{
 		if (!addPlayerOk(player))
 			return;
@@ -624,7 +624,7 @@ public class DM
 		
 	}
 	
-	public static boolean addPlayerOk(L2PcInstance eventPlayer)
+	public static boolean addPlayerOk(L2Player eventPlayer)
 	{
 		if (GlobalRestrictions.isRestricted(eventPlayer, DMRestriction.class))
 		{
@@ -641,7 +641,7 @@ public class DM
 		return true;
 	}
 	
-	public static synchronized void addDisconnectedPlayer(L2PcInstance player)
+	public static synchronized void addDisconnectedPlayer(L2Player player)
 	{
 		if ((_teleport || _started) || _savePlayers.contains(player.getName()))
 		{
@@ -649,7 +649,7 @@ public class DM
 			{
 				player.stopAllEffects();
 			}
-			for (L2PcInstance p : _players)
+			for (L2Player p : _players)
 			{
 				if (p == null)
 				{
@@ -675,7 +675,7 @@ public class DM
 		}
 	}
 	
-	public static void removePlayer(L2PcInstance player)
+	public static void removePlayer(L2Player player)
 	{
 		if (player != null)
 		{
@@ -685,7 +685,7 @@ public class DM
 	
 	public static void cleanDM()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			removePlayer(player);
 		}
@@ -698,7 +698,7 @@ public class DM
 		_started = false;
 		_sitForced = false;
 		_topKills = 0;
-		_players = new CopyOnWriteArrayList<L2PcInstance>();
+		_players = new CopyOnWriteArrayList<L2Player>();
 		
 	}
 	
@@ -722,7 +722,7 @@ public class DM
 			@Override
 			public void run()
 			{
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null && player.isOnline() != 0)
 						player.teleToLocation(_npcX, _npcY, _npcZ, false);

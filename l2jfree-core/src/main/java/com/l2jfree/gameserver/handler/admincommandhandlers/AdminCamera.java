@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -30,7 +30,7 @@ public class AdminCamera implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_camera", "admin_camset", };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_camera"))
 			AdminHelpPage.showHelpPage(activeChar, "camera_menu.htm");

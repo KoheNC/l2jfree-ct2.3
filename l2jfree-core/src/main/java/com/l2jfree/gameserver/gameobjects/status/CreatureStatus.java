@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.Duel;
@@ -186,7 +186,7 @@ public class CreatureStatus
 				return false;
 		}
 		
-		L2PcInstance attackerPlayer = attacker.getActingPlayer();
+		L2Player attackerPlayer = attacker.getActingPlayer();
 		
 		// Additional prevention
 		// Check if player is GM and has sufficient rights to make damage
@@ -362,17 +362,17 @@ public class CreatureStatus
 	// ========================================================================
 	// Status Listeners
 	
-	private Set<L2PcInstance> _statusListeners;
+	private Set<L2Player> _statusListeners;
 	
-	public final Set<L2PcInstance> getStatusListeners()
+	public final Set<L2Player> getStatusListeners()
 	{
 		if (_statusListeners == null)
-			_statusListeners = new LazyFastSet<L2PcInstance>();
+			_statusListeners = new LazyFastSet<L2Player>();
 		
 		return _statusListeners;
 	}
 	
-	public final void addStatusListener(L2PcInstance player)
+	public final void addStatusListener(L2Player player)
 	{
 		synchronized (getStatusListeners())
 		{
@@ -381,7 +381,7 @@ public class CreatureStatus
 		}
 	}
 	
-	public final void removeStatusListener(L2PcInstance player)
+	public final void removeStatusListener(L2Player player)
 	{
 		synchronized (getStatusListeners())
 		{

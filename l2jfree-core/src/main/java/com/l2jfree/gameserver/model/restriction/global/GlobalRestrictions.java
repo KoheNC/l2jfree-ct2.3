@@ -25,8 +25,8 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeFlagInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -212,7 +212,7 @@ public final class GlobalRestrictions
 	 *         because it's already participating in one, or it's just simply in a forbidden state<br>
 	 *         <b>false</b> otherwise
 	 */
-	public static boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public static boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		// Avoid NPE and wrong usage
 		if (activeChar == null)
@@ -252,7 +252,7 @@ public final class GlobalRestrictions
 		return false;
 	}
 	
-	public static boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target)
+	public static boolean canInviteToParty(L2Player activeChar, L2Player target)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canInviteToParty.ordinal()])
 			if (!restriction.canInviteToParty(activeChar, target))
@@ -269,8 +269,8 @@ public final class GlobalRestrictions
 		if (activeChar == target)
 			return true;
 		
-		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
-		final L2PcInstance target_ = L2Object.getActingPlayer(target);
+		final L2Player attacker_ = L2Object.getActingPlayer(activeChar);
+		final L2Player target_ = L2Object.getActingPlayer(target);
 		
 		final boolean isOffensive = skill.isOffensive();
 		
@@ -299,8 +299,8 @@ public final class GlobalRestrictions
 	 */
 	public static boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage)
 	{
-		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
-		final L2PcInstance target_ = L2Object.getActingPlayer(target);
+		final L2Player attacker_ = L2Object.getActingPlayer(activeChar);
+		final L2Player target_ = L2Object.getActingPlayer(target);
 		
 		final boolean isOffensive = (skill == null || skill.isOffensive());
 		
@@ -308,7 +308,7 @@ public final class GlobalRestrictions
 	}
 	
 	private static boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
+			L2Player attacker_, L2Player target_, boolean isOffensive)
 	{
 		if (isProtected(activeChar, target, skill, sendMessage, attacker_, target_, isOffensive))
 			return true;
@@ -329,8 +329,8 @@ public final class GlobalRestrictions
 	 */
 	public static boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage)
 	{
-		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
-		final L2PcInstance target_ = L2Object.getActingPlayer(target);
+		final L2Player attacker_ = L2Object.getActingPlayer(activeChar);
+		final L2Player target_ = L2Object.getActingPlayer(target);
 		
 		final boolean isOffensive = (skill == null || skill.isOffensive());
 		
@@ -338,7 +338,7 @@ public final class GlobalRestrictions
 	}
 	
 	private static boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
+			L2Player attacker_, L2Player target_, boolean isOffensive)
 	{
 		if (!canTarget(activeChar, target, sendMessage, attacker_, target_))
 			return true;
@@ -396,14 +396,14 @@ public final class GlobalRestrictions
 	 */
 	public static boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage)
 	{
-		final L2PcInstance attacker_ = L2Object.getActingPlayer(activeChar);
-		final L2PcInstance target_ = L2Object.getActingPlayer(target);
+		final L2Player attacker_ = L2Object.getActingPlayer(activeChar);
+		final L2Player target_ = L2Object.getActingPlayer(target);
 		
 		return canTarget(activeChar, target, sendMessage, attacker_, target_);
 	}
 	
 	private static boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_)
+			L2Player attacker_, L2Player target_)
 	{
 		// if GM is invisible, exclude him from the normal gameplay
 		if (target_ != null && target_.isGM() && target_.getAppearance().isInvisible())
@@ -435,7 +435,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static boolean canRequestRevive(L2PcInstance activeChar)
+	public static boolean canRequestRevive(L2Player activeChar)
 	{
 		if (activeChar.isPendingRevive())
 			return false;
@@ -447,7 +447,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static boolean canTeleport(L2PcInstance activeChar)
+	public static boolean canTeleport(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canTeleport.ordinal()])
 			if (!restriction.canTeleport(activeChar))
@@ -459,7 +459,7 @@ public final class GlobalRestrictions
 	public static boolean canUseItemHandler(Class<? extends IItemHandler> clazz, int itemId, L2Playable activeChar,
 			L2ItemInstance item)
 	{
-		final L2PcInstance player = L2Object.getActingPlayer(activeChar);
+		final L2Player player = L2Object.getActingPlayer(activeChar);
 		
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canUseItemHandler.ordinal()])
 			if (!restriction.canUseItemHandler(clazz, itemId, activeChar, item, player))
@@ -468,7 +468,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static boolean canDropItem(L2PcInstance activeChar, int itemId, L2ItemInstance item)
+	public static boolean canDropItem(L2Player activeChar, int itemId, L2ItemInstance item)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canDropItem.ordinal()])
 			if (!restriction.canDropItem(activeChar, itemId, item))
@@ -477,7 +477,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static boolean canDestroyItem(L2PcInstance activeChar, int itemId, L2ItemInstance item)
+	public static boolean canDestroyItem(L2Player activeChar, int itemId, L2ItemInstance item)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canDestroyItem.ordinal()])
 			if (!restriction.canDestroyItem(activeChar, itemId, item))
@@ -493,7 +493,7 @@ public final class GlobalRestrictions
 		NEUTRAL;
 	}
 	
-	public static boolean isCombat(L2PcInstance activeChar, L2PcInstance target)
+	public static boolean isCombat(L2Player activeChar, L2Player target)
 	{
 		switch (getCombatState(activeChar, target))
 		{
@@ -505,7 +505,7 @@ public final class GlobalRestrictions
 		return false;
 	}
 	
-	public static CombatState getCombatState(L2PcInstance activeChar, L2PcInstance target)
+	public static CombatState getCombatState(L2Player activeChar, L2Player target)
 	{
 		if (activeChar == null || target == null)
 			return CombatState.NEUTRAL;
@@ -525,7 +525,7 @@ public final class GlobalRestrictions
 		return CombatState.NEUTRAL;
 	}
 	
-	public static boolean canStandUp(L2PcInstance activeChar)
+	public static boolean canStandUp(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canStandUp.ordinal()])
 			if (!restriction.canStandUp(activeChar))
@@ -534,7 +534,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static boolean canPickUp(L2PcInstance activeChar, L2ItemInstance item, L2PetInstance pet)
+	public static boolean canPickUp(L2Player activeChar, L2ItemInstance item, L2PetInstance pet)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.canPickUp.ordinal()])
 			if (!restriction.canPickUp(activeChar, item, pet))
@@ -543,7 +543,7 @@ public final class GlobalRestrictions
 		return true;
 	}
 	
-	public static int getNameColor(L2PcInstance activeChar)
+	public static int getNameColor(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.getNameColor.ordinal()])
 		{
@@ -556,7 +556,7 @@ public final class GlobalRestrictions
 		return -1;
 	}
 	
-	public static int getTitleColor(L2PcInstance activeChar)
+	public static int getTitleColor(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.getTitleColor.ordinal()])
 		{
@@ -641,7 +641,7 @@ public final class GlobalRestrictions
 	
 	// TODO
 	
-	public static void levelChanged(L2PcInstance activeChar)
+	public static void levelChanged(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.levelChanged.ordinal()])
 			restriction.levelChanged(activeChar);
@@ -653,21 +653,21 @@ public final class GlobalRestrictions
 			restriction.effectCreated(effect);
 	}
 	
-	public static void playerLoggedIn(L2PcInstance activeChar)
+	public static void playerLoggedIn(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.playerLoggedIn.ordinal()])
 			restriction.playerLoggedIn(activeChar);
 	}
 	
-	public static void playerDisconnected(L2PcInstance activeChar)
+	public static void playerDisconnected(L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.playerDisconnected.ordinal()])
 			restriction.playerDisconnected(activeChar);
 	}
 	
-	public static boolean playerKilled(L2Creature activeChar, L2PcInstance target)
+	public static boolean playerKilled(L2Creature activeChar, L2Player target)
 	{
-		final L2PcInstance killer = L2Object.getActingPlayer(activeChar);
+		final L2Player killer = L2Object.getActingPlayer(activeChar);
 		
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.playerKilled.ordinal()])
 			if (restriction.playerKilled(activeChar, target, killer))
@@ -676,7 +676,7 @@ public final class GlobalRestrictions
 		return false;
 	}
 	
-	public static void playerRevived(L2PcInstance player)
+	public static void playerRevived(L2Player player)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.playerRevived.ordinal()])
 			restriction.playerRevived(player);
@@ -699,13 +699,13 @@ public final class GlobalRestrictions
 			restriction.isInsideZoneStateChanged(activeChar, zone, isInsideZone);
 	}
 	
-	public static void instanceChanged(L2PcInstance activeChar, int oldInstance, int newInstance)
+	public static void instanceChanged(L2Player activeChar, int oldInstance, int newInstance)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.instanceChanged.ordinal()])
 			restriction.instanceChanged(activeChar, oldInstance, newInstance);
 	}
 	
-	public static boolean onBypassFeedback(L2Npc npc, L2PcInstance activeChar, String command)
+	public static boolean onBypassFeedback(L2Npc npc, L2Player activeChar, String command)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.onBypassFeedback.ordinal()])
 			if (restriction.onBypassFeedback(npc, activeChar, command))
@@ -714,7 +714,7 @@ public final class GlobalRestrictions
 		return false;
 	}
 	
-	public static boolean onAction(L2Npc npc, L2PcInstance activeChar)
+	public static boolean onAction(L2Npc npc, L2Player activeChar)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.onAction.ordinal()])
 			if (restriction.onAction(npc, activeChar))
@@ -723,7 +723,7 @@ public final class GlobalRestrictions
 		return false;
 	}
 	
-	public static boolean useVoicedCommand(String command, L2PcInstance activeChar, String target)
+	public static boolean useVoicedCommand(String command, L2Player activeChar, String target)
 	{
 		for (GlobalRestriction restriction : _restrictions[RestrictionMode.useVoicedCommand.ordinal()])
 			if (restriction.useVoicedCommand(command, activeChar, target))

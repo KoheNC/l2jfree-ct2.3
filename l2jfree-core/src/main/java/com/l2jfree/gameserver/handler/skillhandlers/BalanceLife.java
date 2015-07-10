@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -33,9 +33,9 @@ public final class BalanceLife implements ISkillHandler
 	{
 		SkillHandler.getInstance().useSkill(L2SkillType.BUFF, activeChar, skill, targets);
 		
-		L2PcInstance player = null;
-		if (activeChar instanceof L2PcInstance)
-			player = (L2PcInstance)activeChar;
+		L2Player player = null;
+		if (activeChar instanceof L2Player)
+			player = (L2Player)activeChar;
 		
 		double fullHP = 0;
 		double currentHPs = 0;
@@ -46,7 +46,7 @@ public final class BalanceLife implements ISkillHandler
 				continue;
 			else if (target != activeChar) // Player holding a cursed weapon can't be healed and can't heal
 			{
-				if (target instanceof L2PcInstance && ((L2PcInstance)target).isCursedWeaponEquipped())
+				if (target instanceof L2Player && ((L2Player)target).isCursedWeaponEquipped())
 					continue;
 				else if (player != null && player.isCursedWeaponEquipped())
 					continue;
@@ -65,7 +65,7 @@ public final class BalanceLife implements ISkillHandler
 				continue;
 			else if (target != activeChar) // Player holding a cursed weapon can't be healed and can't heal
 			{
-				if (target instanceof L2PcInstance && ((L2PcInstance)target).isCursedWeaponEquipped())
+				if (target instanceof L2Player && ((L2Player)target).isCursedWeaponEquipped())
 					continue;
 				else if (player != null && player.isCursedWeaponEquipped())
 					continue;
@@ -73,8 +73,8 @@ public final class BalanceLife implements ISkillHandler
 			
 			target.getStatus().increaseHp(target.getMaxHp() * percentHP - target.getStatus().getCurrentHp());
 			
-			if (target instanceof L2PcInstance)
-				((L2PcInstance)target).sendMessage(message);
+			if (target instanceof L2Player)
+				((L2Player)target).sendMessage(message);
 		}
 	}
 	

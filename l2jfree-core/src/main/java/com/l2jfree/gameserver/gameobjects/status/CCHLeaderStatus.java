@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.gameobjects.status;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2CCHBossInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CCHManager;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
@@ -36,7 +36,7 @@ public final class CCHLeaderStatus extends AttackableStatus
 	{
 		super.reduceHp0(value, attacker, awake, isDOT, isConsume);
 		
-		final L2PcInstance player = L2Object.getActingPlayer(attacker);
+		final L2Player player = L2Object.getActingPlayer(attacker);
 		if (player == null)
 			return;
 		

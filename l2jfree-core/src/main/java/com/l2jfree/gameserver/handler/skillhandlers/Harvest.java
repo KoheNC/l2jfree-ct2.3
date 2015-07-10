@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -39,10 +39,10 @@ public class Harvest implements ISkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
-		L2PcInstance activePlayer = (L2PcInstance)activeChar;
+		L2Player activePlayer = (L2Player)activeChar;
 		
 		InventoryUpdate iu = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		
@@ -124,7 +124,7 @@ public class Harvest implements ISkillHandler
 		}
 	}
 	
-	private boolean calcSuccess(L2PcInstance activePlayer, L2MonsterInstance target)
+	private boolean calcSuccess(L2Player activePlayer, L2MonsterInstance target)
 	{
 		int basicSuccess = 100;
 		int levelPlayer = activePlayer.getLevel();

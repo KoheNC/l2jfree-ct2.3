@@ -15,18 +15,18 @@
 package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 import com.l2jfree.util.ArrayBunch;
 
 public class PlayerFreight extends ItemContainer
 {
-	private final L2PcInstance _owner; // This is the L2PcInstance that owns this Freight;
+	private final L2Player _owner; // This is the L2Player that owns this Freight;
 	private int _activeLocationId;
 	private int _tempOwnerId = 0;
 	
-	public PlayerFreight(L2PcInstance owner)
+	public PlayerFreight(L2Player owner)
 	{
 		_owner = owner;
 	}
@@ -38,7 +38,7 @@ public class PlayerFreight extends ItemContainer
 	}
 	
 	@Override
-	public L2PcInstance getOwner()
+	public L2Player getOwner()
 	{
 		return _owner;
 	}

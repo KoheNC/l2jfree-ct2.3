@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -23,9 +23,9 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
  */
 public class ExValidateLocationInAirShip extends L2ServerPacket
 {
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public ExValidateLocationInAirShip(L2PcInstance player)
+	public ExValidateLocationInAirShip(L2Player player)
 	{
 		_activeChar = player;
 	}

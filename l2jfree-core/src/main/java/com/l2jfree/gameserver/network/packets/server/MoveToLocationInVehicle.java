@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
  */
 public class MoveToLocationInVehicle extends L2ServerPacket
 {
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final L2CharPosition _destination;
 	private final L2CharPosition _origin;
 	
@@ -33,7 +33,7 @@ public class MoveToLocationInVehicle extends L2ServerPacket
 	 * @param destination
 	 * @param origin
 	 */
-	public MoveToLocationInVehicle(L2PcInstance player, L2CharPosition destination, L2CharPosition origin)
+	public MoveToLocationInVehicle(L2Player player, L2CharPosition destination, L2CharPosition origin)
 	{
 		_activeChar = player;
 		_destination = destination;

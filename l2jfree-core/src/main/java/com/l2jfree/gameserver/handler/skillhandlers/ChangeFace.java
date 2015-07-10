@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillAppearance;
@@ -32,10 +32,10 @@ public final class ChangeFace implements ISkillHandler
 		
 		for (L2Creature target : targets)
 		{
-			if (!(target instanceof L2PcInstance))
+			if (!(target instanceof L2Player))
 				continue;
 			
-			L2PcInstance player = (L2PcInstance)target;
+			L2Player player = (L2Player)target;
 			
 			if (skill.getFaceId() >= 0)
 				player.getAppearance().setFace(skill.getFaceId());

@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
 import com.l2jfree.gameserver.model.entity.Siege;
@@ -22,7 +23,7 @@ import com.l2jfree.gameserver.skills.l2skills.L2SkillSummon;
 
 public class L2SiegeSummonInstance extends L2SummonInstance
 {
-	public L2SiegeSummonInstance(int objectId, L2NpcTemplate template, L2PcInstance owner, L2SkillSummon skill)
+	public L2SiegeSummonInstance(int objectId, L2NpcTemplate template, L2Player owner, L2SkillSummon skill)
 	{
 		super(objectId, template, owner, skill);
 	}

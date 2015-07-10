@@ -28,7 +28,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.network.packets.server.MultiSellList;
 import com.l2jfree.gameserver.templates.item.L2Armor;
@@ -94,7 +94,7 @@ public final class L2Multisell
 	 * 		  be at +0
 	 * 3) apply taxes: Uses the "taxIngredient" entry in order to add a certain amount of adena to the ingredients
 	 */
-	private MultiSellListContainer generateMultiSell(int listId, boolean inventoryOnly, L2PcInstance player, int npcId,
+	private MultiSellListContainer generateMultiSell(int listId, boolean inventoryOnly, L2Player player, int npcId,
 			double taxRate)
 	{
 		MultiSellListContainer listTemplate = getList(listId);
@@ -267,7 +267,7 @@ public final class L2Multisell
 		return newEntry;
 	}
 	
-	public void separateAndSend(int listId, L2PcInstance player, int npcId, boolean inventoryOnly, double taxRate)
+	public void separateAndSend(int listId, L2Player player, int npcId, boolean inventoryOnly, double taxRate)
 	{
 		MultiSellListContainer list = generateMultiSell(listId, inventoryOnly, player, npcId, taxRate);
 		MultiSellListContainer temp = new MultiSellListContainer();

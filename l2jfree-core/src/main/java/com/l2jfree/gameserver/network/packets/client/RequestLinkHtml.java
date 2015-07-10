@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.NpcLinkHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
@@ -39,7 +39,7 @@ public final class RequestLinkHtml extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance actor = getClient().getActiveChar();
+		L2Player actor = getClient().getActiveChar();
 		if (actor == null)
 			return;
 		

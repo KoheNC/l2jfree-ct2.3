@@ -21,6 +21,7 @@ import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable;
 import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable.MerchantPriceConfig;
 import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2TradeList;
@@ -78,7 +79,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 		return _mpc;
 	}
 	
-	private final void showWearWindow(L2PcInstance player, int val)
+	private final void showWearWindow(L2Player player, int val)
 	{
 		player.tempInventoryDisable();
 		
@@ -99,7 +100,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 		}
 	}
 	
-	protected void showBuyWindow(L2PcInstance player, int val)
+	protected void showBuyWindow(L2Player player, int val)
 	{
 		double taxRate = 1.;
 		
@@ -130,7 +131,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	protected final void showSellWindow(L2PcInstance player)
+	protected final void showSellWindow(L2Player player)
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Showing selllist");
@@ -144,7 +145,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
@@ -208,7 +209,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 		}
 	}
 	
-	public final void showRentPetWindow(L2PcInstance player)
+	public final void showRentPetWindow(L2Player player)
 	{
 		if (!Config.LIST_PET_RENT_NPC.contains(getTemplate().getNpcId()))
 			return;
@@ -227,7 +228,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 		insertObjectIdAndShowChatWindow(player, html1.moveToString());
 	}
 	
-	public void tryRentPet(L2PcInstance player, int val)
+	public void tryRentPet(L2Player player, int val)
 	{
 		if (player == null || player.getPet() != null || player.isMounted() || player.isRentedPet()
 				|| player.isTransformed() || player.isCursedWeaponEquipped())
@@ -268,7 +269,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 	}
 	
 	@Override
-	public final void onActionShift(L2PcInstance player)
+	public final void onActionShift(L2Player player)
 	{
 		if (player.getAccessLevel() >= Config.GM_ACCESSLEVEL)
 		{

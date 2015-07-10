@@ -15,7 +15,7 @@
 package ai.individual;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -43,7 +43,7 @@ public class EvaGiftBox extends ItemDropper
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		boolean reward = killer.getSkillLevel(KISS_OF_EVA_SKILL) > 0;
 		if (!reward)

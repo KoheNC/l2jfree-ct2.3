@@ -21,8 +21,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -62,10 +62,10 @@ public class AdminTest implements IAdminCommandHandler
 			"Show usefull info about target heading and angle.", "Usage: heading", } };
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2PcInstance)
+	 * @see com.l2jfree.gameserver.handler.IAdminCommandHandler#useAdminCommand(java.lang.String, com.l2jfree.gameserver.model.L2Player)
 	 */
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		
@@ -159,7 +159,7 @@ public class AdminTest implements IAdminCommandHandler
 						{
 							if (target instanceof L2Npc)
 								activeChar.sendMessage("NPC: " + target.getName());
-							if (target instanceof L2PcInstance)
+							if (target instanceof L2Player)
 								activeChar.sendMessage("PC : " + target.getName());
 							if (target instanceof L2Summon)
 								activeChar.sendMessage("PET: " + target.getName());
@@ -210,7 +210,7 @@ public class AdminTest implements IAdminCommandHandler
 	 * @param activeChar
 	 * @param socId
 	 */
-	public void adminTestSocial(L2PcInstance activeChar, int socId)
+	public void adminTestSocial(L2Player activeChar, int socId)
 	{
 		L2Object target;
 		
@@ -227,7 +227,7 @@ public class AdminTest implements IAdminCommandHandler
 	 * Show tips about command usage and syntax.
 	 * @param command admin command name
 	 */
-	private void showAdminCommandHelp(L2PcInstance activeChar, String command)
+	private void showAdminCommandHelp(L2Player activeChar, String command)
 	{
 		for (String[] element : ADMIN_COMMANDS)
 		{

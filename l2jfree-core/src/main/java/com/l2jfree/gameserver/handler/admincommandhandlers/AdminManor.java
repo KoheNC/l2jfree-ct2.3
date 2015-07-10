@@ -20,7 +20,7 @@ import javolution.text.TextBuilder;
 import javolution.util.FastList;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
@@ -48,7 +48,7 @@ public class AdminManor implements IAdminCommandHandler
 			"admin_manor_reset", "admin_manor_setmaintenance", "admin_manor_save", "admin_manor_disable" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		StringTokenizer st = new StringTokenizer(command);
 		command = st.nextToken();
@@ -168,7 +168,7 @@ public class AdminManor implements IAdminCommandHandler
 		return s;
 	}
 	
-	private void showMainPage(L2PcInstance activeChar)
+	private void showMainPage(L2Player activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		TextBuilder replyMSG = new TextBuilder("<html><body>");

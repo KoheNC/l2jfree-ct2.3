@@ -25,8 +25,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
@@ -63,7 +63,7 @@ public final class CCHManager
 		return (getSiege(x, y, z) != null);
 	}
 	
-	public static boolean checkIfOkToPlaceFlag(L2PcInstance player, boolean isCheckOnly)
+	public static boolean checkIfOkToPlaceFlag(L2Player player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		L2Clan clan = player.getClan();
@@ -88,7 +88,7 @@ public final class CCHManager
 		return false;
 	}
 	
-	public static boolean checkIfOkToUseStriderSiegeAssault(L2PcInstance player, boolean isCheckOnly)
+	public static boolean checkIfOkToUseStriderSiegeAssault(L2Player player, boolean isCheckOnly)
 	{
 		// Get siege battleground
 		CCHSiege siege = getInstance().getSiege(player);

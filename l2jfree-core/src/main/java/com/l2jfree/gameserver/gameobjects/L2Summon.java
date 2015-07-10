@@ -21,7 +21,6 @@ import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PetInventory;
@@ -69,7 +68,7 @@ public abstract class L2Summon extends L2Playable
 	public static final int HOG_CANNON_ID = 14768;
 	public static final int SWOOP_CANNON_ID = 14839;
 	
-	private L2PcInstance _owner;
+	private L2Player _owner;
 	//private int				_attackRange			= 36;		//Melee range
 	private boolean _follow = true;
 	private boolean _previousFollowStatus = true;
@@ -100,7 +99,7 @@ public abstract class L2Summon extends L2Playable
 		}
 	}
 	
-	public L2Summon(int objectId, L2NpcTemplate template, L2PcInstance owner)
+	public L2Summon(int objectId, L2NpcTemplate template, L2Player owner)
 	{
 		super(objectId, template);
 		getKnownList(); // init knownlist
@@ -200,7 +199,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		// Aggression target lock effect
 		if (!player.canChangeLockedTarget(this))
@@ -245,7 +244,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	public int getMyTargetSelectedColor(L2PcInstance player)
+	public int getMyTargetSelectedColor(L2Player player)
 	{
 		return player.getLevel() - getLevel();
 	}
@@ -283,7 +282,7 @@ public abstract class L2Summon extends L2Playable
 		return getOwner() != null ? getOwner().getTeam() : 0;
 	}
 	
-	public final L2PcInstance getOwner()
+	public final L2Player getOwner()
 	{
 		return _owner;
 	}
@@ -317,7 +316,7 @@ public abstract class L2Summon extends L2Playable
 		if (this instanceof L2MerchantSummonInstance)
 			return true;
 		
-		L2PcInstance owner = getOwner();
+		L2Player owner = getOwner();
 		
 		if (owner != null)
 		{
@@ -393,7 +392,7 @@ public abstract class L2Summon extends L2Playable
 			getOwner().sendPacket(new PartySpelled(list));
 	}
 	
-	public void deleteMe(L2PcInstance owner)
+	public void deleteMe(L2Player owner)
 	{
 		getAI().stopFollow();
 		owner.sendPacket(new PetDelete(getObjectId(), 2));
@@ -430,7 +429,7 @@ public abstract class L2Summon extends L2Playable
 		unSummon(getOwner());
 	}
 	
-	public void unSummon(L2PcInstance owner)
+	public void unSummon(L2Player owner)
 	{
 		if (isVisible() && !isDead())
 		{
@@ -551,7 +550,7 @@ public abstract class L2Summon extends L2Playable
 	public abstract int getMaxFed();
 	
 	/**
-	 * Return the L2Party object of its L2PcInstance owner or null.<BR><BR>
+	 * Return the L2Party object of its L2Player owner or null.<BR><BR>
 	 */
 	@Override
 	public L2Party getParty()
@@ -655,7 +654,7 @@ public abstract class L2Summon extends L2Playable
 			
 			if (getOwner() != null && getOwner().isInOlympiadMode() && !getOwner().isOlympiadStart())
 			{
-				// if L2PcInstance is in Olympia and the match isn't already start, send a Server->Client packet ActionFailed
+				// if L2Player is in Olympia and the match isn't already start, send a Server->Client packet ActionFailed
 				getOwner().sendPacket(ActionFailed.STATIC_PACKET);
 				return false;
 			}
@@ -695,7 +694,7 @@ public abstract class L2Summon extends L2Playable
 			}
 		}
 		
-		final L2PcInstance actingPlayer = getActingPlayer();
+		final L2Player actingPlayer = getActingPlayer();
 		
 		if (actingPlayer.isGM() && actingPlayer.getAccessLevel() < Config.GM_CAN_GIVE_DAMAGE)
 		{
@@ -706,10 +705,10 @@ public abstract class L2Summon extends L2Playable
 		
 		if (!actingPlayer.checkPvpSkill(getTarget(), skill))
 		{
-			// Send a System Message to the L2PcInstance
+			// Send a System Message to the L2Player
 			actingPlayer.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
 			
-			// Send a Server->Client packet ActionFailed to the L2PcInstance
+			// Send a Server->Client packet ActionFailed to the L2Player
 			actingPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 			return false;
 		}
@@ -736,7 +735,7 @@ public abstract class L2Summon extends L2Playable
 		}
 	}
 	
-	public void setOwner(L2PcInstance newOwner)
+	public void setOwner(L2Player newOwner)
 	{
 		_owner = newOwner;
 	}
@@ -748,7 +747,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	public final L2PcInstance getActingPlayer()
+	public final L2Player getActingPlayer()
 	{
 		return getOwner();
 	}
@@ -792,9 +791,9 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
-		// Check if the L2PcInstance is the owner of the Pet
+		// Check if the L2Player is the owner of the Pet
 		if (activeChar == getOwner() && !(this instanceof L2MerchantSummonInstance))
 		{
 			activeChar.sendPacket(new PetInfo(this, 0));

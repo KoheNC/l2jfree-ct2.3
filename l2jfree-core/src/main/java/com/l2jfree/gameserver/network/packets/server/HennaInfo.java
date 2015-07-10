@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Henna;
 
@@ -22,11 +22,11 @@ public final class HennaInfo extends L2ServerPacket
 {
 	private static final String _S__E5_HennaInfo = "[S] E5 HennaInfo";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final L2Henna[] _hennas = new L2Henna[3];
 	private int _count = 0;
 	
-	public HennaInfo(L2PcInstance player)
+	public HennaInfo(L2Player player)
 	{
 		_activeChar = player;
 		

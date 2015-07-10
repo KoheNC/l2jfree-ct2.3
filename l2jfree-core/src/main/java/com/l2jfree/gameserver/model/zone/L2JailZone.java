@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.zone;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.GmListTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.Location;
 
 public class L2JailZone extends L2Zone
@@ -27,7 +27,7 @@ public class L2JailZone extends L2Zone
 	@Override
 	protected void onEnter(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
 			character.setInsideZone(FLAG_JAIL, true);
 			character.setInsideZone(FLAG_NOSUMMON, true);
@@ -42,7 +42,7 @@ public class L2JailZone extends L2Zone
 	@Override
 	protected void onExit(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
 			character.setInsideZone(FLAG_JAIL, false);
 			character.setInsideZone(FLAG_NOSUMMON, false);
@@ -53,9 +53,9 @@ public class L2JailZone extends L2Zone
 		
 		super.onExit(character);
 		
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)character;
+			L2Player player = (L2Player)character;
 			// This is for when a player tries to bug his way out of jail
 			if (player.isInJail())
 			{

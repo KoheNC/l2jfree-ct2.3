@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.CrownTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
@@ -49,7 +49,7 @@ public final class CrownManager
 				checkCrowns(member.getPlayerInstance());
 	}
 	
-	public static void checkCrowns(L2PcInstance activeChar)
+	public static void checkCrowns(L2Player activeChar)
 	{
 		if (activeChar == null)
 			return;

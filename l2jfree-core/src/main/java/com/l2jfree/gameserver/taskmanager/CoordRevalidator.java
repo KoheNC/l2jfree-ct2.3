@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.taskmanager;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.server.PartyMemberPosition;
 
@@ -65,9 +65,9 @@ public final class CoordRevalidator extends AbstractFIFOPeriodicTaskManager<L2Ob
 				((L2AirShipInstance)cha).updatePeopleInTheAirShip(cha.getX(), cha.getY(), cha.getZ());
 			}
 			
-			if (cha instanceof L2PcInstance)
+			if (cha instanceof L2Player)
 			{
-				final L2PcInstance player = (L2PcInstance)cha;
+				final L2Player player = (L2Player)cha;
 				
 				if (player.getParty() != null)
 					player.getParty().broadcastToPartyMembers(player, new PartyMemberPosition(player));

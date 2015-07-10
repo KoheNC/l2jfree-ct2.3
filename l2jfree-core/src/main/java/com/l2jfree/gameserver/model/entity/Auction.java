@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
@@ -275,7 +275,7 @@ public class Auction
 	}
 	
 	/** Set a bid */
-	public synchronized void setBid(L2PcInstance bidder, int bid)
+	public synchronized void setBid(L2Player bidder, int bid)
 	{
 		int requiredAdena = bid;
 		if (getHighestBidderName().equals(bidder.getClan().getLeaderName()))
@@ -314,7 +314,7 @@ public class Auction
 	 * @param itemId
 	 * @param quantity
 	 */
-	private boolean takeItem(L2PcInstance bidder, int itemId, int quantity)
+	private boolean takeItem(L2Player bidder, int itemId, int quantity)
 	{
 		if (bidder.getClan() != null && bidder.getClan().getWarehouse().getAdena() >= quantity)
 		{
@@ -327,7 +327,7 @@ public class Auction
 	}
 	
 	/** Update auction in DB */
-	private void updateInDB(L2PcInstance bidder, int bid)
+	private void updateInDB(L2Player bidder, int bid)
 	{
 		Connection con = null;
 		try
@@ -361,7 +361,7 @@ public class Auction
 				statement.setLong(7, System.currentTimeMillis());
 				statement.execute();
 				statement.close();
-				L2PcInstance highest = L2World.getInstance().getPlayer(_highestBidderName);
+				L2Player highest = L2World.getInstance().getPlayer(_highestBidderName);
 				if (highest != null)
 					highest.sendMessage("You have been out bidded");
 			}
@@ -382,7 +382,7 @@ public class Auction
 		}
 		catch (Exception e)
 		{
-			_log.fatal("Exception: Auction.updateInDB(L2PcInstance bidder, int bid): ", e);
+			_log.fatal("Exception: Auction.updateInDB(L2Player bidder, int bid): ", e);
 		}
 		finally
 		{
@@ -420,7 +420,7 @@ public class Auction
 				returnItem(b.getClanName(), PlayerInventory.ADENA_ID, b.getBid(), true); // 10 % tax
 			else
 			{
-				L2PcInstance bidder = L2World.getInstance().getPlayer(b.getName());
+				L2Player bidder = L2World.getInstance().getPlayer(b.getName());
 				if (bidder != null)
 					bidder.sendMessage("Congratulations! You have won a ClanHall!");
 			}

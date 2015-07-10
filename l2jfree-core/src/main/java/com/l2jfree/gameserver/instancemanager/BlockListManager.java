@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.lang.L2Integer;
 import com.l2jfree.util.LazyFastSet;
 
@@ -96,7 +96,7 @@ public final class BlockListManager
 		return set;
 	}
 	
-	public synchronized void insert(L2PcInstance listOwner, L2PcInstance blocked)
+	public synchronized void insert(L2Player listOwner, L2Player blocked)
 	{
 		Connection con = null;
 		try
@@ -121,7 +121,7 @@ public final class BlockListManager
 		}
 	}
 	
-	public synchronized void remove(L2PcInstance listOwner, String name)
+	public synchronized void remove(L2Player listOwner, String name)
 	{
 		Connection con = null;
 		try

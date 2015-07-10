@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.SevenSignsFestival;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -37,10 +37,10 @@ public class SSQStatus extends L2ServerPacket
 {
 	private static final String _S__F5_SSQStatus = "[S] F5 RecordUpdate";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final int _page;
 	
-	public SSQStatus(L2PcInstance player, int recordPage)
+	public SSQStatus(L2Player player, int recordPage)
 	{
 		_activeChar = player;
 		_page = recordPage;

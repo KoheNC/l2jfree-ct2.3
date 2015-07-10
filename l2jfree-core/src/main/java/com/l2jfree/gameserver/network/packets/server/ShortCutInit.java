@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ShortCut;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -31,7 +31,7 @@ public class ShortCutInit extends L2ServerPacket
 	
 	private final L2ShortCut[] _shortCuts;
 	
-	public ShortCutInit(L2PcInstance activeChar)
+	public ShortCutInit(L2Player activeChar)
 	{
 		_shortCuts = activeChar.getAllShortCuts();
 	}

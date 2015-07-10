@@ -18,7 +18,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.Location;
@@ -96,7 +96,7 @@ public final class L2MapRegionRestart
 		return _name;
 	}
 	
-	private int getNextAccessibleRestartId(L2PcInstance activeChar)
+	private int getNextAccessibleRestartId(L2Player activeChar)
 	{
 		if (activeChar == null)
 			return getRestartId();
@@ -120,7 +120,7 @@ public final class L2MapRegionRestart
 		return getRestartId();
 	}
 	
-	public Location getRandomRestartPoint(L2PcInstance player)
+	public Location getRandomRestartPoint(L2Player player)
 	{
 		final int restartId = getNextAccessibleRestartId(player);
 		
@@ -130,7 +130,7 @@ public final class L2MapRegionRestart
 		return _restartPoints[Rnd.get(_restartPoints.length)];
 	}
 	
-	public Location getRandomChaoticRestartPoint(L2PcInstance player)
+	public Location getRandomChaoticRestartPoint(L2Player player)
 	{
 		final int restartId = getNextAccessibleRestartId(player);
 		

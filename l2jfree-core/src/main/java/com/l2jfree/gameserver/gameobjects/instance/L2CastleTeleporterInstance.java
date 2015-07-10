@@ -19,6 +19,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
@@ -46,7 +47,7 @@ public final class L2CastleTeleporterInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String actualCommand = st.nextToken(); // Get actual command
@@ -75,7 +76,7 @@ public final class L2CastleTeleporterInstance extends L2Npc
 	}
 	
 	@Override
-	public void showChatWindow(L2PcInstance player)
+	public void showChatWindow(L2Player player)
 	{
 		String filename;
 		if (!getTask())
@@ -108,10 +109,10 @@ public final class L2CastleTeleporterInstance extends L2Npc
 					new NpcSay(getObjectId(), 1, getNpcId(), "The defenders of " + getCastle().getName()
 							+ " castle will be teleported to the inner castle.");
 			L2MapRegion region = MapRegionManager.getInstance().getRegion(getX(), getY());
-			Collection<L2PcInstance> pls = L2World.getInstance().getAllPlayers();
+			Collection<L2Player> pls = L2World.getInstance().getAllPlayers();
 			//synchronized (L2World.getInstance().getAllPlayers())
 			{
-				for (L2PcInstance player : pls)
+				for (L2Player player : pls)
 					if (region == MapRegionManager.getInstance().getRegion(player.getX(), player.getY()))
 						player.sendPacket(cs);
 			}
@@ -125,25 +126,25 @@ public final class L2CastleTeleporterInstance extends L2Npc
 	* @param player
 	*/
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
 		player.setLastFolkNPC(this);
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			}
 			else
@@ -151,7 +152,7 @@ public final class L2CastleTeleporterInstance extends L2Npc
 				showChatWindow(player);
 			}
 		}
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	

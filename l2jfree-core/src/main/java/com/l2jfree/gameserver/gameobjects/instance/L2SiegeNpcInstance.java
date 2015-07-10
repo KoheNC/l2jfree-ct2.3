@@ -14,6 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -36,25 +37,25 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 	 * @param player
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;
 		
 		player.setLastFolkNPC(this);
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 		else
 		{
-			// Calculate the distance between the L2PcInstance and the L2NpcInstance
+			// Calculate the distance between the L2Player and the L2NpcInstance
 			if (!canInteract(player))
 			{
-				// Notify the L2PcInstance AI with AI_INTENTION_INTERACT
+				// Notify the L2Player AI with AI_INTENTION_INTERACT
 				player.getAI().setIntention(CtrlIntention.AI_INTENTION_INTERACT, this);
 			}
 			else
@@ -62,7 +63,7 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 				showSiegeInfoWindow(player);
 			}
 		}
-		// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+		// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
@@ -71,7 +72,7 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 	 * else Shows the SiegeInfo window
 	 * @param player
 	 */
-	public void showSiegeInfoWindow(L2PcInstance player)
+	public void showSiegeInfoWindow(L2Player player)
 	{
 		if (validateCondition(player))
 			getCastle().getSiege().listRegisterClan(player);
@@ -89,7 +90,7 @@ public class L2SiegeNpcInstance extends L2NpcInstance
 	/**
 	 * @param player
 	 */
-	private boolean validateCondition(L2PcInstance player)
+	private boolean validateCondition(L2Player player)
 	{
 		return !getCastle().getSiege().getIsInProgress();
 	}

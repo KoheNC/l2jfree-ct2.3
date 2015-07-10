@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.RecipeShopSellList;
@@ -38,7 +38,7 @@ public class RequestRecipeShopSellList extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getActiveChar();
+		L2Player player = getActiveChar();
 		if (player == null)
 			return;
 		
@@ -48,9 +48,9 @@ public class RequestRecipeShopSellList extends L2ClientPacket
 			return;
 		}
 		
-		final L2PcInstance manufacturer;
+		final L2Player manufacturer;
 		if (player.getTargetId() == _targetId)
-			manufacturer = player.getTarget(L2PcInstance.class);
+			manufacturer = player.getTarget(L2Player.class);
 		else
 			manufacturer = L2World.getInstance().findPlayer(_targetId);
 		if (manufacturer != null)

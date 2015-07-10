@@ -17,6 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
@@ -36,7 +37,7 @@ public final class L2ObservationInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("Chat"))
 		{
@@ -76,7 +77,7 @@ public final class L2ObservationInstance extends L2Npc
 			super.onBypassFeedback(player, command);
 	}
 	
-	private void doObserve(L2PcInstance player, String val)
+	private void doObserve(L2Player player, String val)
 	{
 		StringTokenizer st = new StringTokenizer(val);
 		long cost = Long.parseLong(st.nextToken());
@@ -93,7 +94,7 @@ public final class L2ObservationInstance extends L2Npc
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showMessageWindow(L2PcInstance player, int val)
+	public void showMessageWindow(L2Player player, int val)
 	{
 		String filename = null;
 		
@@ -120,7 +121,7 @@ public final class L2ObservationInstance extends L2Npc
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (!canTarget(player))
 			return;

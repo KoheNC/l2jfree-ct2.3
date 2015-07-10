@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.Env;
 
 /**
@@ -32,6 +32,6 @@ class ConditionAgathionSummoned extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		return ((L2PcInstance)env.player).getAgathionId() == _agathionId;
+		return ((L2Player)env.player).getAgathionId() == _agathionId;
 	}
 }

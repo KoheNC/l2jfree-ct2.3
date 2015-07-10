@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -50,10 +50,10 @@ public class L2SkillChangeWeapon extends L2Skill
 		if (caster.isAlikeDead())
 			return;
 		
-		if (!(caster instanceof L2PcInstance))
+		if (!(caster instanceof L2Player))
 			return;
 		
-		L2PcInstance player = (L2PcInstance)caster;
+		L2Player player = (L2Player)caster;
 		
 		L2Weapon weaponItem = player.getActiveWeaponItem();
 		

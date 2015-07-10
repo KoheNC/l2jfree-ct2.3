@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Henna;
 
@@ -25,11 +25,11 @@ import com.l2jfree.gameserver.templates.item.L2Henna;
 public class GMHennaInfo extends L2ServerPacket
 {
 	private final static String S_F0_GMHENNAINFO = "[S] F0 GMHennaInfo";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final L2Henna[] _hennas = new L2Henna[3];
 	private int _count = 0;
 	
-	public GMHennaInfo(L2PcInstance activeChar)
+	public GMHennaInfo(L2Player activeChar)
 	{
 		_activeChar = activeChar;
 		

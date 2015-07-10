@@ -19,8 +19,8 @@ import java.util.List;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -63,7 +63,7 @@ public final class RequestExEnchantSkillInfo extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -129,7 +129,7 @@ public final class RequestExEnchantSkillInfo extends L2ClientPacket
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showEnchantInfo(L2PcInstance activeChar, boolean isSafeEnchant)
+	public void showEnchantInfo(L2Player activeChar, boolean isSafeEnchant)
 	{
 		ExEnchantSkillInfo asi =
 				new ExEnchantSkillInfo(isSafeEnchant ? EnchantSkillType.SAFE : EnchantSkillType.NORMAL, _skillId);
@@ -160,7 +160,7 @@ public final class RequestExEnchantSkillInfo extends L2ClientPacket
 		}
 	}
 	
-	public void showChangeEnchantInfo(L2PcInstance activeChar)
+	public void showChangeEnchantInfo(L2Player activeChar)
 	{
 		ExEnchantSkillInfo asi = new ExEnchantSkillInfo(EnchantSkillType.CHANGE_ROUTE, _skillId);
 		
@@ -198,7 +198,7 @@ public final class RequestExEnchantSkillInfo extends L2ClientPacket
 		}
 	}
 	
-	public void showUntrainEnchantInfo(L2PcInstance activeChar)
+	public void showUntrainEnchantInfo(L2Player activeChar)
 	{
 		ExEnchantSkillInfo asi = new ExEnchantSkillInfo(EnchantSkillType.UNTRAIN, _skillId);
 		

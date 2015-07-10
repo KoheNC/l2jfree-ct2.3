@@ -20,9 +20,9 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.communitybbs.CommunityBoard;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.AdminCommandHandler;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Object;
@@ -57,7 +57,7 @@ public class RequestBypassToServer extends L2ClientPacket
 	@Override
 	protected void runImpl() throws InvalidPacketException
 	{
-		L2PcInstance activeChar = getClient().getActiveChar();
+		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -184,7 +184,7 @@ public class RequestBypassToServer extends L2ClientPacket
 		sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	private void comeHere(L2PcInstance activeChar)
+	private void comeHere(L2Player activeChar)
 	{
 		L2Object obj = activeChar.getTarget();
 		if (obj instanceof L2Npc)
@@ -196,7 +196,7 @@ public class RequestBypassToServer extends L2ClientPacket
 		}
 	}
 	
-	private void playerHelp(L2PcInstance activeChar, String path)
+	private void playerHelp(L2Player activeChar, String path)
 	{
 		if (path.indexOf("..") != -1)
 			return;

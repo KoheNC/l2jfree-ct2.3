@@ -22,7 +22,7 @@ import javolution.util.FastList;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.DimensionalRiftManager;
 import com.l2jfree.gameserver.instancemanager.DimensionalRiftManager.DimensionalRiftRoom;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
@@ -50,8 +50,8 @@ public class DimensionalRift
 	
 	protected byte _choosenRoom = -1;
 	private boolean _hasJumped = false;
-	protected FastList<L2PcInstance> deadPlayers = new FastList<L2PcInstance>();
-	protected FastList<L2PcInstance> revivedInWaitingRoom = new FastList<L2PcInstance>();
+	protected FastList<L2Player> deadPlayers = new FastList<L2Player>();
+	protected FastList<L2Player> revivedInWaitingRoom = new FastList<L2Player>();
 	private boolean isBossRoom = false;
 	
 	public DimensionalRift(L2Party party, byte roomType, byte roomId)
@@ -63,7 +63,7 @@ public class DimensionalRift
 		party.setDimensionalRift(this);
 		
 		Quest riftQuest = QuestManager.getInstance().getQuest(635);
-		for (L2PcInstance p : party.getPartyMembers())
+		for (L2Player p : party.getPartyMembers())
 		{
 			if (riftQuest != null)
 			{
@@ -118,7 +118,7 @@ public class DimensionalRift
 					_completedRooms.add(_choosenRoom);
 					_choosenRoom = -1;
 					
-					for (L2PcInstance p : _party.getPartyMembers())
+					for (L2Player p : _party.getPartyMembers())
 						if (!revivedInWaitingRoom.contains(p))
 							teleportToNextRoom(p);
 					createTeleporterTimer(true);
@@ -126,7 +126,7 @@ public class DimensionalRift
 				}
 				else
 				{
-					for (L2PcInstance p : _party.getPartyMembers())
+					for (L2Player p : _party.getPartyMembers())
 						if (!revivedInWaitingRoom.contains(p))
 							teleportToWaitingRoom(p);
 					killRift();
@@ -175,7 +175,7 @@ public class DimensionalRift
 		createTeleporterTimer(false);
 	}
 	
-	public void partyMemberExited(L2PcInstance player)
+	public void partyMemberExited(L2Player player)
 	{
 		if (deadPlayers.contains(player))
 			deadPlayers.remove(player);
@@ -185,13 +185,13 @@ public class DimensionalRift
 		
 		if (_party.getMemberCount() < Config.ALT_RIFT_MIN_PARTY_SIZE || _party.getMemberCount() == 1)
 		{
-			for (L2PcInstance p : _party.getPartyMembers())
+			for (L2Player p : _party.getPartyMembers())
 				teleportToWaitingRoom(p);
 			killRift();
 		}
 	}
 	
-	public void manualTeleport(L2PcInstance player, L2Npc npc)
+	public void manualTeleport(L2Player player, L2Npc npc)
 	{
 		if (!player.isInParty() || !player.getParty().isInDimensionalRift())
 			return;
@@ -216,14 +216,14 @@ public class DimensionalRift
 		_completedRooms.add(_choosenRoom);
 		_choosenRoom = -1;
 		
-		for (L2PcInstance p : _party.getPartyMembers())
+		for (L2Player p : _party.getPartyMembers())
 			teleportToNextRoom(p);
 		
 		createSpawnTimer(_choosenRoom);
 		createTeleporterTimer(true);
 	}
 	
-	public void manualExitRift(L2PcInstance player, L2Npc npc)
+	public void manualExitRift(L2Player player, L2Npc npc)
 	{
 		if (!player.isInParty() || !player.getParty().isInDimensionalRift())
 			return;
@@ -235,12 +235,12 @@ public class DimensionalRift
 			return;
 		}
 		
-		for (L2PcInstance p : player.getParty().getPartyMembers())
+		for (L2Player p : player.getParty().getPartyMembers())
 			teleportToWaitingRoom(p);
 		killRift();
 	}
 	
-	protected void teleportToNextRoom(L2PcInstance player)
+	protected void teleportToNextRoom(L2Player player)
 	{
 		if (_choosenRoom == -1)
 		{ //Do not tp in the same room a second time
@@ -254,7 +254,7 @@ public class DimensionalRift
 		player.teleToLocation(coords[0], coords[1], coords[2]);
 	}
 	
-	protected void teleportToWaitingRoom(L2PcInstance player)
+	protected void teleportToWaitingRoom(L2Player player)
 	{
 		DimensionalRiftManager.getInstance().teleportToWaitingRoom(player);
 		Quest riftQuest = QuestManager.getInstance().getQuest(635);
@@ -330,7 +330,7 @@ public class DimensionalRift
 		return time;
 	}
 	
-	public void memberDead(L2PcInstance player)
+	public void memberDead(L2Player player)
 	{
 		if (!deadPlayers.contains(player))
 			deadPlayers.add(player);
@@ -341,7 +341,7 @@ public class DimensionalRift
 				@Override
 				public void run()
 				{
-					for (L2PcInstance p : _party.getPartyMembers())
+					for (L2Player p : _party.getPartyMembers())
 						if (!revivedInWaitingRoom.contains(p))
 							teleportToWaitingRoom(p);
 					killRift();
@@ -350,13 +350,13 @@ public class DimensionalRift
 		}
 	}
 	
-	public void memberRessurected(L2PcInstance player)
+	public void memberRessurected(L2Player player)
 	{
 		if (deadPlayers.contains(player))
 			deadPlayers.remove(player);
 	}
 	
-	public void usedTeleport(L2PcInstance player)
+	public void usedTeleport(L2Player player)
 	{
 		if (!revivedInWaitingRoom.contains(player))
 			revivedInWaitingRoom.add(player);
@@ -370,7 +370,7 @@ public class DimensionalRift
 				@Override
 				public void run()
 				{
-					for (L2PcInstance p : _party.getPartyMembers())
+					for (L2Player p : _party.getPartyMembers())
 						if (!revivedInWaitingRoom.contains(p))
 							teleportToWaitingRoom(p);
 					killRift();
@@ -379,12 +379,12 @@ public class DimensionalRift
 		}
 	}
 	
-	public FastList<L2PcInstance> getDeadMemberList()
+	public FastList<L2Player> getDeadMemberList()
 	{
 		return deadPlayers;
 	}
 	
-	public FastList<L2PcInstance> getRevivedAtWaitingRoom()
+	public FastList<L2Player> getRevivedAtWaitingRoom()
 	{
 		return revivedInWaitingRoom;
 	}

@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -37,13 +37,13 @@ public class Harvester implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
 		if (CastleManorManager.getInstance().isDisabled())
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		L2Object target = activeChar.getTarget();
 		
 		if (target instanceof L2MonsterInstance && ((L2Creature)target).isDead())

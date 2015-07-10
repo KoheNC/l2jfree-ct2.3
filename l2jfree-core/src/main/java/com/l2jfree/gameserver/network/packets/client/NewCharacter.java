@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.datatables.CharTemplateTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate.PcTemplateItem;
@@ -141,8 +141,8 @@ public class NewCharacter extends L2ClientPacket
 			}
 			
 			int objectId = IdFactory.getInstance().getNextId();
-			L2PcInstance newChar =
-					L2PcInstance.create(objectId, template, getClient().getAccountName(), _name, _hairStyle,
+			L2Player newChar =
+					L2Player.create(objectId, template, getClient().getAccountName(), _name, _hairStyle,
 							_hairColor, _face, _sex != 0);
 			newChar.getStatus().setCurrentHp(template.getBaseHpMax());
 			newChar.getStatus().setCurrentCp(template.getBaseCpMax());
@@ -157,7 +157,7 @@ public class NewCharacter extends L2ClientPacket
 		}
 	}
 	
-	private void initNewChar(L2PcInstance newChar)
+	private void initNewChar(L2Player newChar)
 	{
 		if (_log.isDebugEnabled())
 			_log.debug("Character init start");
@@ -236,7 +236,7 @@ public class NewCharacter extends L2ClientPacket
 			_log.debug("Character init end");
 	}
 	
-	public void startTutorialQuest(L2PcInstance player)
+	public void startTutorialQuest(L2Player player)
 	{
 		QuestState qs = player.getQuestState("255_Tutorial");
 		Quest q = null;
@@ -246,7 +246,7 @@ public class NewCharacter extends L2ClientPacket
 			q.newQuestState(player);
 	}
 	
-	private final void storeCreationDate(L2PcInstance player)
+	private final void storeCreationDate(L2Player player)
 	{
 		Connection con = null;
 		try

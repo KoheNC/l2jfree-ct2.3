@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -31,7 +31,7 @@ public class ExGetOnAirShip extends L2ServerPacket
 	
 	private final int _playerId, _airShipId, _x, _y, _z;
 	
-	public ExGetOnAirShip(L2PcInstance player, L2AirShipInstance ship)
+	public ExGetOnAirShip(L2Player player, L2AirShipInstance ship)
 	{
 		_playerId = player.getObjectId();
 		_airShipId = ship.getObjectId();

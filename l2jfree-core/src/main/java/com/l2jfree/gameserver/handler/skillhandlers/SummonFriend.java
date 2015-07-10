@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -41,7 +41,7 @@ public class SummonFriend implements ISkillHandler
 {
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.SUMMON_FRIEND };
 	
-	public static boolean checkSummonerStatus(L2PcInstance summonerChar)
+	public static boolean checkSummonerStatus(L2Player summonerChar)
 	{
 		if (summonerChar == null)
 			return false;
@@ -76,7 +76,7 @@ public class SummonFriend implements ISkillHandler
 		return true;
 	}
 	
-	public static boolean checkTargetStatus(L2PcInstance targetChar, L2PcInstance summonerChar)
+	public static boolean checkTargetStatus(L2Player targetChar, L2Player summonerChar)
 	{
 		if (targetChar == null)
 			return false;
@@ -174,7 +174,7 @@ public class SummonFriend implements ISkillHandler
 		return true;
 	}
 	
-	public static void teleToTarget(L2PcInstance targetChar, L2PcInstance summonerChar, L2Skill summonSkill)
+	public static void teleToTarget(L2Player targetChar, L2Player summonerChar, L2Skill summonSkill)
 	{
 		if (targetChar == null || summonerChar == null || summonSkill == null)
 			return;
@@ -210,22 +210,22 @@ public class SummonFriend implements ISkillHandler
 	@Override
 	public void useSkill(L2Creature activeChar, final L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return; // currently not implemented for others
 			
-		final L2PcInstance activePlayer = (L2PcInstance)activeChar;
+		final L2Player activePlayer = (L2Player)activeChar;
 		if (!checkSummonerStatus(activePlayer))
 			return;
 		
 		for (L2Creature element : targets)
 		{
-			if (!(element instanceof L2PcInstance))
+			if (!(element instanceof L2Player))
 				continue;
 			
 			if (activeChar == element)
 				continue;
 			
-			final L2PcInstance target = (L2PcInstance)element;
+			final L2Player target = (L2Player)element;
 			
 			if (!checkTargetStatus(target, activePlayer))
 				continue;

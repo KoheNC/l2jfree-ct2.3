@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.lang.Replaceable;
 
@@ -52,7 +52,7 @@ public final class NpcHtmlMessage extends AbstractNpcHtmlMessage
 	}
 	
 	@Override
-	public void prepareToSend(L2Client client, L2PcInstance activeChar)
+	public void prepareToSend(L2Client client, L2Player activeChar)
 	{
 		if (activeChar != null)
 			activeChar.buildBypassCache(_replaceable);
@@ -65,7 +65,7 @@ public final class NpcHtmlMessage extends AbstractNpcHtmlMessage
 	}
 	
 	@Override
-	public boolean canBeSentTo(L2Client client, L2PcInstance activeChar)
+	public boolean canBeSentTo(L2Client client, L2Player activeChar)
 	{
 		return _replaceable != null;
 	}

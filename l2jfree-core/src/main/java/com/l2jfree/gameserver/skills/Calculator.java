@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.skills.funcs.Func;
 import com.l2jfree.gameserver.skills.funcs.FuncOwner;
 
@@ -151,8 +151,8 @@ public final class Calculator
 			{
 				removeFunc(element);
 				
-				if (cha instanceof L2PcInstance)
-					((L2PcInstance)cha).onFuncRemoval(element);
+				if (cha instanceof L2Player)
+					((L2Player)cha).onFuncRemoval(element);
 			}
 		}
 	}

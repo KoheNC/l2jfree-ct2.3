@@ -19,6 +19,7 @@ import java.util.StringTokenizer;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2TeleportLocation;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -33,7 +34,7 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -142,7 +143,7 @@ public class L2DungeonGatekeeperInstance extends L2Npc
 			super.onBypassFeedback(player, command);
 	}
 	
-	private void doTeleport(L2PcInstance player, int val)
+	private void doTeleport(L2Player player, int val)
 	{
 		L2TeleportLocation list = TeleportLocationTable.getInstance().getTemplate(val);
 		if (list != null)

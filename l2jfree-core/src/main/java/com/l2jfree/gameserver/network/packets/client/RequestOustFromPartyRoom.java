@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.model.L2World;
@@ -43,10 +43,10 @@ public class RequestOustFromPartyRoom extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
-		L2PcInstance target = L2World.getInstance().findPlayer(_objectId);
+		L2Player target = L2World.getInstance().findPlayer(_objectId);
 		if (target == null || target == activeChar)
 		{
 			sendAF();

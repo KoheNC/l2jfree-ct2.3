@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class ExSpawnEmitter extends L2ServerPacket
@@ -26,7 +26,7 @@ public class ExSpawnEmitter extends L2ServerPacket
 		_npcObjectId = npcObjectId;
 	}
 	
-	public ExSpawnEmitter(L2PcInstance player, L2Npc npc)
+	public ExSpawnEmitter(L2Player player, L2Npc npc)
 	{
 		_playerObjectId = player.getObjectId();
 		_npcObjectId = npc.getObjectId();

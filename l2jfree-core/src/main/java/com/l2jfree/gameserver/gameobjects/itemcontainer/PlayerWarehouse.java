@@ -14,14 +14,14 @@
  */
 package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 
 public class PlayerWarehouse extends Warehouse
 {
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	
-	public PlayerWarehouse(L2PcInstance owner)
+	public PlayerWarehouse(L2Player owner)
 	{
 		_owner = owner;
 	}
@@ -33,7 +33,7 @@ public class PlayerWarehouse extends Warehouse
 	}
 	
 	@Override
-	public L2PcInstance getOwner()
+	public L2Player getOwner()
 	{
 		return _owner;
 	}

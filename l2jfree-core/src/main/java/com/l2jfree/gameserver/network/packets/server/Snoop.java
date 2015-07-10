@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -25,12 +25,12 @@ public class Snoop extends L2ServerPacket
 {
 	private static final String _S__D5_SNOOP = "[S] D5 Snoop";
 	
-	private final L2PcInstance _snooped;
+	private final L2Player _snooped;
 	private final int _type;
 	private final String _speaker;
 	private final String _msg;
 	
-	public Snoop(L2PcInstance snooped, SystemChatChannelId channel, String speaker, String msg)
+	public Snoop(L2Player snooped, SystemChatChannelId channel, String speaker, String msg)
 	{
 		_snooped = snooped;
 		_type = channel.getId();

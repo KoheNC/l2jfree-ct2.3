@@ -15,10 +15,10 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -37,7 +37,7 @@ public class Spoil extends ISkillConditionChecker
 	{
 		if (!(target instanceof L2MonsterInstance) && !(target instanceof L2ChestInstance))
 		{
-			// Send a System Message to the L2PcInstance
+			// Send a System Message to the L2Player
 			activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
 			return false;
 		}
@@ -48,7 +48,7 @@ public class Spoil extends ISkillConditionChecker
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return;
 		
 		for (L2Creature element : targets)

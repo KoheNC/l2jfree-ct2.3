@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PenaltyMonsterInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
@@ -37,7 +37,7 @@ public class L2Fishing implements Runnable
 	
 	// =========================================================
 	// Data Field
-	private L2PcInstance _fisher;
+	private L2Player _fisher;
 	private int _time;
 	private int _stop = 0;
 	private int _goodUse = 0;
@@ -77,7 +77,7 @@ public class L2Fishing implements Runnable
 	}
 	
 	// =========================================================
-	public L2Fishing(L2PcInstance fisher, FishData fish, boolean isNoob, boolean isUpperGrade)
+	public L2Fishing(L2Player fisher, FishData fish, boolean isNoob, boolean isUpperGrade)
 	{
 		_fisher = fisher;
 		_fishMaxHp = fish.getHP();

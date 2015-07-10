@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
@@ -29,10 +29,10 @@ public class GMViewWarehouseWithdrawList extends L2ServerPacket
 	private static final String _S__95_GMViewWarehouseWithdrawList = "[S] 95 GMViewWarehouseWithdrawList";
 	private final L2ItemInstance[] _items;
 	private final String _playerName;
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final long _money;
 	
-	public GMViewWarehouseWithdrawList(L2PcInstance cha)
+	public GMViewWarehouseWithdrawList(L2Player cha)
 	{
 		_activeChar = cha;
 		_items = _activeChar.getWarehouse().getItems();

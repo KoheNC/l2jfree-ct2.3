@@ -18,8 +18,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SummonItemsData;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -31,7 +31,7 @@ import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 
 public final class Evolve
 {
-	public static final boolean doEvolve(L2PcInstance player, L2Npc npc, int itemIdtake, int itemIdgive, int petminlvl)
+	public static final boolean doEvolve(L2Player player, L2Npc npc, int itemIdtake, int itemIdgive, int petminlvl)
 	{
 		if (itemIdtake == 0 || itemIdgive == 0 || petminlvl == 0)
 			return false;
@@ -120,10 +120,10 @@ public final class Evolve
 	
 	static final class EvolveFeedWait implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		private final L2PetInstance _petSummon;
 		
-		EvolveFeedWait(L2PcInstance activeChar, L2PetInstance petSummon)
+		EvolveFeedWait(L2Player activeChar, L2PetInstance petSummon)
 		{
 			_activeChar = activeChar;
 			_petSummon = petSummon;
@@ -141,10 +141,10 @@ public final class Evolve
 	
 	static final class EvolveFinalizer implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		private final L2PetInstance _petSummon;
 		
-		EvolveFinalizer(L2PcInstance activeChar, L2PetInstance petSummon)
+		EvolveFinalizer(L2Player activeChar, L2PetInstance petSummon)
 		{
 			_activeChar = activeChar;
 			_petSummon = petSummon;

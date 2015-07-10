@@ -47,7 +47,6 @@ import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcWalkerInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
@@ -247,7 +246,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <BR>
 	 * <li>If L2Creature is NOT a L2Npc, create an empty _skills slot</li>
-	 * <li>If L2Creature is a L2PcInstance or L2Summon, copy basic Calculator set to object</li>
+	 * <li>If L2Creature is a L2Player or L2Summon, copy basic Calculator set to object</li>
 	 * <BR>
 	 * <BR>
 	 *
@@ -442,11 +441,11 @@ public abstract class L2Creature extends L2Object
 	}
 	
 	/**
-	 * Send a packet to the L2Creature AND to all L2PcInstance in the _knownPlayers of the L2Creature.<BR>
+	 * Send a packet to the L2Creature AND to all L2Player in the _knownPlayers of the L2Creature.<BR>
 	 * <BR>
 	 * <B><U> Concept</U> :</B><BR>
 	 * <BR>
-	 * L2PcInstance in the detection area of the L2Creature are identified in <B>_knownPlayers</B>. In order to inform other players of state modification on
+	 * L2Player in the detection area of the L2Creature are identified in <B>_knownPlayers</B>. In order to inform other players of state modification on
 	 * the L2Creature, server just need to go through _knownPlayers to send Server->Client Packet<BR>
 	 * <BR>
 	 */
@@ -456,11 +455,11 @@ public abstract class L2Creature extends L2Object
 	}
 	
 	/**
-	 * Send a packet to the L2Creature AND to all L2PcInstance in the radius (max knownlist radius) from the L2Creature.<BR>
+	 * Send a packet to the L2Creature AND to all L2Player in the radius (max knownlist radius) from the L2Creature.<BR>
 	 * <BR>
 	 * <B><U> Concept</U> :</B><BR>
 	 * <BR>
-	 * L2PcInstance in the detection area of the L2Creature are identified in <B>_knownPlayers</B>. In order to inform other players of state modification on
+	 * L2Player in the detection area of the L2Creature are identified in <B>_knownPlayers</B>. In order to inform other players of state modification on
 	 * the L2Creature, server just need to go through _knownPlayers to send Server->Client Packet<BR>
 	 * <BR>
 	 */
@@ -503,7 +502,7 @@ public abstract class L2Creature extends L2Object
 	}
 	
 	/**
-	 * Send the Server->Client packet StatusUpdate with current HP and MP to all other L2PcInstance to inform.<BR>
+	 * Send the Server->Client packet StatusUpdate with current HP and MP to all other L2Player to inform.<BR>
 	 * <BR>
 	 * <B><U> Actions</U> :</B><BR>
 	 * <BR>
@@ -516,7 +515,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance : Send current HP,MP and CP to the L2PcInstance and only current HP, MP and Level to all other L2PcInstance of the Party</li>
+	 * <li> L2Player : Send current HP,MP and CP to the L2Player and only current HP, MP and Level to all other L2Player of the Party</li>
 	 * <BR>
 	 * <BR>
 	 */
@@ -536,7 +535,7 @@ public abstract class L2Creature extends L2Object
 		
 		synchronized (getStatus().getStatusListeners())
 		{
-			for (L2PcInstance player : getStatus().getStatusListeners())
+			for (L2Player player : getStatus().getStatusListeners())
 				player.sendPacket(su);
 		}
 	}
@@ -546,7 +545,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance</li>
+	 * <li> L2Player</li>
 	 * <BR>
 	 * <BR>
 	 * @param gsp
@@ -579,7 +578,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <li>Stop the movement of the L2Creature</li>
 	 * <li>Set the x,y,z position of the L2Object and if necessary modify its _worldRegion</li>
-	 * <li>Send a Server->Client packet TeleportToLocationt to the L2Creature AND to all L2PcInstance in its _knownPlayers</li>
+	 * <li>Send a Server->Client packet TeleportToLocationt to the L2Creature AND to all L2Player in its _knownPlayers</li>
 	 * <li>Modify the position of the pet if necessary</li>
 	 * <BR>
 	 * <BR>
@@ -620,7 +619,7 @@ public abstract class L2Creature extends L2Object
 		// remove the object from its old location
 		decayMe();
 		
-		// Send a Server->Client packet TeleportToLocationt to the L2Creature AND to all L2PcInstance in the _knownPlayers of the L2Creature
+		// Send a Server->Client packet TeleportToLocationt to the L2Creature AND to all L2Player in the _knownPlayers of the L2Creature
 		broadcastPacket(new TeleportToLocation(this, x, y, z, heading));
 		
 		// Set the x, y, z coords of the object, but do not update it's world region yet - onTeleported() will do it
@@ -631,7 +630,7 @@ public abstract class L2Creature extends L2Object
 		
 		isFalling(false, 0);
 		
-		if (this instanceof L2PcInstance && !((L2PcInstance)this).isInOfflineMode())
+		if (this instanceof L2Player && !((L2Player)this).isInOfflineMode())
 		{
 		}
 		else
@@ -742,11 +741,11 @@ public abstract class L2Creature extends L2Object
 		
 		try
 		{
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				safeFallHeight =
-						((L2PcInstance)this).getTemplate().getBaseFallSafeHeight(
-								((L2PcInstance)this).getAppearance().getSex());
+						((L2Player)this).getTemplate().getBaseFallSafeHeight(
+								((L2Player)this).getAppearance().getSex());
 			}
 		}
 		
@@ -809,7 +808,7 @@ public abstract class L2Creature extends L2Object
 		if (damage < 1)
 			return;
 		
-		if (this instanceof L2PcInstance)
+		if (this instanceof L2Player)
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.FALL_DAMAGE_S1);
 			sm.addNumber(damage);
@@ -850,13 +849,13 @@ public abstract class L2Creature extends L2Object
 	 * <li>Get the active weapon (always equipped in the right hand) </li>
 	 * <BR>
 	 * <BR>
-	 * <li>If weapon is a bow, check for arrows, MP and bow re-use delay (if necessary, equip the L2PcInstance with arrows in left hand)</li>
+	 * <li>If weapon is a bow, check for arrows, MP and bow re-use delay (if necessary, equip the L2Player with arrows in left hand)</li>
 	 * <li>If weapon is a bow, consume MP and set the new period of bow non re-use </li>
 	 * <BR>
 	 * <BR>
 	 * <li>Get the Attack Speed of the L2Creature (delay (in milliseconds) before next attack) </li>
 	 * <li>Select the type of attack to start (Simple, Bow, Pole or Dual) and verify if SoulShot are charged then start calculation</li>
-	 * <li>If the Server->Client packet Attack contains at least 1 hit, send the Server->Client packet Attack to the L2Creature AND to all L2PcInstance in the
+	 * <li>If the Server->Client packet Attack contains at least 1 hit, send the Server->Client packet Attack to the L2Creature AND to all L2Player in the
 	 * _knownPlayers of the L2Creature</li>
 	 * <li>Notify AI with EVT_READY_TO_ACT</li>
 	 * <BR>
@@ -871,9 +870,9 @@ public abstract class L2Creature extends L2Object
 			_log.debug(getName() + " doAttack: target=" + target);
 		
 		if (isAlikeDead() || target == null || (this instanceof L2Npc && target.isAlikeDead())
-				|| (this instanceof L2PcInstance && target.isDead() && !target.isFakeDeath()))
+				|| (this instanceof L2Player && target.isDead() && !target.isFakeDeath()))
 		{
-			// If L2PcInstance is dead or the target is dead, the action is stoped
+			// If L2Player is dead or the target is dead, the action is stoped
 			getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE);
 			
 			sendPacket(ActionFailed.STATIC_PACKET);
@@ -894,9 +893,9 @@ public abstract class L2Creature extends L2Object
 		
 		boolean transformed = false;
 		
-		if (this instanceof L2PcInstance)
+		if (this instanceof L2Player)
 		{
-			L2PcInstance actor = (L2PcInstance)this;
+			L2Player actor = (L2Player)this;
 			if ((actor.isMounted() && actor.getMountNpcId() == 12621)
 					|| (actor.isTransformed() && !actor.getTransformation().canDoMeleeAttack()))
 			{
@@ -904,7 +903,7 @@ public abstract class L2Creature extends L2Object
 				return;
 			}
 			
-			transformed = ((L2PcInstance)this).isTransformed();
+			transformed = ((L2Player)this).isTransformed();
 		}
 		
 		if (GlobalRestrictions.isProtected(this, target, null, true))
@@ -938,7 +937,7 @@ public abstract class L2Creature extends L2Object
 		}
 		
 		// BOW and CROSSBOW checks
-		if (weaponItem != null && !transformed && this instanceof L2PcInstance)
+		if (weaponItem != null && !transformed && this instanceof L2Player)
 		{
 			// Check for arrows and MP
 			if (weaponItem.getItemType() == L2WeaponType.BOW)
@@ -951,31 +950,31 @@ public abstract class L2Creature extends L2Object
 					return;
 				}
 				
-				// Equip arrows needed in left hand and send a Server->Client packet ItemList to the L2PcINstance then return True
+				// Equip arrows needed in left hand and send a Server->Client packet ItemList to the L2Player then return True
 				if (!checkAndEquipArrows())
 				{
-					// Cancel the action because the L2PcInstance have no arrow
+					// Cancel the action because the L2Player have no arrow
 					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 					sendPacket(ActionFailed.STATIC_PACKET);
 					sendPacket(SystemMessageId.NOT_ENOUGH_ARROWS);
 					return;
 				}
 				
-				// Verify if L2PcInstance owns enough MP
+				// Verify if L2Player owns enough MP
 				int saMpConsume = (int)getStat().calcStat(Stats.MP_CONSUME, 0, null, null);
 				int mpConsume = saMpConsume == 0 ? weaponItem.getMpConsume() : saMpConsume;
 				mpConsume = (int)calcStat(Stats.BOW_MP_CONSUME_RATE, mpConsume, null, null);
 				
 				if (getStatus().getCurrentMp() < mpConsume)
 				{
-					// If L2PcInstance doesn't have enough MP, stop the attack
+					// If L2Player doesn't have enough MP, stop the attack
 					getBowReuseEndEvtReadyToAct().schedule(1000);
 					sendPacket(ActionFailed.STATIC_PACKET);
 					sendPacket(SystemMessageId.NOT_ENOUGH_MP);
 					return;
 				}
 				
-				// If L2PcInstance have enough MP, the bow consumes it
+				// If L2Player have enough MP, the bow consumes it
 				if (mpConsume > 0)
 					getStatus().reduceMp(mpConsume);
 			}
@@ -990,10 +989,10 @@ public abstract class L2Creature extends L2Object
 					return;
 				}
 				
-				// Equip bolts needed in left hand and send a Server->Client packet ItemList to the L2PcINstance then return True
+				// Equip bolts needed in left hand and send a Server->Client packet ItemList to the L2Player then return True
 				if (!checkAndEquipBolts())
 				{
-					// Cancel the action because the L2PcInstance have no arrow
+					// Cancel the action because the L2Player have no arrow
 					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 					sendPacket(ActionFailed.STATIC_PACKET);
 					sendPacket(SystemMessageId.NOT_ENOUGH_BOLTS);
@@ -1002,7 +1001,7 @@ public abstract class L2Creature extends L2Object
 			}
 		}
 		
-		// Add the L2PcInstance to _knownObjects and _knownPlayer of the target
+		// Add the L2Player to _knownObjects and _knownPlayer of the target
 		target.getKnownList().addKnownObject(this);
 		
 		// Reduce the current CP if TIREDNESS configuration is activated
@@ -1060,8 +1059,8 @@ public abstract class L2Creature extends L2Object
 		else
 			hitted = doAttackHitSimple(attack, target, timeToHit);
 		
-		// Flag the attacker if it's a L2PcInstance outside a PvP area
-		L2PcInstance player = getActingPlayer();
+		// Flag the attacker if it's a L2Player outside a PvP area
+		L2Player player = getActingPlayer();
 		
 		if (player != null && player.getPet() != target)
 		{
@@ -1104,14 +1103,14 @@ public abstract class L2Creature extends L2Object
 				}
 				else if (player.isHero())
 				{
-					if (target instanceof L2PcInstance && ((L2PcInstance)target).isCursedWeaponEquipped())
+					if (target instanceof L2Player && ((L2Player)target).isCursedWeaponEquipped())
 						target.getStatus().setCurrentCp(0); // If Zariche is hitted by a Hero, Cp is reduced to 0
 				}
 			}
 		}
 		
 		// If the Server->Client packet Attack contains at least 1 hit, send the Server->Client packet Attack
-		// to the L2Creature AND to all L2PcInstance in the _knownPlayers of the L2Creature
+		// to the L2Creature AND to all L2Player in the _knownPlayers of the L2Creature
 		if (attack.hasHits())
 			broadcastPacket(attack);
 	}
@@ -1156,7 +1155,7 @@ public abstract class L2Creature extends L2Object
 	 * <li>If hit isn't missed, calculate if shield defense is efficient </li>
 	 * <li>If hit isn't missed, calculate if hit is critical </li>
 	 * <li>If hit isn't missed, calculate physical damages </li>
-	 * <li>If the L2Creature is a L2PcInstance, Send a Server->Client packet SetupGauge </li>
+	 * <li>If the L2Creature is a L2Player, Send a Server->Client packet SetupGauge </li>
 	 * <li>Create a new hit task with Medium priority</li>
 	 * <li>Calculate and set the disable delay of the bow in function of the Attack Speed</li>
 	 * <li>Add this hit to the Server-Client packet Attack </li>
@@ -1198,8 +1197,8 @@ public abstract class L2Creature extends L2Object
 			damage1 = (int)Formulas.calcPhysDam(this, target, null, shld1, crit1, attack.soulshot);
 		}
 		
-		// Check if the L2Creature is a L2PcInstance
-		if (this instanceof L2PcInstance)
+		// Check if the L2Creature is a L2Player
+		if (this instanceof L2Player)
 		{
 			// Send a system message
 			sendPacket(SystemMessageId.GETTING_READY_TO_SHOOT_AN_ARROW);
@@ -1228,7 +1227,7 @@ public abstract class L2Creature extends L2Object
 	* <li>If hit isn't missed, calculate if shield defense is efficient </li>
 	* <li>If hit isn't missed, calculate if hit is critical </li>
 	* <li>If hit isn't missed, calculate physical damages </li>
-	* <li>If the L2Creature is a L2PcInstance, Send a Server->Client packet SetupGauge </li>
+	* <li>If the L2Creature is a L2Player, Send a Server->Client packet SetupGauge </li>
 	* <li>Create a new hit task with Medium priority</li>
 	* <li>Calculate and set the disable delay of the crossbow in function of the Attack Speed</li>
 	* <li>Add this hit to the Server-Client packet Attack </li><BR><BR>
@@ -1267,8 +1266,8 @@ public abstract class L2Creature extends L2Object
 			damage1 = (int)Formulas.calcPhysDam(this, target, null, shld1, crit1, attack.soulshot);
 		}
 		
-		// Check if the L2Creature is a L2PcInstance
-		if (this instanceof L2PcInstance)
+		// Check if the L2Creature is a L2Player
+		if (this instanceof L2Player)
 		{
 			// Send a system message
 			sendPacket(SystemMessageId.CROSSBOW_PREPARING_TO_FIRE);
@@ -1545,7 +1544,7 @@ public abstract class L2Creature extends L2Object
 	{
 		if (!checkDoCastConditions(skill))
 		{
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 				getAI().setIntention(AI_INTENTION_ACTIVE);
 			return;
 		}
@@ -1558,7 +1557,7 @@ public abstract class L2Creature extends L2Object
 		
 		if (target == null || GlobalRestrictions.isProtected(this, target, skill, true))
 		{
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				sendPacket(ActionFailed.STATIC_PACKET);
 				getAI().setIntention(AI_INTENTION_ACTIVE);
@@ -1601,7 +1600,7 @@ public abstract class L2Creature extends L2Object
 			skillInterruptTime *= multi;
 		}
 		
-		// Set the _castInterruptTime and casting status (L2PcInstance already has this true)
+		// Set the _castInterruptTime and casting status (L2Player already has this true)
 		if (simultaneously)
 		{
 			setIsCastingSimultaneouslyNow(true);
@@ -1653,15 +1652,15 @@ public abstract class L2Creature extends L2Object
 					else
 						setIsCastingNow(false);
 					
-					if (this instanceof L2PcInstance)
+					if (this instanceof L2Player)
 						getAI().setIntention(AI_INTENTION_ACTIVE);
 					return;
 				}
 			}
 			
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
-				L2PcInstance player = (L2PcInstance)this;
+				L2Player player = (L2Player)this;
 				// Reset soul bonus for skills
 				player.resetLastSoulConsume();
 				
@@ -1702,7 +1701,7 @@ public abstract class L2Creature extends L2Object
 		}
 		
 		// Send a system message USE_S1 to the L2Creature
-		if (this instanceof L2PcInstance && skill.getId() != 1312)
+		if (this instanceof L2Player && skill.getId() != 1312)
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.USE_S1);
 			sm.addSkillName(skill);
@@ -1729,7 +1728,7 @@ public abstract class L2Creature extends L2Object
 		//		}
 		
 		// Before start AI Cast Broadcast Fly Effect is Need
-		if (skill.getFlyType() != null && this instanceof L2PcInstance)
+		if (skill.getFlyType() != null && this instanceof L2Player)
 			ThreadPoolManager.getInstance().schedule(new FlyToLocationTask(target, skill), 50);
 		
 		final MagicEnv magicEnv = new MagicEnv(skill, targets, getTarget(), target, coolTime, simultaneously);
@@ -1744,7 +1743,7 @@ public abstract class L2Creature extends L2Object
 		}
 		else
 		{
-			if (this instanceof L2PcInstance && !effectWhileCasting)
+			if (this instanceof L2Player && !effectWhileCasting)
 				getActingPlayer().sendPacket(new SetupGauge(SetupGauge.BLUE, hitTime));
 			
 			// Create a task MagicUseTask to launch the MagicSkill at the end of the casting time (hitTime)
@@ -1782,7 +1781,7 @@ public abstract class L2Creature extends L2Object
 		if (skill == null || isSkillDisabled(skill.getId()) || skill.getSkillType() == L2SkillType.NOTDONE
 				|| (skill.getFlyType() != null && isRooted()))
 		{
-			// Send a Server->Client packet ActionFailed to the L2PcInstance
+			// Send a Server->Client packet ActionFailed to the L2Player
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return false;
 		}
@@ -1790,12 +1789,12 @@ public abstract class L2Creature extends L2Object
 		// Check if the caster has enough MP
 		if (getStatus().getCurrentMp() < getStat().getMpConsume(skill) + getStat().getMpInitialConsume(skill))
 		{
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				// Send a System Message to the caster
 				sendPacket(SystemMessageId.NOT_ENOUGH_MP);
 				
-				// Send a Server->Client packet ActionFailed to the L2PcInstance
+				// Send a Server->Client packet ActionFailed to the L2Player
 				sendPacket(ActionFailed.STATIC_PACKET);
 			}
 			return false;
@@ -1804,12 +1803,12 @@ public abstract class L2Creature extends L2Object
 		// Check if the caster has enough HP
 		if (getStatus().getCurrentHp() <= skill.getHpConsume())
 		{
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				// Send a System Message to the caster
 				sendPacket(SystemMessageId.NOT_ENOUGH_HP);
 				
-				// Send a Server->Client packet ActionFailed to the L2PcInstance
+				// Send a Server->Client packet ActionFailed to the L2Player
 				sendPacket(ActionFailed.STATIC_PACKET);
 			}
 			return false;
@@ -1821,13 +1820,13 @@ public abstract class L2Creature extends L2Object
 			{
 				if (isInsideZone(L2Zone.FLAG_PEACE))
 				{
-					if (this instanceof L2PcInstance)
+					if (this instanceof L2Player)
 						sendPacket(SystemMessageId.A_MALICIOUS_SKILL_CANNOT_BE_USED_IN_PEACE_ZONE);
 					return false;
 				}
-				if (this instanceof L2PcInstance && ((L2PcInstance)this).getTrap() != null)
+				if (this instanceof L2Player && ((L2Player)this).getTrap() != null)
 				{
-					// Send a Server->Client packet ActionFailed to the L2PcInstance
+					// Send a Server->Client packet ActionFailed to the L2Player
 					sendPacket(ActionFailed.STATIC_PACKET);
 					return false;
 				}
@@ -1836,8 +1835,8 @@ public abstract class L2Creature extends L2Object
 			}
 			case SUMMON:
 			{
-				if (!((L2SkillSummon)skill).isCubic() && this instanceof L2PcInstance
-						&& (getPet() != null || ((L2PcInstance)this).isMounted()))
+				if (!((L2SkillSummon)skill).isCubic() && this instanceof L2Player
+						&& (getPet() != null || ((L2Player)this).isMounted()))
 				{
 					if (_log.isDebugEnabled())
 						_log.info("player has a pet already. ignore summon skill");
@@ -1864,7 +1863,7 @@ public abstract class L2Creature extends L2Object
 			{
 				if (isMuted())
 				{
-					// Send a Server->Client packet ActionFailed to the L2PcInstance
+					// Send a Server->Client packet ActionFailed to the L2Player
 					sendPacket(ActionFailed.STATIC_PACKET);
 					return false;
 				}
@@ -1874,13 +1873,13 @@ public abstract class L2Creature extends L2Object
 				// Check if the skill is physical and if the L2Creature is not physical_muted
 				if (isPhysicalMuted())
 				{
-					// Send a Server->Client packet ActionFailed to the L2PcInstance
+					// Send a Server->Client packet ActionFailed to the L2Player
 					sendPacket(ActionFailed.STATIC_PACKET);
 					return false;
 				}
 				else if (isPhysicalAttackMuted()) // Prevent use attack
 				{
-					// Send a Server->Client packet ActionFailed to the L2PcInstance
+					// Send a Server->Client packet ActionFailed to the L2Player
 					sendPacket(ActionFailed.STATIC_PACKET);
 					return false;
 				}
@@ -1894,9 +1893,9 @@ public abstract class L2Creature extends L2Object
 			if (region == null)
 				return false;
 			boolean canCast = true;
-			if (skill.getTargetType() == SkillTargetType.TARGET_GROUND && this instanceof L2PcInstance)
+			if (skill.getTargetType() == SkillTargetType.TARGET_GROUND && this instanceof L2Player)
 			{
-				Point3D wp = ((L2PcInstance)this).getCurrentSkillWorldPosition();
+				Point3D wp = ((L2Player)this).getCurrentSkillWorldPosition();
 				if (!region.checkEffectRangeInsidePeaceZone(skill, wp.getX(), wp.getY(), wp.getZ()))
 					canCast = false;
 			}
@@ -1914,7 +1913,7 @@ public abstract class L2Creature extends L2Object
 		// Check if the caster owns the weapon needed
 		if (!skill.getWeaponDependancy(this, true))
 		{
-			// Send a Server->Client packet ActionFailed to the L2PcInstance
+			// Send a Server->Client packet ActionFailed to the L2Player
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return false;
 		}
@@ -1965,7 +1964,7 @@ public abstract class L2Creature extends L2Object
 	 * <li>Stop movement </li>
 	 * <li>Stop HP/MP/CP Regeneration task </li>
 	 * <li>Stop all active skills effects in progress on the L2Creature </li>
-	 * <li>Send the Server->Client packet StatusUpdate with current HP and MP to all other L2PcInstance to inform </li>
+	 * <li>Send the Server->Client packet StatusUpdate with current HP and MP to all other L2Player to inform </li>
 	 * <li>Notify L2Creature AI </li>
 	 * <BR>
 	 * <BR>
@@ -1973,7 +1972,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <li> L2Npc : Create a DecayTask to remove the corpse of the L2Npc after 7 seconds </li>
 	 * <li> L2Attackable : Distribute rewards (EXP, SP, Drops...) and notify Quest Engine </li>
-	 * <li> L2PcInstance : Apply Death Penalty, Manage gain/loss Karma and Item Drop </li>
+	 * <li> L2Player : Apply Death Penalty, Manage gain/loss Karma and Item Drop </li>
 	 * <BR>
 	 * <BR>
 	 *
@@ -2031,19 +2030,19 @@ public abstract class L2Creature extends L2Object
 		else
 			stopAllEffectsExceptThoseThatLastThroughDeath();
 		
-		if (this instanceof L2PcInstance && ((L2PcInstance)this).getAgathionId() != 0)
-			((L2PcInstance)this).setAgathionId(0);
+		if (this instanceof L2Player && ((L2Player)this).getAgathionId() != 0)
+			((L2Player)this).setAgathionId(0);
 		
 		calculateRewards(killer);
 		
-		// Send the Server->Client packet StatusUpdate with current HP and MP to all other L2PcInstance to inform
+		// Send the Server->Client packet StatusUpdate with current HP and MP to all other L2Player to inform
 		broadcastStatusUpdate();
 		
 		if (getWorldRegion() != null)
 			getWorldRegion().onDie(this);
 		
 		// Notify Quest of L2Playable's death
-		L2PcInstance actingPlayer = getActingPlayer();
+		L2Player actingPlayer = getActingPlayer();
 		if (actingPlayer != null)
 		{
 			for (QuestState qs : actingPlayer.getNotifyQuestOfDeath())
@@ -2063,13 +2062,13 @@ public abstract class L2Creature extends L2Object
 			if (((L2Summon)this).isPhoenixBlessed() && ((L2Summon)this).getOwner() != null)
 				((L2Summon)this).getOwner().revivePetRequest(((L2Summon)this).getOwner(), null);
 		}
-		else if (this instanceof L2PcInstance)
+		else if (this instanceof L2Player)
 		{
 			if (((L2Playable)this).isPhoenixBlessed())
-				((L2PcInstance)this).reviveRequest(((L2PcInstance)this), null);
-			else if (((L2PcInstance)this).getCharmOfCourage() && ((L2PcInstance)this).isInSiege())
+				((L2Player)this).reviveRequest(((L2Player)this), null);
+			else if (((L2Player)this).getCharmOfCourage() && ((L2Player)this).isInSiege())
 			{
-				((L2PcInstance)this).reviveRequest(((L2PcInstance)this), null);
+				((L2Player)this).reviveRequest(((L2Player)this), null);
 			}
 		}
 		
@@ -2507,7 +2506,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance</li>
+	 * <li> L2Player</li>
 	 * <BR>
 	 * <BR>
 	 */
@@ -2542,7 +2541,7 @@ public abstract class L2Creature extends L2Object
 		broadcastFullInfo();
 	}
 	
-	/** Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2PcInstance. */
+	/** Set the L2Creature movement type to run and send Server->Client packet ChangeMoveType to all others L2Player. */
 	public final void setRunning()
 	{
 		if (!isRunning())
@@ -2750,7 +2749,7 @@ public abstract class L2Creature extends L2Object
 		_title = value;
 	}
 	
-	/** Set the L2Creature movement type to walk and send Server->Client packet ChangeMoveType to all others L2PcInstance. */
+	/** Set the L2Creature movement type to walk and send Server->Client packet ChangeMoveType to all others L2Player. */
 	public final void setWalking()
 	{
 		if (isRunning())
@@ -2763,8 +2762,8 @@ public abstract class L2Creature extends L2Object
 	 * <B><U> Actions</U> :</B><BR>
 	 * <BR>
 	 * <li>If the attacker/target is dead or use fake death, notify the AI with EVT_CANCEL and send a Server->Client packet ActionFailed (if attacker is a
-	 * L2PcInstance)</li>
-	 * <li>If attack isn't aborted, send a message system (critical hit, missed...) to attacker/target if they are L2PcInstance </li>
+	 * L2Player)</li>
+	 * <li>If attack isn't aborted, send a message system (critical hit, missed...) to attacker/target if they are L2Player </li>
 	 * <li>If attack isn't aborted and hit isn't missed, reduce HP of the target and calculate reflection damage to reduce HP of attacker if necessary </li>
 	 * <li>if attack isn't aborted and hit isn't missed, manage attack or cast break of the target (calculating rate, sending message...) </li>
 	 * <BR>
@@ -3180,7 +3179,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <li>Calculate the success rate of the Stun Abnormal Effect on this L2Creature</li>
 	 * <li>If Stun succeed, active the abnormal effect Stun flag, notify the L2Creature AI and send Server->Client UserInfo/CharInfo packet</li>
-	 * <li>If Stun NOT succeed, send a system message Failed to the L2PcInstance attacker</li>
+	 * <li>If Stun NOT succeed, send a system message Failed to the L2Player attacker</li>
 	 * <BR>
 	 * <BR>
 	 */
@@ -3368,9 +3367,9 @@ public abstract class L2Creature extends L2Object
 		setIsFakeDeath(false);
 		setIsFallsdown(false); // [L2J_JP_ADD]
 		// if this is a player instance, start the grace period for this character (grace from mobs only)!
-		if (this instanceof L2PcInstance)
+		if (this instanceof L2Player)
 		{
-			((L2PcInstance)this).setRecentFakeDeath(true);
+			((L2Player)this).setRecentFakeDeath(true);
 		}
 		ChangeWaitType revive = new ChangeWaitType(this, ChangeWaitType.WT_STOP_FAKEDEATH);
 		broadcastPacket(revive);
@@ -3533,11 +3532,11 @@ public abstract class L2Creature extends L2Object
 			stopEffects(L2EffectType.TRANSFORMATION);
 		
 		// if this is a player instance, then untransform, also set the transform_id column equal to 0 if not cursed.
-		if (this instanceof L2PcInstance)
+		if (this instanceof L2Player)
 		{
-			if (((L2PcInstance)this).getTransformation() != null)
+			if (((L2Player)this).getTransformation() != null)
 			{
-				((L2PcInstance)this).untransform();
+				((L2Player)this).untransform();
 			}
 		}
 		
@@ -3551,7 +3550,7 @@ public abstract class L2Creature extends L2Object
 	 * <B><U> Overridden in</U> :</B><BR>
 	 * <BR>
 	 * <li>L2Npc</li>
-	 * <li>L2PcInstance</li>
+	 * <li>L2Player</li>
 	 * <li>L2Summon</li>
 	 * <li>L2DoorInstance</li>
 	 * <BR>
@@ -3883,8 +3882,8 @@ public abstract class L2Creature extends L2Object
 			// Add the Func to the calculator corresponding to the state
 			_calculators[stat].addFunc(f);
 			
-			if (this instanceof L2PcInstance)
-				((L2PcInstance)this).onFuncAddition(f);
+			if (this instanceof L2Player)
+				((L2Player)this).onFuncAddition(f);
 		}
 		
 		broadcastFullInfo();
@@ -4127,7 +4126,7 @@ public abstract class L2Creature extends L2Object
 				enableAllSkills(); // this remains for forced skill use, e.g. scroll of escape
 			setIsCastingNow(false);
 			setIsCastingSimultaneouslyNow(false);
-			//if (this instanceof L2PcInstance)
+			//if (this instanceof L2Player)
 			getAI().notifyEvent(CtrlEvent.EVT_FINISH_CASTING); // setting back previous intention
 			broadcastPacket(new MagicSkillCanceled(getObjectId())); // broadcast packet to stop animations client-side
 			sendPacket(ActionFailed.STATIC_PACKET); // send an "action failed" packet to the caster
@@ -4210,7 +4209,7 @@ public abstract class L2Creature extends L2Object
 			short geoHeight = GeoData.getInstance().getSpawnHeight(xPrev, yPrev, zPrev - 30, zPrev + 30, getObjectId());
 			dz = m._zDestination - geoHeight;
 			// quite a big difference, compare to validatePosition packet
-			if (this instanceof L2PcInstance && Math.abs(getClientZ() - geoHeight) > 200
+			if (this instanceof L2Player && Math.abs(getClientZ() - geoHeight) > 200
 					&& Math.abs(getClientZ() - geoHeight) < 1500)
 			{
 				dz = m._zDestination - zPrev; // allow diff
@@ -4347,7 +4346,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance : Remove the L2PcInstance from the old target _statusListener and add it to the new target if it was a L2Creature</li>
+	 * <li> L2Player : Remove the L2Player from the old target _statusListener and add it to the new target if it was a L2Creature</li>
 	 * <BR>
 	 * <BR>
 	 *
@@ -4359,7 +4358,7 @@ public abstract class L2Creature extends L2Object
 		if (newTarget == getTarget())
 			return;
 		
-		if (newTarget != null && !(this instanceof L2PcInstance))
+		if (newTarget != null && !(this instanceof L2Player))
 		{
 			if (!newTarget.isVisible())
 				return;
@@ -4577,7 +4576,7 @@ public abstract class L2Creature extends L2Object
 			// when geodata == 1, for L2Playable and l2riftinstance only
 			if ((Config.GEODATA == 2 && !(this instanceof L2Attackable && ((L2Attackable)this)
 					.isReturningToSpawnPoint()))
-					|| this instanceof L2PcInstance
+					|| this instanceof L2Player
 					|| (this instanceof L2Summon && !(getAI().getIntention() == AI_INTENTION_FOLLOW)) // assuming intention_follow only when following owner
 					|| isAfraid() || this instanceof L2RiftInvaderInstance)
 			{
@@ -4602,8 +4601,8 @@ public abstract class L2Creature extends L2Object
 					// Temporary fix for character outside world region errors
 					_log.warn("Character " + getName() + " outside world area, in coordinates x:" + curX + " y:" + curY);
 					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-					if (this instanceof L2PcInstance)
-						new Disconnection((L2PcInstance)this).defaultSequence(true);
+					if (this instanceof L2Player)
+						new Disconnection((L2Player)this).defaultSequence(true);
 					else if (!(this instanceof L2Summon))
 						onDecay(); // preventation when summon get out of world coords, player will not loose it, unsummon handled from pcinstance
 					return;
@@ -4639,7 +4638,7 @@ public abstract class L2Creature extends L2Object
 						// * Summons will follow their masters no matter what.
 						// * Currently minions also must move freely since L2AttackableAI commands
 						// them to move along with their leader
-						if (this instanceof L2PcInstance
+						if (this instanceof L2Player
 								|| (!(this instanceof L2Playable) && !(this instanceof L2MinionInstance) && Math.abs(z
 										- curZ) > 140)
 								|| (this instanceof L2Summon && !((L2Summon)this).getFollowStatus()))
@@ -4778,7 +4777,7 @@ public abstract class L2Creature extends L2Object
 		
 		MovementController.getInstance().add(this, ticksToMove);
 		
-		// Send a Server->Client packet MoveToLocation to the actor and all L2PcInstance in its _knownPlayers
+		// Send a Server->Client packet MoveToLocation to the actor and all L2Player in its _knownPlayers
 		MoveToLocation msg = new MoveToLocation(this);
 		broadcastPacket(msg);
 		
@@ -5032,7 +5031,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance</li>
+	 * <li> L2Player</li>
 	 * <BR>
 	 * <BR>
 	 */
@@ -5045,7 +5044,7 @@ public abstract class L2Creature extends L2Object
 	* Retun True if bolts are available.<BR><BR>
 	*
 	* <B><U> Overridden in </U> :</B><BR><BR>
-	* <li> L2PcInstance</li><BR><BR>
+	* <li> L2Player</li><BR><BR>
 	*
 	*/
 	protected boolean checkAndEquipBolts()
@@ -5058,7 +5057,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance</li>
+	 * <li> L2Player</li>
 	 * <li> L2PetInstance</li>
 	 * <BR>
 	 * <BR>
@@ -5106,8 +5105,8 @@ public abstract class L2Creature extends L2Object
 	 * <B><U> Actions</U> :</B><BR>
 	 * <BR>
 	 * <li>If the attacker/target is dead or use fake death, notify the AI with EVT_CANCEL and send a Server->Client packet ActionFailed (if attacker is a
-	 * L2PcInstance)</li>
-	 * <li>If attack isn't aborted, send a message system (critical hit, missed...) to attacker/target if they are L2PcInstance </li>
+	 * L2Player)</li>
+	 * <li>If attack isn't aborted, send a message system (critical hit, missed...) to attacker/target if they are L2Player </li>
 	 * <li>If attack isn't aborted and hit isn't missed, reduce HP of the target and calculate reflection damage to reduce HP of attacker if necessary </li>
 	 * <li>if attack isn't aborted and hit isn't missed, manage attack or cast break of the target (calculating rate, sending message...) </li>
 	 * <BR>
@@ -5129,7 +5128,7 @@ public abstract class L2Creature extends L2Object
 	protected void onHitTimer(L2Creature target, int damage, boolean crit, boolean miss, double vampiricMulti)
 	{
 		// If the attacker/target is dead or use fake death, notify the AI with EVT_CANCEL
-		// and send a Server->Client packet ActionFailed (if attacker is a L2PcInstance)
+		// and send a Server->Client packet ActionFailed (if attacker is a L2Player)
 		if (target == null || isAlikeDead())
 		{
 			getAI().notifyEvent(CtrlEvent.EVT_CANCEL);
@@ -5155,7 +5154,7 @@ public abstract class L2Creature extends L2Object
 		
 		sendDamageMessage(target, damage, false, crit, miss);
 		
-		// If attack isn't aborted, send a message system (critical hit, missed...) to attacker/target if they are L2PcInstance
+		// If attack isn't aborted, send a message system (critical hit, missed...) to attacker/target if they are L2Player
 		if (!isAttackAborted())
 		{
 			// Check Raidboss attack
@@ -5165,7 +5164,7 @@ public abstract class L2Creature extends L2Object
 					&& getSkillLevel(L2Boss.BOSS_PENALTY_RESISTANCE) == -1)
 			{
 				int level = 0;
-				if (this instanceof L2PcInstance)
+				if (this instanceof L2Player)
 					level = getLevel();
 				else if (this instanceof L2Summon)
 					level = ((L2Summon)this).getOwner().getLevel();
@@ -5183,10 +5182,10 @@ public abstract class L2Creature extends L2Object
 				}
 			}
 			
-			// If L2Creature target is a L2PcInstance, send a system message
-			if (target instanceof L2PcInstance)
+			// If L2Creature target is a L2Player, send a system message
+			if (target instanceof L2Player)
 			{
-				L2PcInstance enemy = (L2PcInstance)target;
+				L2Player enemy = (L2Player)target;
 				enemy.getAI().clientStartAutoAttack();
 				
 				// Check if shield is efficient
@@ -5236,10 +5235,10 @@ public abstract class L2Creature extends L2Object
 					
 					// Custom messages - nice but also more network load
 					/*
-					 * if (target instanceof L2PcInstance) ((L2PcInstance)target).sendMessage("You reflected " + reflectedDamage + " damage."); else if
+					 * if (target instanceof L2Player) ((L2Player)target).sendMessage("You reflected " + reflectedDamage + " damage."); else if
 					 * (target instanceof L2Summon) ((L2Summon)target).getOwner().sendMessage("Summon reflected " + reflectedDamage + " damage.");
 					 *
-					 * if (this instanceof L2PcInstance) ((L2PcInstance)this).sendMessage("Target reflected to you " + reflectedDamage + " damage."); else
+					 * if (this instanceof L2Player) ((L2Player)this).sendMessage("Target reflected to you " + reflectedDamage + " damage."); else
 					 * if (this instanceof L2Summon) ((L2Summon)this).getOwner().sendMessage("Target reflected to your summon " + reflectedDamage + "
 					 * damage.");
 					 */
@@ -5302,7 +5301,7 @@ public abstract class L2Creature extends L2Object
 				getAI().clientStartAutoAttack();
 				if (this instanceof L2Summon)
 				{
-					L2PcInstance owner = ((L2Summon)this).getOwner();
+					L2Player owner = ((L2Summon)this).getOwner();
 					if (owner != null)
 					{
 						owner.getAI().clientStartAutoAttack();
@@ -5348,7 +5347,7 @@ public abstract class L2Creature extends L2Object
 			// Abort the attack of the L2Creature and send Server->Client ActionFailed packet
 			abortAttack();
 			
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				// not retail, so no system message.
 				sendPacket(ActionFailed.STATIC_PACKET);
@@ -5368,7 +5367,7 @@ public abstract class L2Creature extends L2Object
 			// Abort the cast of the L2Creature and send Server->Client MagicSkillCanceld/ActionFailed packet.
 			abortCast();
 			
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
 				// Send a system message
 				SystemMessage sm = new SystemMessage(SystemMessageId.C1_CASTING_INTERRUPTED);
@@ -5383,7 +5382,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance</li>
+	 * <li> L2Player</li>
 	 * <BR>
 	 * <BR>
 	 * @param bolts
@@ -5406,10 +5405,10 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 *
 	 * @param player
-	 *            The L2PcInstance to attack
+	 *            The L2Player to attack
 	 */
 	@Override
-	public void onForcedAttack(L2PcInstance player)
+	public void onForcedAttack(L2Player player)
 	{
 		if (GlobalRestrictions.isProtected(player, this, null, true))
 		{
@@ -5446,8 +5445,8 @@ public abstract class L2Creature extends L2Object
 	public static final boolean isInsidePeaceZone(L2Creature attacker, L2Object objTarget)
 	{
 		final L2Creature target = L2Object.getActingCharacter(objTarget);
-		final L2PcInstance attackerPlayer = L2Object.getActingPlayer(attacker);
-		final L2PcInstance targetPlayer = L2Object.getActingPlayer(target);
+		final L2Player attackerPlayer = L2Object.getActingPlayer(attacker);
+		final L2Player targetPlayer = L2Object.getActingPlayer(target);
 		
 		if (attackerPlayer == null || targetPlayer == null)
 			return false;
@@ -5509,7 +5508,7 @@ public abstract class L2Creature extends L2Object
 	{
 		double base = 500000/*468000*/; //1500 * 333.3/*1500 * 312*/
 		
-		//if (weapon != null && !(this instanceof L2PcInstance && ((L2PcInstance)this).isTransformed()))
+		//if (weapon != null && !(this instanceof L2Player && ((L2Player)this).isTransformed()))
 		//{
 		//	switch (weapon.getItemType())
 		//	{
@@ -5531,7 +5530,7 @@ public abstract class L2Creature extends L2Object
 		// The SA "Quick Recovery" reduces the red bar Weapon Delay on a bow to the following:
 		// Reuse goes from 639 EB QR, to 1500 Normal...
 		
-		if (weapon == null || (this instanceof L2PcInstance && ((L2PcInstance)this).isTransformed()))
+		if (weapon == null || (this instanceof L2Player && ((L2Player)this).isTransformed()))
 			return 0;
 		
 		double reuse = weapon.getAttackReuseDelay();
@@ -5571,7 +5570,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance : Save update in the character_skills table of the database</li>
+	 * <li> L2Player : Save update in the character_skills table of the database</li>
 	 * <BR>
 	 * <BR>
 	 *
@@ -5620,7 +5619,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance : Save update in the character_skills table of the database</li>
+	 * <li> L2Player : Save update in the character_skills table of the database</li>
 	 * <BR>
 	 * <BR>
 	 *
@@ -5646,9 +5645,9 @@ public abstract class L2Creature extends L2Object
 			if (oldSkill.getSkillType() != L2SkillType.TRANSFORMDISPEL)
 			{
 				// Stop casting if this skill is used right now
-				if (isCastingNow() && this instanceof L2PcInstance)
+				if (isCastingNow() && this instanceof L2Player)
 				{
-					SkillUsageRequest currentSkill = ((L2PcInstance)this).getCurrentSkill();
+					SkillUsageRequest currentSkill = ((L2Player)this).getCurrentSkill();
 					if (currentSkill != null && currentSkill.getSkillId() == oldSkill.getId())
 						abortCast();
 				}
@@ -5681,9 +5680,9 @@ public abstract class L2Creature extends L2Object
 					e.exit(); // remove self skills only - there is no reason to remove normal buffs
 			}
 			
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
-				L2PcInstance player = (L2PcInstance)this;
+				L2Player player = (L2Player)this;
 				
 				if (oldSkill instanceof L2SkillAgathion && player.getAgathionId() > 0)
 				{
@@ -5824,9 +5823,9 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Actions</U> :</B><BR>
 	 * <BR>
-	 * <li>Send a Server->Client packet MagicSkillLaunched (to display magic skill animation) to all L2PcInstance of L2Charcater _knownPlayers</li>
+	 * <li>Send a Server->Client packet MagicSkillLaunched (to display magic skill animation) to all L2Player of L2Charcater _knownPlayers</li>
 	 * <li>Consume MP, HP and Item if necessary</li>
-	 * <li>Send a Server->Client packet StatusUpdate with MP modification to the L2PcInstance</li>
+	 * <li>Send a Server->Client packet StatusUpdate with MP modification to the L2Player</li>
 	 * <li>Launch the magic skill in order to calculate its effects</li>
 	 * <li>If the skill type is PDAM, notify the AI of the target with AI_INTENTION_ATTACK</li>
 	 * <li>Notify the AI of the L2Creature with EVT_FINISH_CASTING</li>
@@ -5963,19 +5962,19 @@ public abstract class L2Creature extends L2Object
 						target.sendPacket(smsg);
 					}
 					
-					if (this instanceof L2PcInstance && target instanceof L2Summon)
+					if (this instanceof L2Player && target instanceof L2Summon)
 					{
 						((L2Summon)target).broadcastFullInfo();
 					}
 				}
 			}
 			
-			// Consume MP of the L2Creature and Send the Server->Client packet StatusUpdate with current HP and MP to all other L2PcInstance to inform
+			// Consume MP of the L2Creature and Send the Server->Client packet StatusUpdate with current HP and MP to all other L2Player to inform
 			double mpConsume = getStat().getMpConsume(skill);
 			if (mpConsume > 0)
 				getStatus().reduceMp(mpConsume);
 			
-			// Consume HP if necessary and Send the Server->Client packet StatusUpdate with current HP and MP to all other L2PcInstance to inform
+			// Consume HP if necessary and Send the Server->Client packet StatusUpdate with current HP and MP to all other L2Player to inform
 			if (skill.getHpConsume() > 0)
 			{
 				double consumeHp;
@@ -5987,7 +5986,7 @@ public abstract class L2Creature extends L2Object
 				reduceCurrentHpByConsume(consumeHp);
 			}
 			
-			// Consume CP if necessary and Send the Server->Client packet StatusUpdate with current CP/HP and MP to all other L2PcInstance to inform
+			// Consume CP if necessary and Send the Server->Client packet StatusUpdate with current CP/HP and MP to all other L2Player to inform
 			if (skill.getCpConsume() > 0)
 			{
 				double consumeCp;
@@ -6010,9 +6009,9 @@ public abstract class L2Creature extends L2Object
 				}
 			}
 			
-			if (this instanceof L2PcInstance)
+			if (this instanceof L2Player)
 			{
-				L2PcInstance player = (L2PcInstance)this;
+				L2Player player = (L2Player)this;
 				// Reset soul bonus for skills
 				player.resetLastSoulConsume();
 				
@@ -6143,7 +6142,7 @@ public abstract class L2Creature extends L2Object
 					
 					if (quests != null)
 					{
-						final L2PcInstance player = target.getActingPlayer();
+						final L2Player player = target.getActingPlayer();
 						
 						for (Quest quest : quests)
 							quest.notifySpellFinished(((L2Npc)this), player, magicEnv._skill);
@@ -6297,13 +6296,13 @@ public abstract class L2Creature extends L2Object
 	{
 		L2Weapon activeWeapon = getActiveWeaponItem();
 		
-		L2PcInstance player = getActingPlayer();
+		L2Player player = getActingPlayer();
 		
 		for (L2Object trg : targets)
 		{
-			if (player != null && trg instanceof L2PcInstance && Config.SIEGE_ONLY_REGISTERED)
+			if (player != null && trg instanceof L2Player && Config.SIEGE_ONLY_REGISTERED)
 			{
-				if (!((L2PcInstance)trg).canBeTargetedByAtSiege(player))
+				if (!((L2Player)trg).canBeTargetedByAtSiege(player))
 				{
 					//quick fix should be just removed from targetlist
 					return;
@@ -6403,7 +6402,7 @@ public abstract class L2Creature extends L2Object
 					}
 					else if (skill.isOffensive())
 					{
-						if (target instanceof L2PcInstance || target instanceof L2Summon || target instanceof L2Trap)
+						if (target instanceof L2Player || target instanceof L2Summon || target instanceof L2Trap)
 						{
 							if (skill.getSkillType() != L2SkillType.SIGNET
 									&& skill.getSkillType() != L2SkillType.SIGNET_CASTTIME)
@@ -6438,12 +6437,12 @@ public abstract class L2Creature extends L2Object
 					}
 					else
 					{
-						if (target instanceof L2PcInstance)
+						if (target instanceof L2Player)
 						{
 							// Casting non offensive skill on player with pvp flag set or with karma
 							if (target != this
 									&& target != player
-									&& (((L2PcInstance)target).getPvpFlag() > 0 || ((L2PcInstance)target).getKarma() > 0))
+									&& (((L2Player)target).getPvpFlag() > 0 || ((L2Player)target).getKarma() > 0))
 								player.updatePvPStatus();
 						}
 						else if (target instanceof L2Attackable && !(skill.getSkillType() == L2SkillType.SUMMON)
@@ -6465,7 +6464,7 @@ public abstract class L2Creature extends L2Object
 	
 	public void notifyMobsAboutSkillCast(L2Skill skill, L2Creature... targets)
 	{
-		L2PcInstance player = getActingPlayer();
+		L2Player player = getActingPlayer();
 		
 		if (player == null)
 			return;
@@ -6554,7 +6553,7 @@ public abstract class L2Creature extends L2Object
 	
 	public final void setSkillCast(final Runnable runnable, int delay)
 	{
-		if (this instanceof L2PcInstance)
+		if (this instanceof L2Player)
 			getActingPlayer().sendPacket(new SetupGauge(SetupGauge.BLUE, delay));
 		
 		setIsCastingNow(true, delay);
@@ -6777,7 +6776,7 @@ public abstract class L2Creature extends L2Object
 	 * <BR>
 	 * <B><U> Overridden in </U> :</B><BR>
 	 * <BR>
-	 * <li> L2PcInstance
+	 * <li> L2Player
 	 * <li> L2SummonInstance
 	 * <li> L2PetInstance</li>
 	 * <BR>
@@ -7040,7 +7039,7 @@ public abstract class L2Creature extends L2Object
 		// Since knownlist objects are always mutual linked, DeleteObject is used for invisibility.
 		// In this case, sending the specific *Info packet is prevented until the object is visible again.
 		DeleteObject de = new DeleteObject(this);
-		for (L2PcInstance player : getKnownList().getKnownPlayers().values())
+		for (L2Player player : getKnownList().getKnownPlayers().values())
 		{
 			if (!player.canSee(this))
 			{

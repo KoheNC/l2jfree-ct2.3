@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.Stats;
 
@@ -34,7 +34,7 @@ import com.l2jfree.gameserver.skills.Stats;
 public class ExStorageMaxCount extends L2ServerPacket
 {
 	private static final String _S__FE_2E_EXSTORAGEMAXCOUNT = "[S] FE:2E ExStorageMaxCount";
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final int _inventory;
 	private final int _warehouse;
 	private final int _clan;
@@ -44,7 +44,7 @@ public class ExStorageMaxCount extends L2ServerPacket
 	private final int _recipe;
 	private final int _inventoryExtraSlots;
 	
-	public ExStorageMaxCount(L2PcInstance character)
+	public ExStorageMaxCount(L2Player character)
 	{
 		_activeChar = character;
 		_inventory = _activeChar.getInventoryLimit();

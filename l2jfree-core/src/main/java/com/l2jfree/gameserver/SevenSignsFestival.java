@@ -33,9 +33,9 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2FestivalMonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -541,11 +541,11 @@ public class SevenSignsFestival implements SpawnListener
 	private L2Npc _dawnChatGuide;
 	private L2Npc _duskChatGuide;
 	
-	protected Map<Integer, List<L2PcInstance>> _dawnFestivalParticipants;
-	protected Map<Integer, List<L2PcInstance>> _duskFestivalParticipants;
+	protected Map<Integer, List<L2Player>> _dawnFestivalParticipants;
+	protected Map<Integer, List<L2Player>> _duskFestivalParticipants;
 	
-	protected Map<Integer, List<L2PcInstance>> _dawnPreviousParticipants;
-	protected Map<Integer, List<L2PcInstance>> _duskPreviousParticipants;
+	protected Map<Integer, List<L2Player>> _dawnPreviousParticipants;
+	protected Map<Integer, List<L2Player>> _duskPreviousParticipants;
 	
 	private final Map<Integer, Long> _dawnFestivalScores;
 	private final Map<Integer, Long> _duskFestivalScores;
@@ -562,12 +562,12 @@ public class SevenSignsFestival implements SpawnListener
 	{
 		_accumulatedBonuses = new FastList<Integer>();
 		
-		_dawnFestivalParticipants = new FastMap<Integer, List<L2PcInstance>>();
-		_dawnPreviousParticipants = new FastMap<Integer, List<L2PcInstance>>();
+		_dawnFestivalParticipants = new FastMap<Integer, List<L2Player>>();
+		_dawnPreviousParticipants = new FastMap<Integer, List<L2Player>>();
 		_dawnFestivalScores = new FastMap<Integer, Long>();
 		
-		_duskFestivalParticipants = new FastMap<Integer, List<L2PcInstance>>();
-		_duskPreviousParticipants = new FastMap<Integer, List<L2PcInstance>>();
+		_duskFestivalParticipants = new FastMap<Integer, List<L2Player>>();
+		_duskPreviousParticipants = new FastMap<Integer, List<L2Player>>();
 		_duskFestivalScores = new FastMap<Integer, Long>();
 		
 		_festivalData = new FastMap<Integer, Map<Integer, StatsSet>>();
@@ -930,7 +930,7 @@ public class SevenSignsFestival implements SpawnListener
 	
 	private void addReputationPointsForPartyMemberClan(String partyMemberName)
 	{
-		L2PcInstance player = L2World.getInstance().getPlayer(partyMemberName);
+		L2Player player = L2World.getInstance().getPlayer(partyMemberName);
 		if (player != null)
 		{
 			if (player.getClan() != null)
@@ -1041,7 +1041,7 @@ public class SevenSignsFestival implements SpawnListener
 		saveFestivalData(updateSettings);
 		
 		// Remove any unused blood offerings from online players.
-		for (L2PcInstance onlinePlayer : L2World.getInstance().getAllPlayers())
+		for (L2Player onlinePlayer : L2World.getInstance().getAllPlayers())
 		{
 			if (onlinePlayer != null)
 			{
@@ -1112,14 +1112,14 @@ public class SevenSignsFestival implements SpawnListener
 	 * @param player
 	 * @return int[] playerFestivalInfo
 	 */
-	public final int[] getFestivalForPlayer(L2PcInstance player)
+	public final int[] getFestivalForPlayer(L2Player player)
 	{
 		int[] playerFestivalInfo = { -1, -1 };
 		int festivalId = 0;
 		
 		while (festivalId < FESTIVAL_COUNT)
 		{
-			List<L2PcInstance> participants = _dawnFestivalParticipants.get(festivalId);
+			List<L2Player> participants = _dawnFestivalParticipants.get(festivalId);
 			
 			// If there are no participants in this festival, move on to the next.
 			if (participants != null && participants.contains(player))
@@ -1147,7 +1147,7 @@ public class SevenSignsFestival implements SpawnListener
 		return playerFestivalInfo;
 	}
 	
-	public final boolean isParticipant(L2PcInstance player)
+	public final boolean isParticipant(L2Player player)
 	{
 		if (SevenSigns.getInstance().isSealValidationPeriod())
 			return false;
@@ -1155,18 +1155,18 @@ public class SevenSignsFestival implements SpawnListener
 		if (_managerInstance == null)
 			return false;
 		
-		for (List<L2PcInstance> participants : _dawnFestivalParticipants.values())
+		for (List<L2Player> participants : _dawnFestivalParticipants.values())
 			if (participants.contains(player))
 				return true;
 		
-		for (List<L2PcInstance> participants : _duskFestivalParticipants.values())
+		for (List<L2Player> participants : _duskFestivalParticipants.values())
 			if (participants.contains(player))
 				return true;
 		
 		return false;
 	}
 	
-	public final List<L2PcInstance> getParticipants(int oracle, int festivalId)
+	public final List<L2Player> getParticipants(int oracle, int festivalId)
 	{
 		if (oracle == SevenSigns.CABAL_DAWN)
 			return _dawnFestivalParticipants.get(festivalId);
@@ -1174,7 +1174,7 @@ public class SevenSignsFestival implements SpawnListener
 		return _duskFestivalParticipants.get(festivalId);
 	}
 	
-	public final List<L2PcInstance> getPreviousParticipants(int oracle, int festivalId)
+	public final List<L2Player> getPreviousParticipants(int oracle, int festivalId)
 	{
 		if (oracle == SevenSigns.CABAL_DAWN)
 			return _dawnPreviousParticipants.get(festivalId);
@@ -1184,7 +1184,7 @@ public class SevenSignsFestival implements SpawnListener
 	
 	public void setParticipants(int oracle, int festivalId, L2Party festivalParty)
 	{
-		List<L2PcInstance> participants = new FastList<L2PcInstance>();
+		List<L2Player> participants = new FastList<L2Player>();
 		
 		if (festivalParty != null)
 		{
@@ -1202,7 +1202,7 @@ public class SevenSignsFestival implements SpawnListener
 			_duskFestivalParticipants.put(festivalId, participants);
 	}
 	
-	public void updateParticipants(L2PcInstance player, L2Party festivalParty)
+	public void updateParticipants(L2Player player, L2Party festivalParty)
 	{
 		if (!isParticipant(player))
 			return;
@@ -1218,7 +1218,7 @@ public class SevenSignsFestival implements SpawnListener
 				L2DarknessFestival festivalInst = _managerInstance.getFestivalInstance(oracle, festivalId);
 				
 				if (festivalParty == null) // leader has left
-					for (L2PcInstance partyMember : getParticipants(oracle, festivalId))
+					for (L2Player partyMember : getParticipants(oracle, festivalId))
 						festivalInst.relocatePlayer(partyMember, true);
 				else
 					festivalInst.relocatePlayer(player, true);
@@ -1325,7 +1325,7 @@ public class SevenSignsFestival implements SpawnListener
 	 * @param offeringScore
 	 * @return boolean isHighestScore
 	 */
-	public boolean setFinalScore(L2PcInstance player, int oracle, int festivalId, long offeringScore)
+	public boolean setFinalScore(L2Player player, int oracle, int festivalId, long offeringScore)
 	{
 		List<String> partyMembers;
 		
@@ -1361,10 +1361,10 @@ public class SevenSignsFestival implements SpawnListener
 				return false;
 			
 			partyMembers = new FastList<String>();
-			List<L2PcInstance> prevParticipants = getPreviousParticipants(oracle, festivalId);
+			List<L2Player> prevParticipants = getPreviousParticipants(oracle, festivalId);
 			
 			// Record a string list of the party members involved.
-			for (L2PcInstance partyMember : prevParticipants)
+			for (L2Player partyMember : prevParticipants)
 			{
 				if (partyMember != null)
 				{
@@ -1446,7 +1446,7 @@ public class SevenSignsFestival implements SpawnListener
 	 * @param player
 	 * @return playerBonus (the share of the bonus for the party)
 	 */
-	public final int distribAccumulatedBonus(L2PcInstance player)
+	public final int distribAccumulatedBonus(L2Player player)
 	{
 		int playerBonus = 0;
 		String playerName = player.getName();
@@ -1840,14 +1840,14 @@ public class SevenSignsFestival implements SpawnListener
 		private L2Npc _witchInst;
 		private final List<L2FestivalMonsterInstance> _npcInsts;
 		
-		private List<L2PcInstance> _participants;
-		private final Map<L2PcInstance, FestivalSpawn> _originalLocations;
+		private List<L2Player> _participants;
+		private final Map<L2Player, FestivalSpawn> _originalLocations;
 		
 		protected L2DarknessFestival(int cabal, int levelRange)
 		{
 			_cabal = cabal;
 			_levelRange = levelRange;
-			_originalLocations = new FastMap<L2PcInstance, FestivalSpawn>();
+			_originalLocations = new FastMap<L2Player, FestivalSpawn>();
 			_npcInsts = new FastList<L2FestivalMonsterInstance>();
 			
 			if (cabal == SevenSigns.CABAL_DAWN)
@@ -1865,7 +1865,7 @@ public class SevenSignsFestival implements SpawnListener
 			
 			// FOR TESTING!
 			if (_participants == null)
-				_participants = new FastList<L2PcInstance>();
+				_participants = new FastList<L2Player>();
 			
 			festivalInit();
 		}
@@ -1881,7 +1881,7 @@ public class SevenSignsFestival implements SpawnListener
 			// Teleport all players to arena and notify them.
 			if (!_participants.isEmpty())
 			{
-				for (L2PcInstance participant : _participants)
+				for (L2Player participant : _participants)
 				{
 					if (participant == null)
 						continue;
@@ -2135,7 +2135,7 @@ public class SevenSignsFestival implements SpawnListener
 						new CreatureSay(_witchInst.getObjectId(), SystemChatChannelId.Chat_Normal, "Festival Witch",
 								message);
 				
-				for (L2PcInstance participant : _participants)
+				for (L2Player participant : _participants)
 				{
 					if (participant != null)
 						participant.sendPacket(cs);
@@ -2151,7 +2151,7 @@ public class SevenSignsFestival implements SpawnListener
 			
 			if (!_participants.isEmpty())
 			{
-				for (L2PcInstance participant : _participants)
+				for (L2Player participant : _participants)
 				{
 					if (participant != null)
 					{
@@ -2189,7 +2189,7 @@ public class SevenSignsFestival implements SpawnListener
 					}
 		}
 		
-		public void relocatePlayer(L2PcInstance participant, boolean isRemoving)
+		public void relocatePlayer(L2Player participant, boolean isRemoving)
 		{
 			try
 			{

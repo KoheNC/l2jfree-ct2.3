@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.taskmanager.AttackStanceTaskManager;
 
 /**
@@ -28,7 +28,7 @@ public final class Disconnection
 {
 	private static final Log _log = LogFactory.getLog(Disconnection.class);
 	
-	public static L2Client getClient(L2Client client, L2PcInstance activeChar)
+	public static L2Client getClient(L2Client client, L2Player activeChar)
 	{
 		if (client != null)
 			return client;
@@ -39,7 +39,7 @@ public final class Disconnection
 		return null;
 	}
 	
-	public static L2PcInstance getActiveChar(L2Client client, L2PcInstance activeChar)
+	public static L2Player getActiveChar(L2Client client, L2Player activeChar)
 	{
 		if (activeChar != null)
 			return activeChar;
@@ -51,19 +51,19 @@ public final class Disconnection
 	}
 	
 	private final L2Client _client;
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
 	public Disconnection(L2Client client)
 	{
 		this(client, null);
 	}
 	
-	public Disconnection(L2PcInstance activeChar)
+	public Disconnection(L2Player activeChar)
 	{
 		this(null, activeChar);
 	}
 	
-	public Disconnection(L2Client client, L2PcInstance activeChar)
+	public Disconnection(L2Client client, L2Player activeChar)
 	{
 		_client = getClient(client, activeChar);
 		_activeChar = getActiveChar(client, activeChar);

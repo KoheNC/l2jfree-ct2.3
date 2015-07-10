@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.packets.server.DeleteObject;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
@@ -48,9 +48,9 @@ public class EffectHide extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		if (getEffected() instanceof L2PcInstance)
+		if (getEffected() instanceof L2Player)
 		{
-			L2PcInstance activeChar = ((L2PcInstance)getEffected());
+			L2Player activeChar = ((L2Player)getEffected());
 			activeChar.getAppearance().setInvisible();
 			
 			if (activeChar.getAI().getNextCtrlIntention() == CtrlIntention.AI_INTENTION_ATTACK)
@@ -70,8 +70,8 @@ public class EffectHide extends L2Effect
 					obj.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 				}
 				
-				if (obj instanceof L2PcInstance)
-					((L2PcInstance)obj).sendPacket(del);
+				if (obj instanceof L2Player)
+					((L2Player)obj).sendPacket(del);
 			}
 		}
 		
@@ -81,9 +81,9 @@ public class EffectHide extends L2Effect
 	@Override
 	protected void onExit()
 	{
-		if (getEffected() instanceof L2PcInstance)
+		if (getEffected() instanceof L2Player)
 		{
-			L2PcInstance activeChar = ((L2PcInstance)getEffected());
+			L2Player activeChar = ((L2Player)getEffected());
 			activeChar.getAppearance().setVisible();
 		}
 	}

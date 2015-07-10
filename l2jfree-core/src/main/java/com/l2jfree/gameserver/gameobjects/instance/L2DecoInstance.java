@@ -15,6 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
@@ -43,25 +44,25 @@ public final class L2DecoInstance extends L2Npc
 	 * Manage actions when a player click on the L2DecoInstance.<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Set the L2NpcInstance as target of the L2PcInstance player (if necessary)</li>
-	 * <li>Send a Server->Client packet MyTargetSelected to the L2PcInstance player (display the select window)</li>
+	 * <li>Set the L2NpcInstance as target of the L2Player player (if necessary)</li>
+	 * <li>Send a Server->Client packet MyTargetSelected to the L2Player player (display the select window)</li>
 	 * <li>Send a Server->Client packet ValidateLocation to correct the L2NpcInstance position and heading on the client </li><BR><BR>
 	 *
 	 * <B><U> Example of use </U> :</B><BR><BR>
 	 * <li> Client packet : Action, AttackRequest</li><BR><BR>
 	 *
-	 * @param player The L2PcInstance that start an action on the L2DecoInstance
+	 * @param player The L2Player that start an action on the L2DecoInstance
 	 *
 	 */
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (getObjectId() != player.getTargetId())
 		{
 			// Set the player AI Intention to AI_INTENTION_IDLE
 			player.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE, null);
 			
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 		}
 	}

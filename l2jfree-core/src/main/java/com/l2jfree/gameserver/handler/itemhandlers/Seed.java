@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.handler.itemhandlers;
 import com.l2jfree.gameserver.datatables.SkillTable.SkillInfo;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
@@ -55,13 +55,13 @@ public class Seed implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
 		if (CastleManorManager.getInstance().isDisabled())
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		
 		L2Object obj = activeChar.getTarget();
 		

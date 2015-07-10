@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.packets.server.ExRegMax;
 import com.l2jfree.gameserver.skills.Env;
@@ -39,8 +39,8 @@ public final class EffectHealOverTime extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		if (getEffected() instanceof L2PcInstance)
-			((L2PcInstance)getEffected()).sendPacket(new ExRegMax(calc(), getTotalCount() * getPeriod(), getPeriod()));
+		if (getEffected() instanceof L2Player)
+			((L2Player)getEffected()).sendPacket(new ExRegMax(calc(), getTotalCount() * getPeriod(), getPeriod()));
 		return true;
 	}
 	

@@ -19,6 +19,7 @@ import javolution.util.FastList;
 import com.l2jfree.gameserver.MonsterRace;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.RaceManagerKnownList;
@@ -241,7 +242,7 @@ public class L2RaceManagerInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("BuyTicket") && _state != ACCEPTING_BETS)
 		{
@@ -286,7 +287,7 @@ public class L2RaceManagerInstance extends L2Npc
 		}
 	}
 	
-	public void showOdds(L2PcInstance player)
+	public void showOdds(L2Player player)
 	{
 		if (_state == ACCEPTING_BETS)
 			return;
@@ -307,7 +308,7 @@ public class L2RaceManagerInstance extends L2Npc
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showMonsterInfo(L2PcInstance player)
+	public void showMonsterInfo(L2Player player)
 	{
 		int npcId = getTemplate().getNpcId();
 		String filename, search;
@@ -325,7 +326,7 @@ public class L2RaceManagerInstance extends L2Npc
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 	
-	public void showBuyTicket(L2PcInstance player, int val)
+	public void showBuyTicket(L2Player player, int val)
 	{
 		if (_state != ACCEPTING_BETS)
 			return;

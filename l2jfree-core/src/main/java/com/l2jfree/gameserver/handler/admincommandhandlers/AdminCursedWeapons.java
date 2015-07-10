@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 
 import javolution.text.TextBuilder;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.CursedWeapon;
@@ -42,7 +42,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 	private int itemId;
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		CursedWeaponsManager cwm = CursedWeaponsManager.getInstance();
 		int id = 0;
@@ -59,7 +59,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 					activeChar.sendMessage("> " + cw.getName() + " (" + cw.getItemId() + ")");
 					if (cw.isActivated())
 					{
-						L2PcInstance pl = cw.getPlayer();
+						L2Player pl = cw.getPlayer();
 						activeChar.sendMessage("  Player holding: " + (pl == null ? "null" : pl.getName()));
 						activeChar.sendMessage("    Player karma: " + cw.getPlayerKarma());
 						activeChar.sendMessage("    Time Remaining: " + (cw.getTimeLeft() / 60000) + " min.");
@@ -89,7 +89,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 					replyMSG.append("<table width=270><tr><td>Name:</td><td>" + cw.getName() + "</td></tr>");
 					if (cw.isActivated())
 					{
-						L2PcInstance pl = cw.getPlayer();
+						L2Player pl = cw.getPlayer();
 						replyMSG.append("<tr><td>Weilder:</td><td>" + (pl == null ? "null" : pl.getName())
 								+ "</td></tr>");
 						replyMSG.append("<tr><td>Karma:</td><td>" + String.valueOf(cw.getPlayerKarma()) + "</td></tr>");
@@ -188,8 +188,8 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 				else
 				{
 					L2Object target = activeChar.getTarget();
-					if (target != null && target instanceof L2PcInstance)
-						((L2PcInstance)target).addItem("AdminCursedWeaponAdd", id, 1, target, true);
+					if (target != null && target instanceof L2Player)
+						((L2Player)target).addItem("AdminCursedWeaponAdd", id, 1, target, true);
 					else
 						activeChar.addItem("AdminCursedWeaponAdd", id, 1, activeChar, true);
 				}

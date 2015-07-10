@@ -21,7 +21,7 @@ import javolution.util.FastMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.entity.Duel;
 import com.l2jfree.gameserver.model.restriction.global.DuelRestriction;
@@ -73,7 +73,7 @@ public class DuelManager
 		return _duels.get(duelId);
 	}
 	
-	public void addDuel(L2PcInstance playerA, L2PcInstance playerB, int partyDuel)
+	public void addDuel(L2Player playerA, L2Player playerB, int partyDuel)
 	{
 		if (playerA == null || playerB == null)
 			return;
@@ -84,7 +84,7 @@ public class DuelManager
 		{
 			boolean playerInPvP = false;
 			boolean isRestricted = false;
-			for (L2PcInstance temp : playerA.getParty().getPartyMembers())
+			for (L2Player temp : playerA.getParty().getPartyMembers())
 			{
 				if (temp.getPvpFlag() != 0)
 				{
@@ -99,7 +99,7 @@ public class DuelManager
 			}
 			if (!playerInPvP && !isRestricted)
 			{
-				for (L2PcInstance temp : playerB.getParty().getPartyMembers())
+				for (L2Player temp : playerB.getParty().getPartyMembers())
 				{
 					if (temp.getPvpFlag() != 0)
 					{
@@ -116,11 +116,11 @@ public class DuelManager
 			// A player has PvP flag
 			if (playerInPvP)
 			{
-				for (L2PcInstance temp : playerA.getParty().getPartyMembers())
+				for (L2Player temp : playerA.getParty().getPartyMembers())
 				{
 					temp.sendMessage(engagedInPvP);
 				}
-				for (L2PcInstance temp : playerB.getParty().getPartyMembers())
+				for (L2Player temp : playerB.getParty().getPartyMembers())
 				{
 					temp.sendMessage(engagedInPvP);
 				}
@@ -128,11 +128,11 @@ public class DuelManager
 			}
 			else if (isRestricted)
 			{
-				for (L2PcInstance temp : playerA.getParty().getPartyMembers())
+				for (L2Player temp : playerA.getParty().getPartyMembers())
 				{
 					temp.sendMessage("The duel was canceled because a duelist is in a restricted state."); // TODO
 				}
-				for (L2PcInstance temp : playerB.getParty().getPartyMembers())
+				for (L2Player temp : playerB.getParty().getPartyMembers())
 				{
 					temp.sendMessage("The duel was canceled because a duelist is in a restricted state."); // TODO
 				}
@@ -165,7 +165,7 @@ public class DuelManager
 		_duels.remove(duel.getId());
 	}
 	
-	public void doSurrender(L2PcInstance player)
+	public void doSurrender(L2Player player)
 	{
 		if (player == null || !player.isInDuel())
 			return;
@@ -177,7 +177,7 @@ public class DuelManager
 	 * Updates player states.
 	 * @param player - the dieing player
 	 */
-	public void onPlayerDefeat(L2PcInstance player)
+	public void onPlayerDefeat(L2Player player)
 	{
 		if (player == null || !player.isInDuel())
 			return;
@@ -191,7 +191,7 @@ public class DuelManager
 	 * @param player
 	 * @param debuff
 	 */
-	public void onBuff(L2PcInstance player, L2Effect buff)
+	public void onBuff(L2Player player, L2Effect buff)
 	{
 		if (player == null || !player.isInDuel() || buff == null)
 			return;
@@ -204,7 +204,7 @@ public class DuelManager
 	 * Removes player from duel.
 	 * @param player - the removed player
 	 */
-	public void onRemoveFromParty(L2PcInstance player)
+	public void onRemoveFromParty(L2Player player)
 	{
 		if (player == null || !player.isInDuel())
 			return;
@@ -218,7 +218,7 @@ public class DuelManager
 	 * @param player
 	 * @param packet
 	 */
-	public void broadcastToOppositTeam(L2PcInstance player, L2ServerPacket packet)
+	public void broadcastToOppositTeam(L2Player player, L2ServerPacket packet)
 	{
 		if (player == null || !player.isInDuel())
 			return;

@@ -14,7 +14,7 @@
  */
 package transformations;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
 
@@ -27,14 +27,14 @@ public class KamaelGuardCaptain extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 876, 1); // Kamael Guard Captain Enuma Elish
 		addSkill(player, 877, 1); // Kamael Guard Captain Disarm
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 876); // Kamael Guard Captain Enuma Elish
 		removeSkill(player, 877); // Kamael Guard Captain Disarm

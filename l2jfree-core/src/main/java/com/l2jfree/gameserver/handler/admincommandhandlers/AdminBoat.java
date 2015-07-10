@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 public class AdminBoat implements IAdminCommandHandler
@@ -25,7 +25,7 @@ public class AdminBoat implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_boat" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		L2BoatInstance boat = activeChar.getBoat();
 		if (boat == null)
@@ -76,7 +76,7 @@ public class AdminBoat implements IAdminCommandHandler
 		return true;
 	}
 	
-	private void showUsage(L2PcInstance cha)
+	private void showUsage(L2Player cha)
 	{
 		cha.sendMessage("Usage: //boat [cycle|reload]");
 	}

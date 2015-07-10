@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.instancemanager.grandbosses.AntharasManager;
 import com.l2jfree.gameserver.instancemanager.grandbosses.BaiumManager;
@@ -75,7 +75,7 @@ public class L2BossZone extends L2Zone
 			}
 			case FRINTEZZA:
 			{
-				if (character instanceof L2PcInstance)
+				if (character instanceof L2Player)
 					FrintezzaManager.getInstance().setScarletSpawnTask();
 				break;
 			}

@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.gameobjects.ai;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
 
@@ -39,7 +39,7 @@ public class SCBodyDestroyerAI extends L2AttackableAI
 	@Override
 	protected void onEvtAttacked(L2Creature attacker)
 	{
-		if (_firstAttakerObjectId == 0 && attacker instanceof L2PcInstance)
+		if (_firstAttakerObjectId == 0 && attacker instanceof L2Player)
 		{
 			_firstAttakerObjectId = attacker.getObjectId();
 			
@@ -56,7 +56,7 @@ public class SCBodyDestroyerAI extends L2AttackableAI
 	{
 		if (_firstAttakerObjectId > 0)
 		{
-			L2PcInstance player = L2World.getInstance().getPlayer(_firstAttakerObjectId);
+			L2Player player = L2World.getInstance().getPlayer(_firstAttakerObjectId);
 			if (player != null)
 				player.stopSkillEffects(5256);
 			

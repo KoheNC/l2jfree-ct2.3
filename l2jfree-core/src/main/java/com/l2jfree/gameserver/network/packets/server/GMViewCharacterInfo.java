@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
@@ -34,9 +34,9 @@ public final class GMViewCharacterInfo extends L2ServerPacket
 {
 	private static final String _S__8F_GMVIEWCHARINFO = "[S] 8F GMViewCharacterInfo";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	
-	public GMViewCharacterInfo(L2PcInstance character)
+	public GMViewCharacterInfo(L2Player character)
 	{
 		character.getView().refresh();
 		

@@ -21,10 +21,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2ControllableMobAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.tools.random.Rnd;
 
@@ -149,12 +149,12 @@ public final class MobGroup
 		}
 	}
 	
-	public void spawnGroup(L2PcInstance activeChar)
+	public void spawnGroup(L2Player activeChar)
 	{
 		spawnGroup(activeChar.getX(), activeChar.getY(), activeChar.getZ());
 	}
 	
-	public void teleportGroup(L2PcInstance player)
+	public void teleportGroup(L2Player player)
 	{
 		removeDead();
 		
@@ -207,7 +207,7 @@ public final class MobGroup
 		getMobs().clear();
 	}
 	
-	public void killGroup(L2PcInstance activeChar)
+	public void killGroup(L2Player activeChar)
 	{
 		removeDead();
 		

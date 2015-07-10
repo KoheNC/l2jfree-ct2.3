@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -32,13 +32,13 @@ import com.l2jfree.gameserver.templates.skills.L2SkillType;
 public class ManaHeal implements ISkillHandler
 {
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.L2PcInstance, com.l2jfree.gameserver.model.L2ItemInstance)
+	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.L2Player, com.l2jfree.gameserver.model.L2ItemInstance)
 	 */
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.MANAHEAL, L2SkillType.MANARECHARGE,
 			L2SkillType.MANAHEAL_PERCENT };
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.L2PcInstance, com.l2jfree.gameserver.model.L2ItemInstance)
+	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.model.L2Player, com.l2jfree.gameserver.model.L2ItemInstance)
 	 */
 	@Override
 	public void useSkill(L2Creature actChar, L2Skill skill, L2Creature... targets)
@@ -93,9 +93,9 @@ public class ManaHeal implements ISkillHandler
 			
 			target.getStatus().setCurrentMp(mp + target.getStatus().getCurrentMp());
 			
-			if (target instanceof L2PcInstance)
+			if (target instanceof L2Player)
 			{
-				if (actChar instanceof L2PcInstance && actChar != target)
+				if (actChar instanceof L2Player && actChar != target)
 				{
 					SystemMessage sm = new SystemMessage(SystemMessageId.S2_MP_RESTORED_BY_C1);
 					sm.addString(actChar.getName());

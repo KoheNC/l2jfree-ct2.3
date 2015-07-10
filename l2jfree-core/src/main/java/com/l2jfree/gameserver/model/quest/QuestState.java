@@ -30,8 +30,8 @@ import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.model.L2DropData;
@@ -63,7 +63,7 @@ public final class QuestState
 	private final String _questName;
 	
 	/** Player who engaged the quest */
-	private final L2PcInstance _player;
+	private final L2Player _player;
 	
 	/** State of the quest */
 	private byte _state;
@@ -83,11 +83,11 @@ public final class QuestState
 	 * <LI>Add drops gotten by the quest</LI>
 	 * <BR/>
 	 * @param quest : quest associated with the QuestState
-	 * @param player : L2PcInstance pointing out the player
+	 * @param player : L2Player pointing out the player
 	 * @param state : state of the quest
 	 * @param completed : boolean for completion of the quest
 	 */
-	QuestState(Quest quest, L2PcInstance player, byte state)
+	QuestState(Quest quest, L2Player player, byte state)
 	{
 		_questName = quest.getName();
 		_player = player;
@@ -114,10 +114,10 @@ public final class QuestState
 	}
 	
 	/**
-	 * Return the L2PcInstance
-	 * @return L2PcInstance
+	 * Return the L2Player
+	 * @return L2Player
 	 */
-	public L2PcInstance getPlayer()
+	public L2Player getPlayer()
 	{
 		return _player;
 	}
@@ -506,10 +506,10 @@ public final class QuestState
 	 */
 	public void addNotifyOfDeath(L2Creature character)
 	{
-		if (character == null || !(character instanceof L2PcInstance))
+		if (character == null || !(character instanceof L2Player))
 			return;
 		
-		((L2PcInstance)character).addNotifyQuestOfDeath(this);
+		((L2Player)character).addNotifyQuestOfDeath(this);
 	}
 	
 	/**
@@ -1120,7 +1120,7 @@ public final class QuestState
 		getPlayer().sendPacket(new TutorialEnableClientEvent(number));
 	}
 	
-	public void dropItem(L2MonsterInstance npc, L2PcInstance player, int itemId, int count)
+	public void dropItem(L2MonsterInstance npc, L2Player player, int itemId, int count)
 	{
 		npc.dropItem(player, itemId, count);
 	}

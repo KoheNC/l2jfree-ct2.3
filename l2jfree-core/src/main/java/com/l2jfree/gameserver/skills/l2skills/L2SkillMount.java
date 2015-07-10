@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -37,10 +37,10 @@ public class L2SkillMount extends L2Skill
 	@Override
 	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
-		if (!(caster instanceof L2PcInstance))
+		if (!(caster instanceof L2Player))
 			return;
 		
-		L2PcInstance activePlayer = (L2PcInstance)caster;
+		L2Player activePlayer = (L2Player)caster;
 		
 		if (!FloodProtector.tryPerformAction(activePlayer, Protected.ITEMPETSUMMON))
 			return;

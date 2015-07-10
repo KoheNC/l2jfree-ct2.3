@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -50,9 +50,9 @@ public final class Pdam implements ISkillHandler
 		
 		final double modifier;
 		
-		if (activeChar instanceof L2PcInstance && isCharge)
+		if (activeChar instanceof L2Player && isCharge)
 		{
-			final L2PcInstance player = (L2PcInstance)activeChar;
+			final L2Player player = (L2Player)activeChar;
 			
 			modifier = 0.8 + 0.201 * player.getCharges(); // thanks Diego Vargas of L2Guru: 70*((0.8+0.201*No.Charges) * (PATK+POWER)) / PDEF
 			
@@ -74,7 +74,7 @@ public final class Pdam implements ISkillHandler
 			
 			if (target.isAlikeDead())
 			{
-				if (activeChar instanceof L2PcInstance && target instanceof L2PcInstance && target.isFakeDeath())
+				if (activeChar instanceof L2Player && target instanceof L2Player && target.isFakeDeath())
 					target.stopFakeDeath(true);
 				else
 					continue;

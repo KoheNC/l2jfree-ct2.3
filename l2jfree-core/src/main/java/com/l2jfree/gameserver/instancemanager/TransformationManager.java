@@ -22,7 +22,7 @@ import javolution.util.FastMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Transformation;
 
 /**
@@ -50,7 +50,7 @@ public class TransformationManager
 		_log.info("Loaded: " + getAllTransformations().size() + " transformations.");
 	}
 	
-	public boolean transformPlayer(int id, L2PcInstance player)
+	public boolean transformPlayer(int id, L2Player player)
 	{
 		L2Transformation template = getTransformationById(id);
 		if (template != null)

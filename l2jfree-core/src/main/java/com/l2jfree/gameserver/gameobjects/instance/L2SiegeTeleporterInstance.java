@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2TeleportLocation;
 import com.l2jfree.gameserver.model.restriction.AvailableRestriction;
@@ -40,7 +41,7 @@ public final class L2SiegeTeleporterInstance extends L2Npc
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		// IDK if needed, must test
 		if (ObjectRestrictions.getInstance().checkRestriction(player, AvailableRestriction.PlayerTeleport))
@@ -85,7 +86,7 @@ public final class L2SiegeTeleporterInstance extends L2Npc
 	}
 	
 	@Override
-	public void showChatWindow(L2PcInstance player, int val)
+	public void showChatWindow(L2Player player, int val)
 	{
 		String filename = "data/html/npcdefault.htm";
 		if (getCastle() != null && getCastle().getSiege().getIsInProgress())

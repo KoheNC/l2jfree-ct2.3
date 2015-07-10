@@ -19,6 +19,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -44,7 +45,7 @@ public final class L2BirthdayHelperInstance extends L2Npc
 		_leaveTask = ThreadPoolManager.getInstance().scheduleGeneral(new Leaving(), HELPING_LENGTH);
 	}
 	
-	public final void setOwner(L2PcInstance player)
+	public final void setOwner(L2Player player)
 	{
 		if (player == null)
 		{
@@ -56,7 +57,7 @@ public final class L2BirthdayHelperInstance extends L2Npc
 	}
 	
 	@Override
-	public final void onBypassFeedback(L2PcInstance player, String command)
+	public final void onBypassFeedback(L2Player player, String command)
 	{
 		if (player.getObjectId() != _ownerId)
 			return;
@@ -81,7 +82,7 @@ public final class L2BirthdayHelperInstance extends L2Npc
 	}
 	
 	@Override
-	public final void showChatWindow(L2PcInstance player, int val)
+	public final void showChatWindow(L2Player player, int val)
 	{
 		if (player.getObjectId() != _ownerId)
 			val = 3;

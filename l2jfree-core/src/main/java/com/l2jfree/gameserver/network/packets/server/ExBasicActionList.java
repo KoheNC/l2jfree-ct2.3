@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Transformation;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -233,7 +233,7 @@ public class ExBasicActionList extends L2ServerPacket
 		return _S__FE_5E_EXBASICACTIONLIST;
 	}
 	
-	public static void sendTo(L2PcInstance player)
+	public static void sendTo(L2Player player)
 	{
 		L2Transformation trans = player.getTransformation();
 		if (trans == null || !trans.hidesActionButtons())

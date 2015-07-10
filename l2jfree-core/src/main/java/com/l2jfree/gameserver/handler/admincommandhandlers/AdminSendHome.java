@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -26,11 +26,11 @@ public class AdminSendHome implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_sendhome" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.startsWith("admin_sendhome"))
 		{
-			L2PcInstance targetPlayer;
+			L2Player targetPlayer;
 			if (command.split(" ").length > 1)
 			{
 				targetPlayer = L2World.getInstance().getPlayer(command.split(" ")[1]);

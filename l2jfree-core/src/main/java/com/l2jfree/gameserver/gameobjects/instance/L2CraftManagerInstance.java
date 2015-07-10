@@ -20,6 +20,7 @@ import java.util.StringTokenizer;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -50,7 +51,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("multisell"))
 		{
@@ -731,7 +732,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 				+ "_i00";
 	}
 	
-	public void sendOutOfItems(L2PcInstance player, String count, String itemname)
+	public void sendOutOfItems(L2Player player, String count, String itemname)
 	{
 		NpcHtmlMessage npcReply = new NpcHtmlMessage(1);
 		
@@ -746,7 +747,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 		player.sendPacket(npcReply);
 	}
 	
-	public void sendCraftedItems(L2PcInstance player, int success, int failed, String itemname)
+	public void sendCraftedItems(L2Player player, int success, int failed, String itemname)
 	{
 		NpcHtmlMessage npcReply = new NpcHtmlMessage(1);
 		

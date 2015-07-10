@@ -21,7 +21,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ExtractableItemsData;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.items.model.L2ExtractableItem;
@@ -44,10 +44,10 @@ public class ExtractableItems implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		
 		int itemID = item.getItemId();
 		L2ExtractableItem exitem = ExtractableItemsData.getInstance().getExtractableItem(itemID);

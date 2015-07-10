@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -48,7 +48,7 @@ public class RequestExEnchantItemAttribute extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
+		L2Player player = getClient().getActiveChar();
 		if (player == null)
 			return;
 		
@@ -71,7 +71,7 @@ public class RequestExEnchantItemAttribute extends L2ClientPacket
 			requestFailed(SystemMessageId.FUNCTION_INACCESSIBLE_NOW);
 			return;
 		}
-		else if (player.getPrivateStoreType() != L2PcInstance.STORE_PRIVATE_NONE)
+		else if (player.getPrivateStoreType() != L2Player.STORE_PRIVATE_NONE)
 		{
 			requestFailed(SystemMessageId.CANNOT_ADD_ELEMENTAL_POWER_WHILE_OPERATING_PRIVATE_STORE_OR_WORKSHOP);
 			return;

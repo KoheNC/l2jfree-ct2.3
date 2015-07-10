@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.gameserver.MonsterRace;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaceManagerInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.server.DeleteObject;
@@ -40,14 +40,14 @@ public class RaceManagerKnownList extends NpcKnownList
 		if (!super.removeKnownObject(object))
 			return false;
 		
-		if (object instanceof L2PcInstance)
+		if (object instanceof L2Player)
 		{
 			//_log.debugr("Sending delete monsrac info.");
 			DeleteObject obj = null;
 			for (int i = 0; i < 8; i++)
 			{
 				obj = new DeleteObject(MonsterRace.getInstance().getMonsters()[i]);
-				((L2PcInstance)object).sendPacket(obj);
+				((L2Player)object).sendPacket(obj);
 			}
 		}
 		

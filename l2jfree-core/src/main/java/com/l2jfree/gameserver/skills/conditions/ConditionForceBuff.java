@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.skills.effects.EffectFusion;
@@ -39,7 +39,7 @@ final class ConditionForceBuff extends Condition
 	@Override
 	boolean testImpl(Env env)
 	{
-		L2PcInstance player = env.player.getActingPlayer();
+		L2Player player = env.player.getActingPlayer();
 		
 		if (player.isGM() && player.getActiveClass() == player.getBaseClass())
 			return true;

@@ -21,8 +21,8 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Object;
@@ -51,17 +51,17 @@ public class SoulCrystals implements IItemHandler
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)
 	{
-		if (!(playable instanceof L2PcInstance))
+		if (!(playable instanceof L2Player))
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)playable;
+		L2Player activeChar = (L2Player)playable;
 		L2Object target = activeChar.getTarget();
 		if (!(target instanceof L2MonsterInstance))
 		{
 			// Send a System Message to the caster
 			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 			
-			// Send a Server->Client packet ActionFailed to the L2PcInstance
+			// Send a Server->Client packet ActionFailed to the L2Player
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			
 			return;
@@ -90,11 +90,11 @@ public class SoulCrystals implements IItemHandler
 	// TODO: this should be inside skill handler
 	static class CrystalFinalizer implements Runnable
 	{
-		private final L2PcInstance _activeChar;
+		private final L2Player _activeChar;
 		private final L2Attackable _target;
 		private final int _crystalId;
 		
-		CrystalFinalizer(L2PcInstance activeChar, L2Object target, int crystalId)
+		CrystalFinalizer(L2Player activeChar, L2Object target, int crystalId)
 		{
 			_activeChar = activeChar;
 			_target = (L2Attackable)target;

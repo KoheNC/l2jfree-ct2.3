@@ -22,6 +22,7 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2DoorAI;
@@ -378,9 +379,9 @@ public class L2DoorInstance extends L2Creature
 				if (clan != null && clan == getFort().getOwnerClan())
 					return false;
 			}
-			else if (attacker instanceof L2PcInstance)
+			else if (attacker instanceof L2Player)
 			{
-				L2Clan clan = ((L2PcInstance)attacker).getClan();
+				L2Clan clan = ((L2Player)attacker).getClan();
 				if (clan != null && clan == getFort().getOwnerClan())
 					return false;
 			}
@@ -393,9 +394,9 @@ public class L2DoorInstance extends L2Creature
 				if (clan != null && clan.getClanId() == getCastle().getOwnerId())
 					return false;
 			}
-			else if (attacker instanceof L2PcInstance)
+			else if (attacker instanceof L2Player)
 			{
-				L2Clan clan = ((L2PcInstance)attacker).getClan();
+				L2Clan clan = ((L2Player)attacker).getClan();
 				if (clan != null && clan.getClanId() == getCastle().getOwnerId())
 					return false;
 			}
@@ -410,7 +411,7 @@ public class L2DoorInstance extends L2Creature
 	}
 	
 	@Override
-	public void onAction(L2PcInstance player)
+	public void onAction(L2Player player)
 	{
 		if (player == null)
 			return;
@@ -454,10 +455,10 @@ public class L2DoorInstance extends L2Creature
 				return;
 		}
 		
-		// Check if the L2PcInstance already target the L2NpcInstance
+		// Check if the L2Player already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			// Set the target of the L2PcInstance player
+			// Set the target of the L2Player player
 			player.setTarget(this);
 			
 			sendInfo(player);
@@ -501,7 +502,7 @@ public class L2DoorInstance extends L2Creature
 		}
 	}
 	
-	private void askGateOpenClose(L2PcInstance player)
+	private void askGateOpenClose(L2Player player)
 	{
 		if (!isOpen())
 		{
@@ -530,7 +531,7 @@ public class L2DoorInstance extends L2Creature
 	}
 	
 	@Override
-	public void onActionShift(L2PcInstance player)
+	public void onActionShift(L2Player player)
 	{
 		if (player.getAccessLevel() >= Config.GM_ACCESSLEVEL)
 		{
@@ -698,7 +699,7 @@ public class L2DoorInstance extends L2Creature
 	// Some automatic doors (e.g. krateis cube) are NOT targetable (and don't show hp)
 	
 	@Override
-	public void sendInfo(L2PcInstance activeChar)
+	public void sendInfo(L2Player activeChar)
 	{
 		activeChar.sendPacket(new StaticObject(this));
 	}

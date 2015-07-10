@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.GrandBossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.RaidBossSpawnManager;
@@ -34,7 +34,7 @@ public class AdminDelete implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS = { "admin_delete" };
 	
 	@Override
-	public boolean useAdminCommand(String command, L2PcInstance activeChar)
+	public boolean useAdminCommand(String command, L2Player activeChar)
 	{
 		if (command.equals("admin_delete"))
 			handleDelete(activeChar);
@@ -49,7 +49,7 @@ public class AdminDelete implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleDelete(L2PcInstance activeChar)
+	private void handleDelete(L2Player activeChar)
 	{
 		L2Object obj = activeChar.getTarget();
 		if ((obj != null) && (obj instanceof L2Npc))

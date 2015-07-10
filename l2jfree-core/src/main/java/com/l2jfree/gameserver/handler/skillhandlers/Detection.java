@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -35,7 +35,7 @@ public class Detection implements ISkillHandler
 		final boolean hasParty;
 		final boolean hasClan;
 		final boolean hasAlly;
-		final L2PcInstance player = activeChar.getActingPlayer();
+		final L2Player player = activeChar.getActingPlayer();
 		if (player != null)
 		{
 			hasParty = player.isInParty();
@@ -49,7 +49,7 @@ public class Detection implements ISkillHandler
 			hasAlly = false;
 		}
 		
-		for (L2PcInstance target : activeChar.getKnownList().getKnownPlayersInRadius(skill.getSkillRadius()))
+		for (L2Player target : activeChar.getKnownList().getKnownPlayersInRadius(skill.getSkillRadius()))
 		{
 			if (target != null && target.getAppearance().isInvisible())
 			{

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.conditions;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -73,10 +73,10 @@ final class ConditionSiegeZone extends Condition
 	
 	public static boolean checkIfOk(L2Creature activeChar, Castle castle, int value)
 	{
-		if (activeChar == null || !(activeChar instanceof L2PcInstance))
+		if (activeChar == null || !(activeChar instanceof L2Player))
 			return false;
 		
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		if (castle == null || castle.getCastleId() <= 0)
 		{
@@ -101,10 +101,10 @@ final class ConditionSiegeZone extends Condition
 	
 	public static boolean checkIfOk(L2Creature activeChar, Fort fort, int value)
 	{
-		if (activeChar == null || !(activeChar instanceof L2PcInstance))
+		if (activeChar == null || !(activeChar instanceof L2Player))
 			return false;
 		
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		if (fort == null || fort.getFortId() <= 0)
 		{
@@ -129,10 +129,10 @@ final class ConditionSiegeZone extends Condition
 	
 	public static boolean checkIfOk(L2Creature activeChar, ClanHall ch, int value)
 	{
-		if (activeChar == null || !(activeChar instanceof L2PcInstance))
+		if (activeChar == null || !(activeChar instanceof L2Player))
 			return false;
 		
-		L2PcInstance player = activeChar.getActingPlayer();
+		L2Player player = activeChar.getActingPlayer();
 		
 		if (ch == null || ch.getSiege() == null)
 		{

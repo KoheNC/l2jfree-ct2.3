@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ShotTable;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.handler.ItemHandler;
@@ -49,9 +49,9 @@ public final class UseItem extends L2ClientPacket
 	public class WeaponEquipTask implements Runnable
 	{
 		L2ItemInstance item;
-		L2PcInstance activeChar;
+		L2Player activeChar;
 		
-		public WeaponEquipTask(L2ItemInstance it, L2PcInstance character)
+		public WeaponEquipTask(L2ItemInstance it, L2Player character)
 		{
 			item = it;
 			activeChar = character;
@@ -75,7 +75,7 @@ public final class UseItem extends L2ClientPacket
 	@Override
 	protected void runImpl()
 	{
-		L2PcInstance activeChar = getActiveChar();
+		L2Player activeChar = getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -364,7 +364,7 @@ public final class UseItem extends L2ClientPacket
 			{
 				activeChar.getInventory().setPaperdollItem(Inventory.PAPERDOLL_LHAND, item);
 				activeChar.broadcastUserInfo();
-				// Send a Server->Client packet ItemList to this L2PcINstance to update left hand equipement
+				// Send a Server->Client packet ItemList to this L2Player to update left hand equipement
 				sendPacket(new ItemList(activeChar, false));
 				sendPacket(new InventoryUpdate());
 				return;

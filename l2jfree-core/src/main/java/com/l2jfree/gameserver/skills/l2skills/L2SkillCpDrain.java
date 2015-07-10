@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.Formulas;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -37,7 +37,7 @@ public class L2SkillCpDrain extends L2Skill
 			
 			if (target.isAlikeDead())
 			{
-				if (activeChar instanceof L2PcInstance && target instanceof L2PcInstance && target.isFakeDeath())
+				if (activeChar instanceof L2Player && target instanceof L2Player && target.isFakeDeath())
 					target.stopFakeDeath(true);
 				else
 					continue;

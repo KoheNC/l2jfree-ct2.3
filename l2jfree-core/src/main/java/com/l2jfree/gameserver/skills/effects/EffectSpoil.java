@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.skills.Env;
@@ -43,7 +43,7 @@ public final class EffectSpoil extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		if (!(getEffector() instanceof L2PcInstance))
+		if (!(getEffector() instanceof L2Player))
 			return false;
 		
 		if (!(getEffected() instanceof L2MonsterInstance))

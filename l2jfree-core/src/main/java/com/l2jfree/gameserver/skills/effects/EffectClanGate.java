@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -49,9 +49,9 @@ public final class EffectClanGate extends L2Effect
 	protected boolean onStart()
 	{
 		L2Creature effected = getEffected();
-		L2PcInstance lord;
-		if (effected instanceof L2PcInstance)
-			lord = (L2PcInstance)effected;
+		L2Player lord;
+		if (effected instanceof L2Player)
+			lord = (L2Player)effected;
 		else
 			return false;
 		if (!GlobalRestrictions.canTeleport(lord) || lord.isInsideZone(L2Zone.FLAG_NOSUMMON))
@@ -71,7 +71,7 @@ public final class EffectClanGate extends L2Effect
 	@Override
 	protected void onExit()
 	{
-		L2PcInstance lord = (L2PcInstance)getEffected();
+		L2Player lord = (L2Player)getEffected();
 		Castle c = CastleManager.getInstance().getCastleByOwner(lord.getClan());
 		if (c != null)
 			c.destroyClanGate();

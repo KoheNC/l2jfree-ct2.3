@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2SkillLearn;
@@ -49,7 +50,7 @@ public class L2StarCollectorInstance extends L2MerchantInstance
 	}
 	
 	@Override
-	public void onBypassFeedback(L2PcInstance player, String command)
+	public void onBypassFeedback(L2Player player, String command)
 	{
 		if (command.startsWith("CollectionSkillList"))
 			showCollectionSkillList(player, false);
@@ -57,7 +58,7 @@ public class L2StarCollectorInstance extends L2MerchantInstance
 			super.onBypassFeedback(player, command);
 	}
 	
-	public void showCollectionSkillList(L2PcInstance player, boolean closable)
+	public void showCollectionSkillList(L2Player player, boolean closable)
 	{
 		if (player.getLevel() < 75)
 		{

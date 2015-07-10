@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.base;
 
 import java.util.EnumSet;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 public enum ClassId
 {
@@ -378,7 +378,7 @@ public enum ClassId
 		return subclasses;
 	}
 	
-	public final EnumSet<ClassId> getAvailableSubclasses(L2PcInstance player)
+	public final EnumSet<ClassId> getAvailableSubclasses(L2Player player)
 	{
 		if (_level != ClassLevel.Third)
 			return null;

@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import com.l2jfree.gameserver.RecipeController;
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2RecipeList;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -41,7 +41,7 @@ public final class SortedWareHouseWithdrawalList extends L2ServerPacket
 	
 	private static final String _S__54_SORTEDWAREHOUSEWITHDRAWALLIST = "[S] 42 SortedWareHouseWithdrawalList";
 	
-	private final L2PcInstance _activeChar;
+	private final L2Player _activeChar;
 	private final long _playerAdena;
 	private final L2WarehouseItem[] _objects;
 	private final int _whType;
@@ -89,7 +89,7 @@ public final class SortedWareHouseWithdrawalList extends L2ServerPacket
 	 * @param itemtype is the Itemtype to sort for
 	 * @param sortorder is the integer Sortorder like 1 for A..Z (use public constant)
 	 */
-	public SortedWareHouseWithdrawalList(L2PcInstance player, int type, WarehouseListType itemtype, byte sortorder)
+	public SortedWareHouseWithdrawalList(L2Player player, int type, WarehouseListType itemtype, byte sortorder)
 	{
 		_activeChar = player;
 		_whType = type;

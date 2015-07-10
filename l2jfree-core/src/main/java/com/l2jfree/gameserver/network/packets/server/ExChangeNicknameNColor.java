@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.L2Client;
 
 /**
@@ -31,7 +31,7 @@ public final class ExChangeNicknameNColor extends StaticPacket
 	}
 	
 	@Override
-	protected void writeImpl(L2Client client, L2PcInstance activeChar)
+	protected void writeImpl(L2Client client, L2Player activeChar)
 	{
 		writeC(0xFE);
 		writeH(0x83);
