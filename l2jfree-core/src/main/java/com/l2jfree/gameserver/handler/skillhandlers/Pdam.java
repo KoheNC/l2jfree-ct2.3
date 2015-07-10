@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -34,7 +34,7 @@ public final class Pdam implements ISkillHandler
 			L2SkillType.CHARGEDAM };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill0, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill0, L2Creature... targets)
 	{
 		// support for Double Shot, etc
 		final L2SkillPdam skill = (L2SkillPdam)skill0;
@@ -63,7 +63,7 @@ public final class Pdam implements ISkillHandler
 		else
 			modifier = 1.0;
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.skills.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Object;
@@ -61,13 +61,13 @@ public final class EffectConfusion extends L2Effect
 	@Override
 	protected boolean onActionTime()
 	{
-		List<L2Character> targetList = new ArrayList<L2Character>();
+		List<L2Creature> targetList = new ArrayList<L2Creature>();
 		
 		// Getting the possible targets
 		for (L2Object obj : getEffected().getKnownList().getKnownObjects().values())
 		{
-			if (obj instanceof L2Character && obj != getEffected()) // TODO: more check
-				targetList.add((L2Character)obj);
+			if (obj instanceof L2Creature && obj != getEffected()) // TODO: more check
+				targetList.add((L2Creature)obj);
 		}
 		
 		// if there is no target, exit function

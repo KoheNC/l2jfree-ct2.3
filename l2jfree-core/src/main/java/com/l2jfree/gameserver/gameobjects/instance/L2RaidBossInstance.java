@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Boss;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.RaidBossSpawnManager;
 
@@ -28,10 +28,10 @@ import com.l2jfree.gameserver.instancemanager.RaidBossSpawnManager;
 public class L2RaidBossInstance extends L2Boss
 {
 	/**
-	 * Constructor of L2RaidBossInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
+	 * Constructor of L2RaidBossInstance (use L2Creature and L2NpcInstance constructor).<BR><BR>
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to set the _template of the L2RaidBossInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
+	 * <li>Call the L2Creature constructor to set the _template of the L2RaidBossInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
 	 * <li>Set the name of the L2RaidBossInstance</li>
 	 * <li>Create a RandomAnimation Task that will be launched after the calculated delay if the server allow it </li><BR><BR>
 	 * 
@@ -44,7 +44,7 @@ public class L2RaidBossInstance extends L2Boss
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;

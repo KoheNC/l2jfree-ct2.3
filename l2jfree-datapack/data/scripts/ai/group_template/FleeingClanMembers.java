@@ -16,7 +16,7 @@ package ai.group_template;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2AttackableAI;
@@ -161,7 +161,7 @@ public class FleeingClanMembers extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onArrived(L2Character character)
+	public String onArrived(L2Creature character)
 	{
 		if (!(character instanceof L2Attackable))
 			return null;

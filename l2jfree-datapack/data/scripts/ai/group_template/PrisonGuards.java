@@ -20,7 +20,7 @@ import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -121,7 +121,7 @@ public class PrisonGuards extends L2AttackableAIScript
 	@Override
 	public String onSkillSee(L2Npc npc, L2PcInstance player, L2Skill skill, L2Object[] targets, boolean isPet)
 	{
-		L2Character caster = isPet ? player.getPet() : player;
+		L2Creature caster = isPet ? player.getPet() : player;
 		
 		if (npc.getNpcId() == GUARD2)
 		{
@@ -138,7 +138,7 @@ public class PrisonGuards extends L2AttackableAIScript
 	@Override
 	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
-		L2Character target = isPet ? player.getPet() : player;
+		L2Creature target = isPet ? player.getPet() : player;
 		
 		if (npc.getNpcId() == GUARD2)
 		{
@@ -173,7 +173,7 @@ public class PrisonGuards extends L2AttackableAIScript
 	@Override
 	public String onAttack(L2Npc npc, L2PcInstance player, int damage, boolean isPet)
 	{
-		L2Character attacker = isPet ? player.getPet() : player;
+		L2Creature attacker = isPet ? player.getPet() : player;
 		
 		_firstAttacked = true;
 		
@@ -222,7 +222,7 @@ public class PrisonGuards extends L2AttackableAIScript
 		return super.onKill(npc, player, isPet);
 	}
 	
-	private void castDebuff(L2Npc npc, L2Character player, int effectId, boolean isSummon, boolean fromAttack,
+	private void castDebuff(L2Npc npc, L2Creature player, int effectId, boolean isSummon, boolean fromAttack,
 			boolean isSpell)
 	{
 		if (fromAttack)

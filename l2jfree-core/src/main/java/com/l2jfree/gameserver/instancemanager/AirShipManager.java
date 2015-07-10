@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipControllerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.templates.StatsSet;
 
@@ -151,7 +151,7 @@ public class AirShipManager
 		npcDat.set("baseMpReg", 3.e-3f);
 		npcDat.set("basePDef", 100);
 		npcDat.set("baseMDef", 100);
-		L2CharTemplate template = new L2CharTemplate(npcDat);
+		L2CreatureTemplate template = new L2CreatureTemplate(npcDat);
 		airShip = new L2AirShipInstance(IdFactory.getInstance().getNextId(), template);
 		airShip.setIsFlying(true);
 		airShip.getPosition().setHeading(heading);

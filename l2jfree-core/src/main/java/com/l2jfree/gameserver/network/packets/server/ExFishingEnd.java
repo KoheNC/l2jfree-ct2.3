@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
@@ -25,7 +25,7 @@ public class ExFishingEnd extends L2ServerPacket
 {
 	private static final String _S__FE_1F_EXFISHINGEND = "[S] FE:1f ExFishingEnd [dc]";
 	private final boolean _win;
-	L2Character _activeChar;
+	L2Creature _activeChar;
 	
 	public ExFishingEnd(boolean win, L2PcInstance character)
 	{

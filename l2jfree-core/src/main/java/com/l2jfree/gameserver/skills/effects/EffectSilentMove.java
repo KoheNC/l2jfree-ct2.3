@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -43,7 +43,7 @@ public final class EffectSilentMove extends L2Effect
 	@Override
 	protected void onExit()
 	{
-		L2Character effected = getEffected();
+		L2Creature effected = getEffected();
 		if (effected instanceof L2Playable)
 			((L2Playable)effected).setSilentMoving(false);
 	}

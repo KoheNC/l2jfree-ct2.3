@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.events.DM;
@@ -110,7 +110,7 @@ public final class DMRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean playerKilled(L2Character activeChar, final L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, final L2PcInstance target, L2PcInstance killer)
 	{
 		final DMPlayerInfo targetInfo = target.getPlayerInfo(DMPlayerInfo.class);
 		

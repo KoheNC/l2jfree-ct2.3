@@ -14,11 +14,11 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2NpcWalkerAI;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.NpcWalkerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -33,7 +33,7 @@ import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 public class L2NpcWalkerInstance extends L2Npc
 {
 	/**
-	 * Constructor of L2NpcWalkerInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
+	 * Constructor of L2NpcWalkerInstance (use L2Creature and L2NpcInstance constructor).<BR><BR>
 	 * @param objectId given object id
 	 * @param template L2NpcTemplateForThisAi
 	 */
@@ -44,7 +44,7 @@ public class L2NpcWalkerInstance extends L2Npc
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new L2NpcWalkerAI(new L2NpcWalkerAIAccessor());
 	}
@@ -87,12 +87,12 @@ public class L2NpcWalkerInstance extends L2Npc
 	 * @return false
 	 */
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		return false;
 	}
 	
-	protected class L2NpcWalkerAIAccessor extends L2Character.AIAccessor
+	protected class L2NpcWalkerAIAccessor extends L2Creature.AIAccessor
 	{
 		/**
 		 * AI can't be deattached.
@@ -104,7 +104,7 @@ public class L2NpcWalkerInstance extends L2Npc
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new NpcWalkerStatus(this);
 	}

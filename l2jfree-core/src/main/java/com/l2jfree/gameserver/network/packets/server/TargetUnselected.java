@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -37,7 +37,7 @@ public class TargetUnselected extends L2ServerPacket
 	/**
 	 * @param _characters
 	 */
-	public TargetUnselected(L2Character character)
+	public TargetUnselected(L2Creature character)
 	{
 		_targetObjId = character.getObjectId();
 		_x = character.getX();

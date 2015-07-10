@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.l2skills;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -39,7 +39,7 @@ public class L2SkillDrain extends L2Skill
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Creature... targets)
 	{
 		if (activeChar.isAlikeDead())
 			return;
@@ -47,7 +47,7 @@ public class L2SkillDrain extends L2Skill
 		boolean ss = false;
 		boolean bss = false;
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target.isAlikeDead() && getTargetType() != SkillTargetType.TARGET_CORPSE_MOB)
 				continue;
@@ -140,12 +140,12 @@ public class L2SkillDrain extends L2Skill
 		}
 	}
 	
-	public void useCubicSkill(L2CubicInstance activeCubic, L2Character... targets)
+	public void useCubicSkill(L2CubicInstance activeCubic, L2Creature... targets)
 	{
 		if (_log.isDebugEnabled())
 			_log.info("L2SkillDrain: useCubicSkill()");
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

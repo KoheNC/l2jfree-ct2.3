@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
@@ -94,10 +94,10 @@ public final class PcKnownList extends PlayableKnownList
 		{
 			object.sendInfo(getActiveChar());
 			
-			if (object instanceof L2Character)
+			if (object instanceof L2Creature)
 			{
-				// Update the state of the L2Character object client side by sending Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance
-				L2Character obj = (L2Character)object;
+				// Update the state of the L2Creature object client side by sending Server->Client packet MoveToPawn/MoveToLocation and AutoAttackStart to the L2PcInstance
+				L2Creature obj = (L2Creature)object;
 				if (obj.getAI() != null)
 					obj.getAI().describeStateToPlayer(getActiveChar());
 			}

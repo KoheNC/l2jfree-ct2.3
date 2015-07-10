@@ -24,7 +24,7 @@ import org.apache.commons.lang.ArrayUtils;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.PetSkillsTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -103,7 +103,7 @@ public final class L2BabyPetInstance extends L2PetInstance
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;

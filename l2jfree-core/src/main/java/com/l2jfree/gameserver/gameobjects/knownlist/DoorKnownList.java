@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
-public class DoorKnownList extends CharKnownList
+public class DoorKnownList extends CreatureKnownList
 {
 	// =========================================================
 	// Data Field

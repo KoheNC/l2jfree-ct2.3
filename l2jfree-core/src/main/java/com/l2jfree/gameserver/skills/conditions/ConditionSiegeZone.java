@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
@@ -51,7 +51,7 @@ final class ConditionSiegeZone extends Condition
 	@Override
 	public boolean testImpl(Env env)
 	{
-		L2Character target = _self ? env.player : env.target;
+		L2Creature target = _self ? env.player : env.target;
 		Castle castle = CastleManager.getInstance().getCastle(target);
 		Fort fort = FortManager.getInstance().getFort(target);
 		ClanHall ch = ClanHallManager.getInstance().getClanHall(target);
@@ -71,7 +71,7 @@ final class ConditionSiegeZone extends Condition
 			return checkIfOk(target, ch, _value);
 	}
 	
-	public static boolean checkIfOk(L2Character activeChar, Castle castle, int value)
+	public static boolean checkIfOk(L2Creature activeChar, Castle castle, int value)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;
@@ -99,7 +99,7 @@ final class ConditionSiegeZone extends Condition
 		return false;
 	}
 	
-	public static boolean checkIfOk(L2Character activeChar, Fort fort, int value)
+	public static boolean checkIfOk(L2Creature activeChar, Fort fort, int value)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;
@@ -127,7 +127,7 @@ final class ConditionSiegeZone extends Condition
 		return false;
 	}
 	
-	public static boolean checkIfOk(L2Character activeChar, ClanHall ch, int value)
+	public static boolean checkIfOk(L2Creature activeChar, ClanHall ch, int value)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;

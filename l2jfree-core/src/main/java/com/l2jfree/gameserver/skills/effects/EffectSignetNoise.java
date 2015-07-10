@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.effects;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2EffectPointInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.skills.Env;
@@ -53,7 +53,7 @@ public final class EffectSignetNoise extends L2Effect
 		if (getCount() == getTotalCount() - 1)
 			return true; // do nothing first time
 			
-		for (L2Character target : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
+		for (L2Creature target : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
 		{
 			if (target == null)
 				continue;

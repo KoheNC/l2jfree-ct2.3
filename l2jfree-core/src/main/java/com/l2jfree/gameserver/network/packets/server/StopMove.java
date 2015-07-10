@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -35,7 +35,7 @@ public class StopMove extends L2ServerPacket
 	private final int _z;
 	private final int _heading;
 	
-	public StopMove(L2Character cha)
+	public StopMove(L2Creature cha)
 	{
 		this(cha.getObjectId(), cha.getX(), cha.getY(), cha.getZ(), cha.getHeading());
 	}

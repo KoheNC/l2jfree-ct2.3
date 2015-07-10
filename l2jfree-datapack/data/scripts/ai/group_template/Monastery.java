@@ -20,7 +20,7 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -118,7 +118,7 @@ public class Monastery extends L2AttackableAIScript
 			{
 				if (obj instanceof L2PcInstance || obj instanceof L2PetInstance)
 				{
-					if (Util.checkIfInRange(npc.getAggroRange(), npc, obj, true) && !((L2Character)obj).isDead())
+					if (Util.checkIfInRange(npc.getAggroRange(), npc, obj, true) && !((L2Creature)obj).isDead())
 						result.add((L2Playable)obj);
 				}
 			}

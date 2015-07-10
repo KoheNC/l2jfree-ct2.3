@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -101,7 +101,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public final boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage,
+	public final boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_)
 	{
 		if (attacker_ == null || target_ == null || attacker_ == target_)
@@ -168,7 +168,7 @@ abstract class AbstractFunEventRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public final Boolean isInsideZone(L2Character activeChar, byte zone)
+	public final Boolean isInsideZone(L2Creature activeChar, byte zone)
 	{
 		if (activeChar instanceof L2Playable && isInFunEvent(activeChar.getActingPlayer()) && started())
 		{

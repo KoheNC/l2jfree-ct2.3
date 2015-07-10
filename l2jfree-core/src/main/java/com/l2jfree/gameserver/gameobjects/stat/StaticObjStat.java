@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.stat;
 
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 
-public class StaticObjStat extends CharStat
+public class StaticObjStat extends CreatureStat
 {
 	// =========================================================
 	// Data Field

@@ -27,7 +27,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.GMAudit;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -51,7 +51,7 @@ public abstract class ItemContainer
 		_items = new FastList<L2ItemInstance>();
 	}
 	
-	protected abstract L2Character getOwner();
+	protected abstract L2Creature getOwner();
 	
 	protected abstract ItemLocation getBaseLocation();
 	
@@ -638,7 +638,7 @@ public abstract class ItemContainer
 				
 				L2World.getInstance().storeObject(item);
 				
-				L2Character owner = getOwner(); // may be null for clan WH
+				L2Creature owner = getOwner(); // may be null for clan WH
 				// If stackable item is found in inventory just add to current quantity
 				if (item.isStackable() && getItemByItemId(item.getItemId()) != null)
 					addItem("Restore", item, owner != null ? owner.getActingPlayer() : null, null);

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
@@ -51,7 +51,7 @@ public abstract class AbstractNpcInfo extends L2ServerPacket
 	protected String _name = "";
 	protected String _title = "";
 	
-	public AbstractNpcInfo(L2Character cha)
+	public AbstractNpcInfo(L2Creature cha)
 	{
 		_isSummoned = cha.isShowSummonAnimation();
 		_x = cha.getX();

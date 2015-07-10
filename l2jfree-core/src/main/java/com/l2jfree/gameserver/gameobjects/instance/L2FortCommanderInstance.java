@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import javolution.util.FastList;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -40,13 +40,13 @@ public class L2FortCommanderInstance extends L2FortSiegeGuardInstance
 	}
 	
 	/**
-	 * Return True if a siege is in progress and the L2Character attacker isn't a Defender.<BR><BR>
+	 * Return True if a siege is in progress and the L2Creature attacker isn't a Defender.<BR><BR>
 	 *
-	 * @param attacker The L2Character that the L2CommanderInstance try to attack
+	 * @param attacker The L2Creature that the L2CommanderInstance try to attack
 	 *
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		if (attacker == null || !(attacker instanceof L2PcInstance))
 			return false;
@@ -60,7 +60,7 @@ public class L2FortCommanderInstance extends L2FortSiegeGuardInstance
 	}
 	
 	@Override
-	public void addDamageHate(L2Character attacker, int damage, int aggro)
+	public void addDamageHate(L2Creature attacker, int damage, int aggro)
 	{
 		if (attacker == null)
 			return;
@@ -72,7 +72,7 @@ public class L2FortCommanderInstance extends L2FortSiegeGuardInstance
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -104,7 +104,7 @@ public class L2FortCommanderInstance extends L2FortSiegeGuardInstance
 	}
 	
 	@Override
-	public final void addDamage(L2Character attacker, int damage, L2Skill skill)
+	public final void addDamage(L2Creature attacker, int damage, L2Skill skill)
 	{
 		L2Spawn spawn = getSpawn();
 		if (spawn != null && canTalk())

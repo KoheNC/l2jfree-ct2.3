@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.status;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2CCHBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CCHManager;
@@ -32,7 +32,7 @@ public final class CCHLeaderStatus extends AttackableStatus
 	}
 	
 	@Override
-	void reduceHp0(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	void reduceHp0(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		super.reduceHp0(value, attacker, awake, isDOT, isConsume);
 		

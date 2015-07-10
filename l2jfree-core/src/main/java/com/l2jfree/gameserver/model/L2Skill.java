@@ -24,7 +24,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
@@ -684,7 +684,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		}
 	}
 	
-	public void useSkill(L2Character caster, L2Character... targets)
+	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
 		caster.sendPacket(ActionFailed.STATIC_PACKET);
 		
@@ -765,7 +765,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	 * Return the power of the skill.<BR>
 	 * <BR>
 	 */
-	public final double getPower(L2Character activeChar)
+	public final double getPower(L2Creature activeChar)
 	{
 		if (activeChar == null)
 			return _power;
@@ -1506,7 +1506,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	
 	private String _weaponDependancyMessage;
 	
-	public final boolean getWeaponDependancy(L2Character activeChar, boolean message)
+	public final boolean getWeaponDependancy(L2Creature activeChar, boolean message)
 	{
 		int weaponsAllowed = getWeaponsAllowed();
 		if (weaponsAllowed == 0)
@@ -1549,7 +1549,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		return false;
 	}
 	
-	public final boolean ownedFuncShouldBeDisabled(L2Character activeChar)
+	public final boolean ownedFuncShouldBeDisabled(L2Creature activeChar)
 	{
 		if (isOffensive())
 			return false;
@@ -1560,7 +1560,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		return false;
 	}
 	
-	public boolean checkCondition(L2Character activeChar, L2Object target)
+	public boolean checkCondition(L2Creature activeChar, L2Object target)
 	{
 		if (activeChar instanceof L2PcInstance && ((L2PcInstance)activeChar).isGM() && !Config.GM_SKILL_RESTRICTION)
 			return true;
@@ -1572,8 +1572,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		
 		Env env = new Env();
 		env.player = activeChar;
-		if (target instanceof L2Character)
-			env.target = (L2Character)target;
+		if (target instanceof L2Creature)
+			env.target = (L2Creature)target;
 		env.skill = this;
 		
 		if (preCondition.test(env))
@@ -1584,9 +1584,9 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		return false;
 	}
 	
-	public final L2Character[] getTargetList(L2Character activeChar, boolean onlyFirst)
+	public final L2Creature[] getTargetList(L2Creature activeChar, boolean onlyFirst)
 	{
-		return getTargetList(activeChar, onlyFirst, activeChar.getTarget(L2Character.class));
+		return getTargetList(activeChar, onlyFirst, activeChar.getTarget(L2Creature.class));
 	}
 	
 	/**
@@ -1601,16 +1601,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	 * CORPSE_MOB, CORPSE_CLAN</li> <li>UNLOCKABLE</li> <li>ITEM</li> <BR>
 	 * <BR>
 	 *
-	 * @param activeChar The L2Character who use the skill
+	 * @param activeChar The L2Creature who use the skill
 	 */
-	public final L2Character[] getTargetList(L2Character activeChar, boolean onlyFirst, L2Character target)
+	public final L2Creature[] getTargetList(L2Creature activeChar, boolean onlyFirst, L2Creature target)
 	{
-		final List<L2Character> targets = SkillTargetHandler.getInstance().getTargetList(activeChar, this, target);
+		final List<L2Creature> targets = SkillTargetHandler.getInstance().getTargetList(activeChar, this, target);
 		
 		if (targets != null)
-			return targets.toArray(new L2Character[targets.size()]);
+			return targets.toArray(new L2Creature[targets.size()]);
 		
-		ArrayBunch<L2Character> targetList = new ArrayBunch<L2Character>();
+		ArrayBunch<L2Creature> targetList = new ArrayBunch<L2Creature>();
 		try
 		{
 			// Get the target type of the skill
@@ -1623,7 +1623,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 			
 			switch (targetType)
 			{
-			// The skill can only be used on the L2Character targeted, or on the caster itself
+			// The skill can only be used on the L2Creature targeted, or on the caster itself
 				case TARGET_ONE:
 				{
 					// automatically selects caster if no target is selected (only positive skills)
@@ -1662,32 +1662,32 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					}
 					if (!GeoData.getInstance().canSeeTarget(activeChar, target))
 						return null;
-					return new L2Character[] { target };
+					return new L2Creature[] { target };
 				}
 				case TARGET_SELF:
 				case TARGET_GROUND:
 				{
-					return new L2Character[] { activeChar };
+					return new L2Creature[] { activeChar };
 				}
 				/*
 				 * case TARGET_BOSS: { L2MinionInstance Minion = null;
 				 * Minion = (L2MinionInstance)target; if (activeChar
 				 * instanceof L2MinionInstance) return new
-				 * L2Character[]{target}; }
+				 * L2Creature[]{target}; }
 				 */
 				case TARGET_HOLY:
 				{
 					if (activeChar instanceof L2PcInstance)
 					{
 						if (target instanceof L2ArtefactInstance)
-							return new L2Character[] { target };
+							return new L2Creature[] { target };
 					}
 					
 					return null;
 				}
 				case TARGET_FLAGPOLE:
 				{
-					return new L2Character[] { activeChar };
+					return new L2Creature[] { activeChar };
 				}
 				case TARGET_COUPLE:
 				{
@@ -1699,7 +1699,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						{
 							if ((cl.getPlayer1Id() == _chaid && cl.getPlayer2Id() == targetId)
 									|| (cl.getPlayer2Id() == _chaid && cl.getPlayer1Id() == targetId))
-								return new L2Character[] { target };
+								return new L2Creature[] { target };
 						}
 					}
 					
@@ -1709,7 +1709,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 				{
 					target = activeChar.getPet();
 					if (target != null && !target.isDead())
-						return new L2Character[] { target };
+						return new L2Creature[] { target };
 					
 					return null;
 				}
@@ -1717,7 +1717,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 				{
 					target = activeChar.getPet();
 					if (target != null && !target.isDead() && target instanceof L2SummonInstance)
-						return new L2Character[] { target };
+						return new L2Creature[] { target };
 					
 					return null;
 				}
@@ -1727,7 +1727,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					{
 						target = ((L2Summon)activeChar).getOwner();
 						if (target != null && !target.isDead())
-							return new L2Character[] { target };
+							return new L2Creature[] { target };
 					}
 					
 					return null;
@@ -1741,7 +1741,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (activeChar instanceof L2PcInstance && activeChar.getPet() != targetPet
 								&& !targetPet.isDead() && targetPet.getOwner().getPvpFlag() != 0)
 						{
-							return new L2Character[] { target };
+							return new L2Creature[] { target };
 						}
 					}
 					return null;
@@ -1753,7 +1753,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						target = activeChar.getPet();
 						if (target != null && target.isDead())
 						{
-							return new L2Character[] { target };
+							return new L2Creature[] { target };
 						}
 					}
 					
@@ -1768,8 +1768,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					
 					L2PcInstance src = activeChar.getActingPlayer();
 					
-					// Go through the L2Character _knownList
-					for (L2Character cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+					// Go through the L2Creature _knownList
+					for (L2Creature cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 					{
 						if (cha instanceof L2Attackable || cha instanceof L2Playable)
 						{
@@ -1832,10 +1832,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							if (!onlyFirst)
 								targetList.add(cha);
 							else
-								return new L2Character[] { cha };
+								return new L2Creature[] { cha };
 						}
 					}
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				// [L2J_JP ADD SANDMAN]
 				// case TARGET_AURA:
@@ -1855,8 +1855,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					
 					L2PcInstance src = activeChar.getActingPlayer();
 					
-					// Go through the L2Character _knownList
-					for (L2Character cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+					// Go through the L2Creature _knownList
+					for (L2Creature cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 					{
 						if (cha instanceof L2Attackable || cha instanceof L2Playable)
 						{
@@ -1921,10 +1921,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							if (!onlyFirst)
 								targetList.add(cha);
 							else
-								return new L2Character[] { cha };
+								return new L2Creature[] { cha };
 						}
 					}
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_BEHIND_AURA:
 				{
@@ -1934,8 +1934,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					
 					L2PcInstance src = activeChar.getActingPlayer();
 					
-					// Go through the L2Character _knownList
-					for (L2Character cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+					// Go through the L2Creature _knownList
+					for (L2Creature cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 					{
 						if (cha instanceof L2Attackable || cha instanceof L2Playable)
 						{
@@ -1999,10 +1999,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							if (!onlyFirst)
 								targetList.add(cha);
 							else
-								return new L2Character[] { cha };
+								return new L2Creature[] { cha };
 						}
 					}
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_AREA:
 				{
@@ -2013,7 +2013,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						return null;
 					}
 					
-					L2Character cha;
+					L2Creature cha;
 					
 					if (getCastRange() >= 0)
 					{
@@ -2022,7 +2022,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (!onlyFirst)
 							targetList.add(cha); // Add target to target list
 						else
-							return new L2Character[] { cha };
+							return new L2Creature[] { cha };
 					}
 					else
 						cha = activeChar;
@@ -2043,7 +2043,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							continue;
 						if (obj == cha)
 							continue;
-						target = (L2Character)obj;
+						target = (L2Creature)obj;
 						boolean targetInPvP =
 								target.isInsideZone(L2Zone.FLAG_PVP) && !target.isInsideZone(L2Zone.FLAG_SIEGE);
 						
@@ -2127,7 +2127,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (targetList.size() == 0)
 						return null;
 					
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_FRONT_AREA:
 				{
@@ -2138,7 +2138,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						return null;
 					}
 					
-					L2Character cha;
+					L2Creature cha;
 					
 					if (getCastRange() >= 0)
 					{
@@ -2147,7 +2147,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (!onlyFirst)
 							targetList.add(cha); // Add target to target list
 						else
-							return new L2Character[] { cha };
+							return new L2Creature[] { cha };
 					}
 					else
 						cha = activeChar;
@@ -2169,7 +2169,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (!(obj instanceof L2Attackable || obj instanceof L2Playable))
 							continue;
 						
-						target = (L2Character)obj;
+						target = (L2Creature)obj;
 						
 						if (!target.isDead() && (target != activeChar))
 						{
@@ -2257,7 +2257,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (targetList.size() == 0)
 						return null;
 					
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_BEHIND_AREA:
 				{
@@ -2268,7 +2268,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						return null;
 					}
 					
-					L2Character cha;
+					L2Creature cha;
 					
 					if (getCastRange() >= 0)
 					{
@@ -2277,7 +2277,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (!onlyFirst)
 							targetList.add(cha); // Add target to target list
 						else
-							return new L2Character[] { cha };
+							return new L2Creature[] { cha };
 					}
 					else
 						cha = activeChar;
@@ -2297,7 +2297,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							continue;
 						if (!(obj instanceof L2Attackable || obj instanceof L2Playable))
 							continue;
-						target = (L2Character)obj;
+						target = (L2Creature)obj;
 						
 						if (!target.isDead() && (target != activeChar))
 						{
@@ -2386,11 +2386,11 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (targetList.size() == 0)
 						return null;
 					
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_AREA_UNDEAD:
 				{
-					L2Character cha;
+					L2Creature cha;
 					int radius = getSkillRadius();
 					if (getCastRange() >= 0 && (target instanceof L2Npc || target instanceof L2SummonInstance)
 							&& target.isUndead() && !target.isAlikeDead())
@@ -2400,7 +2400,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (!onlyFirst)
 							targetList.add(cha); // Add target to target list
 						else
-							return new L2Character[] { cha };
+							return new L2Creature[] { cha };
 					}
 					else
 						cha = activeChar;
@@ -2424,20 +2424,20 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								continue;
 							
 							if (!onlyFirst)
-								targetList.add((L2Character)obj); // Add obj to target lists
+								targetList.add((L2Creature)obj); // Add obj to target lists
 							else
-								return new L2Character[] { (L2Character)obj };
+								return new L2Creature[] { (L2Creature)obj };
 						}
 					}
 					
 					if (targetList.size() == 0)
 						return null;
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_PARTY:
 				{
 					if (onlyFirst)
-						return new L2Character[] { activeChar };
+						return new L2Creature[] { activeChar };
 					
 					targetList.add(activeChar);
 					
@@ -2457,7 +2457,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					
 					if (activeChar.getParty() != null)
 					{
-						// Get all visible objects in a spheric area near the L2Character
+						// Get all visible objects in a spheric area near the L2Creature
 						// Get a list of Party Members
 						List<L2PcInstance> partyList = activeChar.getParty().getPartyMembers();
 						
@@ -2482,7 +2482,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							}
 						}
 					}
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_PARTY_MEMBER:
 				{
@@ -2497,7 +2497,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (!target.isDead())
 						{
 							// If a target is found, return it in a table else send a system message TARGET_IS_INCORRECT
-							return new L2Character[] { target };
+							return new L2Creature[] { target };
 						}
 						
 						return null;
@@ -2522,17 +2522,17 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								// FORCE BUFFS may cancel here but there should be a proper condition
 									case 426:
 										if (!player.isMageClass())
-											return new L2Character[] { target };
+											return new L2Creature[] { target };
 										
 										return null;
 									case 427:
 										if (player.isMageClass())
-											return new L2Character[] { target };
+											return new L2Creature[] { target };
 										
 										return null;
 								}
 							}
-							return new L2Character[] { target };
+							return new L2Creature[] { target };
 						}
 						
 						return null;
@@ -2544,7 +2544,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 				case TARGET_PARTY_CLAN:
 				{
 					if (onlyFirst)
-						return new L2Character[] { activeChar };
+						return new L2Creature[] { activeChar };
 					
 					final L2PcInstance player = activeChar.getActingPlayer();
 					
@@ -2562,7 +2562,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					
 					// if player in olympiad mode or not in clan and not in party
 					if (player.isInOlympiadMode() || !(hasClan || hasParty))
-						return new L2Character[] { player };
+						return new L2Creature[] { player };
 					
 					for (L2PcInstance obj : activeChar.getKnownList().getKnownPlayersInRadius(radius))
 					{
@@ -2598,12 +2598,12 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							continue;
 						
 						if (onlyFirst)
-							return new L2Character[] { obj };
+							return new L2Creature[] { obj };
 						
 						targetList.add(obj);
 					}
 					
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_CORPSE_ALLY:
 				case TARGET_ALLY:
@@ -2620,9 +2620,9 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (player.isInOlympiadMode())
 						{
 							if (player.getPet() == null)
-								return new L2Character[] { player };
+								return new L2Creature[] { player };
 							
-							return new L2Character[] { player, player.getPet() };
+							return new L2Creature[] { player, player.getPet() };
 						}
 						
 						if (targetType != SkillTargetType.TARGET_CORPSE_ALLY)
@@ -2630,7 +2630,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							if (!onlyFirst)
 								targetList.add(player);
 							else
-								return new L2Character[] { player };
+								return new L2Creature[] { player };
 						}
 						
 						if (activeChar.getPet() != null)
@@ -2641,7 +2641,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						
 						if (clan != null)
 						{
-							// Get all visible objects in a spheric area near the L2Character
+							// Get all visible objects in a spheric area near the L2Creature
 							// Get Clan Members
 							for (L2Object obj : activeChar.getKnownList().getKnownObjects().values())
 							{
@@ -2692,18 +2692,18 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								if (!onlyFirst)
 									targetList.add(newTarget);
 								
-								return new L2Character[] { newTarget };
+								return new L2Creature[] { newTarget };
 								
 							}
 						}
 					}
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_ENEMY_ALLY:
 				{
 					// int charX, charY, charZ, targetX, targetY, targetZ, dx, dy, dz;
 					int radius = getSkillRadius();
-					L2Character newTarget;
+					L2Creature newTarget;
 					
 					if (getCastRange() > -1 && target != null)
 					{
@@ -2715,7 +2715,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (newTarget != activeChar || isOffensive())
 						targetList.add(newTarget);
 					
-					for (L2Character obj : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+					for (L2Creature obj : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 					{
 						if (obj == newTarget || obj == activeChar)
 							continue;
@@ -2742,7 +2742,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						}
 					}
 					//FIXME: (Noctarius) Added return here to deny fallthrough - is it wished to add more targets?
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_CORPSE_CLAN:
 				case TARGET_CLAN:
@@ -2759,9 +2759,9 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						if (player.isInOlympiadMode())
 						{
 							if (player.getPet() == null)
-								return new L2Character[] { player };
+								return new L2Creature[] { player };
 							
-							return new L2Character[] { player, player.getPet() };
+							return new L2Creature[] { player, player.getPet() };
 						}
 						
 						if (targetType != SkillTargetType.TARGET_CORPSE_CLAN)
@@ -2769,7 +2769,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							if (!onlyFirst)
 								targetList.add(player);
 							else
-								return new L2Character[] { player };
+								return new L2Creature[] { player };
 						}
 						
 						if (activeChar.getPet() != null)
@@ -2780,7 +2780,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						
 						if (clan != null)
 						{
-							// Get all visible objects in a spheric area near the L2Character
+							// Get all visible objects in a spheric area near the L2Creature
 							// Get Clan Members
 							for (L2ClanMember member : clan.getMembers())
 							{
@@ -2833,7 +2833,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								if (!onlyFirst)
 									targetList.add(newTarget);
 								else
-									return new L2Character[] { newTarget };
+									return new L2Creature[] { newTarget };
 							}
 						}
 					}
@@ -2860,7 +2860,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						}
 					}
 					
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_CORPSE_PLAYER:
 				{
@@ -2932,10 +2932,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								if (!onlyFirst)
 								{
 									targetList.add(target);
-									return targetList.moveToArray(new L2Character[targetList.size()]);
+									return targetList.moveToArray(new L2Creature[targetList.size()]);
 								}
 								
-								return new L2Character[] { target };
+								return new L2Creature[] { target };
 								
 							}
 						}
@@ -2971,10 +2971,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (!onlyFirst)
 					{
 						targetList.add(target);
-						return targetList.moveToArray(new L2Character[targetList.size()]);
+						return targetList.moveToArray(new L2Creature[targetList.size()]);
 					}
 					
-					return new L2Character[] { target };
+					return new L2Creature[] { target };
 					
 				}
 				case TARGET_AREA_CORPSE_MOB:
@@ -2988,7 +2988,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (!onlyFirst)
 						targetList.add(target);
 					else
-						return new L2Character[] { target };
+						return new L2Creature[] { target };
 					
 					boolean srcInArena =
 							(activeChar.isInsideZone(L2Zone.FLAG_PVP) && !activeChar.isInsideZone(L2Zone.FLAG_SIEGE));
@@ -3000,13 +3000,13 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					int radius = getSkillRadius();
 					for (L2Object obj : activeChar.getKnownList().getKnownObjects().values())
 					{
-						if (!(obj instanceof L2Attackable || obj instanceof L2Playable) || ((L2Character)obj).isDead()
+						if (!(obj instanceof L2Attackable || obj instanceof L2Playable) || ((L2Creature)obj).isDead()
 								|| obj == activeChar)
 							continue;
 						
 						boolean targetInPvP =
-								((L2Character)obj).isInsideZone(L2Zone.FLAG_PVP)
-										&& !((L2Character)obj).isInsideZone(L2Zone.FLAG_SIEGE);
+								((L2Creature)obj).isInsideZone(L2Zone.FLAG_PVP)
+										&& !((L2Creature)obj).isInsideZone(L2Zone.FLAG_SIEGE);
 						
 						if (!Util.checkIfInRange(radius, target, obj, true))
 							continue;
@@ -3067,12 +3067,12 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								continue;
 						}
 						
-						targetList.add((L2Character)obj);
+						targetList.add((L2Creature)obj);
 					}
 					
 					if (targetList.size() == 0)
 						return null;
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_AREA_CORPSES:
 				{
@@ -3085,7 +3085,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (!onlyFirst)
 						targetList.add(target);
 					else
-						return new L2Character[] { target };
+						return new L2Creature[] { target };
 					
 					int radius = getSkillRadius();
 					if (activeChar.getKnownList() != null)
@@ -3094,7 +3094,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						{
 							if (obj == null || !(obj instanceof L2Attackable))
 								continue;
-							L2Character cha = (L2Character)obj;
+							L2Creature cha = (L2Creature)obj;
 							
 							if (!cha.isDead() || !Util.checkIfInRange(radius, target, cha, true))
 								continue;
@@ -3108,7 +3108,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					
 					if (targetList.size() == 0)
 						return null;
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_UNLOCKABLE:
 				{
@@ -3121,10 +3121,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					if (!onlyFirst)
 					{
 						targetList.add(target);
-						return targetList.moveToArray(new L2Character[targetList.size()]);
+						return targetList.moveToArray(new L2Creature[targetList.size()]);
 					}
 					
-					return new L2Character[] { target };
+					return new L2Creature[] { target };
 					
 				}
 				case TARGET_ENEMY_SUMMON:
@@ -3138,7 +3138,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								&& (targetSummon.getOwner().getPvpFlag() != 0 || targetSummon.getOwner().getKarma() > 0)
 								|| (targetSummon.getOwner().isInsideZone(L2Zone.FLAG_PVP) && activeChar
 										.isInsideZone(L2Zone.FLAG_PVP)))
-							return new L2Character[] { targetSummon };
+							return new L2Creature[] { targetSummon };
 					}
 					return null;
 				}
@@ -3151,7 +3151,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						return null;
 					}
 					// If a target is found, return it in a table else send a system message TARGET_IS_INCORRECT
-					return new L2Character[] { target };
+					return new L2Creature[] { target };
 				}
 				case TARGET_MOB:
 				{
@@ -3162,7 +3162,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						return null;
 					}
 					// If a target is found, return it in a table else send a system message TARGET_IS_INCORRECT
-					return new L2Character[] { target };
+					return new L2Creature[] { target };
 				}
 				case TARGET_KNOWNLIST:
 				{
@@ -3170,16 +3170,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						for (L2Object obj : target.getKnownList().getKnownObjects().values())
 						{
 							if (obj instanceof L2Attackable || obj instanceof L2Playable)
-								return new L2Character[] { (L2Character)obj };
+								return new L2Creature[] { (L2Creature)obj };
 						}
 					
 					if (targetList.size() == 0)
 						return null;
-					return targetList.moveToArray(new L2Character[targetList.size()]);
+					return targetList.moveToArray(new L2Creature[targetList.size()]);
 				}
 				case TARGET_INITIATOR:
 					if (target != null)
-						return new L2Character[] { target };
+						return new L2Creature[] { target };
 					else
 						return null;
 				default:
@@ -3198,9 +3198,9 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	
 	/*
 		// [L2J_JP ADD SANDMAN START]
-		public final L2Character[] getAreaTargetList(L2Character activeChar)
+		public final L2Creature[] getAreaTargetList(L2Creature activeChar)
 		{
-			ArrayBunch<L2Character> targetList = new ArrayBunch<L2Character>();
+			ArrayBunch<L2Creature> targetList = new ArrayBunch<L2Creature>();
 			L2Object target;
 			L2PcInstance tgOwner;
 			L2Clan acClan;
@@ -3213,7 +3213,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 			else
 				target = activeChar.getTarget();
 
-			if (target == null || !(target instanceof L2Character))
+			if (target == null || !(target instanceof L2Creature))
 			{
 				activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
 				return null;
@@ -3221,8 +3221,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 
 			if ((getTargetType() == SkillTargetType.TARGET_AREA) && (target.getObjectId() != activeChar.getObjectId()))
 			{
-				if (!((L2Character) target).isAlikeDead())
-					targetList.add((L2Character) target);
+				if (!((L2Creature) target).isAlikeDead())
+					targetList.add((L2Creature) target);
 				else
 				{
 					activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
@@ -3238,13 +3238,13 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					{
 						if (!(Util.checkIfInRange(radius, target, obj, true)))
 							continue;
-						else if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						else if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 				}
 				if (targetList.size() == 0)
 					return null;
-				return targetList.moveToArray(new L2Character[targetList.size()]);
+				return targetList.moveToArray(new L2Creature[targetList.size()]);
 			}
 
 			if (activeChar instanceof L2PcInstance)
@@ -3272,8 +3272,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						{
 							if (activeChar.getParty().getPartyMembers().contains(obj))
 								continue;
-							else if (!((L2Character) obj).isAlikeDead())
-								targetList.add((L2Character) obj);
+							else if (!((L2Creature) obj).isAlikeDead())
+								targetList.add((L2Creature) obj);
 						}
 						else if (tgClan != null)
 						{
@@ -3281,11 +3281,11 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								continue;
 							else if (tgClan.getAllyId() == acClan.getAllyId())
 								continue;
-							else if (!((L2Character) obj).isAlikeDead())
-								targetList.add((L2Character) obj);
+							else if (!((L2Creature) obj).isAlikeDead())
+								targetList.add((L2Creature) obj);
 						}
-						else if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						else if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 					else if (obj instanceof L2Summon)
 					{
@@ -3296,8 +3296,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						{
 							if (activeChar.getParty().getPartyMembers().contains(tgOwner))
 								continue;
-							else if (!((L2Character) obj).isAlikeDead())
-								targetList.add((L2Character) obj);
+							else if (!((L2Creature) obj).isAlikeDead())
+								targetList.add((L2Creature) obj);
 						}
 						else if (tgClan != null)
 						{
@@ -3305,16 +3305,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 								continue;
 							else if (tgClan.getAllyId() == acClan.getAllyId())
 								continue;
-							else if (!((L2Character) obj).isAlikeDead())
-								targetList.add((L2Character) obj);
+							else if (!((L2Creature) obj).isAlikeDead())
+								targetList.add((L2Creature) obj);
 						}
-						else if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						else if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 					else if (obj instanceof L2Attackable)
 					{
-						if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 					else
 					{
@@ -3335,11 +3335,11 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						{
 							if (activeChar.getParty().getPartyMembers().contains(obj))
 								continue;
-							else if (!((L2Character) obj).isAlikeDead())
-								targetList.add((L2Character) obj);
+							else if (!((L2Creature) obj).isAlikeDead())
+								targetList.add((L2Creature) obj);
 						}
-						else if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						else if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 					else if (obj instanceof L2Summon)
 					{
@@ -3349,16 +3349,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 						{
 							if (activeChar.getParty().getPartyMembers().contains(tgOwner))
 								continue;
-							else if (!((L2Character) obj).isAlikeDead())
-								targetList.add((L2Character) obj);
+							else if (!((L2Creature) obj).isAlikeDead())
+								targetList.add((L2Creature) obj);
 						}
-						else if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						else if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 					else if (obj instanceof L2Attackable)
 					{
-						if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 					else
 					{
@@ -3375,8 +3375,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 
 					if (obj instanceof L2MonsterInstance)
 					{
-						if (!((L2Character) obj).isAlikeDead())
-							targetList.add((L2Character) obj);
+						if (!((L2Creature) obj).isAlikeDead())
+							targetList.add((L2Creature) obj);
 					}
 				}
 			}
@@ -3387,12 +3387,12 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 				return null;
 			}
 
-			return targetList.moveToArray(new L2Character[targetList.size()]);
+			return targetList.moveToArray(new L2Creature[targetList.size()]);
 		}
 	*/
-	public final L2Character[] getMultiFaceTargetList(L2Character activeChar)
+	public final L2Creature[] getMultiFaceTargetList(L2Creature activeChar)
 	{
-		ArrayBunch<L2Character> targetList = new ArrayBunch<L2Character>();
+		ArrayBunch<L2Creature> targetList = new ArrayBunch<L2Creature>();
 		L2Object target;
 		L2Object FirstTarget;
 		L2PcInstance tgOwner;
@@ -3407,18 +3407,18 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 			target = activeChar.getTarget();
 		FirstTarget = target;
 		
-		if (target == null || !(target instanceof L2Character))
+		if (target == null || !(target instanceof L2Creature))
 		{
 			activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
 			return null;
 		}
 		
-		int newHeading = getNewHeadingToTarget(activeChar, (L2Character)target);
+		int newHeading = getNewHeadingToTarget(activeChar, (L2Creature)target);
 		
 		if (target.getObjectId() != activeChar.getObjectId())
 		{
-			if (!((L2Character)target).isAlikeDead())
-				targetList.add((L2Character)target);
+			if (!((L2Creature)target).isAlikeDead())
+				targetList.add((L2Creature)target);
 			else
 			{
 				activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
@@ -3434,16 +3434,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 				{
 					if (!(Util.checkIfInRange(radius, target, obj, true)))
 						continue;
-					else if (isBehindFromCaster(newHeading, (L2Character)FirstTarget, (L2Character)target))
+					else if (isBehindFromCaster(newHeading, (L2Creature)FirstTarget, (L2Creature)target))
 						continue;
-					else if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					else if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 					
 				}
 			}
 			if (targetList.size() == 0)
 				return null;
-			return targetList.moveToArray(new L2Character[targetList.size()]);
+			return targetList.moveToArray(new L2Creature[targetList.size()]);
 		}
 		
 		if (activeChar.getActingPlayer() != null)
@@ -3462,7 +3462,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					continue;
 				if (!(Util.checkIfInRange(radius, target, obj, true)))
 					continue;
-				else if (isBehindFromCaster(newHeading, (L2Character)FirstTarget, (L2Character)obj))
+				else if (isBehindFromCaster(newHeading, (L2Creature)FirstTarget, (L2Creature)obj))
 					continue;
 				
 				if (obj instanceof L2PcInstance)
@@ -3473,8 +3473,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					{
 						if (activeChar.getParty().getPartyMembers().contains(obj))
 							continue;
-						else if (!((L2Character)obj).isAlikeDead())
-							targetList.add((L2Character)obj);
+						else if (!((L2Creature)obj).isAlikeDead())
+							targetList.add((L2Creature)obj);
 					}
 					else if (tgClan != null)
 					{
@@ -3482,11 +3482,11 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							continue;
 						else if (tgClan.getAllyId() == acClan.getAllyId())
 							continue;
-						else if (!((L2Character)obj).isAlikeDead())
-							targetList.add((L2Character)obj);
+						else if (!((L2Creature)obj).isAlikeDead())
+							targetList.add((L2Creature)obj);
 					}
-					else if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					else if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 				else if (obj instanceof L2Summon)
 				{
@@ -3497,8 +3497,8 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					{
 						if (activeChar.getParty().getPartyMembers().contains(tgOwner))
 							continue;
-						else if (!((L2Character)obj).isAlikeDead())
-							targetList.add((L2Character)obj);
+						else if (!((L2Creature)obj).isAlikeDead())
+							targetList.add((L2Creature)obj);
 					}
 					else if (tgClan != null)
 					{
@@ -3506,16 +3506,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 							continue;
 						else if (tgClan.getAllyId() == acClan.getAllyId())
 							continue;
-						else if (!((L2Character)obj).isAlikeDead())
-							targetList.add((L2Character)obj);
+						else if (!((L2Creature)obj).isAlikeDead())
+							targetList.add((L2Creature)obj);
 					}
-					else if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					else if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 				else if (obj instanceof L2Attackable)
 				{
-					if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 				else
 				{
@@ -3532,7 +3532,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					continue;
 				if (!(Util.checkIfInRange(radius, target, obj, true)))
 					continue;
-				else if (isBehindFromCaster(newHeading, (L2Character)FirstTarget, (L2Character)obj))
+				else if (isBehindFromCaster(newHeading, (L2Creature)FirstTarget, (L2Creature)obj))
 					continue;
 				
 				if (obj instanceof L2PcInstance)
@@ -3541,11 +3541,11 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					{
 						if (activeChar.getParty().getPartyMembers().contains(obj))
 							continue;
-						else if (!((L2Character)obj).isAlikeDead())
-							targetList.add((L2Character)obj);
+						else if (!((L2Creature)obj).isAlikeDead())
+							targetList.add((L2Creature)obj);
 					}
-					else if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					else if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 				else if (obj instanceof L2Summon)
 				{
@@ -3555,16 +3555,16 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					{
 						if (activeChar.getParty().getPartyMembers().contains(tgOwner))
 							continue;
-						else if (!((L2Character)obj).isAlikeDead())
-							targetList.add((L2Character)obj);
+						else if (!((L2Creature)obj).isAlikeDead())
+							targetList.add((L2Creature)obj);
 					}
-					else if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					else if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 				else if (obj instanceof L2Attackable)
 				{
-					if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 				else
 				{
@@ -3580,13 +3580,13 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 					continue;
 				if (!(Util.checkIfInRange(radius, target, obj, true)))
 					continue;
-				else if (isBehindFromCaster(newHeading, (L2Character)FirstTarget, (L2Character)obj))
+				else if (isBehindFromCaster(newHeading, (L2Creature)FirstTarget, (L2Creature)obj))
 					continue;
 				
 				if (obj instanceof L2MonsterInstance)
 				{
-					if (!((L2Character)obj).isAlikeDead())
-						targetList.add((L2Character)obj);
+					if (!((L2Creature)obj).isAlikeDead())
+						targetList.add((L2Creature)obj);
 				}
 			}
 		}
@@ -3597,10 +3597,10 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 			return null;
 		}
 		
-		return targetList.moveToArray(new L2Character[targetList.size()]);
+		return targetList.moveToArray(new L2Creature[targetList.size()]);
 	}
 	
-	public static final boolean addSummon(L2Character caster, L2PcInstance owner, int radius, boolean isDead)
+	public static final boolean addSummon(L2Creature caster, L2PcInstance owner, int radius, boolean isDead)
 	{
 		final L2Summon summon = owner.getPet();
 		
@@ -3610,7 +3610,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		return addCharacter(caster, summon, radius, isDead);
 	}
 	
-	public static final boolean addCharacter(L2Character caster, L2Character target, int radius, boolean isDead)
+	public static final boolean addCharacter(L2Creature caster, L2Creature target, int radius, boolean isDead)
 	{
 		if (isDead != target.isDead())
 			return false;
@@ -3630,7 +3630,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		return true;
 	}
 	
-	private int getNewHeadingToTarget(L2Character caster, L2Character target)
+	private int getNewHeadingToTarget(L2Creature caster, L2Creature target)
 	{
 		if (caster == null || target == null)
 			return 0;
@@ -3655,7 +3655,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		
 	}
 	
-	public final boolean isBehindFromCaster(int heading, L2Character caster, L2Character target)
+	public final boolean isBehindFromCaster(int heading, L2Creature caster, L2Creature target)
 	{
 		if (caster == null || target == null)
 			return true;
@@ -3694,17 +3694,17 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	}
 	
 	// [L2J_JP ADD SANDMAN END]
-	public final L2Character[] getTargetList(L2Character activeChar)
+	public final L2Creature[] getTargetList(L2Creature activeChar)
 	{
 		return getTargetList(activeChar, false);
 	}
 	
-	public final L2Character getFirstOfTargetList(L2Character activeChar)
+	public final L2Creature getFirstOfTargetList(L2Creature activeChar)
 	{
 		return getFirstOfTargetList(activeChar, null);
 	}
 	
-	public final L2Character getFirstOfTargetList(L2Character activeChar, L2Character[] targets)
+	public final L2Creature getFirstOfTargetList(L2Creature activeChar, L2Creature[] targets)
 	{
 		switch (getTargetType())
 		{
@@ -3735,7 +3735,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	
 	private Func[] _statFuncs;
 	
-	public final Func[] getStatFuncs(L2Character player)
+	public final Func[] getStatFuncs(L2Creature player)
 	{
 		if (!(player instanceof L2Playable) && !(player instanceof L2Attackable))
 			return Func.EMPTY_ARRAY;
@@ -3770,7 +3770,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		return _effectTemplatesSelf != null && _effectTemplatesSelf.length > 0;
 	}
 	
-	public final void dealDamage(L2Character activeChar, L2Character target, L2Skill skill, double damage,
+	public final void dealDamage(L2Creature activeChar, L2Creature target, L2Skill skill, double damage,
 			byte reflect, boolean mcrit, boolean pcrit)
 	{
 		activeChar.sendDamageMessage(target, (int)damage, mcrit, pcrit, false);
@@ -3808,7 +3808,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		}
 	}
 	
-	public final void getEffects(L2Character effector, L2Character effected, byte reflect, byte shld, boolean ss,
+	public final void getEffects(L2Creature effector, L2Creature effected, byte reflect, byte shld, boolean ss,
 			boolean sps, boolean bss)
 	{
 		if (_effectTemplates == null)
@@ -3845,12 +3845,12 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		}
 	}
 	
-	public final void getEffects(L2Character effector, L2Character effected)
+	public final void getEffects(L2Creature effector, L2Creature effected)
 	{
 		getEffects(effector, effected, null);
 	}
 	
-	public final void getEffects(L2Character effector, L2Character effected, ForEachExecutable<L2Effect> executable)
+	public final void getEffects(L2Creature effector, L2Creature effected, ForEachExecutable<L2Effect> executable)
 	{
 		if (_effectTemplates == null)
 			return;
@@ -3873,7 +3873,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 		}
 	}
 	
-	public final void getEffects(L2CubicInstance effector, L2Character effected)
+	public final void getEffects(L2CubicInstance effector, L2Creature effected)
 	{
 		if (_effectTemplates == null)
 			return;
@@ -3891,7 +3891,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 			et.getEffect(env);
 	}
 	
-	public final void getEffectsSelf(L2Character effector)
+	public final void getEffectsSelf(L2Creature effector)
 	{
 		if (_effectTemplatesSelf == null)
 			return;
@@ -4137,7 +4137,7 @@ public class L2Skill implements FuncOwner, IChanceSkillTrigger
 	}
 	
 	@Override
-	public final L2Skill getChanceTriggeredSkill(L2Character activeChar, L2Character evtInitiator)
+	public final L2Skill getChanceTriggeredSkill(L2Creature activeChar, L2Creature evtInitiator)
 	{
 		if (!getWeaponDependancy(activeChar, false))
 			return null;

@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CCHManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
@@ -56,7 +56,7 @@ public class Die extends L2ServerPacket
 	private final int _showFeather;
 	private final int _showFortress;
 	
-	public Die(L2Character cha)
+	public Die(L2Creature cha)
 	{
 		_charObjId = cha.getObjectId();
 		_fallDown = cha.mustFallDownOnDeath();

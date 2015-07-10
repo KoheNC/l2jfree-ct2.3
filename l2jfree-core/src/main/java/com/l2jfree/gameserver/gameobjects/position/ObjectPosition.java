@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.position;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
@@ -138,7 +138,7 @@ public final class ObjectPosition
 				((L2PcInstance)_activeObject).teleToLocation(0, 0, 0, false);
 				((L2PcInstance)_activeObject).sendMessage("Error with your coords, Please ask a GM for help!");
 			}
-			else if (_activeObject instanceof L2Character)
+			else if (_activeObject instanceof L2Creature)
 				_activeObject.decayMe();
 		}
 	}
@@ -154,12 +154,12 @@ public final class ObjectPosition
 		{
 			oldRegion.removeVisibleObject(_activeObject, false);
 			
-			if (_activeObject instanceof L2Character) // confirm revalidation of old region's zones
+			if (_activeObject instanceof L2Creature) // confirm revalidation of old region's zones
 			{
 				if (newRegion != null)
-					oldRegion.revalidateZones((L2Character)_activeObject); // at world region change
+					oldRegion.revalidateZones((L2Creature)_activeObject); // at world region change
 				else
-					oldRegion.removeFromZones((L2Character)_activeObject); // at world region change
+					oldRegion.removeFromZones((L2Creature)_activeObject); // at world region change
 			}
 		}
 		

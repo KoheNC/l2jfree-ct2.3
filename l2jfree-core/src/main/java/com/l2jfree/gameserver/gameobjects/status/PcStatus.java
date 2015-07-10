@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.status;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.L2Math;
 
-public final class PcStatus extends CharStatus
+public final class PcStatus extends CreatureStatus
 {
 	private double _currentCp = 0;
 	
@@ -91,7 +91,7 @@ public final class PcStatus extends CharStatus
 	}
 	
 	@Override
-	void reduceHp0(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	void reduceHp0(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		if (!isConsume)
 		{

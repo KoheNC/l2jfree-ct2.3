@@ -31,7 +31,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -265,7 +265,7 @@ public final class MapRegionManager
 		return restart.getRandomChaoticRestartPoint(activeChar);
 	}
 	
-	public L2MapRegion getRegion(L2Character activeChar)
+	public L2MapRegion getRegion(L2Creature activeChar)
 	{
 		return getRegion(activeChar.getX(), activeChar.getY(), activeChar.getZ());
 	}
@@ -436,7 +436,7 @@ public final class MapRegionManager
 		return getRestartPoint(Config.ALT_DEFAULT_RESTARTTOWN, player);
 	}
 	
-	public int getAreaCastle(L2Character activeChar)
+	public int getAreaCastle(L2Creature activeChar)
 	{
 		Town town = TownManager.getInstance().getClosestTown(activeChar);
 		

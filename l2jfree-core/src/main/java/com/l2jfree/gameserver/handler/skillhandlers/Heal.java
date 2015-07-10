@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeFlagInstance;
@@ -35,7 +35,7 @@ public class Heal implements ISkillHandler
 			L2SkillType.HEAL_STATIC, L2SkillType.HEAL_MOB, L2SkillType.RECOVER };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		SkillHandler.getInstance().useSkill(L2SkillType.BUFF, activeChar, skill, targets);
 		
@@ -43,7 +43,7 @@ public class Heal implements ISkillHandler
 		if (activeChar instanceof L2PcInstance)
 			player = (L2PcInstance)activeChar;
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

@@ -22,7 +22,7 @@ import ai.group_template.L2AttackableAIScript;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -150,7 +150,7 @@ public class DarkWaterDragon extends L2AttackableAIScript
 				_Shades.add((L2Attackable)addSpawn(SHADE2, x - 100, y - 100, npc.getZ(), 0, false, 0));
 				_Shades.add((L2Attackable)addSpawn(SHADE1, x - 150, y + 150, npc.getZ(), 0, false, 0));
 				_HasSpawned1 = 0;
-				L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
+				L2Creature originalAttacker = isPet ? attacker.getPet() : attacker;
 				for (int i = 0; i < _Shades.size(); i++) //Shades attack the attacker
 				{
 					L2Attackable Shade = _Shades.get(i);
@@ -172,7 +172,7 @@ public class DarkWaterDragon extends L2AttackableAIScript
 				_Shades.add((L2Attackable)this.addSpawn(SHADE1, x - 100, y - 100, npc.getZ(), 0, false, 0));
 				_Shades.add((L2Attackable)this.addSpawn(SHADE2, x - 150, y + 150, npc.getZ(), 0, false, 0));
 				secondSpawn.add(npcObjId);
-				L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
+				L2Creature originalAttacker = isPet ? attacker.getPet() : attacker;
 				for (int i = 0; i < _Shades.size(); i++) //Shades attack the attacker
 				{
 					L2Attackable Shade = _Shades.get(i);

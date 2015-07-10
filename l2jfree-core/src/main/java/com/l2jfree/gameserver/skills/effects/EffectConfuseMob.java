@@ -19,7 +19,7 @@ import java.util.List;
 import javolution.util.FastList;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Object;
@@ -64,14 +64,14 @@ public final class EffectConfuseMob extends L2Effect
 	@Override
 	protected boolean onActionTime()
 	{
-		List<L2Character> targetList = new FastList<L2Character>();
+		List<L2Creature> targetList = new FastList<L2Creature>();
 		
 		// Getting the possible targets
 		
 		for (L2Object obj : getEffected().getKnownList().getKnownObjects().values())
 		{
 			if (obj instanceof L2Attackable && obj != getEffected())
-				targetList.add((L2Character)obj);
+				targetList.add((L2Creature)obj);
 		}
 		// if there is no target, exit function
 		if (targetList.isEmpty())

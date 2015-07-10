@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
@@ -30,9 +30,9 @@ public class ZakenTeleport implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.ZAKEN_TELEPORT };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill0, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill0, L2Creature... targets)
 	{
-		for (L2Character c : activeChar.getKnownList().getKnownCharacters())
+		for (L2Creature c : activeChar.getKnownList().getKnownCharacters())
 		{
 			c.abortAttack();
 			c.setTarget(null);
@@ -50,7 +50,7 @@ public class ZakenTeleport implements ISkillHandler
 		return SKILL_IDS;
 	}
 	
-	protected void teleport(L2Character... targets)
+	protected void teleport(L2Creature... targets)
 	{
 		final int loc[][] =
 				{ { 54228, 220136, -3496 }, { 56315, 220127, -3496 }, { 56285, 218078, -3496 },
@@ -59,7 +59,7 @@ public class ZakenTeleport implements ISkillHandler
 						{ 55268, 219090, -3224 }, { 56284, 218078, -2952 }, { 54252, 220135, -2952 },
 						{ 54244, 218095, -2952 }, { 55270, 219086, -2952 } };
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

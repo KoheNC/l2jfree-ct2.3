@@ -19,7 +19,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -79,14 +79,14 @@ public abstract class AbstractRestriction implements GlobalRestriction
 	
 	@Override
 	@DisabledRestriction
-	public boolean canCreateEffect(L2Character activeChar, L2Character target, L2Skill skill)
+	public boolean canCreateEffect(L2Creature activeChar, L2Creature target, L2Skill skill)
 	{
 		throw new AbstractMethodError();
 	}
 	
 	@Override
 	@DisabledRestriction
-	public boolean isInvul(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	public boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
 	{
 		throw new AbstractMethodError();
@@ -94,7 +94,7 @@ public abstract class AbstractRestriction implements GlobalRestriction
 	
 	@Override
 	@DisabledRestriction
-	public boolean isProtected(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	public boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
 	{
 		throw new AbstractMethodError();
@@ -102,7 +102,7 @@ public abstract class AbstractRestriction implements GlobalRestriction
 	
 	@Override
 	@DisabledRestriction
-	public boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage, L2PcInstance attacker_,
+	public boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage, L2PcInstance attacker_,
 			L2PcInstance target_)
 	{
 		throw new AbstractMethodError();
@@ -183,22 +183,22 @@ public abstract class AbstractRestriction implements GlobalRestriction
 	
 	@Override
 	@DisabledRestriction
-	public Boolean isInsideZone(L2Character activeChar, byte zone)
+	public Boolean isInsideZone(L2Creature activeChar, byte zone)
 	{
 		throw new AbstractMethodError();
 	}
 	
 	@Override
 	@DisabledRestriction
-	public double calcDamage(L2Character activeChar, L2Character target, double damage, L2Skill skill)
+	public double calcDamage(L2Creature activeChar, L2Creature target, double damage, L2Skill skill)
 	{
 		throw new AbstractMethodError();
 	}
 	
 	@Override
 	@DisabledRestriction
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
-			L2Character target)
+	public List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill,
+			L2Creature target)
 	{
 		throw new AbstractMethodError();
 	}
@@ -235,7 +235,7 @@ public abstract class AbstractRestriction implements GlobalRestriction
 	
 	@Override
 	@DisabledRestriction
-	public boolean playerKilled(L2Character activeChar, L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, L2PcInstance target, L2PcInstance killer)
 	{
 		throw new AbstractMethodError();
 	}
@@ -249,7 +249,7 @@ public abstract class AbstractRestriction implements GlobalRestriction
 	
 	@Override
 	@DisabledRestriction
-	public void isInsideZoneStateChanged(L2Character activeChar, byte zone, boolean isInsideZone)
+	public void isInsideZoneStateChanged(L2Creature activeChar, byte zone, boolean isInsideZone)
 	{
 		throw new AbstractMethodError();
 	}

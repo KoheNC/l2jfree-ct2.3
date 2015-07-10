@@ -27,7 +27,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
@@ -242,7 +242,7 @@ public class CursedWeapon
 		dropIt(attackable, player, null, true);
 	}
 	
-	private void dropIt(L2Attackable attackable, L2PcInstance player, L2Character killer, boolean fromMonster)
+	private void dropIt(L2Attackable attackable, L2PcInstance player, L2Creature killer, boolean fromMonster)
 	{
 		_isActivated = false;
 		
@@ -499,7 +499,7 @@ public class CursedWeapon
 		}
 	}
 	
-	public void dropIt(L2Character killer)
+	public void dropIt(L2Creature killer)
 	{
 		if (Rnd.get(100) <= _disapearChance)
 		{

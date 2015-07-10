@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 
 /**
  * Inside this zone HP and/or MP are regenerated.
@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 public class L2RegenerationZone extends L2DangerZone
 {
 	@Override
-	protected void checkForDamage(L2Character character)
+	protected void checkForDamage(L2Creature character)
 	{
 		if (getHPDamagePerSecond() > 0)
 			character.getStatus().increaseHp(getHPDamagePerSecond());

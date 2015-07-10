@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2EffectPointInstance;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -73,7 +73,7 @@ public final class EffectSignet extends L2Effect
 		
 		getEffector().reduceCurrentMp(mpConsume);
 		
-		for (L2Character cha : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
+		for (L2Creature cha : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
 		{
 			if (cha == null)
 				continue;

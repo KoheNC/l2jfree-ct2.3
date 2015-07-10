@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
@@ -38,7 +38,7 @@ public class InstantJump extends ISkillConditionChecker
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.INSTANT_JUMP };
 	
 	@Override
-	public boolean checkConditions(L2Character activeChar, L2Skill skill)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
 		// You cannot jump while rooted right ;)
 		if (activeChar.isRooted())
@@ -64,12 +64,12 @@ public class InstantJump extends ISkillConditionChecker
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (targets.length == 0 || targets[0] == null)
 			return;
 		
-		L2Character target = targets[0];
+		L2Creature target = targets[0];
 		
 		int x = 0, y = 0, z = 0;
 		

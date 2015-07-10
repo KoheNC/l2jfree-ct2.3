@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.skills.funcs.Func;
 import com.l2jfree.gameserver.skills.funcs.FuncOwner;
@@ -143,7 +143,7 @@ public final class Calculator
 	/**
 	 * Remove each Func with the specified owner of the Calculator.<BR><BR>
 	 */
-	public synchronized void removeOwner(FuncOwner owner, L2Character cha)
+	public synchronized void removeOwner(FuncOwner owner, L2Creature cha)
 	{
 		for (Func element : _functions)
 		{

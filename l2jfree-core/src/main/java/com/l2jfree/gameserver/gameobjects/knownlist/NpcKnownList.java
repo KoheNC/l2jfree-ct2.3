@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2CabaleBufferInstance;
@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2FestivalGuideInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
-public class NpcKnownList extends CharKnownList
+public class NpcKnownList extends CreatureKnownList
 {
 	// =========================================================
 	// Data Field
@@ -60,7 +60,7 @@ public class NpcKnownList extends CharKnownList
 		if (object instanceof L2FestivalGuideInstance)
 			return 4000;
 		
-		if (object instanceof L2NpcInstance || !(object instanceof L2Character))
+		if (object instanceof L2NpcInstance || !(object instanceof L2Creature))
 			return 0;
 		
 		if (object instanceof L2CabaleBufferInstance)

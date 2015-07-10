@@ -15,15 +15,15 @@
 package com.l2jfree.gameserver.gameobjects.shot;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 
 /**
  * @author NB4L1
  */
-public abstract class CharShots implements Runnable
+public abstract class CreatureShots implements Runnable
 {
-	private static final CharShots _instance = new CharShots(null) {
+	private static final CreatureShots _instance = new CreatureShots(null) {
 		@Override
 		public void scheduleShotRecharge(int delay)
 		{
@@ -35,19 +35,19 @@ public abstract class CharShots implements Runnable
 		}
 	};
 	
-	public static CharShots getEmptyInstance()
+	public static CreatureShots getEmptyInstance()
 	{
 		return _instance;
 	}
 	
-	protected final L2Character _activeChar;
+	protected final L2Creature _activeChar;
 	
-	protected CharShots(L2Character activeChar)
+	protected CreatureShots(L2Creature activeChar)
 	{
 		_activeChar = activeChar;
 	}
 	
-	protected L2Character getActiveChar()
+	protected L2Creature getActiveChar()
 	{
 		return _activeChar;
 	}

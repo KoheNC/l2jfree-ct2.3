@@ -37,7 +37,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2FeedableBeastInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FestivalMonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
@@ -322,7 +322,7 @@ public class CursedWeaponsManager
 			return false;
 	}
 	
-	public void drop(int itemId, L2Character killer)
+	public void drop(int itemId, L2Creature killer)
 	{
 		CursedWeapon cw = _cursedWeapons.get(itemId);
 		

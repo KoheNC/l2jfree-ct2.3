@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2ControllableMobAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance;
@@ -240,7 +240,7 @@ public final class MobGroup
 		}
 	}
 	
-	public void setAttackTarget(L2Character target)
+	public void setAttackTarget(L2Creature target)
 	{
 		removeDead();
 		
@@ -268,7 +268,7 @@ public final class MobGroup
 		}
 	}
 	
-	public void returnGroup(L2Character activeChar)
+	public void returnGroup(L2Creature activeChar)
 	{
 		setIdleMode();
 		
@@ -287,7 +287,7 @@ public final class MobGroup
 		}
 	}
 	
-	public void setFollowMode(L2Character character)
+	public void setFollowMode(L2Creature character)
 	{
 		removeDead();
 		

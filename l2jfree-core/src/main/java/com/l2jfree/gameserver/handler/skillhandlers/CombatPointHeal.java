@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
@@ -28,11 +28,11 @@ public class CombatPointHeal implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.COMBATPOINTHEAL, L2SkillType.CPHEAL_PERCENT };
 	
 	@Override
-	public void useSkill(L2Character actChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature actChar, L2Skill skill, L2Creature... targets)
 	{
 		SkillHandler.getInstance().useSkill(L2SkillType.BUFF, actChar, skill, targets);
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

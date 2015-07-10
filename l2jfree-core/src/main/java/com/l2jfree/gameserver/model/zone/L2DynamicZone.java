@@ -21,7 +21,7 @@ import javolution.util.FastMap;
 import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.skills.conditions.Condition;
@@ -32,7 +32,7 @@ public class L2DynamicZone extends L2Zone
 	private ScheduledFuture<?> _task;
 	private Condition _cond;
 	
-	private boolean checkCondition(L2Character character)
+	private boolean checkCondition(L2Creature character)
 	{
 		if (_cond == null)
 			return true;
@@ -45,7 +45,7 @@ public class L2DynamicZone extends L2Zone
 	}
 	
 	@Override
-	protected boolean checkDynamicConditions(L2Character character)
+	protected boolean checkDynamicConditions(L2Creature character)
 	{
 		if (!checkCondition(character))
 			return false;
@@ -54,7 +54,7 @@ public class L2DynamicZone extends L2Zone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		super.onEnter(character);
 		
@@ -92,7 +92,7 @@ public class L2DynamicZone extends L2Zone
 			
 			revalidateAllInZone();
 			
-			for (L2Character character : getCharactersInsideActivated())
+			for (L2Creature character : getCharactersInsideActivated())
 			{
 				checkForDamage(character);
 				if (isRepeatingBuff())
@@ -102,9 +102,9 @@ public class L2DynamicZone extends L2Zone
 		
 		private boolean isActiveRegion()
 		{
-			final FastMap<L2Character, Boolean> map = getCharactersInsideMap();
+			final FastMap<L2Creature, Boolean> map = getCharactersInsideMap();
 			
-			for (FastMap.Entry<L2Character, Boolean> e = map.head(), end = map.tail(); (e = e.getNext()) != end;)
+			for (FastMap.Entry<L2Creature, Boolean> e = map.head(), end = map.tail(); (e = e.getNext()) != end;)
 				if (e.getKey().isInActiveRegion())
 					return true;
 			
@@ -112,11 +112,11 @@ public class L2DynamicZone extends L2Zone
 		}
 	}
 	
-	protected void checkForDamage(L2Character character)
+	protected void checkForDamage(L2Creature character)
 	{
 	}
 	
-	protected void checkForEffects(L2Character character)
+	protected void checkForEffects(L2Creature character)
 	{
 		if (getApplyEnter() != null)
 			for (L2Skill sk : getApplyEnter())

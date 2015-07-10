@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.model.L2Object;
 
-public class TrapKnownList extends CharKnownList
+public class TrapKnownList extends CreatureKnownList
 {
 	public TrapKnownList(L2Trap activeChar)
 	{

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.ai;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 
 /**
  * Interface of AI and client state.
@@ -61,13 +61,13 @@ public interface Ctrl
 {
 	
 	/** the character this AI serves */
-	L2Character getActor();
+	L2Creature getActor();
 	
 	/** get current intention */
 	CtrlIntention getIntention();
 	
 	/** get current ATTACK target */
-	L2Character getAttackTarget();
+	L2Creature getAttackTarget();
 	
 	/** Set general state/intention for AI, with optional data */
 	void setIntention(CtrlIntention intention);

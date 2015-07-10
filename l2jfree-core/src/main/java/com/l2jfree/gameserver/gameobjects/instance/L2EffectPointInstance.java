@@ -14,23 +14,23 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 
 public class L2EffectPointInstance extends L2Npc
 {
-	private final L2Character _owner;
+	private final L2Creature _owner;
 	
-	public L2EffectPointInstance(int objectId, L2NpcTemplate template, L2Character owner)
+	public L2EffectPointInstance(int objectId, L2NpcTemplate template, L2Creature owner)
 	{
 		super(objectId, template);
 		setIsInvul(false);
 		_owner = owner;
 	}
 	
-	public L2Character getOwner()
+	public L2Creature getOwner()
 	{
 		return _owner;
 	}

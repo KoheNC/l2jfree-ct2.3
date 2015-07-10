@@ -44,7 +44,7 @@ public final class EffectEnemyCharge extends L2Effect
 	@Override
 	protected boolean onStart()
 	{
-		// Get current position of the L2Character
+		// Get current position of the L2Creature
 		final int curX = getEffector().getX();
 		final int curY = getEffector().getY();
 		final int curZ = getEffector().getZ();

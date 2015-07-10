@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
@@ -344,24 +344,24 @@ public class L2Zone implements FuncOwner
 		return _removeEnter;
 	}
 	
-	private final FastMap<L2Character, Boolean> _charactersInside = new FastMap<L2Character, Boolean>().setShared(true);
+	private final FastMap<L2Creature, Boolean> _charactersInside = new FastMap<L2Creature, Boolean>().setShared(true);
 	
-	protected final FastMap<L2Character, Boolean> getCharactersInsideMap()
+	protected final FastMap<L2Creature, Boolean> getCharactersInsideMap()
 	{
 		return _charactersInside;
 	}
 	
-	public final Set<L2Character> getCharactersInside()
+	public final Set<L2Creature> getCharactersInside()
 	{
 		return _charactersInside.keySet();
 	}
 	
-	public final Iterable<L2Character> getCharactersInsideActivated()
+	public final Iterable<L2Creature> getCharactersInsideActivated()
 	{
 		return L2Collections.convertingIterable(_charactersInside.entrySet(),
-				new L2Collections.Converter<Map.Entry<L2Character, Boolean>, L2Character>() {
+				new L2Collections.Converter<Map.Entry<L2Creature, Boolean>, L2Creature>() {
 					@Override
-					public L2Character convert(Entry<L2Character, Boolean> src)
+					public L2Creature convert(Entry<L2Creature, Boolean> src)
 					{
 						if (Boolean.TRUE.equals(src.getValue()))
 							return src.getKey();
@@ -374,7 +374,7 @@ public class L2Zone implements FuncOwner
 	/**
 	 * Check default never changing conditions. Determines zone can be activated on player or not at all.
 	 */
-	protected boolean checkConstantConditions(L2Character character)
+	protected boolean checkConstantConditions(L2Creature character)
 	{
 		return isCorrectType(character);
 	}
@@ -382,7 +382,7 @@ public class L2Zone implements FuncOwner
 	/**
 	 * Check conditions that can be changed anytime. Determines zone can be activated or not on the player currently.
 	 */
-	protected boolean checkDynamicConditions(L2Character character)
+	protected boolean checkDynamicConditions(L2Creature character)
 	{
 		if (_exitOnDeath && character.isDead())
 			return false;
@@ -390,7 +390,7 @@ public class L2Zone implements FuncOwner
 		return isEnabled();
 	}
 	
-	private State getExpectedState(L2Character character)
+	private State getExpectedState(L2Creature character)
 	{
 		if (character instanceof L2PcInstance)
 		{
@@ -413,7 +413,7 @@ public class L2Zone implements FuncOwner
 		return State.INSIDE_AND_ACTIVATED;
 	}
 	
-	private State getCurrentState(L2Character character)
+	private State getCurrentState(L2Creature character)
 	{
 		final Boolean isActive = _charactersInside.get(character);
 		
@@ -432,16 +432,16 @@ public class L2Zone implements FuncOwner
 	
 	public final void revalidateAllInZone()
 	{
-		for (L2Character character : getCharactersInside())
+		for (L2Creature character : getCharactersInside())
 			revalidateInZone(character);
 	}
 	
-	public final void revalidateInZone(L2Character character)
+	public final void revalidateInZone(L2Creature character)
 	{
 		changeStateOf(character, getExpectedState(character));
 	}
 	
-	private void changeStateOf(L2Character character, State expectedState)
+	private void changeStateOf(L2Creature character, State expectedState)
 	{
 		final State currentState = getCurrentState(character);
 		
@@ -473,7 +473,7 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		final L2PcInstance player = character instanceof L2PcInstance ? (L2PcInstance)character : null;
 		
@@ -537,7 +537,7 @@ public class L2Zone implements FuncOwner
 			tryPortIntoInstance(player);
 	}
 	
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		final L2PcInstance player = character instanceof L2PcInstance ? (L2PcInstance)character : null;
 		
@@ -728,7 +728,7 @@ public class L2Zone implements FuncOwner
 			pet.getKnownList().updateKnownObjects();
 	}
 	
-	public final void onDie(L2Character character)
+	public final void onDie(L2Creature character)
 	{
 		if (getCurrentState(character) == State.INSIDE_AND_ACTIVATED)
 			onDieInside(character);
@@ -737,7 +737,7 @@ public class L2Zone implements FuncOwner
 		revalidateInZone(character);
 	}
 	
-	public final void onRevive(L2Character character)
+	public final void onRevive(L2Creature character)
 	{
 		// will enter the zone, if it was disabled because of "_exitOnDeath"
 		revalidateInZone(character);
@@ -746,20 +746,20 @@ public class L2Zone implements FuncOwner
 			onReviveInside(character);
 	}
 	
-	protected void onDieInside(L2Character character)
+	protected void onDieInside(L2Creature character)
 	{
 	}
 	
-	protected void onReviveInside(L2Character character)
+	protected void onReviveInside(L2Creature character)
 	{
 	}
 	
-	public final void removeFromZone(L2Character character)
+	public final void removeFromZone(L2Creature character)
 	{
 		changeStateOf(character, State.OUTSIDE);
 	}
 	
-	private boolean isCorrectType(L2Character character)
+	private boolean isCorrectType(L2Creature character)
 	{
 		switch (_affected)
 		{
@@ -938,7 +938,7 @@ public class L2Zone implements FuncOwner
 	 */
 	public final void movePlayersTo(int x, int y, int z)
 	{
-		for (L2Character character : getCharactersInside())
+		for (L2Creature character : getCharactersInside())
 			if (character instanceof L2PcInstance)
 				character.teleToLocation(x, y, z);
 	}
@@ -1003,7 +1003,7 @@ public class L2Zone implements FuncOwner
 	 */
 	public void broadcastPacket(L2ServerPacket packet)
 	{
-		for (L2Character character : getCharactersInside())
+		for (L2Creature character : getCharactersInside())
 			if (character instanceof L2PcInstance)
 				character.getActingPlayer().sendPacket(packet);
 	}

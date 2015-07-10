@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.QueenAntLarvaStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
@@ -29,7 +29,7 @@ public class QueenAntLarvaInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new QueenAntLarvaStatus(this);
 	}

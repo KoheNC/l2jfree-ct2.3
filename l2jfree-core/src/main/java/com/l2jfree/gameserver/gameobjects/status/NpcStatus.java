@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.gameobjects.status;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 
-public class NpcStatus extends CharStatus
+public class NpcStatus extends CreatureStatus
 {
 	public NpcStatus(L2Npc activeChar)
 	{
@@ -25,7 +25,7 @@ public class NpcStatus extends CharStatus
 	}
 	
 	@Override
-	void reduceHp0(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	void reduceHp0(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		getActiveChar().addAttackerToAttackByList(attacker);
 		

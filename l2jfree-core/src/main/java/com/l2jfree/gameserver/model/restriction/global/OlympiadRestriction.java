@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -77,7 +77,7 @@ public final class OlympiadRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage, L2PcInstance attacker_,
+	public boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage, L2PcInstance attacker_,
 			L2PcInstance target_)
 	{
 		if (attacker_ == null || target_ == null || attacker_ == target_ || attacker_.isGM())

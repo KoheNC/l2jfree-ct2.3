@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects;
 
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.gameobjects.view.TrapView;
@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
  *
  * @author nBd
  */
-public class L2Trap extends L2Character
+public class L2Trap extends L2Creature
 {
 	private final L2PcInstance _owner;
 	
@@ -34,7 +34,7 @@ public class L2Trap extends L2Character
 	 * @param objectId
 	 * @param template
 	 */
-	public L2Trap(int objectId, L2CharTemplate template, L2PcInstance owner)
+	public L2Trap(int objectId, L2CreatureTemplate template, L2PcInstance owner)
 	{
 		super(objectId, template);
 		getKnownList();
@@ -59,7 +59,7 @@ public class L2Trap extends L2Character
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.gameobjects.L2Character#onSpawn()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Creature#onSpawn()
 	 */
 	@Override
 	public void onSpawn()
@@ -94,7 +94,7 @@ public class L2Trap extends L2Character
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.gameobjects.L2Character#onDecay()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Creature#onDecay()
 	 */
 	@Override
 	public void onDecay()
@@ -113,10 +113,10 @@ public class L2Trap extends L2Character
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.model.L2Object#isAutoAttackable(com.l2jfree.gameserver.gameobjects.L2Character)
+	 * @see com.l2jfree.gameserver.model.L2Object#isAutoAttackable(com.l2jfree.gameserver.gameobjects.L2Creature)
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return _owner.isAutoAttackable(attacker);
 	}
@@ -150,7 +150,7 @@ public class L2Trap extends L2Character
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.gameobjects.L2Character#getLevel()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Creature#getLevel()
 	 */
 	@Override
 	public int getLevel()
@@ -175,7 +175,7 @@ public class L2Trap extends L2Character
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.gameobjects.L2Character#getTemplate()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Creature#getTemplate()
 	 */
 	@Override
 	public L2NpcTemplate getTemplate()

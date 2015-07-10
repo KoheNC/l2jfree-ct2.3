@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -37,7 +37,7 @@ import com.l2jfree.lang.L2TextBuilder;
  * <br>
  * L2Object :<BR>
  * <BR>
- * <li>L2Character</li>
+ * <li>L2Creature</li>
  * <li>L2ItemInstance</li>
  * <li>L2Potion</li>
  */
@@ -331,12 +331,12 @@ public abstract class L2Object implements L2Entity<Integer>
 	}
 	
 	/**
-	 * Return True if the L2Character is autoAttackable
+	 * Return True if the L2Creature is autoAttackable
 	 * 
 	 * @param attacker
-	 * @return true if L2Character is autoAttackable, false otherwise
+	 * @return true if L2Creature is autoAttackable, false otherwise
 	 */
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		return false;
 	}
@@ -538,12 +538,12 @@ public abstract class L2Object implements L2Entity<Integer>
 	{
 	}
 	
-	public L2Character getActingCharacter()
+	public L2Creature getActingCharacter()
 	{
 		return null;
 	}
 	
-	public final static L2Character getActingCharacter(L2Object obj)
+	public final static L2Creature getActingCharacter(L2Object obj)
 	{
 		return (obj == null ? null : obj.getActingCharacter());
 	}

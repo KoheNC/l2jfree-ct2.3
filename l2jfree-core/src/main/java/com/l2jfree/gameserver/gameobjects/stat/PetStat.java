@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.stat;
 
 import com.l2jfree.gameserver.datatables.PetDataTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2PetData;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -164,7 +164,7 @@ public class PetStat extends SummonStat
 	}
 	
 	@Override
-	public int getMAtk(L2Character target, L2Skill skill)
+	public int getMAtk(L2Creature target, L2Skill skill)
 	{
 		double attack = getActiveChar().getPetData().getPetMAtk();
 		/*
@@ -196,20 +196,20 @@ public class PetStat extends SummonStat
 	}
 	
 	@Override
-	public int getMDef(L2Character target, L2Skill skill)
+	public int getMDef(L2Creature target, L2Skill skill)
 	{
 		double defence = getActiveChar().getPetData().getPetMDef();
 		return (int)calcStat(Stats.MAGIC_DEFENCE, defence, target, skill);
 	}
 	
 	@Override
-	public int getPAtk(L2Character target)
+	public int getPAtk(L2Creature target)
 	{
 		return (int)calcStat(Stats.POWER_ATTACK, getActiveChar().getPetData().getPetPAtk(), target, null);
 	}
 	
 	@Override
-	public int getPDef(L2Character target)
+	public int getPDef(L2Creature target)
 	{
 		return (int)calcStat(Stats.POWER_DEFENCE, getActiveChar().getPetData().getPetPDef(), target, null);
 	}
@@ -221,13 +221,13 @@ public class PetStat extends SummonStat
 	}
 	
 	@Override
-	public int getCriticalHit(L2Character target)
+	public int getCriticalHit(L2Creature target)
 	{
 		return (int)calcStat(Stats.CRITICAL_RATE, getActiveChar().getPetData().getPetCritical(), target, null);
 	}
 	
 	@Override
-	public int getEvasionRate(L2Character target)
+	public int getEvasionRate(L2Creature target)
 	{
 		return (int)calcStat(Stats.EVASION_RATE, getActiveChar().getPetData().getPetEvasion(), target, null);
 	}

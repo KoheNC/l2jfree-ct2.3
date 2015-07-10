@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.status;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 
 public final class FolkStatus extends NpcStatus
@@ -25,7 +25,7 @@ public final class FolkStatus extends NpcStatus
 	}
 	
 	@Override
-	boolean canReduceHp(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	boolean canReduceHp(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		return false;
 	}

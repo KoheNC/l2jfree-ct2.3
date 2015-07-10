@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.gameobjects.ai;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
-import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
@@ -37,7 +37,7 @@ public class SCBodyDestroyerAI extends L2AttackableAI
 	}
 	
 	@Override
-	protected void onEvtAttacked(L2Character attacker)
+	protected void onEvtAttacked(L2Creature attacker)
 	{
 		if (_firstAttakerObjectId == 0 && attacker instanceof L2PcInstance)
 		{

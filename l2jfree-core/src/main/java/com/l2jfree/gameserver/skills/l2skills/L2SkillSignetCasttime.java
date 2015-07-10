@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.l2skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
 
@@ -34,7 +34,7 @@ public final class L2SkillSignetCasttime extends L2Skill
 	}
 	
 	@Override
-	public void useSkill(L2Character caster, L2Character... targets)
+	public void useSkill(L2Creature caster, L2Creature... targets)
 	{
 		if (caster.isAlikeDead())
 			return;

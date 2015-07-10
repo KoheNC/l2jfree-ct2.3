@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -49,7 +49,7 @@ public final class DuelRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean isInvul(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	public boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
 	{
 		return Duel.isInvul(target, activeChar);

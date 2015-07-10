@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.ZakenAI;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
@@ -29,7 +29,7 @@ public class ZakenInstance extends L2GrandBossInstance
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new ZakenAI(new AIAccessor());
 	}

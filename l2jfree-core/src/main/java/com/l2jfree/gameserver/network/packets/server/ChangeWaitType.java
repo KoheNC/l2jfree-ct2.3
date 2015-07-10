@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class ChangeWaitType extends L2ServerPacket
@@ -29,7 +29,7 @@ public class ChangeWaitType extends L2ServerPacket
 	public static final int WT_START_FAKEDEATH = 2;
 	public static final int WT_STOP_FAKEDEATH = 3;
 	
-	public ChangeWaitType(L2Character character, int newMoveType)
+	public ChangeWaitType(L2Creature character, int newMoveType)
 	{
 		_charObjId = character.getObjectId();
 		_moveType = newMoveType;

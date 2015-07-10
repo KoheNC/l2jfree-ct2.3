@@ -21,9 +21,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
-import com.l2jfree.gameserver.gameobjects.effects.CharEffects;
+import com.l2jfree.gameserver.gameobjects.effects.CreatureEffects;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
@@ -49,15 +49,15 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	
 	public static final L2Effect[] EMPTY_ARRAY = new L2Effect[0];
 	
-	// member _effector is the instance of L2Character that cast/used the spell/skill that is
-	// causing this effect. Do not confuse with the instance of L2Character that
+	// member _effector is the instance of L2Creature that cast/used the spell/skill that is
+	// causing this effect. Do not confuse with the instance of L2Creature that
 	// is being affected by this effect.
-	private final L2Character _effector;
+	private final L2Creature _effector;
 	
-	// member _effected is the instance of L2Character that was affected
-	// by this effect. Do not confuse with the instance of L2Character that
+	// member _effected is the instance of L2Creature that was affected
+	// by this effect. Do not confuse with the instance of L2Creature that
 	// casted/used this effect.
-	private final L2Character _effected;
+	private final L2Creature _effected;
 	
 	// the skill that was used.
 	private final L2Skill _skill;
@@ -215,7 +215,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	}
 	
 	/**
-	 * Must be called from synchronized context from {@link CharEffects}.
+	 * Must be called from synchronized context from {@link CreatureEffects}.
 	 */
 	public synchronized final void setInUse(boolean inUse)
 	{
@@ -346,12 +346,12 @@ public abstract class L2Effect implements FuncOwner, Runnable
 		return _skill;
 	}
 	
-	public final L2Character getEffector()
+	public final L2Creature getEffector()
 	{
 		return _effector;
 	}
 	
-	public final L2Character getEffected()
+	public final L2Creature getEffected()
 	{
 		return _effected;
 	}
@@ -376,7 +376,7 @@ public abstract class L2Effect implements FuncOwner, Runnable
 	 * <BR>
 	 * <B><U> Actions</U> :</B><BR>
 	 * <BR>
-	 * <li>Cancel the effect in the the abnormal effect map of the L2Character </li>
+	 * <li>Cancel the effect in the the abnormal effect map of the L2Creature </li>
 	 * <li>Stop the task of the L2Effect, remove it and update client magic icons </li>
 	 * <BR>
 	 * <BR>

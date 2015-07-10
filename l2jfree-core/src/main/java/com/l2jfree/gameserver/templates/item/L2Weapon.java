@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.templates.item;
 
 import javolution.util.FastList;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -333,10 +333,10 @@ public final class L2Weapon extends L2Equip
 	/**
 	 * Returns effects of skills associated with the item to be triggered onHit.
 	 * 
-	 * @param caster : L2Character pointing out the caster
-	 * @param target : L2Character pointing out the target
+	 * @param caster : L2Creature pointing out the caster
+	 * @param target : L2Creature pointing out the target
 	 */
-	public void getSkillEffectsByCrit(L2Character caster, L2Character target)
+	public void getSkillEffectsByCrit(L2Creature caster, L2Creature target)
 	{
 		if (_onCritSkills == null)
 			return;
@@ -367,11 +367,11 @@ public final class L2Weapon extends L2Equip
 	/**
 	 * Returns effects of skills associated with the item to be triggered onCast.
 	 * 
-	 * @param caster : L2Character pointing out the caster
-	 * @param target : L2Character pointing out the target
+	 * @param caster : L2Creature pointing out the caster
+	 * @param target : L2Creature pointing out the target
 	 * @param trigger : L2Skill pointing out the skill triggering this action
 	 */
-	public void getSkillEffectsByCast(L2Character caster, L2Character target, L2Skill trigger)
+	public void getSkillEffectsByCast(L2Creature caster, L2Creature target, L2Skill trigger)
 	{
 		if (_onCastSkills == null)
 			return;

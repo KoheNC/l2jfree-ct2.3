@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance.TeleportMode;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
@@ -34,7 +34,7 @@ public class Recall extends ISkillConditionChecker
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.RECALL, L2SkillType.TELEPORT };
 	
 	@Override
-	public boolean checkConditions(L2Character activeChar, L2Skill skill)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
 		if (activeChar instanceof L2PcInstance)
 		{
@@ -57,7 +57,7 @@ public class Recall extends ISkillConditionChecker
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (activeChar instanceof L2PcInstance)
 		{
@@ -71,7 +71,7 @@ public class Recall extends ISkillConditionChecker
 			}
 		}
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

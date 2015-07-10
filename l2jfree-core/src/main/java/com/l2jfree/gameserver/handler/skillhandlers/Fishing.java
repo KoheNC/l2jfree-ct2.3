@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.handler.ISkillHandler;
@@ -38,7 +38,7 @@ public class Fishing implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.FISHING };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;

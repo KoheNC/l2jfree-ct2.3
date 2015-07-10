@@ -31,7 +31,7 @@ import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.CombatFlag;
@@ -89,9 +89,9 @@ public class FortSiegeManager
 	
 	/**
 	 * Return true if character summon<BR><BR>
-	 * @param activeChar The L2Character of the character can summon
+	 * @param activeChar The L2Creature of the character can summon
 	 */
-	public final boolean checkIfOkToSummon(L2Character activeChar, boolean isCheckOnly)
+	public final boolean checkIfOkToSummon(L2Creature activeChar, boolean isCheckOnly)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return false;
@@ -372,7 +372,7 @@ public class FortSiegeManager
 		return true;
 	}
 	
-	public static boolean checkIfOkToUseStriderSiegeAssault(L2Character activeChar, boolean isCheckOnly)
+	public static boolean checkIfOkToUseStriderSiegeAssault(L2Creature activeChar, boolean isCheckOnly)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;
@@ -399,7 +399,7 @@ public class FortSiegeManager
 		return false;
 	}
 	
-	public static boolean checkIfOkToPlaceFlag(L2Character activeChar, boolean isCheckOnly)
+	public static boolean checkIfOkToPlaceFlag(L2Creature activeChar, boolean isCheckOnly)
 	{
 		if (activeChar == null || !(activeChar instanceof L2PcInstance))
 			return false;

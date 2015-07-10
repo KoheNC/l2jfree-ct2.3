@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.PlayableKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.PlayableStat;
-import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
@@ -45,7 +45,7 @@ import com.l2jfree.tools.random.Rnd;
  * <li>L2Summon</li><BR><BR>
  * 
  */
-public abstract class L2Playable extends L2Character
+public abstract class L2Playable extends L2Creature
 {
 	@SuppressWarnings("hiding")
 	public static final L2Playable[] EMPTY_ARRAY = new L2Playable[0];
@@ -58,16 +58,16 @@ public abstract class L2Playable extends L2Character
 	private boolean _lockedTarget = false;
 	
 	/**
-	 * Constructor of L2Playable (use L2Character constructor).<BR><BR>
+	 * Constructor of L2Playable (use L2Creature constructor).<BR><BR>
 	 * 
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to create an empty _skills slot and link copy basic Calculator set to this L2Playable </li><BR><BR>
+	 * <li>Call the L2Creature constructor to create an empty _skills slot and link copy basic Calculator set to this L2Playable </li><BR><BR>
 	 * 
 	 * @param objectId Identifier of the object to initialized
-	 * @param template The L2CharTemplate to apply to the L2Playable
+	 * @param template The L2CreatureTemplate to apply to the L2Playable
 	 * 
 	 */
-	public L2Playable(int objectId, L2CharTemplate template)
+	public L2Playable(int objectId, L2CreatureTemplate template)
 	{
 		super(objectId, template);
 		getKnownList(); // Init knownlist
@@ -83,7 +83,7 @@ public abstract class L2Playable extends L2Character
 	public abstract PlayableStat getStat();
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -94,7 +94,7 @@ public abstract class L2Playable extends L2Character
 		return true;
 	}
 	
-	public boolean checkIfPvP(L2Character target)
+	public boolean checkIfPvP(L2Creature target)
 	{
 		if (target == null)
 			return false; // Target is null
@@ -139,7 +139,7 @@ public abstract class L2Playable extends L2Character
 	}
 	
 	@Override
-	public final void sendDamageMessage(L2Character target, int damage, boolean mcrit, boolean pcrit, boolean miss)
+	public final void sendDamageMessage(L2Creature target, int damage, boolean mcrit, boolean pcrit, boolean miss)
 	{
 		// All messages are verified on retail
 		L2PcInstance attOwner = getActingPlayer();
@@ -201,7 +201,7 @@ public abstract class L2Playable extends L2Character
 	}
 	
 	@Override
-	public final void sendAvoidMessage(L2Character attacker)
+	public final void sendAvoidMessage(L2Creature attacker)
 	{
 		SystemMessage sm = new SystemMessage(SystemMessageId.C1_EVADED_C2_ATTACK);
 		sm.addCharName(this);
@@ -210,7 +210,7 @@ public abstract class L2Playable extends L2Character
 	}
 	
 	@Override
-	public final void sendResistedMyMagicMessage(L2Character target)
+	public final void sendResistedMyMagicMessage(L2Creature target)
 	{
 		SystemMessage sm = new SystemMessage(SystemMessageId.C1_ATTACK_FAILED);
 		sm.addCharName(this);
@@ -219,7 +219,7 @@ public abstract class L2Playable extends L2Character
 	}
 	
 	@Override
-	public final void sendResistedAgainstMagicMessage(L2Character attacker)
+	public final void sendResistedAgainstMagicMessage(L2Creature attacker)
 	{
 		SystemMessage sm = new SystemMessage(SystemMessageId.C1_RESISTED_C2_MAGIC);
 		sm.addCharName(this);
@@ -228,10 +228,10 @@ public abstract class L2Playable extends L2Character
 	}
 	
 	@Override
-	public final void sendResistedMyMagicSlightlyMessage(L2Character target)
+	public final void sendResistedMyMagicSlightlyMessage(L2Creature target)
 	{
 		// Perhaps this method is not retail and we should use
-		//sendResistedMyMagicMessage(L2Character, boolean) & sendResistedAgainstMagicWeaklyMessage(L2Character, boolean)
+		//sendResistedMyMagicMessage(L2Creature, boolean) & sendResistedAgainstMagicWeaklyMessage(L2Creature, boolean)
 		SystemMessage sm = new SystemMessage(SystemMessageId.DAMAGE_DECREACE_C1_RESISTED_C2_MAGIC);
 		sm.addCharName(target);
 		sm.addCharName(this);
@@ -240,7 +240,7 @@ public abstract class L2Playable extends L2Character
 	}
 	
 	@Override
-	public final void sendResistedAgainstMagicWeaklyMessage(L2Character attacker)
+	public final void sendResistedAgainstMagicWeaklyMessage(L2Creature attacker)
 	{
 		SystemMessage sm = new SystemMessage(SystemMessageId.C1_WEAKLY_RESISTED_C2_MAGIC);
 		sm.addCharName(this);
@@ -420,9 +420,9 @@ public abstract class L2Playable extends L2Character
 			if (obj.getKnownList().getKnownObject(getObjectId()) == this)
 				obj.getKnownList().removeKnownObject(this);
 			
-			if (obj instanceof L2Character)
+			if (obj instanceof L2Creature)
 			{
-				L2Character cha = (L2Character)obj;
+				L2Creature cha = (L2Creature)obj;
 				
 				cha.getAttackByList().remove(this);
 				

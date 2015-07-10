@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.entity;
 
 import com.l2jfree.gameserver.datatables.ResidentialSkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Object;
@@ -74,7 +74,7 @@ public abstract class Siegeable<T extends AbstractSiege> extends Entity
 	
 	public void oustAllPlayers()
 	{
-		for (L2Character player : _zoneTP.getCharactersInside())
+		for (L2Creature player : _zoneTP.getCharactersInside())
 		{
 			// To random spot in defender spawn zone
 			if (player instanceof L2PcInstance)

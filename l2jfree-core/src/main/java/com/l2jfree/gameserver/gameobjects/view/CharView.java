@@ -14,12 +14,12 @@
  */
 package com.l2jfree.gameserver.gameobjects.view;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 
 /**
  * @author NB4L1
  */
-public abstract class CharView<T extends L2Character> implements CharLikeView
+public abstract class CharView<T extends L2Creature> implements CharLikeView
 {
 	protected final T _activeChar;
 	

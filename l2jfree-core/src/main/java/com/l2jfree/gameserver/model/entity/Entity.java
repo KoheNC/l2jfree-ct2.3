@@ -21,7 +21,7 @@ import javolution.util.FastList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.zone.L2Zone;
@@ -72,7 +72,7 @@ public class Entity
 		return 0;
 	}
 	
-	public boolean checkIfInZone(L2Character cha)
+	public boolean checkIfInZone(L2Creature cha)
 	{
 		if (_zone != null)
 			return _zone.isInsideZone(cha);
@@ -111,7 +111,7 @@ public class Entity
 	protected List<L2PcInstance> getPlayersInside()
 	{
 		List<L2PcInstance> lst = new FastList<L2PcInstance>();
-		for (L2Character cha : getZone().getCharactersInside())
+		for (L2Creature cha : getZone().getCharactersInside())
 		{
 			if (cha instanceof L2PcInstance)
 				lst.add((L2PcInstance)cha);

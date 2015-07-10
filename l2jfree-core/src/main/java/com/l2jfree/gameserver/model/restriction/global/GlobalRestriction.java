@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.restriction.global;
 
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -37,15 +37,15 @@ public interface GlobalRestriction
 	
 	public boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target);
 	
-	public boolean canCreateEffect(L2Character activeChar, L2Character target, L2Skill skill);
+	public boolean canCreateEffect(L2Creature activeChar, L2Creature target, L2Skill skill);
 	
-	public boolean isInvul(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	public boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive);
 	
-	public boolean isProtected(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
+	public boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
 			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive);
 	
-	public boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage, L2PcInstance attacker_,
+	public boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage, L2PcInstance attacker_,
 			L2PcInstance target_);
 	
 	public boolean canRequestRevive(L2PcInstance activeChar);
@@ -71,12 +71,12 @@ public interface GlobalRestriction
 	
 	// TODO
 	
-	public Boolean isInsideZone(L2Character activeChar, byte zone);
+	public Boolean isInsideZone(L2Creature activeChar, byte zone);
 	
-	public double calcDamage(L2Character activeChar, L2Character target, double damage, L2Skill skill);
+	public double calcDamage(L2Creature activeChar, L2Creature target, double damage, L2Skill skill);
 	
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
-			L2Character target);
+	public List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill,
+			L2Creature target);
 	
 	// TODO
 	
@@ -88,11 +88,11 @@ public interface GlobalRestriction
 	
 	public void playerDisconnected(L2PcInstance activeChar);
 	
-	public boolean playerKilled(L2Character activeChar, L2PcInstance target, L2PcInstance killer);
+	public boolean playerKilled(L2Creature activeChar, L2PcInstance target, L2PcInstance killer);
 	
 	public void playerRevived(L2PcInstance player);
 	
-	public void isInsideZoneStateChanged(L2Character activeChar, byte zone, boolean isInsideZone);
+	public void isInsideZoneStateChanged(L2Creature activeChar, byte zone, boolean isInsideZone);
 	
 	public void instanceChanged(L2PcInstance activeChar, int oldInstance, int newInstance);
 	

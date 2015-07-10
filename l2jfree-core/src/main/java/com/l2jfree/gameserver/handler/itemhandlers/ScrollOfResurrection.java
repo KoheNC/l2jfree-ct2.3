@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.itemhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
@@ -61,7 +61,7 @@ public class ScrollOfResurrection implements IItemHandler
 		boolean petScroll = (itemId == 6387);
 		
 		// SoR Animation section
-		L2Character target = (L2Character)activeChar.getTarget();
+		L2Creature target = (L2Creature)activeChar.getTarget();
 		
 		if (target != null && target.isDead())
 		{

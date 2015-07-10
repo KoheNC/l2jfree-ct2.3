@@ -21,7 +21,7 @@ import org.apache.commons.lang.ArrayUtils;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
@@ -120,7 +120,7 @@ public class L2AttackableAIScript extends QuestJython
 				{
 					if (npcTarget == skillTarget || npc == skillTarget)
 					{
-						L2Character originalCaster = isPet ? caster.getPet() : caster;
+						L2Creature originalCaster = isPet ? caster.getPet() : caster;
 						attackable.addDamageHate(originalCaster, 0, (skillAggroPoints * 150)
 								/ (attackable.getLevel() + 7));
 					}
@@ -133,7 +133,7 @@ public class L2AttackableAIScript extends QuestJython
 	@Override
 	public String onFactionCall(L2Npc npc, L2Npc caller, L2PcInstance attacker, boolean isPet)
 	{
-		L2Character originalAttackTarget = (isPet ? attacker.getPet() : attacker);
+		L2Creature originalAttackTarget = (isPet ? attacker.getPet() : attacker);
 		
 		if (attacker.isInParty() && attacker.getParty().isInDimensionalRift())
 		{
@@ -158,7 +158,7 @@ public class L2AttackableAIScript extends QuestJython
 	@Override
 	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
-		L2Character target = isPet ? player.getPet() : player;
+		L2Creature target = isPet ? player.getPet() : player;
 		
 		((L2Attackable)npc).addDamageHate(target, 0, 1);
 		
@@ -181,7 +181,7 @@ public class L2AttackableAIScript extends QuestJython
 		{
 			L2Attackable attackable = (L2Attackable)npc;
 			
-			L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
+			L2Creature originalAttacker = isPet ? attacker.getPet() : attacker;
 			attackable.getAI().notifyEvent(CtrlEvent.EVT_ATTACKED, originalAttacker);
 			attackable.addDamageHate(originalAttacker, damage, (damage * 100) / (attackable.getLevel() + 7));
 		}

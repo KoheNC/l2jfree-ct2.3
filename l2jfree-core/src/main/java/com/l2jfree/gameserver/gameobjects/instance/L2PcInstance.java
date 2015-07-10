@@ -73,7 +73,7 @@ import com.l2jfree.gameserver.datatables.RecordTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Decoy;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
@@ -81,21 +81,21 @@ import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2PlayerAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
 import com.l2jfree.gameserver.gameobjects.effects.PcEffects;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.PcKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
-import com.l2jfree.gameserver.gameobjects.shot.CharShots;
+import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.PcShots;
 import com.l2jfree.gameserver.gameobjects.skills.PcSkills;
-import com.l2jfree.gameserver.gameobjects.stat.CharStat;
+import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PcStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
@@ -417,7 +417,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private static final int[] COMMON_CRAFT_LEVELS = { 5, 20, 28, 36, 43, 49, 55, 62 };
 	
-	public class AIAccessor extends L2Character.AIAccessor
+	public class AIAccessor extends L2Creature.AIAccessor
 	{
 		protected AIAccessor()
 		{
@@ -433,13 +433,13 @@ public final class L2PcInstance extends L2Playable
 			L2PcInstance.this.doPickupItem(object);
 		}
 		
-		public void doInteract(L2Character target)
+		public void doInteract(L2Creature target)
 		{
 			L2PcInstance.this.doInteract(target);
 		}
 		
 		@Override
-		public void doAttack(L2Character target)
+		public void doAttack(L2Creature target)
 		{
 			super.doAttack(target);
 			
@@ -1068,10 +1068,10 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Constructor of L2PcInstance (use L2Character constructor).<BR><BR>
+	 * Constructor of L2PcInstance (use L2Creature constructor).<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to create an empty _skills slot and copy basic Calculator set to this L2PcInstance </li>
+	 * <li>Call the L2Creature constructor to create an empty _skills slot and copy basic Calculator set to this L2PcInstance </li>
 	 * <li>Set the name of the L2PcInstance</li><BR><BR>
 	 *
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : This method SET the level of the L2PcInstance to 1</B></FONT><BR><BR>
@@ -1087,7 +1087,7 @@ public final class L2PcInstance extends L2Playable
 		getKnownList(); // Init knownlist
 		getStat(); // Init stats
 		getStatus(); // Init status
-		super.initCharStatusUpdateValues();
+		super.initCreatureStatusUpdateValues();
 		initPcStatusUpdateValues();
 		
 		_accountName = accountName;
@@ -1106,7 +1106,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new PcKnownList(this);
 	}
@@ -1130,7 +1130,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharStat initStat()
+	protected CreatureStat initStat()
 	{
 		return new PcStat(this);
 	}
@@ -1142,7 +1142,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new PcStatus(this);
 	}
@@ -1209,7 +1209,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new L2PlayerAI(new L2PcInstance.AIAccessor());
 	}
@@ -4124,10 +4124,10 @@ public final class L2PcInstance extends L2Playable
 	 * <li>If the private store is a STORE_PRIVATE_BUY, send a Server->Client PrivateBuyListBuy packet to the L2PcInstance</li>
 	 * <li>If the private store is a STORE_PRIVATE_MANUFACTURE, send a Server->Client RecipeShopSellList packet to the L2PcInstance</li><BR><BR>
 	 *
-	 * @param target The L2Character targeted
+	 * @param target The L2Creature targeted
 	 *
 	 */
-	public void doInteract(L2Character target)
+	public void doInteract(L2Creature target)
 	{
 		if (target instanceof L2PcInstance)
 		{
@@ -4377,8 +4377,8 @@ public final class L2PcInstance extends L2Playable
 	 * Set a target.<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Remove the L2PcInstance from the _statusListener of the old target if it was a L2Character </li>
-	 * <li>Add the L2PcInstance to the _statusListener of the new target if it's a L2Character </li>
+	 * <li>Remove the L2PcInstance from the _statusListener of the old target if it was a L2Creature </li>
+	 * <li>Add the L2PcInstance to the _statusListener of the new target if it's a L2Creature </li>
 	 * <li>Target the new L2Object (add the target to the L2PcInstance _target, _knownObject and L2PcInstance to _KnownObject of the L2Object)</li><BR><BR>
 	 *
 	 * @param newTarget The L2Object to target
@@ -4389,8 +4389,8 @@ public final class L2PcInstance extends L2Playable
 	{
 		if (newTarget != null)
 		{
-			if (this != newTarget && newTarget instanceof L2Character)
-				sendPacket(new ValidateLocation((L2Character)newTarget));
+			if (this != newTarget && newTarget instanceof L2Creature)
+				sendPacket(new ValidateLocation((L2Creature)newTarget));
 			
 			if (!isGM())
 			{
@@ -4426,11 +4426,11 @@ public final class L2PcInstance extends L2Playable
 	{
 		final L2Object oldTarget = getTarget();
 		
-		if (oldTarget instanceof L2Character)
-			((L2Character)oldTarget).getStatus().removeStatusListener(this);
+		if (oldTarget instanceof L2Creature)
+			((L2Creature)oldTarget).getStatus().removeStatusListener(this);
 		
-		if (newTarget instanceof L2Character)
-			((L2Character)newTarget).getStatus().addStatusListener(this);
+		if (newTarget instanceof L2Creature)
+			((L2Creature)newTarget).getStatus().addStatusListener(this);
 		
 		if (newTarget != null)
 		{
@@ -4603,7 +4603,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Kill the L2Character, Apply Death Penalty, Manage gain/loss Karma and Item Drop.<BR><BR>
+	 * Kill the L2Creature, Apply Death Penalty, Manage gain/loss Karma and Item Drop.<BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Reduce the Experience of the L2PcInstance in function of the calculated Death Penalty </li>
@@ -4613,11 +4613,11 @@ public final class L2PcInstance extends L2Playable
 	 * <li>Kill the L2PcInstance </li><BR><BR>
 	 *
 	 *
-	 * @param killer The L2Character who attacks
+	 * @param killer The L2Creature who attacks
 	 *
 	 */
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		// is the dying in duel? if so, change his duel state to dead
 		if (isInDuel()) // pets can die as usual
@@ -4643,7 +4643,7 @@ public final class L2PcInstance extends L2Playable
 			return false;
 		}
 		
-		/* Since L2Character.doDie() calls stopAllEffects(), which includes
+		/* Since L2Creature.doDie() calls stopAllEffects(), which includes
 		 * setting charm of curage and other blessings as false, this stores value
 		 * before calling superclass method
 		 */
@@ -4803,7 +4803,7 @@ public final class L2PcInstance extends L2Playable
 		if (_fusionSkill != null)
 			abortCast();
 		
-		for (L2Character character : getKnownList().getKnownCharacters())
+		for (L2Creature character : getKnownList().getKnownCharacters())
 			if (character.getFusionSkill() != null && character.getFusionSkill().getTarget() == this)
 				character.abortCast();
 		
@@ -4848,7 +4848,7 @@ public final class L2PcInstance extends L2Playable
 		target.getInventory().unEquipItemInBodySlotAndRecord(14);
 	}
 	
-	private void onDieDropItem(L2Character killer)
+	private void onDieDropItem(L2Creature killer)
 	{
 		if (killer == null)
 			return;
@@ -4979,7 +4979,7 @@ public final class L2PcInstance extends L2Playable
 		}
 	}
 	
-	public void onKillUpdatePvPKarma(L2Character target)
+	public void onKillUpdatePvPKarma(L2Creature target)
 	{
 		if (target == null)
 			return;
@@ -5299,7 +5299,7 @@ public final class L2PcInstance extends L2Playable
 			startPvPFlag();
 	}
 	
-	public void updatePvPStatus(L2Character target)
+	public void updatePvPStatus(L2Creature target)
 	{
 		L2PcInstance player_target = target.getActingPlayer();
 		
@@ -6420,7 +6420,7 @@ public final class L2PcInstance extends L2Playable
 		if (party != null)
 		{
 			// First set the party otherwise this wouldn't be considered
-			// as in a party into the L2Character.updateEffectIcons() call.
+			// as in a party into the L2Creature.updateEffectIcons() call.
 			setParty(party);
 			if (!party.addPartyMember(this))
 				setParty(null);
@@ -7345,10 +7345,10 @@ public final class L2PcInstance extends L2Playable
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
 	 * <li>Replace oldSkill by newSkill or Add the newSkill </li>
-	 * <li>If an old skill has been replaced, remove all its Func objects of L2Character calculator set</li>
-	 * <li>Add Func objects of newSkill to the calculator set of the L2Character </li><BR><BR>
+	 * <li>If an old skill has been replaced, remove all its Func objects of L2Creature calculator set</li>
+	 * <li>Add Func objects of newSkill to the calculator set of the L2Creature </li><BR><BR>
 	 *
-	 * @param newSkill The L2Skill to add to the L2Character
+	 * @param newSkill The L2Skill to add to the L2Creature
 	 *
 	 * @return The L2Skill replaced or null if just added a new L2Skill
 	 *
@@ -7380,19 +7380,19 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Remove a skill from the L2Character and its Func objects from calculator set of the L2Character and save update in the character_skills table of the database.<BR><BR>
+	 * Remove a skill from the L2Creature and its Func objects from calculator set of the L2Creature and save update in the character_skills table of the database.<BR><BR>
 	 *
 	 * <B><U> Concept</U> :</B><BR><BR>
-	 * All skills own by a L2Character are identified in <B>_skills</B><BR><BR>
+	 * All skills own by a L2Creature are identified in <B>_skills</B><BR><BR>
 	 *
 	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Remove the skill from the L2Character _skills </li>
-	 * <li>Remove all its Func objects from the L2Character calculator set</li><BR><BR>
+	 * <li>Remove the skill from the L2Creature _skills </li>
+	 * <li>Remove all its Func objects from the L2Creature calculator set</li><BR><BR>
 	 *
 	 * <B><U> Overridden in </U> :</B><BR><BR>
 	 * <li> L2PcInstance : Save update in the character_skills table of the database</li><BR><BR>
 	 *
-	 * @param skill The L2Skill to remove from the L2Character
+	 * @param skill The L2Skill to remove from the L2Creature
 	 *
 	 * @return The L2Skill removed
 	 *
@@ -7403,7 +7403,7 @@ public final class L2PcInstance extends L2Playable
 		if (skill == null)
 			return null;
 		
-		// Remove a skill from the L2Character and its Func objects from calculator set of the L2Character
+		// Remove a skill from the L2Creature and its Func objects from calculator set of the L2Creature
 		L2Skill oldSkill = super.removeSkill(skill);
 		
 		_pcSkills.deleteSkill(skill);
@@ -7855,7 +7855,7 @@ public final class L2PcInstance extends L2Playable
 	 *
 	 */
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		// Check if the attacker isn't the L2PcInstance Pet
 		if (attacker == this || attacker == getPet())
@@ -8066,7 +8066,7 @@ public final class L2PcInstance extends L2Playable
 		
 		//************************************* Check Player State *******************************************
 		
-		// Abnormal effects(ex : Stun, Sleep...) are checked in L2Character useMagic()
+		// Abnormal effects(ex : Stun, Sleep...) are checked in L2Creature useMagic()
 		
 		if (!SkillHandler.getInstance().checkConditions(this, skill))
 		{
@@ -8169,7 +8169,7 @@ public final class L2PcInstance extends L2Playable
 			return false;
 		}
 		
-		final L2Character target = skill.getFirstOfTargetList(this);
+		final L2Creature target = skill.getFirstOfTargetList(this);
 		
 		// Check the validity of the target
 		if (target == null)
@@ -8267,9 +8267,9 @@ public final class L2PcInstance extends L2Playable
 		// Check if this is offensive magic skill
 		if (skill.isOffensive())
 		{
-			if (L2Character.isInsidePeaceZone(this, target))
+			if (L2Creature.isInsidePeaceZone(this, target))
 			{
-				// If L2Character or target is in a peace zone, send a system message TARGET_IN_PEACEZONE a Server->Client packet ActionFailed
+				// If L2Creature or target is in a peace zone, send a system message TARGET_IN_PEACEZONE a Server->Client packet ActionFailed
 				sendPacket(SystemMessageId.TARGET_IN_PEACEZONE);
 				sendPacket(ActionFailed.STATIC_PACKET);
 				return false;
@@ -8452,8 +8452,8 @@ public final class L2PcInstance extends L2Playable
 	 */
 	public boolean checkPvpSkill(L2Object obj, L2Skill skill, boolean srcIsSummon)
 	{
-		if (obj instanceof L2Character)
-			if (GlobalRestrictions.isProtected(this, (L2Character)obj, skill, false))
+		if (obj instanceof L2Creature)
+			if (GlobalRestrictions.isProtected(this, (L2Creature)obj, skill, false))
 				return false;
 		
 		// Check for PC->PC Pvp status
@@ -10062,7 +10062,7 @@ public final class L2PcInstance extends L2Playable
 				abortCast();
 			
 			// Stop casting for any player that may be casting a force buff on this l2pcinstance.
-			for (L2Character character : getKnownList().getKnownCharacters())
+			for (L2Creature character : getKnownList().getKnownCharacters())
 			{
 				if (character.getFusionSkill() != null && character.getFusionSkill().getTarget() == this)
 					character.abortCast();
@@ -11059,7 +11059,7 @@ public final class L2PcInstance extends L2Playable
 	 * <li>Remove the L2PcInstance from the world </li>
 	 * <li>Stop Party and Unsummon Pet </li>
 	 * <li>Update database with items in its inventory and remove them from the world </li>
-	 * <li>Remove all L2Object from _knownObjects and _knownPlayer of the L2Character then cancel Attak or Cast and notify AI </li>
+	 * <li>Remove all L2Object from _knownObjects and _knownPlayer of the L2Creature then cancel Attak or Cast and notify AI </li>
 	 * <li>Close the connection with the client </li><BR><BR>
 	 *
 	 */
@@ -11208,7 +11208,7 @@ public final class L2PcInstance extends L2Playable
 			{
 				abortCast();
 			}
-			for (L2Character character : getKnownList().getKnownCharacters())
+			for (L2Creature character : getKnownList().getKnownCharacters())
 				if (character.getFusionSkill() != null && character.getFusionSkill().getTarget() == this)
 					character.abortCast();
 		}
@@ -11374,7 +11374,7 @@ public final class L2PcInstance extends L2Playable
 			_log.fatal(e.getMessage(), e);
 		}
 		
-		// Remove all L2Object from _knownObjects and _knownPlayer of the L2Character then cancel Attak or Cast and notify AI
+		// Remove all L2Object from _knownObjects and _knownPlayer of the L2Creature then cancel Attak or Cast and notify AI
 		try
 		{
 			getKnownList().removeAllKnownObjects();
@@ -12276,7 +12276,7 @@ public final class L2PcInstance extends L2Playable
 		sendEtcStatusUpdate();
 	}
 	
-	/** Return True if the L2Character is riding. */
+	/** Return True if the L2Creature is riding. */
 	public final boolean isRidingStrider()
 	{
 		return _isRidingStrider;
@@ -12292,7 +12292,7 @@ public final class L2PcInstance extends L2Playable
 		return _isRidingHorse;
 	}
 	
-	/** Set the L2Character riding mode to True. */
+	/** Set the L2Creature riding mode to True. */
 	public final void setIsRidingStrider(boolean mode)
 	{
 		_isRidingStrider = mode;
@@ -12440,7 +12440,7 @@ public final class L2PcInstance extends L2Playable
 	 * @param skill
 	 * @param target
 	 */
-	public void absorbSoulFromNpc(L2Skill soulMastery, L2Character target)
+	public void absorbSoulFromNpc(L2Skill soulMastery, L2Creature target)
 	{
 		if (_souls >= soulMastery.getNumSouls())
 		{
@@ -12641,7 +12641,7 @@ public final class L2PcInstance extends L2Playable
 		_deathPenaltyBuffLevel = level;
 	}
 	
-	public void calculateDeathPenaltyBuffLevel(L2Character killer)
+	public void calculateDeathPenaltyBuffLevel(L2Creature killer)
 	{
 		if (Config.DEATH_PENALTY_CHANCE < 1)
 			return;
@@ -13538,7 +13538,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharShots initShots()
+	protected CreatureShots initShots()
 	{
 		return new PcShots(this);
 	}
@@ -13624,7 +13624,7 @@ public final class L2PcInstance extends L2Playable
 		return true;
 	}
 	
-	public boolean canSee(L2Character cha)
+	public boolean canSee(L2Creature cha)
 	{
 		if (isGM())
 			return true;
@@ -14376,7 +14376,7 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	public void sendResistedMyEffectMessage(L2Character target, L2Skill skill)
+	public void sendResistedMyEffectMessage(L2Creature target, L2Skill skill)
 	{
 		SystemMessage sm = new SystemMessage(SystemMessageId.C1_RESISTED_YOUR_S2_EFFECT);
 		sm.addCharName(target);

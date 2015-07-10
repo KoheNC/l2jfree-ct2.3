@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills.conditions;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.skills.Env;
 
 class ConditionPlayerActiveSkillId extends AbstractConditionActiveSkillId
@@ -25,7 +25,7 @@ class ConditionPlayerActiveSkillId extends AbstractConditionActiveSkillId
 	}
 	
 	@Override
-	L2Character getSkillOwner(Env env)
+	L2Creature getSkillOwner(Env env)
 	{
 		return env.player;
 	}

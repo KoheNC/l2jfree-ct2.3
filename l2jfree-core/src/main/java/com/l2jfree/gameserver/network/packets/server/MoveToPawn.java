@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -37,7 +37,7 @@ public class MoveToPawn extends L2ServerPacket
 	private final int _distance;
 	private final int _x, _y, _z, _tx, _ty, _tz;
 	
-	public MoveToPawn(L2Character cha, L2Character target, int distance)
+	public MoveToPawn(L2Creature cha, L2Creature target, int distance)
 	{
 		_charObjId = cha.getObjectId();
 		_targetId = target.getObjectId();

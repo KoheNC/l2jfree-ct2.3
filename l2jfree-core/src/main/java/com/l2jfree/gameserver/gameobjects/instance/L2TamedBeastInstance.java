@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -92,7 +92,7 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 		_homeZ = z;
 	}
 	
-	public void setHome(L2Character c)
+	public void setHome(L2Creature c)
 	{
 		setHome(c.getX(), c.getY(), c.getZ());
 	}
@@ -129,7 +129,7 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;
@@ -225,7 +225,7 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 	
 	// Notification triggered by the owner when the owner is attacked.
 	// Tamed mobs will heal/recharge or debuff the enemy according to their skills
-	public void onOwnerGotAttacked(L2Character attacker)
+	public void onOwnerGotAttacked(L2Creature attacker)
 	{
 		// Check if the owner is no longer around...if so, despawn
 		if ((_owner == null) || (_owner.isOnline() == 0))
@@ -302,9 +302,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 	 *   Next, call super.doCast(skill) in order to actually cast the spell
 	 *   Finally, return to auto-following the owner.
 	 * 
-	 * @see com.l2jfree.gameserver.gameobjects.L2Character#doCast(com.l2jfree.gameserver.model.L2Skill)
+	 * @see com.l2jfree.gameserver.gameobjects.L2Creature#doCast(com.l2jfree.gameserver.model.L2Skill)
 	 */
-	protected void sitCastAndFollow(L2Skill skill, L2Character target)
+	protected void sitCastAndFollow(L2Skill skill, L2Creature target)
 	{
 		stopMove(null);
 		broadcastPacket(new StopMove(this));
@@ -345,7 +345,7 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 			{
 				L2Object oldTarget = owner.getTarget();
 				owner.setTarget(_tamedBeast);
-				L2Character[] targets = { _tamedBeast };
+				L2Creature[] targets = { _tamedBeast };
 				
 				// Emulate a call to the owner using food, but bypass all checks for range, etc
 				// this also causes a call to the AI tasks handling feeding, which may call onReceiveFood as required.

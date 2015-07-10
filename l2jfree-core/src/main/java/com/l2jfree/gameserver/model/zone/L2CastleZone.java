@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ClanTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
@@ -35,7 +35,7 @@ public class L2CastleZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		character.setInsideZone(FLAG_CASTLE, true);
 		alertCastle(character, true);
@@ -58,7 +58,7 @@ public class L2CastleZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		character.setInsideZone(FLAG_CASTLE, false);
 		
@@ -68,7 +68,7 @@ public class L2CastleZone extends SiegeableEntityZone
 			((L2PcInstance)character).stopFameTask();
 	}
 	
-	private void alertCastle(L2Character character, boolean entering)
+	private void alertCastle(L2Creature character, boolean entering)
 	{
 		Castle castle = CastleManager.getInstance().getCastleById(_entity.getCastleId());
 		int ownerId = castle.getOwnerId();

@@ -14,11 +14,11 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2ControllableMobAI;
-import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.ControllableMobStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
@@ -63,7 +63,7 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new L2ControllableMobAI(new ControllableAIAcessor());
 	}
@@ -80,7 +80,7 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	protected CharStatus initStatus()
+	protected CreatureStatus initStatus()
 	{
 		return new ControllableMobStatus(this);
 	}
@@ -92,7 +92,7 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	public boolean doDie(L2Character killer)
+	public boolean doDie(L2Creature killer)
 	{
 		if (!super.doDie(killer))
 			return false;

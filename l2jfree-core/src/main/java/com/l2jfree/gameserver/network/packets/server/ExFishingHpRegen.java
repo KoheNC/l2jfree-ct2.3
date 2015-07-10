@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -23,10 +23,10 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ExFishingHpRegen extends L2ServerPacket
 {
 	private static final String _S__FE_28_EXFISHINGHPREGEN = "[S] FE:28 ExFishingHPRegen [dddcccdc]";
-	private final L2Character _activeChar;
+	private final L2Creature _activeChar;
 	private final int _time, _fishHp, _hpMode, _anim, _goodUse, _penalty, _hpBarColor;
 	
-	public ExFishingHpRegen(L2Character character, int time, int fishHp, int HPmode, int GoodUse, int anim,
+	public ExFishingHpRegen(L2Creature character, int time, int fishHp, int HPmode, int GoodUse, int anim,
 			int penalty, int hpBarColor)
 	{
 		_activeChar = character;

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.LoginServerThread;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -209,7 +209,7 @@ public class AdminMenu implements IAdminCommandHandler
 	private void handleKill(L2PcInstance activeChar, String player)
 	{
 		L2Object obj = activeChar.getTarget();
-		L2Character target = (L2Character)obj;
+		L2Creature target = (L2Creature)obj;
 		String filename = "main_menu.htm";
 		if (player != null)
 		{

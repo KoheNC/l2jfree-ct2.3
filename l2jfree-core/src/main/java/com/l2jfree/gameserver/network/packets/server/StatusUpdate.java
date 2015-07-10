@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public final class StatusUpdate extends L2ServerPacket
@@ -71,7 +71,7 @@ public final class StatusUpdate extends L2ServerPacket
 		}
 	}
 	
-	public StatusUpdate(L2Character cha)
+	public StatusUpdate(L2Creature cha)
 	{
 		this(cha.getObjectId());
 	}

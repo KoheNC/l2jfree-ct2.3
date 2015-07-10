@@ -35,7 +35,7 @@ import com.l2jfree.util.LazyFastSet;
 /**
  * @author NB4L1
  */
-public final class PcShots extends CharShots
+public final class PcShots extends CreatureShots
 {
 	private static final Map<Integer, ShotInfo> SHOTS = new HashMap<Integer, ShotInfo>();
 	

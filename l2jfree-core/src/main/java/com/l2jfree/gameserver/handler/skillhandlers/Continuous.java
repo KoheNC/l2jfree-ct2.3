@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
@@ -37,7 +37,7 @@ public class Continuous implements ICubicSkillHandler
 			L2SkillType.AGGDEBUFF, L2SkillType.FUSION };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		L2PcInstance player = null;
 		if (activeChar instanceof L2PcInstance)
@@ -62,7 +62,7 @@ public class Continuous implements ICubicSkillHandler
 				skill = skill2;
 		}
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;
@@ -154,9 +154,9 @@ public class Continuous implements ICubicSkillHandler
 	}
 	
 	@Override
-	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Character... targets)
+	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Creature... targets)
 	{
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;

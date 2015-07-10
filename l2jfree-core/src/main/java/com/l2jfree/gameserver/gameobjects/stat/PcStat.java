@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.stat;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.PetDataTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2ClassMasterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -413,7 +413,7 @@ public class PcStat extends PlayableStat
 	}
 	
 	/**
-	 * Return the RunSpeed (base+modifier) of the L2Character in function of the
+	 * Return the RunSpeed (base+modifier) of the L2Creature in function of the
 	 * Armour Expertise Penalty.
 	 */
 	@Override
@@ -449,7 +449,7 @@ public class PcStat extends PlayableStat
 	}
 	
 	/**
-	 * Return the PAtk Speed (base+modifier) of the L2Character in function of
+	 * Return the PAtk Speed (base+modifier) of the L2Creature in function of
 	 * the Armour Expertise Penalty.
 	 */
 	@Override
@@ -468,7 +468,7 @@ public class PcStat extends PlayableStat
 	}
 	
 	/**
-	 * Return the MAtk Speed (base+modifier) of the L2Character in function of
+	 * Return the MAtk Speed (base+modifier) of the L2Creature in function of
 	 * the Armour Expertise Penalty.
 	 */
 	@Override
@@ -486,9 +486,9 @@ public class PcStat extends PlayableStat
 		return val;
 	}
 	
-	/** Return the Attack Evasion rate (base+modifier) of the L2Character. */
+	/** Return the Attack Evasion rate (base+modifier) of the L2Creature. */
 	@Override
-	public int getEvasionRate(L2Character target)
+	public int getEvasionRate(L2Creature target)
 	{
 		int val = super.getEvasionRate(target);
 		

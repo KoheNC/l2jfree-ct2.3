@@ -28,7 +28,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.cache.HtmCache;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -502,9 +502,9 @@ public final class QuestState
 	
 	/**
 	 * Add player to get notification of characters death
-	 * @param character : L2Character of the character to get notification of death
+	 * @param character : L2Creature of the character to get notification of death
 	 */
-	public void addNotifyOfDeath(L2Character character)
+	public void addNotifyOfDeath(L2Creature character)
 	{
 		if (character == null || !(character instanceof L2PcInstance))
 			return;
@@ -979,12 +979,12 @@ public final class QuestState
 	 * Adds a little randomization in the x y coords
 	 * Return object id of newly spawned npc
 	 */
-	public L2Npc addSpawn(int npcId, L2Character cha)
+	public L2Npc addSpawn(int npcId, L2Creature cha)
 	{
 		return addSpawn(npcId, cha, true, 0);
 	}
 	
-	public L2Npc addSpawn(int npcId, L2Character cha, int despawnDelay)
+	public L2Npc addSpawn(int npcId, L2Creature cha, int despawnDelay)
 	{
 		return addSpawn(npcId, cha.getX(), cha.getY(), cha.getZ(), cha.getHeading(), true, despawnDelay);
 	}
@@ -1001,11 +1001,11 @@ public final class QuestState
 	
 	/**
 	 * Add spawn for player instance
-	 * Inherits coords and heading from specified L2Character instance.
+	 * Inherits coords and heading from specified L2Creature instance.
 	 * It could be either the player, or any killed/attacked mob
 	 * Return object id of newly spawned npc
 	 */
-	public L2Npc addSpawn(int npcId, L2Character cha, boolean randomOffset, int despawnDelay)
+	public L2Npc addSpawn(int npcId, L2Creature cha, boolean randomOffset, int despawnDelay)
 	{
 		return addSpawn(npcId, cha.getX(), cha.getY(), cha.getZ(), cha.getHeading(), randomOffset, despawnDelay);
 	}

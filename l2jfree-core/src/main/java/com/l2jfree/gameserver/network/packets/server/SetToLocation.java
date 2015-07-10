@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -34,7 +34,7 @@ public class SetToLocation extends L2ServerPacket
 	private final int _charObjId;
 	private final int _x, _y, _z, _heading;
 	
-	public SetToLocation(L2Character character)
+	public SetToLocation(L2Creature character)
 	{
 		_charObjId = character.getObjectId();
 		_x = character.getX();

@@ -32,7 +32,7 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
@@ -1079,7 +1079,7 @@ public class MercTicketManager
 	}
 	
 	/**
-	 * This method should only be called from {@link L2ItemInstance#pickupMe(L2Character)}
+	 * This method should only be called from {@link L2ItemInstance#pickupMe(L2Creature)}
 	 * without any additional checks.<BR>
 	 * The item is validated if it is a mercenary ticket and then the position is cleared
 	 * from {@link #_positions} and removed from the database.

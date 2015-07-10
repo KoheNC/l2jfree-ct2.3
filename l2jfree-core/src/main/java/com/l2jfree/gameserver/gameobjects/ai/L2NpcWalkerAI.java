@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcWalkerRoutesTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcWalkerInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2NpcWalkerNode;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 
-public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
+public class L2NpcWalkerAI extends L2CreatureAI implements Runnable
 {
 	private static final class NpcWalkerAiTaskManager extends AbstractIterativePeriodicTaskManager<L2NpcWalkerAI>
 	{
@@ -75,12 +75,12 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 	private int _currentPos;
 	
 	/**
-	 * Constructor of L2CharacterAI.<BR>
+	 * Constructor of L2CreatureAI.<BR>
 	 * <BR>
 	 * 
-	 * @param accessor The AI accessor of the L2Character
+	 * @param accessor The AI accessor of the L2Creature
 	 */
-	public L2NpcWalkerAI(L2Character.AIAccessor accessor)
+	public L2NpcWalkerAI(L2Creature.AIAccessor accessor)
 	{
 		super(accessor);
 		

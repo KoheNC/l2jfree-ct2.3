@@ -32,7 +32,7 @@ import com.l2jfree.util.concurrent.ForEachExecutable;
 /**
  * @author NB4L1
  */
-public final class PcEffects extends CharEffects
+public final class PcEffects extends CreatureEffects
 {
 	protected static final class StoredEffect
 	{

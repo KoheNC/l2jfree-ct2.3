@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -40,7 +40,7 @@ public class L2FlameControlTowerInstance extends L2Npc
 	}
 	
 	@Override
-	public boolean isAutoAttackable(L2Character attacker)
+	public boolean isAutoAttackable(L2Creature attacker)
 	{
 		// Attackable during siege by attacker only
 		return (attacker != null && attacker instanceof L2PcInstance && getCastle() != null

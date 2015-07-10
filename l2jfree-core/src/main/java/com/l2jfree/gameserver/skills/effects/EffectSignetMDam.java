@@ -18,7 +18,7 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
@@ -121,9 +121,9 @@ public final class EffectSignetMDam extends L2Effect
 		
 		caster.rechargeShot();
 		
-		FastList<L2Character> targets = new FastList<L2Character>();
+		FastList<L2Creature> targets = new FastList<L2Creature>();
 		
-		for (L2Character cha : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
+		for (L2Creature cha : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
 		{
 			if (cha == null || cha == caster)
 				continue;
@@ -156,9 +156,9 @@ public final class EffectSignetMDam extends L2Effect
 		
 		if (!targets.isEmpty())
 		{
-			caster.broadcastPacket(new MagicSkillLaunched(caster, getSkill(), targets.toArray(new L2Character[targets
+			caster.broadcastPacket(new MagicSkillLaunched(caster, getSkill(), targets.toArray(new L2Creature[targets
 					.size()])));
-			for (L2Character target : targets)
+			for (L2Creature target : targets)
 			{
 				boolean mcrit = Formulas.calcMCrit(caster.getMCriticalHit(target, getSkill()));
 				byte shld = Formulas.calcShldUse(caster, target, getSkill());

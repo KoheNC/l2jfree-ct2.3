@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.gameobjects.ai;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
-import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.OrfenInstance;
 import com.l2jfree.gameserver.gameobjects.instance.OrfenInstance.Position;
 import com.l2jfree.gameserver.network.packets.server.NpcSay;
@@ -59,7 +59,7 @@ public class OrfenAI extends L2AttackableAI
 	}
 	
 	@Override
-	protected void onEvtAttacked(L2Character attacker)
+	protected void onEvtAttacked(L2Creature attacker)
 	{
 		super.onEvtAttacked(attacker);
 		

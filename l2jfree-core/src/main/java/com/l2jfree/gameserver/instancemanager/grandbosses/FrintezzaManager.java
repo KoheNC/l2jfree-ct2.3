@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
@@ -864,18 +864,18 @@ public class FrintezzaManager extends BossLair
 			{
 				L2Object frintezzaTarget = frintezza.getTarget();
 				
-				if (frintezzaTarget != null && frintezzaTarget instanceof L2Character)
-					callMinionsToAssist(((L2Character)frintezzaTarget), 200);
+				if (frintezzaTarget != null && frintezzaTarget instanceof L2Creature)
+					callMinionsToAssist(((L2Creature)frintezzaTarget), 200);
 				
 				return;
 			}
 			
 			for (L2Object target : _targets)
 			{
-				if (target == null || !(target instanceof L2Character))
+				if (target == null || !(target instanceof L2Creature))
 					continue;
 				
-				L2Character cha = (L2Character)target;
+				L2Creature cha = (L2Creature)target;
 				
 				if (cha.isDead() || cha.isInvul())
 					continue;
@@ -892,9 +892,9 @@ public class FrintezzaManager extends BossLair
 		 * Calculates the music damage according to the current song played
 		 * 
 		 * @param target -
-		 *            L2Character affected by the music
+		 *            L2Creature affected by the music
 		 */
-		private void calculateSongEffects(L2Character target)
+		private void calculateSongEffects(L2Creature target)
 		{
 			if (target == null)
 				return;
@@ -948,9 +948,9 @@ public class FrintezzaManager extends BossLair
 	 * Decreases the HP Regeneration of the <b>target</b>
 	 * 
 	 * @param target
-	 *            L2Character who's HP Regeneration is decreased.
+	 *            L2Creature who's HP Regeneration is decreased.
 	 */
-	private void decreaseEffectOfHpReg(L2Character target)
+	private void decreaseEffectOfHpReg(L2Creature target)
 	{
 		L2Skill skill = SkillTable.getInstance().getInfo(5008, 4);
 		
@@ -974,10 +974,10 @@ public class FrintezzaManager extends BossLair
 	 * @param skill
 	 *            L2Skill to calculate it's duration
 	 * @param target
-	 *            L2Character to calculate the duration on it
+	 *            L2Creature to calculate the duration on it
 	 * @return int value of skill duration before exit
 	 */
-	private int getDebuffPeriod(L2Skill skill, L2Character target)
+	private int getDebuffPeriod(L2Skill skill, L2Creature target)
 	{
 		// This is usually returned, unless _debuffPeriod needs initialization
 		if (_debuffPeriod != 0)
@@ -1040,9 +1040,9 @@ public class FrintezzaManager extends BossLair
 	 */
 	private class exitDecreaseRegHp implements Runnable
 	{
-		private final L2Character _char;
+		private final L2Creature _char;
 		
-		public exitDecreaseRegHp(L2Character character)
+		public exitDecreaseRegHp(L2Creature character)
 		{
 			_char = character;
 		}
@@ -1063,11 +1063,11 @@ public class FrintezzaManager extends BossLair
 	
 	private class startStunDanceEffect implements Runnable
 	{
-		private final L2Character _effected;
+		private final L2Creature _effected;
 		
 		private final L2Skill _skill;
 		
-		public startStunDanceEffect(L2Character target, L2Skill skill)
+		public startStunDanceEffect(L2Creature target, L2Skill skill)
 		{
 			_effected = target;
 			_skill = skill;
@@ -1132,9 +1132,9 @@ public class FrintezzaManager extends BossLair
 	 */
 	private class exitStunDanceEffect implements Runnable
 	{
-		private final L2Character _effected;
+		private final L2Creature _effected;
 		
-		public exitStunDanceEffect(L2Character target)
+		public exitStunDanceEffect(L2Creature target)
 		{
 			_effected = target;
 		}
@@ -1203,11 +1203,11 @@ public class FrintezzaManager extends BossLair
 	 */
 	private class attackerListener implements Runnable
 	{
-		private final L2Character _mob;
+		private final L2Creature _mob;
 		
 		private final int _aggroDamage;
 		
-		public attackerListener(L2Character controller, int hate)
+		public attackerListener(L2Creature controller, int hate)
 		{
 			_mob = controller;
 			_aggroDamage = hate;
@@ -1267,20 +1267,20 @@ public class FrintezzaManager extends BossLair
 			// Tell the other mobs "I'm attacked"
 			L2Object target = _mob.getTarget();
 			
-			if (target == null || (target instanceof L2Character && ((L2Character)target).isDead()))
+			if (target == null || (target instanceof L2Creature && ((L2Creature)target).isDead()))
 				return;
 			
 			/*
 			 * if (target instanceof L2PcInstance && (((L2PcInstance)target).isInvul() || ((L2PcInstance)target).getAppearance().getInvisible())) {
 			 * _mob.abortAttack(); _mob.abortCast(); _mob.setTarget(null); _mob.getKnownList().getKnownPlayers().remove((L2PcInstance)target); return; }
 			 */
-			if (target instanceof L2Character)
-				callMinionsToAssist((L2Character)target, _aggroDamage);
+			if (target instanceof L2Creature)
+				callMinionsToAssist((L2Creature)target, _aggroDamage);
 			
 			// Now set the mob's Target to the most hated:
 			if (_mob instanceof L2Attackable)
 			{
-				L2Character mostHated = ((L2Attackable)_mob).getMostHated();
+				L2Creature mostHated = ((L2Attackable)_mob).getMostHated();
 				
 				if (mostHated != null)
 				{
@@ -1375,7 +1375,7 @@ public class FrintezzaManager extends BossLair
 	 * @param hate - Damage hate to add to the attacker 1. Frintezza adds 200 hate 2. Weak Scarlet adds 100 hate 3. Stronger Scarlet adds 125 hate 4.
 	 *            Strongest Scarlet adds 150 hate 5. Portraits adds 50 hate 6. Demons adds 1 hate
 	 */
-	public void callMinionsToAssist(L2Character attacker, int hate)
+	public void callMinionsToAssist(L2Creature attacker, int hate)
 	{
 		if (attacker == null)
 			return;
@@ -1532,7 +1532,7 @@ public class FrintezzaManager extends BossLair
 			_mob.getStatus().setCurrentMp(_mob.getMaxMp());
 			_mob.spawnMe();
 			
-			L2Character target = getRandomPlayer();
+			L2Creature target = getRandomPlayer();
 			_mob.setTarget(target);
 			
 			L2CharPosition pos = new L2CharPosition(target.getX(), target.getY(), target.getZ(), 0);
@@ -1643,13 +1643,13 @@ public class FrintezzaManager extends BossLair
 	 * Receives a target and a list of players in _playersInLair that should target this target
 	 * 
 	 * @param target
-	 *            L2Character
+	 *            L2Creature
 	 * @param targeted
 	 *            boolean[]
 	 * @return void
 	 */
 	
-	private void setTargeted(L2Character target, boolean[] targeted)
+	private void setTargeted(L2Creature target, boolean[] targeted)
 	{
 		int count = 0;
 		
@@ -1695,12 +1695,12 @@ public class FrintezzaManager extends BossLair
 	}
 	
 	/**
-	 * Sets a L2Character to idle state. Disables all skills, aborts attack and cast, immoblizies
+	 * Sets a L2Creature to idle state. Disables all skills, aborts attack and cast, immoblizies
 	 * 
 	 * @param target
-	 *            L2Character
+	 *            L2Creature
 	 */
-	public void setIdle(L2Character target)
+	public void setIdle(L2Creature target)
 	{
 		target.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		target.abortAttack();
@@ -1773,7 +1773,7 @@ public class FrintezzaManager extends BossLair
 	
 	private class doSkill implements Runnable
 	{
-		private final L2Character _caster;
+		private final L2Creature _caster;
 		private final L2Skill _skill;
 		private final int _interval, _range;
 		
@@ -1790,7 +1790,7 @@ public class FrintezzaManager extends BossLair
 		 *            the range minimum to teleport
 		 */
 		
-		public doSkill(L2Character caster, L2Skill skill, int interval, int range)
+		public doSkill(L2Creature caster, L2Skill skill, int interval, int range)
 		{
 			_caster = caster;
 			_skill = skill;
@@ -1810,7 +1810,7 @@ public class FrintezzaManager extends BossLair
 				
 				L2Object tempTarget = _caster.getTarget();
 				
-				if (tempTarget == null || !(tempTarget instanceof L2Character))
+				if (tempTarget == null || !(tempTarget instanceof L2Creature))
 					tempTarget = _caster;
 				
 				int x = tempTarget.getX() + Rnd.get(_range) - _range / 2, y =
@@ -1823,7 +1823,7 @@ public class FrintezzaManager extends BossLair
 					// Returns a list of the players that targeted the _caster
 					boolean[] targeted = getTargeted(_caster);
 					
-					_caster.broadcastPacket(new MagicSkillUse(_caster, ((L2Character)tempTarget), _skill.getId(),
+					_caster.broadcastPacket(new MagicSkillUse(_caster, ((L2Creature)tempTarget), _skill.getId(),
 							_skill.getLevel(), 0, 0), 10000);
 					_caster.decayMe();
 					_caster.getPosition().setXYZ(x, y, z);

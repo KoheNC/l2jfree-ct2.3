@@ -61,7 +61,7 @@ import com.l2jfree.gameserver.templates.StatsSet;
  * 
  * @version $Revision: 1.1.2.4 $ $Date: 2005/04/02 15:57:51 $
  */
-public final class L2NpcTemplate extends L2CharTemplate
+public final class L2NpcTemplate extends L2CreatureTemplate
 {
 	/**
 	 * Logger
@@ -213,7 +213,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	}
 	
 	/**
-	 * Constructor of L2Character.<BR>
+	 * Constructor of L2Creature.<BR>
 	 * 
 	 * @param set The StatsSet object to transfer data to the method
 	 * @throws ClassNotFoundException

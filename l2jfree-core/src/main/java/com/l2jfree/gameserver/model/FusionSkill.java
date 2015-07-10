@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model;
 import java.util.concurrent.Future;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.skills.effects.EffectFusion;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillFusion;
@@ -28,18 +28,18 @@ import com.l2jfree.gameserver.util.Util;
  */
 public final class FusionSkill implements Runnable
 {
-	private final L2Character _caster;
-	private final L2Character _target;
+	private final L2Creature _caster;
+	private final L2Creature _target;
 	private final L2SkillFusion _skill;
 	
 	private final Future<?> _geoCheckTask;
 	
-	public L2Character getTarget()
+	public L2Creature getTarget()
 	{
 		return _target;
 	}
 	
-	public FusionSkill(L2Character caster, L2Character target, L2SkillFusion skill)
+	public FusionSkill(L2Creature caster, L2Creature target, L2SkillFusion skill)
 	{
 		_caster = caster;
 		_target = target;

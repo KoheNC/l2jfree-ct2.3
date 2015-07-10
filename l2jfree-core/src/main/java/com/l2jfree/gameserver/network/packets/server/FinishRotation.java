@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -29,7 +29,7 @@ public class FinishRotation extends L2ServerPacket
 	private final int _heading;
 	private final int _charObjId;
 	
-	public FinishRotation(L2Character cha)
+	public FinishRotation(L2Creature cha)
 	{
 		_charObjId = cha.getObjectId();
 		_heading = cha.getHeading();

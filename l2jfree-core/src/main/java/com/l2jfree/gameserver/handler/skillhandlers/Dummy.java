@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
@@ -24,7 +24,7 @@ public class Dummy implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.DUMMY };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 	}
 	

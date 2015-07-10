@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2Effect;
@@ -42,7 +42,7 @@ public final class EffectWarp extends L2Effect
 {
 	private int x, y, z;
 	
-	private L2Character _actor;
+	private L2Creature _actor;
 	
 	public EffectWarp(Env env, EffectTemplate template)
 	{

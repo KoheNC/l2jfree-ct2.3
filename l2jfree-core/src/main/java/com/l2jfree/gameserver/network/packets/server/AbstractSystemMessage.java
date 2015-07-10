@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import java.util.Arrays;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -346,7 +346,7 @@ public abstract class AbstractSystemMessage<T extends AbstractSystemMessage> ext
 		return (T)this;
 	}
 	
-	public T addCharName(L2Character cha)
+	public T addCharName(L2Creature cha)
 	{
 		if (checkNPE(cha))
 			return (T)this;

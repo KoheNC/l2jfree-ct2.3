@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2World;
@@ -34,9 +34,9 @@ public class AdminHeal implements IAdminCommandHandler
 	{
 		if (command.equals("admin_heal"))
 		{
-			if (activeChar.getTarget() instanceof L2Character)
+			if (activeChar.getTarget() instanceof L2Creature)
 			{
-				handleHeal((L2Character)activeChar.getTarget());
+				handleHeal((L2Creature)activeChar.getTarget());
 			}
 		}
 		else if (command.startsWith("admin_heal"))
@@ -48,7 +48,7 @@ public class AdminHeal implements IAdminCommandHandler
 				try
 				{
 					int radius = Integer.parseInt(val);
-					for (L2Character cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
+					for (L2Creature cha : activeChar.getKnownList().getKnownCharactersInRadius(radius))
 					{
 						handleHeal(cha);
 					}
@@ -75,7 +75,7 @@ public class AdminHeal implements IAdminCommandHandler
 		return ADMIN_COMMANDS;
 	}
 	
-	private void handleHeal(L2Character target)
+	private void handleHeal(L2Creature target)
 	{
 		target.getStatus().setCurrentHpMp(target.getMaxHp(), target.getMaxMp());
 		if (target instanceof L2PcInstance)

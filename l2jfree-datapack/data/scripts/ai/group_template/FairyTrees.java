@@ -16,7 +16,7 @@ package ai.group_template;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -44,7 +44,7 @@ public class FairyTrees extends L2AttackableAIScript
 			{
 				L2Attackable newNpc =
 						(L2Attackable)addSpawn(27189, npc.getX(), npc.getY(), npc.getZ(), 0, false, 30000);
-				L2Character originalKiller = isPet ? killer.getPet() : killer;
+				L2Creature originalKiller = isPet ? killer.getPet() : killer;
 				newNpc.setRunning();
 				newNpc.addDamageHate(originalKiller, 0, 999);
 				newNpc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalKiller);

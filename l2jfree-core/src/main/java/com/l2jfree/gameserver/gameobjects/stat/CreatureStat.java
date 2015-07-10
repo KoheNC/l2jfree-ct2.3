@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
 import com.l2jfree.gameserver.model.Elementals;
@@ -30,20 +30,20 @@ import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.gameserver.templates.item.L2WeaponType;
 
-public class CharStat
+public class CreatureStat
 {
-	protected final static Log _log = LogFactory.getLog(CharStat.class);
+	protected final static Log _log = LogFactory.getLog(CreatureStat.class);
 	
 	// =========================================================
 	// Data Field
-	protected final L2Character _activeChar;
+	protected final L2Creature _activeChar;
 	private long _exp = 0;
 	private int _sp = 0;
 	private byte _level = 1;
 	
 	// =========================================================
 	// Constructor
-	public CharStat(L2Character activeChar)
+	public CreatureStat(L2Creature activeChar)
 	{
 		_activeChar = activeChar;
 	}
@@ -52,12 +52,12 @@ public class CharStat
 	// Method - Public
 	/**
 	 * Calculate the new value of the state with modifiers that will be applied
-	 * on the targeted L2Character.<BR>
+	 * on the targeted L2Creature.<BR>
 	 * <BR>
 	 * 
 	 * <B><U> Concept</U> :</B><BR>
 	 * <BR>
-	 * A L2Character owns a table of Calculators called <B>_calculators</B>.
+	 * A L2Creature owns a table of Calculators called <B>_calculators</B>.
 	 * Each Calculator (a calculator per state) own a table of Func object. A
 	 * Func object is a mathematic function that permit to calculate the
 	 * modifier of a state (ex : REGENERATE_HP_RATE...) : <BR>
@@ -81,7 +81,7 @@ public class CharStat
 	 *            (ex : Level...)
 	 * 
 	 */
-	public final double calcStat(Stats stat, double init, L2Character target, L2Skill skill)
+	public final double calcStat(Stats stat, double init, L2Creature target, L2Skill skill)
 	{
 		int id = stat.ordinal();
 		
@@ -134,7 +134,7 @@ public class CharStat
 	// =========================================================
 	// Property - Public
 	/**
-	 * Return the Accuracy (base+modifier) of the L2Character in function of the
+	 * Return the Accuracy (base+modifier) of the L2Creature in function of the
 	 * Weapon Expertise Penalty.
 	 */
 	public int getAccuracy()
@@ -142,13 +142,13 @@ public class CharStat
 		return (int)(calcStat(Stats.ACCURACY_COMBAT, 0, null, null)/* / _activeChar.getWeaponExpertisePenalty()*/);
 	}
 	
-	public L2Character getActiveChar()
+	public L2Creature getActiveChar()
 	{
 		return _activeChar;
 	}
 	
 	/**
-	 * Return the Attack Speed multiplier (base+modifier) of the L2Character to
+	 * Return the Attack Speed multiplier (base+modifier) of the L2Creature to
 	 * get proper animations.
 	 */
 	public final float getAttackSpeedMultiplier()
@@ -156,14 +156,14 @@ public class CharStat
 		return (float)((1.1) * getPAtkSpd() / _activeChar.getTemplate().getBasePAtkSpd());
 	}
 	
-	/** Return the CON of the L2Character (base+modifier). */
+	/** Return the CON of the L2Creature (base+modifier). */
 	public final int getCON()
 	{
 		return (int)calcStat(Stats.STAT_CON, _activeChar.getTemplate().getBaseCON(), null, null);
 	}
 	
-	/** Return the Critical Hit rate (base+modifier) of the L2Character. */
-	public int getCriticalHit(L2Character target)
+	/** Return the Critical Hit rate (base+modifier) of the L2Creature. */
+	public int getCriticalHit(L2Creature target)
 	{
 		int criticalHit = (int)calcStat(Stats.CRITICAL_RATE, _activeChar.getTemplate().getBaseCritRate(), target, null);
 		
@@ -174,14 +174,14 @@ public class CharStat
 		return criticalHit;
 	}
 	
-	/** Return the DEX of the L2Character (base+modifier). */
+	/** Return the DEX of the L2Creature (base+modifier). */
 	public final int getDEX()
 	{
 		return (int)calcStat(Stats.STAT_DEX, _activeChar.getTemplate().getBaseDEX(), null, null);
 	}
 	
-	/** Return the Attack Evasion rate (base+modifier) of the L2Character. */
-	public int getEvasionRate(L2Character target)
+	/** Return the Attack Evasion rate (base+modifier) of the L2Creature. */
+	public int getEvasionRate(L2Creature target)
 	{
 		int val = (int)(calcStat(Stats.EVASION_RATE, 0, target, null)/* / _activeChar.getArmourExpertisePenalty()*/);
 		
@@ -198,7 +198,7 @@ public class CharStat
 		_exp = value;
 	}
 	
-	/** Return the INT of the L2Character (base+modifier). */
+	/** Return the INT of the L2Creature (base+modifier). */
 	public int getINT()
 	{
 		return (int)calcStat(Stats.STAT_INT, _activeChar.getTemplate().getBaseINT(), null, null);
@@ -214,7 +214,7 @@ public class CharStat
 		_level = value;
 	}
 	
-	/** Return the Magical Attack range (base+modifier) of the L2Character. */
+	/** Return the Magical Attack range (base+modifier) of the L2Creature. */
 	public final int getMagicalAttackRange(L2Skill skill)
 	{
 		if (skill != null)
@@ -239,7 +239,7 @@ public class CharStat
 	}
 	
 	/**
-	 * Return the MAtk (base+modifier) of the L2Character for a skill used in
+	 * Return the MAtk (base+modifier) of the L2Creature for a skill used in
 	 * function of abnormal effects in progress.<BR>
 	 * <BR>
 	 * 
@@ -248,20 +248,20 @@ public class CharStat
 	 * <li>Calculate Magic damage</li> <BR>
 	 * <BR>
 	 * 
-	 * @param target The L2Character targeted by the skill
+	 * @param target The L2Creature targeted by the skill
 	 * @param skill The L2Skill used against the target
 	 */
-	public int getMAtk(L2Character target, L2Skill skill)
+	public int getMAtk(L2Creature target, L2Skill skill)
 	{
 		float bonusAtk = 1;
 		if (_activeChar.isChampion())
 			bonusAtk = Config.CHAMPION_ATK;
 		
-		// Get the base MAtk of the L2Character
+		// Get the base MAtk of the L2Creature
 		double attack = _activeChar.getTemplate().getBaseMAtk() * bonusAtk;
 		
 		// Get the skill type to calculate its effect in function of base stats
-		// of the L2Character target
+		// of the L2Creature target
 		/*
 		 * Stats stat = skill == null ? null : skill.getStat();
 		 * 
@@ -293,7 +293,7 @@ public class CharStat
 	}
 	
 	/**
-	 * Return the MAtk Speed (base+modifier) of the L2Character in function of
+	 * Return the MAtk Speed (base+modifier) of the L2Creature in function of
 	 * the Armour Expertise Penalty.
 	 */
 	public int getMAtkSpd()
@@ -309,8 +309,8 @@ public class CharStat
 		return val;
 	}
 	
-	/** Return the Magic Critical Hit rate (base+modifier) of the L2Character. */
-	public final int getMCriticalHit(L2Character target, L2Skill skill)
+	/** Return the Magic Critical Hit rate (base+modifier) of the L2Creature. */
+	public final int getMCriticalHit(L2Creature target, L2Skill skill)
 	{
 		double mrate = calcStat(Stats.MCRITICAL_RATE, _activeChar.getTemplate().getBaseMCritRate(), target, skill);
 		
@@ -322,7 +322,7 @@ public class CharStat
 	}
 	
 	/**
-	 * Return the MDef (base+modifier) of the L2Character against a skill in
+	 * Return the MDef (base+modifier) of the L2Creature against a skill in
 	 * function of abnormal effects in progress.<BR>
 	 * <BR>
 	 * 
@@ -331,12 +331,12 @@ public class CharStat
 	 * <li>Calculate Magic damage</li> <BR>
 	 * <BR>
 	 * 
-	 * @param target The L2Character targeted by the skill
+	 * @param target The L2Creature targeted by the skill
 	 * @param skill The L2Skill used against the target
 	 */
-	public int getMDef(L2Character target, L2Skill skill)
+	public int getMDef(L2Creature target, L2Skill skill)
 	{
-		// Get the base MAtk of the L2Character
+		// Get the base MAtk of the L2Creature
 		double defence = _activeChar.getTemplate().getBaseMDef();
 		
 		// Calculate modifier for Raid Bosses
@@ -347,7 +347,7 @@ public class CharStat
 		return (int)calcStat(Stats.MAGIC_DEFENCE, defence, target, skill);
 	}
 	
-	/** Return the MEN of the L2Character (base+modifier). */
+	/** Return the MEN of the L2Creature (base+modifier). */
 	public final int getMEN()
 	{
 		return (int)calcStat(Stats.STAT_MEN, _activeChar.getTemplate().getBaseMEN(), null, null);
@@ -365,7 +365,7 @@ public class CharStat
 	
 	/**
 	 * Return the RunSpeed (base+modifier) or WalkSpeed (base+modifier) of the
-	 * L2Character in function of the movement type.
+	 * L2Creature in function of the movement type.
 	 */
 	public final float getMoveSpeed()
 	{
@@ -380,20 +380,20 @@ public class CharStat
 		return getWalkSpeed();
 	}
 	
-	/** Return the MReuse rate (base+modifier) of the L2Character. */
+	/** Return the MReuse rate (base+modifier) of the L2Creature. */
 	public final double getMReuseRate(L2Skill skill)
 	{
 		return calcStat(Stats.MAGIC_REUSE_RATE, _activeChar.getTemplate().getBaseMReuseRate(), null, skill);
 	}
 	
-	/** Return the PReuse rate (base+modifier) of the L2Character. */
+	/** Return the PReuse rate (base+modifier) of the L2Creature. */
 	public final double getPReuseRate(L2Skill skill)
 	{
 		return calcStat(Stats.PHYS_REUSE_RATE, _activeChar.getTemplate().getBaseMReuseRate(), null, skill);
 	}
 	
-	/** Return the PAtk (base+modifier) of the L2Character. */
-	public int getPAtk(L2Character target)
+	/** Return the PAtk (base+modifier) of the L2Creature. */
+	public int getPAtk(L2Creature target)
 	{
 		float bonusAtk = 1;
 		if (_activeChar.isChampion())
@@ -402,13 +402,13 @@ public class CharStat
 		return (int)calcStat(Stats.POWER_ATTACK, _activeChar.getTemplate().getBasePAtk() * bonusAtk, target, null);
 	}
 	
-	public final double getMul(Stats stat, L2Character target)
+	public final double getMul(Stats stat, L2Creature target)
 	{
 		return calcStat(stat, 1, target, null);
 	}
 	
 	/**
-	 * Return the PAtk Speed (base+modifier) of the L2Character in function of
+	 * Return the PAtk Speed (base+modifier) of the L2Creature in function of
 	 * the Armour Expertise Penalty.
 	 */
 	public int getPAtkSpd()
@@ -424,14 +424,14 @@ public class CharStat
 		return val;
 	}
 	
-	/** Return the PDef (base+modifier) of the L2Character. */
-	public int getPDef(L2Character target)
+	/** Return the PDef (base+modifier) of the L2Creature. */
+	public int getPDef(L2Creature target)
 	{
 		return (int)calcStat(Stats.POWER_DEFENCE, (_activeChar.isRaid()) ? _activeChar.getTemplate().getBasePDef()
 				* Config.RAID_PDEFENCE_MULTIPLIER : _activeChar.getTemplate().getBasePDef(), target, null);
 	}
 	
-	/** Return the Physical Attack range (base+modifier) of the L2Character. */
+	/** Return the Physical Attack range (base+modifier) of the L2Creature. */
 	public final int getPhysicalAttackRange()
 	{
 		// Polearm handled here for now. Basically L2PcInstance could have a function
@@ -443,7 +443,7 @@ public class CharStat
 	}
 	
 	/**
-	 * Return the RunSpeed (base+modifier) of the L2Character in function of the
+	 * Return the RunSpeed (base+modifier) of the L2Creature in function of the
 	 * Armour Expertise Penalty.
 	 */
 	public int getRunSpeed()
@@ -463,7 +463,7 @@ public class CharStat
 		return _activeChar.getTemplate().getBaseRunSpd();
 	}
 	
-	/** Return the ShieldDef rate (base+modifier) of the L2Character. */
+	/** Return the ShieldDef rate (base+modifier) of the L2Creature. */
 	public final int getShldDef()
 	{
 		return (int)calcStat(Stats.SHIELD_DEFENCE, 0, null, null);
@@ -479,13 +479,13 @@ public class CharStat
 		_sp = value;
 	}
 	
-	/** Return the STR of the L2Character (base+modifier). */
+	/** Return the STR of the L2Creature (base+modifier). */
 	public final int getSTR()
 	{
 		return (int)calcStat(Stats.STAT_STR, _activeChar.getTemplate().getBaseSTR(), null, null);
 	}
 	
-	/** Return the WalkSpeed (base+modifier) of the L2Character. */
+	/** Return the WalkSpeed (base+modifier) of the L2Creature. */
 	public int getWalkSpeed()
 	{
 		double baseWalkSpd = _activeChar.getTemplate().getBaseWalkSpd();
@@ -496,7 +496,7 @@ public class CharStat
 		return (int)calcStat(Stats.WALK_SPEED, baseWalkSpd, null, null);
 	}
 	
-	/** Return the WIT of the L2Character (base+modifier). */
+	/** Return the WIT of the L2Creature (base+modifier). */
 	public final int getWIT()
 	{
 		return (int)calcStat(Stats.STAT_WIT, _activeChar.getTemplate().getBaseWIT(), null, null);

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.skillhandlers;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -33,7 +33,7 @@ public class LearnSkill implements ISkillHandler
 	}
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill0, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill0, L2Creature... targets)
 	{
 		L2SkillLearnSkill skill = (L2SkillLearnSkill)skill0;
 		

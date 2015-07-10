@@ -35,7 +35,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -376,7 +376,7 @@ public class Quest extends ManagedScript
 		return showResult(attacker, res);
 	}
 	
-	public final boolean notifyDeath(L2Character killer, L2Character victim, QuestState qs)
+	public final boolean notifyDeath(L2Creature killer, L2Creature victim, QuestState qs)
 	{
 		String res = null;
 		try
@@ -589,7 +589,7 @@ public class Quest extends ManagedScript
 		return showResult(player, res);
 	}
 	
-	public final boolean notifyEnterZone(L2Character character, L2Zone zone)
+	public final boolean notifyEnterZone(L2Creature character, L2Zone zone)
 	{
 		L2PcInstance player = character.getActingPlayer();
 		String res = null;
@@ -607,7 +607,7 @@ public class Quest extends ManagedScript
 		return true;
 	}
 	
-	public final boolean notifyExitZone(L2Character character, L2Zone zone)
+	public final boolean notifyExitZone(L2Creature character, L2Zone zone)
 	{
 		L2PcInstance player = character.getActingPlayer();
 		String res = null;
@@ -625,7 +625,7 @@ public class Quest extends ManagedScript
 		return true;
 	}
 	
-	public final boolean notifyMoveFinished(L2Character character)
+	public final boolean notifyMoveFinished(L2Creature character)
 	{
 		L2PcInstance player = character.getActingPlayer();
 		String res = null;
@@ -665,7 +665,7 @@ public class Quest extends ManagedScript
 		return onAttack(npc, attacker, damage, isPet);
 	}
 	
-	public String onDeath(L2Character killer, L2Character victim, QuestState qs)
+	public String onDeath(L2Creature killer, L2Creature victim, QuestState qs)
 	{
 		if (killer instanceof L2Npc)
 			return onAdvEvent("", (L2Npc)killer, qs.getPlayer());
@@ -770,17 +770,17 @@ public class Quest extends ManagedScript
 		return null;
 	}
 	
-	public String onEnterZone(L2Character character, L2Zone zone)
+	public String onEnterZone(L2Creature character, L2Zone zone)
 	{
 		return null;
 	}
 	
-	public String onExitZone(L2Character character, L2Zone zone)
+	public String onExitZone(L2Creature character, L2Zone zone)
 	{
 		return null;
 	}
 	
-	public String onArrived(L2Character character)
+	public String onArrived(L2Creature character)
 	{
 		return null;
 	}
@@ -1589,13 +1589,13 @@ public class Quest extends ManagedScript
 	 * Add a temporary (quest) spawn
 	 * Return instance of newly spawned npc
 	 */
-	public L2Npc addSpawn(int npcId, L2Character cha)
+	public L2Npc addSpawn(int npcId, L2Creature cha)
 	{
 		return addSpawn(npcId, cha.getX(), cha.getY(), cha.getZ(), cha.getHeading(), false, 0, false,
 				cha.getInstanceId());
 	}
 	
-	public L2Npc addSpawn(int npcId, L2Character cha, boolean isSummonSpawn)
+	public L2Npc addSpawn(int npcId, L2Creature cha, boolean isSummonSpawn)
 	{
 		return addSpawn(npcId, cha.getX(), cha.getY(), cha.getZ(), cha.getHeading(), false, 0, isSummonSpawn,
 				cha.getInstanceId());

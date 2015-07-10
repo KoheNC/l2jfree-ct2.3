@@ -23,7 +23,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.gameserver.datatables.HeroSkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
@@ -61,7 +61,7 @@ public class Disablers implements ICubicSkillHandler
 			L2SkillType.STEAL_BUFF };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		L2SkillType type = skill.getSkillType();
 		
@@ -100,7 +100,7 @@ public class Disablers implements ICubicSkillHandler
 			ss = true;
 		}
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;
@@ -546,14 +546,14 @@ public class Disablers implements ICubicSkillHandler
 	}
 	
 	@Override
-	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Character... targets)
+	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Creature... targets)
 	{
 		if (_log.isDebugEnabled())
 			_log.info("Disablers: useCubicSkill()");
 		
 		L2SkillType type = skill.getSkillType();
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			if (target == null)
 				continue;
@@ -619,12 +619,12 @@ public class Disablers implements ICubicSkillHandler
 		}
 	}
 	
-	private int negateEffect(L2Character target, L2SkillType type, double negateLvl, L2Skill skill)
+	private int negateEffect(L2Creature target, L2SkillType type, double negateLvl, L2Skill skill)
 	{
 		return negateEffect(target, type, negateLvl, 0, skill);
 	}
 	
-	private int negateEffect(L2Character target, L2SkillType type, double negateLvl, int skillId, L2Skill skill)
+	private int negateEffect(L2Creature target, L2SkillType type, double negateLvl, int skillId, L2Skill skill)
 	{
 		int maxNegatedEffects = skill.getMaxNegatedEffects();
 		L2Effect[] effects = target.getAllEffects();
@@ -699,7 +699,7 @@ public class Disablers implements ICubicSkillHandler
 		return (maxNegatedEffects <= 0) ? count + 2 : count;
 	}
 	
-	private void stealEffects(L2Character stealer, L2Character stolen, List<L2Effect> stolenEffects)
+	private void stealEffects(L2Creature stealer, L2Creature stolen, List<L2Effect> stolenEffects)
 	{
 		for (L2Effect eff : stolenEffects)
 		{

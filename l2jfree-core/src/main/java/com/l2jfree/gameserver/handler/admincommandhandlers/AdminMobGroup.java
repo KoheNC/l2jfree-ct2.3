@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
@@ -63,9 +63,9 @@ public class AdminMobGroup implements IAdminCommandHandler
 			attackGrp(command, activeChar);
 		else if (command.startsWith("admin_mobgroup_attack"))
 		{
-			if (activeChar.getTarget() instanceof L2Character)
+			if (activeChar.getTarget() instanceof L2Creature)
 			{
-				L2Character target = (L2Character)activeChar.getTarget();
+				L2Creature target = (L2Creature)activeChar.getTarget();
 				attack(command, activeChar, target);
 			}
 		}
@@ -163,7 +163,7 @@ public class AdminMobGroup implements IAdminCommandHandler
 		group.setAttackRandom();
 	}
 	
-	private void attack(String command, L2PcInstance activeChar, L2Character target)
+	private void attack(String command, L2PcInstance activeChar, L2Creature target)
 	{
 		int groupId;
 		try
@@ -184,7 +184,7 @@ public class AdminMobGroup implements IAdminCommandHandler
 		group.setAttackTarget(target);
 	}
 	
-	private void follow(String command, L2PcInstance activeChar, L2Character target)
+	private void follow(String command, L2PcInstance activeChar, L2Creature target)
 	{
 		int groupId;
 		try

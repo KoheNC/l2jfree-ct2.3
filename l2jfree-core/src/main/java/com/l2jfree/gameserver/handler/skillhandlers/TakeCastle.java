@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.skillhandlers;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2ArtefactInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
@@ -32,7 +32,7 @@ public class TakeCastle implements ISkillHandler
 	private static final L2SkillType[] SKILL_IDS = { L2SkillType.TAKECASTLE };
 	
 	@Override
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (!(activeChar instanceof L2PcInstance))
 			return;
@@ -59,10 +59,10 @@ public class TakeCastle implements ISkillHandler
 	/**
 	 * Return true if character clan place a flag<BR><BR>
 	 * 
-	 * @param activeChar The L2Character of the character placing the flag
+	 * @param activeChar The L2Creature of the character placing the flag
 	 * 
 	 */
-	public static boolean checkIfOkToCastSealOfRule(L2Character activeChar)
+	public static boolean checkIfOkToCastSealOfRule(L2Creature activeChar)
 	{
 		return SiegeManager.getInstance().checkIfOkToCastSealOfRule(activeChar,
 				CastleManager.getInstance().getCastle(activeChar));

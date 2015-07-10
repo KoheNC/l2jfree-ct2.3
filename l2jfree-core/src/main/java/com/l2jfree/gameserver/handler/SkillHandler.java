@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.skillhandlers.BalanceLife;
@@ -138,7 +138,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 		registerAll(handler, handler.getSkillIds());
 	}
 	
-	public void useSkill(L2SkillType skillType, L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2SkillType skillType, L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		final ISkillHandler handler = get(skillType);
 		
@@ -148,14 +148,14 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 			skill.useSkill(activeChar, targets);
 	}
 	
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (activeChar.isAlikeDead())
 			return;
 		
 		useSkill(skill.getSkillType(), activeChar, skill, targets);
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			Formulas.calcLethalHit(activeChar, target, skill);
 		}
@@ -173,7 +173,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 			activeChar.doDie(activeChar);
 	}
 	
-	public void useCubicSkill(L2CubicInstance cubic, L2Skill skill, L2Character... targets)
+	public void useCubicSkill(L2CubicInstance cubic, L2Skill skill, L2Creature... targets)
 	{
 		final ISkillHandler handler = get(skill.getSkillType());
 		
@@ -187,7 +187,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 			skill.useSkill(cubic.getOwner(), targets);
 	}
 	
-	public boolean checkConditions(L2Character activeChar, L2Skill skill)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
 		final ISkillHandler handler = get(skill.getSkillType());
 		
@@ -197,7 +197,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 		return true;
 	}
 	
-	public boolean checkConditions(L2Character activeChar, L2Skill skill, L2Character target)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill, L2Creature target)
 	{
 		final ISkillHandler handler = get(skill.getSkillType());
 		

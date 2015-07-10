@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 
 /**
@@ -22,10 +22,10 @@ import com.l2jfree.gameserver.model.L2Skill;
  */
 public final class Env
 {
-	public L2Character player;
+	public L2Creature player;
 	//	Disabled until it's really used...
 	//	public L2CubicInstance	cubic;
-	public L2Character target;
+	public L2Creature target;
 	//	Disabled until it's really used...
 	//	public L2ItemInstance	item;
 	public L2Skill skill;

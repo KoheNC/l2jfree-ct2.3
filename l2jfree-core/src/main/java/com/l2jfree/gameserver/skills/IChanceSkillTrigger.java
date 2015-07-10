@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.skills;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 
 /**
@@ -30,7 +30,7 @@ public interface IChanceSkillTrigger
 	/**
 	 * Triggered skill
 	 */
-	public L2Skill getChanceTriggeredSkill(L2Character activeChar, L2Character evtInitiator);
+	public L2Skill getChanceTriggeredSkill(L2Creature activeChar, L2Creature evtInitiator);
 	
 	/**
 	 * Chance condition object

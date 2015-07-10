@@ -25,7 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfoPacketList;
@@ -36,22 +36,22 @@ import com.l2jfree.util.ObjectPool;
 /**
  * @author NB4L1
  */
-public class CharEffects
+public class CreatureEffects
 {
-	protected static final Log _log = LogFactory.getLog(CharEffects.class);
+	protected static final Log _log = LogFactory.getLog(CreatureEffects.class);
 	
-	protected final L2Character _owner;
+	protected final L2Creature _owner;
 	
 	private L2Effect[] _toArray;
 	private List<L2Effect> _effects;
 	private Map<String, StackQueue> _stackedEffects;
 	
-	public CharEffects(L2Character owner)
+	public CreatureEffects(L2Creature owner)
 	{
 		_owner = owner;
 	}
 	
-	protected L2Character getOwner()
+	protected L2Creature getOwner()
 	{
 		return _owner;
 	}
@@ -228,7 +228,7 @@ public class CharEffects
 			}
 		};
 		
-		private static StackQueue newInstance(CharEffects effects, String stackType)
+		private static StackQueue newInstance(CreatureEffects effects, String stackType)
 		{
 			StackQueue stackQueue = POOL.get();
 			
@@ -251,7 +251,7 @@ public class CharEffects
 		}
 		
 		private final ArrayList<L2Effect> _queue = new ArrayList<L2Effect>(4);
-		private CharEffects _effects;
+		private CreatureEffects _effects;
 		private String _stackType;
 		
 		private synchronized L2Effect[] getAllEffects()

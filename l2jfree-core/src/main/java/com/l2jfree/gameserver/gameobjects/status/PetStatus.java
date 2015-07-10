@@ -14,12 +14,12 @@
  */
 package com.l2jfree.gameserver.gameobjects.status;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
-public final class PetStatus extends CharStatus
+public final class PetStatus extends CreatureStatus
 {
 	public PetStatus(L2PetInstance activeChar)
 	{
@@ -27,7 +27,7 @@ public final class PetStatus extends CharStatus
 	}
 	
 	@Override
-	void reduceHp0(double value, L2Character attacker, boolean awake, boolean isDOT, boolean isConsume)
+	void reduceHp0(double value, L2Creature attacker, boolean awake, boolean isDOT, boolean isConsume)
 	{
 		super.reduceHp0(value, attacker, awake, isDOT, isConsume);
 		

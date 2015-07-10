@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
@@ -23,11 +23,11 @@ import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 public class ExFishingStartCombat extends L2ServerPacket
 {
 	private static final String _S__FE_27_EXFISHINGSTARTCOMBAT = "[S] FE:27 ExFishingStartCombat [ddd ccc]";
-	private final L2Character _activeChar;
+	private final L2Creature _activeChar;
 	private final int _time, _hp;
 	private final int _lureType, _deceptiveMode, _mode;
 	
-	public ExFishingStartCombat(L2Character character, int time, int hp, int mode, int lureType, int deceptiveMode)
+	public ExFishingStartCombat(L2Creature character, int time, int hp, int mode, int lureType, int deceptiveMode)
 	{
 		_activeChar = character;
 		_time = time;

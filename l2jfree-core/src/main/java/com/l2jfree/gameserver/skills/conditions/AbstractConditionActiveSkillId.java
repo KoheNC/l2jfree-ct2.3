@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.skills.conditions;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.skills.Env;
 
@@ -38,7 +38,7 @@ abstract class AbstractConditionActiveSkillId extends Condition
 	@Override
 	boolean testImpl(Env env)
 	{
-		final L2Character owner = getSkillOwner(env);
+		final L2Creature owner = getSkillOwner(env);
 		
 		if (owner != null)
 			for (L2Skill sk : owner.getAllSkills())
@@ -49,5 +49,5 @@ abstract class AbstractConditionActiveSkillId extends Condition
 		return false;
 	}
 	
-	abstract L2Character getSkillOwner(Env env);
+	abstract L2Creature getSkillOwner(Env env);
 }

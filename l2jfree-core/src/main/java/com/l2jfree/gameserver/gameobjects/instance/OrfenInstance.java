@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.OrfenAI;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.Location;
@@ -45,7 +45,7 @@ public class OrfenInstance extends L2GrandBossInstance
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new OrfenAI(new AIAccessor());
 	}
