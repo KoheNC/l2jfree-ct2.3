@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -24,7 +25,6 @@ import com.l2jfree.gameserver.network.packets.server.SortedWareHouseWithdrawalLi
 import com.l2jfree.gameserver.network.packets.server.WareHouseDepositList;
 import com.l2jfree.gameserver.network.packets.server.WareHouseWithdrawalList;
 import com.l2jfree.gameserver.network.packets.server.SortedWareHouseWithdrawalList.WarehouseListType;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.util.IllegalPlayerAction;
 import com.l2jfree.gameserver.util.Util;
 

@@ -15,12 +15,12 @@
 package com.l2jfree.gameserver.gameobjects;
 
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.network.packets.server.CharInfo;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
-import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public abstract class L2Decoy extends L2Character
 {

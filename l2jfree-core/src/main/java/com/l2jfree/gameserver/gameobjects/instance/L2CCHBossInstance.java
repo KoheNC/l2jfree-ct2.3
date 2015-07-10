@@ -20,10 +20,10 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.status.CCHLeaderStatus;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
 import com.l2jfree.gameserver.model.entity.ClanHall;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * Represents the monster that is the leader of a clan hall.<BR>

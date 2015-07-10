@@ -18,10 +18,10 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2FortEnvoyInstance extends L2Npc
 {

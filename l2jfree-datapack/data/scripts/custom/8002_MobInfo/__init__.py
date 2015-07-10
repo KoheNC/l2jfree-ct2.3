@@ -2,7 +2,7 @@ import sys
 from com.l2jfree.gameserver.model.quest 				import State
 from com.l2jfree.gameserver.model.quest 				import QuestState
 from com.l2jfree.gameserver.datatables 				import NpcTable
-from com.l2jfree.gameserver.templates.chars 				import L2NpcTemplate
+from com.l2jfree.gameserver.gameobjects.templates 				import L2NpcTemplate
 from com.l2jfree.gameserver.gameobjects.instance		import L2PcInstance
 from com.l2jfree.gameserver.datatables   			import SpawnTable
 from com.l2jfree.gameserver.datatables				import ItemTable

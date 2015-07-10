@@ -23,11 +23,11 @@ import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.FortSiegeGuardKnownList;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2FortSiegeGuardInstance extends L2SiegeGuard
 {

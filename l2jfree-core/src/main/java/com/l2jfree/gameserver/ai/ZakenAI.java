@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.ai;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.tools.random.Rnd;
 

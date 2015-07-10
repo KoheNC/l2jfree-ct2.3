@@ -34,6 +34,7 @@ import com.l2jfree.gameserver.ai.L2CharacterAI;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.knownlist.BoatKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -45,7 +46,6 @@ import com.l2jfree.gameserver.network.packets.server.VehicleDeparture;
 import com.l2jfree.gameserver.network.packets.server.VehicleInfo;
 import com.l2jfree.gameserver.network.packets.server.VehicleStarted;
 import com.l2jfree.gameserver.taskmanager.MovementController;
-import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 import com.l2jfree.gameserver.util.Util;
 
 /**

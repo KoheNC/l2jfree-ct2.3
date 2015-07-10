@@ -21,6 +21,7 @@ import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable;
 import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable.MerchantPriceConfig;
 import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2TradeList;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -30,7 +31,6 @@ import com.l2jfree.gameserver.network.packets.server.SellList;
 import com.l2jfree.gameserver.network.packets.server.SetupGauge;
 import com.l2jfree.gameserver.network.packets.server.ShopPreviewList;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.lang.L2TextBuilder;
 
 /**

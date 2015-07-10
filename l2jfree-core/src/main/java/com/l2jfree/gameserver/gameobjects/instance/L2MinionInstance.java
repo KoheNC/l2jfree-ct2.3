@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.L2WorldRegion;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * This class manages all Minions.

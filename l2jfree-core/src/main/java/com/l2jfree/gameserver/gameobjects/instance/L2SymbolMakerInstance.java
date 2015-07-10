@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.HennaEquipList;
 import com.l2jfree.gameserver.network.packets.server.HennaRemoveList;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2SymbolMakerInstance extends L2Npc
 {

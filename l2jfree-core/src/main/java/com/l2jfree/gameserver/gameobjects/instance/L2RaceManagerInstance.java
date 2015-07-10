@@ -21,6 +21,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.RaceManagerKnownList;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
@@ -33,7 +34,6 @@ import com.l2jfree.gameserver.network.packets.server.MonRaceInfo;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.PlaySound;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.util.Broadcast;
 
 public class L2RaceManagerInstance extends L2Npc

@@ -28,10 +28,10 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.SpawnData;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * @author hex1r0

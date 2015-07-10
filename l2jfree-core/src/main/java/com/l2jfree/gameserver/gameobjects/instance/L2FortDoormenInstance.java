@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 public class L2FortDoormenInstance extends L2DoormenInstance
 {

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 /**
  * This class is here mostly for convinience and for avoidance of hardcoded IDs.

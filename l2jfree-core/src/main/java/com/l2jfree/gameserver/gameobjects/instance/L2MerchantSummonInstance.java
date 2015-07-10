@@ -21,6 +21,7 @@ import com.l2jfree.gameserver.ai.L2CharacterAI;
 import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2TradeList;
@@ -32,7 +33,6 @@ import com.l2jfree.gameserver.network.packets.server.SellList;
 import com.l2jfree.gameserver.skills.SkillUsageRequest;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillSummon;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * @author Kerberos

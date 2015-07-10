@@ -24,6 +24,7 @@ import javolution.util.FastMap;
 
 import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
@@ -34,7 +35,6 @@ import com.l2jfree.gameserver.model.entity.Town;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public final class L2AuctioneerInstance extends L2Npc
 {

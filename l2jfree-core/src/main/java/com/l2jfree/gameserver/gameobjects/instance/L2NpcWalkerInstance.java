@@ -20,9 +20,9 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.status.NpcWalkerStatus;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * This class manages some npcs can walk in the city. <br>

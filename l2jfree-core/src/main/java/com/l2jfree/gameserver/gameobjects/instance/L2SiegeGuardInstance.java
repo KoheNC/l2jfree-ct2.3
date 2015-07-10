@@ -23,6 +23,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.SiegeGuardKnownList;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
@@ -33,7 +34,6 @@ import com.l2jfree.gameserver.model.entity.FortSiege;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * This class represents all guards in the world. It inherits all methods from

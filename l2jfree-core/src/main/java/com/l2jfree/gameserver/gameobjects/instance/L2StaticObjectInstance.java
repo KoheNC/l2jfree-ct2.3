@@ -23,6 +23,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.StaticObjectKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.StaticObjStat;
+import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Clan;
@@ -34,7 +35,6 @@ import com.l2jfree.gameserver.network.packets.server.ChairSit;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.ShowTownMap;
 import com.l2jfree.gameserver.network.packets.server.StaticObject;
-import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 import com.l2jfree.lang.L2TextBuilder;
 
 /**

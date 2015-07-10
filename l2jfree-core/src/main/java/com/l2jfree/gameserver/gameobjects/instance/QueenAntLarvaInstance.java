@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.status.QueenAntLarvaStatus;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 /**
  * @author hex1r0

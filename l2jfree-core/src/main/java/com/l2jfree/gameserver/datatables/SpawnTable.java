@@ -31,9 +31,9 @@ import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
 import com.l2jfree.gameserver.gameobjects.instance.L2ClassMasterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2WyvernManagerInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.DayNightSpawnManager;
 import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * This class ...

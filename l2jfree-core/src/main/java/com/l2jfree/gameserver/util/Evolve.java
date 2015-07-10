@@ -21,13 +21,13 @@ import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2SummonItem;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public final class Evolve
 {

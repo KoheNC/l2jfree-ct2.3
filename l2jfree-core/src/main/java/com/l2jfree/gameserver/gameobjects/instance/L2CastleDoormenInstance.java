@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2CastleDoormenInstance extends L2DoormenInstance
 {

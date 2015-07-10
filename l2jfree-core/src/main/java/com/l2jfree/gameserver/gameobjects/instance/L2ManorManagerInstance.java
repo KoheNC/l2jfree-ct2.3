@@ -19,6 +19,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.SeedProduction;
@@ -34,7 +35,6 @@ import com.l2jfree.gameserver.network.packets.server.ExShowSeedInfo;
 import com.l2jfree.gameserver.network.packets.server.ExShowSellCropList;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2ManorManagerInstance extends L2MerchantInstance
 {

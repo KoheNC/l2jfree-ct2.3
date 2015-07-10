@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.MonsterKnownList;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.util.MinionList;
 import com.l2jfree.tools.random.Rnd;
 

@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.util.Evolve;
 
 /**

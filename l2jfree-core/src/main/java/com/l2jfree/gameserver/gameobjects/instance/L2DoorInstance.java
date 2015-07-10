@@ -29,6 +29,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.DoorKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.DoorStat;
+import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
@@ -47,7 +48,6 @@ import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHand
 import com.l2jfree.gameserver.network.packets.server.ConfirmDlg;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.StaticObject;
-import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.lang.L2TextBuilder;
 

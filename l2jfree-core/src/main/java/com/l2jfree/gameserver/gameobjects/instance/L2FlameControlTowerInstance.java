@@ -17,10 +17,10 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2FlameControlTowerInstance extends L2Npc
 {

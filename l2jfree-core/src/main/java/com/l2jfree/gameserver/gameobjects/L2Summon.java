@@ -31,6 +31,7 @@ import com.l2jfree.gameserver.gameobjects.shot.CharShots;
 import com.l2jfree.gameserver.gameobjects.shot.SummonShots;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.SummonStat;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.gameobjects.view.SummonView;
 import com.l2jfree.gameserver.geodata.GeoData;
@@ -59,7 +60,6 @@ import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfo
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.LeakTaskManager;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 

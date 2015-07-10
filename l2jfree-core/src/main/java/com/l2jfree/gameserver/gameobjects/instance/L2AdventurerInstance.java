@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ExShowQuestInfo;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * @author LBaldi

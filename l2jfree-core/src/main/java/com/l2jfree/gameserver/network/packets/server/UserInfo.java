@@ -20,12 +20,12 @@ import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
 import com.l2jfree.gameserver.gameobjects.status.PcStatus;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.PcView;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * 0000: 04 03 15 00 00 77 ff 00 00 80 f1 ff ff 00 00 00    .....w..........

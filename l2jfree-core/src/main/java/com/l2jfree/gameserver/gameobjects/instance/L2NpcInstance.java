@@ -21,6 +21,7 @@ import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.status.FolkStatus;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2SkillLearn;
@@ -33,7 +34,6 @@ import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList.EnchantSkillType;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.gameserver.util.StringUtil;
 import com.l2jfree.lang.L2TextBuilder;
 

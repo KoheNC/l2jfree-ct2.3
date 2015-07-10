@@ -19,10 +19,10 @@ import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
-import com.l2jfree.gameserver.templates.chars.L2PcTemplate;
 
 /**
  * @author NB4L1

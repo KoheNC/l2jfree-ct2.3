@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.network.packets.server.ExShowDominionRegistry;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 /**
  * NPC that gives information about territory wars

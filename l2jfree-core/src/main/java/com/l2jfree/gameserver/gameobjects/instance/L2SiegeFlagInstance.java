@@ -20,6 +20,7 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.status.SiegeFlagStatus;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CCHManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
@@ -31,7 +32,6 @@ import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public final class L2SiegeFlagInstance extends L2Npc
 {

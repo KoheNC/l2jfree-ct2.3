@@ -22,11 +22,11 @@ import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.status.SummonStatus;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.server.SetSummonRemainTime;
 import com.l2jfree.gameserver.network.packets.server.UserInfo;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillSummon;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public class L2SummonInstance extends L2Summon
 {

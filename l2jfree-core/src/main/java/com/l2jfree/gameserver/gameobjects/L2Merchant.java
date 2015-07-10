@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects;
 
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 /**
  * Interface for {@link L2MerchantInstance} and {@link L2MerchantSummonInstance} to avoid a bunch of instanceof checks.

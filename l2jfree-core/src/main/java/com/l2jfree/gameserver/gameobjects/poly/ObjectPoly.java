@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.poly;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
 public class ObjectPoly
 {

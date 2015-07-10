@@ -35,6 +35,7 @@ import com.l2jfree.gameserver.ai.L2CharacterAI;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.knownlist.AirShipKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.server.ExAirShipInfo;
@@ -43,7 +44,6 @@ import com.l2jfree.gameserver.network.packets.server.ExGetOnAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExMoveToLocationAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExStopMoveAirShip;
 import com.l2jfree.gameserver.taskmanager.MovementController;
-import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 
 /**

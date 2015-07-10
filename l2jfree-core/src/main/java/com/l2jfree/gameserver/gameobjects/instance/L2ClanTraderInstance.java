@@ -17,11 +17,11 @@ package com.l2jfree.gameserver.gameobjects.instance;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 
 public final class L2ClanTraderInstance extends L2Npc
 {
