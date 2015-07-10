@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.irccommandhandlers;
+package com.l2jfree.gameserver.handler.irccommands;
 
 import com.l2jfree.gameserver.handler.IIrcCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
