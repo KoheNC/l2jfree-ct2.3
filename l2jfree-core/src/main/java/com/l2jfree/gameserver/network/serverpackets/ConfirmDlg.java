@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.serverpackets;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.L2GameClient;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.clientpackets.ConfirmDlgAnswer.AnswerHandler;
+import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
 import com.l2jfree.tools.random.Rnd;
 
 /**

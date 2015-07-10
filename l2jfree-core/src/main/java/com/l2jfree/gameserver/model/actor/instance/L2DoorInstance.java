@@ -43,7 +43,7 @@ import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.model.mapregion.L2MapRegion;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.clientpackets.ConfirmDlgAnswer.AnswerHandler;
+import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
 import com.l2jfree.gameserver.network.serverpackets.ConfirmDlg;
 import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.serverpackets.StaticObject;

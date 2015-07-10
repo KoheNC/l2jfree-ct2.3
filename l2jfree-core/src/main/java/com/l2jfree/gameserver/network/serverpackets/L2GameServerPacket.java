@@ -25,14 +25,14 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.L2GameClient;
-import com.l2jfree.gameserver.network.clientpackets.L2GameClientPacket;
+import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.mmocore.network.SendablePacket;
 
 /**
  * @author KenM
  */
-public abstract class L2GameServerPacket extends SendablePacket<L2GameClient, L2GameClientPacket, L2GameServerPacket>
+public abstract class L2GameServerPacket extends SendablePacket<L2GameClient, L2ClientPacket, L2GameServerPacket>
 {
 	protected static final Log _log = LogFactory.getLog(L2GameServerPacket.class);
 	

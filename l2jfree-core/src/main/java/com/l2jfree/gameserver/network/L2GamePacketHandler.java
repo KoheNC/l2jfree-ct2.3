@@ -21,7 +21,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.network.L2GameClient.GameClientState;
-import com.l2jfree.gameserver.network.clientpackets.*;
+import com.l2jfree.gameserver.network.packets.L2ClientPacket;
+import com.l2jfree.gameserver.network.packets.client.*;
 import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jfree.mmocore.network.IPacketHandler;
 
@@ -38,14 +39,14 @@ import com.l2jfree.mmocore.network.IPacketHandler;
  * 
  * @author KenM
  */
-public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L2GameClientPacket, L2GameServerPacket>
+public final class L2GamePacketHandler implements IPacketHandler<L2GameClient, L2ClientPacket, L2GameServerPacket>
 {
 	private static final Log _log = LogFactory.getLog(L2GamePacketHandler.class);
 	
 	@Override
-	public L2GameClientPacket handlePacket(ByteBuffer buf, L2GameClient client, final int opcode)
+	public L2ClientPacket handlePacket(ByteBuffer buf, L2GameClient client, final int opcode)
 	{
-		L2GameClientPacket msg = null;
+		L2ClientPacket msg = null;
 		GameClientState state = client.getState();
 		
 		switch (state)

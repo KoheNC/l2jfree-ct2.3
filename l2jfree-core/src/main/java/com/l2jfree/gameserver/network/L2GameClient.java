@@ -35,7 +35,7 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.model.CharSelectInfoPackage;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.clientpackets.L2GameClientPacket;
+import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jfree.gameserver.network.serverpackets.LeaveWorld;
 import com.l2jfree.gameserver.network.serverpackets.ServerClose;
@@ -55,7 +55,7 @@ import com.l2jfree.util.concurrent.RunnableStatsManager;
  * 
  * @author KenM
  */
-public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClientPacket, L2GameServerPacket>
+public final class L2GameClient extends MMOConnection<L2GameClient, L2ClientPacket, L2GameServerPacket>
 {
 	private static final Log _log = LogFactory.getLog(L2GameClient.class);
 	
@@ -80,7 +80,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 	private String _hostAddress;
 	private boolean _protocol;
 	
-	public L2GameClient(SelectorThread<L2GameClient, L2GameClientPacket, L2GameServerPacket> selectorThread,
+	public L2GameClient(SelectorThread<L2GameClient, L2ClientPacket, L2GameServerPacket> selectorThread,
 			SocketChannel socketChannel) throws ClosedChannelException
 	{
 		super(selectorThread, socketChannel);
@@ -416,7 +416,7 @@ public final class L2GameClient extends MMOConnection<L2GameClient, L2GameClient
 		_disconnected = true;
 	}
 	
-	void execute(L2GameClientPacket rp)
+	void execute(L2ClientPacket rp)
 	{
 		getPacketQueue().execute(rp);
 	}
