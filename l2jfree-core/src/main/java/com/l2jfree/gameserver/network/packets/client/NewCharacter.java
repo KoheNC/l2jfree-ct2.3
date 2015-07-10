@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate.PcTemplateItem;
 import com.l2jfree.gameserver.idfactory.IdFactory;
@@ -174,7 +174,7 @@ public class NewCharacter extends L2ClientPacket
 		newChar.getPosition().setXYZInvisible(startPos.getX(), startPos.getY(), startPos.getZ());
 		newChar.setTitle("");
 		
-		newChar.setVitalityPoints(PcStat.MAX_VITALITY_POINTS, true);
+		newChar.setVitalityPoints(PlayerStat.MAX_VITALITY_POINTS, true);
 		
 		if (Config.STARTING_LEVEL > 1)
 			newChar.getStat().addLevel((byte)(Config.STARTING_LEVEL - 1));

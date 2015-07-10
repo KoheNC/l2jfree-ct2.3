@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.server;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.view.PcView;
 import com.l2jfree.gameserver.model.itemcontainer.Inventory;
@@ -49,7 +49,7 @@ public final class GMViewCharacterInfo extends L2ServerPacket
 		final PcView view = _activeChar.getView();
 		final PlayerAppearance appearance = _activeChar.getAppearance();
 		final PcInventory _inv = _activeChar.getInventory();
-		final PcStat stat = _activeChar.getStat();
+		final PlayerStat stat = _activeChar.getStat();
 		final PlayerStatus status = _activeChar.getStatus();
 		
 		writeC(0x95);

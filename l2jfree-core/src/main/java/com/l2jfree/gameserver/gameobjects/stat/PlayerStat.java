@@ -38,7 +38,7 @@ import com.l2jfree.gameserver.network.packets.server.TutorialShowQuestionMark;
 import com.l2jfree.gameserver.network.packets.server.UserInfo;
 import com.l2jfree.gameserver.skills.Stats;
 
-public class PcStat extends PlayableStat
+public class PlayerStat extends PlayableStat
 {
 	private float _vitalityPoints = 1;
 	private byte _vitalityLevel = 0;
@@ -56,7 +56,7 @@ public class PcStat extends PlayableStat
 	
 	// =========================================================
 	// Constructor
-	public PcStat(L2PcInstance activeChar)
+	public PlayerStat(L2PcInstance activeChar)
 	{
 		super(activeChar);
 	}

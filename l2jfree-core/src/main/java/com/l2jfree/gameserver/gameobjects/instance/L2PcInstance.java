@@ -94,7 +94,7 @@ import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.PlayerShots;
 import com.l2jfree.gameserver.gameobjects.skills.PlayerSkills;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
@@ -864,7 +864,7 @@ public final class L2PcInstance extends L2Playable
 			if (!_player.isInsideZone(L2Zone.FLAG_PEACE))
 				return;
 			
-			if (_player.getVitalityPoints() >= PcStat.MAX_VITALITY_POINTS)
+			if (_player.getVitalityPoints() >= PlayerStat.MAX_VITALITY_POINTS)
 				return;
 			
 			_player.updateVitalityPoints(Config.RATE_RECOVERY_VITALITY_PEACE_ZONE, false, false);
@@ -1132,13 +1132,13 @@ public final class L2PcInstance extends L2Playable
 	@Override
 	protected CreatureStat initStat()
 	{
-		return new PcStat(this);
+		return new PlayerStat(this);
 	}
 	
 	@Override
-	public final PcStat getStat()
+	public final PlayerStat getStat()
 	{
-		return (PcStat)_stat;
+		return (PlayerStat)_stat;
 	}
 	
 	@Override

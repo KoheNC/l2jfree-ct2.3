@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 
 /**
@@ -75,7 +75,7 @@ public class AdminVitality implements IAdminCommandHandler
 				
 				if (level >= 0 && level <= 4)
 				{
-					target.setVitalityPoints(PcStat.VITALITY_LEVELS[level], true);
+					target.setVitalityPoints(PlayerStat.VITALITY_LEVELS[level], true);
 					target.sendMessage("Admin set your Vitality level to " + level);
 				}
 				else
@@ -83,7 +83,7 @@ public class AdminVitality implements IAdminCommandHandler
 			}
 			else if (cmd.equals("admin_full_vitality"))
 			{
-				target.setVitalityPoints(PcStat.VITALITY_LEVELS[4], true);
+				target.setVitalityPoints(PlayerStat.VITALITY_LEVELS[4], true);
 				target.sendMessage("Admin completly recharged your Vitality");
 			}
 			else if (cmd.equals("admin_empty_vitality"))

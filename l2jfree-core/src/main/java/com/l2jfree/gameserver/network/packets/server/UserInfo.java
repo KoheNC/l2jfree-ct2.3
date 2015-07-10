@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.gameobjects.stat.PcStat;
+import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.PcView;
@@ -112,7 +112,7 @@ public final class UserInfo extends L2ServerPacket
 		final PcView view = _activeChar.getView();
 		final PlayerAppearance _appearance = _activeChar.getAppearance();
 		final PcInventory _inv = _activeChar.getInventory();
-		final PcStat stat = _activeChar.getStat();
+		final PlayerStat stat = _activeChar.getStat();
 		final PlayerStatus status = _activeChar.getStatus();
 		
 		writeC(0x32);
