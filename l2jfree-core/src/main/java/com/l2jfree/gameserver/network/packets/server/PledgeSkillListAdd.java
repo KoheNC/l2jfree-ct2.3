@@ -33,9 +33,6 @@ public class PledgeSkillListAdd extends L2ServerPacket
 		_lvl = lvl;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

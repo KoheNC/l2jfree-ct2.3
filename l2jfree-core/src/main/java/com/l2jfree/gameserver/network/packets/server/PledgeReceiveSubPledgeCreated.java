@@ -38,9 +38,6 @@ public class PledgeReceiveSubPledgeCreated extends L2ServerPacket
 		_clan = clan;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

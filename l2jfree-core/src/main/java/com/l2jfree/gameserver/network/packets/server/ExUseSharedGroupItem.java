@@ -33,9 +33,6 @@ public class ExUseSharedGroupItem extends L2ServerPacket
 		_totalTime = totalTime / 1000;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

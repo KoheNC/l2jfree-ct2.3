@@ -33,9 +33,6 @@ public class ExMPCCShowPartyMemberInfo extends L2ServerPacket
 	
 	private final L2Party _party;
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

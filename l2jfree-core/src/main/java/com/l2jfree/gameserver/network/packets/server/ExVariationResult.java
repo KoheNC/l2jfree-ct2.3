@@ -35,9 +35,6 @@ public class ExVariationResult extends L2ServerPacket
 		_unk3 = unk3;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

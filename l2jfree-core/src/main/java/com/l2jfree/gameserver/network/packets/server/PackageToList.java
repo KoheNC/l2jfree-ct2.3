@@ -39,9 +39,6 @@ public class PackageToList extends L2ServerPacket
 		_players = players;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

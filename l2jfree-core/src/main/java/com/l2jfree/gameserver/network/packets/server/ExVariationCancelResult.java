@@ -33,9 +33,6 @@ public class ExVariationCancelResult extends L2ServerPacket
 		_unk1 = result;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

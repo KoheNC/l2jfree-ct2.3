@@ -33,9 +33,6 @@ public class ExPutItemResultForVariationCancel extends L2ServerPacket
 		_price = price;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

@@ -29,9 +29,6 @@ public class ExDuelStart extends L2ServerPacket
 		_unk1 = unk1;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

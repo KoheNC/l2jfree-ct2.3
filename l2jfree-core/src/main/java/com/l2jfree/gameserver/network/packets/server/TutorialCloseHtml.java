@@ -25,9 +25,6 @@ public class TutorialCloseHtml extends L2ServerPacket
 {
 	private static final String _S__A3_TUTORIALCLOSEHTML = "[S] a3 TutorialCloseHtml";
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected final void writeImpl()
 	{

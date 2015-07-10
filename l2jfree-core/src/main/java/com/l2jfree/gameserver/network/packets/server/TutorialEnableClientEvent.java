@@ -33,9 +33,6 @@ public class TutorialEnableClientEvent extends L2ServerPacket
 		_event = event;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected final void writeImpl()
 	{

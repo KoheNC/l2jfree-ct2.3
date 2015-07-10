@@ -44,9 +44,6 @@ public class PackageSendableList extends L2ServerPacket
 		}
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

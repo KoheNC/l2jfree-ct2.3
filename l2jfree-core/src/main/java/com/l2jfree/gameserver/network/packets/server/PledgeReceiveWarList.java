@@ -34,9 +34,6 @@ public class PledgeReceiveWarList extends L2ServerPacket
 		_tab = tab;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{

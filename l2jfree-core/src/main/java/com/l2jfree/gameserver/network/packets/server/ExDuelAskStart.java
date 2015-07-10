@@ -32,9 +32,6 @@ public class ExDuelAskStart extends L2ServerPacket
 		_partyDuel = partyDuel;
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.serverpackets.ServerBasePacket#writeImpl()
-	 */
 	@Override
 	protected void writeImpl()
 	{
