@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
-import com.l2jfree.gameserver.gameobjects.itemcontainer.PcWarehouse;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerWarehouse;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -101,7 +101,7 @@ public class SendWareHouseDepositList extends L2ClientPacket
 			return;
 		}
 		
-		boolean isPrivate = warehouse instanceof PcWarehouse;
+		boolean isPrivate = warehouse instanceof PlayerWarehouse;
 		
 		L2Npc manager = player.getLastFolkNPC();
 		if ((manager == null || !manager.isWarehouse() || !manager.canInteract(player)) && !player.isGM())

@@ -88,10 +88,10 @@ import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.effects.PlayerEffects;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
-import com.l2jfree.gameserver.gameobjects.itemcontainer.PcWarehouse;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PetInventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerFreight;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerWarehouse;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.PlayerKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
@@ -521,7 +521,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private long _deleteTimer;
 	private PlayerInventory _inventory;
-	private PcWarehouse _warehouse;
+	private PlayerWarehouse _warehouse;
 	private PlayerFreight _freight;
 	private List<PlayerFreight> _depositedFreight;
 	private final PlayerSkills _pcSkills = new PlayerSkills(this);
@@ -2774,13 +2774,13 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Return the PcWarehouse object of the L2PcInstance.<BR><BR>
+	 * Return the PlayerWarehouse object of the L2PcInstance.<BR><BR>
 	 */
-	public PcWarehouse getWarehouse()
+	public PlayerWarehouse getWarehouse()
 	{
 		if (_warehouse == null)
 		{
-			_warehouse = new PcWarehouse(this);
+			_warehouse = new PlayerWarehouse(this);
 			_warehouse.restore();
 		}
 		

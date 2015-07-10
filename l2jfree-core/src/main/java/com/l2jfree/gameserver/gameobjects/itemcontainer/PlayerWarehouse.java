@@ -17,11 +17,11 @@ package com.l2jfree.gameserver.gameobjects.itemcontainer;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 
-public class PcWarehouse extends Warehouse
+public class PlayerWarehouse extends Warehouse
 {
 	private final L2PcInstance _owner;
 	
-	public PcWarehouse(L2PcInstance owner)
+	public PlayerWarehouse(L2PcInstance owner)
 	{
 		_owner = owner;
 	}
