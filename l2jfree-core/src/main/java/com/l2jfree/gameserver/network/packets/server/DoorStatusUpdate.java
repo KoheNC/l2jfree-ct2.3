@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /** @deprecated Seems to be completely replaced by StaticObject in retail */

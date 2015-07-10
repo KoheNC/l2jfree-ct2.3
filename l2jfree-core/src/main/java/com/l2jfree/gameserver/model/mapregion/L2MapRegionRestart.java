@@ -18,10 +18,10 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.SevenSigns;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.model.entity.Town;
 import com.l2jfree.tools.random.Rnd;

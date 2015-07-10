@@ -6,7 +6,7 @@ from com.l2jfree.gameserver.network.packets.server 	import NpcSay
 from com.l2jfree.gameserver.model.quest 			import State
 from com.l2jfree.gameserver.model.quest 			import QuestState
 from com.l2jfree.gameserver.model.quest.jython 		import QuestJython as JQuest
-from com.l2jfree.gameserver.model.actor.instance    import L2MonsterInstance
+from com.l2jfree.gameserver.gameobjects.instance    import L2MonsterInstance
 
 debug = False
 

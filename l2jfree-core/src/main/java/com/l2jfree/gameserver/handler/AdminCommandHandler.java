@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAI;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAdmin;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAnnouncements;
@@ -94,7 +95,6 @@ import com.l2jfree.gameserver.handler.admincommandhandlers.AdminVIPEngine;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminVitality;
 import com.l2jfree.gameserver.handler.admincommandhandlers.AdminZone;
 import com.l2jfree.gameserver.model.GMAudit;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.util.HandlerRegistry;
 import com.l2jfree.util.logging.ListeningLog;

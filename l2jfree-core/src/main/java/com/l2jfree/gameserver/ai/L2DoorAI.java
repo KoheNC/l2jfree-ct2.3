@@ -17,12 +17,12 @@ package com.l2jfree.gameserver.ai;
 import javolution.util.FastMap;
 import javolution.util.FastMap.Entry;
 
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2SiegeGuard;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2SiegeGuard;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jfree.gameserver.skills.SkillUsageRequest;
 import com.l2jfree.gameserver.threadmanager.FIFOExecutableQueue;
 

@@ -15,18 +15,18 @@
 package com.l2jfree.gameserver.skills.effects;
 
 import com.l2jfree.gameserver.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeFlagInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.instance.L2FortCommanderInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2FortSiegeGuardInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2NpcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeFlagInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeGuardInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
 import com.l2jfree.gameserver.templates.skills.L2EffectType;

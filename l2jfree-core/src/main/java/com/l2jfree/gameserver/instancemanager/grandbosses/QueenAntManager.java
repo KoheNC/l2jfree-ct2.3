@@ -17,13 +17,13 @@ package com.l2jfree.gameserver.instancemanager.grandbosses;
 import java.util.Set;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.instance.QueenAntInstance;
+import com.l2jfree.gameserver.gameobjects.instance.QueenAntLarvaInstance;
+import com.l2jfree.gameserver.gameobjects.instance.QueenAntNurseInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.SpawnListener;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.QueenAntInstance;
-import com.l2jfree.gameserver.model.actor.instance.QueenAntLarvaInstance;
-import com.l2jfree.gameserver.model.actor.instance.QueenAntNurseInstance;
 import com.l2jfree.util.L2FastSet;
 
 /**

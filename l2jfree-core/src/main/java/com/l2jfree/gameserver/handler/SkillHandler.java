@@ -14,6 +14,9 @@
  */
 package com.l2jfree.gameserver.handler;
 
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.skillhandlers.BalanceLife;
 import com.l2jfree.gameserver.handler.skillhandlers.BallistaBomb;
 import com.l2jfree.gameserver.handler.skillhandlers.BeastFeed;
@@ -62,9 +65,6 @@ import com.l2jfree.gameserver.handler.skillhandlers.Trap;
 import com.l2jfree.gameserver.handler.skillhandlers.Unlock;
 import com.l2jfree.gameserver.handler.skillhandlers.ZakenTeleport;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2CubicInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.skills.Formulas;
 import com.l2jfree.gameserver.skills.l2skills.L2SkillDrain;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;

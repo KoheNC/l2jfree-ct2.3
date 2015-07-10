@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.ai;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Character.AIAccessor;
-import com.l2jfree.gameserver.model.actor.instance.OrfenInstance;
-import com.l2jfree.gameserver.model.actor.instance.OrfenInstance.Position;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Character.AIAccessor;
+import com.l2jfree.gameserver.gameobjects.instance.OrfenInstance;
+import com.l2jfree.gameserver.gameobjects.instance.OrfenInstance.Position;
 import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;

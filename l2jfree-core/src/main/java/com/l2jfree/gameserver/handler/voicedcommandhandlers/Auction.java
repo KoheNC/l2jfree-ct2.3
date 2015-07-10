@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.handler.voicedcommandhandlers;
 
 import com.l2jfree.gameserver.communitybbs.Manager.AuctionBBSManager;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IVoicedCommandHandler;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 /**
  * 

@@ -21,9 +21,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PenaltyMonsterInstance;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PenaltyMonsterInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ExFishingHpRegen;
 import com.l2jfree.gameserver.network.packets.server.ExFishingStartCombat;

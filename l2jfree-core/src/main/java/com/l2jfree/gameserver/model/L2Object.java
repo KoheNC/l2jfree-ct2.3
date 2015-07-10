@@ -14,15 +14,15 @@
  */
 package com.l2jfree.gameserver.model;
 
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.knownlist.ObjectKnownList;
+import com.l2jfree.gameserver.gameobjects.poly.ObjectPoly;
+import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.knownlist.ObjectKnownList;
-import com.l2jfree.gameserver.model.actor.poly.ObjectPoly;
-import com.l2jfree.gameserver.model.actor.position.ObjectPosition;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;

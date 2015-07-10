@@ -18,8 +18,8 @@ import java.util.StringTokenizer;
 
 import javolution.text.TextBuilder;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.network.packets.server.AdminForgePacket;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 

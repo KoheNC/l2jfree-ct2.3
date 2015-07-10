@@ -18,10 +18,10 @@ import java.util.Map;
 
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.model.actor.L2Boss;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
+import com.l2jfree.gameserver.gameobjects.L2Boss;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.lang.L2TextBuilder;
 
 public final class DecayTaskManager extends AbstractPeriodicTaskManager

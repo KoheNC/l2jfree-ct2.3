@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.handler;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.Auction;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.Banking;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.CastleDoors;
@@ -25,7 +26,6 @@ import com.l2jfree.gameserver.handler.voicedcommandhandlers.Offline;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.Report;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.VersionInfo;
 import com.l2jfree.gameserver.handler.voicedcommandhandlers.Wedding;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.util.HandlerRegistry;
 

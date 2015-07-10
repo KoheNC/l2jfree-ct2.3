@@ -24,9 +24,9 @@ import java.io.File;
 
 import javax.script.ScriptException;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.scripting.L2ScriptEngineManager;
 
 public class AdminQuest implements IAdminCommandHandler

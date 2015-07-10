@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

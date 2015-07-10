@@ -18,8 +18,8 @@ import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.threadmanager.FIFOExecutableQueue;
 import com.l2jfree.lang.L2System;
 import com.l2jfree.util.L2FastSet;

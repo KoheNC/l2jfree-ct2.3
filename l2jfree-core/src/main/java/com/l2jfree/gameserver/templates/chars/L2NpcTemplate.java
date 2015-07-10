@@ -229,7 +229,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 			_type = "L2SymbolMaker";
 		else
 			_type = set.getString("type").intern(); // implementing class name
-		_clazz = Class.forName("com.l2jfree.gameserver.model.actor.instance." + _type + "Instance");
+		_clazz = Class.forName("com.l2jfree.gameserver.gameobjects.instance." + _type + "Instance");
 		_name = set.getString("name").intern();
 		_serverSideName = set.getBool("serverSideName");
 		_title = set.getString("title").intern();

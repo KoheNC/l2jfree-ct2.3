@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.model.olympiad;
 import java.util.Set;
 
 import com.l2jfree.gameserver.datatables.DoorTable;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.util.L2FastSet;
 
 /**

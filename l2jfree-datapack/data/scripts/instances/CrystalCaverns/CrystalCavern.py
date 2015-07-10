@@ -14,8 +14,8 @@ from com.l2jfree.gameserver.datatables                  import DoorTable
 from com.l2jfree.gameserver.datatables                  import ItemTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.instancemanager.grandbosses import BaylorManager
-from com.l2jfree.gameserver.model.actor                 import L2Summon
-from com.l2jfree.gameserver.model.actor.instance        import L2PcInstance
+from com.l2jfree.gameserver.gameobjects                 import L2Summon
+from com.l2jfree.gameserver.gameobjects.instance        import L2PcInstance
 from com.l2jfree.gameserver.model.entity                import Instance
 from com.l2jfree.gameserver.model.quest                 import State
 from com.l2jfree.gameserver.model.quest                 import QuestState

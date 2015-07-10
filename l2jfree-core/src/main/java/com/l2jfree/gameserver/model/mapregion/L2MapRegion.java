@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.mapregion;
 
 import java.util.Arrays;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.model.zone.form.Shape;
 

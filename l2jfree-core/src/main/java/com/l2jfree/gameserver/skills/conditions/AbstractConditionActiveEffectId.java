@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.skills.conditions;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.model.L2Effect;
-import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.skills.Env;
 
 abstract class AbstractConditionActiveEffectId extends Condition

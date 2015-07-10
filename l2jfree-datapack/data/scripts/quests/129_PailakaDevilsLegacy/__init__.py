@@ -1,14 +1,14 @@
 # By Psycho(killer1888) / L2jFree
 
 from com.l2jfree.gameserver.instancemanager        import InstanceManager
-from com.l2jfree.gameserver.model.actor            import L2Summon
+from com.l2jfree.gameserver.gameobjects            import L2Summon
 from com.l2jfree.gameserver.model.entity           import Instance
 from com.l2jfree.gameserver.model.quest            import State
 from com.l2jfree.gameserver.model.quest            import QuestState
 from com.l2jfree.gameserver.model.quest.jython     import QuestJython as JQuest
 from com.l2jfree.gameserver.network.packets.server  import SystemMessage
 from com.l2jfree.gameserver.datatables             import ItemTable
-from com.l2jfree.gameserver.model.actor.instance   import L2PcInstance
+from com.l2jfree.gameserver.gameobjects.instance   import L2PcInstance
 
 qn = "129_PailakaDevilsLegacy"
 debug = False

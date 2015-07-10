@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.model;
 
 import org.apache.commons.lang.ArrayUtils;
 
+import com.l2jfree.gameserver.gameobjects.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.handler.SkillHandler;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 import com.l2jfree.gameserver.skills.ChanceCondition;

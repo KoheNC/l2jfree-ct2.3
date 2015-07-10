@@ -16,10 +16,10 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import javolution.util.FastList;
 
+import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.model.CursedWeapon;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Character;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.ExCursedWeaponLocation;
 import com.l2jfree.gameserver.network.packets.server.ExCursedWeaponLocation.CursedWeaponInfo;

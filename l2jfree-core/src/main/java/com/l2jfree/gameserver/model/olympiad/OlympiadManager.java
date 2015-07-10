@@ -19,7 +19,7 @@ import java.util.Map;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad.COMP_TYPE;
 import com.l2jfree.tools.random.Rnd;
 

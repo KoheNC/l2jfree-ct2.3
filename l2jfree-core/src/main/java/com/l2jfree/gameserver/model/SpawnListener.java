@@ -20,7 +20,7 @@ package com.l2jfree.gameserver.model;
  * 
  */
 
-import com.l2jfree.gameserver.model.actor.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
 
 /**
  * This class ...

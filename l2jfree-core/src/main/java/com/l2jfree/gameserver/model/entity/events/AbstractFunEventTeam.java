@@ -19,7 +19,7 @@ import java.util.Set;
 
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.events.AbstractFunEvent.FunEventState;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2FastSet;

@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.network.packets.client;
 import static com.l2jfree.gameserver.model.itemcontainer.PcInventory.ADENA_ID;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.itemcontainer.ItemContainer;
 import com.l2jfree.gameserver.model.itemcontainer.PcFreight;
 import com.l2jfree.gameserver.network.SystemMessageId;

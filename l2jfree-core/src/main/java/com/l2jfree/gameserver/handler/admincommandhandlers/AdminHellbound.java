@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
+import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.hellbound.HellboundManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 /**
  * @author Psycho(killer1888) / L2jFree
