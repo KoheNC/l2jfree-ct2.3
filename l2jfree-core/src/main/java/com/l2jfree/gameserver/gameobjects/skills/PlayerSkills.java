@@ -34,14 +34,14 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.util.LookupTable;
 
-public final class PcSkills
+public final class PlayerSkills
 {
-	private static final Log _log = LogFactory.getLog(PcSkills.class);
+	private static final Log _log = LogFactory.getLog(PlayerSkills.class);
 	
 	private final LookupTable<SkillMap> _storedSkills = new LookupTable<SkillMap>();
 	private final L2PcInstance _owner;
 	
-	public PcSkills(L2PcInstance owner)
+	public PlayerSkills(L2PcInstance owner)
 	{
 		_owner = owner;
 	}

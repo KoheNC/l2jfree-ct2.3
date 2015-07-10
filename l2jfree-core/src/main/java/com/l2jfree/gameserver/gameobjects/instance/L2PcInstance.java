@@ -92,7 +92,7 @@ import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
 import com.l2jfree.gameserver.gameobjects.shot.PlayerShots;
-import com.l2jfree.gameserver.gameobjects.skills.PcSkills;
+import com.l2jfree.gameserver.gameobjects.skills.PlayerSkills;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
@@ -524,7 +524,7 @@ public final class L2PcInstance extends L2Playable
 	private PcWarehouse _warehouse;
 	private PcFreight _freight;
 	private List<PcFreight> _depositedFreight;
-	private final PcSkills _pcSkills = new PcSkills(this);
+	private final PlayerSkills _pcSkills = new PlayerSkills(this);
 	
 	/** True if the L2PcInstance is sitting */
 	private boolean _waitTypeSitting;
