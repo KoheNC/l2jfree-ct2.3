@@ -36,11 +36,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2Registry;
-import com.l2jfree.loginserver.L2LoginClient;
 import com.l2jfree.loginserver.beans.Accounts;
 import com.l2jfree.loginserver.beans.FailedLoginAttempt;
 import com.l2jfree.loginserver.beans.GameServerInfo;
 import com.l2jfree.loginserver.beans.SessionKey;
+import com.l2jfree.loginserver.network.L2Client;
 import com.l2jfree.loginserver.services.AccountsServices;
 import com.l2jfree.loginserver.services.exception.AccountBannedException;
 import com.l2jfree.loginserver.services.exception.AccountModificationException;
@@ -83,7 +83,7 @@ public class LoginManager
 	}
 	
 	/** Authed Clients on LoginServer*/
-	protected Map<String, L2LoginClient> _loginServerClients = new FastMap<String, L2LoginClient>().setShared(true);
+	protected Map<String, L2Client> _loginServerClients = new FastMap<String, L2Client>().setShared(true);
 	
 	/** Keep trace of login attempt for an inetadress*/
 	private Map<InetAddress, FailedLoginAttempt> _hackProtection;
@@ -106,7 +106,7 @@ public class LoginManager
 		SYSTEM_ERROR
 	}
 	
-	private FastList<L2LoginClient> _connections;
+	private FastList<L2Client> _connections;
 	
 	/**
 	 * Private constructor to avoid direct instantiation.
@@ -124,7 +124,7 @@ public class LoginManager
 			
 			_service = (AccountsServices)L2Registry.getBean("AccountsServices");
 			
-			_connections = new FastList<L2LoginClient>();
+			_connections = new FastList<L2Client>();
 			
 			KeyPairGenerator keygen = null;
 			
@@ -203,7 +203,7 @@ public class LoginManager
 	 * @param client
 	 * @return a SessionKey
 	 */
-	public SessionKey assignSessionKeyToLogin(String account, L2LoginClient client)
+	public SessionKey assignSessionKeyToLogin(String account, L2Client client)
 	{
 		SessionKey key;
 		
@@ -224,7 +224,7 @@ public class LoginManager
 		return _loginServerClients.containsKey(account);
 	}
 	
-	public SessionKey assignSessionKeyToClient(String account, L2LoginClient client)
+	public SessionKey assignSessionKeyToClient(String account, L2Client client)
 	{
 		SessionKey key;
 		
@@ -273,7 +273,7 @@ public class LoginManager
 	 * @throws AccountBannedException if the use was banned
 	 * @throws AccountWrongPasswordException if the password was wrong
 	 */
-	public AuthLoginResult tryAuthLogin(String account, String password, L2LoginClient client)
+	public AuthLoginResult tryAuthLogin(String account, String password, L2Client client)
 			throws AccountBannedException, AccountWrongPasswordException, IPRestrictedException
 	{
 		AuthLoginResult ret = AuthLoginResult.INVALID_PASSWORD;
@@ -325,14 +325,14 @@ public class LoginManager
 		return ret;
 	}
 	
-	public L2LoginClient getAuthedClient(String account)
+	public L2Client getAuthedClient(String account)
 	{
 		return _loginServerClients.get(account);
 	}
 	
 	public SessionKey getKeyForAccount(String account)
 	{
-		L2LoginClient client = _loginServerClients.get(account);
+		L2Client client = _loginServerClients.get(account);
 		if (client != null)
 		{
 			return client.getSessionKey();
@@ -342,7 +342,7 @@ public class LoginManager
 	
 	public String getHostForAccount(String account)
 	{
-		L2LoginClient client = getAuthedClient(account);
+		L2Client client = getAuthedClient(account);
 		
 		return client != null ? client.getIp() : "-1";
 	}
@@ -480,7 +480,7 @@ public class LoginManager
 	 * @throws AccountBannedException  if account is banned
 	 * @throws AccountWrongPasswordException if the password is wrong
 	 */
-	public boolean loginValid(String user, String password, L2LoginClient client) throws NoSuchAlgorithmException,
+	public boolean loginValid(String user, String password, L2Client client) throws NoSuchAlgorithmException,
 			UnsupportedEncodingException, AccountModificationException, AccountBannedException,
 			AccountWrongPasswordException, IPRestrictedException
 	{
@@ -679,12 +679,12 @@ public class LoginManager
 		return false;
 	}
 	
-	public void addConnection(L2LoginClient lc)
+	public void addConnection(L2Client lc)
 	{
 		_connections.add(lc);
 	}
 	
-	public void remConnection(L2LoginClient lc)
+	public void remConnection(L2Client lc)
 	{
 		_connections.remove(lc);
 	}

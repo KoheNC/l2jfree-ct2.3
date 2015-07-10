@@ -22,6 +22,7 @@ import com.l2jfree.L2Registry;
 import com.l2jfree.loginserver.manager.BanManager;
 import com.l2jfree.loginserver.manager.GameServerManager;
 import com.l2jfree.loginserver.manager.LoginManager;
+import com.l2jfree.loginserver.network.L2ClientSelectorThread;
 import com.l2jfree.loginserver.thread.GameServerListener;
 import com.l2jfree.status.Status;
 
@@ -51,7 +52,7 @@ public final class LoginServer extends L2AutoInitialization
 		
 		// o Initialize SelectorThread
 		// ----------------------------
-		L2LoginSelectorThread.getInstance();
+		L2ClientSelectorThread.getInstance();
 		
 		// o Initialize GS listener
 		// ----------------------------
@@ -71,9 +72,9 @@ public final class LoginServer extends L2AutoInitialization
 		// o Start the server
 		// ------------------
 		
-		L2LoginSelectorThread.getInstance().openServerSocket(InetAddress.getByName(Config.LOGIN_SERVER_HOSTNAME),
+		L2ClientSelectorThread.getInstance().openServerSocket(InetAddress.getByName(Config.LOGIN_SERVER_HOSTNAME),
 				Config.LOGIN_SERVER_PORT);
-		L2LoginSelectorThread.getInstance().start();
+		L2ClientSelectorThread.getInstance().start();
 		
 		_log.info("Login Server ready on " + Config.LOGIN_SERVER_HOSTNAME + ":" + Config.LOGIN_SERVER_PORT);
 	}
