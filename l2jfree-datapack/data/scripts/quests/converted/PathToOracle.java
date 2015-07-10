@@ -16,9 +16,9 @@ package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.ClassId;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -236,7 +236,7 @@ public final class PathToOracle extends QuestJython
 						qs.exitQuest(false);
 						if (done.isEmpty())
 						{
-							qs.rewardItems(PcInventory.ADENA_ID, 81900);
+							qs.rewardItems(PlayerInventory.ADENA_ID, 81900);
 							qs.addExpAndSp(295862, 16894); // 2140?
 							qs.giveItems(LEAF_OF_ORACLE, 1);
 						}

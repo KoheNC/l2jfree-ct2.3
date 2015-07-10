@@ -21,9 +21,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.Elementals;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.mmocore.network.SendablePacket;
@@ -162,19 +162,19 @@ public abstract class L2ServerPacket extends SendablePacket<L2Client, L2ClientPa
 		return slots.toNativeArray();
 	}
 	
-	protected final void writePaperdollObjectIds(PcInventory inv, boolean writeJewels)
+	protected final void writePaperdollObjectIds(PlayerInventory inv, boolean writeJewels)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(writeJewels))
 			writeD(inv.getPaperdollObjectId(slot));
 	}
 	
-	protected final void writePaperdollItemDisplayIds(PcInventory inv, boolean writeJewels)
+	protected final void writePaperdollItemDisplayIds(PlayerInventory inv, boolean writeJewels)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(writeJewels))
 			writeD(inv.getPaperdollItemDisplayId(slot));
 	}
 	
-	protected final void writePaperdollAugmentationIds(PcInventory inv, boolean writeJewels)
+	protected final void writePaperdollAugmentationIds(PlayerInventory inv, boolean writeJewels)
 	{
 		for (int slot : L2ServerPacket.getPaperdollSlots(writeJewels))
 			writeD(inv.getPaperdollAugmentationId(slot));

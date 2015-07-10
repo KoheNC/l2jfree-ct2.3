@@ -29,7 +29,7 @@ import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.network.packets.server.MultiSellList;
 import com.l2jfree.gameserver.templates.item.L2Armor;
 import com.l2jfree.gameserver.templates.item.L2Item;
@@ -195,13 +195,13 @@ public final class L2Multisell
 			MultiSellIngredient newIngredient = new MultiSellIngredient(ing);
 			
 			// if taxes are to be applied, modify/add the adena count based on the template adena/ancient adena count
-			if (ing.getItemId() == PcInventory.ADENA_ID && ing.isTaxIngredient())
+			if (ing.getItemId() == PlayerInventory.ADENA_ID && ing.isTaxIngredient())
 			{
 				if (applyTaxes)
 					adenaAmount += Math.round(ing.getItemCount() * taxRate);
 				continue; // do not adena yet, as non-taxIngredient adena entries might occur next (order not guaranteed)
 			}
-			else if (ing.getItemId() == PcInventory.ADENA_ID) // && !ing.isTaxIngredient()
+			else if (ing.getItemId() == PlayerInventory.ADENA_ID) // && !ing.isTaxIngredient()
 			{
 				adenaAmount += ing.getItemCount();
 				continue; // do not adena yet, as taxIngredient adena entries might occur next (order not guaranteed)
@@ -234,7 +234,7 @@ public final class L2Multisell
 		// now add the adena, if any.
 		if (adenaAmount > 0)
 		{
-			newEntry.addIngredient(new MultiSellIngredient(PcInventory.ADENA_ID, adenaAmount));
+			newEntry.addIngredient(new MultiSellIngredient(PlayerInventory.ADENA_ID, adenaAmount));
 		}
 		// Now modify the enchantment level of products, if necessary
 		for (MultiSellIngredient ing : templateEntry.getProducts())

@@ -34,6 +34,7 @@ import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.items.model.Item;
 import com.l2jfree.gameserver.model.L2CommandChannel;
@@ -41,7 +42,6 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.skills.SkillsEngine;
 import com.l2jfree.gameserver.templates.StatsSet;
 import com.l2jfree.gameserver.templates.item.L2ArmorType;
@@ -845,8 +845,8 @@ public final class ItemTable
 	{
 		switch (itemId)
 		{
-			case PcInventory.ADENA_ID:
-			case PcInventory.ANCIENT_ADENA_ID:
+			case PlayerInventory.ADENA_ID:
+			case PlayerInventory.ANCIENT_ADENA_ID:
 			case SevenSigns.SEAL_STONE_BLUE_ID:
 			case SevenSigns.SEAL_STONE_GREEN_ID:
 			case SevenSigns.SEAL_STONE_RED_ID:

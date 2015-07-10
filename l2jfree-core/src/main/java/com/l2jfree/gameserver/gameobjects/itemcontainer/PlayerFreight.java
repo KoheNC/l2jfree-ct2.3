@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -20,13 +20,13 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 import com.l2jfree.util.ArrayBunch;
 
-public class PcFreight extends ItemContainer
+public class PlayerFreight extends ItemContainer
 {
 	private final L2PcInstance _owner; // This is the L2PcInstance that owns this Freight;
 	private int _activeLocationId;
 	private int _tempOwnerId = 0;
 	
-	public PcFreight(L2PcInstance owner)
+	public PlayerFreight(L2PcInstance owner)
 	{
 		_owner = owner;
 	}

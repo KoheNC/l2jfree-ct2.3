@@ -16,10 +16,10 @@ package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.ClassId;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -224,7 +224,7 @@ public final class PathToRogue extends QuestJython
 					qs.exitQuest(false);
 					if (done.isEmpty())
 					{
-						qs.rewardItems(PcInventory.ADENA_ID, 81900);
+						qs.rewardItems(PlayerInventory.ADENA_ID, 81900);
 						qs.addExpAndSp(295862, 16814);
 						qs.giveItems(BEZIQUES_RECOMMENDATION, 1);
 					}

@@ -18,9 +18,9 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -242,7 +242,7 @@ public final class L2UrnInstance extends L2NpcInstance
 			count = item.getCount();
 		
 		// Destroy the quantity of items wanted
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 			player.reduceAdena("Quest", count, player, true);
 		else
 			player.destroyItemByItemId("Quest", itemId, count, player, true);
@@ -264,7 +264,7 @@ public final class L2UrnInstance extends L2NpcInstance
 			item.setEnchantLevel(enchantlevel);
 		
 		// If item for reward is gold, send message of gold reward to client
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 		{
 			SystemMessage smsg = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
 			smsg.addItemNumber(count);

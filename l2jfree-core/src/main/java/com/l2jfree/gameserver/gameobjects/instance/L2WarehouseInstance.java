@@ -18,11 +18,11 @@ import java.util.Map;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerFreight;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.entity.Town;
-import com.l2jfree.gameserver.model.itemcontainer.PcFreight;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -155,7 +155,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 		if (_log.isDebugEnabled())
 			_log.debug("Showing freightened items");
 		
-		PcFreight freight = player.getFreight();
+		PlayerFreight freight = player.getFreight();
 		
 		if (freight != null)
 		{
@@ -219,7 +219,7 @@ public final class L2WarehouseInstance extends L2NpcInstance
 	{
 		player.sendPacket(ActionFailed.STATIC_PACKET);
 		
-		PcFreight freight = new PcFreight(null);
+		PlayerFreight freight = new PlayerFreight(null);
 		
 		freight.doQuickRestore(obj_Id);
 		

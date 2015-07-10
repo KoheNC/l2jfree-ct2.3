@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model;
 
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 
 /**
  * Used to Store data sent to Client for Character
@@ -60,7 +60,7 @@ public class CharSelectInfoPackage
 	{
 		setObjectId(objectId);
 		_name = name;
-		_paperdoll = PcInventory.restoreVisibleInventory(objectId);
+		_paperdoll = PlayerInventory.restoreVisibleInventory(objectId);
 	}
 	
 	public int getObjectId()

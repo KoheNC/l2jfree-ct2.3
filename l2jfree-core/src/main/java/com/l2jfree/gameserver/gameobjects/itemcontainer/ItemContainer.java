@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -187,7 +187,7 @@ public abstract class ItemContainer
 	public long getAdena()
 	{
 		for (L2ItemInstance item : _items)
-			if (item.getItemId() == PcInventory.ADENA_ID)
+			if (item.getItemId() == PlayerInventory.ADENA_ID)
 				return item.getCount();
 		return 0;
 	}
@@ -217,7 +217,7 @@ public abstract class ItemContainer
 			item = olditem;
 			
 			// Updates database
-			if (item.getItemId() == PcInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
+			if (item.getItemId() == PlayerInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
 			{
 				// Small adena changes won't be saved to database all the time
 				if (GameTimeController.getGameTicks() % 5 == 0)
@@ -263,7 +263,7 @@ public abstract class ItemContainer
 			item.changeCount(process, count, actor, reference);
 			item.setLastChange(L2ItemInstance.MODIFIED);
 			// Updates database
-			if (itemId == PcInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
+			if (itemId == PlayerInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
 			{
 				// Small adena changes won't be saved to database all the time
 				if (GameTimeController.getGameTicks() % 5 == 0)

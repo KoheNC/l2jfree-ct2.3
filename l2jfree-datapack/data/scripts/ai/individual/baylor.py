@@ -9,7 +9,7 @@ from com.l2jfree.gameserver.model                       import L2CharPosition
 from com.l2jfree.gameserver.model                       import L2World
 from com.l2jfree.gameserver.gameobjects.instance        import L2MonsterInstance
 from com.l2jfree.gameserver.model.entity                import Instance
-from com.l2jfree.gameserver.model.itemcontainer         import Inventory
+from com.l2jfree.gameserver.gameobjects.itemcontainer         import Inventory
 from com.l2jfree.gameserver.model.quest                 import QuestState
 from com.l2jfree.gameserver.model.quest                 import State
 from com.l2jfree.gameserver.model.quest.jython          import QuestJython as JQuest

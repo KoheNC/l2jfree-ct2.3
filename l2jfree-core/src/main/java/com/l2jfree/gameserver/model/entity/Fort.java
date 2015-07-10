@@ -34,10 +34,10 @@ import com.l2jfree.gameserver.datatables.StaticObjects;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.PlaySound;
 import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
@@ -176,7 +176,7 @@ public class Fort extends Siegeable<FortSiege>
 					dbSave(newfc);
 					if (_cwh)
 					{
-						getOwnerClan().getWarehouse().destroyItemByItemId("CS_function_fee", PcInventory.ADENA_ID, fee,
+						getOwnerClan().getWarehouse().destroyItemByItemId("CS_function_fee", PlayerInventory.ADENA_ID, fee,
 								null, null);
 						if (_log.isDebugEnabled())
 							_log.warn("deducted " + fee + " adena from " + getName()
@@ -595,7 +595,7 @@ public class Fort extends Siegeable<FortSiege>
 			_log.warn("Called Fort.updateFunctions(int type, int lvl, int lease, long rate, boolean addNew) Owner : "
 					+ getOwnerId());
 		if (lease > 0)
-			if (!player.destroyItemByItemId("Consume", PcInventory.ADENA_ID, lease, null, true))
+			if (!player.destroyItemByItemId("Consume", PlayerInventory.ADENA_ID, lease, null, true))
 				return false;
 		if (addNew)
 		{

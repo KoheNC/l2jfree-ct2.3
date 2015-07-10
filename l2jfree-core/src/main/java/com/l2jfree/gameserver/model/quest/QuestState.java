@@ -32,11 +32,11 @@ import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.model.L2DropData;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.ExShowQuestMark;
@@ -568,7 +568,7 @@ public final class QuestState
 			item.setEnchantLevel(enchantlevel);
 		
 		// If item for reward is gold, send message of gold reward to client
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 		{
 			SystemMessage smsg = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
 			smsg.addItemNumber(count);
@@ -619,7 +619,7 @@ public final class QuestState
 		}
 		
 		// If item for reward is gold, send message of gold reward to client
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 		{
 			SystemMessage smsg = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
 			smsg.addItemNumber(count);
@@ -660,7 +660,7 @@ public final class QuestState
 		if (count <= 0)
 			return;
 		
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 			count = (long)(count * Config.RATE_QUESTS_REWARD_ADENA);
 		else if (!Config.COMPENSATE_QUEST_ITEM_REWARDS)
 			count = (long)(count * Config.RATE_QUESTS_REWARD_ITEMS);
@@ -682,7 +682,7 @@ public final class QuestState
 		}
 		
 		// If item for reward is gold, send message of gold reward to client
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 		{
 			SystemMessage smsg = new SystemMessage(SystemMessageId.EARNED_S1_ADENA);
 			smsg.addItemNumber(count);
@@ -825,7 +825,7 @@ public final class QuestState
 			count = item.getCount();
 		
 		// Destroy the quantity of items wanted
-		if (itemId == PcInventory.ADENA_ID)
+		if (itemId == PlayerInventory.ADENA_ID)
 			getPlayer().reduceAdena(Quest.QUEST, count, getPlayer(), true);
 		else
 		{

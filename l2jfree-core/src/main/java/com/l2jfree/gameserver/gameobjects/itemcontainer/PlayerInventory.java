@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.itemcontainer;
+package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,7 +37,7 @@ import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 import com.l2jfree.util.ArrayBunch;
 
-public class PcInventory extends Inventory
+public class PlayerInventory extends Inventory
 {
 	public static final int ADENA_ID = 57;
 	public static final int ANCIENT_ADENA_ID = 5575;
@@ -47,7 +47,7 @@ public class PcInventory extends Inventory
 	private L2ItemInstance _adena;
 	private L2ItemInstance _ancientAdena;
 	
-	public PcInventory(L2PcInstance owner)
+	public PlayerInventory(L2PcInstance owner)
 	{
 		_owner = owner;
 	}

@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket.ElementalOwner;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
@@ -246,7 +246,7 @@ public class TradeList
 	 * Returns the list of items in inventory available for transaction
 	 * @return L2ItemInstance : items in inventory
 	 */
-	public TradeList.TradeItem[] getAvailableItems(PcInventory inventory)
+	public TradeList.TradeItem[] getAvailableItems(PlayerInventory inventory)
 	{
 		ArrayBunch<TradeList.TradeItem> list = new ArrayBunch<TradeList.TradeItem>();
 		for (TradeList.TradeItem item : _items)
@@ -357,7 +357,7 @@ public class TradeList
 			return null;
 		}
 		
-		if ((PcInventory.MAX_ADENA / count) < price)
+		if ((PlayerInventory.MAX_ADENA / count) < price)
 		{
 			_owner.sendPacket(SystemMessageId.YOU_HAVE_EXCEEDED_QUANTITY_THAT_CAN_BE_INPUTTED);
 			return null;
@@ -415,7 +415,7 @@ public class TradeList
 			return null;
 		}
 		
-		if ((PcInventory.MAX_ADENA / count) < price)
+		if ((PlayerInventory.MAX_ADENA / count) < price)
 		{
 			_log.warn(_owner.getName() + ": Attempt to overflow adena !");
 			return null;
@@ -751,8 +751,8 @@ public class TradeList
 		int weight = 0;
 		long totalPrice = 0;
 		
-		final PcInventory ownerInventory = _owner.getInventory();
-		final PcInventory playerInventory = player.getInventory();
+		final PlayerInventory ownerInventory = _owner.getInventory();
+		final PlayerInventory playerInventory = player.getInventory();
 		
 		for (ItemRequest item : items)
 		{
@@ -779,7 +779,7 @@ public class TradeList
 			}
 			
 			// check for overflow in the single item
-			if ((PcInventory.MAX_ADENA / item.getCount()) < item.getPrice())
+			if ((PlayerInventory.MAX_ADENA / item.getCount()) < item.getPrice())
 			{
 				// private store attempting to overflow - disable it
 				lock();
@@ -788,7 +788,7 @@ public class TradeList
 			
 			totalPrice += item.getCount() * item.getPrice();
 			// check for overflow of the total price
-			if (PcInventory.MAX_ADENA < totalPrice || totalPrice < 0)
+			if (PlayerInventory.MAX_ADENA < totalPrice || totalPrice < 0)
 			{
 				// private store attempting to overflow - disable it
 				lock();
@@ -929,8 +929,8 @@ public class TradeList
 		
 		boolean ok = false;
 		
-		final PcInventory ownerInventory = _owner.getInventory();
-		final PcInventory playerInventory = player.getInventory();
+		final PlayerInventory ownerInventory = _owner.getInventory();
+		final PlayerInventory playerInventory = player.getInventory();
 		
 		// Prepare inventory update packet
 		final InventoryUpdate ownerIU = new InventoryUpdate();
@@ -964,7 +964,7 @@ public class TradeList
 				continue;
 			
 			// check for overflow in the single item
-			if ((PcInventory.MAX_ADENA / item.getCount()) < item.getPrice())
+			if ((PlayerInventory.MAX_ADENA / item.getCount()) < item.getPrice())
 			{
 				lock();
 				break;
@@ -972,7 +972,7 @@ public class TradeList
 			
 			long _totalPrice = totalPrice + item.getCount() * item.getPrice();
 			// check for overflow of the total price
-			if (PcInventory.MAX_ADENA < _totalPrice || _totalPrice < 0)
+			if (PlayerInventory.MAX_ADENA < _totalPrice || _totalPrice < 0)
 			{
 				lock();
 				break;

@@ -40,6 +40,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaidBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.knownlist.AttackableKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.status.AttackableStatus;
@@ -55,7 +56,6 @@ import com.l2jfree.gameserver.model.L2Manor;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.SoulCrystal;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
@@ -1128,7 +1128,7 @@ public class L2Attackable extends L2Npc
 	
 	private long calculateDropChance(double chance, L2DropData drop, boolean isSweep, int levelModifier)
 	{
-		if (drop != null && drop.getItemId() == PcInventory.ADENA_ID)
+		if (drop != null && drop.getItemId() == PlayerInventory.ADENA_ID)
 		{
 			if (this instanceof L2RaidBossInstance)
 				chance *= Config.RATE_DROP_ADENA_RAID;
@@ -1164,7 +1164,7 @@ public class L2Attackable extends L2Npc
 		
 		if (isChampion())
 		{
-			if (drop != null && drop.getItemId() == PcInventory.ADENA_ID)
+			if (drop != null && drop.getItemId() == PlayerInventory.ADENA_ID)
 				chance *= Config.CHAMPION_ADENA;
 			else if (drop != null && ItemTable.isSealStone(drop.getItemId()))
 				chance *= Config.CHAMPION_SEALSTONE;
@@ -1179,7 +1179,7 @@ public class L2Attackable extends L2Npc
 				// We should multiply by the server's drop rate, so we always get a low chance of drop for deep blue mobs.
 				// NOTE: This is valid only for adena drops! Others drops will still obey server's rate
 				chance /= 3;
-				if (drop != null && drop.getItemId() == PcInventory.ADENA_ID && Config.RATE_DROP_ITEMS != 0)
+				if (drop != null && drop.getItemId() == PlayerInventory.ADENA_ID && Config.RATE_DROP_ITEMS != 0)
 					chance /= Config.RATE_DROP_ITEMS;
 			}
 			

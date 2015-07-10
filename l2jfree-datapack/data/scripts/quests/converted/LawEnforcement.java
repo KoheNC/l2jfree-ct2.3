@@ -16,9 +16,9 @@ package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.base.ClassId;
 import com.l2jfree.gameserver.model.base.Race;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -69,7 +69,7 @@ public final class LawEnforcement extends QuestJython
 		{
 			player.setClassId(ClassId.Judicator.getId());
 			player.broadcastUserInfo();
-			qs.rewardItems(PcInventory.ADENA_ID, 26000);
+			qs.rewardItems(PlayerInventory.ADENA_ID, 26000);
 			qs.exitQuest(false);
 			player.sendPacket(SND_FINISH);
 		}

@@ -16,9 +16,9 @@ package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.Race;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -139,7 +139,7 @@ public final class DangerousAllure extends QuestJython
 			if (qs.getQuestItemsCount(NIGHTMARE_CRYSTAL) != 0)
 			{
 				qs.exitQuest(false);
-				qs.rewardItems(PcInventory.ADENA_ID, 102680);
+				qs.rewardItems(PlayerInventory.ADENA_ID, 102680);
 				qs.addExpAndSp(38607, 4018);
 				talker.sendPacket(SND_FINISH);
 				return "30305-06.htm";

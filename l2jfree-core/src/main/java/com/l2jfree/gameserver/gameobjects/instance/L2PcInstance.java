@@ -86,6 +86,12 @@ import com.l2jfree.gameserver.gameobjects.ai.L2PlayerAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.effects.PlayerEffects;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PcWarehouse;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PetInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerFreight;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.PlayerKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
@@ -179,12 +185,6 @@ import com.l2jfree.gameserver.model.entity.events.AbstractFunEventPlayerInfo;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.model.entity.events.CTF.CTFPlayerInfo;
 import com.l2jfree.gameserver.model.entity.faction.FactionMember;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.ItemContainer;
-import com.l2jfree.gameserver.model.itemcontainer.PcFreight;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcWarehouse;
-import com.l2jfree.gameserver.model.itemcontainer.PetInventory;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.quest.Quest;
@@ -520,10 +520,10 @@ public final class L2PcInstance extends L2Playable
 	private int _curWeightPenalty = 0;
 	
 	private long _deleteTimer;
-	private PcInventory _inventory;
+	private PlayerInventory _inventory;
 	private PcWarehouse _warehouse;
-	private PcFreight _freight;
-	private List<PcFreight> _depositedFreight;
+	private PlayerFreight _freight;
+	private List<PlayerFreight> _depositedFreight;
 	private final PlayerSkills _pcSkills = new PlayerSkills(this);
 	
 	/** True if the L2PcInstance is sitting */
@@ -2686,13 +2686,13 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	/**
-	 * Return the PcInventory Inventory of the L2PcInstance contained in _inventory.<BR><BR>
+	 * Return the PlayerInventory Inventory of the L2PcInstance contained in _inventory.<BR><BR>
 	 */
 	@Override
-	public PcInventory getInventory()
+	public PlayerInventory getInventory()
 	{
 		if (_inventory == null)
-			_inventory = new PcInventory(this);
+			_inventory = new PlayerInventory(this);
 		
 		return _inventory;
 	}
@@ -2803,11 +2803,11 @@ public final class L2PcInstance extends L2Playable
 	/**
 	 * Return the PcFreight object of the L2PcInstance.<BR><BR>
 	 */
-	public PcFreight getFreight()
+	public PlayerFreight getFreight()
 	{
 		if (_freight == null)
 		{
-			_freight = new PcFreight(this);
+			_freight = new PlayerFreight(this);
 			_freight.restore();
 		}
 		
@@ -2828,20 +2828,20 @@ public final class L2PcInstance extends L2Playable
 	 * Return deposited PcFreight object for the objectId
 	 * or create new if not exist
 	 */
-	public PcFreight getDepositedFreight(int objectId)
+	public PlayerFreight getDepositedFreight(int objectId)
 	{
 		if (_depositedFreight == null)
-			_depositedFreight = new FastList<PcFreight>();
+			_depositedFreight = new FastList<PlayerFreight>();
 		else
 		{
-			for (PcFreight freight : _depositedFreight)
+			for (PlayerFreight freight : _depositedFreight)
 			{
 				if (freight != null && freight.getOwnerId() == objectId)
 					return freight;
 			}
 		}
 		
-		PcFreight freight = new PcFreight(null);
+		PlayerFreight freight = new PlayerFreight(null);
 		freight.doQuickRestore(objectId);
 		_depositedFreight.add(freight);
 		return freight;
@@ -2855,7 +2855,7 @@ public final class L2PcInstance extends L2Playable
 		if (_depositedFreight == null)
 			return;
 		
-		for (PcFreight freight : _depositedFreight)
+		for (PlayerFreight freight : _depositedFreight)
 		{
 			if (freight != null)
 			{
@@ -2979,7 +2979,7 @@ public final class L2PcInstance extends L2Playable
 		if (sendMessage)
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.EARNED_S2_S1_S);
-			sm.addItemName(PcInventory.ANCIENT_ADENA_ID);
+			sm.addItemName(PlayerInventory.ANCIENT_ADENA_ID);
 			sm.addItemNumber(count);
 			sendPacket(sm);
 		}
@@ -3016,7 +3016,7 @@ public final class L2PcInstance extends L2Playable
 			if (sendMessage)
 			{
 				SystemMessage sm = new SystemMessage(SystemMessageId.S2_S1_DISAPPEARED);
-				sm.addItemName(PcInventory.ANCIENT_ADENA_ID);
+				sm.addItemName(PlayerInventory.ANCIENT_ADENA_ID);
 				sm.addItemNumber(count);
 				sendPacket(sm);
 			}
@@ -3439,9 +3439,9 @@ public final class L2PcInstance extends L2Playable
 		sendPacket(playerSU);
 		
 		// Send target update packet
-		if (target instanceof PcInventory)
+		if (target instanceof PlayerInventory)
 		{
-			L2PcInstance targetPlayer = ((PcInventory)target).getOwner();
+			L2PcInstance targetPlayer = ((PlayerInventory)target).getOwner();
 			
 			if (!Config.FORCE_INVENTORY_UPDATE)
 			{
@@ -4170,7 +4170,7 @@ public final class L2PcInstance extends L2Playable
 			target.dropItem(this, item);
 		else if (isInParty())
 			getParty().distributeItem(this, item, false, target);
-		else if (item.getItemId() == PcInventory.ADENA_ID)
+		else if (item.getItemId() == PlayerInventory.ADENA_ID)
 			addAdena("Loot", item.getCount(), target, true);
 		else
 			addItem("Loot", item.getItemId(), item.getCount(), target, true, false);
@@ -4276,7 +4276,7 @@ public final class L2PcInstance extends L2Playable
 			{
 				sendPacket(ActionFailed.STATIC_PACKET);
 				
-				if (target.getItemId() == PcInventory.ADENA_ID)
+				if (target.getItemId() == PlayerInventory.ADENA_ID)
 				{
 					SystemMessage smsg = new SystemMessage(SystemMessageId.FAILED_TO_PICKUP_S1_ADENA);
 					smsg.addItemNumber(target.getCount());
@@ -4362,7 +4362,7 @@ public final class L2PcInstance extends L2Playable
 			if (isInParty())
 				getParty().distributeItem(this, target);
 			// Target is adena
-			else if (target.getItemId() == PcInventory.ADENA_ID && getInventory().getAdenaInstance() != null)
+			else if (target.getItemId() == PlayerInventory.ADENA_ID && getInventory().getAdenaInstance() != null)
 			{
 				addAdena("Pickup", target.getCount(), null, true);
 				ItemTable.getInstance().destroyItem("Pickup", target, this, null);
@@ -4897,7 +4897,7 @@ public final class L2PcInstance extends L2Playable
 				for (L2ItemInstance itemDrop : getInventory().getItems())
 				{
 					// Don't drop
-					if (!itemDrop.isDropable() || itemDrop.getItemId() == PcInventory.ADENA_ID
+					if (!itemDrop.isDropable() || itemDrop.getItemId() == PlayerInventory.ADENA_ID
 					// Dont drop Shadow Items
 							|| itemDrop.isShadowItem()
 							// Dont drop Time Limited Items
@@ -4950,7 +4950,7 @@ public final class L2PcInstance extends L2Playable
 				// Adena count depends on config
 				iCount = iCount * Config.PLAYER_RATE_DROP_ADENA / 100;
 				// Drop only adena this time
-				if (itemDrop != null && itemDrop.getItemId() == PcInventory.ADENA_ID) // Adena
+				if (itemDrop != null && itemDrop.getItemId() == PlayerInventory.ADENA_ID) // Adena
 				{
 					dropItem("DieDrop", itemDrop.getObjectId(), iCount, getPosition().getX() + Rnd.get(50) - 25,
 							getPosition().getY() + Rnd.get(50) - 25, getPosition().getZ() + 20, killer, true);

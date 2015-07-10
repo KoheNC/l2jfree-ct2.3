@@ -20,13 +20,13 @@ import java.util.StringTokenizer;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2RecipeInstance;
 import com.l2jfree.gameserver.model.L2RecipeList;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -319,7 +319,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 					_itemsSelected.remove(i);
 			}
 			
-			if (_inventory.getInventoryItemCount(PcInventory.ADENA_ID, 0) < _priceTotal)
+			if (_inventory.getInventoryItemCount(PlayerInventory.ADENA_ID, 0) < _priceTotal)
 			{
 				sendOutOfItems(player, Integer.toString(_priceTotal), "Adena");
 				return;
@@ -327,8 +327,8 @@ public class L2CraftManagerInstance extends L2NpcInstance
 			
 			InventoryUpdate iu = new InventoryUpdate();
 			
-			player.destroyItemByItemId("CraftManager", PcInventory.ADENA_ID, _priceTotal, player, true);
-			iu.addModifiedItem(player.getInventory().getItemByItemId(PcInventory.ADENA_ID));
+			player.destroyItemByItemId("CraftManager", PlayerInventory.ADENA_ID, _priceTotal, player, true);
+			iu.addModifiedItem(player.getInventory().getItemByItemId(PlayerInventory.ADENA_ID));
 			
 			for (int i = 0; i < _itemsSelected.size(); i++)
 			{
@@ -662,7 +662,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 				if (_price == 0)
 					_price = Config.ALT_CRAFT_DEFAULT_PRICE;
 				
-				if (_inventory.getInventoryItemCount(PcInventory.ADENA_ID, 0) < _price)
+				if (_inventory.getInventoryItemCount(PlayerInventory.ADENA_ID, 0) < _price)
 				{
 					sendOutOfItems(player, Integer.toString(_price), "Adena");
 					return;
@@ -688,8 +688,8 @@ public class L2CraftManagerInstance extends L2NpcInstance
 					iu.addModifiedItem(player.getInventory().getItemByItemId(_recipeItem.getItemId()));
 				}
 				
-				player.destroyItemByItemId("CraftManager", PcInventory.ADENA_ID, _price, player, true);
-				iu.addModifiedItem(player.getInventory().getItemByItemId(PcInventory.ADENA_ID));
+				player.destroyItemByItemId("CraftManager", PlayerInventory.ADENA_ID, _price, player, true);
+				iu.addModifiedItem(player.getInventory().getItemByItemId(PlayerInventory.ADENA_ID));
 				
 				if (_quantitySuccess > 0)
 				{

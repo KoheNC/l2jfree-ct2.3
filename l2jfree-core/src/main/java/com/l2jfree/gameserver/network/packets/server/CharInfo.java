@@ -18,9 +18,9 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Decoy;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.gameobjects.view.PcLikeView;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
@@ -64,7 +64,7 @@ public final class CharInfo extends L2ServerPacket
 	protected void writeImpl()
 	{
 		final PlayerAppearance _appearance = _activeChar.getAppearance();
-		final PcInventory _inv = _activeChar.getInventory();
+		final PlayerInventory _inv = _activeChar.getInventory();
 		
 		writeC(0x31);
 		writeD(_view.getX());

@@ -28,6 +28,9 @@ import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PetInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.PetStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
@@ -43,9 +46,6 @@ import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2PetData;
 import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
-import com.l2jfree.gameserver.model.itemcontainer.PetInventory;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
@@ -529,7 +529,7 @@ public class L2PetInstance extends L2Summon
 			{
 				getOwner().sendPacket(ActionFailed.STATIC_PACKET);
 				
-				if (target.getItemId() == PcInventory.ADENA_ID)
+				if (target.getItemId() == PlayerInventory.ADENA_ID)
 				{
 					SystemMessage smsg = new SystemMessage(SystemMessageId.FAILED_TO_PICKUP_S1_ADENA);
 					smsg.addItemNumber(target.getCount());
@@ -582,7 +582,7 @@ public class L2PetInstance extends L2Summon
 		}
 		else
 		{
-			if (target.getItemId() == PcInventory.ADENA_ID)
+			if (target.getItemId() == PlayerInventory.ADENA_ID)
 			{
 				SystemMessage sm2 = new SystemMessage(SystemMessageId.PET_PICKED_S1_ADENA);
 				sm2.addItemNumber(target.getCount());
@@ -698,9 +698,9 @@ public class L2PetInstance extends L2Summon
 		getOwner().sendPacket(petIU);
 		
 		// Send target update packet
-		if (target instanceof PcInventory)
+		if (target instanceof PlayerInventory)
 		{
-			L2PcInstance targetPlayer = ((PcInventory)target).getOwner();
+			L2PcInstance targetPlayer = ((PlayerInventory)target).getOwner();
 			InventoryUpdate playerUI = new InventoryUpdate();
 			if (newItem.getCount() > count)
 				playerUI.addModifiedItem(newItem);

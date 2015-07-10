@@ -36,6 +36,7 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.CropProcure;
@@ -44,7 +45,6 @@ import com.l2jfree.gameserver.instancemanager.CrownManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Manor;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.zone.L2SiegeDangerZone;
 import com.l2jfree.gameserver.network.packets.server.PlaySound;
 import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
@@ -207,7 +207,7 @@ public class Castle extends Siegeable<Siege>
 					if (_cwh)
 					{
 						ClanTable.getInstance().getClan(getOwnerId()).getWarehouse()
-								.destroyItemByItemId("CS_function_fee", PcInventory.ADENA_ID, fee, null, null);
+								.destroyItemByItemId("CS_function_fee", PlayerInventory.ADENA_ID, fee, null, null);
 						if (_log.isDebugEnabled())
 							_log.warn("deducted " + fee + " adena from " + getName()
 									+ " owner's cwh for function id : " + getType());
@@ -364,8 +364,8 @@ public class Castle extends Siegeable<Siege>
 		}
 		else
 		{
-			if (_treasury + amount > PcInventory.MAX_ADENA) // TODO is this valid after gracia final?
-				_treasury = PcInventory.MAX_ADENA;
+			if (_treasury + amount > PlayerInventory.MAX_ADENA) // TODO is this valid after gracia final?
+				_treasury = PlayerInventory.MAX_ADENA;
 			else
 				_treasury += amount;
 		}
@@ -1434,7 +1434,7 @@ public class Castle extends Siegeable<Siege>
 			_log.warn("Called Castle.updateFunctions(int type, int lvl, int lease, long rate, boolean addNew) Owner : "
 					+ getOwnerId());
 		if (lease > 0)
-			if (!player.destroyItemByItemId("Consume", PcInventory.ADENA_ID, lease, null, true))
+			if (!player.destroyItemByItemId("Consume", PlayerInventory.ADENA_ID, lease, null, true))
 				return false;
 		if (addNew)
 		{

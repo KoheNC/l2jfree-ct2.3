@@ -52,6 +52,8 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2TeleporterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2WarehouseInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.NpcInventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.NpcKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
@@ -86,8 +88,6 @@ import com.l2jfree.gameserver.model.MobGroupTable;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.Town;
-import com.l2jfree.gameserver.model.itemcontainer.NpcInventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
@@ -2078,7 +2078,7 @@ public class L2Npc extends L2Creature
 			
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addItem(item);
-			L2ItemInstance adenaupdate = player.getInventory().getItemByItemId(PcInventory.ADENA_ID);
+			L2ItemInstance adenaupdate = player.getInventory().getItemByItemId(PlayerInventory.ADENA_ID);
 			iu.addModifiedItem(adenaupdate);
 			player.sendPacket(iu);
 			

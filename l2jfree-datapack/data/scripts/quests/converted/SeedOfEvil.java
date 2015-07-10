@@ -16,8 +16,8 @@ package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -129,7 +129,7 @@ public final class SeedOfEvil extends QuestJython
 			if (qs.getQuestItemsCount(CLAY_TABLET) != 0)
 			{
 				qs.exitQuest(false);
-				qs.rewardItems(PcInventory.ADENA_ID, 1495);
+				qs.rewardItems(PlayerInventory.ADENA_ID, 1495);
 				qs.giveItems(956, 1);
 				qs.addExpAndSp(17818, 927);
 				talker.sendPacket(SND_FINISH);

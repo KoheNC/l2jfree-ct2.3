@@ -16,9 +16,9 @@ package quests.converted;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.Race;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
@@ -149,7 +149,7 @@ public final class DestroyPlaguebringers extends QuestJython
 			{
 				qs.takeItems(WERERAT_FANG, normal);
 				qs.takeItems(VAROOL_FOULCLAWS_FANG, leader);
-				qs.rewardItems(PcInventory.ADENA_ID, (normal * NORMAL_FANG_REWARD + leader * LEADER_FANG_REWARD));
+				qs.rewardItems(PlayerInventory.ADENA_ID, (normal * NORMAL_FANG_REWARD + leader * LEADER_FANG_REWARD));
 				return "30155-07.htm";
 			}
 			else
