@@ -24,9 +24,9 @@ import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.packets.server.DeleteObject;
 import com.l2jfree.gameserver.network.packets.server.SpawnItem;
 
-public final class PcKnownList extends PlayableKnownList
+public final class PlayerKnownList extends PlayableKnownList
 {
-	public PcKnownList(L2PcInstance activeChar)
+	public PlayerKnownList(L2PcInstance activeChar)
 	{
 		super(activeChar);
 	}

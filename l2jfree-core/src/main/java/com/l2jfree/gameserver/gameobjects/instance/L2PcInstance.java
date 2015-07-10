@@ -87,7 +87,7 @@ import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.effects.PlayerEffects;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
-import com.l2jfree.gameserver.gameobjects.knownlist.PcKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.PlayerKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ClearableReference;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
 import com.l2jfree.gameserver.gameobjects.shot.CreatureShots;
@@ -1108,13 +1108,13 @@ public final class L2PcInstance extends L2Playable
 	@Override
 	protected CreatureKnownList initKnownList()
 	{
-		return new PcKnownList(this);
+		return new PlayerKnownList(this);
 	}
 	
 	@Override
-	public final PcKnownList getKnownList()
+	public final PlayerKnownList getKnownList()
 	{
-		return (PcKnownList)_knownList;
+		return (PlayerKnownList)_knownList;
 	}
 	
 	@Override
