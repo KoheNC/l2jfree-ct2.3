@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 
-public abstract class PlayableKnownList extends CharKnownList
+public abstract class PlayableKnownList extends CreatureKnownList
 {
 	// =========================================================
 	// Data Field

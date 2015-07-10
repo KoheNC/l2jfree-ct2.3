@@ -52,7 +52,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2TeleporterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2WarehouseInstance;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.NpcKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CharShots;
 import com.l2jfree.gameserver.gameobjects.shot.NpcShots;
@@ -358,7 +358,7 @@ public class L2Npc extends L2Character
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new NpcKnownList(this);
 	}

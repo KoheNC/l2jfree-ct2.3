@@ -49,7 +49,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcWalkerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.shot.CharShots;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
@@ -223,7 +223,7 @@ public abstract class L2Character extends L2Object
 	/**
 	 * Objects known by this object
 	 */
-	protected final CharKnownList _knownList;
+	protected final CreatureKnownList _knownList;
 	
 	// =========================================================
 	// Constructor
@@ -2672,13 +2672,13 @@ public abstract class L2Character extends L2Object
 		_isFlying = mode;
 	}
 	
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
-		return new CharKnownList(this);
+		return new CreatureKnownList(this);
 	}
 	
 	@Override
-	public CharKnownList getKnownList()
+	public CreatureKnownList getKnownList()
 	{
 		return _knownList;
 	}

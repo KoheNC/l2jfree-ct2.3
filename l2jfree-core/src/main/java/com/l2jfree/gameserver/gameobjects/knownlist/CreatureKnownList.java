@@ -24,14 +24,14 @@ import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.LazyFastMap;
 
-public class CharKnownList extends ObjectKnownList
+public class CreatureKnownList extends ObjectKnownList
 {
 	protected final L2Character _activeChar;
 	
 	private final Map<Integer, L2Object> _knownObjects = new LazyFastMap<Integer, L2Object>().setShared();
 	private final Map<Integer, L2PcInstance> _knownPlayers = new LazyFastMap<Integer, L2PcInstance>().setShared();
 	
-	public CharKnownList(L2Character activeChar)
+	public CreatureKnownList(L2Character activeChar)
 	{
 		_activeChar = activeChar;
 	}

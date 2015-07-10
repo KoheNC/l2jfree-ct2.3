@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2FortSiegeGuardAI;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.FortSiegeGuardKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
@@ -38,7 +38,7 @@ public class L2FortSiegeGuardInstance extends L2SiegeGuard
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new FortSiegeGuardKnownList(this);
 	}

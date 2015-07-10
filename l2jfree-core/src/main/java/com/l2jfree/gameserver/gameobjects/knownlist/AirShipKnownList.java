@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.model.L2Object;
  * @author Kerberos
  *
  */
-public class AirShipKnownList extends CharKnownList
+public class AirShipKnownList extends CreatureKnownList
 {
 	
 	/**

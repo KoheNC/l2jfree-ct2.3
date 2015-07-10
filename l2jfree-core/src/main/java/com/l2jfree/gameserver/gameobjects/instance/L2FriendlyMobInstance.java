@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.instance;
 
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.FriendlyMobKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
@@ -36,7 +36,7 @@ public class L2FriendlyMobInstance extends L2Attackable
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new FriendlyMobKnownList(this);
 	}

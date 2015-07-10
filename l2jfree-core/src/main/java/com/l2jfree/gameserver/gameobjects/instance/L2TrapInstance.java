@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Trap;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.TrapKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2CharTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -86,7 +86,7 @@ public final class L2TrapInstance extends L2Trap implements Runnable
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new TrapKnownList(this);
 	}

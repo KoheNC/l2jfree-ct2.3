@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.model.L2Object;
  * @author Maktakien
  *
  */
-public class BoatKnownList extends CharKnownList
+public class BoatKnownList extends CreatureKnownList
 {
 	
 	/**

@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2DoorAI;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.DoorKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
 import com.l2jfree.gameserver.gameobjects.stat.DoorStat;
@@ -190,7 +190,7 @@ public class L2DoorInstance extends L2Character
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new DoorKnownList(this);
 	}

@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2FestivalGuideInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.model.L2Object;
 
-public class NpcKnownList extends CharKnownList
+public class NpcKnownList extends CreatureKnownList
 {
 	// =========================================================
 	// Data Field

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 import com.l2jfree.gameserver.gameobjects.L2Decoy;
 import com.l2jfree.gameserver.model.L2Object;
 
-public class DecoyKnownList extends CharKnownList
+public class DecoyKnownList extends CreatureKnownList
 {
 	public DecoyKnownList(L2Decoy activeChar)
 	{

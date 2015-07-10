@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.SummonKnownList;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
 import com.l2jfree.gameserver.gameobjects.shot.CharShots;
@@ -141,7 +141,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new SummonKnownList(this);
 	}

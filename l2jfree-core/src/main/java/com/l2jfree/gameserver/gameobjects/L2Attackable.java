@@ -41,7 +41,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaidBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.AttackableKnownList;
-import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
+import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.status.AttackableStatus;
 import com.l2jfree.gameserver.gameobjects.status.CharStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
@@ -346,7 +346,7 @@ public class L2Attackable extends L2Npc
 	}
 	
 	@Override
-	protected CharKnownList initKnownList()
+	protected CreatureKnownList initKnownList()
 	{
 		return new AttackableKnownList(this);
 	}
