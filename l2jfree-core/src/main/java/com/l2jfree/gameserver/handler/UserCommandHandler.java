@@ -14,23 +14,23 @@
  */
 package com.l2jfree.gameserver.handler;
 
-import com.l2jfree.gameserver.handler.usercommandhandlers.Birthday;
-import com.l2jfree.gameserver.handler.usercommandhandlers.ChannelDelete;
-import com.l2jfree.gameserver.handler.usercommandhandlers.ChannelLeave;
-import com.l2jfree.gameserver.handler.usercommandhandlers.ChannelListUpdate;
-import com.l2jfree.gameserver.handler.usercommandhandlers.ClanPenalty;
-import com.l2jfree.gameserver.handler.usercommandhandlers.ClanWarsList;
-import com.l2jfree.gameserver.handler.usercommandhandlers.DisMount;
-import com.l2jfree.gameserver.handler.usercommandhandlers.Escape;
-import com.l2jfree.gameserver.handler.usercommandhandlers.FatigueTime;
-import com.l2jfree.gameserver.handler.usercommandhandlers.GraduateList;
-import com.l2jfree.gameserver.handler.usercommandhandlers.InstanceZone;
-import com.l2jfree.gameserver.handler.usercommandhandlers.Loc;
-import com.l2jfree.gameserver.handler.usercommandhandlers.Mount;
-import com.l2jfree.gameserver.handler.usercommandhandlers.OlympiadStat;
-import com.l2jfree.gameserver.handler.usercommandhandlers.PartyInfo;
-import com.l2jfree.gameserver.handler.usercommandhandlers.SiegeStatus;
-import com.l2jfree.gameserver.handler.usercommandhandlers.Time;
+import com.l2jfree.gameserver.handler.usercommands.Birthday;
+import com.l2jfree.gameserver.handler.usercommands.ChannelDelete;
+import com.l2jfree.gameserver.handler.usercommands.ChannelLeave;
+import com.l2jfree.gameserver.handler.usercommands.ChannelListUpdate;
+import com.l2jfree.gameserver.handler.usercommands.ClanPenalty;
+import com.l2jfree.gameserver.handler.usercommands.ClanWarsList;
+import com.l2jfree.gameserver.handler.usercommands.DisMount;
+import com.l2jfree.gameserver.handler.usercommands.Escape;
+import com.l2jfree.gameserver.handler.usercommands.FatigueTime;
+import com.l2jfree.gameserver.handler.usercommands.GraduateList;
+import com.l2jfree.gameserver.handler.usercommands.InstanceZone;
+import com.l2jfree.gameserver.handler.usercommands.Loc;
+import com.l2jfree.gameserver.handler.usercommands.Mount;
+import com.l2jfree.gameserver.handler.usercommands.OlympiadStat;
+import com.l2jfree.gameserver.handler.usercommands.PartyInfo;
+import com.l2jfree.gameserver.handler.usercommands.SiegeStatus;
+import com.l2jfree.gameserver.handler.usercommands.Time;
 import com.l2jfree.util.NumberHandlerRegistry;
 
 public final class UserCommandHandler extends NumberHandlerRegistry<IUserCommandHandler>

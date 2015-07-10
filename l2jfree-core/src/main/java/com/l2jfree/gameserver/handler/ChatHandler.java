@@ -14,19 +14,19 @@
  */
 package com.l2jfree.gameserver.handler;
 
-import com.l2jfree.gameserver.handler.chathandlers.ChatAll;
-import com.l2jfree.gameserver.handler.chathandlers.ChatAlliance;
-import com.l2jfree.gameserver.handler.chathandlers.ChatAnnounce;
-import com.l2jfree.gameserver.handler.chathandlers.ChatClan;
-import com.l2jfree.gameserver.handler.chathandlers.ChatCommander;
-import com.l2jfree.gameserver.handler.chathandlers.ChatHero;
-import com.l2jfree.gameserver.handler.chathandlers.ChatParty;
-import com.l2jfree.gameserver.handler.chathandlers.ChatPartyRoom;
-import com.l2jfree.gameserver.handler.chathandlers.ChatPetition;
-import com.l2jfree.gameserver.handler.chathandlers.ChatShout;
-import com.l2jfree.gameserver.handler.chathandlers.ChatSystem;
-import com.l2jfree.gameserver.handler.chathandlers.ChatTrade;
-import com.l2jfree.gameserver.handler.chathandlers.ChatWhisper;
+import com.l2jfree.gameserver.handler.chat.ChatAll;
+import com.l2jfree.gameserver.handler.chat.ChatAlliance;
+import com.l2jfree.gameserver.handler.chat.ChatAnnounce;
+import com.l2jfree.gameserver.handler.chat.ChatClan;
+import com.l2jfree.gameserver.handler.chat.ChatCommander;
+import com.l2jfree.gameserver.handler.chat.ChatHero;
+import com.l2jfree.gameserver.handler.chat.ChatParty;
+import com.l2jfree.gameserver.handler.chat.ChatPartyRoom;
+import com.l2jfree.gameserver.handler.chat.ChatPetition;
+import com.l2jfree.gameserver.handler.chat.ChatShout;
+import com.l2jfree.gameserver.handler.chat.ChatSystem;
+import com.l2jfree.gameserver.handler.chat.ChatTrade;
+import com.l2jfree.gameserver.handler.chat.ChatWhisper;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.util.EnumHandlerRegistry;
 
