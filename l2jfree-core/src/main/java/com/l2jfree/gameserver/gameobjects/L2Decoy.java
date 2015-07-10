@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.network.packets.server.CharInfo;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
@@ -38,7 +38,7 @@ public abstract class L2Decoy extends L2Creature
 	}
 	
 	@Override
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
 		return new DecoyView(this);
 	}

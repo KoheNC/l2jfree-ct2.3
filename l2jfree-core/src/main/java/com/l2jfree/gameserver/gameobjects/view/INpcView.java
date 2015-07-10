@@ -17,7 +17,6 @@ package com.l2jfree.gameserver.gameobjects.view;
 /**
  * @author NB4L1
  */
-public interface CharLikeView
+public interface INpcView extends ICreatureView
 {
-	public void refresh();
 }

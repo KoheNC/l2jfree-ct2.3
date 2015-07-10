@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.PcView;
+import com.l2jfree.gameserver.gameobjects.view.PlayerView;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.skills.AbnormalEffect;
@@ -109,7 +109,7 @@ public final class UserInfo extends L2ServerPacket
 	@Override
 	protected void writeImpl()
 	{
-		final PcView view = _activeChar.getView();
+		final PlayerView view = _activeChar.getView();
 		final PlayerAppearance _appearance = _activeChar.getAppearance();
 		final PlayerInventory _inv = _activeChar.getInventory();
 		final PlayerStat stat = _activeChar.getStat();

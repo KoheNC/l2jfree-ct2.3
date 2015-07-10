@@ -14,34 +14,10 @@
  */
 package com.l2jfree.gameserver.gameobjects.view;
 
-import com.l2jfree.gameserver.gameobjects.L2Creature;
-
 /**
  * @author NB4L1
  */
-public abstract class CharView<T extends L2Creature> implements CharLikeView
+public interface ICreatureView
 {
-	protected final T _activeChar;
-	
-	protected CharView(T activeChar)
-	{
-		_activeChar = activeChar;
-	}
-	
-	//private long _lastRefreshTime;
-	
-	@Override
-	public final void refresh()
-	{
-		//if (System.currentTimeMillis() - _lastRefreshTime < 100)
-		//	return;
-		//
-		//_lastRefreshTime = System.currentTimeMillis();
-		
-		refreshImpl();
-	}
-	
-	protected void refreshImpl()
-	{
-	}
+	public void refresh();
 }

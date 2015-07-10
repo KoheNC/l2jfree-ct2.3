@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 /**
  * @author NB4L1
  */
-public final class DecoyView extends CharView<L2Decoy> implements PcLikeView
+public final class DecoyView extends CreatureView<L2Decoy> implements IPlayerView
 {
 	public DecoyView(L2Decoy activeChar)
 	{
@@ -43,7 +43,7 @@ public final class DecoyView extends CharView<L2Decoy> implements PcLikeView
 		_z = position.getZ();
 	}
 	
-	private PcLikeView _ownerView;
+	private IPlayerView _ownerView;
 	
 	private int _objectId;
 	private int _x;

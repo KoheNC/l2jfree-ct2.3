@@ -64,7 +64,7 @@ import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.NpcStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate.AIType;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.gameobjects.view.NpcView;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
@@ -370,7 +370,7 @@ public class L2Npc extends L2Creature
 	}
 	
 	@Override
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
 		return new NpcView(this);
 	}

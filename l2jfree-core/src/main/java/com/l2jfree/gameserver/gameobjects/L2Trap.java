@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.gameobjects.view.TrapView;
 import com.l2jfree.gameserver.network.packets.server.AbstractNpcInfo;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
@@ -46,7 +46,7 @@ public class L2Trap extends L2Creature
 	}
 	
 	@Override
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
 		return new TrapView(this);
 	}

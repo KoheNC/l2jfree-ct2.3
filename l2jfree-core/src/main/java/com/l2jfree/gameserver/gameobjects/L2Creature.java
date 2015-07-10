@@ -56,7 +56,7 @@ import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.geodata.pathfinding.Node;
 import com.l2jfree.gameserver.geodata.pathfinding.PathFinding;
@@ -194,7 +194,7 @@ public abstract class L2Creature extends L2Object
 	protected boolean _isMarked = false;
 	protected boolean _isEradicated = false;
 	private final int[] lastPosition = { 0, 0, 0 };
-	protected final CharLikeView _view;
+	protected final ICreatureView _view;
 	protected final CreatureStat _stat;
 	protected final CreatureStatus _status;
 	private L2CreatureTemplate _template; // The link on the L2CreatureTemplate
@@ -2683,12 +2683,12 @@ public abstract class L2Creature extends L2Object
 		return _knownList;
 	}
 	
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
 		return null;
 	}
 	
-	public CharLikeView getView()
+	public ICreatureView getView()
 	{
 		return _view;
 	}

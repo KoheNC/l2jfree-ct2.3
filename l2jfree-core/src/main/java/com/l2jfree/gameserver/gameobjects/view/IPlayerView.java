@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects.view;
 /**
  * @author NB4L1
  */
-public interface PcLikeView extends CharLikeView
+public interface IPlayerView extends ICreatureView
 {
 	public int getObjectId();
 	

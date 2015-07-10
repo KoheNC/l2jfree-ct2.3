@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.L2Npc;
 /**
  * @author NB4L1
  */
-public final class NpcView extends CharView<L2Npc> /*implements UniversalCharView*/
+public final class NpcView extends CreatureView<L2Npc> /*implements UniversalCharView*/
 {
 	public NpcView(L2Npc activeChar)
 	{

@@ -27,9 +27,9 @@ import com.l2jfree.gameserver.model.L2Transformation;
 /**
  * @author NB4L1
  */
-public final class PcView extends CharView<L2PcInstance> implements UniversalCharView
+public final class PlayerView extends CreatureView<L2PcInstance> implements UniversalCharView
 {
-	public PcView(L2PcInstance activeChar)
+	public PlayerView(L2PcInstance activeChar)
 	{
 		super(activeChar);
 	}

@@ -33,7 +33,7 @@ import com.l2jfree.gameserver.gameobjects.shot.SummonShots;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.SummonStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.gameobjects.view.SummonView;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2ItemInstance;
@@ -153,7 +153,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
 		return new SummonView(this);
 	}

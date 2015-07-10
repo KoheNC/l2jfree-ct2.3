@@ -19,7 +19,7 @@ import com.l2jfree.gameserver.gameobjects.L2Summon;
 /**
  * @author NB4L1
  */
-public final class SummonView extends CharView<L2Summon> implements NpcLikeView
+public final class SummonView extends CreatureView<L2Summon> implements INpcView
 {
 	public SummonView(L2Summon activeChar)
 	{

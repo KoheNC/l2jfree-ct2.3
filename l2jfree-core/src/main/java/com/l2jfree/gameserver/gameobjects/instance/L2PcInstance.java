@@ -104,8 +104,8 @@ import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
-import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
-import com.l2jfree.gameserver.gameobjects.view.PcView;
+import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
+import com.l2jfree.gameserver.gameobjects.view.PlayerView;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.handler.ItemHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
@@ -1118,15 +1118,15 @@ public final class L2PcInstance extends L2Playable
 	}
 	
 	@Override
-	protected CharLikeView initView()
+	protected ICreatureView initView()
 	{
-		return new PcView(this);
+		return new PlayerView(this);
 	}
 	
 	@Override
-	public PcView getView()
+	public PlayerView getView()
 	{
-		return (PcView)_view;
+		return (PlayerView)_view;
 	}
 	
 	@Override
