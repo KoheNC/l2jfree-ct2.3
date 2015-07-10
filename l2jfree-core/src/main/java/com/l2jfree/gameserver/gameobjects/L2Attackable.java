@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2AttackableAI;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2FortSiegeGuardAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SiegeGuardAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
@@ -358,7 +358,7 @@ public class L2Attackable extends L2Npc
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new L2AttackableAI(new AIAccessor());
 	}

@@ -54,14 +54,14 @@ import com.l2jfree.util.L2Collections;
 /**
  * This class manages AI of L2Character.<BR><BR>
  *
- * L2CharacterAI :<BR><BR>
+ * L2CreatureAI :<BR><BR>
  * <li>L2AttackableAI</li>
  * <li>L2DoorAI</li>
  * <li>L2PlayerAI</li>
  * <li>L2SummonAI</li><BR><BR>
  *
  */
-public class L2CharacterAI extends AbstractAI
+public class L2CreatureAI extends AbstractAI
 {
 	@Override
 	protected void onEvtAttacked(L2Character attacker)
@@ -71,12 +71,12 @@ public class L2CharacterAI extends AbstractAI
 	}
 	
 	/**
-	 * Constructor of L2CharacterAI.<BR><BR>
+	 * Constructor of L2CreatureAI.<BR><BR>
 	 *
 	 * @param accessor The AI accessor of the L2Character
 	 *
 	 */
-	public L2CharacterAI(L2Character.AIAccessor accessor)
+	public L2CreatureAI(L2Character.AIAccessor accessor)
 	{
 		super(accessor);
 	}
@@ -868,7 +868,7 @@ public class L2CharacterAI extends AbstractAI
 	}
 	
 	/**
-	 * Finalize the casting of a skill. This method overrides L2CharacterAI method.<BR><BR>
+	 * Finalize the casting of a skill. This method overrides L2CreatureAI method.<BR><BR>
 	 *
 	 * <B>What it does:</B>
 	 * Check if actual intention is set to CAST and, if so, retrieves latest intention

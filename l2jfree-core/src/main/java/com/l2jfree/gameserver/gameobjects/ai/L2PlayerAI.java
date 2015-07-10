@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
 
-public class L2PlayerAI extends L2CharacterAI
+public class L2PlayerAI extends L2CreatureAI
 {
 	private volatile boolean _thinking; // to prevent recursive thinking
 	

@@ -333,7 +333,7 @@ public abstract class AbstractAI implements Ctrl
 	}
 	
 	/**
-	 * Launch the L2CharacterAI onIntention method corresponding to the new Intention.<BR>
+	 * Launch the L2CreatureAI onIntention method corresponding to the new Intention.<BR>
 	 * <BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : Stop the FOLLOW mode if necessary</B></FONT><BR>
 	 * <BR>
@@ -347,7 +347,7 @@ public abstract class AbstractAI implements Ctrl
 	}
 	
 	/**
-	 * Launch the L2CharacterAI onIntention method corresponding to the new Intention.<BR>
+	 * Launch the L2CreatureAI onIntention method corresponding to the new Intention.<BR>
 	 * <BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : Stop the FOLLOW mode if necessary</B></FONT><BR>
 	 * <BR>
@@ -362,7 +362,7 @@ public abstract class AbstractAI implements Ctrl
 	}
 	
 	/**
-	 * Launch the L2CharacterAI onIntention method corresponding to the new Intention.<BR>
+	 * Launch the L2CreatureAI onIntention method corresponding to the new Intention.<BR>
 	 * <BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : Stop the FOLLOW mode if necessary</B></FONT><BR>
 	 * <BR>
@@ -395,7 +395,7 @@ public abstract class AbstractAI implements Ctrl
 		if (intention != AI_INTENTION_FOLLOW && intention != AI_INTENTION_ATTACK)
 			stopFollow();
 		
-		// Launch the onIntention method of the L2CharacterAI corresponding to the new Intention
+		// Launch the onIntention method of the L2CreatureAI corresponding to the new Intention
 		switch (intention)
 		{
 			case AI_INTENTION_IDLE:
@@ -492,7 +492,7 @@ public abstract class AbstractAI implements Ctrl
 	}
 	
 	/**
-	 * Launch the L2CharacterAI onEvt method corresponding to the Event.<BR>
+	 * Launch the L2CreatureAI onEvt method corresponding to the Event.<BR>
 	 * <BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : The current general intention won't be change (ex : If the character
 	 * attack and is stunned, he will attack again after the stunned period)</B></FONT><BR>
@@ -507,7 +507,7 @@ public abstract class AbstractAI implements Ctrl
 	}
 	
 	/**
-	 * Launch the L2CharacterAI onEvt method corresponding to the Event.<BR>
+	 * Launch the L2CreatureAI onEvt method corresponding to the Event.<BR>
 	 * <BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : The current general intention won't be change (ex : If the character
 	 * attack and is stunned, he will attack again after the stunned period)</B></FONT><BR>
@@ -523,7 +523,7 @@ public abstract class AbstractAI implements Ctrl
 	}
 	
 	/**
-	 * Launch the L2CharacterAI onEvt method corresponding to the Event.<BR>
+	 * Launch the L2CreatureAI onEvt method corresponding to the Event.<BR>
 	 * <BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : The current general intention won't be change (ex : If the character
 	 * attack and is stunned, he will attack again after the stunned period)</B></FONT><BR>

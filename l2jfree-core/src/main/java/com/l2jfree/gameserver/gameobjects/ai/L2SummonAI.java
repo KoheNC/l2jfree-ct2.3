@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
 
-public class L2SummonAI extends L2CharacterAI
+public class L2SummonAI extends L2CreatureAI
 {
 	private volatile boolean _thinking; // to prevent recursive thinking
 	private boolean _startFollow = getActor().getFollowStatus();

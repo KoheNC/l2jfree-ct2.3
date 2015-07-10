@@ -53,7 +53,7 @@ import com.l2jfree.tools.random.Rnd;
  * This class manages AI of L2Attackable.<BR><BR>
  * 
  */
-public class L2AttackableAI extends L2CharacterAI implements Runnable
+public class L2AttackableAI extends L2CreatureAI implements Runnable
 {
 	private static final class AttackableAiTaskManager extends AbstractIterativePeriodicTaskManager<L2AttackableAI>
 	{
@@ -313,7 +313,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 	}
 	
 	/**
-	 * Set the Intention of this L2CharacterAI and create an  AI Task executed every 1s (call onEvtThink method) for this L2Attackable.<BR><BR>
+	 * Set the Intention of this L2CreatureAI and create an  AI Task executed every 1s (call onEvtThink method) for this L2Attackable.<BR><BR>
 	 * 
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : If actor _knowPlayer isn't EMPTY, AI_INTENTION_IDLE will be change in AI_INTENTION_ACTIVE</B></FONT><BR><BR>
 	 * 

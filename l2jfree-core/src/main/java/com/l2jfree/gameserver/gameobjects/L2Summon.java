@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.gameobjects;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Attackable.AggroInfo;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
@@ -177,7 +177,7 @@ public abstract class L2Summon extends L2Playable
 	}
 	
 	@Override
-	protected final L2CharacterAI initAI()
+	protected final L2CreatureAI initAI()
 	{
 		return new L2SummonAI(new L2Summon.AIAccessor());
 	}

@@ -18,7 +18,7 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.knownlist.CharKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.StaticObjectKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.CharStat;
@@ -100,7 +100,7 @@ public class L2StaticObjectInstance extends L2Character
 	}
 	
 	@Override
-	public L2CharacterAI getAI()
+	public L2CreatureAI getAI()
 	{
 		return null;
 	}

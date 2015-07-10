@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Attackable.AggroInfo;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
@@ -48,7 +48,7 @@ public class AdminAI implements IAdminCommandHandler
 				return false;
 			}
 			
-			L2CharacterAI ai = ((L2Character)target).getAI();
+			L2CreatureAI ai = ((L2Character)target).getAI();
 			CtrlIntention intention = ai.getIntention();
 			String param0 = ai.getIntentionArg0() == null ? "--" : ai.getIntentionArg0().toString();
 			String param1 = ai.getIntentionArg1() == null ? "--" : ai.getIntentionArg1().toString();

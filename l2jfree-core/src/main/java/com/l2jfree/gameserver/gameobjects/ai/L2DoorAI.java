@@ -29,7 +29,7 @@ import com.l2jfree.gameserver.threadmanager.FIFOExecutableQueue;
 /**
  * @author mkizub
  */
-public class L2DoorAI extends L2CharacterAI
+public class L2DoorAI extends L2CreatureAI
 {
 	public L2DoorAI(L2DoorInstance.AIAccessor accessor)
 	{

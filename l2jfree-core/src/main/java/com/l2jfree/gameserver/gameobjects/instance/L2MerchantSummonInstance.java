@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Character;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2Skill;
@@ -51,7 +51,7 @@ public class L2MerchantSummonInstance extends L2SummonInstance implements L2Merc
 	}
 	
 	@Override
-	public L2CharacterAI getAI()
+	public L2CreatureAI getAI()
 	{
 		return null;
 	}

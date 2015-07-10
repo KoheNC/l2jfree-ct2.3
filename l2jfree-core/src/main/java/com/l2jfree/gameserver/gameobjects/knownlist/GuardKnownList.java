@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.instance.L2GuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
@@ -94,7 +94,7 @@ public class GuardKnownList extends AttackableKnownList
 			//removeAllKnownObjects();
 			
 			// Set the L2GuardInstance to AI_INTENTION_IDLE
-			L2CharacterAI ai = getActiveChar().getAI();
+			L2CreatureAI ai = getActiveChar().getAI();
 			if (ai != null)
 				ai.setIntention(CtrlIntention.AI_INTENTION_IDLE, null);
 		}

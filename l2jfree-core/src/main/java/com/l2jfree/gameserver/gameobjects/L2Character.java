@@ -40,7 +40,7 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.effects.CharEffects;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
@@ -2149,9 +2149,9 @@ public abstract class L2Character extends L2Object
 	// =========================================================
 	// Property - Public
 	/**
-	 * Return the L2CharacterAI of the L2Character and if its null create a new one.
+	 * Return the L2CreatureAI of the L2Character and if its null create a new one.
 	 */
-	public L2CharacterAI getAI()
+	public L2CreatureAI getAI()
 	{
 		if (_ai == null)
 		{
@@ -2165,17 +2165,17 @@ public abstract class L2Character extends L2Object
 		return _ai;
 	}
 	
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
-		return new L2CharacterAI(new AIAccessor());
+		return new L2CreatureAI(new AIAccessor());
 	}
 	
-	public final void setAI(L2CharacterAI newAI)
+	public final void setAI(L2CreatureAI newAI)
 	{
 		if (!canReplaceAI())
 			return;
 		
-		final L2CharacterAI oldAI = _ai;
+		final L2CreatureAI oldAI = _ai;
 		
 		if (oldAI == newAI)
 			return;
@@ -2186,7 +2186,7 @@ public abstract class L2Character extends L2Object
 		_ai = newAI;
 	}
 	
-	/** Return True if the L2Character has a L2CharacterAI. */
+	/** Return True if the L2Character has a L2CreatureAI. */
 	public boolean hasAI()
 	{
 		return _ai != null;
@@ -3832,7 +3832,7 @@ public abstract class L2Character extends L2Object
 		NPC_STD_CALCULATOR = Formulas.getStdNPCCalculators();
 	}
 	
-	private L2CharacterAI _ai;
+	private L2CreatureAI _ai;
 	
 	/** Future Skill Cast */
 	protected Future<?> _skillCast;

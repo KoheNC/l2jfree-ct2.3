@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
-import com.l2jfree.gameserver.gameobjects.ai.L2CharacterAI;
+import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.QueenAntNurseAI;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 
@@ -29,7 +29,7 @@ public class QueenAntNurseInstance extends L2MonsterInstance
 	}
 	
 	@Override
-	protected L2CharacterAI initAI()
+	protected L2CreatureAI initAI()
 	{
 		return new QueenAntNurseAI(new AIAccessor());
 	}

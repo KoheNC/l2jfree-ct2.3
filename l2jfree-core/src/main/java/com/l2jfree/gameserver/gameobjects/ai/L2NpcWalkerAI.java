@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2NpcWalkerNode;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 
-public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
+public class L2NpcWalkerAI extends L2CreatureAI implements Runnable
 {
 	private static final class NpcWalkerAiTaskManager extends AbstractIterativePeriodicTaskManager<L2NpcWalkerAI>
 	{
@@ -75,7 +75,7 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 	private int _currentPos;
 	
 	/**
-	 * Constructor of L2CharacterAI.<BR>
+	 * Constructor of L2CreatureAI.<BR>
 	 * <BR>
 	 * 
 	 * @param accessor The AI accessor of the L2Character
