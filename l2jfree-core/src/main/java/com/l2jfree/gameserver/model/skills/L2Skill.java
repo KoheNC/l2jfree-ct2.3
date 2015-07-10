@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.skills;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,15 +41,16 @@ import com.l2jfree.gameserver.handler.SkillTargetHandler;
 import com.l2jfree.gameserver.instancemanager.CoupleManager;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
+import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.L2ClanMember;
+import com.l2jfree.gameserver.model.L2Effect;
+import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
+import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.model.entity.Couple;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
-import com.l2jfree.gameserver.model.skills.ChanceCondition;
-import com.l2jfree.gameserver.model.skills.Env;
-import com.l2jfree.gameserver.model.skills.Formulas;
-import com.l2jfree.gameserver.model.skills.IChanceSkillTrigger;
-import com.l2jfree.gameserver.model.skills.TriggeredSkill;
 import com.l2jfree.gameserver.model.skills.conditions.Condition;
 import com.l2jfree.gameserver.model.skills.funcs.Func;
 import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;

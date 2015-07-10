@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.items.model.L2ExtractableProductItem;
 import com.l2jfree.gameserver.items.model.L2ExtractableSkill;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -40,7 +40,7 @@ public class Extractable implements ISkillHandler
 	
 	/**
 	 * 
-	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.gameobjects.L2Creature, com.l2jfree.gameserver.model.L2Skill, com.l2jfree.gameserver.gameobjects.L2Creature...)
+	 * @see com.l2jfree.gameserver.handler.ISkillHandler#useSkill(com.l2jfree.gameserver.gameobjects.L2Creature, com.l2jfree.gameserver.model.skills.L2Skill, com.l2jfree.gameserver.gameobjects.L2Creature...)
 	 */
 	@Override
 	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)

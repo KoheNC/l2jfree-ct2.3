@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model.skills.funcs;
 
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.conditions.Condition;
 

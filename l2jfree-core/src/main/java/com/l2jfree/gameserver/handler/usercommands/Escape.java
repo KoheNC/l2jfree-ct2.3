@@ -19,8 +19,8 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Player.TeleportMode;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 
 public class Escape implements IUserCommandHandler

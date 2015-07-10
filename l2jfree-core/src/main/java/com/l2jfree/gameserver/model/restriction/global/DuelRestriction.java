@@ -18,8 +18,8 @@ import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.model.L2Effect;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.Duel;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * @author NB4L1

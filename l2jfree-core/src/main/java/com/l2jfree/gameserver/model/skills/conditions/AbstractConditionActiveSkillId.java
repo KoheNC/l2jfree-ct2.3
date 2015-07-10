@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.model.skills.conditions;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 abstract class AbstractConditionActiveSkillId extends Condition
 {

@@ -15,7 +15,6 @@
 package com.l2jfree.gameserver.model.skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.model.L2Skill;
 
 /**
  * An Env object is just a class to pass parameters to a calculator such as L2Player, L2ItemInstance, Initial value.

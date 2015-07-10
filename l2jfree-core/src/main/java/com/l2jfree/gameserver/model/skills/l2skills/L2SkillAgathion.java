@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.skills.l2skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 public class L2SkillAgathion extends L2Skill

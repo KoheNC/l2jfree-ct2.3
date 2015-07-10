@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.skills.funcs;
 
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * @author NB4L1

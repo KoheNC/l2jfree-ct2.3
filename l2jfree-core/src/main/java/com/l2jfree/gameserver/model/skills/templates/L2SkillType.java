@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.skills.templates;
 
 import java.lang.reflect.Constructor;
 
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillAgathion;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillAppearance;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillChangeWeapon;

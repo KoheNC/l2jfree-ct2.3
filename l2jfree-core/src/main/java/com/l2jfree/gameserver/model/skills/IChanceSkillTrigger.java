@@ -15,7 +15,6 @@
 package com.l2jfree.gameserver.model.skills;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.model.L2Skill;
 
 /**
  * This interface provides method to handle triggered skills from other objects.<br>

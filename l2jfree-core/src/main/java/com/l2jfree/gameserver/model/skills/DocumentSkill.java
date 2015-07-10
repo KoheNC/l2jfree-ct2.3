@@ -22,7 +22,6 @@ import java.util.StringTokenizer;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.templates.ValidatingStatsSet;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;

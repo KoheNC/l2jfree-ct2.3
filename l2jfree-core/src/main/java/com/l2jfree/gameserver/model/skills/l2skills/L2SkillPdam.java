@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.skills.l2skills;
 
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 /**

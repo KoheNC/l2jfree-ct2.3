@@ -22,8 +22,8 @@ import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.instance.L2TrapInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 public class L2SkillTrap extends L2SkillSummon
@@ -44,7 +44,7 @@ public class L2SkillTrap extends L2SkillSummon
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.model.L2Skill#useSkill(com.l2jfree.gameserver.gameobjects.L2Creature, com.l2jfree.gameserver.gameobjects.L2Creature...)
+	 * @see com.l2jfree.gameserver.model.skills.L2Skill#useSkill(com.l2jfree.gameserver.gameobjects.L2Creature, com.l2jfree.gameserver.gameobjects.L2Creature...)
 	 */
 	@Override
 	public void useSkill(L2Creature caster, L2Creature... targets)

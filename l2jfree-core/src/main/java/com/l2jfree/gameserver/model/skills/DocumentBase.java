@@ -24,7 +24,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.skills.conditions.Condition;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionParser;
 import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;

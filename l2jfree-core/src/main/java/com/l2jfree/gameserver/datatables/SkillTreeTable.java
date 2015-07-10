@@ -37,10 +37,10 @@ import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
 import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.model.L2PledgeSkillLearn;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2SkillLearn;
 import com.l2jfree.gameserver.model.L2TransformSkillLearn;
 import com.l2jfree.gameserver.model.base.ClassId;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.util.ArrayBunch;
 import com.l2jfree.util.L2Collections;
 

@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.model;
 
 import junit.framework.TestCase;
 
-import com.l2jfree.gameserver.model.L2Skill.SkillOpType;
-import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
+import com.l2jfree.gameserver.model.skills.L2Skill.SkillOpType;
+import com.l2jfree.gameserver.model.skills.L2Skill.SkillTargetType;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.templates.StatsSet;
 

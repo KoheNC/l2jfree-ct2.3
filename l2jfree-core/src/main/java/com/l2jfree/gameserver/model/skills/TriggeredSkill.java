@@ -15,7 +15,6 @@
 package com.l2jfree.gameserver.model.skills;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 /**
