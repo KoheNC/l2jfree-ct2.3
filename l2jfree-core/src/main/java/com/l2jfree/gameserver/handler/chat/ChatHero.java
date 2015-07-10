@@ -12,25 +12,28 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.chathandlers;
+package com.l2jfree.gameserver.handler.chat;
 
+import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
+import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.util.FloodProtector;
+import com.l2jfree.gameserver.util.FloodProtector.Protected;
 
 /**
  *
  * @author  Noctarius
  */
-public class ChatAnnounce implements IChatHandler
+public class ChatHero implements IChatHandler
 {
-	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Announce,
-			SystemChatChannelId.Chat_Critical_Announce };
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Hero };
 	
 	/**
-	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatTypes()
 	 */
 	@Override
 	public SystemChatChannelId[] getChatTypes()
@@ -44,26 +47,37 @@ public class ChatAnnounce implements IChatHandler
 	@Override
 	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
-		String charName = "";
-		int charObjId = 0;
+		boolean canSpeak = activeChar.isGM();
 		
-		if (activeChar != null)
+		if (!canSpeak)
 		{
-			charName = activeChar.getName();
-			charObjId = activeChar.getObjectId();
-			
-			if (!activeChar.isGM())
-				return;
+			if (activeChar.isHero())
+			{
+				if (FloodProtector.tryPerformAction(activeChar, Protected.HEROVOICE))
+				{
+					canSpeak = true;
+				}
+				else
+				{
+					activeChar
+							.sendMessage("Action failed. Heroes are only able to speak in the global channel once every 10 seconds.");
+				}
+			}
 		}
 		
-		if (chatType == SystemChatChannelId.Chat_Critical_Announce)
-			text = "** " + text;
-		
-		CreatureSay cs = new CreatureSay(charObjId, chatType, charName, text);
-		
-		for (L2Player player : L2World.getInstance().getAllPlayers())
+		if (canSpeak)
 		{
-			if (player != null)
+			if (Config.IRC_ENABLED && Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("hero") && activeChar.isHero()
+					|| Config.IRC_ENABLED && Config.IRC_FROM_GAME_TYPE.equalsIgnoreCase("all")) // added hero voice to IRC like said in the properties files
+			{
+				IrcManager.getInstance().getConnection().sendChan("12%" + activeChar.getName() + ": " + text);
+			}
+			String name =
+					(activeChar.isGM() && Config.GM_NAME_HAS_BRACELETS) ? "[GM]" + activeChar.getName() : activeChar
+							.getName();
+			
+			CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, name, text);
+			for (L2Player player : L2World.getInstance().getAllPlayers())
 			{
 				player.sendPacket(cs);
 			}

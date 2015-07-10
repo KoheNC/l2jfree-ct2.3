@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.chathandlers;
+package com.l2jfree.gameserver.handler.chat;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
@@ -23,9 +23,9 @@ import com.l2jfree.gameserver.network.packets.server.CreatureSay;
  *
  * @author  Noctarius
  */
-public class ChatParty implements IChatHandler
+public class ChatClan implements IChatHandler
 {
-	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Party };
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Clan };
 	
 	/**
 	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
@@ -42,12 +42,11 @@ public class ChatParty implements IChatHandler
 	@Override
 	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
-		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName(), text);
+		if (activeChar.getClan() == null)
+			return;
 		
-		if (activeChar.isInParty())
-		{
-			//activeChar.getParty().broadcastToPartyMembers(cs);
-			activeChar.getParty().broadcastCSToPartyMembers(cs, activeChar);
-		}
+		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName(), text);
+		//activeChar.getClan().broadcastToOnlineMembers(cs);
+		activeChar.getClan().broadcastCreatureSayToOnlineMembers(cs, activeChar);
 	}
 }

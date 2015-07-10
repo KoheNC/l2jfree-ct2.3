@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.chathandlers;
+package com.l2jfree.gameserver.handler.chat;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
@@ -23,12 +23,12 @@ import com.l2jfree.gameserver.network.packets.server.CreatureSay;
  *
  * @author  Noctarius
  */
-public class ChatAlliance implements IChatHandler
+public class ChatSystem implements IChatHandler
 {
-	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Alliance };
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_System };
 	
 	/**
-	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatTypes()
 	 */
 	@Override
 	public SystemChatChannelId[] getChatTypes()
@@ -42,10 +42,19 @@ public class ChatAlliance implements IChatHandler
 	@Override
 	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
-		if (activeChar.getClan() == null)
-			return;
+		//TODO: Find out what this channel is original intended for
+		//      For me it is my emotechannel, because normal all-chan is affected
+		//      by a language skill system. This one is readable by everyone.
+		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName() + "'s Emote", text);
 		
-		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName(), text);
-		activeChar.getClan().broadcastToOnlineAllyMembers(cs);
+		for (L2Player player : activeChar.getKnownList().getKnownPlayers().values())
+		{
+			if (player != null && activeChar.isInsideRadius(player, 1250, false, true))
+			{
+				player.sendPacket(cs);
+			}
+		}
+		
+		activeChar.sendPacket(cs);
 	}
 }

@@ -12,56 +12,42 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.handler.chathandlers;
+package com.l2jfree.gameserver.handler.chat;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
-import com.l2jfree.gameserver.model.L2CommandChannel;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 
 /**
  *
- * @author Noctarius
+ * @author  Noctarius
  */
-public class ChatPartyRoom implements IChatHandler
+public class ChatParty implements IChatHandler
 {
-	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Party_Room };
+	private final SystemChatChannelId[] _chatTypes = { SystemChatChannelId.Chat_Party };
 	
+	/**
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#getChatType()
+	 */
 	@Override
 	public SystemChatChannelId[] getChatTypes()
 	{
 		return _chatTypes;
 	}
 	
+	/**
+	 * @see com.l2jfree.gameserver.handler.IChatHandler#useChatHandler(com.l2jfree.gameserver.gameobjects.L2Player.player.L2Player, java.lang.String, com.l2jfree.gameserver.network.enums.SystemChatChannelId, java.lang.String)
+	 */
 	@Override
 	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text)
 	{
-		if (activeChar == null)
-			return;
+		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), chatType, activeChar.getName(), text);
 		
-		String charName = activeChar.getName();
-		int charObjId = activeChar.getObjectId();
-		
-		L2PartyRoom room = activeChar.getPartyRoom();
-		if (room != null)
+		if (activeChar.isInParty())
 		{
-			CreatureSay cs = new CreatureSay(charObjId, chatType, charName, text);
-			room.broadcastPacket(cs);
-		}
-		
-		// According to ChatCommander comments, this might not belong here?
-		L2Party party = activeChar.getParty();
-		if (party != null)
-		{
-			L2CommandChannel chan = party.getCommandChannel();
-			if (chan != null && party.isLeader(activeChar))
-			{
-				CreatureSay cs = new CreatureSay(charObjId, chatType, charName, text);
-				chan.broadcastCSToChannelMembers(cs, activeChar);
-			}
+			//activeChar.getParty().broadcastToPartyMembers(cs);
+			activeChar.getParty().broadcastCSToPartyMembers(cs, activeChar);
 		}
 	}
 }
