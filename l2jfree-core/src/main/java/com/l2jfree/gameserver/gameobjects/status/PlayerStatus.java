@@ -27,11 +27,11 @@ import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.L2Math;
 
-public final class PcStatus extends CreatureStatus
+public final class PlayerStatus extends CreatureStatus
 {
 	private double _currentCp = 0;
 	
-	public PcStatus(L2PcInstance activeChar)
+	public PlayerStatus(L2PcInstance activeChar)
 	{
 		super(activeChar);
 	}

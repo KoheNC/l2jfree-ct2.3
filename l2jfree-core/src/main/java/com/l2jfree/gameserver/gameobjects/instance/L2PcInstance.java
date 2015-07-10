@@ -96,7 +96,7 @@ import com.l2jfree.gameserver.gameobjects.skills.PlayerSkills;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
-import com.l2jfree.gameserver.gameobjects.status.PcStatus;
+import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2PcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.CharLikeView;
 import com.l2jfree.gameserver.gameobjects.view.PcView;
@@ -208,6 +208,7 @@ import com.l2jfree.gameserver.network.packets.server.CameraMode;
 import com.l2jfree.gameserver.network.packets.server.ChangeWaitType;
 import com.l2jfree.gameserver.network.packets.server.CharInfo;
 import com.l2jfree.gameserver.network.packets.server.ConfirmDlg;
+import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfoPacketList;
 import com.l2jfree.gameserver.network.packets.server.EtcStatusUpdate;
 import com.l2jfree.gameserver.network.packets.server.ExBasicActionList;
 import com.l2jfree.gameserver.network.packets.server.ExDuelUpdateUserInfo;
@@ -275,7 +276,6 @@ import com.l2jfree.gameserver.network.packets.server.TutorialCloseHtml;
 import com.l2jfree.gameserver.network.packets.server.TutorialShowHtml;
 import com.l2jfree.gameserver.network.packets.server.UserInfo;
 import com.l2jfree.gameserver.network.packets.server.ValidateLocation;
-import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfoPacketList;
 import com.l2jfree.gameserver.skills.Env;
 import com.l2jfree.gameserver.skills.Formulas;
 import com.l2jfree.gameserver.skills.SkillUsageRequest;
@@ -1057,7 +1057,7 @@ public final class L2PcInstance extends L2Playable
 		return _chars;
 	}
 	
-	private void initPcStatusUpdateValues()
+	private void initPlayerStatusUpdateValues()
 	{
 		_cpUpdateInterval = getMaxCp() / 352.0;
 		_cpUpdateIncCheck = getMaxCp();
@@ -1088,7 +1088,7 @@ public final class L2PcInstance extends L2Playable
 		getStat(); // Init stats
 		getStatus(); // Init status
 		super.initCreatureStatusUpdateValues();
-		initPcStatusUpdateValues();
+		initPlayerStatusUpdateValues();
 		
 		_accountName = accountName;
 		app.setOwner(this);
@@ -1144,13 +1144,13 @@ public final class L2PcInstance extends L2Playable
 	@Override
 	protected CreatureStatus initStatus()
 	{
-		return new PcStatus(this);
+		return new PlayerStatus(this);
 	}
 	
 	@Override
-	public final PcStatus getStatus()
+	public final PlayerStatus getStatus()
 	{
-		return (PcStatus)_status;
+		return (PlayerStatus)_status;
 	}
 	
 	@Override
@@ -6693,8 +6693,8 @@ public final class L2PcInstance extends L2Playable
 				final boolean female = rset.getInt("sex") != 0;
 				final L2PcTemplate template = CharTemplateTable.getInstance().getTemplate(activeClassId);
 				PlayerAppearance app =
-						new PlayerAppearance(rset.getByte("face"), rset.getByte("hairColor"), rset.getByte("hairStyle"),
-								female);
+						new PlayerAppearance(rset.getByte("face"), rset.getByte("hairColor"),
+								rset.getByte("hairStyle"), female);
 				
 				player = new L2PcInstance(objectId, template, rset.getString("account_name"), app);
 				player.setName(rset.getString("char_name"));
