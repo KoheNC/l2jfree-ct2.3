@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.model.skills.funcs.Func;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillPdam;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 
 public final class Pdam implements ISkillHandler
 {

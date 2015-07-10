@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 
 public interface ISkillHandler
 {

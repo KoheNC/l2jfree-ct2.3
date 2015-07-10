@@ -31,8 +31,8 @@ import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.SpecialEffect;
 import com.l2jfree.gameserver.model.skills.TriggeredSkill;
 import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 /**
  * @author mkizub

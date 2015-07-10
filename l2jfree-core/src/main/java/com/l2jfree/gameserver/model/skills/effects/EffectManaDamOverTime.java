@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.model.skills.effects;
 
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
-import com.l2jfree.gameserver.templates.skills.L2EffectType;
 
 public final class EffectManaDamOverTime extends L2Effect
 {

@@ -41,6 +41,7 @@ import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.model.base.Experience;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.AbstractNpcInfo;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -60,7 +61,6 @@ import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.LeakTaskManager;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public abstract class L2Summon extends L2Playable
 {

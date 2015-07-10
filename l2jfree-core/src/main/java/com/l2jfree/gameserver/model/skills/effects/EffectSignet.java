@@ -22,10 +22,10 @@ import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillSignet;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillSignetCasttime;
+import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
-import com.l2jfree.gameserver.templates.skills.L2EffectType;
 
 /**
  * @authors Forsaiken, Sami

@@ -43,10 +43,10 @@ import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.entity.GrandBossState;
+import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
-import com.l2jfree.gameserver.templates.skills.L2EffectType;
 import com.l2jfree.tools.random.Rnd;
 
 /**

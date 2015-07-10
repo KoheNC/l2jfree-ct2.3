@@ -22,9 +22,9 @@ import com.l2jfree.gameserver.handler.SkillHandler;
 import com.l2jfree.gameserver.model.skills.ChanceCondition;
 import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.model.skills.IChanceSkillTrigger;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 import com.l2jfree.util.L2Arrays;
 
 /**

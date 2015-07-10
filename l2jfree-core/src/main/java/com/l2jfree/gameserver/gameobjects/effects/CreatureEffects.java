@@ -28,8 +28,8 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfoPacketList;
-import com.l2jfree.gameserver.templates.skills.L2EffectType;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.util.ObjectPool;
 

@@ -25,6 +25,7 @@ import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.skills.SkillUsageRequest;
 import com.l2jfree.gameserver.model.skills.Stats;
+import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -32,7 +33,6 @@ import com.l2jfree.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.MovementController;
 import com.l2jfree.gameserver.taskmanager.PacketBroadcaster.BroadcastMode;
-import com.l2jfree.gameserver.templates.skills.L2EffectType;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.tools.random.Rnd;
 
