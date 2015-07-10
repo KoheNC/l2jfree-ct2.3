@@ -23,8 +23,8 @@ import com.l2jfree.loginserver.manager.BanManager;
 import com.l2jfree.loginserver.manager.GameServerManager;
 import com.l2jfree.loginserver.manager.LoginManager;
 import com.l2jfree.loginserver.network.L2ClientSelectorThread;
+import com.l2jfree.loginserver.status.Status;
 import com.l2jfree.loginserver.thread.GameServerListener;
-import com.l2jfree.status.Status;
 
 public final class LoginServer extends L2AutoInitialization
 {

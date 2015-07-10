@@ -14,7 +14,7 @@
  */
 package com.l2jfree.loginserver.network.loginserverpackets;
 
-import com.l2jfree.status.Status;
+import com.l2jfree.loginserver.status.Status;
 
 public final class KickPlayer extends LoginToGamePacket
 {

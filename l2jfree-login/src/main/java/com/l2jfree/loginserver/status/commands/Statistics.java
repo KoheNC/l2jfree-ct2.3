@@ -12,24 +12,31 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.status.commands;
+package com.l2jfree.loginserver.status.commands;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.l2jfree.loginserver.manager.GameServerManager;
 import com.l2jfree.status.StatusCommand;
 
 /**
  * @author NB4L1
  */
-public final class Shutdown extends StatusCommand
+public final class Statistics extends StatusCommand
 {
 	@Override
 	protected void useCommand(String command, String params)
 	{
-		Runtime.getRuntime().exit(0);
+		println("Registered server(s):");
+		println("\t...count: " + GameServerManager.getInstance().getRegisteredGameServers().size());
+		println("\t...ids: "
+				+ StringUtils
+						.join(GameServerManager.getInstance().getRegisteredGameServers().keySet().iterator(), ", "));
 		
-		getStatusThread().close();
+		// TODO: add more details
 	}
 	
-	private static final String[] COMMANDS = { "shutdown" };
+	private static final String[] COMMANDS = { "status", "stats" };
 	
 	@Override
 	protected String[] getCommands()
@@ -40,6 +47,6 @@ public final class Shutdown extends StatusCommand
 	@Override
 	protected String getDescription()
 	{
-		return "shuts down the server";
+		return "displays basic server statistics";
 	}
 }

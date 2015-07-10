@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.status;
+package com.l2jfree.loginserver.status;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -23,10 +23,11 @@ import java.util.Arrays;
 
 import com.l2jfree.loginserver.beans.Accounts;
 import com.l2jfree.loginserver.manager.LoginManager;
-import com.l2jfree.status.commands.Restart;
-import com.l2jfree.status.commands.Shutdown;
-import com.l2jfree.status.commands.Statistics;
-import com.l2jfree.status.commands.UnblockIP;
+import com.l2jfree.loginserver.status.commands.Restart;
+import com.l2jfree.loginserver.status.commands.Shutdown;
+import com.l2jfree.loginserver.status.commands.Statistics;
+import com.l2jfree.loginserver.status.commands.UnblockIP;
+import com.l2jfree.status.StatusThread;
 import com.l2jfree.tools.codec.Base64;
 
 public final class LoginStatusThread extends StatusThread

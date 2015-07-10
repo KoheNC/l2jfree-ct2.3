@@ -48,9 +48,9 @@ import com.l2jfree.loginserver.network.loginserverpackets.KickPlayer;
 import com.l2jfree.loginserver.network.loginserverpackets.LoginServerFail;
 import com.l2jfree.loginserver.network.loginserverpackets.PlayerAuthResponse;
 import com.l2jfree.loginserver.network.loginserverpackets.PlayerLoginAttempt;
+import com.l2jfree.loginserver.status.Status;
 import com.l2jfree.network.LoginServerFailReason;
 import com.l2jfree.network.NetworkThread;
-import com.l2jfree.status.Status;
 import com.l2jfree.tools.network.SubNetHost;
 import com.l2jfree.tools.security.NewCrypt;
 
