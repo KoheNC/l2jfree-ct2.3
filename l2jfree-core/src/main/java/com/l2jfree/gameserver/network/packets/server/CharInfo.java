@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Decoy;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.gameobjects.view.PcLikeView;
@@ -63,7 +63,7 @@ public final class CharInfo extends L2ServerPacket
 	@Override
 	protected void writeImpl()
 	{
-		final PcAppearance _appearance = _activeChar.getAppearance();
+		final PlayerAppearance _appearance = _activeChar.getAppearance();
 		final PcInventory _inv = _activeChar.getInventory();
 		
 		writeC(0x31);

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.view;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
@@ -41,7 +41,7 @@ public final class PcView extends CharView<L2PcInstance> implements UniversalCha
 		
 		final L2PcInstance cha = _activeChar;
 		final ObjectPosition position = cha.getPosition();
-		final PcAppearance appearance = cha.getAppearance();
+		final PlayerAppearance appearance = cha.getAppearance();
 		final PcStat stat = cha.getStat();
 		final L2Transformation transformation = cha.getTransformation();
 		

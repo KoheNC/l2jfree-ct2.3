@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PcInstance;
 import com.l2jfree.gameserver.gameobjects.stat.PcStat;
 import com.l2jfree.gameserver.gameobjects.status.PcStatus;
@@ -110,7 +110,7 @@ public final class UserInfo extends L2ServerPacket
 	protected void writeImpl()
 	{
 		final PcView view = _activeChar.getView();
-		final PcAppearance _appearance = _activeChar.getAppearance();
+		final PlayerAppearance _appearance = _activeChar.getAppearance();
 		final PcInventory _inv = _activeChar.getInventory();
 		final PcStat stat = _activeChar.getStat();
 		final PcStatus status = _activeChar.getStatus();

@@ -84,7 +84,7 @@ import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2PlayerAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
-import com.l2jfree.gameserver.gameobjects.appearance.PcAppearance;
+import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.effects.PcEffects;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.PcKnownList;
@@ -476,7 +476,7 @@ public final class L2PcInstance extends L2Playable
 	
 	private L2Client _client;
 	
-	private final PcAppearance _appearance;
+	private final PlayerAppearance _appearance;
 	
 	/** Sitting down and Standing up fix */
 	private long _lastSitStandRequest = 0;
@@ -913,7 +913,7 @@ public final class L2PcInstance extends L2Playable
 			byte hairStyle, byte hairColor, byte face, boolean sex)
 	{
 		// Create a new L2PcInstance with an account name
-		PcAppearance app = new PcAppearance(face, hairColor, hairStyle, sex);
+		PlayerAppearance app = new PlayerAppearance(face, hairColor, hairStyle, sex);
 		L2PcInstance player = new L2PcInstance(objectId, template, accountName, app);
 		
 		// Set the name of the L2PcInstance
@@ -1081,7 +1081,7 @@ public final class L2PcInstance extends L2Playable
 	 * @param accountName The name of the account including this L2PcInstance
 	 *
 	 */
-	private L2PcInstance(int objectId, L2PcTemplate template, String accountName, PcAppearance app)
+	private L2PcInstance(int objectId, L2PcTemplate template, String accountName, PlayerAppearance app)
 	{
 		super(objectId, template);
 		getKnownList(); // Init knownlist
@@ -1165,7 +1165,7 @@ public final class L2PcInstance extends L2Playable
 		return (PcEffects)_effects;
 	}
 	
-	public final PcAppearance getAppearance()
+	public final PlayerAppearance getAppearance()
 	{
 		return _appearance;
 	}
@@ -6692,8 +6692,8 @@ public final class L2PcInstance extends L2Playable
 				final int activeClassId = rset.getInt("classid");
 				final boolean female = rset.getInt("sex") != 0;
 				final L2PcTemplate template = CharTemplateTable.getInstance().getTemplate(activeClassId);
-				PcAppearance app =
-						new PcAppearance(rset.getByte("face"), rset.getByte("hairColor"), rset.getByte("hairStyle"),
+				PlayerAppearance app =
+						new PlayerAppearance(rset.getByte("face"), rset.getByte("hairColor"), rset.getByte("hairStyle"),
 								female);
 				
 				player = new L2PcInstance(objectId, template, rset.getString("account_name"), app);
@@ -14189,16 +14189,16 @@ public final class L2PcInstance extends L2Playable
 			}
 			else
 			{
-				getAppearance().setNameColor(PcAppearance.DEFAULT_NAME_COLOR);
-				getAppearance().setTitleColor(PcAppearance.DEFAULT_TITLE_COLOR);
+				getAppearance().setNameColor(PlayerAppearance.DEFAULT_NAME_COLOR);
+				getAppearance().setTitleColor(PlayerAppearance.DEFAULT_TITLE_COLOR);
 			}
 			result.close();
 			statement.close();
 		}
 		catch (Exception e)
 		{
-			getAppearance().setNameColor(PcAppearance.DEFAULT_NAME_COLOR);
-			getAppearance().setTitleColor(PcAppearance.DEFAULT_TITLE_COLOR);
+			getAppearance().setNameColor(PlayerAppearance.DEFAULT_NAME_COLOR);
+			getAppearance().setTitleColor(PlayerAppearance.DEFAULT_TITLE_COLOR);
 			
 			_log.error("Could not load character name/title colors!", e);
 		}
