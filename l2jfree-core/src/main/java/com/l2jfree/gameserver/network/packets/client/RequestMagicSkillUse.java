@@ -19,8 +19,8 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.restriction.AvailableRestriction;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
+import com.l2jfree.gameserver.model.skills.SkillUsageRequest;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
-import com.l2jfree.gameserver.skills.SkillUsageRequest;
 
 public class RequestMagicSkillUse extends L2ClientPacket
 {

@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.DecoyKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillDecoy;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillDecoy;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 
 public class L2DecoyInstance extends L2Decoy

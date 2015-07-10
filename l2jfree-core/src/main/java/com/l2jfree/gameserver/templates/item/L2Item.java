@@ -23,10 +23,10 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.conditions.Condition;
+import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.skills.Env;
-import com.l2jfree.gameserver.skills.conditions.Condition;
-import com.l2jfree.gameserver.skills.funcs.FuncOwner;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 /**

@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillAppearance;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillAppearance;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public final class ChangeFace implements ISkillHandler

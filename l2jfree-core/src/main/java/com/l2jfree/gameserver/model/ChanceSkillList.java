@@ -19,11 +19,11 @@ import org.apache.commons.lang.ArrayUtils;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.handler.SkillHandler;
+import com.l2jfree.gameserver.model.skills.ChanceCondition;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.IChanceSkillTrigger;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
-import com.l2jfree.gameserver.skills.ChanceCondition;
-import com.l2jfree.gameserver.skills.Formulas;
-import com.l2jfree.gameserver.skills.IChanceSkillTrigger;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 import com.l2jfree.util.L2Arrays;
 

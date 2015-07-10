@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.stat.CreatureStat;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.Duel;
-import com.l2jfree.gameserver.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.LazyFastSet;

@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
-import com.l2jfree.gameserver.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 

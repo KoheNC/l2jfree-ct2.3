@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.funcs.FuncTemplate;
+import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 public abstract class L2Equip extends L2Item

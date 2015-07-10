@@ -29,12 +29,12 @@ import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.model.restriction.AvailableRestriction;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
+import com.l2jfree.gameserver.model.skills.AbnormalEffect;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
 import com.l2jfree.gameserver.network.packets.server.ConfirmDlg;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.skills.AbnormalEffect;
 
 /**
  * @author evill33t

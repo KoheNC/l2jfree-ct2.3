@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
-import com.l2jfree.gameserver.skills.Stats;
 
 /**
  * Format: (ch)ddddddd

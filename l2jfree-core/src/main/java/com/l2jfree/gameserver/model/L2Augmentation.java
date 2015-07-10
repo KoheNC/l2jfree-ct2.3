@@ -19,9 +19,9 @@ import javolution.util.FastList;
 import com.l2jfree.gameserver.datatables.AugmentationData;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.skills.funcs.Func;
-import com.l2jfree.gameserver.skills.funcs.FuncAdd;
-import com.l2jfree.gameserver.skills.funcs.FuncOwner;
+import com.l2jfree.gameserver.model.skills.funcs.Func;
+import com.l2jfree.gameserver.model.skills.funcs.FuncAdd;
+import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 
 /**
  * Used to store an augmentation and its boni

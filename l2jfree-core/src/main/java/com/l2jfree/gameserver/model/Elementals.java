@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.model;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.skills.Stats;
-import com.l2jfree.gameserver.skills.funcs.FuncAdd;
-import com.l2jfree.gameserver.skills.funcs.FuncOwner;
+import com.l2jfree.gameserver.model.skills.Stats;
+import com.l2jfree.gameserver.model.skills.funcs.FuncAdd;
+import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 
 public final class Elementals implements FuncOwner
 {

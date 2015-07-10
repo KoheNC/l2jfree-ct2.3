@@ -18,8 +18,8 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
 import com.l2jfree.gameserver.model.entity.Siege;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillSummon;
 import com.l2jfree.gameserver.model.zone.L2Zone;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillSummon;
 
 public class L2SiegeSummonInstance extends L2SummonInstance
 {

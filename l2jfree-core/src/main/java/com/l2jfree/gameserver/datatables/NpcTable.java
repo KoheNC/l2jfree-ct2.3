@@ -41,8 +41,8 @@ import com.l2jfree.gameserver.model.L2MinionData;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.ClassId;
 import com.l2jfree.gameserver.model.entity.faction.Faction;
-import com.l2jfree.gameserver.skills.Formulas;
-import com.l2jfree.gameserver.skills.Stats;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.templates.StatsSet;
 import com.l2jfree.util.LookupTable;
 

@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.handler.ICubicSkillHandler;
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class Continuous implements ICubicSkillHandler

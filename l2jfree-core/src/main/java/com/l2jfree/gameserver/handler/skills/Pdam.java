@@ -22,10 +22,10 @@ import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
-import com.l2jfree.gameserver.skills.Env;
-import com.l2jfree.gameserver.skills.Formulas;
-import com.l2jfree.gameserver.skills.funcs.Func;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillPdam;
+import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.funcs.Func;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillPdam;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public final class Pdam implements ISkillHandler

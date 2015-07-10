@@ -21,9 +21,9 @@ import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.L2Player.ConditionListenerDependency;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.quest.QuestState;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.skills.Stats;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.L2Math;
 

@@ -21,8 +21,8 @@ import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
 import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.skills.Formulas;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 /**

@@ -20,11 +20,11 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2PetData;
 import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.base.Experience;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.skills.Stats;
 
 public class PetStat extends SummonStat
 {

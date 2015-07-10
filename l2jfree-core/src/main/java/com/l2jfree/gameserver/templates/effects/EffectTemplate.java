@@ -25,12 +25,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.AbnormalEffect;
-import com.l2jfree.gameserver.skills.ChanceCondition;
-import com.l2jfree.gameserver.skills.Env;
-import com.l2jfree.gameserver.skills.SpecialEffect;
-import com.l2jfree.gameserver.skills.TriggeredSkill;
-import com.l2jfree.gameserver.skills.funcs.FuncTemplate;
+import com.l2jfree.gameserver.model.skills.AbnormalEffect;
+import com.l2jfree.gameserver.model.skills.ChanceCondition;
+import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.SpecialEffect;
+import com.l2jfree.gameserver.model.skills.TriggeredSkill;
+import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
 import com.l2jfree.gameserver.templates.StatsSet;
 import com.l2jfree.gameserver.templates.skills.L2SkillType;
 

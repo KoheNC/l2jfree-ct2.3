@@ -42,12 +42,12 @@ import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.model.quest.Quest;
+import com.l2jfree.gameserver.model.skills.funcs.Func;
+import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 import com.l2jfree.gameserver.model.zone.form.Shape;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.skills.funcs.Func;
-import com.l2jfree.gameserver.skills.funcs.FuncOwner;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.L2Collections;
 
