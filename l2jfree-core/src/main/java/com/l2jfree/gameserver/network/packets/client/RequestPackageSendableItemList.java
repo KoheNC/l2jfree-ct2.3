@@ -33,9 +33,6 @@ public final class RequestPackageSendableItemList extends L2ClientPacket
 		_objectID = readD();
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
-	 */
 	@Override
 	protected void runImpl()
 	{

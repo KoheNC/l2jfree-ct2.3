@@ -41,9 +41,6 @@ public class RequestPledgeReorganizeMember extends L2ClientPacket
 		_selectedMember = readS();
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
-	 */
 	@Override
 	protected void runImpl()
 	{

@@ -64,9 +64,6 @@ public final class RequestPackageSend extends L2ClientPacket
 		}
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
-	 */
 	@Override
 	protected void runImpl()
 	{

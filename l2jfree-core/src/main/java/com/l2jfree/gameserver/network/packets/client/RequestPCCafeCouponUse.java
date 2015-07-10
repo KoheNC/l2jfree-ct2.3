@@ -37,9 +37,6 @@ public class RequestPCCafeCouponUse extends L2ClientPacket
 		_str = readS();
 	}
 	
-	/**
-	 * @see com.l2jfree.gameserver.network.clientpackets.ClientBasePacket#runImpl()
-	 */
 	@Override
 	protected void runImpl()
 	{
