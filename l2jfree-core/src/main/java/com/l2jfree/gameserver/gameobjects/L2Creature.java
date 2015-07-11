@@ -33,7 +33,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.ThreadPoolManager;
@@ -60,6 +59,7 @@ import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.geodata.pathfinding.Node;
 import com.l2jfree.gameserver.geodata.pathfinding.PathFinding;
 import com.l2jfree.gameserver.handler.SkillHandler;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2Party;
@@ -4201,7 +4201,7 @@ public abstract class L2Creature extends L2Object
 		}
 		// Z coordinate will follow geodata or client values
 		if (Config.GEODATA > 0 && Config.COORD_SYNCHRONIZE == 2 && !isFlying() && !isInsideZone(L2Zone.FLAG_WATER)
-				&& !m.disregardingGeodata && GameTimeController.getGameTicks() % 10 == 0
+				&& !m.disregardingGeodata && GameTimeManager.getGameTicks() % 10 == 0
 				&& !(this instanceof L2BoatInstance) // once a second to reduce possible cpu load
 				&& !(this instanceof L2AirShipInstance))
 		{
@@ -4226,7 +4226,7 @@ public abstract class L2Creature extends L2Object
 			dz = m._zDestination - zPrev;
 		
 		double distPassed =
-				getStat().getMoveSpeed() * (gameTicks - m._moveTimestamp) / GameTimeController.TICKS_PER_SECOND;
+				getStat().getMoveSpeed() * (gameTicks - m._moveTimestamp) / GameTimeManager.TICKS_PER_SECOND;
 		if ((dx * dx + dy * dy) < 10000 && (dz * dz > 2500)) // close enough, allows error between client and server geodata if it cannot be avoided
 		{
 			distFraction = distPassed / Math.sqrt(dx * dx + dy * dy);
@@ -4685,7 +4685,7 @@ public abstract class L2Creature extends L2Object
 		
 		// Caclulate the Nb of ticks between the current position and the destination
 		// One tick added for rounding reasons
-		int ticksToMove = 1 + (int)(GameTimeController.TICKS_PER_SECOND * distance / speed);
+		int ticksToMove = 1 + (int)(GameTimeManager.TICKS_PER_SECOND * distance / speed);
 		m._xDestination = x;
 		m._yDestination = y;
 		m._zDestination = z; // this is what was requested from client
@@ -4697,7 +4697,7 @@ public abstract class L2Creature extends L2Object
 		if (_log.isDebugEnabled())
 			_log.info("dist:" + distance + "speed:" + speed + " ttt:" + ticksToMove + " heading:" + getHeading());
 		
-		m._moveStartTime = GameTimeController.getGameTicks();
+		m._moveStartTime = GameTimeManager.getGameTicks();
 		
 		// Set the L2Creature _move object to MoveData object
 		_move = m;
@@ -4758,7 +4758,7 @@ public abstract class L2Creature extends L2Object
 		
 		// Caclulate the Nb of ticks between the current position and the destination
 		// One tick added for rounding reasons
-		int ticksToMove = 1 + (int)(GameTimeController.TICKS_PER_SECOND * distance / speed);
+		int ticksToMove = 1 + (int)(GameTimeManager.TICKS_PER_SECOND * distance / speed);
 		
 		// Calculate and set the heading of the L2Creature
 		int heading = (int)(Math.atan2(-sin, -cos) * 10430.378);
@@ -4766,7 +4766,7 @@ public abstract class L2Creature extends L2Object
 		setHeading(heading);
 		m._heading = 0; // initial value for coordinate sync
 		
-		m._moveStartTime = GameTimeController.getGameTicks();
+		m._moveStartTime = GameTimeManager.getGameTicks();
 		
 		if (_log.isDebugEnabled())
 			_log.info("time to target:" + ticksToMove);

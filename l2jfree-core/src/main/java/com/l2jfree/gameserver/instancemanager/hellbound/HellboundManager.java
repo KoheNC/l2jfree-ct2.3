@@ -26,11 +26,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.Announcements;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.model.world.spawn.SpawnData;
 import com.l2jfree.tools.random.Rnd;
@@ -484,7 +484,7 @@ public final class HellboundManager
 	
 	public void recalculateShadaiSpawn()
 	{
-		_allowShadaiSpawn = GameTimeController.getInstance().isNowNight() && (Rnd.get(100) < 20);
+		_allowShadaiSpawn = GameTimeManager.getInstance().isNowNight() && (Rnd.get(100) < 20);
 		
 		revalidateCurrentLevel();
 	}

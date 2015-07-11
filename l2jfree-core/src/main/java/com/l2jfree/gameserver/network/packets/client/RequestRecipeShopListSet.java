@@ -19,7 +19,7 @@ import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.M
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.RecipeController;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
@@ -97,7 +97,7 @@ public class RequestRecipeShopListSet extends L2ClientPacket
 		
 		for (Recipe i : _items)
 		{
-			L2RecipeList list = RecipeController.getInstance().getRecipeList(i.getRecipeId());
+			L2RecipeList list = RecipeTable.getInstance().getRecipeList(i.getRecipeId());
 			
 			if (!ArrayUtils.contains(dwarven, list) && !ArrayUtils.contains(common, list))
 			{

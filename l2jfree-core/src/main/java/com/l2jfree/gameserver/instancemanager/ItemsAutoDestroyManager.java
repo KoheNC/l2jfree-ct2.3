@@ -12,23 +12,22 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver;
+package com.l2jfree.gameserver.instancemanager;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 
-public final class ItemsAutoDestroy extends AbstractIterativePeriodicTaskManager<L2ItemInstance>
+public final class ItemsAutoDestroyManager extends AbstractIterativePeriodicTaskManager<L2ItemInstance>
 {
-	public static ItemsAutoDestroy getInstance()
+	public static ItemsAutoDestroyManager getInstance()
 	{
 		return SingletonHolder.INSTANCE;
 	}
 	
-	private ItemsAutoDestroy()
+	private ItemsAutoDestroyManager()
 	{
 		super(5000);
 	}
@@ -79,17 +78,17 @@ public final class ItemsAutoDestroy extends AbstractIterativePeriodicTaskManager
 			if (item.isEquipable())
 			{
 				if (Config.DESTROY_EQUIPABLE_PLAYER_ITEM)
-					ItemsAutoDestroy.getInstance().startTask(item);
+					ItemsAutoDestroyManager.getInstance().startTask(item);
 			}
 			else
 			{
-				ItemsAutoDestroy.getInstance().startTask(item);
+				ItemsAutoDestroyManager.getInstance().startTask(item);
 			}
 		}
 	}
 	
 	private static final class SingletonHolder
 	{
-		public static final ItemsAutoDestroy INSTANCE = new ItemsAutoDestroy();
+		public static final ItemsAutoDestroyManager INSTANCE = new ItemsAutoDestroyManager();
 	}
 }

@@ -26,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.ItemsAutoDestroy;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
@@ -127,7 +126,7 @@ public class ItemsOnGroundManager
 					// Add to ItemsAutoDestroy only items not protected
 					if (result.getLong(8) > -1)
 					{
-						ItemsAutoDestroy.tryAddItem(item);
+						ItemsAutoDestroyManager.tryAddItem(item);
 					}
 				}
 				result.close();

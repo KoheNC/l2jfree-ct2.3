@@ -22,7 +22,6 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_I
 import java.util.Set;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
@@ -40,6 +39,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.skills.L2Skill;
@@ -375,10 +375,10 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	protected void onIntentionAttack(L2Creature target)
 	{
 		// Calculate the attack timeout
-		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 		
 		// self and buffs
-		if (_selfAnalysis.lastBuffTick + 100 < GameTimeController.getGameTicks())
+		if (_selfAnalysis.lastBuffTick + 100 < GameTimeManager.getGameTicks())
 		{
 			for (L2Skill sk : _selfAnalysis.buffSkills)
 			{
@@ -396,7 +396,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 					clientStopMoving(null);
 					_accessor.doCast(sk);
 					// forcing long reuse delay so if cast get interrupted or there would be several buffs, doesn't cast again
-					_selfAnalysis.lastBuffTick = GameTimeController.getGameTicks();
+					_selfAnalysis.lastBuffTick = GameTimeManager.getGameTicks();
 					_actor.setTarget(OldTarget);
 				}
 			}
@@ -707,7 +707,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 	 */
 	protected void thinkAttack()
 	{
-		if (_attackTimeout < GameTimeController.getGameTicks())
+		if (_attackTimeout < GameTimeManager.getGameTicks())
 		{
 			// Check if the actor is running
 			if (_actor.isRunning())
@@ -716,14 +716,14 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				_actor.setWalking();
 				
 				// Calculate a new attack timeout
-				_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+				_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 			}
 		}
 		
 		L2Creature originalAttackTarget = getAttackTarget();
 		// Check if target is dead or if timeout is expired to stop this attack
 		if (originalAttackTarget == null || originalAttackTarget.isAlikeDead()
-				|| _attackTimeout < GameTimeController.getGameTicks())
+				|| _attackTimeout < GameTimeManager.getGameTicks())
 		{
 			// Stop hating this target after the attack timeout or if target is dead
 			if (originalAttackTarget != null)
@@ -917,7 +917,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		int range = _actor.getPhysicalAttackRange() + combinedCollision;
 		
 		// Reconsider target next round if _actor hasn't got hits in for last 14 seconds
-		if (!_actor.isMuted() && _attackTimeout - 160 < GameTimeController.getGameTicks()
+		if (!_actor.isMuted() && _attackTimeout - 160 < GameTimeManager.getGameTicks()
 				&& _secondMostHatedAnalysis.character != null)
 		{
 			if (Util.checkIfInRange(900, _actor, hated[1], true))
@@ -926,7 +926,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				((L2Attackable)_actor).reduceHate(hated[0],
 						2 * (((L2Attackable)_actor).getHating(hated[0]) - ((L2Attackable)_actor).getHating(hated[1])));
 				// Calculate a new attack timeout
-				_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+				_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 			}
 		}
 		// Reconsider target during next round if actor is rooted and cannot reach mostHated but can
@@ -1011,12 +1011,12 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 							clientStopMoving(null);
 							_accessor.doCast(sk);
 							_mostHatedAnalysis.isCanceled = true;
-							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 							return;
 						}
 					}
 				}
-				if (_selfAnalysis.lastDebuffTick + 60 < GameTimeController.getGameTicks())
+				if (_selfAnalysis.lastDebuffTick + 60 < GameTimeManager.getGameTicks())
 				{
 					for (L2Skill sk : _selfAnalysis.debuffSkills)
 					{
@@ -1041,8 +1041,8 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 						{
 							clientStopMoving(null);
 							_accessor.doCast(sk);
-							_selfAnalysis.lastDebuffTick = GameTimeController.getGameTicks();
-							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+							_selfAnalysis.lastDebuffTick = GameTimeManager.getGameTicks();
+							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 							return;
 						}
 					}
@@ -1063,7 +1063,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 						{
 							clientStopMoving(null);
 							_accessor.doCast(sk);
-							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 							return;
 						}
 					}
@@ -1104,7 +1104,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 						{
 							clientStopMoving(null);
 							_accessor.doCast(sk);
-							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 							return;
 						}
 					}
@@ -1144,7 +1144,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 						{
 							clientStopMoving(null);
 							_accessor.doCast(sk);
-							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 							return;
 						}
 					}
@@ -1162,7 +1162,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 						{
 							clientStopMoving(null);
 							_accessor.doCast(sk);
-							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+							_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 							return;
 						}
 					}
@@ -1223,7 +1223,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 					{
 						clientStopMoving(null);
 						_accessor.doCast(sk);
-						_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+						_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 						return;
 					}
 				}
@@ -1275,7 +1275,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		}
 		
 		// Calculate a new attack timeout.
-		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 		
 		// check for close combat skills && heal/buff skills
 		
@@ -1299,7 +1299,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				}
 			}
 		}
-		if (_selfAnalysis.lastDebuffTick + 60 < GameTimeController.getGameTicks())
+		if (_selfAnalysis.lastDebuffTick + 60 < GameTimeManager.getGameTicks())
 		{
 			for (L2Skill sk : _selfAnalysis.debuffSkills)
 			{
@@ -1327,7 +1327,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				{
 					clientStopMoving(null);
 					_accessor.doCast(sk);
-					_selfAnalysis.lastDebuffTick = GameTimeController.getGameTicks();
+					_selfAnalysis.lastDebuffTick = GameTimeManager.getGameTicks();
 					return;
 				}
 			}
@@ -1389,7 +1389,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 				{
 					clientStopMoving(null);
 					_accessor.doCast(sk);
-					_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+					_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 					return;
 				}
 			}
@@ -1591,7 +1591,7 @@ public class L2AttackableAI extends L2CreatureAI implements Runnable
 		}*/
 		
 		// Calculate the attack timeout
-		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 		
 		// Set the _globalAggro to 0 to permit attack even just after spawn
 		if (_globalAggro < 0)

@@ -22,7 +22,6 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ItemsAutoDestroy;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.EventDroplist;
 import com.l2jfree.gameserver.datatables.EventDroplist.DateDrop;
@@ -46,6 +45,7 @@ import com.l2jfree.gameserver.gameobjects.status.AttackableStatus;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
+import com.l2jfree.gameserver.instancemanager.ItemsAutoDestroyManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2CommandChannel;
 import com.l2jfree.gameserver.model.L2DropCategory;
@@ -1690,7 +1690,7 @@ public class L2Attackable extends L2Npc
 				ditem.dropMe(this, newX, newY, newZ);
 				
 				// Add drop to auto destroy item task
-				ItemsAutoDestroy.tryAddItem(ditem);
+				ItemsAutoDestroyManager.tryAddItem(ditem);
 				
 				ditem.setProtected(false);
 				// If stackable, end loop as entire count is included in 1 instance of item

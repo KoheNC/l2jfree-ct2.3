@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.util;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 
 /**
  * Flood protector
@@ -30,11 +30,11 @@ public final class FloodProtector
 		USEITEM(100),
 		ROLLDICE(4200),
 		FIREWORK(4200),
-		GLOBAL_CHAT(Config.GLOBAL_CHAT_TIME * GameTimeController.MILLIS_IN_TICK),
-		TRADE_CHAT(Config.TRADE_CHAT_TIME * GameTimeController.MILLIS_IN_TICK),
+		GLOBAL_CHAT(Config.GLOBAL_CHAT_TIME * GameTimeManager.MILLIS_IN_TICK),
+		TRADE_CHAT(Config.TRADE_CHAT_TIME * GameTimeManager.MILLIS_IN_TICK),
 		ITEMPETSUMMON(1600),
 		HEROVOICE(10000),
-		SOCIAL(Config.SOCIAL_TIME * GameTimeController.MILLIS_IN_TICK),
+		SOCIAL(Config.SOCIAL_TIME * GameTimeManager.MILLIS_IN_TICK),
 		SUBCLASS(500),
 		DROPITEM(500),
 		MULTISELL(500),

@@ -33,9 +33,9 @@ import org.apache.commons.logging.impl.Jdk14Logger;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.datatables.RecordTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.BlockList;
 import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.world.L2World;
@@ -542,7 +542,7 @@ public class RegionBBSManager extends BaseBBSManager
 			{
 				htmlCode.append(trOpen);
 				{
-					final String gameTime = GameTimeController.getInstance().getFormattedGameTime();
+					final String gameTime = GameTimeManager.getInstance().getFormattedGameTime();
 					
 					htmlCode.append(tdOpen).append("Server Time: ").append(format.format(new Date())).append(tdClose);
 					htmlCode.append(colSpacer);

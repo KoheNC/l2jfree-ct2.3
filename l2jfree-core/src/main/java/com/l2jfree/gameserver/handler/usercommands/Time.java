@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.handler.usercommands;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 
 public class Time implements IUserCommandHandler
 {
@@ -25,7 +25,7 @@ public class Time implements IUserCommandHandler
 	@Override
 	public boolean useUserCommand(int id, L2Player activeChar)
 	{
-		activeChar.sendMessage("The current date is " + GameTimeController.getInstance().getFormattedGameTime());
+		activeChar.sendMessage("The current date is " + GameTimeManager.getInstance().getFormattedGameTime());
 		return true;
 	}
 	

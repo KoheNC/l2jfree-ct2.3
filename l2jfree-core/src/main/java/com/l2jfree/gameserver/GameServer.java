@@ -52,6 +52,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.NpcWalkerRoutesTable;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.PetSkillsTable;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.datatables.ResidentialSkillTable;
 import com.l2jfree.gameserver.datatables.ShotTable;
 import com.l2jfree.gameserver.datatables.SkillSpellbookTable;
@@ -95,9 +96,11 @@ import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.instancemanager.FriendListManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.GrandBossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
+import com.l2jfree.gameserver.instancemanager.ItemsAutoDestroyManager;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
@@ -203,7 +206,7 @@ public final class GameServer extends L2AutoInitialization
 			PathFinding.getInstance();
 		
 		StaticObjects.getInstance();
-		GameTimeController.getInstance();
+		GameTimeManager.getInstance();
 		TeleportLocationTable.getInstance();
 		BoatManager.getInstance();
 		InstanceManager.getInstance();
@@ -242,7 +245,7 @@ public final class GameServer extends L2AutoInitialization
 		ItemsOnGroundManager.getInstance();
 		if (Config.AUTODESTROY_ITEM_AFTER > 0 || Config.HERB_AUTO_DESTROY_TIME > 0)
 		{
-			ItemsAutoDestroy.getInstance();
+			ItemsAutoDestroyManager.getInstance();
 		}
 		Util.printSection("Characters");
 		CharNameTable.getInstance();
@@ -369,7 +372,7 @@ public final class GameServer extends L2AutoInitialization
 		CastleManorManager.getInstance();
 		L2Manor.getInstance();
 		AuctionManager.getInstance();
-		RecipeController.getInstance();
+		RecipeTable.getInstance();
 		
 		Util.printSection("Olympiad");
 		Olympiad.getInstance();

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.skills.conditions;
 
-import com.l2jfree.gameserver.GameTimeController;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.skills.Env;
 
 /**
@@ -42,7 +42,7 @@ public final class ConditionGameTime extends Condition
 		switch (_check)
 		{
 			case NIGHT:
-				return GameTimeController.getInstance().isNowNight() == _required;
+				return GameTimeManager.getInstance().isNowNight() == _required;
 		}
 		
 		return !_required;

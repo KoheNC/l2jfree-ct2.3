@@ -25,11 +25,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.GMAudit;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
@@ -220,7 +220,7 @@ public abstract class ItemContainer
 			if (item.getItemId() == PlayerInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
 			{
 				// Small adena changes won't be saved to database all the time
-				if (GameTimeController.getGameTicks() % 5 == 0)
+				if (GameTimeManager.getGameTicks() % 5 == 0)
 					item.updateDatabase();
 			}
 			else
@@ -266,7 +266,7 @@ public abstract class ItemContainer
 			if (itemId == PlayerInventory.ADENA_ID && count < 10000 * Config.RATE_DROP_ADENA)
 			{
 				// Small adena changes won't be saved to database all the time
-				if (GameTimeController.getGameTicks() % 5 == 0)
+				if (GameTimeManager.getGameTicks() % 5 == 0)
 					item.updateDatabase();
 			}
 			else
@@ -478,7 +478,7 @@ public abstract class ItemContainer
 				item.setLastChange(L2ItemInstance.MODIFIED);
 				
 				// don't update often for untraced items
-				if (process != null || GameTimeController.getGameTicks() % 10 == 0)
+				if (process != null || GameTimeManager.getGameTicks() % 10 == 0)
 				{
 					item.updateDatabase();
 				}

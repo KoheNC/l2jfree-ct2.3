@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.taskmanager;
 
 import java.util.ArrayList;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.threadmanager.FIFOSimpleExecutableQueue;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2FastSet;
@@ -46,7 +46,7 @@ public final class MovementController extends AbstractPeriodicTaskManager
 	
 	private MovementController()
 	{
-		super(GameTimeController.MILLIS_IN_TICK);
+		super(GameTimeManager.MILLIS_IN_TICK);
 	}
 	
 	public void add(L2Creature cha, int ticks)
@@ -69,7 +69,7 @@ public final class MovementController extends AbstractPeriodicTaskManager
 		
 		for (L2Creature cha : _movingChars)
 		{
-			boolean arrived = cha.updatePosition(GameTimeController.getGameTicks());
+			boolean arrived = cha.updatePosition(GameTimeManager.getGameTicks());
 			
 			// normal movement to an exact coordinate
 			if (cha.getAI().getFollowTarget() == null)

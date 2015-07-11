@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver;
+package com.l2jfree.gameserver.instancemanager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,31 +29,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.Announcements;
+import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Player.ConditionListenerDependency;
-import com.l2jfree.gameserver.instancemanager.DayNightSpawnManager;
 import com.l2jfree.gameserver.instancemanager.hellbound.HellboundManager;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.packets.server.ClientSetTime;
 import com.l2jfree.gameserver.util.Broadcast;
 import com.l2jfree.lang.L2Thread;
 
-public final class GameTimeController
+public final class GameTimeManager
 {
-	private static final Log _log = LogFactory.getLog(GameTimeController.class);
+	private static final Log _log = LogFactory.getLog(GameTimeManager.class);
 	
 	public static final int TICKS_PER_SECOND = 10;
 	public static final int MILLIS_IN_TICK = 1000 / TICKS_PER_SECOND;
 	
-	public static GameTimeController getInstance()
+	public static GameTimeManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
 	
 	private final Calendar _calendar = new GregorianCalendar();
 	
-	private GameTimeController()
+	private GameTimeManager()
 	{
 		new File("data/serial").mkdirs();
 		
@@ -268,6 +269,6 @@ public final class GameTimeController
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{
-		protected static final GameTimeController _instance = new GameTimeController();
+		protected static final GameTimeManager _instance = new GameTimeManager();
 	}
 }

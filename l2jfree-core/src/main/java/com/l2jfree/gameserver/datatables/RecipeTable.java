@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver;
+package com.l2jfree.gameserver.datatables;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,9 +36,10 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeInstance;
@@ -61,23 +62,23 @@ import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
 
-public class RecipeController
+public class RecipeTable
 {
 	private static final String RECIPES_FILE = "recipes.xml";
 	
-	private final static Log _log = LogFactory.getLog(RecipeController.class);
+	private final static Log _log = LogFactory.getLog(RecipeTable.class);
 	private static final Map<L2Player, RecipeItemMaker> _activeMakers = Collections
 			.synchronizedMap(new WeakHashMap<L2Player, RecipeItemMaker>());
 	
 	private final FastMap<Integer, L2RecipeList> _lists;
 	private int[] _itemIds;
 	
-	public static RecipeController getInstance()
+	public static RecipeTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
 	
-	private RecipeController()
+	private RecipeTable()
 	{
 		_lists = new FastMap<Integer, L2RecipeList>().setShared(true);
 		
@@ -580,8 +581,8 @@ public class RecipeController
 					// divided by RATE_CONSUMABLES_COST to remove craft time increase on higher consumables rates
 					_delay =
 							(int)(Config.ALT_GAME_CREATION_SPEED * _player.getStat().getMReuseRate(_skill)
-									* GameTimeController.TICKS_PER_SECOND / Config.RATE_CONSUMABLE_COST)
-									* GameTimeController.MILLIS_IN_TICK;
+									* GameTimeManager.TICKS_PER_SECOND / Config.RATE_CONSUMABLE_COST)
+									* GameTimeManager.MILLIS_IN_TICK;
 					
 					// FIXME: please fix this packet to show crafting animation (somebody)
 					MagicSkillUse msk = new MagicSkillUse(_player, _skillId, _skillLevel, _delay, 0);
@@ -1079,6 +1080,6 @@ public class RecipeController
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{
-		protected static final RecipeController _instance = new RecipeController();
+		protected static final RecipeTable _instance = new RecipeTable();
 	}
 }

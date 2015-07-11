@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model;
 
-import com.l2jfree.gameserver.RecipeController;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 
 public class L2ManufactureItem
 {
@@ -27,7 +27,7 @@ public class L2ManufactureItem
 		_recipeId = recipeId;
 		_cost = cost;
 		
-		_isDwarven = RecipeController.getInstance().getRecipeList(_recipeId).isDwarvenRecipe();
+		_isDwarven = RecipeTable.getInstance().getRecipeList(_recipeId).isDwarvenRecipe();
 	}
 	
 	public int getRecipeId()

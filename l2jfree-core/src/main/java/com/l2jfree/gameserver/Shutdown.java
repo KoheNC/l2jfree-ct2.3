@@ -23,6 +23,7 @@ import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.GrandBossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
@@ -241,7 +242,7 @@ public final class Shutdown extends Thread
 		
 		try
 		{
-			GameTimeController.stopTimer();
+			GameTimeManager.stopTimer();
 		}
 		catch (Throwable t)
 		{

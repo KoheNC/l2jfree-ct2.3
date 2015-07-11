@@ -19,11 +19,11 @@ import java.util.Map;
 
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.network.packets.server.NpcSay;
@@ -197,7 +197,7 @@ public class MC_Show extends Quest
 	
 	private int getGameTime()
 	{
-		return GameTimeController.getInstance().getGameTime();
+		return GameTimeManager.getInstance().getGameTime();
 	}
 	
 	private void scheduleTimer()

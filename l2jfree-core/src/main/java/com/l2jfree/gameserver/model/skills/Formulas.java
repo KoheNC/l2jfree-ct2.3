@@ -18,7 +18,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
@@ -36,6 +35,7 @@ import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
 import com.l2jfree.gameserver.model.L2SiegeClan;
 import com.l2jfree.gameserver.model.base.PlayerState;
@@ -1084,7 +1084,7 @@ public final class Formulas
 			{
 				if (boss.isInsideZone(L2Zone.FLAG_SUNLIGHTROOM))
 					hpRegenMultiplier *= 0.75;
-				else if (GameTimeController.getInstance().isNowNight())
+				else if (GameTimeManager.getInstance().isNowNight())
 					hpRegenMultiplier *= 1.75;
 			}
 		}

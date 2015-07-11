@@ -26,13 +26,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.model.L2DropData;
 import com.l2jfree.gameserver.model.L2Party;
@@ -898,7 +898,7 @@ public final class QuestState
 	 */
 	public int getGameTicks()
 	{
-		return GameTimeController.getGameTicks();
+		return GameTimeManager.getGameTicks();
 	}
 	
 	/**

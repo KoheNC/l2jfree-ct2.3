@@ -43,10 +43,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.ItemsAutoDestroy;
 import com.l2jfree.gameserver.LoginServerThread;
-import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.Shutdown;
@@ -69,6 +66,7 @@ import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NobleSkillTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.PetDataTable;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.datatables.RecordTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
@@ -127,7 +125,9 @@ import com.l2jfree.gameserver.instancemanager.FactionManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
+import com.l2jfree.gameserver.instancemanager.ItemsAutoDestroyManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
@@ -3506,7 +3506,7 @@ public final class L2Player extends L2Playable
 		
 		if (Config.DESTROY_DROPPED_PLAYER_ITEM)
 		{
-			ItemsAutoDestroy.tryAddItem(item);
+			ItemsAutoDestroyManager.tryAddItem(item);
 			
 			if (!item.isEquipable() || (item.isEquipable() && Config.DESTROY_EQUIPABLE_PLAYER_ITEM))
 				item.setProtected(false);
@@ -3560,7 +3560,7 @@ public final class L2Player extends L2Playable
 		// Destroy item droped from inventory by player when DESTROY_PLAYER_INVENTORY_DROP is set to true
 		if (Config.DESTROY_PLAYER_INVENTORY_DROP)
 		{
-			ItemsAutoDestroy.tryAddItem(item);
+			ItemsAutoDestroyManager.tryAddItem(item);
 			
 			item.setProtected(false);
 		}
@@ -3643,11 +3643,11 @@ public final class L2Player extends L2Playable
 			_log.debug(getName()
 					+ ": Protection "
 					+ (protect ? "ON "
-							+ (GameTimeController.getGameTicks() + proTime * GameTimeController.TICKS_PER_SECOND)
-							: "OFF") + " (currently " + GameTimeController.getGameTicks() + ")");
+							+ (GameTimeManager.getGameTicks() + proTime * GameTimeManager.TICKS_PER_SECOND)
+							: "OFF") + " (currently " + GameTimeManager.getGameTicks() + ")");
 		
 		_protectEndTime =
-				protect ? GameTimeController.getGameTicks() + proTime * GameTimeController.TICKS_PER_SECOND : 0;
+				protect ? GameTimeManager.getGameTicks() + proTime * GameTimeManager.TICKS_PER_SECOND : 0;
 	}
 	
 	public long getProtection()
@@ -3661,13 +3661,13 @@ public final class L2Player extends L2Playable
 	public void setRecentFakeDeath(boolean protect)
 	{
 		_recentFakeDeathEndTime =
-				protect ? GameTimeController.getGameTicks() + Config.PLAYER_FAKEDEATH_UP_PROTECTION
-						* GameTimeController.TICKS_PER_SECOND : 0;
+				protect ? GameTimeManager.getGameTicks() + Config.PLAYER_FAKEDEATH_UP_PROTECTION
+						* GameTimeManager.TICKS_PER_SECOND : 0;
 	}
 	
 	public boolean isRecentFakeDeath()
 	{
-		return _recentFakeDeathEndTime > GameTimeController.getGameTicks();
+		return _recentFakeDeathEndTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -5628,7 +5628,7 @@ public final class L2Player extends L2Playable
 	 */
 	public boolean isRequestExpired()
 	{
-		return !(_requestExpireTime > GameTimeController.getGameTicks());
+		return !(_requestExpireTime > GameTimeManager.getGameTicks());
 	}
 	
 	/**
@@ -5644,7 +5644,7 @@ public final class L2Player extends L2Playable
 	 */
 	public boolean isProcessingRequest()
 	{
-		return _activeRequester != null || _requestExpireTime > GameTimeController.getGameTicks();
+		return _activeRequester != null || _requestExpireTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -5653,7 +5653,7 @@ public final class L2Player extends L2Playable
 	public boolean isProcessingTransaction()
 	{
 		return _activeRequester != null || _activeTradeList != null
-				|| _requestExpireTime > GameTimeController.getGameTicks();
+				|| _requestExpireTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -5661,7 +5661,7 @@ public final class L2Player extends L2Playable
 	 */
 	public void onTransactionRequest(L2Player partner)
 	{
-		_requestExpireTime = GameTimeController.getGameTicks() + REQUEST_TIMEOUT * GameTimeController.TICKS_PER_SECOND;
+		_requestExpireTime = GameTimeManager.getGameTicks() + REQUEST_TIMEOUT * GameTimeManager.TICKS_PER_SECOND;
 		partner.setActiveRequester(this);
 	}
 	
@@ -6011,7 +6011,7 @@ public final class L2Player extends L2Playable
 				arrows.setLastChange(L2ItemInstance.MODIFIED);
 				
 				// Could do also without saving, but let's save approx 1 of 10
-				if (GameTimeController.getGameTicks() % 10 == 0)
+				if (GameTimeManager.getGameTicks() % 10 == 0)
 					arrows.updateDatabase();
 				getInventory().refreshWeight();
 			}
@@ -6398,7 +6398,7 @@ public final class L2Player extends L2Playable
 	@Override
 	public boolean isInvul()
 	{
-		return super.isInvul() || _protectEndTime > GameTimeController.getGameTicks();
+		return super.isInvul() || _protectEndTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -7043,7 +7043,7 @@ public final class L2Player extends L2Playable
 			L2RecipeList recipe;
 			while (rset.next())
 			{
-				recipe = RecipeController.getInstance().getRecipeList(rset.getInt("id"));
+				recipe = RecipeTable.getInstance().getRecipeList(rset.getInt("id"));
 				
 				if (loadCommon)
 				{
@@ -8757,7 +8757,7 @@ public final class L2Player extends L2Playable
 				return;
 			}
 			
-			if (!GameTimeController.getInstance().isNowNight() && _lure.isNightLure())
+			if (!GameTimeManager.getInstance().isNowNight() && _lure.isNightLure())
 				return;
 			
 			int check = Rnd.get(1000);
@@ -11188,7 +11188,7 @@ public final class L2Player extends L2Playable
 		// Stop crafting, if in progress
 		try
 		{
-			RecipeController.getInstance().requestMakeItemAbort(this);
+			RecipeTable.getInstance().requestMakeItemAbort(this);
 		}
 		catch (Exception e)
 		{

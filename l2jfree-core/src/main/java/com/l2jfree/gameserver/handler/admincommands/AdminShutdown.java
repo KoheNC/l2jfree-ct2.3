@@ -15,11 +15,11 @@
 package com.l2jfree.gameserver.handler.admincommands;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.ShutdownMode;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 
@@ -86,7 +86,7 @@ public class AdminShutdown implements IAdminCommandHandler
 		adminReply.replace("%sp%", String.valueOf(Config.RATE_SP));
 		adminReply.replace("%adena%", String.valueOf(Config.RATE_DROP_ADENA));
 		adminReply.replace("%drop%", String.valueOf(Config.RATE_DROP_ITEMS));
-		adminReply.replace("%time%", String.valueOf(GameTimeController.getInstance().getFormattedGameTime()));
+		adminReply.replace("%time%", String.valueOf(GameTimeManager.getInstance().getFormattedGameTime()));
 		activeChar.sendPacket(adminReply);
 	}
 	

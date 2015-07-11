@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.RecipeController;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.world.L2World;
@@ -100,7 +100,7 @@ public class RequestRecipeShopMakeItem extends L2ClientPacket
 		}
 		
 		if (Util.checkIfInRange(150, activeChar, manufacturer, true))
-			RecipeController.getInstance().requestManufactureItem(manufacturer, _recipeId, activeChar);
+			RecipeTable.getInstance().requestManufactureItem(manufacturer, _recipeId, activeChar);
 		else
 			sendPacket(SystemMessageId.TARGET_TOO_FAR);
 		

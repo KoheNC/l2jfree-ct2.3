@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler.items;
 
-import com.l2jfree.gameserver.RecipeController;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
@@ -36,7 +36,7 @@ public class Recipes implements IItemHandler
 	
 	public Recipes()
 	{
-		ITEM_IDS = RecipeController.getInstance().getAllItemIds();
+		ITEM_IDS = RecipeTable.getInstance().getAllItemIds();
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class Recipes implements IItemHandler
 		if (!(playable instanceof L2Player))
 			return;
 		L2Player activeChar = (L2Player)playable;
-		L2RecipeList rp = RecipeController.getInstance().getRecipeByItemId(item.getItemId());
+		L2RecipeList rp = RecipeTable.getInstance().getRecipeByItemId(item.getItemId());
 		if (rp == null)
 			return;
 		if (activeChar.hasRecipeList(rp.getId()))
