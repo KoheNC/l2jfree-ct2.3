@@ -20,14 +20,14 @@ import java.util.StringTokenizer;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Multisell;
-import com.l2jfree.gameserver.model.L2RecipeInstance;
-import com.l2jfree.gameserver.model.L2RecipeList;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.recipe.L2RecipeInstance;
+import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
@@ -56,7 +56,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 		if (command.startsWith("multisell"))
 		{
 			int listId = Integer.parseInt(command.substring(9).trim());
-			L2Multisell.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
+			MultisellTable.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
 		}
 		else if (command.startsWith("Crystallize")) // List player inventory items for crystallization
 		{

@@ -29,9 +29,9 @@ import com.l2jfree.gameserver.InstanceListManager;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2ClanMember;
-import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 public class CastleManager implements InstanceListManager
 {

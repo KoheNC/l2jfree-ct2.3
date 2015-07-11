@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.itemcontainer;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
+import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
 
 public class PlayerWarehouse extends Warehouse
 {

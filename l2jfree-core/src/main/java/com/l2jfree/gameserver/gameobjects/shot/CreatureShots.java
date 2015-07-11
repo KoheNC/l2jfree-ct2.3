@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.shot;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 /**
  * @author NB4L1

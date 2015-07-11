@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.gameobjects.shot;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.tools.random.Rnd;

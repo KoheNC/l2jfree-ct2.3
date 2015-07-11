@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.restriction.global;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 /**
  * @author savormix

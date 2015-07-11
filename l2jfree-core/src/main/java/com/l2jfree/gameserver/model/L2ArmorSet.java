@@ -20,6 +20,7 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTable.SkillInfo;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 /**
  * @author Luno & Psychokiller1888

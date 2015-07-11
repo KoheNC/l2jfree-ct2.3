@@ -19,8 +19,8 @@ import java.util.List;
 import javolution.util.FastList;
 
 import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
 
 public class NpcInventory extends Inventory
 {

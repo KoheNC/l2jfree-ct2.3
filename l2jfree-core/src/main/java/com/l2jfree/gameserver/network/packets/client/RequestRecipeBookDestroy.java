@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2RecipeList;
+import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.RecipeBookItemList;
 

@@ -20,12 +20,12 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Multisell;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -130,10 +130,10 @@ public class L2OlympiadManagerInstance extends L2Npc
 					}
 					break;
 				case 7:
-					L2Multisell.getInstance().separateAndSend(102, player, getNpcId(), false, getCastle().getTaxRate());
+					MultisellTable.getInstance().separateAndSend(102, player, getNpcId(), false, getCastle().getTaxRate());
 					break;
 				case 8:
-					L2Multisell.getInstance().separateAndSend(103, player, getNpcId(), false, getCastle().getTaxRate());
+					MultisellTable.getInstance().separateAndSend(103, player, getNpcId(), false, getCastle().getTaxRate());
 					break;
 				case 9:
 					int point = Olympiad.getInstance().getLastNobleOlympiadPoints(player.getObjectId());

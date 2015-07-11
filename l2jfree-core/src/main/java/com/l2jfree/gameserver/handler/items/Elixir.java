@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -32,7 +32,7 @@ public class Elixir implements IItemHandler
 	
 	/**
 	 * 
-	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.gameobjects.L2Playable, com.l2jfree.gameserver.model.L2ItemInstance)
+	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.gameobjects.L2Playable, com.l2jfree.gameserver.model.items.L2ItemInstance)
 	 */
 	@Override
 	public synchronized void useItem(L2Playable playable, L2ItemInstance item)

@@ -46,6 +46,7 @@ import com.l2jfree.gameserver.datatables.HeroSkillTable;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.LevelUpData;
 import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.NobleSkillTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.NpcWalkerRoutesTable;
@@ -125,7 +126,6 @@ import com.l2jfree.gameserver.instancemanager.leaderboards.ArenaManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
 import com.l2jfree.gameserver.model.AutoChatHandler;
 import com.l2jfree.gameserver.model.L2Manor;
-import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
 import com.l2jfree.gameserver.model.entity.Castle;
@@ -234,7 +234,7 @@ public final class GameServer extends L2AutoInitialization
 		ExtractableItemsData.getInstance();
 		ExtractableSkillsData.getInstance();
 		EnchantHPBonusData.getInstance();
-		L2Multisell.getInstance();
+		MultisellTable.getInstance();
 		if (Config.ALLOW_FISHING)
 		{
 			FishTable.getInstance();

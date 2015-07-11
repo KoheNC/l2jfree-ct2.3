@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.templates.item;
 
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket.ElementalOwner;
 
 /**

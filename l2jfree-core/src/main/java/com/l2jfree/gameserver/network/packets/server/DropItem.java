@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class DropItem extends L2ServerPacket

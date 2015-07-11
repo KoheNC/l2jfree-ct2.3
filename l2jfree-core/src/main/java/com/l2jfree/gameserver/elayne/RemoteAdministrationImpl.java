@@ -32,6 +32,7 @@ import com.l2jfree.gameserver.Shutdown.ShutdownMode;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.GmListTable;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
@@ -40,7 +41,6 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.DayNightSpawnManager;
 import com.l2jfree.gameserver.instancemanager.Manager;
 import com.l2jfree.gameserver.instancemanager.RaidBossSpawnManager;
-import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
@@ -190,7 +190,7 @@ public class RemoteAdministrationImpl extends UnicastRemoteObject implements IRe
 			switch (reloadProcedure)
 			{
 				case 1:
-					L2Multisell.getInstance().reload();
+					MultisellTable.getInstance().reload();
 					break;
 				case 2:
 					SkillTable.reload();

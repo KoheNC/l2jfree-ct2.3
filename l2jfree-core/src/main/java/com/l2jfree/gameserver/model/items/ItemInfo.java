@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.items;
 
 import com.l2jfree.gameserver.network.packets.L2ServerPacket.ElementalOwner;
 import com.l2jfree.gameserver.templates.item.L2Item;

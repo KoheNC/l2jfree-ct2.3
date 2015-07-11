@@ -12,41 +12,33 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.items.extractable;
+
+import java.util.List;
 
 /**
- * This class describes a RecipeList componant (1 line of the recipe : Item-Quantity needed).<BR><BR>
+ *
+ * @author -Nemesiss-
  */
-public class L2RecipeInstance
+public class L2ExtractableItem
 {
-	/** The Identifier of the item needed in the L2RecipeInstance */
 	private final int _itemId;
+	private final L2ExtractableProductItem[] _products;
 	
-	/** The item quantity needed in the L2RecipeInstance */
-	private final int _quantity;
-	
-	/**
-	 * Constructor of L2RecipeInstance (create a new line in a RecipeList).<BR><BR>
-	 */
-	public L2RecipeInstance(int itemId, int quantity)
+	public L2ExtractableItem(int itemid, List<L2ExtractableProductItem> products)
 	{
-		_itemId = itemId;
-		_quantity = quantity;
+		_itemId = itemid;
+		_products = new L2ExtractableProductItem[products.size()];
+		products.toArray(_products);
 	}
 	
-	/**
-	 * Return the Identifier of the L2RecipeInstance Item needed.<BR><BR>
-	 */
 	public int getItemId()
 	{
 		return _itemId;
 	}
 	
-	/**
-	 * Return the Item quantity needed of the L2RecipeInstance.<BR><BR>
-	 */
-	public int getQuantity()
+	public L2ExtractableProductItem[] getProductItemsArray()
 	{
-		return _quantity;
+		return _products;
 	}
 }

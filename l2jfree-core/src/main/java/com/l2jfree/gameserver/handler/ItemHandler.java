@@ -49,7 +49,7 @@ import com.l2jfree.gameserver.handler.items.SpiritShot;
 import com.l2jfree.gameserver.handler.items.SummonItems;
 import com.l2jfree.gameserver.handler.items.TeleportBookmark;
 import com.l2jfree.gameserver.handler.items.WrappedPack;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.templates.item.L2EtcItem;
 import com.l2jfree.gameserver.templates.item.L2Item;

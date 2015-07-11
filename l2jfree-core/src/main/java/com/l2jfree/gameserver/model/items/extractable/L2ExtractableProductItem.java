@@ -12,55 +12,37 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.items.extractable;
 
 /**
  *
+ * @author -Nemesiss-
  */
-public class ItemRequest
+public class L2ExtractableProductItem
 {
-	int _objectId;
-	int _itemId;
-	long _count;
-	long _price;
+	private final int[] _id;
+	private final int[] _ammount;
+	private final int _chance;
 	
-	public ItemRequest(int objectId, long count, long price)
+	public L2ExtractableProductItem(int[] id, int[] ammount, int chance)
 	{
-		_objectId = objectId;
-		_count = count;
-		_price = price;
+		_id = id;
+		_ammount = ammount;
+		_chance = chance;
 	}
 	
-	public ItemRequest(int objectId, int itemId, long count, long price)
+	public int[] getId()
 	{
-		_objectId = objectId;
-		_itemId = itemId;
-		_count = count;
-		_price = price;
+		return _id;
 	}
 	
-	public int getObjectId()
+	public int[] getAmmount()
 	{
-		return _objectId;
+		return _ammount;
 	}
 	
-	public int getItemId()
+	public int getChance()
 	{
-		return _itemId;
-	}
-	
-	public void setCount(long count)
-	{
-		_count = count;
-	}
-	
-	public long getCount()
-	{
-		return _count;
-	}
-	
-	public long getPrice()
-	{
-		return _price;
+		return _chance;
 	}
 }

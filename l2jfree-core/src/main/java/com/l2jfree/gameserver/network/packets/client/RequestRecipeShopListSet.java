@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2ManufactureItem;
 import com.l2jfree.gameserver.model.L2ManufactureList;
-import com.l2jfree.gameserver.model.L2RecipeList;
+import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;

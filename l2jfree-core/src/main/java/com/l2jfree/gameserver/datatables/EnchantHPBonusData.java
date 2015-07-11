@@ -26,7 +26,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
 import com.l2jfree.gameserver.templates.item.L2Armor;

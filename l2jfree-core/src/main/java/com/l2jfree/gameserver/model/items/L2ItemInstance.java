@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.items;
 
 import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.ADENA_ID;
 import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.MAX_ADENA;
@@ -39,6 +39,12 @@ import com.l2jfree.gameserver.gameobjects.shot.ShotState;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
+import com.l2jfree.gameserver.model.Elementals;
+import com.l2jfree.gameserver.model.L2Augmentation;
+import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.L2WorldRegion;
+import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.skills.L2Skill;
