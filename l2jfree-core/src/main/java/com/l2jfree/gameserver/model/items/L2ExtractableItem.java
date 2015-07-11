@@ -12,25 +12,33 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.items.model;
+package com.l2jfree.gameserver.model.items;
 
-import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.item.AbstractL2ItemType;
+import java.util.List;
 
 /**
- * @author luisantonioa
+ *
+ * @author -Nemesiss-
  */
-public final class Item
+public class L2ExtractableItem
 {
-	public int id;
-	public int displayid;
-	public AbstractL2ItemType type;
-	public String name;
-	public StatsSet set;
+	private final int _itemId;
+	private final L2ExtractableProductItem[] _products;
 	
-	@Override
-	public String toString()
+	public L2ExtractableItem(int itemid, List<L2ExtractableProductItem> products)
 	{
-		return super.toString() + "[id=" + id + "]";
+		_itemId = itemid;
+		_products = new L2ExtractableProductItem[products.size()];
+		products.toArray(_products);
+	}
+	
+	public int getItemId()
+	{
+		return _itemId;
+	}
+	
+	public L2ExtractableProductItem[] getProductItemsArray()
+	{
+		return _products;
 	}
 }

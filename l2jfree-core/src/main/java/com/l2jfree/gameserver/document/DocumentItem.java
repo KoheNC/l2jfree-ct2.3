@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.items.model.Item;
+import com.l2jfree.gameserver.model.items.Item;
 import com.l2jfree.gameserver.templates.item.L2Armor;
 import com.l2jfree.gameserver.templates.item.L2ArmorType;
 import com.l2jfree.gameserver.templates.item.L2EtcItem;
