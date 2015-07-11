@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.mapregion;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.w3c.dom.Node;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;

@@ -16,7 +16,7 @@ package ai.group_template;
 
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.NpcTable;

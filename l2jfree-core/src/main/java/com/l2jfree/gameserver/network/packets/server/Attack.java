@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;

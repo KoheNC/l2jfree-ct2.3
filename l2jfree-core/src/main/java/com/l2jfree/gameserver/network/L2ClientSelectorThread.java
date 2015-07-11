@@ -22,7 +22,7 @@ import java.util.Map;
 
 import javolution.util.FastMap;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.CoreInfo;

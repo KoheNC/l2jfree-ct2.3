@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import static com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory.MAX_ADENA;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.RecipeTable;
