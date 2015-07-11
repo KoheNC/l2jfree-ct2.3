@@ -27,8 +27,8 @@ import javolution.util.FastSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.l2jfree.gameserver.document.DocumentEngine;
 import com.l2jfree.gameserver.model.skills.L2Skill;
-import com.l2jfree.gameserver.model.skills.SkillsEngine;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillLearnSkill;
 import com.l2jfree.gameserver.model.skills.learn.L2EnchantSkillLearn;
 import com.l2jfree.gameserver.model.skills.learn.L2EnchantSkillLearn.EnchantSkillDetail;
@@ -89,7 +89,7 @@ public final class SkillTable
 	
 	private SkillTable()
 	{
-		final List<L2Skill> skills = SkillsEngine.loadSkills();
+		final List<L2Skill> skills = DocumentEngine.loadSkills();
 		_log.info("SkillTable: Loaded " + skills.size() + " skill templates from XML files.");
 		
 		int highestId = 0;

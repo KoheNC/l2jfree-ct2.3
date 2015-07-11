@@ -12,17 +12,14 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.skills;
 
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.handler.SkillHandler;
-import com.l2jfree.gameserver.model.skills.ChanceCondition;
-import com.l2jfree.gameserver.model.skills.Formulas;
-import com.l2jfree.gameserver.model.skills.IChanceSkillTrigger;
-import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;

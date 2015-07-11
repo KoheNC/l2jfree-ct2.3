@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.skills;
+package com.l2jfree.gameserver.document;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -27,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.items.model.Item;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.templates.item.L2EtcItem;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 import com.l2jfree.gameserver.templates.item.L2Item;
@@ -34,11 +35,11 @@ import com.l2jfree.gameserver.templates.item.L2Item;
 /**
  * @author mkizub
  */
-public final class SkillsEngine
+public final class DocumentEngine
 {
-	private static final Log _log = LogFactory.getLog(SkillsEngine.class);
+	private static final Log _log = LogFactory.getLog(DocumentEngine.class);
 	
-	private SkillsEngine()
+	private DocumentEngine()
 	{
 	}
 	

@@ -32,6 +32,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
+import com.l2jfree.gameserver.document.DocumentEngine;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
@@ -40,7 +41,6 @@ import com.l2jfree.gameserver.items.model.Item;
 import com.l2jfree.gameserver.model.L2CommandChannel;
 import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
-import com.l2jfree.gameserver.model.skills.SkillsEngine;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -294,13 +294,13 @@ public final class ItemTable
 			L2DatabaseFactory.close(con);
 		}
 		
-		final List<L2Item> etcItems = SkillsEngine.loadItems(itemData);
+		final List<L2Item> etcItems = DocumentEngine.loadItems(itemData);
 		_log.info("ItemTable: Loaded " + etcItems.size() + "/" + etcItems.size() + " Items.");
 		
-		final List<L2Item> armors = SkillsEngine.loadArmors(armorData);
+		final List<L2Item> armors = DocumentEngine.loadArmors(armorData);
 		_log.info("ItemTable: Loaded " + armors.size() + "/" + armorData.size() + " Armors.");
 		
-		final List<L2Item> weapons = SkillsEngine.loadWeapons(weaponData);
+		final List<L2Item> weapons = DocumentEngine.loadWeapons(weaponData);
 		_log.info("ItemTable: Loaded " + weapons.size() + "/" + weaponData.size() + " Weapons.");
 		
 		int highestId = 0;

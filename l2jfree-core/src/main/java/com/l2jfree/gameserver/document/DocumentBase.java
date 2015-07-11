@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.skills;
+package com.l2jfree.gameserver.document;
 
 import java.io.File;
 
@@ -24,6 +24,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.conditions.Condition;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionParser;
 import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;
