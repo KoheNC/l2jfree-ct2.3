@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model.entity;
 
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2SiegeClan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2SiegeClan;
 
 /**
  * @author NB4L1

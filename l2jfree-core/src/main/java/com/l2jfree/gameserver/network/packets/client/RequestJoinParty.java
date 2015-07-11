@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.network.packets.client;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.BlockList;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.AskJoinParty;

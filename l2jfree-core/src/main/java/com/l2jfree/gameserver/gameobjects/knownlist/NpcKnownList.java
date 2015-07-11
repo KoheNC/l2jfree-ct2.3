@@ -16,11 +16,11 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.instance.L2CabaleBufferInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FestivalGuideInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.model.L2Object;
 
 public class NpcKnownList extends CreatureKnownList
 {

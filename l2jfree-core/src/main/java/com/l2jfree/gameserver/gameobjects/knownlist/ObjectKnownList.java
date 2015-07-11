@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 
 public abstract class ObjectKnownList
 {

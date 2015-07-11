@@ -29,7 +29,6 @@ import javolution.util.FastMap;
 import org.apache.commons.io.IOUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
@@ -38,14 +37,15 @@ import com.l2jfree.gameserver.gameobjects.knownlist.AirShipKnownList;
 import com.l2jfree.gameserver.gameobjects.knownlist.CreatureKnownList;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.network.packets.server.ExAirShipInfo;
 import com.l2jfree.gameserver.network.packets.server.ExGetOffAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExGetOnAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExMoveToLocationAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExStopMoveAirShip;
 import com.l2jfree.gameserver.taskmanager.MovementController;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 
 /**
  * Flying airships. Very similar to Maktakien boats (see L2BoatInstance) but these do fly :P
@@ -241,7 +241,7 @@ public final class L2AirShipInstance extends L2Creature
 		
 		// Caclulate the Nb of ticks between the current position and the
 		// destination
-		int ticksToMove = (int)(GameTimeController.TICKS_PER_SECOND * distance / speed);
+		int ticksToMove = (int)(GameTimeManager.TICKS_PER_SECOND * distance / speed);
 		
 		// Calculate and set the heading of the L2Creature
 		int heading = (int)(Math.atan2(-sin, -cos) * 10430.378350470452724949566316381);
@@ -256,7 +256,7 @@ public final class L2AirShipInstance extends L2Creature
 		m._zDestination = z; // this is what was requested from client
 		m._heading = 0; // initial value for coordinate sync
 		m.onGeodataPathIndex = -1; // Initialize not on geodata path
-		m._moveStartTime = GameTimeController.getGameTicks();
+		m._moveStartTime = GameTimeManager.getGameTicks();
 		
 		if (_log.isDebugEnabled())
 			_log.debug("time to target:" + ticksToMove);

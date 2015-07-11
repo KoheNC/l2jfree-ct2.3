@@ -27,12 +27,12 @@ import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Armor;
+import com.l2jfree.gameserver.model.items.templates.L2Equip;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
-import com.l2jfree.gameserver.templates.item.L2Armor;
-import com.l2jfree.gameserver.templates.item.L2Equip;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.util.LookupTable;
 
 /**

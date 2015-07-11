@@ -17,10 +17,10 @@ package com.l2jfree.gameserver.model.skills.conditions;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2ArmorType;
+import com.l2jfree.gameserver.model.items.templates.L2Equip;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.model.skills.Env;
-import com.l2jfree.gameserver.templates.item.L2ArmorType;
-import com.l2jfree.gameserver.templates.item.L2Equip;
-import com.l2jfree.gameserver.templates.item.L2Item;
 
 /**
  * @author mkizub

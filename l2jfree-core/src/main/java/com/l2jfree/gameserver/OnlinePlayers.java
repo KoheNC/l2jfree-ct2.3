@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 
 public class OnlinePlayers
 {

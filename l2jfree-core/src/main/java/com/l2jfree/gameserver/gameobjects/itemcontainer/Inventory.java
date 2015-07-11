@@ -28,22 +28,22 @@ import com.l2jfree.gameserver.datatables.ArmorSetsTable;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTable.SkillInfo;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.GMAudit;
 import com.l2jfree.gameserver.model.L2ArmorSet;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
+import com.l2jfree.gameserver.model.items.templates.L2Armor;
+import com.l2jfree.gameserver.model.items.templates.L2Equip;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItem;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.templates.item.L2Armor;
-import com.l2jfree.gameserver.templates.item.L2Equip;
-import com.l2jfree.gameserver.templates.item.L2EtcItem;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * This class manages inventory

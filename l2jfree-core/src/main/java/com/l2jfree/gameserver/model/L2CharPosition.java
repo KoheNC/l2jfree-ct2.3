@@ -14,6 +14,8 @@
  */
 package com.l2jfree.gameserver.model;
 
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+
 /**
  * This class permit to pass (x, y, z, heading) position data to method.<BR>
  * <BR>

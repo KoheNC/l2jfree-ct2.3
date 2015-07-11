@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.RecipeController;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -49,7 +49,7 @@ public class RecipeItemMakeInfo extends L2ServerPacket
 	@Override
 	protected final void writeImpl()
 	{
-		L2RecipeList recipe = RecipeController.getInstance().getRecipeList(_id);
+		L2RecipeList recipe = RecipeTable.getInstance().getRecipeList(_id);
 		
 		if (recipe != null)
 		{

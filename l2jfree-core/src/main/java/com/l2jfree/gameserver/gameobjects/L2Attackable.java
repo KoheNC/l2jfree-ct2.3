@@ -22,7 +22,6 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ItemsAutoDestroy;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.EventDroplist;
 import com.l2jfree.gameserver.datatables.EventDroplist.DateDrop;
@@ -33,6 +32,7 @@ import com.l2jfree.gameserver.gameobjects.ai.L2AttackableAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2FortSiegeGuardAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SiegeGuardAI;
+import com.l2jfree.gameserver.gameobjects.base.SoulCrystal;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
@@ -46,14 +46,14 @@ import com.l2jfree.gameserver.gameobjects.status.AttackableStatus;
 import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
+import com.l2jfree.gameserver.instancemanager.ItemsAutoDestroyManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
 import com.l2jfree.gameserver.model.L2CommandChannel;
-import com.l2jfree.gameserver.model.L2DropCategory;
-import com.l2jfree.gameserver.model.L2DropData;
 import com.l2jfree.gameserver.model.L2Manor;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.base.SoulCrystal;
+import com.l2jfree.gameserver.model.drop.L2DropCategory;
+import com.l2jfree.gameserver.model.drop.L2DropData;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
@@ -1690,7 +1690,7 @@ public class L2Attackable extends L2Npc
 				ditem.dropMe(this, newX, newY, newZ);
 				
 				// Add drop to auto destroy item task
-				ItemsAutoDestroy.tryAddItem(ditem);
+				ItemsAutoDestroyManager.tryAddItem(ditem);
 				
 				ditem.setProtected(false);
 				// If stackable, end loop as entire count is included in 1 instance of item

@@ -52,6 +52,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.NpcWalkerRoutesTable;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.PetSkillsTable;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.datatables.ResidentialSkillTable;
 import com.l2jfree.gameserver.datatables.ShotTable;
 import com.l2jfree.gameserver.datatables.SkillSpellbookTable;
@@ -77,6 +78,7 @@ import com.l2jfree.gameserver.handler.VoicedCommandHandler;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
+import com.l2jfree.gameserver.instancemanager.AutoChatManager;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager;
 import com.l2jfree.gameserver.instancemanager.BlockListManager;
 import com.l2jfree.gameserver.instancemanager.BoatManager;
@@ -95,9 +97,11 @@ import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.instancemanager.FriendListManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.GrandBossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
+import com.l2jfree.gameserver.instancemanager.ItemsAutoDestroyManager;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
@@ -124,9 +128,7 @@ import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
 import com.l2jfree.gameserver.instancemanager.lastimperialtomb.LastImperialTombManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.ArenaManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
-import com.l2jfree.gameserver.model.AutoChatHandler;
 import com.l2jfree.gameserver.model.L2Manor;
-import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Fort;
@@ -134,10 +136,14 @@ import com.l2jfree.gameserver.model.entity.Hero;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.L2ClientSelectorThread;
 import com.l2jfree.gameserver.script.faenor.FaenorScriptEngine;
 import com.l2jfree.gameserver.scripting.CompiledScriptCache;
 import com.l2jfree.gameserver.scripting.L2ScriptEngineManager;
+import com.l2jfree.gameserver.status.Status;
 import com.l2jfree.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.KnownListUpdateTaskManager;
@@ -153,7 +159,6 @@ import com.l2jfree.gameserver.util.OfflineTradeManager;
 import com.l2jfree.gameserver.util.TableOptimizer;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.management.StartupManager;
-import com.l2jfree.status.Status;
 import com.l2jfree.util.concurrent.RunnableStatsManager;
 
 public final class GameServer extends L2AutoInitialization
@@ -203,7 +208,7 @@ public final class GameServer extends L2AutoInitialization
 			PathFinding.getInstance();
 		
 		StaticObjects.getInstance();
-		GameTimeController.getInstance();
+		GameTimeManager.getInstance();
 		TeleportLocationTable.getInstance();
 		BoatManager.getInstance();
 		InstanceManager.getInstance();
@@ -242,7 +247,7 @@ public final class GameServer extends L2AutoInitialization
 		ItemsOnGroundManager.getInstance();
 		if (Config.AUTODESTROY_ITEM_AFTER > 0 || Config.HERB_AUTO_DESTROY_TIME > 0)
 		{
-			ItemsAutoDestroy.getInstance();
+			ItemsAutoDestroyManager.getInstance();
 		}
 		Util.printSection("Characters");
 		CharNameTable.getInstance();
@@ -313,7 +318,7 @@ public final class GameServer extends L2AutoInitialization
 		RaidBossSpawnManager.getInstance();
 		GrandBossSpawnManager.getInstance();
 		RaidPointsManager.init();
-		AutoChatHandler.getInstance();
+		AutoChatManager.getInstance();
 		AutoSpawnManager.getInstance();
 		
 		Util.printSection("Quests");
@@ -369,7 +374,7 @@ public final class GameServer extends L2AutoInitialization
 		CastleManorManager.getInstance();
 		L2Manor.getInstance();
 		AuctionManager.getInstance();
-		RecipeController.getInstance();
+		RecipeTable.getInstance();
 		
 		Util.printSection("Olympiad");
 		Olympiad.getInstance();

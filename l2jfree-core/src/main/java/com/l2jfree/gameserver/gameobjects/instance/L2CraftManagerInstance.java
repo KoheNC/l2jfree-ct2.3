@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.MultisellTable;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
@@ -28,12 +28,12 @@ import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.tools.random.Rnd;
 
@@ -395,7 +395,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 			{
 				if (_item.getItemType() == L2EtcItemType.RECEIPE)
 				{
-					L2RecipeList _recipe = RecipeController.getInstance().getRecipeByItemId(_item.getItemId());
+					L2RecipeList _recipe = RecipeTable.getInstance().getRecipeByItemId(_item.getItemId());
 					
 					if (_recipe != null)
 						_recipes.add(_item.getObjectId());
@@ -448,7 +448,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 				if (_recipe == null)
 					continue;
 				
-				L2RecipeList _recipeList = RecipeController.getInstance().getRecipeByItemId(_recipe.getItemId());
+				L2RecipeList _recipeList = RecipeTable.getInstance().getRecipeByItemId(_recipe.getItemId());
 				
 				boolean _isConsumable = ItemTable.getInstance().getTemplate(_recipeList.getItemId()).isConsumable();
 				
@@ -515,7 +515,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 			
 			L2ItemInstance _recipe = _inventory.getItemByObjectId(_recipeObjId);
 			
-			L2RecipeList _recipeList = RecipeController.getInstance().getRecipeByItemId(_recipe.getItemId());
+			L2RecipeList _recipeList = RecipeTable.getInstance().getRecipeByItemId(_recipe.getItemId());
 			
 			boolean _isConsumable = ItemTable.getInstance().getTemplate(_recipeList.getItemId()).isConsumable();
 			
@@ -635,7 +635,7 @@ public class L2CraftManagerInstance extends L2NpcInstance
 			
 			L2ItemInstance _recipe = _inventory.getItemByObjectId(_recipeObjId);
 			
-			L2RecipeList _recipeList = RecipeController.getInstance().getRecipeByItemId(_recipe.getItemId());
+			L2RecipeList _recipeList = RecipeTable.getInstance().getRecipeByItemId(_recipe.getItemId());
 			
 			boolean _isConsumable = ItemTable.getInstance().getTemplate(_recipeList.getItemId()).isConsumable();
 			

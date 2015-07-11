@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.geodata.pathfinding.cellnodes;
 
 import com.l2jfree.gameserver.geodata.pathfinding.Node;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * @author NB4L1

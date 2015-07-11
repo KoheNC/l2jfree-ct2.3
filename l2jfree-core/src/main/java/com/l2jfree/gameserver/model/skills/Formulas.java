@@ -18,14 +18,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.gameobjects.base.PlayerState;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
@@ -36,15 +34,20 @@ import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
-import com.l2jfree.gameserver.model.L2SiegeClan;
-import com.l2jfree.gameserver.model.base.PlayerState;
+import com.l2jfree.gameserver.model.clan.L2SiegeClan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionPlayerState;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionUsingItemType;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;
@@ -52,9 +55,6 @@ import com.l2jfree.gameserver.model.skills.funcs.Func;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.gameserver.util.Util.Direction;
 import com.l2jfree.lang.L2Math;
@@ -1084,7 +1084,7 @@ public final class Formulas
 			{
 				if (boss.isInsideZone(L2Zone.FLAG_SUNLIGHTROOM))
 					hpRegenMultiplier *= 0.75;
-				else if (GameTimeController.getInstance().isNowNight())
+				else if (GameTimeManager.getInstance().isNowNight())
 					hpRegenMultiplier *= 1.75;
 			}
 		}

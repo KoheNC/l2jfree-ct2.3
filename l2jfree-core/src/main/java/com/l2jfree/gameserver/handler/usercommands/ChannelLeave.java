@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.usercommands;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IUserCommandHandler;
 import com.l2jfree.gameserver.model.L2CommandChannel;
-import com.l2jfree.gameserver.model.L2Party;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 

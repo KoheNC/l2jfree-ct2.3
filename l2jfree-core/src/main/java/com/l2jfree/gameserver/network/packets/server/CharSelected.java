@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class CharSelected extends L2ServerPacket
@@ -68,7 +68,7 @@ public class CharSelected extends L2ServerPacket
 		writeD(_activeChar.getStat().getDEX());
 		writeD(_activeChar.getStat().getWIT());
 		
-		writeD(GameTimeController.getInstance().getGameTime());
+		writeD(GameTimeManager.getInstance().getGameTime());
 		writeD(0x00);
 		
 		writeD(_activeChar.getClassId().getId());

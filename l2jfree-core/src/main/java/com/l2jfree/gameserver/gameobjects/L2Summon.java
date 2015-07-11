@@ -19,6 +19,7 @@ import com.l2jfree.gameserver.gameobjects.L2Attackable.AggroInfo;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
+import com.l2jfree.gameserver.gameobjects.base.Experience;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
@@ -35,13 +36,12 @@ import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.ICreatureView;
 import com.l2jfree.gameserver.gameobjects.view.SummonView;
 import com.l2jfree.gameserver.geodata.GeoData;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2WorldRegion;
-import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
+import com.l2jfree.gameserver.model.world.L2WorldRegion;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.AbstractNpcInfo;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -60,7 +60,6 @@ import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfo
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.LeakTaskManager;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 
 public abstract class L2Summon extends L2Playable
 {

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class PlaySound extends L2ServerPacket

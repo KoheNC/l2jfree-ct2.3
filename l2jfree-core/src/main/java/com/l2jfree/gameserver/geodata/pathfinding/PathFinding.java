@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.geodata.pathfinding.cellnodes.CellPathFinding;
 import com.l2jfree.gameserver.geodata.pathfinding.geonodes.GeoPathFinding;
 import com.l2jfree.gameserver.geodata.pathfinding.utils.BinaryNodeHeap;
 import com.l2jfree.gameserver.geodata.pathfinding.utils.CellNodeMap;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.util.L2Arrays;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2FastSet;

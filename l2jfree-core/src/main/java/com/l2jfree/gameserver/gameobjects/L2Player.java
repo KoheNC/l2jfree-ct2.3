@@ -43,12 +43,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.GameServer;
-import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.ItemsAutoDestroy;
 import com.l2jfree.gameserver.LoginServerThread;
-import com.l2jfree.gameserver.RecipeController;
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.ThreadPoolManager;
@@ -69,6 +64,7 @@ import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NobleSkillTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.PetDataTable;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.datatables.RecordTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
@@ -77,6 +73,11 @@ import com.l2jfree.gameserver.gameobjects.ai.L2CreatureAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2PlayerAI;
 import com.l2jfree.gameserver.gameobjects.ai.L2SummonAI;
 import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
+import com.l2jfree.gameserver.gameobjects.base.ClassId;
+import com.l2jfree.gameserver.gameobjects.base.ClassLevel;
+import com.l2jfree.gameserver.gameobjects.base.Experience;
+import com.l2jfree.gameserver.gameobjects.base.Race;
+import com.l2jfree.gameserver.gameobjects.base.SubClass;
 import com.l2jfree.gameserver.gameobjects.effects.PlayerEffects;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
@@ -127,7 +128,9 @@ import com.l2jfree.gameserver.instancemanager.FactionManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
+import com.l2jfree.gameserver.instancemanager.ItemsAutoDestroyManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
@@ -147,32 +150,21 @@ import com.l2jfree.gameserver.model.BlockList;
 import com.l2jfree.gameserver.model.CursedWeapon;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.FishData;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
 import com.l2jfree.gameserver.model.L2Fishing;
 import com.l2jfree.gameserver.model.L2FriendList;
 import com.l2jfree.gameserver.model.L2Macro;
-import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.model.L2Marker;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.model.L2PetData;
 import com.l2jfree.gameserver.model.L2Request;
 import com.l2jfree.gameserver.model.L2ShortCut;
-import com.l2jfree.gameserver.model.L2SiegeClan;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.MacroList;
 import com.l2jfree.gameserver.model.ShortCuts;
 import com.l2jfree.gameserver.model.TradeList;
-import com.l2jfree.gameserver.model.base.ClassId;
-import com.l2jfree.gameserver.model.base.ClassLevel;
-import com.l2jfree.gameserver.model.base.Experience;
-import com.l2jfree.gameserver.model.base.Race;
-import com.l2jfree.gameserver.model.base.SubClass;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2ClanMember;
+import com.l2jfree.gameserver.model.clan.L2SiegeClan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Duel;
 import com.l2jfree.gameserver.model.entity.Fort;
@@ -185,9 +177,19 @@ import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.model.entity.events.CTF.CTFPlayerInfo;
 import com.l2jfree.gameserver.model.entity.faction.FactionMember;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.manufacture.L2ManufactureList;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
+import com.l2jfree.gameserver.model.items.templates.L2Armor;
+import com.l2jfree.gameserver.model.items.templates.L2ArmorType;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Henna;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
+import com.l2jfree.gameserver.model.party.L2Party;
+import com.l2jfree.gameserver.model.party.L2PartyRoom;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
@@ -195,6 +197,8 @@ import com.l2jfree.gameserver.model.restriction.AvailableRestriction;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
 import com.l2jfree.gameserver.model.restriction.global.DuelRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.model.skills.L2Skill;
@@ -211,6 +215,8 @@ import com.l2jfree.gameserver.model.skills.learn.L2SkillLearn;
 import com.l2jfree.gameserver.model.skills.learn.L2TransformSkillLearn;
 import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.model.world.L2WorldRegion;
 import com.l2jfree.gameserver.model.zone.L2JailZone;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.Disconnection;
@@ -299,13 +305,6 @@ import com.l2jfree.gameserver.taskmanager.LeakTaskManager;
 import com.l2jfree.gameserver.taskmanager.MovementController;
 import com.l2jfree.gameserver.taskmanager.PacketBroadcaster.BroadcastMode;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
-import com.l2jfree.gameserver.templates.item.L2Armor;
-import com.l2jfree.gameserver.templates.item.L2ArmorType;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Henna;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
 import com.l2jfree.gameserver.util.Broadcast;
 import com.l2jfree.gameserver.util.FloodProtector;
 import com.l2jfree.gameserver.util.Util;
@@ -3507,7 +3506,7 @@ public final class L2Player extends L2Playable
 		
 		if (Config.DESTROY_DROPPED_PLAYER_ITEM)
 		{
-			ItemsAutoDestroy.tryAddItem(item);
+			ItemsAutoDestroyManager.tryAddItem(item);
 			
 			if (!item.isEquipable() || (item.isEquipable() && Config.DESTROY_EQUIPABLE_PLAYER_ITEM))
 				item.setProtected(false);
@@ -3561,7 +3560,7 @@ public final class L2Player extends L2Playable
 		// Destroy item droped from inventory by player when DESTROY_PLAYER_INVENTORY_DROP is set to true
 		if (Config.DESTROY_PLAYER_INVENTORY_DROP)
 		{
-			ItemsAutoDestroy.tryAddItem(item);
+			ItemsAutoDestroyManager.tryAddItem(item);
 			
 			item.setProtected(false);
 		}
@@ -3644,11 +3643,11 @@ public final class L2Player extends L2Playable
 			_log.debug(getName()
 					+ ": Protection "
 					+ (protect ? "ON "
-							+ (GameTimeController.getGameTicks() + proTime * GameTimeController.TICKS_PER_SECOND)
-							: "OFF") + " (currently " + GameTimeController.getGameTicks() + ")");
+							+ (GameTimeManager.getGameTicks() + proTime * GameTimeManager.TICKS_PER_SECOND)
+							: "OFF") + " (currently " + GameTimeManager.getGameTicks() + ")");
 		
 		_protectEndTime =
-				protect ? GameTimeController.getGameTicks() + proTime * GameTimeController.TICKS_PER_SECOND : 0;
+				protect ? GameTimeManager.getGameTicks() + proTime * GameTimeManager.TICKS_PER_SECOND : 0;
 	}
 	
 	public long getProtection()
@@ -3662,13 +3661,13 @@ public final class L2Player extends L2Playable
 	public void setRecentFakeDeath(boolean protect)
 	{
 		_recentFakeDeathEndTime =
-				protect ? GameTimeController.getGameTicks() + Config.PLAYER_FAKEDEATH_UP_PROTECTION
-						* GameTimeController.TICKS_PER_SECOND : 0;
+				protect ? GameTimeManager.getGameTicks() + Config.PLAYER_FAKEDEATH_UP_PROTECTION
+						* GameTimeManager.TICKS_PER_SECOND : 0;
 	}
 	
 	public boolean isRecentFakeDeath()
 	{
-		return _recentFakeDeathEndTime > GameTimeController.getGameTicks();
+		return _recentFakeDeathEndTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -5629,7 +5628,7 @@ public final class L2Player extends L2Playable
 	 */
 	public boolean isRequestExpired()
 	{
-		return !(_requestExpireTime > GameTimeController.getGameTicks());
+		return !(_requestExpireTime > GameTimeManager.getGameTicks());
 	}
 	
 	/**
@@ -5645,7 +5644,7 @@ public final class L2Player extends L2Playable
 	 */
 	public boolean isProcessingRequest()
 	{
-		return _activeRequester != null || _requestExpireTime > GameTimeController.getGameTicks();
+		return _activeRequester != null || _requestExpireTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -5654,7 +5653,7 @@ public final class L2Player extends L2Playable
 	public boolean isProcessingTransaction()
 	{
 		return _activeRequester != null || _activeTradeList != null
-				|| _requestExpireTime > GameTimeController.getGameTicks();
+				|| _requestExpireTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -5662,7 +5661,7 @@ public final class L2Player extends L2Playable
 	 */
 	public void onTransactionRequest(L2Player partner)
 	{
-		_requestExpireTime = GameTimeController.getGameTicks() + REQUEST_TIMEOUT * GameTimeController.TICKS_PER_SECOND;
+		_requestExpireTime = GameTimeManager.getGameTicks() + REQUEST_TIMEOUT * GameTimeManager.TICKS_PER_SECOND;
 		partner.setActiveRequester(this);
 	}
 	
@@ -6012,7 +6011,7 @@ public final class L2Player extends L2Playable
 				arrows.setLastChange(L2ItemInstance.MODIFIED);
 				
 				// Could do also without saving, but let's save approx 1 of 10
-				if (GameTimeController.getGameTicks() % 10 == 0)
+				if (GameTimeManager.getGameTicks() % 10 == 0)
 					arrows.updateDatabase();
 				getInventory().refreshWeight();
 			}
@@ -6399,7 +6398,7 @@ public final class L2Player extends L2Playable
 	@Override
 	public boolean isInvul()
 	{
-		return super.isInvul() || _protectEndTime > GameTimeController.getGameTicks();
+		return super.isInvul() || _protectEndTime > GameTimeManager.getGameTicks();
 	}
 	
 	/**
@@ -7044,7 +7043,7 @@ public final class L2Player extends L2Playable
 			L2RecipeList recipe;
 			while (rset.next())
 			{
-				recipe = RecipeController.getInstance().getRecipeList(rset.getInt("id"));
+				recipe = RecipeTable.getInstance().getRecipeList(rset.getInt("id"));
 				
 				if (loadCommon)
 				{
@@ -8758,7 +8757,7 @@ public final class L2Player extends L2Playable
 				return;
 			}
 			
-			if (!GameTimeController.getInstance().isNowNight() && _lure.isNightLure())
+			if (!GameTimeManager.getInstance().isNowNight() && _lure.isNightLure())
 				return;
 			
 			int check = Rnd.get(1000);
@@ -11189,7 +11188,7 @@ public final class L2Player extends L2Playable
 		// Stop crafting, if in progress
 		try
 		{
-			RecipeController.getInstance().requestMakeItemAbort(this);
+			RecipeTable.getInstance().requestMakeItemAbort(this);
 		}
 		catch (Exception e)
 		{

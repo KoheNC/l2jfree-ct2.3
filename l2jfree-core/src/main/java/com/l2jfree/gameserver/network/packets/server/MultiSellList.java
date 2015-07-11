@@ -19,8 +19,8 @@ import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellEntry;
 import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellIngredient;
 import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellListContainer;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
-import com.l2jfree.gameserver.templates.item.L2Item;
 
 public final class MultiSellList extends L2ServerPacket
 {

@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.GameTimeController;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 
 public class ClientSetTime extends StaticPacket
 {
@@ -31,7 +31,7 @@ public class ClientSetTime extends StaticPacket
 	protected final void writeImpl()
 	{
 		writeC(0xf2);
-		writeD(GameTimeController.getInstance().getGameTime()); // time in client minutes
+		writeD(GameTimeManager.getInstance().getGameTime()); // time in client minutes
 		writeD(Config.DATETIME_MULTI); //constant to match the server time( this determines the speed of the client clock)
 	}
 	

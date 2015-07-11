@@ -19,12 +19,11 @@ import javolution.util.FastMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaidBossInstance;
-import com.l2jfree.gameserver.model.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 /**
  * This class ...
@@ -196,7 +195,7 @@ public class DayNightSpawnManager
 	{
 		try
 		{
-			if (GameTimeController.getInstance().isNowNight())
+			if (GameTimeManager.getInstance().isNowNight())
 				changeMode(1);
 			else
 				changeMode(0);
@@ -283,7 +282,7 @@ public class DayNightSpawnManager
 		if (_bosses.containsKey(spawnDat))
 			return _bosses.get(spawnDat);
 		
-		if (GameTimeController.getInstance().isNowNight())
+		if (GameTimeManager.getInstance().isNowNight())
 		{
 			L2Boss raidboss = (L2Boss)spawnDat.doSpawn();
 			_bosses.put(spawnDat, raidboss);

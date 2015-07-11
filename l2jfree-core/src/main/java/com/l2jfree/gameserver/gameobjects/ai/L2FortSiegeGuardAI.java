@@ -18,10 +18,10 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_A
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
 import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_IDLE;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
@@ -31,7 +31,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
-import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
@@ -258,7 +258,7 @@ public class L2FortSiegeGuardAI extends L2CreatureAI implements Runnable
 	protected void onIntentionAttack(L2Creature target)
 	{
 		// Calculate the attack timeout
-		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 		
 		// Manage the Attack Intention : Stop current Attack (if necessary), Start a new Attack and Launch Think Event
 		//if (_actor.getTarget() != null)
@@ -362,9 +362,9 @@ public class L2FortSiegeGuardAI extends L2CreatureAI implements Runnable
 	{
 		if (_log.isDebugEnabled())
 			_log.info("L2FortSiegeGuardAI.thinkAttack(); timeout="
-					+ (_attackTimeout - GameTimeController.getGameTicks()));
+					+ (_attackTimeout - GameTimeManager.getGameTicks()));
 		
-		if (_attackTimeout < GameTimeController.getGameTicks())
+		if (_attackTimeout < GameTimeManager.getGameTicks())
 		{
 			// Check if the actor is running
 			if (_actor.isRunning())
@@ -373,13 +373,13 @@ public class L2FortSiegeGuardAI extends L2CreatureAI implements Runnable
 				_actor.setWalking();
 				
 				// Calculate a new attack timeout
-				_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+				_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 			}
 		}
 		
 		L2Creature attackTarget = getAttackTarget();
 		// Check if target is dead or if timeout is expired to stop this attack
-		if (attackTarget == null || attackTarget.isAlikeDead() || _attackTimeout < GameTimeController.getGameTicks())
+		if (attackTarget == null || attackTarget.isAlikeDead() || _attackTimeout < GameTimeManager.getGameTicks())
 		{
 			// Stop hating this target after the attack timeout or if target is dead
 			if (attackTarget != null)
@@ -669,7 +669,7 @@ public class L2FortSiegeGuardAI extends L2CreatureAI implements Runnable
 			if (hated != attackTarget)
 				attackTarget = hated;
 			
-			_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+			_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 			
 			// check for close combat skills && heal/buff skills
 			if (!_actor.isMuted() && Rnd.nextInt(100) <= 5)
@@ -757,7 +757,7 @@ public class L2FortSiegeGuardAI extends L2CreatureAI implements Runnable
 	protected void onEvtAttacked(L2Creature attacker)
 	{
 		// Calculate the attack timeout
-		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeController.getGameTicks();
+		_attackTimeout = MAX_ATTACK_TIMEOUT + GameTimeManager.getGameTicks();
 		
 		// Set the _globalAggro to 0 to permit attack even just after spawn
 		if (_globalAggro < 0)

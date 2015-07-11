@@ -23,8 +23,6 @@ import java.util.StringTokenizer;
 import javolution.util.FastList;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.ThreadPoolManager;
@@ -76,25 +74,29 @@ import com.l2jfree.gameserver.instancemanager.games.Lottery;
 import com.l2jfree.gameserver.instancemanager.grandbosses.BaiumManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.ArenaManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2DropCategory;
-import com.l2jfree.gameserver.model.L2DropData;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.L2WorldRegion;
-import com.l2jfree.gameserver.model.MobGroupTable;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.drop.L2DropCategory;
+import com.l2jfree.gameserver.model.drop.L2DropData;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.Town;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.templates.L2BuffTemplate;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
+import com.l2jfree.gameserver.model.world.L2WorldRegion;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.MobGroupTable;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.AbstractNpcInfo;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -113,8 +115,6 @@ import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.gameserver.util.StringUtil;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.lang.L2TextBuilder;
@@ -2721,7 +2721,7 @@ public class L2Npc extends L2Creature
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : This method DOESN'T REMOVE the object from _allObjects of L2World </B></FONT><BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : This method DOESN'T SEND Server->Client packets to players</B></FONT><BR><BR>
 	 *
-	 * @see com.l2jfree.gameserver.model.L2Object#decayMe()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Object#decayMe()
 	 */
 	@Override
 	public void onDecay()

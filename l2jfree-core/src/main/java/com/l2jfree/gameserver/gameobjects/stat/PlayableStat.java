@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.gameobjects.stat;
 
 import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.base.Experience;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
-import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 
 public abstract class PlayableStat extends CreatureStat

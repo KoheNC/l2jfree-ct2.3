@@ -22,13 +22,13 @@ import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_I
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.SkillUsageRequest;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
@@ -717,14 +717,14 @@ public abstract class AbstractAI implements Ctrl
 			{
 				if (_clientMovingToPawnOffset == offset)
 				{
-					if (GameTimeController.getGameTicks() < _moveToPawnTimeout)
+					if (GameTimeManager.getGameTicks() < _moveToPawnTimeout)
 						return;
 					sendPacket = false;
 				}
 				else if (_actor.isOnGeodataPath())
 				{
 					// minimum time to calculate new route is 2 seconds
-					if (GameTimeController.getGameTicks() < (_moveToPawnTimeout + 10))
+					if (GameTimeManager.getGameTicks() < (_moveToPawnTimeout + 10))
 						return;
 				}
 			}
@@ -733,8 +733,8 @@ public abstract class AbstractAI implements Ctrl
 			_clientMoving = true;
 			_clientMovingToPawnOffset = offset;
 			setTarget(pawn);
-			_moveToPawnTimeout = GameTimeController.getGameTicks();
-			_moveToPawnTimeout += /*1000*/200 / GameTimeController.MILLIS_IN_TICK;
+			_moveToPawnTimeout = GameTimeManager.getGameTicks();
+			_moveToPawnTimeout += /*1000*/200 / GameTimeManager.MILLIS_IN_TICK;
 			
 			if (pawn == null || _accessor == null)
 				return;
@@ -742,7 +742,7 @@ public abstract class AbstractAI implements Ctrl
 			// if the target runs towards the character then don't force the actor to run over it
 			if (pawn instanceof L2Creature && pawn.isMoving())
 			{
-				double speed = ((L2Creature)pawn).getStat().getMoveSpeed() / GameTimeController.TICKS_PER_SECOND;
+				double speed = ((L2Creature)pawn).getStat().getMoveSpeed() / GameTimeManager.TICKS_PER_SECOND;
 				
 				offset += speed * Math.cos(Math.toRadians(Util.getAngleDifference(_actor, pawn)));
 			}

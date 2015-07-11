@@ -20,7 +20,6 @@ import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.gameobjects.knownlist.PlayableKnownList;
 import com.l2jfree.gameserver.gameobjects.stat.PlayableStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.SkillUsageRequest;

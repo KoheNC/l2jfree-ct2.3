@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model.items;
 
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket.ElementalOwner;
-import com.l2jfree.gameserver.templates.item.L2Item;
 
 /**
  * Get all information from L2ItemInstance to generate ItemInfo.<BR><BR>

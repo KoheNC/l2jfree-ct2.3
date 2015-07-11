@@ -22,8 +22,8 @@ import com.l2jfree.gameserver.gameobjects.instance.QueenAntInstance;
 import com.l2jfree.gameserver.gameobjects.instance.QueenAntLarvaInstance;
 import com.l2jfree.gameserver.gameobjects.instance.QueenAntNurseInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.SpawnListener;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.SpawnListener;
 import com.l2jfree.util.L2FastSet;
 
 /**

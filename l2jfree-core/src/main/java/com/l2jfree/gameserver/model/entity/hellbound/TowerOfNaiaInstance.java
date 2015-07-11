@@ -18,8 +18,8 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
-import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.entity.Instance;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * @author hex1r0

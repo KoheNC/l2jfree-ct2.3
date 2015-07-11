@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.l2jfree.gameserver.datatables.CharNameTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

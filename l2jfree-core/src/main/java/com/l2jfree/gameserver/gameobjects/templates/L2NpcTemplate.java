@@ -27,10 +27,10 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.model.L2DropCategory;
-import com.l2jfree.gameserver.model.L2DropData;
+import com.l2jfree.gameserver.gameobjects.base.ClassId;
 import com.l2jfree.gameserver.model.L2MinionData;
-import com.l2jfree.gameserver.model.base.ClassId;
+import com.l2jfree.gameserver.model.drop.L2DropCategory;
+import com.l2jfree.gameserver.model.drop.L2DropData;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;

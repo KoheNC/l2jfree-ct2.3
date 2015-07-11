@@ -26,17 +26,18 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
-import com.l2jfree.gameserver.model.L2DropData;
-import com.l2jfree.gameserver.model.L2Party;
+import com.l2jfree.gameserver.model.drop.L2DropData;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -49,7 +50,6 @@ import com.l2jfree.gameserver.network.packets.server.TutorialCloseHtml;
 import com.l2jfree.gameserver.network.packets.server.TutorialEnableClientEvent;
 import com.l2jfree.gameserver.network.packets.server.TutorialShowHtml;
 import com.l2jfree.gameserver.network.packets.server.TutorialShowQuestionMark;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -898,7 +898,7 @@ public final class QuestState
 	 */
 	public int getGameTicks()
 	{
-		return GameTimeController.getGameTicks();
+		return GameTimeManager.getGameTicks();
 	}
 	
 	/**

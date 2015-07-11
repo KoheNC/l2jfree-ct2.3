@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.RecipeController;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -65,7 +65,7 @@ public class RequestRecipeItemMakeSelf extends L2ClientPacket
 			return;
 		}
 		
-		RecipeController.getInstance().requestMakeItem(activeChar, _id);
+		RecipeTable.getInstance().requestMakeItem(activeChar, _id);
 		
 		sendAF();
 	}

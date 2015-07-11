@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.L2Clan.RankPrivs;
+import com.l2jfree.gameserver.model.clan.L2Clan.RankPrivs;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

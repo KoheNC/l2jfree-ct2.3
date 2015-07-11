@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.RecipeController;
+import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -42,7 +42,7 @@ public class RequestRecipeBookDestroy extends L2ClientPacket
 		L2Player activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 			return;
-		L2RecipeList rp = RecipeController.getInstance().getRecipeList(_recipeId);
+		L2RecipeList rp = RecipeTable.getInstance().getRecipeList(_recipeId);
 		if (rp == null)
 		{
 			sendAF();

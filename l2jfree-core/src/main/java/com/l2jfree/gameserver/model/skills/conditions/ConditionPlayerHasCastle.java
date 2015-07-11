@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.skills.conditions;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.skills.Env;
 
 /**

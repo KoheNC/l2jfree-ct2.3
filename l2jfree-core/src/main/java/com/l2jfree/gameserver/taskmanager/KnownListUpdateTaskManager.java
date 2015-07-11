@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.taskmanager;
 
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * It removes accidently leaked objects from knownlists :)

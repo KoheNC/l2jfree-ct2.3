@@ -20,7 +20,7 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.skills.Env;
 
 /**

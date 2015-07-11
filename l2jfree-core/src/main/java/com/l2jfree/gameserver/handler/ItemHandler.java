@@ -50,9 +50,9 @@ import com.l2jfree.gameserver.handler.items.SummonItems;
 import com.l2jfree.gameserver.handler.items.TeleportBookmark;
 import com.l2jfree.gameserver.handler.items.WrappedPack;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItem;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
-import com.l2jfree.gameserver.templates.item.L2EtcItem;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.util.HandlerRegistry;
 import com.l2jfree.util.NumberHandlerRegistry;
 
