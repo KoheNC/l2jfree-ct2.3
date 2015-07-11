@@ -26,10 +26,10 @@ import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 /**
  * 

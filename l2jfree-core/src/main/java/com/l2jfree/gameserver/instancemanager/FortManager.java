@@ -33,8 +33,8 @@ import com.l2jfree.gameserver.datatables.SpawnTable;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.entity.Fort;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 public class FortManager implements InstanceListManager
 {

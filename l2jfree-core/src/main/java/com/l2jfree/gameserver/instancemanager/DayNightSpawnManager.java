@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.gameobjects.L2Boss;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaidBossInstance;
-import com.l2jfree.gameserver.model.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 /**
  * This class ...

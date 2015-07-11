@@ -28,7 +28,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.instancemanager.grandbosses.BossLair;
 import com.l2jfree.gameserver.instancemanager.grandbosses.FrintezzaManager;
 import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;

@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 /**
  * Gordon AI

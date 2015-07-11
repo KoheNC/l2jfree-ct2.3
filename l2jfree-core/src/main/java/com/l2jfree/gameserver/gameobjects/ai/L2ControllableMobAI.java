@@ -29,9 +29,9 @@ import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.L2ControllableMobInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
-import com.l2jfree.gameserver.model.MobGroup;
-import com.l2jfree.gameserver.model.MobGroupTable;
 import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.world.spawn.MobGroup;
+import com.l2jfree.gameserver.model.world.spawn.MobGroupTable;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
 

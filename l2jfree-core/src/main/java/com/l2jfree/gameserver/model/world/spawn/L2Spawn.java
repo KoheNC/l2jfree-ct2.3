@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.world.spawn;
 
 import java.lang.reflect.Constructor;
 
@@ -36,6 +36,8 @@ import com.l2jfree.gameserver.gameobjects.instance.L2TrapInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.idfactory.IdFactory;
+import com.l2jfree.gameserver.model.L2CharPosition;
+import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.tools.random.Rnd;
 
 /**

@@ -18,8 +18,8 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager.SiegeSpawn;
-import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.entity.Fort;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
