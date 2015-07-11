@@ -22,8 +22,8 @@ import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.base.PlayerState;
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.base.PlayerState;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.items.templates.L2ArmorType;
 import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionGameTime.CheckGameTime;

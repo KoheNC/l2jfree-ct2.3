@@ -5,7 +5,7 @@ import sys
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.model.base import Race
+from com.l2jfree.gameserver.gameobjects.base import Race
 
 qn = "236_SeedsOfChaos"
 

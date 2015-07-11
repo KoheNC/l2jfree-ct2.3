@@ -21,7 +21,7 @@ import javolution.util.FastMap;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.model.items.templates.L2WeaponType;

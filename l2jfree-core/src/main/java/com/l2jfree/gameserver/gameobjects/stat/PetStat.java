@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.gameobjects.stat;
 
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.base.Experience;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.model.L2PetData;
-import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;

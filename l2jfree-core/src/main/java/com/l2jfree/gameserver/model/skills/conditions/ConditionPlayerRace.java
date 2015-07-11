@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.model.skills.conditions;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.skills.Env;
 
 /**

@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.network.packets.server;
 import java.util.ArrayList;
 
 import com.l2jfree.gameserver.datatables.CharTemplateTable;
+import com.l2jfree.gameserver.gameobjects.base.ClassId;
 import com.l2jfree.gameserver.gameobjects.templates.L2PlayerTemplate;
-import com.l2jfree.gameserver.model.base.ClassId;
 
 public class NewCharacterSuccess extends StaticPacket
 {

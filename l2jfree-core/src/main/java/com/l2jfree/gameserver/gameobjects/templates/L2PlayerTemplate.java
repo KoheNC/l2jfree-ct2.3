@@ -19,9 +19,9 @@ import java.util.List;
 import javolution.util.FastList;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.base.ClassId;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.base.ClassId;
-import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.templates.StatsSet;
 import com.l2jfree.tools.random.Rnd;
 

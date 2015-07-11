@@ -12,17 +12,33 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.base;
+package com.l2jfree.gameserver.gameobjects.base;
 
-public enum PlayerState
+/**
+ * This class defines all races (human, elf, darkelf, orc, dwarf) that a player can chose.<BR><BR>
+ *
+ *
+ * @version $Revision: 1.2.4.2 $ $Date: 2005/03/27 15:29:32 $
+ * 
+ */
+
+public enum Race
 {
-	RESTING,
-	MOVING,
-	RUNNING,
-	WALKING,
-	FLYING,
-	BEHIND,
-	FRONT,
-	CHAOTIC,
-	OLYMPIAD
+	Human,
+	Elf,
+	Darkelf,
+	Orc,
+	Dwarf,
+	Kamael;
+	
+	public final static Race getRaceByName(String name)
+	{
+		for (Race race : Race.values())
+		{
+			if (race.name().equals(name))
+				return race;
+		}
+		
+		return Race.Human;
+	}
 }

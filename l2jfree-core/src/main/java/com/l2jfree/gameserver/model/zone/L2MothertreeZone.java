@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.network.SystemMessageId;
 
 public class L2MothertreeZone extends L2Zone
