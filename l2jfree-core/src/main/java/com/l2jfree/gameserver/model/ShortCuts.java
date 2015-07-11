@@ -25,19 +25,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.ExAutoSoulShot;
-import com.l2jfree.gameserver.network.serverpackets.ShortCutInit;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.network.packets.server.ExAutoSoulShot;
+import com.l2jfree.gameserver.network.packets.server.ShortCutInit;
 
 public final class ShortCuts
 {
 	private static final Log _log = LogFactory.getLog(ShortCuts.class);
 	
 	private final Map<Integer, L2ShortCut> _shortCuts = new FastMap<Integer, L2ShortCut>().setShared(true);
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	
-	public ShortCuts(L2PcInstance owner)
+	public ShortCuts(L2Player owner)
 	{
 		_owner = owner;
 	}

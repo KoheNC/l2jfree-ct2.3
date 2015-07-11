@@ -16,23 +16,23 @@ package quests.converted;
 
 import javolution.util.FastMap;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2ClanMember;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillLaunched;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillUse;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillLaunched;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.tools.random.Rnd;
 
@@ -120,7 +120,7 @@ public final class ProofOfClanAlliance extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		QuestClan qc = _questers.get(player.getClanId());
 		if (event.startsWith("loyalty"))
@@ -248,18 +248,18 @@ public final class ProofOfClanAlliance extends QuestJython
 	}
 	
 	@Override
-	public String onDeath(L2Character killer, L2Character victim, QuestState qs)
+	public String onDeath(L2Creature killer, L2Creature victim, QuestState qs)
 	{
-		if (victim instanceof L2PcInstance)
+		if (victim instanceof L2Player)
 		{
-			L2PcInstance leader = victim.getActingPlayer();
+			L2Player leader = victim.getActingPlayer();
 			QuestClan qc = _questers.remove(leader.getClanId());
 			qs.exitQuest(true);
 			for (L2ClanMember cm : qc._loyal)
 			{
 				if (cm == null)
 					break;
-				L2PcInstance member = cm.getPlayerInstance();
+				L2Player member = cm.getPlayerInstance();
 				if (member != null)
 				{
 					QuestState st = member.getQuestState(PROOF_OF_CLAN_ALLIANCE);
@@ -275,7 +275,7 @@ public final class ProofOfClanAlliance extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		if (ArrayUtils.contains(CHEST, npc.getNpcId()))
 		{
@@ -316,7 +316,7 @@ public final class ProofOfClanAlliance extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		QuestClan qc = _questers.get(talker.getClanId());
 		QuestState qs = talker.getQuestState(PROOF_OF_CLAN_ALLIANCE);
@@ -528,7 +528,7 @@ public final class ProofOfClanAlliance extends QuestJython
 			_chests = new ChestInfo();
 		}
 		
-		public synchronized boolean addLoyalMember(L2PcInstance player)
+		public synchronized boolean addLoyalMember(L2Player player)
 		{
 			L2ClanMember cm = getClan().getClanMember(player.getObjectId());
 			if (cm == null)
@@ -553,7 +553,7 @@ public final class ProofOfClanAlliance extends QuestJython
 		
 		public boolean checkLeader()
 		{
-			L2PcInstance leader = getClan().getLeader().getPlayerInstance();
+			L2Player leader = getClan().getLeader().getPlayerInstance();
 			if (leader == null)
 				return false;
 			QuestState qs = leader.getQuestState(PROOF_OF_CLAN_ALLIANCE);
@@ -563,7 +563,7 @@ public final class ProofOfClanAlliance extends QuestJython
 				return true;
 		}
 		
-		public boolean isLoyal(L2PcInstance player)
+		public boolean isLoyal(L2Player player)
 		{
 			for (L2ClanMember cm : _loyal)
 				if (cm != null && cm.getPlayerInstance() == player)

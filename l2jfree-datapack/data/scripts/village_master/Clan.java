@@ -14,8 +14,8 @@
  */
 package village_master;
 
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * @author savormix
@@ -31,7 +31,7 @@ public final class Clan extends VillageMaster
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.endsWith("03.htm") || event.endsWith("04.htm") || event.endsWith("05.htm"))
 		{
@@ -49,7 +49,7 @@ public final class Clan extends VillageMaster
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		return "9000-01.htm";
 	}

@@ -20,18 +20,18 @@ import java.sql.ResultSet;
 
 import javolution.util.FastList;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.SpawnData;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.model.world.spawn.SpawnData;
 
 /**
  * @author hex1r0

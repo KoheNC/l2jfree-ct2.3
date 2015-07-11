@@ -15,15 +15,15 @@
 package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
-import com.l2jfree.gameserver.model.L2Effect;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.model.entity.Fort;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 
 public class L2SiegeZone extends SiegeableEntityZone
 {
@@ -39,15 +39,15 @@ public class L2SiegeZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		character.setInsideZone(FLAG_PVP, true);
 		character.setInsideZone(FLAG_SIEGE, true);
 		character.setInsideZone(FLAG_NOSUMMON, true);
 		
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			L2PcInstance pc = (L2PcInstance)character;
+			L2Player pc = (L2Player)character;
 			if (pc.getClan() != null
 					&& (_entity.getSiege().checkIsAttacker(pc.getClan()) || _entity.getSiege().checkIsDefender(
 							pc.getClan())))
@@ -60,7 +60,7 @@ public class L2SiegeZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		character.setInsideZone(FLAG_PVP, false);
 		character.setInsideZone(FLAG_SIEGE, false);
@@ -69,9 +69,9 @@ public class L2SiegeZone extends SiegeableEntityZone
 		if (character instanceof L2SiegeSummonInstance)
 			((L2SiegeSummonInstance)character).unSummon();
 		
-		else if (character instanceof L2PcInstance)
+		else if (character instanceof L2Player)
 		{
-			final L2PcInstance activeChar = (L2PcInstance)character;
+			final L2Player activeChar = (L2Player)character;
 			
 			// Set pvp flag
 			activeChar.updatePvPStatus();
@@ -104,7 +104,7 @@ public class L2SiegeZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected boolean checkDynamicConditions(L2Character character)
+	protected boolean checkDynamicConditions(L2Creature character)
 	{
 		if (!isSiegeInProgress())
 			return false;
@@ -118,10 +118,10 @@ public class L2SiegeZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onDieInside(L2Character character)
+	protected void onDieInside(L2Creature character)
 	{
 		// debuff participants only if they die inside siege zone
-		if (character instanceof L2PcInstance && isSiegeInProgress())
+		if (character instanceof L2Player && isSiegeInProgress())
 		{
 			int lvl;
 			L2Effect effect = character.getFirstEffect(DEATH_SYNDROME);

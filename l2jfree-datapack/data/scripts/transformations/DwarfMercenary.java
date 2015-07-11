@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class DwarfMercenary extends L2Transformation
 {
@@ -27,13 +27,13 @@ public class DwarfMercenary extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 869, 1); // Mercenary Power Strike
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 869); // Mercenary Power Strike
 	}

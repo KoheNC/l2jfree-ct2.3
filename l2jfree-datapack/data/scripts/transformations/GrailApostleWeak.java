@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class GrailApostleWeak extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class GrailApostleWeak extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 559, 2); // Spear
 		addSkill(player, 560, 2); // Power Slash
@@ -36,7 +36,7 @@ public class GrailApostleWeak extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 559); // Spear
 		removeSkill(player, 560); // Power Slash

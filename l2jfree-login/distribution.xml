@@ -37,9 +37,5 @@
 			<directory>sql/</directory>
 			<outputDirectory>loginserver/sql/</outputDirectory>
 		</fileSet>
-		<fileSet>
-			<directory>tools/</directory>
-			<outputDirectory>loginserver/tools/</outputDirectory>
-		</fileSet>
 	</fileSets>
 </assembly>

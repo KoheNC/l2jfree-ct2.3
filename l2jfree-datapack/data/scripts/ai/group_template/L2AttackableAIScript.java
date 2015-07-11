@@ -14,26 +14,26 @@
  */
 package ai.group_template;
 
-import static com.l2jfree.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
+import static com.l2jfree.gameserver.gameobjects.ai.CtrlIntention.AI_INTENTION_ATTACK;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ai.CtrlEvent;
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.ai.FactionAggressionNotificationQueue;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.ai.FactionAggressionNotificationQueue;
+import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.DimensionalRiftManager;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * 
@@ -82,19 +82,19 @@ public class L2AttackableAIScript extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		return null;
 	}
 	
 	@Override
-	public String onSpellFinished(L2Npc npc, L2PcInstance player, L2Skill skill)
+	public String onSpellFinished(L2Npc npc, L2Player player, L2Skill skill)
 	{
 		return null;
 	}
 	
 	@Override
-	public String onSkillSee(L2Npc npc, L2PcInstance caster, L2Skill skill, L2Object[] targets, boolean isPet)
+	public String onSkillSee(L2Npc npc, L2Player caster, L2Skill skill, L2Object[] targets, boolean isPet)
 	{
 		if (caster == null)
 			return null;
@@ -120,7 +120,7 @@ public class L2AttackableAIScript extends QuestJython
 				{
 					if (npcTarget == skillTarget || npc == skillTarget)
 					{
-						L2Character originalCaster = isPet ? caster.getPet() : caster;
+						L2Creature originalCaster = isPet ? caster.getPet() : caster;
 						attackable.addDamageHate(originalCaster, 0, (skillAggroPoints * 150)
 								/ (attackable.getLevel() + 7));
 					}
@@ -131,9 +131,9 @@ public class L2AttackableAIScript extends QuestJython
 	}
 	
 	@Override
-	public String onFactionCall(L2Npc npc, L2Npc caller, L2PcInstance attacker, boolean isPet)
+	public String onFactionCall(L2Npc npc, L2Npc caller, L2Player attacker, boolean isPet)
 	{
-		L2Character originalAttackTarget = (isPet ? attacker.getPet() : attacker);
+		L2Creature originalAttackTarget = (isPet ? attacker.getPet() : attacker);
 		
 		if (attacker.isInParty() && attacker.getParty().isInDimensionalRift())
 		{
@@ -156,9 +156,9 @@ public class L2AttackableAIScript extends QuestJython
 	}
 	
 	@Override
-	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isPet)
+	public String onAggroRangeEnter(L2Npc npc, L2Player player, boolean isPet)
 	{
-		L2Character target = isPet ? player.getPet() : player;
+		L2Creature target = isPet ? player.getPet() : player;
 		
 		((L2Attackable)npc).addDamageHate(target, 0, 1);
 		
@@ -175,13 +175,13 @@ public class L2AttackableAIScript extends QuestJython
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet)
 	{
 		if (attacker != null && (npc instanceof L2Attackable))
 		{
 			L2Attackable attackable = (L2Attackable)npc;
 			
-			L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
+			L2Creature originalAttacker = isPet ? attacker.getPet() : attacker;
 			attackable.getAI().notifyEvent(CtrlEvent.EVT_ATTACKED, originalAttacker);
 			attackable.addDamageHate(originalAttacker, damage, (damage * 100) / (attackable.getLevel() + 7));
 		}
@@ -189,7 +189,7 @@ public class L2AttackableAIScript extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		return null;
 	}

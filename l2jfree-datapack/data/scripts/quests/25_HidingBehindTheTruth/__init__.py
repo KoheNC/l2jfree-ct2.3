@@ -5,11 +5,11 @@
 import sys
 import time
 
-from com.l2jfree.gameserver.ai                    import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai                    import CtrlIntention
 from com.l2jfree.gameserver.model.quest           import State
 from com.l2jfree.gameserver.model.quest           import QuestState
 from com.l2jfree.gameserver.model.quest           import Quest as JQuest
-from com.l2jfree.gameserver.network.serverpackets import NpcSay
+from com.l2jfree.gameserver.network.packets.server import NpcSay
 
 qn = "25_HidingBehindTheTruth"
 

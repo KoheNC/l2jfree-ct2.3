@@ -24,20 +24,20 @@ import javolution.util.FastMap;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.instance.L2GrandBossInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2GrandBossInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.GrandBossState;
-import com.l2jfree.gameserver.network.serverpackets.Earthquake;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.network.packets.server.Earthquake;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -251,7 +251,7 @@ public class BaiumManager extends BossLair
 		_npcBaium = NpcBaium;
 		
 		// Get target from statue,to kill a player of make Baium awake.
-		L2PcInstance target = (L2PcInstance)_npcBaium.getTarget();
+		L2Player target = (L2Player)_npcBaium.getTarget();
 		
 		// Do spawn.
 		L2Spawn baiumSpawn = _monsterSpawn.get(BAIUM);
@@ -555,10 +555,10 @@ public class BaiumManager extends BossLair
 	// Kill pc
 	private class KillPc implements Runnable
 	{
-		private final L2PcInstance _target;
+		private final L2Player _target;
 		private final L2GrandBossInstance _boss;
 		
-		public KillPc(L2PcInstance target, L2GrandBossInstance boss)
+		public KillPc(L2Player target, L2GrandBossInstance boss)
 		{
 			_target = target;
 			_boss = boss;

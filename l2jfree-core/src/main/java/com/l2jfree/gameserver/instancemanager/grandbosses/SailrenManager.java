@@ -22,16 +22,16 @@ import javolution.util.FastList;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.GrandBossState;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
 
@@ -185,7 +185,7 @@ public class SailrenManager extends BossLair
 	}
 	
 	// Whether it is permitted to enter the sailren's lair is confirmed.
-	public int canIntoSailrenLair(L2PcInstance pc)
+	public int canIntoSailrenLair(L2Player pc)
 	{
 		if ((!Config.FWS_ENABLESINGLEPLAYER) && (pc.getParty() == null))
 			return 4;
@@ -218,7 +218,7 @@ public class SailrenManager extends BossLair
 	}
 	
 	// Teleporting player to sailren's lair.
-	public void entryToSailrenLair(L2PcInstance pc)
+	public void entryToSailrenLair(L2Player pc)
 	{
 		int driftx;
 		int drifty;
@@ -238,8 +238,8 @@ public class SailrenManager extends BossLair
 		}
 		else
 		{
-			List<L2PcInstance> members = new FastList<L2PcInstance>(); // list of member of teleport candidate.
-			for (L2PcInstance mem : pc.getParty().getPartyMembers())
+			List<L2Player> members = new FastList<L2Player>(); // list of member of teleport candidate.
+			for (L2Player mem : pc.getParty().getPartyMembers())
 			{
 				// teleporting it within alive and the range of recognition of the leader of the party.
 				if (!mem.isDead() && Util.checkIfInRange(700, pc, mem, true))
@@ -247,7 +247,7 @@ public class SailrenManager extends BossLair
 					members.add(mem);
 				}
 			}
-			for (L2PcInstance mem : members)
+			for (L2Player mem : members)
 			{
 				driftx = Rnd.get(-80, 80);
 				drifty = Rnd.get(-80, 80);

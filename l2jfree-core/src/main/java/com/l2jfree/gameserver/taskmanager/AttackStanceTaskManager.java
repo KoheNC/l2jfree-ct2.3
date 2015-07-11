@@ -18,11 +18,11 @@ import java.util.Map;
 
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.model.actor.instance.L2CubicInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.AutoAttackStop;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
+import com.l2jfree.gameserver.network.packets.server.AutoAttackStop;
 
 public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 {
@@ -33,14 +33,14 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 		return SingletonHolder._instance;
 	}
 	
-	private final Map<L2Character, Long> _attackStanceTasks = new FastMap<L2Character, Long>();
+	private final Map<L2Creature, Long> _attackStanceTasks = new FastMap<L2Creature, Long>();
 	
 	private AttackStanceTaskManager()
 	{
 		super(1000);
 	}
 	
-	public boolean getAttackStanceTask(L2Character actor)
+	public boolean getAttackStanceTask(L2Creature actor)
 	{
 		readLock();
 		try
@@ -56,7 +56,7 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 		}
 	}
 	
-	public void addAttackStanceTask(L2Character actor)
+	public void addAttackStanceTask(L2Creature actor)
 	{
 		writeLock();
 		try
@@ -64,8 +64,8 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 			if (actor instanceof L2Summon)
 				actor = ((L2Summon)actor).getOwner();
 			
-			if (actor instanceof L2PcInstance)
-				for (L2CubicInstance cubic : ((L2PcInstance)actor).getCubics().values())
+			if (actor instanceof L2Player)
+				for (L2CubicInstance cubic : ((L2Player)actor).getCubics().values())
 					if (cubic.getId() != L2CubicInstance.LIFE_CUBIC)
 						cubic.doAction();
 			
@@ -77,7 +77,7 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 		}
 	}
 	
-	public void removeAttackStanceTask(L2Character actor)
+	public void removeAttackStanceTask(L2Creature actor)
 	{
 		writeLock();
 		try
@@ -99,17 +99,17 @@ public final class AttackStanceTaskManager extends AbstractPeriodicTaskManager
 		writeLock();
 		try
 		{
-			for (Map.Entry<L2Character, Long> entry : _attackStanceTasks.entrySet())
+			for (Map.Entry<L2Creature, Long> entry : _attackStanceTasks.entrySet())
 			{
 				if (System.currentTimeMillis() > entry.getValue())
 				{
-					final L2Character actor = entry.getKey();
+					final L2Creature actor = entry.getKey();
 					
 					actor.broadcastPacket(new AutoAttackStop(actor.getObjectId()));
 					
-					if (actor instanceof L2PcInstance)
+					if (actor instanceof L2Player)
 					{
-						final L2Summon pet = ((L2PcInstance)actor).getPet();
+						final L2Summon pet = ((L2Player)actor).getPet();
 						if (pet != null)
 							pet.broadcastPacket(new AutoAttackStop(pet.getObjectId()));
 					}

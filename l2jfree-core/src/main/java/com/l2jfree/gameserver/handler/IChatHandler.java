@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.handler;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 
 /**
@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.network.SystemChatChannelId;
  */
 public interface IChatHandler
 {
-	public void useChatHandler(L2PcInstance activeChar, String target, SystemChatChannelId chatType, String text);
+	public void useChatHandler(L2Player activeChar, String target, SystemChatChannelId chatType, String text);
 	
 	public SystemChatChannelId[] getChatTypes();
 }

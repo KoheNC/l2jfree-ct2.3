@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class LilimKnightWeak extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class LilimKnightWeak extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 568, 2); // Attack Buster
 		addSkill(player, 569, 2); // Attack Storm
@@ -38,7 +38,7 @@ public class LilimKnightWeak extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 568); // Attack Buster
 		removeSkill(player, 569); // Attack Storm

@@ -25,13 +25,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.InstanceListManager;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2ClanMember;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 public class CastleManager implements InstanceListManager
 {
@@ -202,7 +201,7 @@ public class CastleManager implements InstanceListManager
 	{
 		if (member == null)
 			return;
-		L2PcInstance player = member.getPlayerInstance();
+		L2Player player = member.getPlayerInstance();
 		int circletId = getCircletByCastleId(castleId);
 		
 		if (circletId != 0)

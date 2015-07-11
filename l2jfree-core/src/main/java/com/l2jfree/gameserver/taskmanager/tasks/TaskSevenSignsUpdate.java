@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.taskmanager.tasks;
 
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.taskmanager.tasks.TaskManager.ExecutedTask;
 
 /**

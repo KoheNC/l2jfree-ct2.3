@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class DwarfGolem extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class DwarfGolem extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 806, 1); // Magic Obstacle
 		addSkill(player, 807, 1); // Over-hit
@@ -36,7 +36,7 @@ public class DwarfGolem extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 806); // Magic Obstacle
 		removeSkill(player, 807); // Over-hit

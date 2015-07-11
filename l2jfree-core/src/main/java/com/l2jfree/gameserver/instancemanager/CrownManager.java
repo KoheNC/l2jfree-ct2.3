@@ -14,18 +14,18 @@
  */
 package com.l2jfree.gameserver.instancemanager;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.CrownTable;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2ClanMember;
 import com.l2jfree.gameserver.model.entity.Castle;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 /**
  * @author evill33t, NB4L1
@@ -49,7 +49,7 @@ public final class CrownManager
 				checkCrowns(member.getPlayerInstance());
 	}
 	
-	public static void checkCrowns(L2PcInstance activeChar)
+	public static void checkCrowns(L2Player activeChar)
 	{
 		if (activeChar == null)
 			return;

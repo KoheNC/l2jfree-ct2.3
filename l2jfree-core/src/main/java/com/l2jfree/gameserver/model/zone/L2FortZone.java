@@ -16,12 +16,12 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Effect;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.FortSiege;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 
 public class L2FortZone extends SiegeableEntityZone
 {
@@ -35,15 +35,15 @@ public class L2FortZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		super.onEnter(character);
 		
 		character.setInsideZone(FLAG_FORT, true);
 		
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)character;
+			L2Player player = (L2Player)character;
 			L2Clan clan = player.getClan();
 			if (clan != null)
 			{
@@ -58,21 +58,21 @@ public class L2FortZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		super.onExit(character);
 		
 		character.setInsideZone(FLAG_FORT, false);
 		
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).stopFameTask();
+		if (character instanceof L2Player)
+			((L2Player)character).stopFameTask();
 	}
 	
 	@Override
-	protected void onDieInside(L2Character character)
+	protected void onDieInside(L2Creature character)
 	{
 		// debuff participants only if they die inside siege zone
-		if (character instanceof L2PcInstance && isSiegeInProgress())
+		if (character instanceof L2Player && isSiegeInProgress())
 		{
 			int lvl;
 			L2Effect effect = character.getFirstEffect(5660);

@@ -20,11 +20,11 @@ import java.util.List;
 import javolution.util.FastMap;
 import javolution.util.FastSet;
 
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2PartyRoom;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.party.L2Party;
+import com.l2jfree.gameserver.model.party.L2PartyRoom;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ExClosePartyRoom;
+import com.l2jfree.gameserver.network.packets.server.ExClosePartyRoom;
 
 /**
  * Party room and party matching waiting list manager.
@@ -36,13 +36,13 @@ public class PartyRoomManager
 	public static final int ENTRIES_PER_PAGE = 64;
 	
 	private volatile int _nextId;
-	private final FastSet<L2PcInstance> _waitingList;
+	private final FastSet<L2Player> _waitingList;
 	private final FastMap<Integer, L2PartyRoom> _rooms;
 	
 	public PartyRoomManager()
 	{
 		_nextId = 1;
-		_waitingList = new FastSet<L2PcInstance>();
+		_waitingList = new FastSet<L2Player>();
 		_rooms = new FastMap<Integer, L2PartyRoom>();
 	}
 	
@@ -51,7 +51,7 @@ public class PartyRoomManager
 		return SingletonHolder._instance;
 	}
 	
-	private final FastSet<L2PcInstance> getWaitingList()
+	private final FastSet<L2Player> getWaitingList()
 	{
 		return _waitingList;
 	}
@@ -66,7 +66,7 @@ public class PartyRoomManager
 		return getPartyRooms().get(roomId);
 	}
 	
-	public void addToWaitingList(L2PcInstance player)
+	public void addToWaitingList(L2Player player)
 	{
 		if (getWaitingList().add(player))
 		{
@@ -75,17 +75,17 @@ public class PartyRoomManager
 		}
 	}
 	
-	public void removeFromWaitingList(L2PcInstance player)
+	public void removeFromWaitingList(L2Player player)
 	{
 		getWaitingList().remove(player);
 		player.setLookingForParty(false);
 		player.broadcastUserInfo();
 	}
 	
-	public List<L2PcInstance> getWaitingList(int minLevel, int maxLevel)
+	public List<L2Player> getWaitingList(int minLevel, int maxLevel)
 	{
-		ArrayList<L2PcInstance> list = new ArrayList<L2PcInstance>();
-		for (L2PcInstance pc : getWaitingList())
+		ArrayList<L2Player> list = new ArrayList<L2Player>();
+		for (L2Player pc : getWaitingList())
 			if (pc.getLevel() >= minLevel && pc.getLevel() <= maxLevel)
 				list.add(pc);
 		return list;
@@ -102,7 +102,7 @@ public class PartyRoomManager
 	 * @param title Party room's title
 	 * @return the newly created party room with leader as the only member
 	 */
-	public void createRoom(L2PcInstance leader, int minLevel, int maxLevel, int maxMembers, int lootDist, String title)
+	public void createRoom(L2Player leader, int minLevel, int maxLevel, int maxMembers, int lootDist, String title)
 	{
 		L2PartyRoom room = new L2PartyRoom(_nextId++, minLevel, maxLevel, maxMembers, lootDist, title);
 		room.addMember(leader);
@@ -129,7 +129,7 @@ public class PartyRoomManager
 			party.setPartyRoom(null);
 		}
 		
-		for (L2PcInstance member : room.getMembers())
+		for (L2Player member : room.getMembers())
 		{
 			member.setPartyRoom(null);
 			member.sendPacket(ExClosePartyRoom.STATIC_PACKET);
@@ -137,7 +137,7 @@ public class PartyRoomManager
 		}
 	}
 	
-	public List<L2PartyRoom> getRooms(L2PcInstance player)
+	public List<L2PartyRoom> getRooms(L2Player player)
 	{
 		return getRooms(player.getPartyMatchingRegion(), MapRegionManager.getInstance().getL2Region(player),
 				player.getPartyMatchingLevelRestriction(), player.getLevel());

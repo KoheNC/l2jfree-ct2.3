@@ -20,8 +20,10 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.TradeListTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.instancemanager.GrandBossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
@@ -31,14 +33,15 @@ import com.l2jfree.gameserver.instancemanager.RaidBossSpawnManager;
 import com.l2jfree.gameserver.instancemanager.hellbound.HellboundManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.ArenaManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
-import com.l2jfree.gameserver.network.L2GameSelectorThread;
+import com.l2jfree.gameserver.network.L2ClientSelectorThread;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
 import com.l2jfree.gameserver.util.DatabaseBackupManager;
 import com.l2jfree.gameserver.util.OfflineTradeManager;
@@ -160,7 +163,7 @@ public final class Shutdown extends Thread
 		
 		OfflineTradeManager.getInstance().store();
 		
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			try
 			{
@@ -241,7 +244,7 @@ public final class Shutdown extends Thread
 		
 		try
 		{
-			GameTimeController.stopTimer();
+			GameTimeManager.stopTimer();
 		}
 		catch (Throwable t)
 		{
@@ -259,7 +262,7 @@ public final class Shutdown extends Thread
 		
 		try
 		{
-			L2GameSelectorThread.getInstance().shutdown();
+			L2ClientSelectorThread.getInstance().shutdown();
 		}
 		catch (Throwable t)
 		{

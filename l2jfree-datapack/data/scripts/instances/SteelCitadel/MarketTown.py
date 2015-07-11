@@ -1,19 +1,19 @@
 # author: Psycho(killer1888) / L2jFree
 
 import sys
-from com.l2jfree.gameserver.ai                          import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai                          import CtrlIntention
 from com.l2jfree.gameserver.datatables                  import ItemTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.instancemanager.hellbound   import HellboundManager
 from com.l2jfree.gameserver.model                       import L2CharPosition
-from com.l2jfree.gameserver.model                       import L2World
+from com.l2jfree.gameserver.model.world                       import L2World
 from com.l2jfree.gameserver.model.entity                import Instance
 from com.l2jfree.gameserver.model.quest                 import State
 from com.l2jfree.gameserver.model.quest                 import QuestState
 from com.l2jfree.gameserver.model.quest.jython          import QuestJython as JQuest
 from com.l2jfree.gameserver.network                     import SystemMessageId
-from com.l2jfree.gameserver.network.serverpackets       import NpcSay
-from com.l2jfree.gameserver.network.serverpackets       import SystemMessage
+from com.l2jfree.gameserver.network.packets.server       import NpcSay
+from com.l2jfree.gameserver.network.packets.server       import SystemMessage
 from com.l2jfree.tools.random                           import Rnd
 
 qn = "MarketTown"

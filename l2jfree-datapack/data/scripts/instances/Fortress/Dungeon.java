@@ -19,17 +19,17 @@ import javolution.util.FastMap;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Fort;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 /**
  * 
@@ -77,7 +77,7 @@ public class Dungeon extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
+	public String onTalk(L2Npc npc, L2Player player)
 	{
 		QuestState st = player.getQuestState("DungeonInstance");
 		if (st == null)
@@ -111,7 +111,7 @@ public class Dungeon extends QuestJython
 			_prisons.put(prison.getFortId(), prison);
 		}
 		
-		for (L2PcInstance partyMember : party.getPartyMembers())
+		for (L2Player partyMember : party.getPartyMembers())
 		{
 			//if (partyMember.getQuestState("").isCompleted())
 			partyMember.setInstanceId(prison.getInstanceId());
@@ -124,7 +124,7 @@ public class Dungeon extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
+	public String onKill(L2Npc npc, L2Player player, boolean isPet)
 	{
 		int npcId = npc.getNpcId();
 		Prison prison = null;

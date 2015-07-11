@@ -27,16 +27,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.ClanHallManager;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.chars.L2CharTemplate;
 
 public final class DoorTable
 {
@@ -229,7 +229,7 @@ public final class DoorTable
 			npcDat.set("basePDef", pdef);
 			npcDat.set("baseMDef", mdef);
 			
-			L2CharTemplate template = new L2CharTemplate(npcDat);
+			L2CreatureTemplate template = new L2CreatureTemplate(npcDat);
 			door = new L2DoorInstance(IdFactory.getInstance().getNextId(), template, id, name, unlockable);
 			door.setRange(rangeXMin, rangeYMin, rangeZMin, rangeXMax, rangeYMax, rangeZMax);
 			door.setMapRegion(MapRegionManager.getInstance().getRegion(x, y, z));

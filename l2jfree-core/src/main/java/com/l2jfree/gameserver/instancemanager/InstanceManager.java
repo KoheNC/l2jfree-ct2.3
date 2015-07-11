@@ -34,8 +34,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.geodata.GeoData;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.util.L2FastSet;
 import com.l2jfree.util.LookupTable;
@@ -235,7 +235,7 @@ public class InstanceManager
 		return _instanceWorlds.get(instanceId);
 	}
 	
-	public InstanceWorld getPlayerWorld(L2PcInstance player)
+	public InstanceWorld getPlayerWorld(L2Player player)
 	{
 		for (FastMap.Entry<Integer, InstanceWorld> entry = _instanceWorlds.head(), end = _instanceWorlds.tail(); (entry =
 				entry.getNext()) != end;)
@@ -248,7 +248,7 @@ public class InstanceManager
 		return null;
 	}
 	
-	public Instance getDynamicInstance(L2PcInstance player)
+	public Instance getDynamicInstance(L2Player player)
 	{
 		for (FastMap.Entry<Integer, Instance> entry = _instanceList.head(), end = _instanceList.tail(); (entry =
 				entry.getNext()) != end;)

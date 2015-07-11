@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class DivineHealer extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class DivineHealer extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 698, 1); // Divine Healer Major Heal
 		addSkill(player, 699, 1); // Divine Healer Battle Heal
@@ -40,7 +40,7 @@ public class DivineHealer extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 698); // Divine Healer Major Heal
 		removeSkill(player, 699); // Divine Healer Battle Heal

@@ -24,20 +24,20 @@ import com.l2jfree.gameserver.cache.HtmCache;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.ZoneManager;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.model.zone.L2BossZone;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.model.zone.L2Zone.ZoneType;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.ExShowScreenMessage;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.ExShowScreenMessage;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 
 /**
  * Ice Fairy Sirra AI<br>
@@ -50,7 +50,7 @@ public class IceFairySirra extends L2AttackableAIScript
 	private static final int STEWARD = 32029;
 	private static final int SILVER_HEMOCYTE = 8057;
 	private static L2BossZone _freyasZone;
-	private static L2PcInstance _player = null;
+	private static L2Player _player = null;
 	protected FastList<L2Npc> _allMobs = new FastList<L2Npc>();
 	protected Future<?> _onDeadEventTask = null;
 	
@@ -166,11 +166,11 @@ public class IceFairySirra extends L2AttackableAIScript
 		}
 	}
 	
-	public boolean checkItems(L2PcInstance player)
+	public boolean checkItems(L2Player player)
 	{
 		if (player.getParty() != null)
 		{
-			for (L2PcInstance pc : player.getParty().getPartyMembers())
+			for (L2Player pc : player.getParty().getPartyMembers())
 			{
 				L2ItemInstance i = pc.getInventory().getItemByItemId(SILVER_HEMOCYTE);
 				if (i == null || i.getCount() < 10)
@@ -184,11 +184,11 @@ public class IceFairySirra extends L2AttackableAIScript
 		return true;
 	}
 	
-	public void destroyItems(L2PcInstance player)
+	public void destroyItems(L2Player player)
 	{
 		if (player.getParty() != null)
 		{
-			for (L2PcInstance pc : player.getParty().getPartyMembers())
+			for (L2Player pc : player.getParty().getPartyMembers())
 			{
 				L2ItemInstance i = pc.getInventory().getItemByItemId(SILVER_HEMOCYTE);
 				pc.destroyItem("Hemocytes", i.getObjectId(), 10, null, false);
@@ -198,11 +198,11 @@ public class IceFairySirra extends L2AttackableAIScript
 			cleanUp();
 	}
 	
-	public void teleportInside(L2PcInstance player)
+	public void teleportInside(L2Player player)
 	{
 		if (player.getParty() != null)
 		{
-			for (L2PcInstance pc : player.getParty().getPartyMembers())
+			for (L2Player pc : player.getParty().getPartyMembers())
 			{
 				pc.teleToLocation(113533, -126159, -3488, false);
 				if (_freyasZone == null)
@@ -219,11 +219,11 @@ public class IceFairySirra extends L2AttackableAIScript
 			cleanUp();
 	}
 	
-	public void screenMessage(L2PcInstance player, String text, int time)
+	public void screenMessage(L2Player player, String text, int time)
 	{
 		if (player.getParty() != null)
 		{
-			for (L2PcInstance pc : player.getParty().getPartyMembers())
+			for (L2Player pc : player.getParty().getPartyMembers())
 			{
 				pc.sendPacket(new ExShowScreenMessage(text, time));
 			}
@@ -287,7 +287,7 @@ public class IceFairySirra extends L2AttackableAIScript
 		return "data/html/npcdefault.htm";
 	}
 	
-	public void sendHtml(L2Npc npc, L2PcInstance player, String filename)
+	public void sendHtml(L2Npc npc, L2Player player, String filename)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 		html.setFile(filename);
@@ -297,7 +297,7 @@ public class IceFairySirra extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	public String onFirstTalk(L2Npc npc, L2Player player)
 	{
 		if (player.getQuestState("IceFairySirra") == null)
 			newQuestState(player);
@@ -312,7 +312,7 @@ public class IceFairySirra extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.equalsIgnoreCase("check_condition"))
 		{

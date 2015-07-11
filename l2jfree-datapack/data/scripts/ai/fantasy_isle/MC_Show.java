@@ -19,16 +19,16 @@ import java.util.Map;
 
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.GameTimeController;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 
 /**
  * MC show script
@@ -197,7 +197,7 @@ public class MC_Show extends Quest
 	
 	private int getGameTime()
 	{
-		return GameTimeController.getInstance().getGameTime();
+		return GameTimeManager.getInstance().getGameTime();
 	}
 	
 	private void scheduleTimer()
@@ -274,7 +274,7 @@ public class MC_Show extends Quest
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.equalsIgnoreCase("Start"))
 		{

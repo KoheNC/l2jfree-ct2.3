@@ -15,9 +15,9 @@
 package com.l2jfree.gameserver.model.restriction.global;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TvTIMain;
 import com.l2jfree.gameserver.model.quest.Quest;
 
@@ -77,19 +77,19 @@ public final class TvTiRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	boolean teamEquals(L2PcInstance participant1, L2PcInstance participant2)
+	boolean teamEquals(L2Player participant1, L2Player participant2)
 	{
 		return TvTIMain.checkSameTeam(participant1, participant2);
 	}
 	
 	@Override
-	boolean isInFunEvent(L2PcInstance player)
+	boolean isInFunEvent(L2Player player)
 	{
 		return player._inEventTvTi;
 	}
 	
 	@Override
-	public boolean canStandUp(L2PcInstance activeChar)
+	public boolean canStandUp(L2Player activeChar)
 	{
 		if (activeChar._isSitForcedTvTi)
 		{
@@ -101,14 +101,14 @@ public final class TvTiRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public void playerLoggedIn(L2PcInstance activeChar)
+	public void playerLoggedIn(L2Player activeChar)
 	{
 		if (TvTIMain.isPlayerInList(activeChar))
 			TvTIMain.addDisconnectedPlayer(activeChar);
 	}
 	
 	@Override
-	public boolean playerKilled(L2Character activeChar, final L2PcInstance target, L2PcInstance killer)
+	public boolean playerKilled(L2Creature activeChar, final L2Player target, L2Player killer)
 	{
 		if (!target._inEventTvTi)
 			return false;
@@ -145,7 +145,7 @@ public final class TvTiRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean onBypassFeedback(L2Npc npc, L2PcInstance activeChar, String command)
+	public boolean onBypassFeedback(L2Npc npc, L2Player activeChar, String command)
 	{
 		if (command.startsWith("tvti_player_join_page"))
 		{
@@ -169,7 +169,7 @@ public final class TvTiRestriction extends AbstractFunEventRestriction
 	}
 	
 	@Override
-	public boolean onAction(L2Npc npc, L2PcInstance activeChar)
+	public boolean onAction(L2Npc npc, L2Player activeChar)
 	{
 		if (npc._isEventMobTvTi)
 		{

@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.python.core.Py;
 import org.python.core.PyModule;
 import org.python.core.PySystemState;
@@ -32,12 +32,12 @@ import org.python.core.imp;
 import org.python.util.InteractiveConsole;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.position.ObjectPosition;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.lang.L2Thread;
 import com.l2jfree.tools.util.CustomFileNameFilter;
@@ -102,12 +102,12 @@ public final class Util
 		interp.cleanup();
 	}
 	
-	public static void handleIllegalPlayerAction(L2PcInstance actor, String message)
+	public static void handleIllegalPlayerAction(L2Player actor, String message)
 	{
 		handleIllegalPlayerAction(actor, message, Config.DEFAULT_PUNISH);
 	}
 	
-	public static void handleIllegalPlayerAction(L2PcInstance actor, String message, int punishment)
+	public static void handleIllegalPlayerAction(L2Player actor, String message, int punishment)
 	{
 		actor.setIllegalWaiting(true);
 		ThreadPoolManager.getInstance().scheduleGeneral(new IllegalPlayerAction(actor, message, punishment), 5000);
@@ -327,11 +327,11 @@ public final class Util
 		if (range == -1)
 			return true; // not limited
 			
-		if (obj1 instanceof L2Character)
-			range += ((L2Character)obj1).getTemplate().getCollisionRadius();
+		if (obj1 instanceof L2Creature)
+			range += ((L2Creature)obj1).getTemplate().getCollisionRadius();
 		
-		if (obj2 instanceof L2Character)
-			range += ((L2Character)obj2).getTemplate().getCollisionRadius();
+		if (obj2 instanceof L2Creature)
+			range += ((L2Creature)obj2).getTemplate().getCollisionRadius();
 		
 		final ObjectPosition pos1 = obj1.getPosition();
 		final ObjectPosition pos2 = obj2.getPosition();
@@ -470,7 +470,7 @@ public final class Util
 		while (s.length() < 160)
 			s = "-" + s;
 		
-		L2Config.out.println(s);
+		L2AutoInitialization.out.println(s);
 	}
 	
 	public static Map<Integer, Integer> sortMap(Map<Integer, Integer> map, boolean asc)

@@ -36,21 +36,21 @@ import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.util.L2FastSet;
 
 /**
@@ -225,7 +225,7 @@ public class Instance
 	
 	public void ejectPlayer(Integer objectId)
 	{
-		L2PcInstance player = L2World.getInstance().findPlayer(objectId);
+		L2Player player = L2World.getInstance().findPlayer(objectId);
 		if (player != null && player.isSameInstance(getId()))
 		{
 			if (!player.isInMultiverse())
@@ -613,7 +613,7 @@ public class Instance
 		{
 			for (int objectId : _players)
 			{
-				L2PcInstance player = L2World.getInstance().findPlayer(objectId);
+				L2Player player = L2World.getInstance().findPlayer(objectId);
 				if (player != null && player.isSameInstance(getId()))
 				{
 					player.sendPacket(cs);

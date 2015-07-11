@@ -14,12 +14,12 @@
  */
 package com.l2jfree.gameserver.taskmanager;
 
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2AirShipInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2BoatInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.PartyMemberPosition;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
+import com.l2jfree.gameserver.network.packets.server.PartyMemberPosition;
 
 /**
  * Used to revalidate/update/broadcast/execute tasks depending on current coordinates.<br>
@@ -48,9 +48,9 @@ public final class CoordRevalidator extends AbstractFIFOPeriodicTaskManager<L2Ob
 	@Override
 	protected void callTask(L2Object obj)
 	{
-		if (obj instanceof L2Character && obj.isVisible())
+		if (obj instanceof L2Creature && obj.isVisible())
 		{
-			final L2Character cha = (L2Character)obj;
+			final L2Creature cha = (L2Creature)obj;
 			
 			cha.getKnownList().updateKnownObjects();
 			
@@ -65,9 +65,9 @@ public final class CoordRevalidator extends AbstractFIFOPeriodicTaskManager<L2Ob
 				((L2AirShipInstance)cha).updatePeopleInTheAirShip(cha.getX(), cha.getY(), cha.getZ());
 			}
 			
-			if (cha instanceof L2PcInstance)
+			if (cha instanceof L2Player)
 			{
-				final L2PcInstance player = (L2PcInstance)cha;
+				final L2Player player = (L2Player)cha;
 				
 				if (player.getParty() != null)
 					player.getParty().broadcastToPartyMembers(player, new PartyMemberPosition(player));

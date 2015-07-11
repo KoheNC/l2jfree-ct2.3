@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.model.Location;
 
 /**

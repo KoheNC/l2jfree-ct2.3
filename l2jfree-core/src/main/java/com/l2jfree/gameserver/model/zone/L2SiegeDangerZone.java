@@ -14,17 +14,17 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Playable;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Siege;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * @author Savormix
@@ -36,7 +36,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 	private Siege _siege;
 	
 	@Override
-	protected void checkForDamage(L2Character character)
+	protected void checkForDamage(L2Creature character)
 	{
 		super.checkForDamage(character);
 		
@@ -50,7 +50,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 	}
 	
 	@Override
-	protected boolean checkDynamicConditions(L2Character character)
+	protected boolean checkDynamicConditions(L2Creature character)
 	{
 		if (_siege == null || !_siege.getIsInProgress() || !(character instanceof L2Playable) || !isActive())
 			return false;
@@ -75,7 +75,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 			if (_applyEnter == null)
 				_applyEnter = new L2Skill[] { s };
 			else
-				_applyEnter = (L2Skill[])ArrayUtils.add(_applyEnter, s);
+				_applyEnter = ArrayUtils.add(_applyEnter, s);
 			_removeExit = ArrayUtils.add(_removeExit, SPEED_SKILL);
 		}
 		else
@@ -86,7 +86,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 	public void deactivate()
 	{
 		_applyEnter = null;
-		for (L2Character c : getCharactersInside())
+		for (L2Creature c : getCharactersInside())
 			removeFromZone(c);
 		_removeExit = null;
 	}

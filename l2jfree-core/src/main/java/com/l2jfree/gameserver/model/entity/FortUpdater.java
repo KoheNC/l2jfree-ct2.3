@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 
 /**
  * Vice - 2008 Class managing periodical events with castle

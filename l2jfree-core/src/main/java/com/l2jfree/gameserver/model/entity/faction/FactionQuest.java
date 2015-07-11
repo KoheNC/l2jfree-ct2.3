@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * @author evill33t
@@ -94,7 +94,7 @@ public class FactionQuest
 		return _minLevel;
 	}
 	
-	public static void createFactionQuest(L2PcInstance player, int factionQuestId)
+	public static void createFactionQuest(L2Player player, int factionQuestId)
 	{
 		Connection con = null;
 		try
@@ -118,14 +118,14 @@ public class FactionQuest
 		}
 	}
 	
-	public static void endFactionQuest(L2PcInstance player, int factionQuestId)
+	public static void endFactionQuest(L2Player player, int factionQuestId)
 	{
 		player.sendMessage(getName() + " completed.");
 		player.getNPCFaction().addFactionPoints(getReward() * Config.FACTION_QUEST_RATE);
 		deleteFactionQuest(player, factionQuestId);
 	}
 	
-	public static void deleteFactionQuest(L2PcInstance player, int factionQuestId)
+	public static void deleteFactionQuest(L2Player player, int factionQuestId)
 	{
 		Connection con = null;
 		try

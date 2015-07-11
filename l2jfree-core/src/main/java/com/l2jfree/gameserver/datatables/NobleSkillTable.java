@@ -16,11 +16,11 @@ package com.l2jfree.gameserver.datatables;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * @author -Nemesiss-

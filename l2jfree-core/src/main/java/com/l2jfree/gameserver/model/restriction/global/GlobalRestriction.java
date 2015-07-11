@@ -16,91 +16,91 @@ package com.l2jfree.gameserver.model.restriction.global;
 
 import java.util.List;
 
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
-import com.l2jfree.gameserver.model.L2Effect;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.L2Playable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions.CombatState;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill.SkillTargetType;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 
 /**
  * @author NB4L1
  */
 public interface GlobalRestriction
 {
-	public boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction);
+	public boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction);
 	
-	public boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target);
+	public boolean canInviteToParty(L2Player activeChar, L2Player target);
 	
-	public boolean canCreateEffect(L2Character activeChar, L2Character target, L2Skill skill);
+	public boolean canCreateEffect(L2Creature activeChar, L2Creature target, L2Skill skill);
 	
-	public boolean isInvul(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive);
+	public boolean isInvul(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
+			L2Player attacker_, L2Player target_, boolean isOffensive);
 	
-	public boolean isProtected(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive);
+	public boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
+			L2Player attacker_, L2Player target_, boolean isOffensive);
 	
-	public boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage, L2PcInstance attacker_,
-			L2PcInstance target_);
+	public boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage, L2Player attacker_,
+			L2Player target_);
 	
-	public boolean canRequestRevive(L2PcInstance activeChar);
+	public boolean canRequestRevive(L2Player activeChar);
 	
-	public boolean canTeleport(L2PcInstance activeChar);
+	public boolean canTeleport(L2Player activeChar);
 	
 	public boolean canUseItemHandler(Class<? extends IItemHandler> clazz, int itemId, L2Playable activeChar,
-			L2ItemInstance item, L2PcInstance player);
+			L2ItemInstance item, L2Player player);
 	
-	public boolean canDropItem(L2PcInstance player, int itemId, L2ItemInstance item);
+	public boolean canDropItem(L2Player player, int itemId, L2ItemInstance item);
 	
-	public boolean canDestroyItem(L2PcInstance player, int itemId, L2ItemInstance item);
+	public boolean canDestroyItem(L2Player player, int itemId, L2ItemInstance item);
 	
-	public CombatState getCombatState(L2PcInstance activeChar, L2PcInstance target);
+	public CombatState getCombatState(L2Player activeChar, L2Player target);
 	
-	public boolean canStandUp(L2PcInstance activeChar);
+	public boolean canStandUp(L2Player activeChar);
 	
-	public boolean canPickUp(L2PcInstance activeChar, L2ItemInstance item, L2PetInstance pet);
+	public boolean canPickUp(L2Player activeChar, L2ItemInstance item, L2PetInstance pet);
 	
-	public int getNameColor(L2PcInstance activeChar);
+	public int getNameColor(L2Player activeChar);
 	
-	public int getTitleColor(L2PcInstance activeChar);
-	
-	// TODO
-	
-	public Boolean isInsideZone(L2Character activeChar, byte zone);
-	
-	public double calcDamage(L2Character activeChar, L2Character target, double damage, L2Skill skill);
-	
-	public List<L2Character> getTargetList(SkillTargetType type, L2Character activeChar, L2Skill skill,
-			L2Character target);
+	public int getTitleColor(L2Player activeChar);
 	
 	// TODO
 	
-	public void levelChanged(L2PcInstance activeChar);
+	public Boolean isInsideZone(L2Creature activeChar, byte zone);
+	
+	public double calcDamage(L2Creature activeChar, L2Creature target, double damage, L2Skill skill);
+	
+	public List<L2Creature> getTargetList(SkillTargetType type, L2Creature activeChar, L2Skill skill,
+			L2Creature target);
+	
+	// TODO
+	
+	public void levelChanged(L2Player activeChar);
 	
 	public void effectCreated(L2Effect effect);
 	
-	public void playerLoggedIn(L2PcInstance activeChar);
+	public void playerLoggedIn(L2Player activeChar);
 	
-	public void playerDisconnected(L2PcInstance activeChar);
+	public void playerDisconnected(L2Player activeChar);
 	
-	public boolean playerKilled(L2Character activeChar, L2PcInstance target, L2PcInstance killer);
+	public boolean playerKilled(L2Creature activeChar, L2Player target, L2Player killer);
 	
-	public void playerRevived(L2PcInstance player);
+	public void playerRevived(L2Player player);
 	
-	public void isInsideZoneStateChanged(L2Character activeChar, byte zone, boolean isInsideZone);
+	public void isInsideZoneStateChanged(L2Creature activeChar, byte zone, boolean isInsideZone);
 	
-	public void instanceChanged(L2PcInstance activeChar, int oldInstance, int newInstance);
+	public void instanceChanged(L2Player activeChar, int oldInstance, int newInstance);
 	
-	public boolean onBypassFeedback(L2Npc npc, L2PcInstance activeChar, String command);
+	public boolean onBypassFeedback(L2Npc npc, L2Player activeChar, String command);
 	
-	public boolean onAction(L2Npc npc, L2PcInstance activeChar);
+	public boolean onAction(L2Npc npc, L2Player activeChar);
 	
-	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String target);
+	public boolean useVoicedCommand(String command, L2Player activeChar, String target);
 	
 	// TODO
 }

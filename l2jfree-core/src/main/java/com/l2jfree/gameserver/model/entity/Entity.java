@@ -21,12 +21,12 @@ import javolution.util.FastList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.zone.L2Zone;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.tools.random.Rnd;
 
 public class Entity
@@ -72,7 +72,7 @@ public class Entity
 		return 0;
 	}
 	
-	public boolean checkIfInZone(L2Character cha)
+	public boolean checkIfInZone(L2Creature cha)
 	{
 		if (_zone != null)
 			return _zone.isInsideZone(cha);
@@ -108,20 +108,20 @@ public class Entity
 		return Double.MAX_VALUE;
 	}
 	
-	protected List<L2PcInstance> getPlayersInside()
+	protected List<L2Player> getPlayersInside()
 	{
-		List<L2PcInstance> lst = new FastList<L2PcInstance>();
-		for (L2Character cha : getZone().getCharactersInside())
+		List<L2Player> lst = new FastList<L2Player>();
+		for (L2Creature cha : getZone().getCharactersInside())
 		{
-			if (cha instanceof L2PcInstance)
-				lst.add((L2PcInstance)cha);
+			if (cha instanceof L2Player)
+				lst.add((L2Player)cha);
 		}
 		return lst;
 	}
 	
-	protected L2PcInstance getRandomPlayer()
+	protected L2Player getRandomPlayer()
 	{
-		List<L2PcInstance> lst = getPlayersInside();
+		List<L2Player> lst = getPlayersInside();
 		if (!lst.isEmpty())
 		{
 			return lst.get(Rnd.get(lst.size()));
@@ -132,14 +132,14 @@ public class Entity
 	/**
 	 * @param cha
 	 */
-	protected boolean checkBanish(L2PcInstance cha)
+	protected boolean checkBanish(L2Player cha)
 	{
 		return true;
 	}
 	
 	public void banishForeigners()
 	{
-		for (L2PcInstance player : getPlayersInside())
+		for (L2Player player : getPlayersInside())
 		{
 			if (checkBanish(player))
 				player.teleToLocation(TeleportWhereType.Town);
@@ -149,15 +149,15 @@ public class Entity
 	public void broadcastToPlayers(String message)
 	{
 		SystemMessage msg = SystemMessage.sendString(message);
-		for (L2PcInstance player : getPlayersInside())
+		for (L2Player player : getPlayersInside())
 		{
 			player.sendPacket(msg);
 		}
 	}
 	
-	public void broadcastToPlayers(L2GameServerPacket gsp)
+	public void broadcastToPlayers(L2ServerPacket gsp)
 	{
-		for (L2PcInstance player : getPlayersInside())
+		for (L2Player player : getPlayersInside())
 		{
 			player.sendPacket(gsp);
 		}

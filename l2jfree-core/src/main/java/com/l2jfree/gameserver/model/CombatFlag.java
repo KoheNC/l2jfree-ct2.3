@@ -16,15 +16,16 @@ package com.l2jfree.gameserver.model;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
-import com.l2jfree.gameserver.network.serverpackets.ItemList;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
+import com.l2jfree.gameserver.network.packets.server.ItemList;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 public class CombatFlag
 {
-	protected L2PcInstance _player = null;
+	protected L2Player _player = null;
 	public int playerId = 0;
 	private L2ItemInstance _item = null;
 	
@@ -65,7 +66,7 @@ public class CombatFlag
 		}
 	}
 	
-	public boolean activate(L2PcInstance player, L2ItemInstance item)
+	public boolean activate(L2Player player, L2ItemInstance item)
 	{
 		if (player.isMounted())
 		{

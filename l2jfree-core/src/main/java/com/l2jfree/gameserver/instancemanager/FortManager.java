@@ -26,15 +26,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.InstanceListManager;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Spawn;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Fort;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 
 public class FortManager implements InstanceListManager
 {

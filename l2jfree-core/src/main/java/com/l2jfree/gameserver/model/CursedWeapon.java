@@ -26,21 +26,24 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.model.restriction.global.CursedWeaponRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.Earthquake;
-import com.l2jfree.gameserver.network.serverpackets.ExRedSky;
-import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
-import com.l2jfree.gameserver.network.serverpackets.ItemList;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.network.serverpackets.UserInfo;
-import com.l2jfree.gameserver.templates.item.L2Item;
+import com.l2jfree.gameserver.network.packets.server.Earthquake;
+import com.l2jfree.gameserver.network.packets.server.ExRedSky;
+import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
+import com.l2jfree.gameserver.network.packets.server.ItemList;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.UserInfo;
 import com.l2jfree.tools.random.Rnd;
 
 public class CursedWeapon
@@ -71,7 +74,7 @@ public class CursedWeapon
 	private long _endTime = 0;
 	
 	private int _playerId = 0;
-	private L2PcInstance _player = null;
+	private L2Player _player = null;
 	private L2ItemInstance _item = null;
 	private int _playerKarma = 0;
 	private int _playerPkKills = 0;
@@ -237,12 +240,12 @@ public class CursedWeapon
 		}
 	}
 	
-	private void dropIt(L2Attackable attackable, L2PcInstance player)
+	private void dropIt(L2Attackable attackable, L2Player player)
 	{
 		dropIt(attackable, player, null, true);
 	}
 	
-	private void dropIt(L2Attackable attackable, L2PcInstance player, L2Character killer, boolean fromMonster)
+	private void dropIt(L2Attackable attackable, L2Player player, L2Creature killer, boolean fromMonster)
 	{
 		_isActivated = false;
 		
@@ -254,7 +257,7 @@ public class CursedWeapon
 			// RedSky and Earthquake
 			ExRedSky packet = new ExRedSky(10);
 			Earthquake eq = new Earthquake(player.getX(), player.getY(), player.getZ(), 14, 3);
-			for (L2PcInstance aPlayer : L2World.getInstance().getAllPlayers())
+			for (L2Player aPlayer : L2World.getInstance().getAllPlayers())
 			{
 				aPlayer.sendPacket(packet);
 				aPlayer.sendPacket(eq);
@@ -361,7 +364,7 @@ public class CursedWeapon
 							_durationLost * 12000L, _durationLost * 12000L);
 	}
 	
-	public boolean checkDrop(L2Attackable attackable, L2PcInstance player)
+	public boolean checkDrop(L2Attackable attackable, L2Player player)
 	{
 		if (Rnd.get(100000) < _dropRate)
 		{
@@ -380,7 +383,7 @@ public class CursedWeapon
 		return false;
 	}
 	
-	public boolean activate(L2PcInstance player, L2ItemInstance item)
+	public boolean activate(L2Player player, L2ItemInstance item)
 	{
 		if (GlobalRestrictions.isRestricted(player, CursedWeaponRestriction.class))
 		{
@@ -499,7 +502,7 @@ public class CursedWeapon
 		}
 	}
 	
-	public void dropIt(L2Character killer)
+	public void dropIt(L2Creature killer)
 	{
 		if (Rnd.get(100) <= _disapearChance)
 		{
@@ -625,7 +628,7 @@ public class CursedWeapon
 		_endTime = endTime;
 	}
 	
-	public void setPlayer(L2PcInstance player)
+	public void setPlayer(L2Player player)
 	{
 		_player = player;
 	}
@@ -675,7 +678,7 @@ public class CursedWeapon
 		return _playerId;
 	}
 	
-	public L2PcInstance getPlayer()
+	public L2Player getPlayer()
 	{
 		return _player;
 	}
@@ -720,7 +723,7 @@ public class CursedWeapon
 		return _transformId;
 	}
 	
-	public void goTo(L2PcInstance player)
+	public void goTo(L2Player player)
 	{
 		if (player == null)
 			return;

@@ -14,13 +14,13 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
-import com.l2jfree.gameserver.handler.itemhandlers.Potions;
-import com.l2jfree.gameserver.handler.itemhandlers.SummonItems;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Playable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.handler.items.Potions;
+import com.l2jfree.gameserver.handler.items.SummonItems;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.network.SystemMessageId;
 
@@ -30,7 +30,7 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public final class OlympiadRestriction extends AbstractRestriction
 {
 	@Override
-	public boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		// TODO: merge different checking methods to one
 		if (activeChar.isInOlympiadMode() || Olympiad.getInstance().isRegistered(activeChar)
@@ -44,7 +44,7 @@ public final class OlympiadRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target)
+	public boolean canInviteToParty(L2Player activeChar, L2Player target)
 	{
 		if (activeChar.isInOlympiadMode() || target.isInOlympiadMode())
 			return false;
@@ -54,7 +54,7 @@ public final class OlympiadRestriction extends AbstractRestriction
 	
 	@Override
 	public boolean canUseItemHandler(Class<? extends IItemHandler> clazz, int itemId, L2Playable activeChar,
-			L2ItemInstance item, L2PcInstance player)
+			L2ItemInstance item, L2Player player)
 	{
 		if (clazz == SummonItems.class)
 		{
@@ -77,8 +77,8 @@ public final class OlympiadRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canTarget(L2Character activeChar, L2Character target, boolean sendMessage, L2PcInstance attacker_,
-			L2PcInstance target_)
+	public boolean canTarget(L2Creature activeChar, L2Creature target, boolean sendMessage, L2Player attacker_,
+			L2Player target_)
 	{
 		if (attacker_ == null || target_ == null || attacker_ == target_ || attacker_.isGM())
 			return true;
@@ -99,7 +99,7 @@ public final class OlympiadRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public void playerDisconnected(L2PcInstance activeChar)
+	public void playerDisconnected(L2Player activeChar)
 	{
 		if (activeChar.isInOlympiadMode())
 			Olympiad.getInstance().unRegisterNoble(activeChar);

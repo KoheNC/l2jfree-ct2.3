@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class DivineEnchanter extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class DivineEnchanter extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 704, 1); // Divine Enchanter Water Spirit
 		addSkill(player, 705, 1); // Divine Enchanter Fire Spirit
@@ -38,7 +38,7 @@ public class DivineEnchanter extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 704); // Divine Enchanter Water Spirit
 		removeSkill(player, 705); // Divine Enchanter Fire Spirit

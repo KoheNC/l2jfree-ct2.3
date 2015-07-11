@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 
 /**
@@ -26,8 +26,8 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 public class ProtectionBlessingRestriction extends AbstractRestriction
 {
 	@Override
-	public boolean isProtected(L2Character activeChar, L2Character target, L2Skill skill, boolean sendMessage,
-			L2PcInstance attacker_, L2PcInstance target_, boolean isOffensive)
+	public boolean isProtected(L2Creature activeChar, L2Creature target, L2Skill skill, boolean sendMessage,
+			L2Player attacker_, L2Player target_, boolean isOffensive)
 	{
 		if (attacker_ == null || target_ == null || attacker_ == target_)
 			return false;

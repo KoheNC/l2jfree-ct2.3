@@ -4,7 +4,7 @@ import sys
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.model.base import Race
+from com.l2jfree.gameserver.gameobjects.base import Race
 #Quest info
 qn = "235_MimirsElixir"
 QUEST_NUMBER,QUEST_NAME,QUEST_DESCRIPTION = 235,"MimirsElixir","Mimir's Elixir"

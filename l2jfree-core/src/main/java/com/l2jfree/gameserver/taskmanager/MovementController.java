@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.taskmanager;
 
 import java.util.ArrayList;
 
-import com.l2jfree.gameserver.GameTimeController;
-import com.l2jfree.gameserver.ai.CtrlEvent;
-import com.l2jfree.gameserver.model.actor.L2Character;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlEvent;
+import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.threadmanager.FIFOSimpleExecutableQueue;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2FastSet;
@@ -39,22 +39,22 @@ public final class MovementController extends AbstractPeriodicTaskManager
 		return SingletonHolder.INSTANCE;
 	}
 	
-	private final L2FastSet<L2Character> _movingChars = new L2FastSet<L2Character>().setShared(true);
+	private final L2FastSet<L2Creature> _movingChars = new L2FastSet<L2Creature>().setShared(true);
 	
 	private final EvtArrivedManager _evtArrivedManager = new EvtArrivedManager();
 	private final EvtArrivedRevalidateManager _evtArrivedRevalidateManager = new EvtArrivedRevalidateManager();
 	
 	private MovementController()
 	{
-		super(GameTimeController.MILLIS_IN_TICK);
+		super(GameTimeManager.MILLIS_IN_TICK);
 	}
 	
-	public void add(L2Character cha, int ticks)
+	public void add(L2Creature cha, int ticks)
 	{
 		_movingChars.add(cha);
 	}
 	
-	public void remove(L2Character cha)
+	public void remove(L2Creature cha)
 	{
 		_movingChars.remove(cha);
 		_evtArrivedManager.remove(cha);
@@ -64,12 +64,12 @@ public final class MovementController extends AbstractPeriodicTaskManager
 	@Override
 	public void run()
 	{
-		final ArrayList<L2Character> arrivedChars = L2Collections.newArrayList();
-		final ArrayList<L2Character> followers = L2Collections.newArrayList();
+		final ArrayList<L2Creature> arrivedChars = L2Collections.newArrayList();
+		final ArrayList<L2Creature> followers = L2Collections.newArrayList();
 		
-		for (L2Character cha : _movingChars)
+		for (L2Creature cha : _movingChars)
 		{
-			boolean arrived = cha.updatePosition(GameTimeController.getGameTicks());
+			boolean arrived = cha.updatePosition(GameTimeManager.getGameTicks());
 			
 			// normal movement to an exact coordinate
 			if (cha.getAI().getFollowTarget() == null)
@@ -85,7 +85,7 @@ public final class MovementController extends AbstractPeriodicTaskManager
 		}
 		
 		// the followed chars must move before checking for acting radius
-		for (L2Character follower : followers)
+		for (L2Creature follower : followers)
 		{
 			// we have reached our target
 			if (follower.getAI().isInsideActingRadius())
@@ -102,12 +102,12 @@ public final class MovementController extends AbstractPeriodicTaskManager
 		L2Collections.recycle(followers);
 	}
 	
-	private final class EvtArrivedManager extends FIFOSimpleExecutableQueue<L2Character>
+	private final class EvtArrivedManager extends FIFOSimpleExecutableQueue<L2Creature>
 	{
 		@Override
 		protected void removeAndExecuteFirst()
 		{
-			final L2Character cha = removeFirst();
+			final L2Creature cha = removeFirst();
 			final long begin = System.nanoTime();
 			
 			try
@@ -129,12 +129,12 @@ public final class MovementController extends AbstractPeriodicTaskManager
 		}
 	}
 	
-	private final class EvtArrivedRevalidateManager extends FIFOSimpleExecutableQueue<L2Character>
+	private final class EvtArrivedRevalidateManager extends FIFOSimpleExecutableQueue<L2Creature>
 	{
 		@Override
 		protected void removeAndExecuteFirst()
 		{
-			final L2Character cha = removeFirst();
+			final L2Creature cha = removeFirst();
 			final long begin = System.nanoTime();
 			
 			try

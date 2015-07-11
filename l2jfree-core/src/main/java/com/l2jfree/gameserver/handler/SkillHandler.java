@@ -14,60 +14,60 @@
  */
 package com.l2jfree.gameserver.handler;
 
-import com.l2jfree.gameserver.handler.skillhandlers.BalanceLife;
-import com.l2jfree.gameserver.handler.skillhandlers.BallistaBomb;
-import com.l2jfree.gameserver.handler.skillhandlers.BeastFeed;
-import com.l2jfree.gameserver.handler.skillhandlers.ChangeFace;
-import com.l2jfree.gameserver.handler.skillhandlers.CombatPointHeal;
-import com.l2jfree.gameserver.handler.skillhandlers.Continuous;
-import com.l2jfree.gameserver.handler.skillhandlers.CpDam;
-import com.l2jfree.gameserver.handler.skillhandlers.Craft;
-import com.l2jfree.gameserver.handler.skillhandlers.DeluxeKey;
-import com.l2jfree.gameserver.handler.skillhandlers.Detection;
-import com.l2jfree.gameserver.handler.skillhandlers.Disablers;
-import com.l2jfree.gameserver.handler.skillhandlers.DrainSoul;
-import com.l2jfree.gameserver.handler.skillhandlers.Dummy;
-import com.l2jfree.gameserver.handler.skillhandlers.Extractable;
-import com.l2jfree.gameserver.handler.skillhandlers.Fishing;
-import com.l2jfree.gameserver.handler.skillhandlers.FishingSkill;
-import com.l2jfree.gameserver.handler.skillhandlers.GetPlayer;
-import com.l2jfree.gameserver.handler.skillhandlers.GiveSp;
-import com.l2jfree.gameserver.handler.skillhandlers.GiveVitality;
-import com.l2jfree.gameserver.handler.skillhandlers.Harvest;
-import com.l2jfree.gameserver.handler.skillhandlers.Heal;
-import com.l2jfree.gameserver.handler.skillhandlers.InstantJump;
-import com.l2jfree.gameserver.handler.skillhandlers.LearnSkill;
-import com.l2jfree.gameserver.handler.skillhandlers.MakeKillable;
-import com.l2jfree.gameserver.handler.skillhandlers.MakeQuestDropable;
-import com.l2jfree.gameserver.handler.skillhandlers.ManaHeal;
-import com.l2jfree.gameserver.handler.skillhandlers.Manadam;
-import com.l2jfree.gameserver.handler.skillhandlers.Mdam;
-import com.l2jfree.gameserver.handler.skillhandlers.OpenDoor;
-import com.l2jfree.gameserver.handler.skillhandlers.Pdam;
-import com.l2jfree.gameserver.handler.skillhandlers.Recall;
-import com.l2jfree.gameserver.handler.skillhandlers.Resurrect;
-import com.l2jfree.gameserver.handler.skillhandlers.ShiftTarget;
-import com.l2jfree.gameserver.handler.skillhandlers.SiegeFlag;
-import com.l2jfree.gameserver.handler.skillhandlers.Soul;
-import com.l2jfree.gameserver.handler.skillhandlers.Sow;
-import com.l2jfree.gameserver.handler.skillhandlers.Spoil;
-import com.l2jfree.gameserver.handler.skillhandlers.StrSiegeAssault;
-import com.l2jfree.gameserver.handler.skillhandlers.SummonFriend;
-import com.l2jfree.gameserver.handler.skillhandlers.SummonTreasureKey;
-import com.l2jfree.gameserver.handler.skillhandlers.Sweep;
-import com.l2jfree.gameserver.handler.skillhandlers.TakeCastle;
-import com.l2jfree.gameserver.handler.skillhandlers.TakeFort;
-import com.l2jfree.gameserver.handler.skillhandlers.TransformDispel;
-import com.l2jfree.gameserver.handler.skillhandlers.Trap;
-import com.l2jfree.gameserver.handler.skillhandlers.Unlock;
-import com.l2jfree.gameserver.handler.skillhandlers.ZakenTeleport;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2CubicInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.skills.Formulas;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillDrain;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
+import com.l2jfree.gameserver.handler.skills.BalanceLife;
+import com.l2jfree.gameserver.handler.skills.BallistaBomb;
+import com.l2jfree.gameserver.handler.skills.BeastFeed;
+import com.l2jfree.gameserver.handler.skills.ChangeFace;
+import com.l2jfree.gameserver.handler.skills.CombatPointHeal;
+import com.l2jfree.gameserver.handler.skills.Continuous;
+import com.l2jfree.gameserver.handler.skills.CpDam;
+import com.l2jfree.gameserver.handler.skills.Craft;
+import com.l2jfree.gameserver.handler.skills.DeluxeKey;
+import com.l2jfree.gameserver.handler.skills.Detection;
+import com.l2jfree.gameserver.handler.skills.Disablers;
+import com.l2jfree.gameserver.handler.skills.DrainSoul;
+import com.l2jfree.gameserver.handler.skills.Dummy;
+import com.l2jfree.gameserver.handler.skills.Extractable;
+import com.l2jfree.gameserver.handler.skills.Fishing;
+import com.l2jfree.gameserver.handler.skills.FishingSkill;
+import com.l2jfree.gameserver.handler.skills.GetPlayer;
+import com.l2jfree.gameserver.handler.skills.GiveSp;
+import com.l2jfree.gameserver.handler.skills.GiveVitality;
+import com.l2jfree.gameserver.handler.skills.Harvest;
+import com.l2jfree.gameserver.handler.skills.Heal;
+import com.l2jfree.gameserver.handler.skills.InstantJump;
+import com.l2jfree.gameserver.handler.skills.LearnSkill;
+import com.l2jfree.gameserver.handler.skills.MakeKillable;
+import com.l2jfree.gameserver.handler.skills.MakeQuestDropable;
+import com.l2jfree.gameserver.handler.skills.ManaHeal;
+import com.l2jfree.gameserver.handler.skills.Manadam;
+import com.l2jfree.gameserver.handler.skills.Mdam;
+import com.l2jfree.gameserver.handler.skills.OpenDoor;
+import com.l2jfree.gameserver.handler.skills.Pdam;
+import com.l2jfree.gameserver.handler.skills.Recall;
+import com.l2jfree.gameserver.handler.skills.Resurrect;
+import com.l2jfree.gameserver.handler.skills.ShiftTarget;
+import com.l2jfree.gameserver.handler.skills.SiegeFlag;
+import com.l2jfree.gameserver.handler.skills.Soul;
+import com.l2jfree.gameserver.handler.skills.Sow;
+import com.l2jfree.gameserver.handler.skills.Spoil;
+import com.l2jfree.gameserver.handler.skills.StrSiegeAssault;
+import com.l2jfree.gameserver.handler.skills.SummonFriend;
+import com.l2jfree.gameserver.handler.skills.SummonTreasureKey;
+import com.l2jfree.gameserver.handler.skills.Sweep;
+import com.l2jfree.gameserver.handler.skills.TakeCastle;
+import com.l2jfree.gameserver.handler.skills.TakeFort;
+import com.l2jfree.gameserver.handler.skills.TransformDispel;
+import com.l2jfree.gameserver.handler.skills.Trap;
+import com.l2jfree.gameserver.handler.skills.Unlock;
+import com.l2jfree.gameserver.handler.skills.ZakenTeleport;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillDrain;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.util.EnumHandlerRegistry;
 import com.l2jfree.util.HandlerRegistry;
 
@@ -138,7 +138,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 		registerAll(handler, handler.getSkillIds());
 	}
 	
-	public void useSkill(L2SkillType skillType, L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2SkillType skillType, L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		final ISkillHandler handler = get(skillType);
 		
@@ -148,23 +148,23 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 			skill.useSkill(activeChar, targets);
 	}
 	
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Character... targets)
+	public void useSkill(L2Creature activeChar, L2Skill skill, L2Creature... targets)
 	{
 		if (activeChar.isAlikeDead())
 			return;
 		
 		useSkill(skill.getSkillType(), activeChar, skill, targets);
 		
-		for (L2Character target : targets)
+		for (L2Creature target : targets)
 		{
 			Formulas.calcLethalHit(activeChar, target, skill);
 		}
 		
 		// Increase Charges, Souls, Etc
-		if (activeChar instanceof L2PcInstance)
+		if (activeChar instanceof L2Player)
 		{
-			((L2PcInstance)activeChar).increaseChargesBySkill(skill);
-			((L2PcInstance)activeChar).increaseSoulsBySkill(skill);
+			((L2Player)activeChar).increaseChargesBySkill(skill);
+			((L2Player)activeChar).increaseSoulsBySkill(skill);
 		}
 		
 		skill.getEffectsSelf(activeChar);
@@ -173,7 +173,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 			activeChar.doDie(activeChar);
 	}
 	
-	public void useCubicSkill(L2CubicInstance cubic, L2Skill skill, L2Character... targets)
+	public void useCubicSkill(L2CubicInstance cubic, L2Skill skill, L2Creature... targets)
 	{
 		final ISkillHandler handler = get(skill.getSkillType());
 		
@@ -187,7 +187,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 			skill.useSkill(cubic.getOwner(), targets);
 	}
 	
-	public boolean checkConditions(L2Character activeChar, L2Skill skill)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill)
 	{
 		final ISkillHandler handler = get(skill.getSkillType());
 		
@@ -197,7 +197,7 @@ public final class SkillHandler extends EnumHandlerRegistry<L2SkillType, ISkillH
 		return true;
 	}
 	
-	public boolean checkConditions(L2Character activeChar, L2Skill skill, L2Character target)
+	public boolean checkConditions(L2Creature activeChar, L2Skill skill, L2Creature target)
 	{
 		final ISkillHandler handler = get(skill.getSkillType());
 		

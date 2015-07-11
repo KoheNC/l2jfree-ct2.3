@@ -16,16 +16,16 @@ package com.l2jfree.gameserver.handler;
 
 import java.util.StringTokenizer;
 
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Auction;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Banking;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.CastleDoors;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Hellbound;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Mail;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Offline;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Report;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.VersionInfo;
-import com.l2jfree.gameserver.handler.voicedcommandhandlers.Wedding;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.handler.voicedcommands.Auction;
+import com.l2jfree.gameserver.handler.voicedcommands.Banking;
+import com.l2jfree.gameserver.handler.voicedcommands.CastleDoors;
+import com.l2jfree.gameserver.handler.voicedcommands.Hellbound;
+import com.l2jfree.gameserver.handler.voicedcommands.Mail;
+import com.l2jfree.gameserver.handler.voicedcommands.Offline;
+import com.l2jfree.gameserver.handler.voicedcommands.Report;
+import com.l2jfree.gameserver.handler.voicedcommands.VersionInfo;
+import com.l2jfree.gameserver.handler.voicedcommands.Wedding;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.util.HandlerRegistry;
 
@@ -67,7 +67,7 @@ public final class VoicedCommandHandler extends HandlerRegistry<String, IVoicedC
 		registerAll(handler, handler.getVoicedCommandList());
 	}
 	
-	public boolean useVoicedCommand(String text, L2PcInstance activeChar)
+	public boolean useVoicedCommand(String text, L2Player activeChar)
 	{
 		if (!text.startsWith(".") || text.length() < 2)
 			return false;

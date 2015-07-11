@@ -15,15 +15,15 @@
 package ai.group_template;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.ai.L2AttackableAI;
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.ai.L2AttackableAI;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.lang.L2Math;
 import com.l2jfree.tools.random.Rnd;
 
@@ -122,7 +122,7 @@ public class FleeingClanMembers extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet)
 	{
 		if (!(npc instanceof L2Attackable))
 			return null;
@@ -161,7 +161,7 @@ public class FleeingClanMembers extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onArrived(L2Character character)
+	public String onArrived(L2Creature character)
 	{
 		if (!(character instanceof L2Attackable))
 			return null;
@@ -217,7 +217,7 @@ public class FleeingClanMembers extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		if (!(npc instanceof L2Attackable))
 			return null;
@@ -233,7 +233,7 @@ public class FleeingClanMembers extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (!(npc instanceof L2Attackable))
 			return null;

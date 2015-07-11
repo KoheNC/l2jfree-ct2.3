@@ -26,15 +26,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.ai.FactionAggressionNotificationQueue;
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.reference.ImmutableReference;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.gameobjects.ai.FactionAggressionNotificationQueue;
+import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.lang.L2Thread;
 import com.l2jfree.util.L2FastSet;
 
@@ -53,8 +53,8 @@ public final class LeakTaskManager
 		return SingletonHolder._instance;
 	}
 	
-	private final Map<ImmutableReference<L2PcInstance>, Long> _players =
-			new FastMap<ImmutableReference<L2PcInstance>, Long>().setShared(true);
+	private final Map<ImmutableReference<L2Player>, Long> _players =
+			new FastMap<ImmutableReference<L2Player>, Long>().setShared(true);
 	private final Map<ImmutableReference<L2Summon>, Long> _summons = new FastMap<ImmutableReference<L2Summon>, Long>()
 			.setShared(true);
 	
@@ -122,7 +122,7 @@ public final class LeakTaskManager
 		}
 	}
 	
-	public void add(L2PcInstance player)
+	public void add(L2Player player)
 	{
 		_players.put(player.getImmutableReference(), System.currentTimeMillis());
 	}
@@ -162,9 +162,9 @@ public final class LeakTaskManager
 		final L2Object[] objects = set.toArray(new L2Object[set.size()]);
 		
 		_log.info("LeakTaskManager: " + _players.size() + " player(s) are waiting for cleanup.");
-		for (ImmutableReference<L2PcInstance> ref : _players.keySet())
+		for (ImmutableReference<L2Player> ref : _players.keySet())
 		{
-			L2PcInstance player = ref.get();
+			L2Player player = ref.get();
 			if (player != null)
 				player.removeFromLists(objects);
 		}
@@ -184,7 +184,7 @@ public final class LeakTaskManager
 	{
 		FastList<String> list = new FastList<String>();
 		
-		for (ImmutableReference<L2PcInstance> ref : _players.keySet())
+		for (ImmutableReference<L2Player> ref : _players.keySet())
 		{
 			if (ref.get() != null)
 				continue;

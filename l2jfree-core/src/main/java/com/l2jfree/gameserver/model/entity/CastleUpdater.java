@@ -19,9 +19,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.ItemContainer;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.itemcontainer.ItemContainer;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 
 /**
  * Thorgrim - 2005 Class managing periodical events with castle

@@ -24,30 +24,30 @@ import java.util.StringTokenizer;
 
 import javolution.util.FastMap;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Playable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.L2Playable;
-import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.model.quest.Quest;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.funcs.Func;
+import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 import com.l2jfree.gameserver.model.zone.form.Shape;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.skills.funcs.Func;
-import com.l2jfree.gameserver.skills.funcs.FuncOwner;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.tools.random.Rnd;
 import com.l2jfree.util.L2Collections;
 
@@ -227,7 +227,7 @@ public class L2Zone implements FuncOwner
 		if (_statFuncs == null)
 			_statFuncs = new Func[] { func };
 		else
-			_statFuncs = (Func[])ArrayUtils.add(_statFuncs, func);
+			_statFuncs = ArrayUtils.add(_statFuncs, func);
 	}
 	
 	protected void register() throws Exception
@@ -344,24 +344,24 @@ public class L2Zone implements FuncOwner
 		return _removeEnter;
 	}
 	
-	private final FastMap<L2Character, Boolean> _charactersInside = new FastMap<L2Character, Boolean>().setShared(true);
+	private final FastMap<L2Creature, Boolean> _charactersInside = new FastMap<L2Creature, Boolean>().setShared(true);
 	
-	protected final FastMap<L2Character, Boolean> getCharactersInsideMap()
+	protected final FastMap<L2Creature, Boolean> getCharactersInsideMap()
 	{
 		return _charactersInside;
 	}
 	
-	public final Set<L2Character> getCharactersInside()
+	public final Set<L2Creature> getCharactersInside()
 	{
 		return _charactersInside.keySet();
 	}
 	
-	public final Iterable<L2Character> getCharactersInsideActivated()
+	public final Iterable<L2Creature> getCharactersInsideActivated()
 	{
 		return L2Collections.convertingIterable(_charactersInside.entrySet(),
-				new L2Collections.Converter<Map.Entry<L2Character, Boolean>, L2Character>() {
+				new L2Collections.Converter<Map.Entry<L2Creature, Boolean>, L2Creature>() {
 					@Override
-					public L2Character convert(Entry<L2Character, Boolean> src)
+					public L2Creature convert(Entry<L2Creature, Boolean> src)
 					{
 						if (Boolean.TRUE.equals(src.getValue()))
 							return src.getKey();
@@ -374,7 +374,7 @@ public class L2Zone implements FuncOwner
 	/**
 	 * Check default never changing conditions. Determines zone can be activated on player or not at all.
 	 */
-	protected boolean checkConstantConditions(L2Character character)
+	protected boolean checkConstantConditions(L2Creature character)
 	{
 		return isCorrectType(character);
 	}
@@ -382,7 +382,7 @@ public class L2Zone implements FuncOwner
 	/**
 	 * Check conditions that can be changed anytime. Determines zone can be activated or not on the player currently.
 	 */
-	protected boolean checkDynamicConditions(L2Character character)
+	protected boolean checkDynamicConditions(L2Creature character)
 	{
 		if (_exitOnDeath && character.isDead())
 			return false;
@@ -390,11 +390,11 @@ public class L2Zone implements FuncOwner
 		return isEnabled();
 	}
 	
-	private State getExpectedState(L2Character character)
+	private State getExpectedState(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			if (((L2PcInstance)character).getOnlineState() == L2PcInstance.ONLINE_STATE_DELETED)
+			if (((L2Player)character).getOnlineState() == L2Player.ONLINE_STATE_DELETED)
 			{
 				_log.warn("", new IllegalStateException());
 				return State.OUTSIDE;
@@ -413,7 +413,7 @@ public class L2Zone implements FuncOwner
 		return State.INSIDE_AND_ACTIVATED;
 	}
 	
-	private State getCurrentState(L2Character character)
+	private State getCurrentState(L2Creature character)
 	{
 		final Boolean isActive = _charactersInside.get(character);
 		
@@ -432,16 +432,16 @@ public class L2Zone implements FuncOwner
 	
 	public final void revalidateAllInZone()
 	{
-		for (L2Character character : getCharactersInside())
+		for (L2Creature character : getCharactersInside())
 			revalidateInZone(character);
 	}
 	
-	public final void revalidateInZone(L2Character character)
+	public final void revalidateInZone(L2Creature character)
 	{
 		changeStateOf(character, getExpectedState(character));
 	}
 	
-	private void changeStateOf(L2Character character, State expectedState)
+	private void changeStateOf(L2Creature character, State expectedState)
 	{
 		final State currentState = getCurrentState(character);
 		
@@ -473,9 +473,9 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
-		final L2PcInstance player = character instanceof L2PcInstance ? (L2PcInstance)character : null;
+		final L2Player player = character instanceof L2Player ? (L2Player)character : null;
 		
 		Quest[] quests = getQuestByEvent(Quest.QuestEventType.ON_ENTER_ZONE);
 		if (quests != null)
@@ -537,9 +537,9 @@ public class L2Zone implements FuncOwner
 			tryPortIntoInstance(player);
 	}
 	
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
-		final L2PcInstance player = character instanceof L2PcInstance ? (L2PcInstance)character : null;
+		final L2Player player = character instanceof L2Player ? (L2Player)character : null;
 		
 		Quest[] quests = getQuestByEvent(Quest.QuestEventType.ON_EXIT_ZONE);
 		if (quests != null)
@@ -611,7 +611,7 @@ public class L2Zone implements FuncOwner
 		private int reason = REASON_OK;
 	}
 	
-	private void tryPortIntoInstance(L2PcInstance pl)
+	private void tryPortIntoInstance(L2Player pl)
 	{
 		InstanceResult ir = new InstanceResult();
 		
@@ -619,7 +619,7 @@ public class L2Zone implements FuncOwner
 		{
 			if (pl.isInParty())
 			{
-				List<L2PcInstance> list = pl.getParty().getPartyMembers();
+				List<L2Player> list = pl.getParty().getPartyMembers();
 				getInstanceFromGroup(ir, list, false);
 				checkPlayersInside(ir, list);
 			}
@@ -628,7 +628,7 @@ public class L2Zone implements FuncOwner
 		{
 			if (pl.getClan() != null)
 			{
-				List<L2PcInstance> list = pl.getClan().getOnlineMembersList();
+				List<L2Player> list = pl.getClan().getOnlineMembersList();
 				getInstanceFromGroup(ir, list, true);
 				checkPlayersInside(ir, list);
 			}
@@ -637,7 +637,7 @@ public class L2Zone implements FuncOwner
 		{
 			if (pl.getAllyId() > 0)
 			{
-				List<L2PcInstance> list = pl.getClan().getOnlineAllyMembers();
+				List<L2Player> list = pl.getClan().getOnlineAllyMembers();
 				getInstanceFromGroup(ir, list, true);
 				checkPlayersInside(ir, list);
 			}
@@ -673,9 +673,9 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	private void getInstanceFromGroup(InstanceResult ir, List<L2PcInstance> group, boolean allowMultiple)
+	private void getInstanceFromGroup(InstanceResult ir, List<L2Player> group, boolean allowMultiple)
 	{
-		for (L2PcInstance mem : group)
+		for (L2Player mem : group)
 		{
 			if (mem == null || !mem.isInInstance())
 				continue;
@@ -694,14 +694,14 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	private void checkPlayersInside(InstanceResult ir, List<L2PcInstance> group)
+	private void checkPlayersInside(InstanceResult ir, List<L2Player> group)
 	{
 		if (ir.reason != REASON_OK)
 			return;
 		
 		int valid = 0, all = 0;
 		
-		for (L2PcInstance mem : group)
+		for (L2Player mem : group)
 		{
 			if (mem != null && mem.isSameInstance(ir.instanceId))
 				valid++;
@@ -719,7 +719,7 @@ public class L2Zone implements FuncOwner
 		}
 	}
 	
-	private void portIntoInstance(L2PcInstance pl, int instanceId)
+	private void portIntoInstance(L2Player pl, int instanceId)
 	{
 		pl.setInstanceId(instanceId);
 		pl.getKnownList().updateKnownObjects();
@@ -728,7 +728,7 @@ public class L2Zone implements FuncOwner
 			pet.getKnownList().updateKnownObjects();
 	}
 	
-	public final void onDie(L2Character character)
+	public final void onDie(L2Creature character)
 	{
 		if (getCurrentState(character) == State.INSIDE_AND_ACTIVATED)
 			onDieInside(character);
@@ -737,7 +737,7 @@ public class L2Zone implements FuncOwner
 		revalidateInZone(character);
 	}
 	
-	public final void onRevive(L2Character character)
+	public final void onRevive(L2Creature character)
 	{
 		// will enter the zone, if it was disabled because of "_exitOnDeath"
 		revalidateInZone(character);
@@ -746,27 +746,27 @@ public class L2Zone implements FuncOwner
 			onReviveInside(character);
 	}
 	
-	protected void onDieInside(L2Character character)
+	protected void onDieInside(L2Creature character)
 	{
 	}
 	
-	protected void onReviveInside(L2Character character)
+	protected void onReviveInside(L2Creature character)
 	{
 	}
 	
-	public final void removeFromZone(L2Character character)
+	public final void removeFromZone(L2Creature character)
 	{
 		changeStateOf(character, State.OUTSIDE);
 	}
 	
-	private boolean isCorrectType(L2Character character)
+	private boolean isCorrectType(L2Creature character)
 	{
 		switch (_affected)
 		{
 			case PLAYABLE:
 				return character instanceof L2Playable;
 			case PC:
-				return character instanceof L2PcInstance;
+				return character instanceof L2Player;
 			case NPC:
 				return character instanceof L2Npc;
 			case ALL:
@@ -938,8 +938,8 @@ public class L2Zone implements FuncOwner
 	 */
 	public final void movePlayersTo(int x, int y, int z)
 	{
-		for (L2Character character : getCharactersInside())
-			if (character instanceof L2PcInstance)
+		for (L2Creature character : getCharactersInside())
+			if (character instanceof L2Player)
 				character.teleToLocation(x, y, z);
 	}
 	
@@ -973,7 +973,7 @@ public class L2Zone implements FuncOwner
 		else
 		{
 			if (!ArrayUtils.contains(questByEvents, q))
-				questByEvents = (Quest[])ArrayUtils.add(questByEvents, q);
+				questByEvents = ArrayUtils.add(questByEvents, q);
 		}
 		
 		_questEvents[EventType.ordinal()] = questByEvents;
@@ -1001,10 +1001,10 @@ public class L2Zone implements FuncOwner
 	/**
 	 * Broadcasts packet to all players inside the zone
 	 */
-	public void broadcastPacket(L2GameServerPacket packet)
+	public void broadcastPacket(L2ServerPacket packet)
 	{
-		for (L2Character character : getCharactersInside())
-			if (character instanceof L2PcInstance)
+		for (L2Creature character : getCharactersInside())
+			if (character instanceof L2Player)
 				character.getActingPlayer().sendPacket(packet);
 	}
 	
@@ -1190,7 +1190,7 @@ public class L2Zone implements FuncOwner
 		int y = Integer.parseInt(yn.getNodeValue());
 		int z = Integer.parseInt(zn.getNodeValue());
 		
-		_restarts[t.ordinal()] = (Location[])ArrayUtils.add(_restarts[t.ordinal()], new Location(x, y, z));
+		_restarts[t.ordinal()] = ArrayUtils.add(_restarts[t.ordinal()], new Location(x, y, z));
 	}
 	
 	private void parseEntity(Node n) throws Exception
@@ -1322,7 +1322,7 @@ public class L2Zone implements FuncOwner
 				if (skills == null)
 					skills = new L2Skill[] { skill };
 				else
-					skills = (L2Skill[])ArrayUtils.add(skills, skill);
+					skills = ArrayUtils.add(skills, skill);
 			}
 		}
 		return skills;

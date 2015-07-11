@@ -14,6 +14,8 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.FourSepulchersManager;
 import com.l2jfree.gameserver.instancemanager.grandbosses.AntharasManager;
 import com.l2jfree.gameserver.instancemanager.grandbosses.BaiumManager;
@@ -23,8 +25,6 @@ import com.l2jfree.gameserver.instancemanager.grandbosses.SailrenManager;
 import com.l2jfree.gameserver.instancemanager.grandbosses.ValakasManager;
 import com.l2jfree.gameserver.instancemanager.grandbosses.VanHalterManager;
 import com.l2jfree.gameserver.instancemanager.lastimperialtomb.LastImperialTombManager;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class L2BossZone extends L2Zone
 {
@@ -64,7 +64,7 @@ public class L2BossZone extends L2Zone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		switch (getBoss())
 		{
@@ -75,7 +75,7 @@ public class L2BossZone extends L2Zone
 			}
 			case FRINTEZZA:
 			{
-				if (character instanceof L2PcInstance)
+				if (character instanceof L2Player)
 					FrintezzaManager.getInstance().setScarletSpawnTask();
 				break;
 			}
@@ -87,7 +87,7 @@ public class L2BossZone extends L2Zone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		switch (getBoss())
 		{

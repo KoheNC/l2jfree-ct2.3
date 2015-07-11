@@ -30,24 +30,24 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
+import com.l2jfree.gameserver.document.DocumentEngine;
+import com.l2jfree.gameserver.gameobjects.L2Boss;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.items.model.Item;
 import com.l2jfree.gameserver.model.L2CommandChannel;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2ItemInstance.ItemLocation;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.L2Boss;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
-import com.l2jfree.gameserver.skills.SkillsEngine;
+import com.l2jfree.gameserver.model.items.Item;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
+import com.l2jfree.gameserver.model.items.templates.L2ArmorType;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.item.L2ArmorType;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
 import com.l2jfree.util.L2Collections;
 
 public final class ItemTable
@@ -294,13 +294,13 @@ public final class ItemTable
 			L2DatabaseFactory.close(con);
 		}
 		
-		final List<L2Item> etcItems = SkillsEngine.loadItems(itemData);
+		final List<L2Item> etcItems = DocumentEngine.loadItems(itemData);
 		_log.info("ItemTable: Loaded " + etcItems.size() + "/" + etcItems.size() + " Items.");
 		
-		final List<L2Item> armors = SkillsEngine.loadArmors(armorData);
+		final List<L2Item> armors = DocumentEngine.loadArmors(armorData);
 		_log.info("ItemTable: Loaded " + armors.size() + "/" + armorData.size() + " Armors.");
 		
-		final List<L2Item> weapons = SkillsEngine.loadWeapons(weaponData);
+		final List<L2Item> weapons = DocumentEngine.loadWeapons(weaponData);
 		_log.info("ItemTable: Loaded " + weapons.size() + "/" + weaponData.size() + " Weapons.");
 		
 		int highestId = 0;
@@ -653,12 +653,12 @@ public final class ItemTable
 	 * @param process : String Identifier of process triggering this action
 	 * @param itemId : int Item Identifier of the item to be created
 	 * @param count : long Quantity of items to be created for stackable items
-	 * @param actor : L2PcInstance Player requesting the item creation
+	 * @param actor : L2Player Player requesting the item creation
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in
 	 *            transformation
 	 * @return L2ItemInstance corresponding to the new item
 	 */
-	public L2ItemInstance createItem(String process, int itemId, long count, L2PcInstance actor, L2Object reference)
+	public L2ItemInstance createItem(String process, int itemId, long count, L2Player actor, L2Object reference)
 	{
 		// Create and Init the L2ItemInstance corresponding to the Item Identifier
 		L2ItemInstance item = new L2ItemInstance(IdFactory.getInstance().getNextId(), itemId);
@@ -716,7 +716,7 @@ public final class ItemTable
 		return item;
 	}
 	
-	public L2ItemInstance createItem(String process, int itemId, long count, L2PcInstance actor)
+	public L2ItemInstance createItem(String process, int itemId, long count, L2Player actor)
 	{
 		return createItem(process, itemId, count, actor, null);
 	}
@@ -752,11 +752,11 @@ public final class ItemTable
 	 * 
 	 * @param process : String Identifier of process triggering this action
 	 * @param item : L2ItemInstance Item Identifier of the item to be created
-	 * @param actor : L2PcInstance Player requesting the item destroy
+	 * @param actor : L2Player Player requesting the item destroy
 	 * @param reference : L2Object Object referencing current action like NPC selling item or previous item in
 	 *            transformation
 	 */
-	public void destroyItem(String process, L2ItemInstance item, L2PcInstance actor, L2Object reference)
+	public void destroyItem(String process, L2ItemInstance item, L2Player actor, L2Object reference)
 	{
 		synchronized (item)
 		{
@@ -845,8 +845,8 @@ public final class ItemTable
 	{
 		switch (itemId)
 		{
-			case PcInventory.ADENA_ID:
-			case PcInventory.ANCIENT_ADENA_ID:
+			case PlayerInventory.ADENA_ID:
+			case PlayerInventory.ANCIENT_ADENA_ID:
 			case SevenSigns.SEAL_STONE_BLUE_ID:
 			case SevenSigns.SEAL_STONE_GREEN_ID:
 			case SevenSigns.SEAL_STONE_RED_ID:

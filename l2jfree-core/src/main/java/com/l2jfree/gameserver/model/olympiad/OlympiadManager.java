@@ -19,7 +19,7 @@ import java.util.Map;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.olympiad.Olympiad.COMP_TYPE;
 import com.l2jfree.tools.random.Rnd;
 
@@ -117,7 +117,7 @@ class OlympiadManager implements Runnable
 								{
 									if (_olympiadInstances.get(i) != null)
 									{
-										for (L2PcInstance player : _olympiadInstances.get(i).getPlayers())
+										for (L2Player player : _olympiadInstances.get(i).getPlayers())
 										{
 											player.sendMessage("Your olympiad registration was canceled due to an error");
 											player.setIsInOlympiadMode(false);
@@ -153,7 +153,7 @@ class OlympiadManager implements Runnable
 								{
 									if (_olympiadInstances.get(i) != null)
 									{
-										for (L2PcInstance player : _olympiadInstances.get(i).getPlayers())
+										for (L2Player player : _olympiadInstances.get(i).getPlayers())
 										{
 											player.sendMessage("Your olympiad registration was canceled due to an error");
 											player.setIsInOlympiadMode(false);
@@ -191,7 +191,7 @@ class OlympiadManager implements Runnable
 								{
 									if (_olympiadInstances.get(i) != null)
 									{
-										for (L2PcInstance player : _olympiadInstances.get(i).getPlayers())
+										for (L2Player player : _olympiadInstances.get(i).getPlayers())
 										{
 											player.sendMessage("Your olympiad registration was canceled due to an error");
 											player.setIsInOlympiadMode(false);
@@ -222,7 +222,7 @@ class OlympiadManager implements Runnable
 								{
 									if (_olympiadInstances.get(i) != null)
 									{
-										for (L2PcInstance player : _olympiadInstances.get(i).getPlayers())
+										for (L2Player player : _olympiadInstances.get(i).getPlayers())
 										{
 											player.sendMessage("Your olympiad registration was canceled due to an error");
 											player.setIsInOlympiadMode(false);
@@ -366,7 +366,7 @@ class OlympiadManager implements Runnable
 		return (_olympiadInstances == null) ? null : _olympiadInstances;
 	}
 	
-	protected FastList<L2PcInstance> getRandomClassList(Map<Integer, FastList<L2PcInstance>> list,
+	protected FastList<L2Player> getRandomClassList(Map<Integer, FastList<L2Player>> list,
 			FastList<Integer> classList)
 	{
 		if (list == null || classList == null || list.size() == 0 || classList.size() == 0)
@@ -375,9 +375,9 @@ class OlympiadManager implements Runnable
 		return list.get(classList.get(Rnd.nextInt(classList.size())));
 	}
 	
-	protected FastList<L2PcInstance> nextOpponents(FastList<L2PcInstance> list)
+	protected FastList<L2Player> nextOpponents(FastList<L2Player> list)
 	{
-		FastList<L2PcInstance> opponents = new FastList<L2PcInstance>();
+		FastList<L2Player> opponents = new FastList<L2Player>();
 		if (list.size() == 0)
 			return opponents;
 		int loopCount = (list.size() / 2);
@@ -400,7 +400,7 @@ class OlympiadManager implements Runnable
 		
 	}
 	
-	protected boolean existNextOpponents(FastList<L2PcInstance> list)
+	protected boolean existNextOpponents(FastList<L2Player> list)
 	{
 		if (list == null)
 			return false;

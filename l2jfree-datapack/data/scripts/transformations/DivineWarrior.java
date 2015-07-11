@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class DivineWarrior extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class DivineWarrior extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 675, 1); // Cross Slash
 		addSkill(player, 676, 1); // Sonic Blaster
@@ -38,7 +38,7 @@ public class DivineWarrior extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 675); // Cross Slash
 		removeSkill(player, 676); // Sonic Blaster

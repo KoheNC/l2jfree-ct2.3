@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * This class ...
@@ -34,7 +34,7 @@ public interface IUserCommandHandler
 	 * @param command
 	 * @return command success
 	 */
-	public boolean useUserCommand(int id, L2PcInstance activeChar);
+	public boolean useUserCommand(int id, L2Player activeChar);
 	
 	/**
 	 * this method is called at initialization to register all the item ids automatically

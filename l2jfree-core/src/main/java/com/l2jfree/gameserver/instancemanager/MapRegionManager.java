@@ -31,13 +31,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.L2WorldRegion;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 import com.l2jfree.gameserver.model.entity.Fort;
@@ -50,6 +48,8 @@ import com.l2jfree.gameserver.model.mapregion.L2MapRegion;
 import com.l2jfree.gameserver.model.mapregion.L2MapRegionRestart;
 import com.l2jfree.gameserver.model.mapregion.L2SpecialMapRegion;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.model.world.L2WorldRegion;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.util.L2Collections;
@@ -229,7 +229,7 @@ public final class MapRegionManager
 		_log.info("MapRegionManager: Loaded " + redirectCount + " race depending redirects.");
 	}
 	
-	public L2MapRegionRestart getRestartLocation(L2PcInstance activeChar)
+	public L2MapRegionRestart getRestartLocation(L2Player activeChar)
 	{
 		L2MapRegion region = getRegion(activeChar);
 		
@@ -245,7 +245,7 @@ public final class MapRegionManager
 		return _mapRegionRestart.get(restartId);
 	}
 	
-	public Location getRestartPoint(int restartId, L2PcInstance activeChar)
+	public Location getRestartPoint(int restartId, L2Player activeChar)
 	{
 		L2MapRegionRestart restart = _mapRegionRestart.get(restartId);
 		
@@ -255,7 +255,7 @@ public final class MapRegionManager
 		return restart.getRandomRestartPoint(activeChar);
 	}
 	
-	public Location getChaoticRestartPoint(int restartId, L2PcInstance activeChar)
+	public Location getChaoticRestartPoint(int restartId, L2Player activeChar)
 	{
 		L2MapRegionRestart restart = _mapRegionRestart.get(restartId);
 		
@@ -265,7 +265,7 @@ public final class MapRegionManager
 		return restart.getRandomChaoticRestartPoint(activeChar);
 	}
 	
-	public L2MapRegion getRegion(L2Character activeChar)
+	public L2MapRegion getRegion(L2Creature activeChar)
 	{
 		return getRegion(activeChar.getX(), activeChar.getY(), activeChar.getZ());
 	}
@@ -281,7 +281,7 @@ public final class MapRegionManager
 	}
 	
 	//TODO: Needs to be clean rewritten
-	public Location getTeleToLocation(L2PcInstance player, TeleportWhereType teleportWhere)
+	public Location getTeleToLocation(L2Player player, TeleportWhereType teleportWhere)
 	{
 		L2Clan clan = player.getClan();
 		
@@ -436,7 +436,7 @@ public final class MapRegionManager
 		return getRestartPoint(Config.ALT_DEFAULT_RESTARTTOWN, player);
 	}
 	
-	public int getAreaCastle(L2Character activeChar)
+	public int getAreaCastle(L2Creature activeChar)
 	{
 		Town town = TownManager.getInstance().getClosestTown(activeChar);
 		
@@ -455,7 +455,7 @@ public final class MapRegionManager
 	 * @param player a player
 	 * @return L2 region used in partymatching
 	 */
-	public int getL2Region(L2PcInstance player)
+	public int getL2Region(L2Player player)
 	{
 		L2MapRegion region = getRegion(player);
 		int locName = -1;

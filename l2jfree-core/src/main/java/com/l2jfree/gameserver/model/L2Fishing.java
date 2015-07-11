@@ -21,14 +21,15 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2PenaltyMonsterInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PenaltyMonsterInstance;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ExFishingHpRegen;
-import com.l2jfree.gameserver.network.serverpackets.ExFishingStartCombat;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.network.packets.server.ExFishingHpRegen;
+import com.l2jfree.gameserver.network.packets.server.ExFishingStartCombat;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.tools.random.Rnd;
 
 public class L2Fishing implements Runnable
@@ -37,7 +38,7 @@ public class L2Fishing implements Runnable
 	
 	// =========================================================
 	// Data Field
-	private L2PcInstance _fisher;
+	private L2Player _fisher;
 	private int _time;
 	private int _stop = 0;
 	private int _goodUse = 0;
@@ -77,7 +78,7 @@ public class L2Fishing implements Runnable
 	}
 	
 	// =========================================================
-	public L2Fishing(L2PcInstance fisher, FishData fish, boolean isNoob, boolean isUpperGrade)
+	public L2Fishing(L2Player fisher, FishData fish, boolean isNoob, boolean isUpperGrade)
 	{
 		_fisher = fisher;
 		_fishMaxHp = fish.getHP();

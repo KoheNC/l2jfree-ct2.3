@@ -16,14 +16,14 @@ package com.l2jfree.gameserver.model.zone;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ClanTable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Siege;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 public class L2CastleZone extends SiegeableEntityZone
 {
@@ -35,15 +35,15 @@ public class L2CastleZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		character.setInsideZone(FLAG_CASTLE, true);
 		alertCastle(character, true);
 		super.onEnter(character);
 		
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
-			L2PcInstance player = (L2PcInstance)character;
+			L2Player player = (L2Player)character;
 			L2Clan clan = player.getClan();
 			if (clan != null)
 			{
@@ -58,17 +58,17 @@ public class L2CastleZone extends SiegeableEntityZone
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		character.setInsideZone(FLAG_CASTLE, false);
 		
 		super.onExit(character);
 		
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).stopFameTask();
+		if (character instanceof L2Player)
+			((L2Player)character).stopFameTask();
 	}
 	
-	private void alertCastle(L2Character character, boolean entering)
+	private void alertCastle(L2Creature character, boolean entering)
 	{
 		Castle castle = CastleManager.getInstance().getCastleById(_entity.getCastleId());
 		int ownerId = castle.getOwnerId();
@@ -84,15 +84,15 @@ public class L2CastleZone extends SiegeableEntityZone
 			return;
 		else if (character.isInFunEvent())
 			return;
-		else if (character instanceof L2PcInstance)
+		else if (character instanceof L2Player)
 		{
-			if (((L2PcInstance)character).isGM())
+			if (((L2Player)character).isGM())
 				return;
 		}
 		else
 			return;
 		
-		L2PcInstance activeChar = (L2PcInstance)character;
+		L2Player activeChar = (L2Player)character;
 		L2Clan castleClan = ClanTable.getInstance().getClan(ownerId);
 		L2Clan activeCharClan = activeChar.getClan();
 		SystemMessage sm = null;

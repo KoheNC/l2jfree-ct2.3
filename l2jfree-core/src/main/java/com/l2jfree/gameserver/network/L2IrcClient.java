@@ -36,12 +36,12 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.LoginServerThread;
 import com.l2jfree.gameserver.datatables.GmListTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IIrcCommandHandler;
 import com.l2jfree.gameserver.handler.IrcCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 import com.l2jfree.tools.codec.Base64;
 import com.l2jfree.tools.random.Rnd;
 
@@ -328,7 +328,7 @@ public class L2IrcClient extends Thread
 				me = " * " + u.getNick() + msg.substring(6);
 				CreatureSay cs = new CreatureSay(0, channelId, "[IRC]", me);
 				
-				for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+				for (L2Player player : L2World.getInstance().getAllPlayers())
 				{
 					player.sendPacket(cs);
 				}
@@ -357,7 +357,7 @@ public class L2IrcClient extends Thread
 						
 						CreatureSay cs = new CreatureSay(0, channelId, "[IRC] " + u.getNick(), sendmsg);
 						
-						for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+						for (L2Player player : L2World.getInstance().getAllPlayers())
 						{
 							player.sendPacket(cs);
 						}
@@ -373,7 +373,7 @@ public class L2IrcClient extends Thread
 					if (GmListTable.getAllGms(false).size() == 0)
 						sendChan("There are not any GMs that are providing customer service currently");
 					else
-						for (L2PcInstance gm : GmListTable.getAllGms(false))
+						for (L2Player gm : GmListTable.getAllGms(false))
 							sendChan(gm.getName());
 				}
 				else if (msg.equals("!rates"))
@@ -391,7 +391,7 @@ public class L2IrcClient extends Thread
 					{
 						String _onlineNames = "Players currently online:";
 						boolean _isFirst = true;
-						for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+						for (L2Player player : L2World.getInstance().getAllPlayers())
 						{
 							_onlineNames = _onlineNames + (_isFirst ? " " : ", ") + player.getName();
 							_isFirst = false;

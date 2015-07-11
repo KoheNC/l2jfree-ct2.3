@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 public class L2PaganZone extends L2Zone
 {
@@ -25,9 +25,9 @@ public class L2PaganZone extends L2Zone
 	private static final int FADED_MARK = 8065;
 	
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2Player)
 		{
 			if (character.destroyItemByItemId("Pagan Zone", MARK, 1, character, false))
 			{

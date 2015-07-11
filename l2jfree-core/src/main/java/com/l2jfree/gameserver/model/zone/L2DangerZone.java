@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model.zone;
 
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * When a player is in this zone, the danger effect icon is shown.
@@ -26,24 +26,24 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class L2DangerZone extends L2DynamicZone
 {
 	@Override
-	protected void onEnter(L2Character character)
+	protected void onEnter(L2Creature character)
 	{
 		character.setInsideZone(FLAG_DANGER, true);
 		
 		super.onEnter(character);
 		
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).sendEtcStatusUpdate();
+		if (character instanceof L2Player)
+			((L2Player)character).sendEtcStatusUpdate();
 	}
 	
 	@Override
-	protected void onExit(L2Character character)
+	protected void onExit(L2Creature character)
 	{
 		character.setInsideZone(FLAG_DANGER, false);
 		
 		super.onExit(character);
 		
-		if (character instanceof L2PcInstance)
-			((L2PcInstance)character).sendEtcStatusUpdate();
+		if (character instanceof L2Player)
+			((L2Player)character).sendEtcStatusUpdate();
 	}
 }

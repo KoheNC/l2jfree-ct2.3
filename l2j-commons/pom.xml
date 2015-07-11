@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
+			<version>1.2</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.servlet</groupId>
@@ -37,9 +37,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.5</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -47,15 +47,16 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>c3p0</groupId>
+			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
+			<version>0.9.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.12</version>
+			<version>5.1.36</version>
 		</dependency>
+		<!-- Javolution 5.4.1 is the last MMORPG development suitable version of Javolution. It is not recommend to be updated to a newer version. -->
 		<dependency>
 			<groupId>javolution</groupId>
 			<artifactId>javolution</artifactId>

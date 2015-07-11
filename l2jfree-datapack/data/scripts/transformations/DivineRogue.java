@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class DivineRogue extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class DivineRogue extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 686, 1); // Divine Rogue Stun Shot
 		addSkill(player, 687, 1); // Divine Rogue Double Shot
@@ -39,7 +39,7 @@ public class DivineRogue extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 686); // Divine Rogue Stun Shot
 		removeSkill(player, 687); // Divine Rogue Double Shot

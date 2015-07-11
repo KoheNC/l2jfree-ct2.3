@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class MyoRace extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class MyoRace extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 896, 4); // Rolling Step
 		addSkill(player, 897, 4); // Double Blast
@@ -37,7 +37,7 @@ public class MyoRace extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 896); // Rolling Step
 		removeSkill(player, 897); // Double Blast

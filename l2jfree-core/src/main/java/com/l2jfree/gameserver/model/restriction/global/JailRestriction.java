@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 
 /**
@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.model.zone.L2Zone;
 final class JailRestriction extends AbstractRestriction
 {
 	@Override
-	public boolean isRestricted(L2PcInstance activeChar, Class<? extends GlobalRestriction> callingRestriction)
+	public boolean isRestricted(L2Player activeChar, Class<? extends GlobalRestriction> callingRestriction)
 	{
 		if (isInJail(activeChar))
 		{
@@ -35,7 +35,7 @@ final class JailRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canInviteToParty(L2PcInstance activeChar, L2PcInstance target)
+	public boolean canInviteToParty(L2Player activeChar, L2Player target)
 	{
 		if (isInJail(activeChar) || isInJail(target))
 		{
@@ -47,7 +47,7 @@ final class JailRestriction extends AbstractRestriction
 	}
 	
 	@Override
-	public boolean canTeleport(L2PcInstance activeChar)
+	public boolean canTeleport(L2Player activeChar)
 	{
 		// Check to see if player is in jail
 		if (isInJail(activeChar))
@@ -59,7 +59,7 @@ final class JailRestriction extends AbstractRestriction
 		return true;
 	}
 	
-	private boolean isInJail(L2PcInstance player)
+	private boolean isInJail(L2Player player)
 	{
 		return player.isInJail() || player.isInsideZone(L2Zone.FLAG_JAIL);
 	}

@@ -15,8 +15,8 @@
 package ai.individual;
 
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.actor.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 
 /**

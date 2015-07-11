@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.lang.L2Integer;
-import com.l2jfree.util.SingletonSet;
+import com.l2jfree.util.LazyFastSet;
 
 /**
  * @author NB4L1
@@ -61,7 +61,7 @@ public final class FriendListManager
 		
 		if (set == null)
 		{
-			_friends.put(objectId, set = new SingletonSet<Integer>());
+			_friends.put(objectId, set = new LazyFastSet<Integer>());
 			
 			Connection con = null;
 			try

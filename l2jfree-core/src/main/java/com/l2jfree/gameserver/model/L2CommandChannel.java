@@ -18,17 +18,19 @@ import java.util.Set;
 
 import javolution.util.FastList;
 
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Boss;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Boss;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.ExCloseMPCC;
-import com.l2jfree.gameserver.network.serverpackets.ExMultiPartyCommandChannelInfo;
-import com.l2jfree.gameserver.network.serverpackets.ExOpenMPCC;
-import com.l2jfree.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.L2ServerPacket;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.ExCloseMPCC;
+import com.l2jfree.gameserver.network.packets.server.ExMultiPartyCommandChannelInfo;
+import com.l2jfree.gameserver.network.packets.server.ExOpenMPCC;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.util.L2FastSet;
 
 /**
@@ -38,14 +40,14 @@ import com.l2jfree.util.L2FastSet;
 public class L2CommandChannel
 {
 	private Set<L2Party> _partys = null;
-	private L2PcInstance _commandLeader = null;
+	private L2Player _commandLeader = null;
 	private int _channelLvl;
 	
 	/**
 	 * Creates a New Command Channel and Add the Leaders party to the CC
 	 * @param leader Command channel leader
 	 */
-	public L2CommandChannel(L2PcInstance leader)
+	public L2CommandChannel(L2Player leader)
 	{
 		_commandLeader = leader;
 		_partys = new L2FastSet<L2Party>().setShared(true);
@@ -147,7 +149,7 @@ public class L2CommandChannel
 	 * Broadcast packet to every channel member
 	 * @param gsp a sendable packet
 	 */
-	public void broadcastToChannelMembers(L2GameServerPacket gsp)
+	public void broadcastToChannelMembers(L2ServerPacket gsp)
 	{
 		if (_partys != null)
 			for (L2Party party : _partys)
@@ -155,7 +157,7 @@ public class L2CommandChannel
 					party.broadcastToPartyMembers(gsp);
 	}
 	
-	public void broadcastCSToChannelMembers(CreatureSay gsp, L2PcInstance broadcaster)
+	public void broadcastCSToChannelMembers(CreatureSay gsp, L2Player broadcaster)
 	{
 		if (_partys != null)
 			for (L2Party party : _partys)
@@ -163,7 +165,7 @@ public class L2CommandChannel
 					party.broadcastCSToPartyMembers(gsp, broadcaster);
 	}
 	
-	public void broadcastToChannelMembers(L2PcInstance exclude, L2GameServerPacket gsp)
+	public void broadcastToChannelMembers(L2Player exclude, L2ServerPacket gsp)
 	{
 		if (_partys != null)
 			for (L2Party party : _partys)
@@ -177,15 +179,15 @@ public class L2CommandChannel
 	}
 	
 	/** @return list of all Members in Command Channel */
-	public FastList<L2PcInstance> getMembers()
+	public FastList<L2Player> getMembers()
 	{
-		FastList<L2PcInstance> members = new FastList<L2PcInstance>();
+		FastList<L2Player> members = new FastList<L2Player>();
 		for (L2Party party : getPartys())
 			members.addAll(party.getPartyMembers());
 		return members;
 	}
 	
-	public boolean contains(L2Character target)
+	public boolean contains(L2Creature target)
 	{
 		if (target.getParty() == null)
 			return false;
@@ -203,13 +205,13 @@ public class L2CommandChannel
 	 * Sets the new leader of the Command Channel
 	 * @param leader
 	 */
-	public void setChannelLeader(L2PcInstance leader)
+	public void setChannelLeader(L2Player leader)
 	{
 		_commandLeader = leader;
 	}
 	
 	/** @return the leader of the Command Channel */
-	public L2PcInstance getChannelLeader()
+	public L2Player getChannelLeader()
 	{
 		return _commandLeader;
 	}

@@ -14,8 +14,8 @@
  */
 package ai.individual;
 
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -42,7 +42,7 @@ public final class BaylorTreasureChest extends ItemDropper
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		int rnd = Rnd.get(100);
 		if (rnd < 2)

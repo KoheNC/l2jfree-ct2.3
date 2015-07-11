@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.model.mapregion;
 
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.world.L2Polygon;
 import com.l2jfree.gameserver.model.zone.form.Shape;
 import com.l2jfree.gameserver.model.zone.form.ShapePoly;

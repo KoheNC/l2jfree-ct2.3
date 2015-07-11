@@ -32,11 +32,11 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ItemList;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.ItemList;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.util.Util;
 
 /**
@@ -145,7 +145,7 @@ public class ArenaManager
 			return;
 		}
 		
-		L2PcInstance winner = L2World.getInstance().findPlayer(idTop);
+		L2Player winner = L2World.getInstance().findPlayer(idTop);
 		
 		Announcements.getInstance().announceToAll(
 				"PvP Arena Manager: " + arTop.name + " is the winner for this time with " + arTop.kills + "/"

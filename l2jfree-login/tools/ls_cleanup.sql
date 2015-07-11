@@ -1,2 +1,0 @@
-DROP DATABASE l2jfree_ls;
-CREATE DATABASE l2jfree_ls;

@@ -43,7 +43,7 @@ public class L2MinionData
 	 * Set the Identifier of the Minion to spawn.<BR>
 	 * <BR>
 	 * 
-	 * @param if The L2Character Identifier to spawn
+	 * @param if The L2Creature Identifier to spawn
 	 * 
 	 */
 	public void setMinionId(int id)

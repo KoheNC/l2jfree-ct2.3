@@ -14,15 +14,15 @@
  */
 package quests.converted;
 
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.base.Race;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.base.Race;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 
 /**
  * A repeatable hunting quest restricted to elves.
@@ -62,7 +62,7 @@ public final class DestroyPlaguebringers extends QuestJython
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
@@ -98,9 +98,9 @@ public final class DestroyPlaguebringers extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
-		L2PcInstance quester = killer/*npc.getQuestFirstAttacker()*/;
+		L2Player quester = killer/*npc.getQuestFirstAttacker()*/;
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(DESTROY_PLAGUE_BRINGERS);
@@ -119,7 +119,7 @@ public final class DestroyPlaguebringers extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		QuestState qs = talker.getQuestState(DESTROY_PLAGUE_BRINGERS);
 		if (qs == null)
@@ -149,7 +149,7 @@ public final class DestroyPlaguebringers extends QuestJython
 			{
 				qs.takeItems(WERERAT_FANG, normal);
 				qs.takeItems(VAROOL_FOULCLAWS_FANG, leader);
-				qs.rewardItems(PcInventory.ADENA_ID, (normal * NORMAL_FANG_REWARD + leader * LEADER_FANG_REWARD));
+				qs.rewardItems(PlayerInventory.ADENA_ID, (normal * NORMAL_FANG_REWARD + leader * LEADER_FANG_REWARD));
 				return "30155-07.htm";
 			}
 			else

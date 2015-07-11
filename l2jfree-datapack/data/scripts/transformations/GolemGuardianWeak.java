@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class GolemGuardianWeak extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class GolemGuardianWeak extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 572, 2); // Double Slasher
 		addSkill(player, 573, 2); // Earthquake
@@ -36,7 +36,7 @@ public class GolemGuardianWeak extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 572); // Double Slasher
 		removeSkill(player, 573); // Earthquake

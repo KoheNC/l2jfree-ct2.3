@@ -26,9 +26,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.model.base.Experience;
+import com.l2jfree.gameserver.gameobjects.base.Experience;
+import com.l2jfree.gameserver.model.skills.templates.L2BuffTemplate;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.skills.L2BuffTemplate;
 
 /**
  * This class represents the buff templates list

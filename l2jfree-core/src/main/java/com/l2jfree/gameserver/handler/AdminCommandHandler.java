@@ -19,82 +19,82 @@ import java.util.concurrent.TimeUnit;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAI;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAdmin;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminAnnouncements;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminBBS;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminBan;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminBanChat;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminBoat;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminBuffs;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminCTFEngine;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminCache;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminCamera;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminChangeAccessLevel;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminContest;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminCreateItem;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminCursedWeapons;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminDMEngine;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminDelete;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminDoorControl;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminEditChar;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminEditNpc;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminEffects;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminElement;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminEnchant;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminExpSp;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminFightCalculator;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminFortSiege;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminGeoEditor;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminGeodata;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminGm;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminGmChat;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminHeal;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminHellbound;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminHelpPage;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminIRC;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminInstance;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminInvul;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminJail;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminKick;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminKill;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminLevel;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminLogin;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminMammon;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminManor;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminMenu;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminMobGroup;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminMonsterRace;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminPForge;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminPetition;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminPledge;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminPolymorph;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminQuest;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminRegion;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminRepairChar;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminRes;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminRide;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSHEngine;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSendHome;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminShop;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminShutdown;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSiege;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSkill;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSmartShop;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSortMultisellItems;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSpawn;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminSummon;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminTarget;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminTeleport;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminTest;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminTvTEngine;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminTvTiEngine;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminUnblockIp;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminVIPEngine;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminVitality;
-import com.l2jfree.gameserver.handler.admincommandhandlers.AdminZone;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.handler.admincommands.AdminAI;
+import com.l2jfree.gameserver.handler.admincommands.AdminAdmin;
+import com.l2jfree.gameserver.handler.admincommands.AdminAnnouncements;
+import com.l2jfree.gameserver.handler.admincommands.AdminBBS;
+import com.l2jfree.gameserver.handler.admincommands.AdminBan;
+import com.l2jfree.gameserver.handler.admincommands.AdminBanChat;
+import com.l2jfree.gameserver.handler.admincommands.AdminBoat;
+import com.l2jfree.gameserver.handler.admincommands.AdminBuffs;
+import com.l2jfree.gameserver.handler.admincommands.AdminCTFEngine;
+import com.l2jfree.gameserver.handler.admincommands.AdminCache;
+import com.l2jfree.gameserver.handler.admincommands.AdminCamera;
+import com.l2jfree.gameserver.handler.admincommands.AdminChangeAccessLevel;
+import com.l2jfree.gameserver.handler.admincommands.AdminContest;
+import com.l2jfree.gameserver.handler.admincommands.AdminCreateItem;
+import com.l2jfree.gameserver.handler.admincommands.AdminCursedWeapons;
+import com.l2jfree.gameserver.handler.admincommands.AdminDMEngine;
+import com.l2jfree.gameserver.handler.admincommands.AdminDelete;
+import com.l2jfree.gameserver.handler.admincommands.AdminDoorControl;
+import com.l2jfree.gameserver.handler.admincommands.AdminEditChar;
+import com.l2jfree.gameserver.handler.admincommands.AdminEditNpc;
+import com.l2jfree.gameserver.handler.admincommands.AdminEffects;
+import com.l2jfree.gameserver.handler.admincommands.AdminElement;
+import com.l2jfree.gameserver.handler.admincommands.AdminEnchant;
+import com.l2jfree.gameserver.handler.admincommands.AdminExpSp;
+import com.l2jfree.gameserver.handler.admincommands.AdminFightCalculator;
+import com.l2jfree.gameserver.handler.admincommands.AdminFortSiege;
+import com.l2jfree.gameserver.handler.admincommands.AdminGeoEditor;
+import com.l2jfree.gameserver.handler.admincommands.AdminGeodata;
+import com.l2jfree.gameserver.handler.admincommands.AdminGm;
+import com.l2jfree.gameserver.handler.admincommands.AdminGmChat;
+import com.l2jfree.gameserver.handler.admincommands.AdminHeal;
+import com.l2jfree.gameserver.handler.admincommands.AdminHellbound;
+import com.l2jfree.gameserver.handler.admincommands.AdminHelpPage;
+import com.l2jfree.gameserver.handler.admincommands.AdminIRC;
+import com.l2jfree.gameserver.handler.admincommands.AdminInstance;
+import com.l2jfree.gameserver.handler.admincommands.AdminInvul;
+import com.l2jfree.gameserver.handler.admincommands.AdminJail;
+import com.l2jfree.gameserver.handler.admincommands.AdminKick;
+import com.l2jfree.gameserver.handler.admincommands.AdminKill;
+import com.l2jfree.gameserver.handler.admincommands.AdminLevel;
+import com.l2jfree.gameserver.handler.admincommands.AdminLogin;
+import com.l2jfree.gameserver.handler.admincommands.AdminMammon;
+import com.l2jfree.gameserver.handler.admincommands.AdminManor;
+import com.l2jfree.gameserver.handler.admincommands.AdminMenu;
+import com.l2jfree.gameserver.handler.admincommands.AdminMobGroup;
+import com.l2jfree.gameserver.handler.admincommands.AdminMonsterRace;
+import com.l2jfree.gameserver.handler.admincommands.AdminPForge;
+import com.l2jfree.gameserver.handler.admincommands.AdminPetition;
+import com.l2jfree.gameserver.handler.admincommands.AdminPledge;
+import com.l2jfree.gameserver.handler.admincommands.AdminPolymorph;
+import com.l2jfree.gameserver.handler.admincommands.AdminQuest;
+import com.l2jfree.gameserver.handler.admincommands.AdminRegion;
+import com.l2jfree.gameserver.handler.admincommands.AdminRepairChar;
+import com.l2jfree.gameserver.handler.admincommands.AdminRes;
+import com.l2jfree.gameserver.handler.admincommands.AdminRide;
+import com.l2jfree.gameserver.handler.admincommands.AdminSHEngine;
+import com.l2jfree.gameserver.handler.admincommands.AdminSendHome;
+import com.l2jfree.gameserver.handler.admincommands.AdminShop;
+import com.l2jfree.gameserver.handler.admincommands.AdminShutdown;
+import com.l2jfree.gameserver.handler.admincommands.AdminSiege;
+import com.l2jfree.gameserver.handler.admincommands.AdminSkill;
+import com.l2jfree.gameserver.handler.admincommands.AdminSmartShop;
+import com.l2jfree.gameserver.handler.admincommands.AdminSortMultisellItems;
+import com.l2jfree.gameserver.handler.admincommands.AdminSpawn;
+import com.l2jfree.gameserver.handler.admincommands.AdminSummon;
+import com.l2jfree.gameserver.handler.admincommands.AdminTarget;
+import com.l2jfree.gameserver.handler.admincommands.AdminTeleport;
+import com.l2jfree.gameserver.handler.admincommands.AdminTest;
+import com.l2jfree.gameserver.handler.admincommands.AdminTvTEngine;
+import com.l2jfree.gameserver.handler.admincommands.AdminTvTiEngine;
+import com.l2jfree.gameserver.handler.admincommands.AdminUnblockIp;
+import com.l2jfree.gameserver.handler.admincommands.AdminVIPEngine;
+import com.l2jfree.gameserver.handler.admincommands.AdminVitality;
+import com.l2jfree.gameserver.handler.admincommands.AdminZone;
 import com.l2jfree.gameserver.model.GMAudit;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.util.HandlerRegistry;
 import com.l2jfree.util.logging.ListeningLog;
@@ -212,7 +212,7 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 				_log.warn("Command \"" + element + "\" have no access level definition. Can't be used.");
 	}
 	
-	public void useAdminCommand(final L2PcInstance activeChar, String message0)
+	public void useAdminCommand(final L2Player activeChar, String message0)
 	{
 		final String message = message0.trim();
 		
@@ -309,7 +309,7 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 		protected static final AdminCommandHandler _instance = new AdminCommandHandler();
 	}
 	
-	private static final ThreadLocal<L2PcInstance> _activeGm = new ThreadLocal<L2PcInstance>();
+	private static final ThreadLocal<L2Player> _activeGm = new ThreadLocal<L2Player>();
 	
 	static
 	{
@@ -317,7 +317,7 @@ public final class AdminCommandHandler extends HandlerRegistry<String, IAdminCom
 			@Override
 			public void write(String s)
 			{
-				final L2PcInstance gm = _activeGm.get();
+				final L2Player gm = _activeGm.get();
 				
 				if (gm != null)
 					gm.sendMessage(s);

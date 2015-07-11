@@ -14,16 +14,16 @@
  */
 package quests.converted;
 
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.base.ClassId;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.base.ClassId;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -80,7 +80,7 @@ public final class PathToRogue extends QuestJython
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		int weaponId = attacker.getInventory().getPaperdollItemId(Inventory.PAPERDOLL_RHAND);
 		switch (npc.getQuestAttackStatus())
@@ -107,7 +107,7 @@ public final class PathToRogue extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		QuestState qs = player.getQuestState(PATH_TO_ROGUE);
 		if ("30379_2".equals(event))
@@ -155,11 +155,11 @@ public final class PathToRogue extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		if (npc.getNpcId() == CATS_EYE_BANDIT)
 			npc.broadcastPacket(new NpcSay(npc, BANDIT_KILLED));
-		L2PcInstance quester = npc.getQuestFirstAttacker();
+		L2Player quester = npc.getQuestFirstAttacker();
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(PATH_TO_ROGUE);
@@ -201,7 +201,7 @@ public final class PathToRogue extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		QuestState qs = talker.getQuestState(PATH_TO_ROGUE);
 		if (qs == null)
@@ -224,7 +224,7 @@ public final class PathToRogue extends QuestJython
 					qs.exitQuest(false);
 					if (done.isEmpty())
 					{
-						qs.rewardItems(PcInventory.ADENA_ID, 81900);
+						qs.rewardItems(PlayerInventory.ADENA_ID, 81900);
 						qs.addExpAndSp(295862, 16814);
 						qs.giveItems(BEZIQUES_RECOMMENDATION, 1);
 					}

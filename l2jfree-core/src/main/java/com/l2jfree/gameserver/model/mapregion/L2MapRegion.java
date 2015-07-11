@@ -16,8 +16,8 @@ package com.l2jfree.gameserver.model.mapregion;
 
 import java.util.Arrays;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.zone.form.Shape;
 
 /**
@@ -38,7 +38,7 @@ public abstract class L2MapRegion
 		_restarts[race.ordinal()] = restartId;
 	}
 	
-	public final int getRestartId(L2PcInstance player)
+	public final int getRestartId(L2Player player)
 	{
 		return getRestartId(player.getRace());
 	}

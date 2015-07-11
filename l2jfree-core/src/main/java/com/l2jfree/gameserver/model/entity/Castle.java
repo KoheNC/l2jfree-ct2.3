@@ -30,24 +30,24 @@ import javolution.util.FastMap;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.Announcements;
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.DoorTable;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.CropProcure;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager.SeedProduction;
 import com.l2jfree.gameserver.instancemanager.CrownManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
-import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2Manor;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.gameserver.model.zone.L2SiegeDangerZone;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowInfoUpdate;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
 
 public class Castle extends Siegeable<Siege>
 {
@@ -207,7 +207,7 @@ public class Castle extends Siegeable<Siege>
 					if (_cwh)
 					{
 						ClanTable.getInstance().getClan(getOwnerId()).getWarehouse()
-								.destroyItemByItemId("CS_function_fee", PcInventory.ADENA_ID, fee, null, null);
+								.destroyItemByItemId("CS_function_fee", PlayerInventory.ADENA_ID, fee, null, null);
 						if (_log.isDebugEnabled())
 							_log.warn("deducted " + fee + " adena from " + getName()
 									+ " owner's cwh for function id : " + getType());
@@ -364,8 +364,8 @@ public class Castle extends Siegeable<Siege>
 		}
 		else
 		{
-			if (_treasury + amount > PcInventory.MAX_ADENA) // TODO is this valid after gracia final?
-				_treasury = PcInventory.MAX_ADENA;
+			if (_treasury + amount > PlayerInventory.MAX_ADENA) // TODO is this valid after gracia final?
+				_treasury = PlayerInventory.MAX_ADENA;
 			else
 				_treasury += amount;
 		}
@@ -391,17 +391,17 @@ public class Castle extends Siegeable<Siege>
 		return true;
 	}
 	
-	public void closeDoor(L2PcInstance activeChar, int doorId)
+	public void closeDoor(L2Player activeChar, int doorId)
 	{
 		openCloseDoor(activeChar, doorId, false);
 	}
 	
-	public void openDoor(L2PcInstance activeChar, int doorId)
+	public void openDoor(L2Player activeChar, int doorId)
 	{
 		openCloseDoor(activeChar, doorId, true);
 	}
 	
-	public void openCloseDoor(L2PcInstance activeChar, int doorId, boolean open)
+	public void openCloseDoor(L2Player activeChar, int doorId, boolean open)
 	{
 		if (activeChar.getClanId() != getOwnerId())
 			return;
@@ -438,7 +438,7 @@ public class Castle extends Siegeable<Siege>
 			Announcements.getInstance().announceToAll(clan.getName() + " has lost " + getName() + " castle.");
 			clan.broadcastToOnlineMembers(new PledgeShowInfoUpdate(clan));
 			
-			for (L2PcInstance member : clan.getOnlineMembers(0))
+			for (L2Player member : clan.getOnlineMembers(0))
 			{
 				removeResidentialSkills(member);
 			}
@@ -470,7 +470,7 @@ public class Castle extends Siegeable<Siege>
 						CastleManager.getInstance().removeCirclet(_formerOwner, getCastleId());
 				}
 				
-				L2PcInstance oldLord = oldOwner.getLeader().getPlayerInstance();
+				L2Player oldLord = oldOwner.getLeader().getPlayerInstance();
 				if (oldLord != null && oldLord.getMountType() == 2)
 					oldLord.dismount();
 				
@@ -502,7 +502,7 @@ public class Castle extends Siegeable<Siege>
 		if (getSiege().getIsInProgress()) // If siege in progress
 			getSiege().midVictory(); // Mid victory phase of siege
 			
-		for (L2PcInstance member : clan.getOnlineMembers(0))
+		for (L2Player member : clan.getOnlineMembers(0))
 		{
 			giveResidentialSkills(member);
 		}
@@ -1426,7 +1426,7 @@ public class Castle extends Siegeable<Siege>
 		}
 	}
 	
-	public boolean updateFunctions(L2PcInstance player, int type, int lvl, int lease, long rate, boolean addNew)
+	public boolean updateFunctions(L2Player player, int type, int lvl, int lease, long rate, boolean addNew)
 	{
 		if (player == null)
 			return false;
@@ -1434,7 +1434,7 @@ public class Castle extends Siegeable<Siege>
 			_log.warn("Called Castle.updateFunctions(int type, int lvl, int lease, long rate, boolean addNew) Owner : "
 					+ getOwnerId());
 		if (lease > 0)
-			if (!player.destroyItemByItemId("Consume", PcInventory.ADENA_ID, lease, null, true))
+			if (!player.destroyItemByItemId("Consume", PlayerInventory.ADENA_ID, lease, null, true))
 				return false;
 		if (addNew)
 		{

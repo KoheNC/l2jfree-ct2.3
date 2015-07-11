@@ -14,10 +14,8 @@
  */
 package com.l2jfree.gameserver;
 
-import java.util.Date;
-
-import com.l2jfree.L2Config;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.L2AutoInitialization;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.mmocore.network.SelectorThread;
 import com.l2jfree.versionning.Version;
 
@@ -31,7 +29,7 @@ public final class CoreInfo
 	}
 	
 	private static final CoreVersion coreVersion = new CoreVersion(GameServer.class);
-	private static final CoreVersion commonsVersion = new CoreVersion(L2Config.class);
+	private static final CoreVersion commonsVersion = new CoreVersion(L2AutoInitialization.class);
 	private static final CoreVersion mmocoreVersion = new CoreVersion(SelectorThread.class);
 	
 	public static void showStartupInfo()
@@ -50,7 +48,7 @@ public final class CoreInfo
 		System.out.println("                   \\/___/  [starting version: " + coreVersion.getVersionNumber() + "]");
 	}
 	
-	public static final void versionInfo(L2PcInstance activeChar)
+	public static final void versionInfo(L2Player activeChar)
 	{
 		activeChar.sendMessage(":__.     :_____:_____:_____:_____:_____:_____:");
 		activeChar.sendMessage("|    |__|___   |__.     |     __|        |     __|     __|");
@@ -81,7 +79,7 @@ public final class CoreInfo
 			super(c);
 			
 			versionInfo = String.format("%-6s [ %4s ]", getVersionNumber(), getRevisionNumber());
-			fullVersionInfo = versionInfo + " - " + getBuildJdk() + " - " + new Date(getBuildTime());
+			fullVersionInfo = versionInfo + " - " + getBuildJdk() + " - " + getBuildTime();
 		}
 	}
 }

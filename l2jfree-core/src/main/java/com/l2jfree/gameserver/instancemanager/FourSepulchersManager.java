@@ -32,19 +32,19 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SepulcherMonsterInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SepulcherNpcInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.grandbosses.BossLair;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SepulcherMonsterInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SepulcherNpcInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.quest.QuestState;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
 
@@ -215,7 +215,7 @@ public class FourSepulchersManager extends BossLair
 	
 	protected void cleanUp()
 	{
-		for (L2PcInstance player : getPlayersInside())
+		for (L2Player player : getPlayersInside())
 		{
 			player.teleToLocation(TeleportWhereType.Town);
 		}
@@ -833,7 +833,7 @@ public class FourSepulchersManager extends BossLair
 		return _inAttackTime;
 	}
 	
-	public synchronized void tryEntry(L2Npc npc, L2PcInstance player)
+	public synchronized void tryEntry(L2Npc npc, L2Player player)
 	{
 		int npcId = npc.getNpcId();
 		switch (npcId)
@@ -876,7 +876,7 @@ public class FourSepulchersManager extends BossLair
 				return;
 			}
 			
-			for (L2PcInstance mem : player.getParty().getPartyMembers())
+			for (L2Player mem : player.getParty().getPartyMembers())
 			{
 				QuestState qs = mem.getQuestState(QUEST_ID);
 				if (qs == null || (!qs.isStarted() && !qs.isCompleted()))
@@ -904,7 +904,7 @@ public class FourSepulchersManager extends BossLair
 				showHtmlFile(player, npcId + "-NL.htm", npc, null);
 				return;
 			}
-			for (L2PcInstance mem : player.getParty().getPartyMembers())
+			for (L2Player mem : player.getParty().getPartyMembers())
 			{
 				QuestState qs = mem.getQuestState(QUEST_ID);
 				if (qs == null || (!qs.isStarted() && !qs.isCompleted()))
@@ -956,7 +956,7 @@ public class FourSepulchersManager extends BossLair
 		entry(npcId, player);
 	}
 	
-	private void entry(int npcId, L2PcInstance player)
+	private void entry(int npcId, L2Player player)
 	{
 		int[] Location = _startHallSpawns.get(npcId);
 		int driftx;
@@ -964,8 +964,8 @@ public class FourSepulchersManager extends BossLair
 		
 		if (Config.ALT_FS_PARTY_MEMBER_COUNT > 1)
 		{
-			List<L2PcInstance> members = new FastList<L2PcInstance>();
-			for (L2PcInstance mem : player.getParty().getPartyMembers())
+			List<L2Player> members = new FastList<L2Player>();
+			for (L2Player mem : player.getParty().getPartyMembers())
 			{
 				if (!mem.isDead() && Util.checkIfInRange(700, player, mem, true))
 				{
@@ -973,7 +973,7 @@ public class FourSepulchersManager extends BossLair
 				}
 			}
 			
-			for (L2PcInstance mem : members)
+			for (L2Player mem : members)
 			{
 				driftx = Rnd.get(-80, 80);
 				drifty = Rnd.get(-80, 80);
@@ -995,8 +995,8 @@ public class FourSepulchersManager extends BossLair
 		}
 		else if (player.isInParty())
 		{
-			List<L2PcInstance> members = new FastList<L2PcInstance>();
-			for (L2PcInstance mem : player.getParty().getPartyMembers())
+			List<L2Player> members = new FastList<L2Player>();
+			for (L2Player mem : player.getParty().getPartyMembers())
 			{
 				if (!mem.isDead() && Util.checkIfInRange(700, player, mem, true))
 				{
@@ -1004,7 +1004,7 @@ public class FourSepulchersManager extends BossLair
 				}
 			}
 			
-			for (L2PcInstance mem : members)
+			for (L2Player mem : members)
 			{
 				driftx = Rnd.get(-80, 80);
 				drifty = Rnd.get(-80, 80);
@@ -1337,7 +1337,7 @@ public class FourSepulchersManager extends BossLair
 		}
 	}
 	
-	public void checkAnnihilated(final L2PcInstance player)
+	public void checkAnnihilated(final L2Player player)
 	{
 		if (isPlayersAnnihilated())
 		{
@@ -1351,11 +1351,11 @@ public class FourSepulchersManager extends BossLair
 		}
 	}
 	
-	public void onPartyAnnihilated(L2PcInstance player)
+	public void onPartyAnnihilated(L2Player player)
 	{
 		if (player.getParty() != null)
 		{
-			for (L2PcInstance mem : player.getParty().getPartyMembers())
+			for (L2Player mem : player.getParty().getPartyMembers())
 			{
 				if (!mem.isDead())
 					break;
@@ -1673,7 +1673,7 @@ public class FourSepulchersManager extends BossLair
 		return _hallGateKeepers;
 	}
 	
-	public void showHtmlFile(L2PcInstance player, String file, L2Npc npc, L2PcInstance member)
+	public void showHtmlFile(L2Player player, String file, L2Npc npc, L2Player member)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 		html.setFile("data/html/SepulcherNpc/" + file);

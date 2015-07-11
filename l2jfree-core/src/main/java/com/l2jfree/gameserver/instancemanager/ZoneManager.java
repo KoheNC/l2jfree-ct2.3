@@ -21,15 +21,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import javolution.util.FastMap;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.model.world.L2WorldRegion;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.model.zone.L2Zone.ZoneType;
 import com.l2jfree.gameserver.util.Util;
@@ -137,7 +137,7 @@ public final class ZoneManager
 							_zones[zone.getType().ordinal()] = new L2Zone[] { zone };
 						else
 							_zones[zone.getType().ordinal()] =
-									(L2Zone[])ArrayUtils.add(_zones[zone.getType().ordinal()], zone);
+									ArrayUtils.add(_zones[zone.getType().ordinal()], zone);
 						
 						// Register the zone to any intersecting world region
 						int ax, ay, bx, by;

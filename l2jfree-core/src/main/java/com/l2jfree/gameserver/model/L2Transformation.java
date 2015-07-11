@@ -18,7 +18,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * @author KenM
@@ -88,7 +89,7 @@ public abstract class L2Transformation
 	/**
 	 * @return Returns the collisionRadius.
 	 */
-	public final double getCollisionRadius(L2PcInstance player)
+	public final double getCollisionRadius(L2Player player)
 	{
 		if (isStance())
 			return player.getBaseTemplate().getCollisionRadius();
@@ -98,7 +99,7 @@ public abstract class L2Transformation
 	/**
 	 * @return Returns the collisionHeight.
 	 */
-	public final double getCollisionHeight(L2PcInstance player)
+	public final double getCollisionHeight(L2Player player)
 	{
 		if (isStance())
 			return player.getBaseTemplate().getCollisionHeight();
@@ -106,7 +107,7 @@ public abstract class L2Transformation
 	}
 	
 	// Scriptable Events
-	public void onTransform(L2PcInstance player)
+	public void onTransform(L2Player player)
 	{
 		if (player.getTransformationId() != getId() || player.isCursedWeaponEquipped())
 			return;
@@ -174,9 +175,9 @@ public abstract class L2Transformation
 		}
 	}
 	
-	protected abstract void transformedSkills(L2PcInstance player);
+	protected abstract void transformedSkills(L2Player player);
 	
-	public void onUntransform(L2PcInstance player)
+	public void onUntransform(L2Player player)
 	{
 		// remove transformation skills
 		removeSkills(player);
@@ -235,9 +236,9 @@ public abstract class L2Transformation
 		}
 	}
 	
-	protected abstract void removeSkills(L2PcInstance player);
+	protected abstract void removeSkills(L2Player player);
 	
-	protected final void addSkill(L2PcInstance player, int skillId, int skillLevel)
+	protected final void addSkill(L2Player player, int skillId, int skillLevel)
 	{
 		if (skillLevel == -1)
 			return;
@@ -252,25 +253,25 @@ public abstract class L2Transformation
 		}
 	}
 	
-	protected final void addSkills(L2PcInstance player, int... skillIds)
+	protected final void addSkills(L2Player player, int... skillIds)
 	{
 		for (int skillId : skillIds)
 			addSkill(player, skillId, 1);
 	}
 	
-	protected final void removeSkill(L2PcInstance player, int skillId)
+	protected final void removeSkill(L2Player player, int skillId)
 	{
 		player.removeSkill(skillId);
 	}
 	
-	protected final void removeSkills(L2PcInstance player, int... skillIds)
+	protected final void removeSkills(L2Player player, int... skillIds)
 	{
 		for (int skillId : skillIds)
 			removeSkill(player, skillId);
 	}
 	
 	// Override if necessary
-	public void onLevelUp(L2PcInstance player)
+	public void onLevelUp(L2Player player)
 	{
 	}
 	

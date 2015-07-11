@@ -18,19 +18,19 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 import javolution.util.FastSet;
 
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 import com.l2jfree.tools.random.Rnd;
 
 public class SummonMinions extends L2AttackableAIScript
 {
 	private static int HasSpawned;
 	private static FastSet<Integer> myTrackingSet = new FastSet<Integer>(); //Used to track instances of npcs
-	private final FastMap<Integer, FastList<L2PcInstance>> _attackersList =
-			new FastMap<Integer, FastList<L2PcInstance>>().setShared(true);
+	private final FastMap<Integer, FastList<L2Player>> _attackersList =
+			new FastMap<Integer, FastList<L2Player>>().setShared(true);
 	private static final FastMap<Integer, Integer[]> MINIONS = new FastMap<Integer, Integer[]>();
 	
 	static
@@ -63,7 +63,7 @@ public class SummonMinions extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet)
 	{
 		int npcId = npc.getNpcId();
 		int npcObjId = npc.getObjectId();
@@ -117,11 +117,11 @@ public class SummonMinions extends L2AttackableAIScript
 							attacker = attacker.getPet().getOwner();
 						if (attacker.getParty() != null)
 						{
-							for (L2PcInstance member : attacker.getParty().getPartyMembers())
+							for (L2Player member : attacker.getParty().getPartyMembers())
 							{
 								if (_attackersList.get(npcObjId) == null)
 								{
-									FastList<L2PcInstance> player = new FastList<L2PcInstance>();
+									FastList<L2Player> player = new FastList<L2Player>();
 									player.add(member);
 									_attackersList.put(npcObjId, player);
 								}
@@ -133,7 +133,7 @@ public class SummonMinions extends L2AttackableAIScript
 						{
 							if (_attackersList.get(npcObjId) == null)
 							{
-								FastList<L2PcInstance> player = new FastList<L2PcInstance>();
+								FastList<L2Player> player = new FastList<L2Player>();
 								player.add(attacker);
 								_attackersList.put(npcObjId, player);
 							}
@@ -196,7 +196,7 @@ public class SummonMinions extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
 		int npcId = npc.getNpcId();
 		int npcObjId = npc.getObjectId();

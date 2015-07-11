@@ -35,22 +35,22 @@ import org.w3c.dom.Node;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
+import com.l2jfree.gameserver.gameobjects.L2Attackable;
+import com.l2jfree.gameserver.gameobjects.L2Boss;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2FeedableBeastInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2FestivalMonsterInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2FortCommanderInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2GuardInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
 import com.l2jfree.gameserver.model.CursedWeapon;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.L2Attackable;
-import com.l2jfree.gameserver.model.actor.L2Boss;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2FeedableBeastInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2FestivalMonsterInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2FortCommanderInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2FortSiegeGuardInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2GuardInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2RiftInvaderInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeGuardInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * 
@@ -158,7 +158,7 @@ public class CursedWeaponsManager
 				}
 			}
 			
-			// Retrieve the L2PcInstance from the characters table of the database
+			// Retrieve the L2Player from the characters table of the database
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
 			if (Config.ALLOW_CURSED_WEAPONS)
@@ -198,7 +198,7 @@ public class CursedWeaponsManager
 			
 			//L2DatabaseFactory.close(con);
 			
-			// Retrieve the L2PcInstance from the characters table of the database
+			// Retrieve the L2Player from the characters table of the database
 			//con = L2DatabaseFactory.getInstance().getConnection(con);
 			
 			for (CursedWeapon cw : _cursedWeapons.values())
@@ -276,7 +276,7 @@ public class CursedWeaponsManager
 		_log.info("CursedWeaponsManager: loaded " + _cursedWeapons.size() + " cursed weapon(s).");
 	}
 	
-	public synchronized void checkDrop(L2Attackable attackable, L2PcInstance player)
+	public synchronized void checkDrop(L2Attackable attackable, L2Player player)
 	{
 		if (Config.ALLOW_CURSED_WEAPONS)
 		{
@@ -297,7 +297,7 @@ public class CursedWeaponsManager
 		}
 	}
 	
-	public boolean activate(L2PcInstance player, L2ItemInstance item)
+	public boolean activate(L2Player player, L2ItemInstance item)
 	{
 		if (Config.ALLOW_CURSED_WEAPONS)
 		{
@@ -322,7 +322,7 @@ public class CursedWeaponsManager
 			return false;
 	}
 	
-	public void drop(int itemId, L2Character killer)
+	public void drop(int itemId, L2Creature killer)
 	{
 		CursedWeapon cw = _cursedWeapons.get(itemId);
 		
@@ -345,7 +345,7 @@ public class CursedWeaponsManager
 	
 	public static void announce(SystemMessage sm)
 	{
-		for (L2PcInstance player : L2World.getInstance().getAllPlayers())
+		for (L2Player player : L2World.getInstance().getAllPlayers())
 		{
 			if (player == null)
 				continue;
@@ -354,7 +354,7 @@ public class CursedWeaponsManager
 		}
 	}
 	
-	public void onEnter(L2PcInstance player)
+	public void onEnter(L2Player player)
 	{
 		if (player == null)
 			return;
@@ -377,7 +377,7 @@ public class CursedWeaponsManager
 		}
 	}
 	
-	public void onExit(L2PcInstance player)
+	public void onExit(L2Player player)
 	{
 		if (player == null)
 			return;

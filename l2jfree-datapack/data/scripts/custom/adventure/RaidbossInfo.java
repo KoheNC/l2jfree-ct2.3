@@ -16,9 +16,9 @@ package custom.adventure;
 
 import javolution.util.FastMap;
 
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 
@@ -257,7 +257,7 @@ public final class RaidbossInfo extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		QuestState qs = player.getQuestState(THIS);
 		Location loc = _raids.get(event);
@@ -269,7 +269,7 @@ public final class RaidbossInfo extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		return "info.htm";
 	}

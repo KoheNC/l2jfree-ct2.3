@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class ArcherCaptain extends L2Transformation
 {
@@ -27,14 +27,14 @@ public class ArcherCaptain extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 872, 1); // Archer Captain Power Shot
 		addSkill(player, 873, 1); // Archer Captain Rapid Shot
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 872); // Archer Captain Power Shot
 		removeSkill(player, 873); // Archer Captain Rapid Shot

@@ -29,17 +29,17 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.instance.L2CubicInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.restriction.global.AutomatedTvTRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.util.Broadcast;
 import com.l2jfree.tools.random.Rnd;
 
@@ -101,7 +101,7 @@ public final class AutomatedTvT
 	private ScheduledFuture<?> event;
 	
 	private final CopyOnWriteArrayList<Integer> registered;
-	private final CopyOnWriteArrayList<L2PcInstance> participants;
+	private final CopyOnWriteArrayList<L2Player> participants;
 	private final FastMap<Integer, Participant> eventPlayers;
 	private Team[] eventTeams;
 	private int[] teamMembers;
@@ -116,7 +116,7 @@ public final class AutomatedTvT
 		status = STATUS_NOT_IN_PROGRESS;
 		announced = 0;
 		// This has no maximum bound, thus configuration changes will not crash anything
-		participants = new CopyOnWriteArrayList<L2PcInstance>();
+		participants = new CopyOnWriteArrayList<L2Player>();
 		registered = new CopyOnWriteArrayList<Integer>();
 		eventPlayers = new FastMap<Integer, Participant>(Config.AUTO_TVT_PARTICIPANTS_MAX);
 		eventTeams = null;
@@ -170,7 +170,7 @@ public final class AutomatedTvT
 		@Override
 		public void run()
 		{
-			L2PcInstance player;
+			L2Player player;
 			for (Participant p : eventPlayers.values())
 			{
 				player = p.getPlayer();
@@ -220,8 +220,8 @@ public final class AutomatedTvT
 		registered.clear();
 		
 		// The array will never be too small
-		L2PcInstance[] reged = participants.toArray(new L2PcInstance[participants.size()]);
-		for (L2PcInstance player : reged)
+		L2Player[] reged = participants.toArray(new L2Player[participants.size()]);
+		for (L2Player player : reged)
 		{
 			if (player == null)
 				continue;
@@ -257,8 +257,8 @@ public final class AutomatedTvT
 		time.addNumber((int)(timeLeft % 3600 / 60));
 		time.addNumber((int)(timeLeft % 3600 % 60));
 		
-		reged = participants.toArray(new L2PcInstance[participants.size()]);
-		for (L2PcInstance player : reged)
+		reged = participants.toArray(new L2Player[participants.size()]);
+		for (L2Player player : reged)
 		{
 			if (player == null)
 				continue;
@@ -310,7 +310,7 @@ public final class AutomatedTvT
 		time.addNumber((int)(timeLeft / 3600));
 		time.addNumber((int)(timeLeft % 3600 / 60));
 		time.addNumber((int)(timeLeft % 3600 % 60));
-		L2PcInstance player;
+		L2Player player;
 		for (Participant p : eventPlayers.values())
 		{
 			player = p.getPlayer();
@@ -343,7 +343,7 @@ public final class AutomatedTvT
 		else
 			Announcements.getInstance().announceToAll(evtName + ": There is no winner team.");
 		
-		L2PcInstance player;
+		L2Player player;
 		for (Participant p : eventPlayers.values())
 		{
 			player = p.getPlayer();
@@ -360,7 +360,7 @@ public final class AutomatedTvT
 		tpm.scheduleGeneral(task, Config.AUTO_TVT_PERIOD_LENGHT_REWARDS);
 	}
 	
-	public final void addDisconnected(L2PcInstance participant)
+	public final void addDisconnected(L2Player participant)
 	{
 		switch (status)
 		{
@@ -383,7 +383,7 @@ public final class AutomatedTvT
 		}
 	}
 	
-	private final void checkEquipment(L2PcInstance player)
+	private final void checkEquipment(L2Player player)
 	{
 		L2ItemInstance item;
 		for (int i = 0; i < 25; i++)
@@ -420,7 +420,7 @@ public final class AutomatedTvT
 		return winTeam;
 	}
 	
-	private final void reward(L2PcInstance player)
+	private final void reward(L2Player player)
 	{
 		for (int i = 0; i < Config.AUTO_TVT_REWARD_IDS.length; i++)
 		{
@@ -443,17 +443,17 @@ public final class AutomatedTvT
 		}
 	}
 	
-	public static final boolean isReged(L2PcInstance player)
+	public static final boolean isReged(L2Player player)
 	{
 		return getInstance().isMember(player);
 	}
 	
-	public static final boolean isPlaying(L2PcInstance player)
+	public static final boolean isPlaying(L2Player player)
 	{
 		return isInProgress() && isReged(player);
 	}
 	
-	public final boolean isMember(L2PcInstance player)
+	public final boolean isMember(L2Player player)
 	{
 		if (player == null)
 			return false;
@@ -479,7 +479,7 @@ public final class AutomatedTvT
 		return eventPlayers.get(oID) != null;
 	}
 	
-	public static int getTeam(L2PcInstance player)
+	public static int getTeam(L2Player player)
 	{
 		Participant p = getInstance().eventPlayers.get(player.getObjectId());
 		if (p != null)
@@ -489,7 +489,7 @@ public final class AutomatedTvT
 			return -1;
 	}
 	
-	public static int getNameColor(L2PcInstance player)
+	public static int getNameColor(L2Player player)
 	{
 		Participant p = getInstance().eventPlayers.get(player.getObjectId());
 		if (p != null)
@@ -498,7 +498,7 @@ public final class AutomatedTvT
 			return -1;
 	}
 	
-	private final boolean canJoin(L2PcInstance player)
+	private final boolean canJoin(L2Player player)
 	{
 		// Cannot mess with observation, Olympiad, raids, sieges or other events
 		if (GlobalRestrictions.isRestricted(player, AutomatedTvTRestriction.class))
@@ -516,7 +516,7 @@ public final class AutomatedTvT
 		return can;
 	}
 	
-	public final void registerPlayer(L2PcInstance player)
+	public final void registerPlayer(L2Player player)
 	{
 		if (!active)
 			return;
@@ -540,7 +540,7 @@ public final class AutomatedTvT
 			player.sendMessage("Already registered!");
 	}
 	
-	public final void cancelRegistration(L2PcInstance player)
+	public final void cancelRegistration(L2Player player)
 	{
 		if (!active)
 			return;
@@ -557,7 +557,7 @@ public final class AutomatedTvT
 			player.sendMessage("You have not registered in " + evtName);
 	}
 	
-	public final void onKill(L2PcInstance killer, L2PcInstance victim)
+	public final void onKill(L2Player killer, L2Player victim)
 	{
 		if (status != STATUS_COMBAT || !isMember(killer) || !isMember(victim))
 			return;
@@ -598,13 +598,13 @@ public final class AutomatedTvT
 		updatePlayerTitle(vp);
 	}
 	
-	public final void revive(L2PcInstance participant, int team)
+	public final void revive(L2Player participant, int team)
 	{
 		participant.setIsPendingRevive(true);
 		participant.teleToLocation(Config.AUTO_TVT_TEAM_LOCATIONS[team]);
 	}
 	
-	public final void recover(L2PcInstance revived)
+	public final void recover(L2Player revived)
 	{
 		if (Config.AUTO_TVT_REVIVE_RECOVER && isPlaying(revived))
 		{
@@ -615,7 +615,7 @@ public final class AutomatedTvT
 	
 	private final void updatePlayerTitle(Participant p)
 	{
-		L2PcInstance player = p.getPlayer();
+		L2Player player = p.getPlayer();
 		if (player == null)
 			return;
 		if (p.isGodlike())
@@ -625,7 +625,7 @@ public final class AutomatedTvT
 		player.broadcastTitleInfo();
 	}
 	
-	public final void onDisconnection(L2PcInstance player)
+	public final void onDisconnection(L2Player player)
 	{
 		if (!isReged(player))
 			return;
@@ -746,7 +746,7 @@ public final class AutomatedTvT
 			teamMembers[i] = 0;
 	}
 	
-	private final void removeFromEvent(L2PcInstance player, Participant p)
+	private final void removeFromEvent(L2Player player, Participant p)
 	{
 		player.getAppearance().setVisibleTitle(null);
 		p.setNameColor(-1);
@@ -769,11 +769,11 @@ public final class AutomatedTvT
 		private final int objectID;
 		private final Location loc;
 		private int nameColor = -1;
-		private volatile L2PcInstance player;
+		private volatile L2Player player;
 		private int points;
 		private int killsNoDeath;
 		
-		private Participant(int team, L2PcInstance player)
+		private Participant(int team, L2Player player)
 		{
 			this.team = team;
 			objectID = player.getObjectId();
@@ -783,12 +783,12 @@ public final class AutomatedTvT
 			killsNoDeath = 0;
 		}
 		
-		public final L2PcInstance getPlayer()
+		public final L2Player getPlayer()
 		{
 			return player;
 		}
 		
-		public final void setPlayer(L2PcInstance player)
+		public final void setPlayer(L2Player player)
 		{
 			this.player = player;
 		}

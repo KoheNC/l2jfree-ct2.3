@@ -35,20 +35,20 @@ import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
-import com.l2jfree.gameserver.model.L2Party;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Summon;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PetInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.L2Summon;
+import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.restriction.global.TvTRestriction;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
-import com.l2jfree.gameserver.network.serverpackets.ActionFailed;
-import com.l2jfree.gameserver.network.serverpackets.CreatureSay;
-import com.l2jfree.gameserver.network.serverpackets.MagicSkillUse;
-import com.l2jfree.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.network.packets.server.ActionFailed;
+import com.l2jfree.gameserver.network.packets.server.CreatureSay;
+import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
+import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.tools.random.Rnd;
 
@@ -68,7 +68,7 @@ public class TvT
 		public int _countTvTdies;
 		public int _originalKarmaTvT;
 		
-		private TvTPlayerInfo(L2PcInstance player)
+		private TvTPlayerInfo(L2Player player)
 		{
 			super(player);
 		}
@@ -89,8 +89,8 @@ public class TvT
 	public static CopyOnWriteArrayList<String> _savePlayers = new CopyOnWriteArrayList<String>();
 	public static CopyOnWriteArrayList<String> _savePlayerTeams = new CopyOnWriteArrayList<String>();
 	
-	public static CopyOnWriteArrayList<L2PcInstance> _players = new CopyOnWriteArrayList<L2PcInstance>();
-	public static CopyOnWriteArrayList<L2PcInstance> _playersShuffle = new CopyOnWriteArrayList<L2PcInstance>();
+	public static CopyOnWriteArrayList<L2Player> _players = new CopyOnWriteArrayList<L2Player>();
+	public static CopyOnWriteArrayList<L2Player> _playersShuffle = new CopyOnWriteArrayList<L2Player>();
 	public static CopyOnWriteArrayList<Integer> _teamPlayersCount = new CopyOnWriteArrayList<Integer>();
 	public static CopyOnWriteArrayList<Integer> _teamKillsCount = new CopyOnWriteArrayList<Integer>();
 	public static CopyOnWriteArrayList<Integer> _teamColors = new CopyOnWriteArrayList<Integer>();
@@ -133,7 +133,7 @@ public class TvT
 			CreatureSay cs = new CreatureSay(0, SystemChatChannelId.Chat_Announce, "", announce);
 			if (_players != null && !_players.isEmpty())
 			{
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null && player.isOnline() != 0)
 						player.sendPacket(cs);
@@ -142,12 +142,12 @@ public class TvT
 		}
 	}
 	
-	public static void kickPlayerFromTvt(L2PcInstance playerToKick)
+	public static void kickPlayerFromTvt(L2Player playerToKick)
 	{
 		removePlayer(playerToKick, true);
 	}
 	
-	public static void setNpcPos(L2PcInstance activeChar)
+	public static void setNpcPos(L2Player activeChar)
 	{
 		_npcX = activeChar.getX();
 		_npcY = activeChar.getY();
@@ -235,7 +235,7 @@ public class TvT
 		_teams.remove(index);
 	}
 	
-	public static void setTeamPos(String teamName, L2PcInstance activeChar)
+	public static void setTeamPos(String teamName, L2Player activeChar)
 	{
 		int index = _teams.indexOf(teamName);
 		
@@ -278,7 +278,7 @@ public class TvT
 		
 	}
 	
-	public static void startJoin(L2PcInstance activeChar)
+	public static void startJoin(L2Player activeChar)
 	{
 		if (!startJoinOk())
 		{
@@ -346,7 +346,7 @@ public class TvT
 					.contains(0));
 	}
 	
-	private static void spawnEventNpc(L2PcInstance activeChar)
+	private static void spawnEventNpc(L2Player activeChar)
 	{
 		L2NpcTemplate tmpl = NpcTable.getInstance().getTemplate(_npcId);
 		
@@ -443,7 +443,7 @@ public class TvT
 			{
 				TvT.sit();
 				
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null)
 					{
@@ -512,7 +512,7 @@ public class TvT
 			{
 				TvT.sit();
 				
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null)
 					{
@@ -555,7 +555,7 @@ public class TvT
 		return true;
 	}
 	
-	public static void startEvent(L2PcInstance activeChar)
+	public static void startEvent(L2Player activeChar)
 	{
 		if (!startEventOk())
 		{
@@ -707,7 +707,7 @@ public class TvT
 		}
 		else if (Config.TVT_EVEN_TEAMS.equals("SHUFFLE"))
 		{
-			CopyOnWriteArrayList<L2PcInstance> playersShuffleTemp = new CopyOnWriteArrayList<L2PcInstance>();
+			CopyOnWriteArrayList<L2Player> playersShuffleTemp = new CopyOnWriteArrayList<L2Player>();
 			int loopCount = 0;
 			
 			loopCount = _playersShuffle.size();
@@ -739,7 +739,7 @@ public class TvT
 				break;
 			
 			int playerToAddIndex = Rnd.nextInt(_playersShuffle.size());
-			L2PcInstance player = null;
+			L2Player player = null;
 			player = _playersShuffle.get(playerToAddIndex);
 			player.as(TvTPlayerInfo.class)._originalKarmaTvT = player.getKarma();
 			
@@ -760,7 +760,7 @@ public class TvT
 	
 	public static void setUserData()
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			final TvTPlayerInfo info = player.as(TvTPlayerInfo.class);
 			
@@ -808,7 +808,7 @@ public class TvT
 	//show loosers and winners animations
 	public static void playKneelAnimation(String teamName)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -843,7 +843,7 @@ public class TvT
 	
 	public static void rewardTeam(String teamName)
 	{
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null && player.isOnline() != 0 && player.isInEvent(TvTPlayerInfo.class))
 			{
@@ -862,7 +862,7 @@ public class TvT
 					nhm.setHtml(replyMSG.moveToString());
 					player.sendPacket(nhm);
 					
-					// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+					// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 					player.sendPacket(ActionFailed.STATIC_PACKET);
 				}
 			}
@@ -893,7 +893,7 @@ public class TvT
 	{
 		_sitForced = !_sitForced;
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -962,10 +962,10 @@ public class TvT
 		{
 			_log.info("");
 			_log.info("#########################################");
-			_log.info("# _playersShuffle(CopyOnWriteArrayList<L2PcInstance>) #");
+			_log.info("# _playersShuffle(CopyOnWriteArrayList<L2Player>) #");
 			_log.info("#########################################");
 			
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player != null)
 					_log.info("Name: " + player.getName());
@@ -974,10 +974,10 @@ public class TvT
 		
 		_log.info("");
 		_log.info("##################################");
-		_log.info("# _players(CopyOnWriteArrayList<L2PcInstance>) #");
+		_log.info("# _players(CopyOnWriteArrayList<L2Player>) #");
 		_log.info("##################################");
 		
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 				_log.info("Name: " + player.getName() + "   Team: " + player.as(TvTPlayerInfo.class)._teamNameTvT
@@ -1005,8 +1005,8 @@ public class TvT
 		_teams = new CopyOnWriteArrayList<String>();
 		_savePlayers = new CopyOnWriteArrayList<String>();
 		_savePlayerTeams = new CopyOnWriteArrayList<String>();
-		_players = new CopyOnWriteArrayList<L2PcInstance>();
-		_playersShuffle = new CopyOnWriteArrayList<L2PcInstance>();
+		_players = new CopyOnWriteArrayList<L2Player>();
+		_playersShuffle = new CopyOnWriteArrayList<L2Player>();
 		_teamPlayersCount = new CopyOnWriteArrayList<Integer>();
 		_teamKillsCount = new CopyOnWriteArrayList<Integer>();
 		_teamColors = new CopyOnWriteArrayList<Integer>();
@@ -1169,7 +1169,7 @@ public class TvT
 		}
 	}
 	
-	public static void showEventHtml(L2PcInstance eventPlayer, String objectId)
+	public static void showEventHtml(L2Player eventPlayer, String objectId)
 	{
 		try
 		{
@@ -1281,7 +1281,7 @@ public class TvT
 			adminReply.setHtml(replyMSG.moveToString());
 			eventPlayer.sendPacket(adminReply);
 			
-			// Send a Server->Client ActionFailed to the L2PcInstance in order to avoid that the client wait another packet
+			// Send a Server->Client ActionFailed to the L2Player in order to avoid that the client wait another packet
 			eventPlayer.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 		catch (Exception e)
@@ -1290,7 +1290,7 @@ public class TvT
 		}
 	}
 	
-	public static void addPlayer(L2PcInstance player, String teamName)
+	public static void addPlayer(L2Player player, String teamName)
 	{
 		if (!addPlayerOk(teamName, player))
 			return;
@@ -1316,7 +1316,7 @@ public class TvT
 			if (_playersShuffle == null || _playersShuffle.isEmpty())
 				return;
 			
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player == null)
 					_playersShuffle.remove(player);
@@ -1332,11 +1332,11 @@ public class TvT
 		}
 	}
 	
-	public static boolean checkShufflePlayers(L2PcInstance eventPlayer)
+	public static boolean checkShufflePlayers(L2Player eventPlayer)
 	{
 		try
 		{
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player == null || player.isOnline() == 0)
 				{
@@ -1363,7 +1363,7 @@ public class TvT
 		return false;
 	}
 	
-	public static boolean addPlayerOk(String teamName, L2PcInstance eventPlayer)
+	public static boolean addPlayerOk(String teamName, L2Player eventPlayer)
 	{
 		if (GlobalRestrictions.isRestricted(eventPlayer, TvTRestriction.class))
 		{
@@ -1379,7 +1379,7 @@ public class TvT
 				return false;
 			}
 			
-			for (L2PcInstance player : _players)
+			for (L2Player player : _players)
 			{
 				if (player.getObjectId() == eventPlayer.getObjectId())
 				{
@@ -1458,7 +1458,7 @@ public class TvT
 		return false;
 	}
 	
-	public static synchronized void addDisconnectedPlayer(L2PcInstance player)
+	public static synchronized void addDisconnectedPlayer(L2Player player)
 	{
 		if ((Config.TVT_EVEN_TEAMS.equals("SHUFFLE") && (_teleport || _started))
 				|| (Config.TVT_EVEN_TEAMS.equals("NO") || Config.TVT_EVEN_TEAMS.equals("BALANCE")
@@ -1472,7 +1472,7 @@ public class TvT
 			final TvTPlayerInfo info = new TvTPlayerInfo(player);
 			player.setPlayerInfo(info);
 			info._teamNameTvT = _savePlayerTeams.get(_savePlayers.indexOf(player.getName()));
-			for (L2PcInstance p : _players)
+			for (L2Player p : _players)
 			{
 				if (p == null)
 				{
@@ -1497,12 +1497,12 @@ public class TvT
 		}
 	}
 	
-	public static void removePlayer(L2PcInstance player)
+	public static void removePlayer(L2Player player)
 	{
 		removePlayer(player, false);
 	}
 	
-	public static void removePlayer(L2PcInstance player, boolean kick)
+	public static void removePlayer(L2Player player, boolean kick)
 	{
 		final TvTPlayerInfo info = player.getPlayerInfo(TvTPlayerInfo.class);
 		
@@ -1539,7 +1539,7 @@ public class TvT
 	public static void cleanTvT()
 	{
 		_log.info("TvT : Cleaning players.");
-		for (L2PcInstance player : _players)
+		for (L2Player player : _players)
 		{
 			if (player != null)
 			{
@@ -1548,7 +1548,7 @@ public class TvT
 		}
 		if (_playersShuffle != null && !_playersShuffle.isEmpty())
 		{
-			for (L2PcInstance player : _playersShuffle)
+			for (L2Player player : _playersShuffle)
 			{
 				if (player != null)
 					player.setPlayerInfo(null);
@@ -1565,8 +1565,8 @@ public class TvT
 		
 		_topKills = 0;
 		_topTeam = "";
-		_players = new CopyOnWriteArrayList<L2PcInstance>();
-		_playersShuffle = new CopyOnWriteArrayList<L2PcInstance>();
+		_players = new CopyOnWriteArrayList<L2Player>();
+		_playersShuffle = new CopyOnWriteArrayList<L2Player>();
 		_savePlayers = new CopyOnWriteArrayList<String>();
 		_savePlayerTeams = new CopyOnWriteArrayList<String>();
 		_log.info("Cleaning TvT done.");
@@ -1590,7 +1590,7 @@ public class TvT
 			@Override
 			public void run()
 			{
-				for (L2PcInstance player : _players)
+				for (L2Player player : _players)
 				{
 					if (player != null)
 					{

@@ -106,7 +106,7 @@ public interface IRemoteAdministration extends Remote
 	/**
 	 * This method returns a map containing the information of all the players online at one particular moment.<br>
 	 * For each key (String containing the name of a player), this method returns an Array of Strings following the object model of the
-	 * L2CharacterBriefEntry class.
+	 * L2CreatureBriefEntry class.
 	 * 
 	 * @return a map containing brief information of all the online players at a given moment.
 	 * @throws RemoteException

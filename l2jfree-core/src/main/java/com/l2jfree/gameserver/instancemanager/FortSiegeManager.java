@@ -27,22 +27,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.config.L2Properties;
 import com.l2jfree.gameserver.datatables.SkillTable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.model.CombatFlag;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.instance.L2DoorInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.FortSiege;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 public class FortSiegeManager
 {
@@ -81,7 +81,7 @@ public class FortSiegeManager
 	
 	// =========================================================
 	// Method - Public
-	public final void addSiegeSkills(L2PcInstance character)
+	public final void addSiegeSkills(L2Player character)
 	{
 		character.addSkill(SkillTable.getInstance().getInfo(246, 1), false);
 		character.addSkill(SkillTable.getInstance().getInfo(247, 1), false);
@@ -89,15 +89,15 @@ public class FortSiegeManager
 	
 	/**
 	 * Return true if character summon<BR><BR>
-	 * @param activeChar The L2Character of the character can summon
+	 * @param activeChar The L2Creature of the character can summon
 	 */
-	public final boolean checkIfOkToSummon(L2Character activeChar, boolean isCheckOnly)
+	public final boolean checkIfOkToSummon(L2Creature activeChar, boolean isCheckOnly)
 	{
-		if (!(activeChar instanceof L2PcInstance))
+		if (!(activeChar instanceof L2Player))
 			return false;
 		
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1);
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		Fort fort = FortManager.getInstance().getFort(player);
 		
 		if (fort == null || fort.getFortId() <= 0)
@@ -156,7 +156,7 @@ public class FortSiegeManager
 		return register;
 	}
 	
-	public final void removeSiegeSkills(L2PcInstance character)
+	public final void removeSiegeSkills(L2Player character)
 	{
 		character.removeSkill(SkillTable.getInstance().getInfo(246, 1));
 		character.removeSkill(SkillTable.getInstance().getInfo(247, 1));
@@ -246,7 +246,7 @@ public class FortSiegeManager
 		_commanderSpawnList.clear();
 		try
 		{
-			L2Config.loadConfig("fortsiege");
+			L2AutoInitialization.loadConfig("fortsiege");
 		}
 		catch (Exception e)
 		{
@@ -319,7 +319,7 @@ public class FortSiegeManager
 		return (itemId == 9819);
 	}
 	
-	public boolean activateCombatFlag(L2PcInstance player, L2ItemInstance item)
+	public boolean activateCombatFlag(L2Player player, L2ItemInstance item)
 	{
 		if (!checkIfCanPickup(player))
 			return false;
@@ -337,7 +337,7 @@ public class FortSiegeManager
 		return true;
 	}
 	
-	public boolean checkIfCanPickup(L2PcInstance player)
+	public boolean checkIfCanPickup(L2Player player)
 	{
 		SystemMessage sm;
 		sm = new SystemMessage(SystemMessageId.THE_FORTRESS_BATTLE_OF_S1_HAS_FINISHED);
@@ -372,13 +372,13 @@ public class FortSiegeManager
 		return true;
 	}
 	
-	public static boolean checkIfOkToUseStriderSiegeAssault(L2Character activeChar, boolean isCheckOnly)
+	public static boolean checkIfOkToUseStriderSiegeAssault(L2Creature activeChar, boolean isCheckOnly)
 	{
-		if (activeChar == null || !(activeChar instanceof L2PcInstance))
+		if (activeChar == null || !(activeChar instanceof L2Player))
 			return false;
 		
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1);
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		// Get siege battleground
 		FortSiege siege = FortSiegeManager.getInstance().getSiege(player);
@@ -399,13 +399,13 @@ public class FortSiegeManager
 		return false;
 	}
 	
-	public static boolean checkIfOkToPlaceFlag(L2Character activeChar, boolean isCheckOnly)
+	public static boolean checkIfOkToPlaceFlag(L2Creature activeChar, boolean isCheckOnly)
 	{
-		if (activeChar == null || !(activeChar instanceof L2PcInstance))
+		if (activeChar == null || !(activeChar instanceof L2Player))
 			return false;
 		
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1);
-		L2PcInstance player = (L2PcInstance)activeChar;
+		L2Player player = (L2Player)activeChar;
 		
 		// Get siege battleground
 		FortSiege siege = FortSiegeManager.getInstance().getSiege(player);
@@ -430,7 +430,7 @@ public class FortSiegeManager
 		return false;
 	}
 	
-	public void dropCombatFlag(L2PcInstance player)
+	public void dropCombatFlag(L2Player player)
 	{
 		Fort fort = FortManager.getInstance().getFort(player);
 		FastList<CombatFlag> fcf = _flagList.get(fort.getFortId());

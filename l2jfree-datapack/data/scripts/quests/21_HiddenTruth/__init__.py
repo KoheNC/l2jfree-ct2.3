@@ -3,12 +3,12 @@
 # Visit http://forum.l2jdp.com for more details.
 import sys
 from com.l2jfree import Config
-from com.l2jfree.gameserver.ai import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
 from com.l2jfree.gameserver.model import L2CharPosition
-from com.l2jfree.gameserver.network.serverpackets import NpcSay
+from com.l2jfree.gameserver.network.packets.server import NpcSay
 
 qn = "21_HiddenTruth"
 

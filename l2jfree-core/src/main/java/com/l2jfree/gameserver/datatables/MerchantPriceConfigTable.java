@@ -30,9 +30,9 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.InstanceListManager;
+import com.l2jfree.gameserver.gameobjects.instance.L2MerchantInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.actor.instance.L2MerchantInstance;
+import com.l2jfree.gameserver.instancemanager.InstanceListManager;
 import com.l2jfree.gameserver.model.entity.Castle;
 
 /**

@@ -14,9 +14,9 @@
  */
 package transformations;
 
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.L2Transformation;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 
 public class FlyingFinalForm extends L2Transformation
 {
@@ -27,7 +27,7 @@ public class FlyingFinalForm extends L2Transformation
 	}
 	
 	@Override
-	public void transformedSkills(L2PcInstance player)
+	public void transformedSkills(L2Player player)
 	{
 		addSkill(player, 953, 1); // Life to Soul
 		addSkill(player, 1545, 1); // Soul Sucking
@@ -46,7 +46,7 @@ public class FlyingFinalForm extends L2Transformation
 	}
 	
 	@Override
-	public void removeSkills(L2PcInstance player)
+	public void removeSkills(L2Player player)
 	{
 		removeSkill(player, 953); // Life to Soul
 		removeSkill(player, 1545);// Soul Sucking

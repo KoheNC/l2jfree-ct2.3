@@ -14,15 +14,15 @@
  */
 package quests.converted;
 
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.base.Race;
-import com.l2jfree.gameserver.model.itemcontainer.PcInventory;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.base.Race;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
-import com.l2jfree.gameserver.network.serverpackets.NpcSay;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.network.packets.server.NpcSay;
 
 /**
  * A quest for all races except dark elves.
@@ -54,7 +54,7 @@ public final class BloodFiend extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		QuestState qs = player.getQuestState(BLOOD_FIEND);
 		if (qs.isCompleted())
@@ -71,7 +71,7 @@ public final class BloodFiend extends QuestJython
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet, L2Skill skill)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet, L2Skill skill)
 	{
 		switch (npc.getQuestAttackStatus())
 		{
@@ -89,9 +89,9 @@ public final class BloodFiend extends QuestJython
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2Player killer, boolean isPet)
 	{
-		L2PcInstance quester = killer/*npc.getQuestFirstAttacker()*/;
+		L2Player quester = killer/*npc.getQuestFirstAttacker()*/;
 		if (quester == null)
 			return null;
 		QuestState qs = quester.getQuestState(BLOOD_FIEND);
@@ -110,7 +110,7 @@ public final class BloodFiend extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		QuestState qs = talker.getQuestState(BLOOD_FIEND);
 		if (qs == null)
@@ -139,7 +139,7 @@ public final class BloodFiend extends QuestJython
 			if (qs.getQuestItemsCount(KIRUNAK_SKULL) != 0)
 			{
 				qs.exitQuest(false);
-				qs.rewardItems(PcInventory.ADENA_ID, 42130);
+				qs.rewardItems(PlayerInventory.ADENA_ID, 42130);
 				qs.addExpAndSp(35637, 1854);
 				talker.sendPacket(SND_FINISH);
 				return "30149-06.htm";

@@ -34,17 +34,17 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.HeroSkillTable;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.itemcontainer.Inventory;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.InventoryUpdate;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.templates.StatsSet;
 
 public class Hero
@@ -239,7 +239,7 @@ public class Hero
 			{
 				String name = hero.getString(Olympiad.CHAR_NAME);
 				
-				L2PcInstance player = L2World.getInstance().getPlayer(name);
+				L2Player player = L2World.getInstance().getPlayer(name);
 				
 				if (player == null)
 					continue;
@@ -321,7 +321,7 @@ public class Hero
 		{
 			String name = hero.getString(Olympiad.CHAR_NAME);
 			
-			L2PcInstance player = L2World.getInstance().getPlayer(name);
+			L2Player player = L2World.getInstance().getPlayer(name);
 			
 			if (player != null)
 			{

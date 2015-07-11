@@ -14,13 +14,13 @@
  */
 package ai.group_template;
 
-import com.l2jfree.gameserver.ai.CtrlIntention;
-import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2ChestInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
+import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.tools.random.Rnd;
 
 /**
@@ -55,7 +55,7 @@ public class Chests extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onSkillSee(L2Npc npc, L2PcInstance caster, L2Skill skill, L2Object[] targets, boolean isPet)
+	public String onSkillSee(L2Npc npc, L2Player caster, L2Skill skill, L2Object[] targets, boolean isPet)
 	{
 		if (npc instanceof L2ChestInstance)
 		{
@@ -110,7 +110,7 @@ public class Chests extends L2AttackableAIScript
 				}
 				else
 				{
-					L2Character originalCaster = isPet ? caster.getPet() : caster;
+					L2Creature originalCaster = isPet ? caster.getPet() : caster;
 					chest.setRunning();
 					chest.addDamageHate(originalCaster, 0, 999);
 					chest.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalCaster);
@@ -121,7 +121,7 @@ public class Chests extends L2AttackableAIScript
 	}
 	
 	@Override
-	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
+	public String onAttack(L2Npc npc, L2Player attacker, int damage, boolean isPet)
 	{
 		if (npc instanceof L2ChestInstance)
 		{
@@ -149,7 +149,7 @@ public class Chests extends L2AttackableAIScript
 				{
 					// if this weren't a box, upon interaction start the mimic behaviors...
 					// todo: perhaps a self-buff (skill id 4245) with random chance goes here?
-					L2Character originalAttacker = isPet ? attacker.getPet() : attacker;
+					L2Creature originalAttacker = isPet ? attacker.getPet() : attacker;
 					chest.setRunning();
 					chest.addDamageHate(originalAttacker, 0, (damage * 100) / (chest.getLevel() + 7));
 					chest.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalAttacker);

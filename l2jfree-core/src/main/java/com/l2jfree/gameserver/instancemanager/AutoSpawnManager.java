@@ -31,12 +31,12 @@ import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.Location;
-import com.l2jfree.gameserver.model.actor.L2Npc;
 import com.l2jfree.gameserver.model.entity.Town;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.tools.random.Rnd;
 
 /**

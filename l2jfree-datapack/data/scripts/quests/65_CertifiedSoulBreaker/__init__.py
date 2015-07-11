@@ -2,13 +2,13 @@
 # this script is part of the Official L2J Datapack Project.
 # Visit http://www.l2jdp.com/forum/ for more details.
 import sys
-from com.l2jfree.gameserver.ai                 import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai                 import CtrlIntention
 from com.l2jfree.gameserver.model.quest        import State
 from com.l2jfree.gameserver.model.quest        import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets      import NpcSay
-from com.l2jfree.gameserver.network.serverpackets      import SocialAction
-from com.l2jfree.gameserver.network.serverpackets      import ActionFailed
+from com.l2jfree.gameserver.network.packets.server      import NpcSay
+from com.l2jfree.gameserver.network.packets.server      import SocialAction
+from com.l2jfree.gameserver.network.packets.server      import ActionFailed
 
 qn = "65_CertifiedSoulBreaker"
 

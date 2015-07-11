@@ -29,25 +29,24 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.NpcTable;
+import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
+import com.l2jfree.gameserver.gameobjects.instance.L2SiegeTeleporterInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.AutoChatHandler;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.L2Character;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeGuardInstance;
-import com.l2jfree.gameserver.model.actor.instance.L2SiegeTeleporterInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.clientpackets.ConfirmDlgAnswer.AnswerHandler;
-import com.l2jfree.gameserver.network.serverpackets.ConfirmDlg;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
+import com.l2jfree.gameserver.network.packets.client.ConfirmDlgAnswer.AnswerHandler;
+import com.l2jfree.gameserver.network.packets.server.ConfirmDlg;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 
 /**
  * Completely revamped mercenary manager.
@@ -862,7 +861,7 @@ public class MercTicketManager
 	 * @param player The castle owning clan member
 	 * @param merc The mercenary posting ticket
 	 */
-	public final void reqPosition(final L2PcInstance player, final L2ItemInstance merc)
+	public final void reqPosition(final L2Player player, final L2ItemInstance merc)
 	{
 		if (player == null || merc == null)
 			return;
@@ -900,7 +899,7 @@ public class MercTicketManager
 	 * <LI>A non-dawn mercenary is positioned <I>(when Seal of Strife is unclaimed)</I></LI>
 	 * @param player which confirmed mercenary positioning
 	 */
-	public final void addPosition(L2PcInstance player, Integer itemObjId)
+	public final void addPosition(L2Player player, Integer itemObjId)
 	{
 		L2ItemInstance ticket = player.getInventory().getItemByObjectId(itemObjId);
 		if (ticket == null)
@@ -1033,7 +1032,7 @@ public class MercTicketManager
 			merc.getStatus().setCurrentHpMp(merc.getMaxHp(), merc.getMaxMp());
 			merc.setDecayed(false);
 			merc.spawnMe(x, y, (z + 20));
-			AutoChatHandler.getInstance().registerChat(merc, MercTicketManager.MESSAGES, 0);
+			AutoChatManager.getInstance().registerChat(merc, MercTicketManager.MESSAGES, 0);
 			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 				@Override
 				public void run()
@@ -1051,7 +1050,7 @@ public class MercTicketManager
 	 * @param ticket an item
 	 * @return allow player to pick up this item
 	 */
-	public final boolean canPickUp(L2PcInstance player, L2ItemInstance ticket)
+	public final boolean canPickUp(L2Player player, L2ItemInstance ticket)
 	{
 		// not a mercenary posting ticket
 		if (ticket == null || !isTicket(ticket.getItemId()))
@@ -1079,7 +1078,7 @@ public class MercTicketManager
 	}
 	
 	/**
-	 * This method should only be called from {@link L2ItemInstance#pickupMe(L2Character)}
+	 * This method should only be called from {@link L2ItemInstance#pickupMe(L2Creature)}
 	 * without any additional checks.<BR>
 	 * The item is validated if it is a mercenary ticket and then the position is cleared
 	 * from {@link #_positions} and removed from the database.

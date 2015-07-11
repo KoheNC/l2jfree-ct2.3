@@ -14,9 +14,9 @@
  */
 package village_master;
 
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.model.base.Race;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.base.Race;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
 
 /**
@@ -38,7 +38,7 @@ public final class Asterios extends QuestJython
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.contains("-11") || event.contains("-12") || event.contains("-13"))
 			return null;
@@ -47,7 +47,7 @@ public final class Asterios extends QuestJython
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance talker)
+	public String onTalk(L2Npc npc, L2Player talker)
 	{
 		if (talker.getRace() != Race.Elf)
 			return "30154-11.htm";

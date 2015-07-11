@@ -22,7 +22,7 @@ import java.awt.HeadlessException;
 
 import javax.swing.UIManager;
 
-import com.l2jfree.L2Config;
+import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.tools.dbinstaller.console.DBInstallerConsole;
 import com.l2jfree.tools.dbinstaller.gui.DBConfigGUI;
 
@@ -39,7 +39,7 @@ public class LauncherLS extends AbstractDBLauncher
 		final String dir;
 		final String cleanUpScript;
 		
-		if (L2Config.isIDEMode())
+		if (L2AutoInitialization.isIDEMode())
 		{
 			dir = "../l2jfree-login/sql/";
 			cleanUpScript = "../l2jfree-login/tools/ls_cleanup.sql";

@@ -3,12 +3,12 @@
 import sys
 
 from com.l2jfree                                  import Config
-from com.l2jfree.gameserver.model.itemcontainer   import Inventory
+from com.l2jfree.gameserver.gameobjects.itemcontainer   import Inventory
 from com.l2jfree.gameserver.model.quest           import State
 from com.l2jfree.gameserver.model.quest           import QuestState
 from com.l2jfree.gameserver.model.quest.jython    import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets import NpcSay
-from com.l2jfree.gameserver.network.serverpackets import SystemMessage
+from com.l2jfree.gameserver.network.packets.server import NpcSay
+from com.l2jfree.gameserver.network.packets.server import SystemMessage
 from com.l2jfree.tools.random                     import Rnd
 from java.lang                                    import System
 from java.text                                    import SimpleDateFormat

@@ -26,7 +26,7 @@ import com.l2jfree.gameserver.communitybbs.bb.Forum;
 import com.l2jfree.gameserver.communitybbs.bb.Post;
 import com.l2jfree.gameserver.communitybbs.bb.Post.CPost;
 import com.l2jfree.gameserver.communitybbs.bb.Topic;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.lang.L2TextBuilder;
 
 public class PostBBSManager extends BaseBBSManager
@@ -84,10 +84,10 @@ public class PostBBSManager extends BaseBBSManager
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
+	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java.lang.String, com.l2jfree.gameserver.gameobjects.instance.L2Player)
 	 */
 	@Override
-	public void parsecmd(String command, L2PcInstance activeChar)
+	public void parsecmd(String command, L2Player activeChar)
 	{
 		if (command.startsWith("_bbsposts;read;"))
 		{
@@ -137,7 +137,7 @@ public class PostBBSManager extends BaseBBSManager
 	 * @param activeChar
 	 * @param idp
 	 */
-	private void showEditPost(Topic topic, Forum forum, L2PcInstance activeChar, int idp)
+	private void showEditPost(Topic topic, Forum forum, L2Player activeChar, int idp)
 	{
 		Post p = getGPosttByTopic(topic);
 		if ((forum == null) || (topic == null) || (p == null))
@@ -159,7 +159,7 @@ public class PostBBSManager extends BaseBBSManager
 	 * @param ind
 	 * @param idf
 	 */
-	private void showPost(Topic topic, Forum forum, L2PcInstance activeChar, int ind)
+	private void showPost(Topic topic, Forum forum, L2Player activeChar, int ind)
 	{
 		if ((forum == null) || (topic == null))
 		{
@@ -184,7 +184,7 @@ public class PostBBSManager extends BaseBBSManager
 	 * @param forum
 	 * @param p
 	 */
-	private void showHtmlEditPost(Topic topic, L2PcInstance activeChar, Forum forum, Post p)
+	private void showHtmlEditPost(Topic topic, L2Player activeChar, Forum forum, Post p)
 	{
 		final L2TextBuilder html = L2TextBuilder.newInstance();
 		html.append("<html>");
@@ -245,7 +245,7 @@ public class PostBBSManager extends BaseBBSManager
 	 * @param activeChar
 	 * @param forum
 	 */
-	private void showMemoPost(Topic topic, L2PcInstance activeChar, Forum forum)
+	private void showMemoPost(Topic topic, L2Player activeChar, Forum forum)
 	{
 		//
 		Post p = getGPosttByTopic(topic);
@@ -326,10 +326,10 @@ public class PostBBSManager extends BaseBBSManager
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.l2jfree.gameserver.model.actor.instance.L2PcInstance)
+	 * @see com.l2jfree.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.l2jfree.gameserver.gameobjects.instance.L2Player)
 	 */
 	@Override
-	public void parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2PcInstance activeChar)
+	public void parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2Player activeChar)
 	{
 		
 		StringTokenizer st = new StringTokenizer(ar1, ";");

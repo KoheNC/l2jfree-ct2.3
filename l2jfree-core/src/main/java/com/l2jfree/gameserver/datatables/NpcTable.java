@@ -24,26 +24,26 @@ import java.util.Set;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.base.ClassId;
+import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
+import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.FactionManager;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
-import com.l2jfree.gameserver.model.L2DropCategory;
-import com.l2jfree.gameserver.model.L2DropData;
 import com.l2jfree.gameserver.model.L2MinionData;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2MonsterInstance;
-import com.l2jfree.gameserver.model.base.ClassId;
+import com.l2jfree.gameserver.model.drop.L2DropCategory;
+import com.l2jfree.gameserver.model.drop.L2DropData;
 import com.l2jfree.gameserver.model.entity.faction.Faction;
-import com.l2jfree.gameserver.skills.Formulas;
-import com.l2jfree.gameserver.skills.Stats;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jfree.util.LookupTable;
 
 public final class NpcTable
@@ -467,7 +467,7 @@ public final class NpcTable
 			L2DropCategory[] categories = new L2DropCategory[0];
 			
 			if (old != null && old.getDropData() != null)
-				categories = (L2DropCategory[])ArrayUtils.addAll(categories, old.getDropData());
+				categories = ArrayUtils.addAll(categories, old.getDropData());
 			
 			FastList<ClassId> classIds = new FastList<ClassId>();
 			
@@ -477,7 +477,7 @@ public final class NpcTable
 			L2MinionData[] minions = new L2MinionData[0];
 			
 			if (old != null && old.getMinionData() != null)
-				minions = (L2MinionData[])ArrayUtils.addAll(minions, old.getMinionData());
+				minions = ArrayUtils.addAll(minions, old.getMinionData());
 			
 			// reload the NPC base data
 			con = L2DatabaseFactory.getInstance().getConnection();

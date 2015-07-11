@@ -2,7 +2,7 @@
 import sys
 from java.lang import System
 from com.l2jfree import L2DatabaseFactory
-from com.l2jfree.gameserver.ai import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.datatables import DoorTable
 from com.l2jfree.gameserver.datatables import SpawnTable
 from com.l2jfree.gameserver.instancemanager import CastleManager
@@ -10,9 +10,9 @@ from com.l2jfree.gameserver.model import L2CharPosition
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets import NpcSay
-from com.l2jfree.gameserver.network.serverpackets import SocialAction
-from com.l2jfree.gameserver.network.serverpackets import SpecialCamera
+from com.l2jfree.gameserver.network.packets.server import NpcSay
+from com.l2jfree.gameserver.network.packets.server import SocialAction
+from com.l2jfree.gameserver.network.packets.server import SpecialCamera
 from com.l2jfree.tools.random import Rnd
 
 Benom = 29054

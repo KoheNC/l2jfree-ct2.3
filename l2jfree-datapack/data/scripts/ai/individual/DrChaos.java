@@ -16,16 +16,16 @@ package ai.individual;
 
 import java.util.Map;
 
-import com.l2jfree.gameserver.ai.CtrlIntention;
 import com.l2jfree.gameserver.datatables.SpawnTable;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.quest.Quest;
-import com.l2jfree.gameserver.network.serverpackets.PlaySound;
-import com.l2jfree.gameserver.network.serverpackets.SocialAction;
-import com.l2jfree.gameserver.network.serverpackets.SpecialCamera;
+import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
+import com.l2jfree.gameserver.network.packets.server.PlaySound;
+import com.l2jfree.gameserver.network.packets.server.SocialAction;
+import com.l2jfree.gameserver.network.packets.server.SpecialCamera;
 
 /**
  * DrChaos AI
@@ -64,7 +64,7 @@ public class DrChaos extends Quest
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		if (event.equalsIgnoreCase("1"))
 		{
@@ -110,7 +110,7 @@ public class DrChaos extends Quest
 	}
 	
 	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	public String onFirstTalk(L2Npc npc, L2Player player)
 	{
 		if (npc.getNpcId() == DOCTER_CHAOS)
 		{

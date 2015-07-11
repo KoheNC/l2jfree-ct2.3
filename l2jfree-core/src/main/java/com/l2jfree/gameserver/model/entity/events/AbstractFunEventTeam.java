@@ -19,7 +19,7 @@ import java.util.Set;
 
 import javolution.util.FastMap;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.events.AbstractFunEvent.FunEventState;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2FastSet;
@@ -68,11 +68,11 @@ public abstract class AbstractFunEventTeam<Info extends AbstractFunEventPlayerIn
 	/**
 	 * @return currently online participants
 	 */
-	public final Iterable<L2PcInstance> getPlayers()
+	public final Iterable<L2Player> getPlayers()
 	{
-		return L2Collections.convertingIterable(_players.values(), new L2Collections.Converter<Info, L2PcInstance>() {
+		return L2Collections.convertingIterable(_players.values(), new L2Collections.Converter<Info, L2Player>() {
 			@Override
-			public L2PcInstance convert(Info info)
+			public L2Player convert(Info info)
 			{
 				return info.getPlayer();
 			}
@@ -83,7 +83,7 @@ public abstract class AbstractFunEventTeam<Info extends AbstractFunEventPlayerIn
 	 * @param player
 	 * @return true, if the addition was successful, false otherwise
 	 */
-	public synchronized boolean addPlayer(L2PcInstance player)
+	public synchronized boolean addPlayer(L2Player player)
 	{
 		if (_players.containsKey(player.getObjectId()))
 			return false;
@@ -92,13 +92,13 @@ public abstract class AbstractFunEventTeam<Info extends AbstractFunEventPlayerIn
 		return true;
 	}
 	
-	protected abstract Info wrap(L2PcInstance player);
+	protected abstract Info wrap(L2Player player);
 	
 	/**
 	 * @param player the character, who just logged in
 	 * @return true, if the player was stored in this team as a disconnected player, false otherwise
 	 */
-	public synchronized boolean playerLoggedIn(L2PcInstance player)
+	public synchronized boolean playerLoggedIn(L2Player player)
 	{
 		return _offlinePlayers.remove(player.getObjectId());
 	}

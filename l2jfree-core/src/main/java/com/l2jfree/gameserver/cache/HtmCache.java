@@ -36,8 +36,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.L2Config;
-import com.l2jfree.gameserver.network.serverpackets.AbstractNpcHtmlMessage;
+import com.l2jfree.L2AutoInitialization;
+import com.l2jfree.gameserver.network.packets.server.AbstractNpcHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
 
 /**
@@ -48,7 +48,7 @@ public final class HtmCache
 	private static final Log _log = LogFactory.getLog(HtmCache.class);
 	
 	private static final FileFilter HTM_FILTER = file -> {
-		if (L2Config.isIDEMode() && file.toURI().getPath().contains("target/classes"))
+		if (L2AutoInitialization.isIDEMode() && file.toURI().getPath().contains("target/classes"))
 		{
 			return false;
 		}
@@ -192,7 +192,7 @@ public final class HtmCache
 	
 	private File getCacheFile()
 	{
-		return new File(Config.DATAPACK_ROOT, Config.HTML_CACHE_FILE);
+		return new File(Config.HTML_CACHE_FILE);
 	}
 	
 	private void validate()

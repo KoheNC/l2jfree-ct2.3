@@ -14,10 +14,11 @@
  */
 package com.l2jfree.gameserver.model;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.skills.Stats;
-import com.l2jfree.gameserver.skills.funcs.FuncAdd;
-import com.l2jfree.gameserver.skills.funcs.FuncOwner;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.Stats;
+import com.l2jfree.gameserver.model.skills.funcs.FuncAdd;
+import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 
 public final class Elementals implements FuncOwner
 {
@@ -202,7 +203,7 @@ public final class Elementals implements FuncOwner
 	 * 
 	 * @param player
 	 */
-	public void applyBonus(L2PcInstance player, boolean isArmor)
+	public void applyBonus(L2Player player, boolean isArmor)
 	{
 		// make sure the bonuses are not applied twice..
 		if (_active)
@@ -221,7 +222,7 @@ public final class Elementals implements FuncOwner
 	 * 
 	 * @param player
 	 */
-	public void removeBonus(L2PcInstance player)
+	public void removeBonus(L2Player player)
 	{
 		// make sure the bonuses are not removed twice
 		if (!_active)
@@ -237,7 +238,7 @@ public final class Elementals implements FuncOwner
 	 * 
 	 * @param player
 	 */
-	public void updateBonus(L2PcInstance player, boolean isArmor)
+	public void updateBonus(L2Player player, boolean isArmor)
 	{
 		removeBonus(player);
 		applyBonus(player, isArmor);

@@ -27,22 +27,22 @@ import org.apache.commons.logging.LogFactory;
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
-import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2ClanMember;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.model.clan.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2ClanMember;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.FortSiege;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowInfoUpdate;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowMemberListAll;
-import com.l2jfree.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
-import com.l2jfree.gameserver.network.serverpackets.SystemMessage;
-import com.l2jfree.gameserver.network.serverpackets.UserInfo;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowInfoUpdate;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowMemberListAll;
+import com.l2jfree.gameserver.network.packets.server.PledgeShowMemberListUpdate;
+import com.l2jfree.gameserver.network.packets.server.SystemMessage;
+import com.l2jfree.gameserver.network.packets.server.UserInfo;
 
 public class ClanTable
 {
@@ -132,7 +132,7 @@ public class ClanTable
 	 * @param player
 	 * @return NULL if clan with same name already exists
 	 */
-	public L2Clan createClan(L2PcInstance player, String clanName)
+	public L2Clan createClan(L2Player player, String clanName)
 	{
 		if (null == player)
 			return null;

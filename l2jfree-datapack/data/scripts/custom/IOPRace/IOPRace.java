@@ -15,11 +15,11 @@
 package custom.IOPRace;
 
 import com.l2jfree.gameserver.datatables.SkillTable;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 public class IOPRace extends Quest
 {
@@ -38,7 +38,7 @@ public class IOPRace extends Quest
 	}
 	
 	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	public String onFirstTalk(L2Npc npc, L2Player player)
 	{
 		QuestState st = player.getQuestState(getName());
 		if (st == null)
@@ -56,7 +56,7 @@ public class IOPRace extends Quest
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
+	public String onTalk(L2Npc npc, L2Player player)
 	{
 		QuestState st = player.getQuestState(getName());
 		if (st == null)
@@ -95,7 +95,7 @@ public class IOPRace extends Quest
 	}
 	
 	@Override
-	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
+	public String onAdvEvent(String event, L2Npc npc, L2Player player)
 	{
 		String htmltext = "";
 		

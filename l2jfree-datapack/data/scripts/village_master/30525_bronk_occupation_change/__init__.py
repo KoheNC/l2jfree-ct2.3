@@ -7,8 +7,8 @@ import sys
 from com.l2jfree.gameserver.model.quest        import State
 from com.l2jfree.gameserver.model.quest        import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
-from com.l2jfree.gameserver.model.base import ClassId
-from com.l2jfree.gameserver.model.base import Race
+from com.l2jfree.gameserver.gameobjects.base import ClassId
+from com.l2jfree.gameserver.gameobjects.base import Race
 
 qn = "30525_bronk_occupation_change"
 HEAD_BLACKSMITH_BRONK = 30525

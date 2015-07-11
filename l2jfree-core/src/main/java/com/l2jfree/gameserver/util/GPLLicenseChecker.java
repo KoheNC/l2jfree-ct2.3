@@ -25,12 +25,12 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 
-import com.l2jfree.Config;
+import com.l2jfree.L2AutoInitialization;
 
 /**
  * @author NB4L1
  */
-public final class GPLLicenseChecker extends Config
+public final class GPLLicenseChecker extends L2AutoInitialization
 {
 	private static final ArrayList<String> MODIFIED = new ArrayList<String>();
 	

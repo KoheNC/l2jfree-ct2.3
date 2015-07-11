@@ -24,9 +24,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.items.model.L2ExtractableProductItem;
-import com.l2jfree.gameserver.items.model.L2ExtractableSkill;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.items.extractable.L2ExtractableProductItem;
+import com.l2jfree.gameserver.model.items.extractable.L2ExtractableSkill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * @author FBIagent

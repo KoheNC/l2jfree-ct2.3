@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.restriction.global;
 
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 
 /**
  * @author savormix
@@ -22,7 +22,7 @@ import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 public class EradicationRestriction extends AbstractRestriction
 {
 	@Override
-	public boolean canRequestRevive(L2PcInstance activeChar)
+	public boolean canRequestRevive(L2Player activeChar)
 	{
 		return !activeChar.isEradicated();
 	}

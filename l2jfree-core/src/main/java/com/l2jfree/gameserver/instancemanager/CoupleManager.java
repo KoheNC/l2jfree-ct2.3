@@ -24,10 +24,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
-import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.Couple;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * @author evill33t
@@ -103,7 +103,7 @@ public class CoupleManager
 		return null;
 	}
 	
-	public void createCouple(L2PcInstance player1, L2PcInstance player2)
+	public void createCouple(L2Player player1, L2Player player2)
 	{
 		if (player1 != null && player2 != null)
 		{
@@ -128,8 +128,8 @@ public class CoupleManager
 		Couple couple = getCouples().get(index);
 		if (couple != null)
 		{
-			L2PcInstance player1 = L2World.getInstance().getPlayer(couple.getPlayer1Id());
-			L2PcInstance player2 = L2World.getInstance().getPlayer(couple.getPlayer2Id());
+			L2Player player1 = L2World.getInstance().getPlayer(couple.getPlayer1Id());
+			L2Player player2 = L2World.getInstance().getPlayer(couple.getPlayer2Id());
 			L2ItemInstance item = null;
 			if (player1 != null)
 			{

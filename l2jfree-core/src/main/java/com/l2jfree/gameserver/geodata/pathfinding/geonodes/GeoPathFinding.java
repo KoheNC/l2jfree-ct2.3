@@ -32,8 +32,8 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.geodata.pathfinding.Node;
 import com.l2jfree.gameserver.geodata.pathfinding.PathFinding;
-import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.Location;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.util.L2Arrays;
 import com.l2jfree.util.LookupTable;
 

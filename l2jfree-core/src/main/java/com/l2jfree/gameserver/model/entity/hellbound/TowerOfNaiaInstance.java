@@ -15,11 +15,11 @@
 package com.l2jfree.gameserver.model.entity.hellbound;
 
 import com.l2jfree.Config;
+import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.L2Npc;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jfree.gameserver.model.entity.Instance;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * @author hex1r0
@@ -90,7 +90,7 @@ public final class TowerOfNaiaInstance extends Instance
 		{
 			for (Integer objectId : getPlayers())
 			{
-				L2PcInstance player = L2World.getInstance().findPlayer(objectId);
+				L2Player player = L2World.getInstance().findPlayer(objectId);
 				if (player != null)
 					player.setInstanceId(0);
 			}

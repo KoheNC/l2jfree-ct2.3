@@ -33,8 +33,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * @author Noctarius
@@ -209,7 +209,7 @@ public final class ObjectRestrictions
 		
 		if (set.add(restriction))
 		{
-			final L2PcInstance player = L2World.getInstance().findPlayer(objId);
+			final L2Player player = L2World.getInstance().findPlayer(objId);
 			
 			if (player != null)
 				restriction.activatedOn(player);
@@ -223,7 +223,7 @@ public final class ObjectRestrictions
 	 * @param restriction
 	 * @throws RestrictionBindClassException
 	 */
-	public void addRestriction(L2PcInstance owner, AvailableRestriction restriction)
+	public void addRestriction(L2Player owner, AvailableRestriction restriction)
 	{
 		if (owner == null)
 			return;
@@ -245,7 +245,7 @@ public final class ObjectRestrictions
 		{
 			if (set.remove(restriction))
 			{
-				final L2PcInstance player = L2World.getInstance().findPlayer(objId);
+				final L2Player player = L2World.getInstance().findPlayer(objId);
 				
 				if (player != null)
 					restriction.deactivatedOn(player);
@@ -290,7 +290,7 @@ public final class ObjectRestrictions
 	 * @param owner
 	 * @param restriction
 	 */
-	public void removeRestriction(L2PcInstance owner, AvailableRestriction restriction)
+	public void removeRestriction(L2Player owner, AvailableRestriction restriction)
 	{
 		if (owner == null)
 			return;
@@ -305,7 +305,7 @@ public final class ObjectRestrictions
 	 * @param restriction
 	 * @return
 	 */
-	public boolean checkRestriction(L2PcInstance owner, AvailableRestriction restriction)
+	public boolean checkRestriction(L2Player owner, AvailableRestriction restriction)
 	{
 		if (owner == null)
 			return false;
@@ -447,7 +447,7 @@ public final class ObjectRestrictions
 			
 			if (getMessage() != null)
 			{
-				final L2PcInstance owner = L2World.getInstance().findPlayer(getObjectId());
+				final L2Player owner = L2World.getInstance().findPlayer(getObjectId());
 				
 				if (owner != null)
 					owner.sendMessage(getMessage());

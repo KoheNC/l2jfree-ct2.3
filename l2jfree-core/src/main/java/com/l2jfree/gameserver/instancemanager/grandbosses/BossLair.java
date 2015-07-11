@@ -15,7 +15,7 @@
 package com.l2jfree.gameserver.instancemanager.grandbosses;
 
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.entity.Entity;
 import com.l2jfree.gameserver.model.entity.GrandBossState;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
@@ -49,7 +49,7 @@ public abstract class BossLair extends Entity
 	
 	public synchronized boolean isPlayersAnnihilated()
 	{
-		for (L2PcInstance pc : getPlayersInside())
+		for (L2Player pc : getPlayersInside())
 		{
 			if (!pc.isDead())
 				return false;
@@ -74,7 +74,7 @@ public abstract class BossLair extends Entity
 	@Override
 	public void banishForeigners()
 	{
-		for (L2PcInstance player : getPlayersInside())
+		for (L2Player player : getPlayersInside())
 		{
 			if (_questName != null)
 			{

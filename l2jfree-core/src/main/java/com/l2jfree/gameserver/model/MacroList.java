@@ -28,9 +28,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
+import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Macro.L2MacroCmd;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.serverpackets.SendMacroList;
+import com.l2jfree.gameserver.network.packets.server.SendMacroList;
 
 /**
  * This class ...
@@ -41,12 +41,12 @@ public class MacroList
 {
 	private final static Log _log = LogFactory.getLog(MacroList.class);
 	
-	private final L2PcInstance _owner;
+	private final L2Player _owner;
 	private int _revision;
 	private int _macroId;
 	private final FastMap<Integer, L2Macro> _macroses = new FastMap<Integer, L2Macro>();
 	
-	public MacroList(L2PcInstance owner)
+	public MacroList(L2Player owner)
 	{
 		_owner = owner;
 		_revision = 1;

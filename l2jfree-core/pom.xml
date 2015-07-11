@@ -27,6 +27,7 @@
 			<artifactId>l2jfree-scripting-engines</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- Updating dependencies below is not necessary. -->
 		<dependency>
 			<groupId>org.schwering</groupId>
 			<artifactId>irclib</artifactId>

@@ -23,6 +23,7 @@
 			<artifactId>l2j-mmocore</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- Updating dependencies below is strongly NOT recommend. -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-mock</artifactId>

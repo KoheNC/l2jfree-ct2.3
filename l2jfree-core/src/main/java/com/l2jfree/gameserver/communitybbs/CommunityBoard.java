@@ -24,16 +24,16 @@ import com.l2jfree.gameserver.communitybbs.Manager.RegionBBSManager;
 import com.l2jfree.gameserver.communitybbs.Manager.TopBBSManager;
 import com.l2jfree.gameserver.communitybbs.Manager.TopicBBSManager;
 import com.l2jfree.gameserver.communitybbs.Manager.UpdateBBSManager;
-import com.l2jfree.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jfree.gameserver.network.L2GameClient;
+import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.network.serverpackets.ShowBoard;
+import com.l2jfree.gameserver.network.packets.server.ShowBoard;
 
 public class CommunityBoard
 {
-	public static void handleCommands(L2GameClient client, String command)
+	public static void handleCommands(L2Client client, String command)
 	{
-		L2PcInstance activeChar = client.getActiveChar();
+		L2Player activeChar = client.getActiveChar();
 		if (activeChar == null)
 			return;
 		
@@ -108,10 +108,10 @@ public class CommunityBoard
 	 * @param arg4
 	 * @param arg5
 	 */
-	public static void handleWriteCommands(L2GameClient client, String url, String arg1, String arg2, String arg3,
+	public static void handleWriteCommands(L2Client client, String url, String arg1, String arg2, String arg3,
 			String arg4, String arg5)
 	{
-		L2PcInstance activeChar = client.getActiveChar();
+		L2Player activeChar = client.getActiveChar();
 		if (activeChar == null)
 			return;
 		

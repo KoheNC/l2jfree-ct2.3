@@ -2,19 +2,19 @@
 
 import sys
 from java.lang                                          import System
-from com.l2jfree.gameserver.ai                          import CtrlIntention
+from com.l2jfree.gameserver.gameobjects.ai                          import CtrlIntention
 from com.l2jfree.gameserver.datatables                  import SkillTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.model                       import L2CharPosition
-from com.l2jfree.gameserver.model                       import L2World
-from com.l2jfree.gameserver.model.actor.instance        import L2MonsterInstance
+from com.l2jfree.gameserver.model.world                       import L2World
+from com.l2jfree.gameserver.gameobjects.instance        import L2MonsterInstance
 from com.l2jfree.gameserver.model.entity                import Instance
-from com.l2jfree.gameserver.model.itemcontainer         import Inventory
+from com.l2jfree.gameserver.gameobjects.itemcontainer         import Inventory
 from com.l2jfree.gameserver.model.quest                 import QuestState
 from com.l2jfree.gameserver.model.quest                 import State
 from com.l2jfree.gameserver.model.quest.jython          import QuestJython as JQuest
-from com.l2jfree.gameserver.network.serverpackets       import MagicSkillUse
-from com.l2jfree.gameserver.network.serverpackets       import SocialAction
+from com.l2jfree.gameserver.network.packets.server       import MagicSkillUse
+from com.l2jfree.gameserver.network.packets.server       import SocialAction
 from com.l2jfree.tools.random                           import Rnd
 
 #NPC
