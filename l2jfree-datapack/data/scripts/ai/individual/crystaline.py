@@ -7,7 +7,7 @@ from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
 from com.l2jfree.gameserver.network.packets.server import CreatureSay
 from com.l2jfree.gameserver.datatables import ItemTable
 from com.l2jfree.tools.random import Rnd
-from com.l2jfree.gameserver.model import L2ItemInstance
+from com.l2jfree.gameserver.model.items import L2ItemInstance
 from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.model import L2CharPosition
 from com.l2jfree.gameserver.model import L2World

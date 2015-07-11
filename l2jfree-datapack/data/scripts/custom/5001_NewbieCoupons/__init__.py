@@ -1,7 +1,7 @@
 # Newbie Weapon/Accesories Coupons for the Hellbound opening event.
 # written by Vice, based in the Miss Queen script.
 import sys
-from com.l2jfree.gameserver.model import L2Multisell
+from com.l2jfree.gameserver.datatables import MultisellTable
 from com.l2jfree.gameserver.model.quest import State
 from com.l2jfree.gameserver.model.quest import QuestState
 from com.l2jfree.gameserver.model.quest.jython import QuestJython as JQuest
@@ -80,12 +80,12 @@ class Quest (JQuest) :
           return "30598-6.htm" #you're not eligible to get a coupon (level caps, pkkills or didnt change class yet)
     elif event == "newbie_show_weapon" :
        if 6 <= level <= 39 and not pkkills and occupation_level == 0 :
-          L2Multisell.getInstance().separateAndSend(WEAPON_MULTISELL, player, npc.getNpcId(), False, 0.0);
+          MultisellTable.getInstance().separateAndSend(WEAPON_MULTISELL, player, npc.getNpcId(), False, 0.0);
        else :
           return "30598-7.htm" #you're not eligible to use warehouse
     elif event == "newbie_show_armor" :
        if 6 <= level <= 39 and not pkkills and occupation_level > 0 :
-          L2Multisell.getInstance().separateAndSend(ACCESORIES_MULTISELL, player, npc.getNpcId(), False, 0.0);
+          MultisellTable.getInstance().separateAndSend(ACCESORIES_MULTISELL, player, npc.getNpcId(), False, 0.0);
        else :
           return "30598-8.htm" #you're not eligible to use warehouse
 
