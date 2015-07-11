@@ -20,8 +20,6 @@ import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.conditions.Condition;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionLogicOr;
-import com.l2jfree.gameserver.model.skills.funcs.Func;
-import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
 
 public class TestFuncTemplate extends TestCase
 {

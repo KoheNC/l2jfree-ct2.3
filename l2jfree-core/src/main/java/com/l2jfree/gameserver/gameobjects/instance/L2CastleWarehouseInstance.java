@@ -23,9 +23,9 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.SortedWareHouseWithdrawalList;
+import com.l2jfree.gameserver.network.packets.server.SortedWareHouseWithdrawalList.WarehouseListType;
 import com.l2jfree.gameserver.network.packets.server.WareHouseDepositList;
 import com.l2jfree.gameserver.network.packets.server.WareHouseWithdrawalList;
-import com.l2jfree.gameserver.network.packets.server.SortedWareHouseWithdrawalList.WarehouseListType;
 import com.l2jfree.gameserver.util.IllegalPlayerAction;
 import com.l2jfree.gameserver.util.Util;
 

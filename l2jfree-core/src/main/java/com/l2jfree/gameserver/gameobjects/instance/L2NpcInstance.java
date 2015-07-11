@@ -32,9 +32,9 @@ import com.l2jfree.gameserver.network.packets.server.AcquireSkillDone;
 import com.l2jfree.gameserver.network.packets.server.AcquireSkillList;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList;
+import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList.EnchantSkillType;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList.EnchantSkillType;
 import com.l2jfree.gameserver.util.StringUtil;
 import com.l2jfree.lang.L2TextBuilder;
 

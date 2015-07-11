@@ -18,7 +18,6 @@ import junit.framework.TestCase;
 
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.Stats;
-import com.l2jfree.gameserver.model.skills.funcs.FuncSub;
 
 public class TestFuncSub extends TestCase
 {
