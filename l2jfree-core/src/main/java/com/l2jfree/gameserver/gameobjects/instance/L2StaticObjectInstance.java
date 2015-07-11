@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.gameobjects.stat.StaticObjStat;
 import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.world.L2World;

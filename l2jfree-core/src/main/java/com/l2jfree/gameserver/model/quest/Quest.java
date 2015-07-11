@@ -42,7 +42,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.instancemanager.ZoneManager;
-import com.l2jfree.gameserver.model.L2Party;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.world.spawn.L2Spawn;
 import com.l2jfree.gameserver.model.zone.L2Zone;

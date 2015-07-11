@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.L2PartyRoom;
+import com.l2jfree.gameserver.model.party.L2PartyRoom;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

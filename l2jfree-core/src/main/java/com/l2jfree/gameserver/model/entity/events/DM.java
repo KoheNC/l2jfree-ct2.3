@@ -38,7 +38,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2Party;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.restriction.global.DMRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.world.spawn.L2Spawn;

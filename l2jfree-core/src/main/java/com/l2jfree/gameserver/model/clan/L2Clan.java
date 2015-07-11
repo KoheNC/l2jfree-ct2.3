@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.clan;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +38,7 @@ import com.l2jfree.gameserver.gameobjects.itemcontainer.ClanWarehouse;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.CrownManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
+import com.l2jfree.gameserver.model.BlockList;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;

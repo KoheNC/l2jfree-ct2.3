@@ -18,7 +18,7 @@ import java.util.Map;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 
 public class ExShowCastleInfo extends StaticPacket

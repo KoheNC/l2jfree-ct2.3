@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler.chat;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IChatHandler;
-import com.l2jfree.gameserver.model.L2Party;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.network.SystemChatChannelId;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;

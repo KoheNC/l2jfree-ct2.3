@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.party;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,8 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
+import com.l2jfree.gameserver.model.BlockList;
+import com.l2jfree.gameserver.model.L2CommandChannel;
 import com.l2jfree.gameserver.model.entity.DimensionalRift;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;

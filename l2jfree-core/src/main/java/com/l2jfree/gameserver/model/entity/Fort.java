@@ -36,7 +36,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2DoorInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.instancemanager.FortManager;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.PlaySound;

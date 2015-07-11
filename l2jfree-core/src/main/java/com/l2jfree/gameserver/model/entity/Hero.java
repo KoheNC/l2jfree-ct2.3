@@ -36,7 +36,7 @@ import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.HeroSkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.skills.L2Skill;

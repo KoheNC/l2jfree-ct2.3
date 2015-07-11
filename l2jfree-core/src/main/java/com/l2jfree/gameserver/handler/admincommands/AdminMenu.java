@@ -29,7 +29,7 @@ import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.SystemMessageId;

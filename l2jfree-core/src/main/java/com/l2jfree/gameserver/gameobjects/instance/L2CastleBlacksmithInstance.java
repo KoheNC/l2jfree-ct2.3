@@ -18,7 +18,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 

@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.network.packets.client;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2PartyRoom;
+import com.l2jfree.gameserver.model.party.L2PartyRoom;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;

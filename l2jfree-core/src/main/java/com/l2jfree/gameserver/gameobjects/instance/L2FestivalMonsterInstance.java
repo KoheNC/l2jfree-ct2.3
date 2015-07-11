@@ -18,8 +18,8 @@ import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 

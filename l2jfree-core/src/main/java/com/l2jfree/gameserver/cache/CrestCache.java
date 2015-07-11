@@ -32,7 +32,7 @@ import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 
 /**
  * @author Layane

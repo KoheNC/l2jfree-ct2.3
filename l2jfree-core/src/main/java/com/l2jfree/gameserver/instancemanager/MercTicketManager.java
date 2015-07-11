@@ -38,7 +38,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeTeleporterInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.sevensigns.SevenSigns;

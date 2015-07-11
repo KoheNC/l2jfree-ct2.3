@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2Clan;
+import com.l2jfree.gameserver.model.clan.L2Clan;
 
 public class L2CastleDoormenInstance extends L2DoormenInstance
 {

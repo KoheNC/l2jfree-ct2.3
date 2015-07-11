@@ -24,7 +24,7 @@ import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
-import com.l2jfree.gameserver.model.L2Party;
+import com.l2jfree.gameserver.model.party.L2Party;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
