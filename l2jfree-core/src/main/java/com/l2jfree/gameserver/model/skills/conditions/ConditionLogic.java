@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.model.skills.conditions;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * @author NB4L1

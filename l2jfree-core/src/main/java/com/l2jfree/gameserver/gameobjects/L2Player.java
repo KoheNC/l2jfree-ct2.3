@@ -37,7 +37,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.L2DatabaseFactory;

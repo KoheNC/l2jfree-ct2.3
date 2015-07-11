@@ -22,7 +22,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.l2jfree.loginserver.manager.BanManager;
 import com.l2jfree.loginserver.manager.LoginManager;

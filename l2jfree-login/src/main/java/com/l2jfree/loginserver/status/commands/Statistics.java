@@ -14,7 +14,7 @@
  */
 package com.l2jfree.loginserver.status.commands;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.l2jfree.loginserver.manager.GameServerManager;
 import com.l2jfree.status.StatusCommand;
