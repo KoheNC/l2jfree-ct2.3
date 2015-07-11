@@ -10,7 +10,7 @@ from com.l2jfree.tools.random import Rnd
 from com.l2jfree.gameserver.model.items import L2ItemInstance
 from com.l2jfree.gameserver.gameobjects.ai import CtrlIntention
 from com.l2jfree.gameserver.model import L2CharPosition
-from com.l2jfree.gameserver.model import L2World
+from com.l2jfree.gameserver.model.world import L2World
 from com.l2jfree.gameserver.network.packets.server  import MagicSkillUse
 
 npcid = 32328

@@ -6,7 +6,7 @@ from com.l2jfree.gameserver.gameobjects.ai                          import CtrlI
 from com.l2jfree.gameserver.datatables                  import SkillTable
 from com.l2jfree.gameserver.instancemanager             import InstanceManager
 from com.l2jfree.gameserver.model                       import L2CharPosition
-from com.l2jfree.gameserver.model                       import L2World
+from com.l2jfree.gameserver.model.world                       import L2World
 from com.l2jfree.gameserver.gameobjects.instance        import L2MonsterInstance
 from com.l2jfree.gameserver.model.entity                import Instance
 from com.l2jfree.gameserver.gameobjects.itemcontainer         import Inventory
