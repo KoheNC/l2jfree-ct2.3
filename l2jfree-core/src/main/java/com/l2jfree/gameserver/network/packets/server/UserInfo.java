@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.gameobjects.stat.PlayerStat;
 import com.l2jfree.gameserver.gameobjects.status.PlayerStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.gameobjects.view.PlayerView;
-import com.l2jfree.gameserver.model.skills.AbnormalEffect;
+import com.l2jfree.gameserver.model.skills.effects.AbnormalEffect;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 

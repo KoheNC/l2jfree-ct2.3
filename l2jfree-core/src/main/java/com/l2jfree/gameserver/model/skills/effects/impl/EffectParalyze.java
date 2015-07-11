@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.model.skills.effects.impl;
 
-import com.l2jfree.gameserver.model.skills.AbnormalEffect;
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.effects.AbnormalEffect;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;
 import com.l2jfree.gameserver.model.skills.templates.L2EffectType;

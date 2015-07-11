@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.gameobjects.appearance.PlayerAppearance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.gameobjects.view.DecoyView;
 import com.l2jfree.gameserver.gameobjects.view.IPlayerView;
-import com.l2jfree.gameserver.model.skills.AbnormalEffect;
+import com.l2jfree.gameserver.model.skills.effects.AbnormalEffect;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
