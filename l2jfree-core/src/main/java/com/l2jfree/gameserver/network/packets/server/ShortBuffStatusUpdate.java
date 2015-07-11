@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.model.L2Effect;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public final class ShortBuffStatusUpdate extends L2ServerPacket

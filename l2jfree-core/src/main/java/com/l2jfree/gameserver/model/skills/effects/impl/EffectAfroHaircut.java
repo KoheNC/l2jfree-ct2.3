@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.model.skills.effects.impl;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.templates.effects.EffectTemplate;
 
@@ -31,7 +31,7 @@ public class EffectAfroHaircut extends L2Effect
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.model.L2Effect#getEffectType()
+	 * @see com.l2jfree.gameserver.model.skills.effects.L2Effect#getEffectType()
 	 */
 	@Override
 	public L2EffectType getEffectType()
@@ -40,7 +40,7 @@ public class EffectAfroHaircut extends L2Effect
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.model.L2Effect#onStart()
+	 * @see com.l2jfree.gameserver.model.skills.effects.L2Effect#onStart()
 	 */
 	@Override
 	protected boolean onStart()
@@ -54,7 +54,7 @@ public class EffectAfroHaircut extends L2Effect
 	}
 	
 	/**
-	 * @see com.l2jfree.gameserver.model.L2Effect#onExit()
+	 * @see com.l2jfree.gameserver.model.skills.effects.L2Effect#onExit()
 	 */
 	@Override
 	protected void onExit()

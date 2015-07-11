@@ -24,9 +24,9 @@ import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2ClanHallManagerInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.handler.ICubicSkillHandler;
-import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 
 public class Continuous implements ICubicSkillHandler

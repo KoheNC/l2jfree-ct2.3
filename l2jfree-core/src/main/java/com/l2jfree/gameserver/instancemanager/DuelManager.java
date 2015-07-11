@@ -22,10 +22,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.entity.Duel;
 import com.l2jfree.gameserver.model.restriction.global.DuelRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 public class DuelManager

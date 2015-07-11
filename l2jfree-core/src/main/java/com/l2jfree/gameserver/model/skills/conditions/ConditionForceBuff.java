@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.model.skills.conditions;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.model.skills.effects.impl.EffectFusion;
 
 /**
