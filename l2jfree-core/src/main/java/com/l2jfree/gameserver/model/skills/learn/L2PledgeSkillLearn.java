@@ -12,14 +12,14 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.skills.learn;
 
 /**
  * This class ...
  * 
  * @version $Revision: 1.2.4.2 $ $Date: 2005/03/27 15:29:33 $
  */
-public final class L2SkillLearn
+public final class L2PledgeSkillLearn
 {
 	// these two build the primary key
 	private final int _id;
@@ -28,20 +28,20 @@ public final class L2SkillLearn
 	// not needed, just for easier debug
 	private final String _name;
 	
-	private final int _spCost;
-	private final int _minLevel;
-	private final int _costid;
-	private final int _costcount;
+	private final int _repCost;
+	private final int _baseLvl;
+	private final int _itemId;
+	private final long _itemCount;
 	
-	public L2SkillLearn(int id, int lvl, int minLvl, String name, int cost, int costid, int costcount)
+	public L2PledgeSkillLearn(int id, int lvl, int baseLvl, String name, int cost, int itemId, long itemCount)
 	{
 		_id = id;
 		_level = lvl;
-		_minLevel = minLvl;
+		_baseLvl = baseLvl;
 		_name = name.intern();
-		_spCost = cost;
-		_costid = costid;
-		_costcount = costcount;
+		_repCost = cost;
+		_itemId = itemId;
+		_itemCount = itemCount;
 	}
 	
 	/**
@@ -63,9 +63,9 @@ public final class L2SkillLearn
 	/**
 	 * @return Returns the minLevel.
 	 */
-	public int getMinLevel()
+	public int getBaseLevel()
 	{
-		return _minLevel;
+		return _baseLvl;
 	}
 	
 	/**
@@ -79,28 +79,18 @@ public final class L2SkillLearn
 	/**
 	 * @return Returns the spCost.
 	 */
-	public int getSpCost()
+	public int getRepCost()
 	{
-		return _spCost;
+		return _repCost;
 	}
 	
-	public int getIdCost()
+	public int getItemId()
 	{
-		return _costid;
+		return _itemId;
 	}
 	
-	public int getCostCount()
+	public long getItemCount()
 	{
-		return _costcount;
-	}
-	
-	public static boolean isSpecialSkill(int id)
-	{
-		switch (id)
-		{
-			case 932: // Star Stone
-				return true;
-		}
-		return false;
+		return _itemCount;
 	}
 }

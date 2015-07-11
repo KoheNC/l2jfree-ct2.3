@@ -27,11 +27,11 @@ import javolution.util.FastSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.l2jfree.gameserver.model.L2EnchantSkillLearn;
-import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.SkillsEngine;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillLearnSkill;
+import com.l2jfree.gameserver.model.skills.learn.L2EnchantSkillLearn;
+import com.l2jfree.gameserver.model.skills.learn.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.lang.L2Integer;
 
 public final class SkillTable

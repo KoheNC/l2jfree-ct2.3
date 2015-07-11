@@ -1415,7 +1415,7 @@ public class AdminSortMultisellItems implements IAdminCommandHandler
 				try
 				{
 					
-					for (com.l2jfree.gameserver.model.L2SkillLearn skill : SkillTreeTable.getInstance()
+					for (com.l2jfree.gameserver.model.skills.learn.L2SkillLearn skill : SkillTreeTable.getInstance()
 							.getAllowedSkills(classId))
 					{
 						try

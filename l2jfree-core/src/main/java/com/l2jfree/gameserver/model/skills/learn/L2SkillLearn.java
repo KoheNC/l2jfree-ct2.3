@@ -12,14 +12,14 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.model.skills.learn;
 
 /**
  * This class ...
  * 
  * @version $Revision: 1.2.4.2 $ $Date: 2005/03/27 15:29:33 $
  */
-public final class L2PledgeSkillLearn
+public final class L2SkillLearn
 {
 	// these two build the primary key
 	private final int _id;
@@ -28,20 +28,20 @@ public final class L2PledgeSkillLearn
 	// not needed, just for easier debug
 	private final String _name;
 	
-	private final int _repCost;
-	private final int _baseLvl;
-	private final int _itemId;
-	private final long _itemCount;
+	private final int _spCost;
+	private final int _minLevel;
+	private final int _costid;
+	private final int _costcount;
 	
-	public L2PledgeSkillLearn(int id, int lvl, int baseLvl, String name, int cost, int itemId, long itemCount)
+	public L2SkillLearn(int id, int lvl, int minLvl, String name, int cost, int costid, int costcount)
 	{
 		_id = id;
 		_level = lvl;
-		_baseLvl = baseLvl;
+		_minLevel = minLvl;
 		_name = name.intern();
-		_repCost = cost;
-		_itemId = itemId;
-		_itemCount = itemCount;
+		_spCost = cost;
+		_costid = costid;
+		_costcount = costcount;
 	}
 	
 	/**
@@ -63,9 +63,9 @@ public final class L2PledgeSkillLearn
 	/**
 	 * @return Returns the minLevel.
 	 */
-	public int getBaseLevel()
+	public int getMinLevel()
 	{
-		return _baseLvl;
+		return _minLevel;
 	}
 	
 	/**
@@ -79,18 +79,28 @@ public final class L2PledgeSkillLearn
 	/**
 	 * @return Returns the spCost.
 	 */
-	public int getRepCost()
+	public int getSpCost()
 	{
-		return _repCost;
+		return _spCost;
 	}
 	
-	public int getItemId()
+	public int getIdCost()
 	{
-		return _itemId;
+		return _costid;
 	}
 	
-	public long getItemCount()
+	public int getCostCount()
 	{
-		return _itemCount;
+		return _costcount;
+	}
+	
+	public static boolean isSpecialSkill(int id)
+	{
+		switch (id)
+		{
+			case 932: // Star Stone
+				return true;
+		}
+		return false;
 	}
 }
