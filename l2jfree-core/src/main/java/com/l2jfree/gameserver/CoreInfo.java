@@ -14,8 +14,6 @@
  */
 package com.l2jfree.gameserver;
 
-import java.util.Date;
-
 import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.mmocore.network.SelectorThread;
@@ -81,7 +79,7 @@ public final class CoreInfo
 			super(c);
 			
 			versionInfo = String.format("%-6s [ %4s ]", getVersionNumber(), getRevisionNumber());
-			fullVersionInfo = versionInfo + " - " + getBuildJdk() + " - " + new Date(getBuildTime());
+			fullVersionInfo = versionInfo + " - " + getBuildJdk() + " - " + getBuildTime();
 		}
 	}
 }

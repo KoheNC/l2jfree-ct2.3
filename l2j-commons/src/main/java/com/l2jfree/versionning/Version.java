@@ -29,7 +29,7 @@ public class Version
 	private String _revisionNumber = "exported";
 	private String _versionNumber = "-1";
 	private String _buildJdk = "";
-	private long _buildTime = -1;
+	private String _buildTime = "";
 	
 	private static final Log _log = LogFactory.getLog(Version.class);
 	
@@ -53,17 +53,18 @@ public class Version
 		try
 		{
 			jarName = Locator.getClassSource(c);
-			JarFile jarFile = new JarFile(jarName);
-			
-			Attributes attrs = jarFile.getManifest().getMainAttributes();
-			
-			setBuildTime(attrs);
-			
-			setBuildJdk(attrs);
-			
-			setRevisionNumber(attrs);
-			
-			setVersionNumber(attrs);
+			try (JarFile jarFile = new JarFile(jarName);)
+			{
+				final Attributes attrs = jarFile.getManifest().getMainAttributes();
+				
+				setBuildTime(attrs);
+				
+				setBuildJdk(attrs);
+				
+				setRevisionNumber(attrs);
+				
+				setVersionNumber(attrs);
+			}
 		}
 		catch (IOException e)
 		{
@@ -139,11 +140,11 @@ public class Version
 		String buildTime = attrs.getValue("Implementation-Time");
 		if (buildTime != null)
 		{
-			_buildTime = Long.parseLong(buildTime);
+			_buildTime = buildTime;
 		}
 		else
 		{
-			_buildTime = -1;
+			_buildTime = "1900-01-01";
 		}
 	}
 	
@@ -162,7 +163,7 @@ public class Version
 		return _buildJdk;
 	}
 	
-	public long getBuildTime()
+	public String getBuildTime()
 	{
 		return _buildTime;
 	}
