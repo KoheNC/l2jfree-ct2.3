@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**

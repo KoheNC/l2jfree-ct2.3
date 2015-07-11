@@ -14,8 +14,8 @@
  */
 package com.l2jfree.gameserver.network.packets.client;
 
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.SSQStatus;
 

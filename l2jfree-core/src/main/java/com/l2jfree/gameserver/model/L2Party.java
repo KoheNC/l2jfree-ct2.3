@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
@@ -34,6 +33,7 @@ import com.l2jfree.gameserver.instancemanager.DuelManager;
 import com.l2jfree.gameserver.instancemanager.PartyRoomManager;
 import com.l2jfree.gameserver.model.entity.DimensionalRift;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;

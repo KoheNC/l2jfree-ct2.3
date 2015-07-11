@@ -17,13 +17,13 @@ package com.l2jfree.gameserver.model.mapregion;
 import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.TownManager;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.base.Race;
 import com.l2jfree.gameserver.model.entity.Town;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.tools.random.Rnd;
 
 /**

@@ -14,10 +14,10 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
-import com.l2jfree.gameserver.MonsterRace;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2RaceManagerInstance;
+import com.l2jfree.gameserver.instancemanager.games.MonsterRace;
 import com.l2jfree.gameserver.network.packets.server.DeleteObject;
 
 public class RaceManagerKnownList extends NpcKnownList

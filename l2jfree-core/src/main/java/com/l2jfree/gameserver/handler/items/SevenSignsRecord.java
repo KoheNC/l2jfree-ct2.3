@@ -14,11 +14,11 @@
  */
 package com.l2jfree.gameserver.handler.items;
 
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.gameserver.network.packets.server.SSQStatus;
 
 public class SevenSignsRecord implements IItemHandler

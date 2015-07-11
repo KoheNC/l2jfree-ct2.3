@@ -18,8 +18,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
@@ -45,6 +43,8 @@ import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.model.entity.Siege;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionPlayerState;
 import com.l2jfree.gameserver.model.skills.conditions.ConditionUsingItemType;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;

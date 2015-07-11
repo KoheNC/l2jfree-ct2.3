@@ -19,7 +19,6 @@ import java.util.StringTokenizer;
 
 import javolution.text.TextBuilder;
 
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
@@ -31,6 +30,7 @@ import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.entity.ClanHall;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;

@@ -23,8 +23,6 @@ import java.util.StringTokenizer;
 import javolution.util.FastList;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.Shutdown;
 import com.l2jfree.gameserver.Shutdown.DisableType;
 import com.l2jfree.gameserver.ThreadPoolManager;
@@ -88,6 +86,8 @@ import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
 import com.l2jfree.gameserver.model.quest.State;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.skills.templates.L2BuffTemplate;

@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.SevenSigns;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
@@ -34,6 +33,7 @@ import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2TeleportLocation;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.SystemMessageId;

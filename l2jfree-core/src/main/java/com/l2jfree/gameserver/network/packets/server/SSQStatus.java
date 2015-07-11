@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.network.packets.server;
 
-import com.l2jfree.gameserver.SevenSigns;
-import com.l2jfree.gameserver.SevenSignsFestival;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.StatsSet;

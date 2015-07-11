@@ -136,6 +136,8 @@ import com.l2jfree.gameserver.model.entity.Hero;
 import com.l2jfree.gameserver.model.entity.events.AutomatedTvT;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.L2ClientSelectorThread;
 import com.l2jfree.gameserver.script.faenor.FaenorScriptEngine;

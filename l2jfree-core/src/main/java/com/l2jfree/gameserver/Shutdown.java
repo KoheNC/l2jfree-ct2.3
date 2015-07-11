@@ -35,6 +35,8 @@ import com.l2jfree.gameserver.instancemanager.leaderboards.ArenaManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
 import com.l2jfree.gameserver.model.olympiad.Olympiad;
 import com.l2jfree.gameserver.model.restriction.ObjectRestrictions;
+import com.l2jfree.gameserver.model.sevensigns.SevenSigns;
+import com.l2jfree.gameserver.model.sevensigns.SevenSignsFestival;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.L2ClientSelectorThread;
