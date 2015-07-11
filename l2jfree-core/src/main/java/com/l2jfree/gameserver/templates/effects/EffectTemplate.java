@@ -30,6 +30,7 @@ import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.SpecialEffect;
 import com.l2jfree.gameserver.model.skills.TriggeredSkill;
+import com.l2jfree.gameserver.model.skills.effects.impl.IEffectMarker;
 import com.l2jfree.gameserver.model.skills.funcs.FuncTemplate;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.templates.StatsSet;
@@ -135,7 +136,11 @@ public final class EffectTemplate
 		
 		try
 		{
-			final Class<?> clazz = Class.forName("com.l2jfree.gameserver.skills.effects.Effect" + name);
+			final StringBuilder sb = new StringBuilder();
+			sb.append(IEffectMarker.class.getPackage().getName());
+			sb.append(".Effect");
+			sb.append(name);
+			final Class<?> clazz = Class.forName(sb.toString());
 			
 			_constructor = clazz.getConstructor(Env.class, EffectTemplate.class);
 			

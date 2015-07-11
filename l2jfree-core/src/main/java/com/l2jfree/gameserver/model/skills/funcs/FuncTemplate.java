@@ -41,7 +41,11 @@ public final class FuncTemplate
 		Class<?> clazz;
 		try
 		{
-			clazz = Class.forName("com.l2jfree.gameserver.skills.funcs.Func" + pFunc);
+			final StringBuilder sb = new StringBuilder();
+			sb.append(IFuncMarker.class.getPackage().getName());
+			sb.append(".Func");
+			sb.append(pFunc);
+			clazz = Class.forName(sb.toString());
 		}
 		catch (Exception e)
 		{
