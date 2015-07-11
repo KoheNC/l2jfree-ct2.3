@@ -31,13 +31,13 @@ import com.l2jfree.gameserver.gameobjects.instance.L2MerchantInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetManagerInstance;
 import com.l2jfree.gameserver.instancemanager.MercTicketManager;
 import com.l2jfree.gameserver.model.L2TradeList;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.ItemList;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.gameserver.util.Util;
 
 /**

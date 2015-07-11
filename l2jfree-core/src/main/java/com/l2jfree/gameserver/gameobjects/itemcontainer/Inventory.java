@@ -34,16 +34,16 @@ import com.l2jfree.gameserver.model.GMAudit;
 import com.l2jfree.gameserver.model.L2ArmorSet;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
+import com.l2jfree.gameserver.model.items.templates.L2Armor;
+import com.l2jfree.gameserver.model.items.templates.L2Equip;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItem;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.model.world.L2World;
-import com.l2jfree.gameserver.templates.item.L2Armor;
-import com.l2jfree.gameserver.templates.item.L2Equip;
-import com.l2jfree.gameserver.templates.item.L2EtcItem;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
 
 /**
  * This class manages inventory

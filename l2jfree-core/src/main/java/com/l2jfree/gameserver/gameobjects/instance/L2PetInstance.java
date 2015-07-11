@@ -45,6 +45,9 @@ import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.model.L2PetData;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -59,9 +62,6 @@ import com.l2jfree.gameserver.network.packets.server.StopMove;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.network.packets.server.ValidateLocation;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.tools.random.Rnd;
 
 public class L2PetInstance extends L2Summon

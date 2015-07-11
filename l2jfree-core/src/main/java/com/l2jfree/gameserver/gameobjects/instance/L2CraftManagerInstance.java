@@ -28,12 +28,12 @@ import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.InventoryUpdate;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.tools.random.Rnd;
 

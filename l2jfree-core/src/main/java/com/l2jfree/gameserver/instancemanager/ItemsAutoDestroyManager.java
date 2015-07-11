@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.instancemanager;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 
 public final class ItemsAutoDestroyManager extends AbstractIterativePeriodicTaskManager<L2ItemInstance>
 {

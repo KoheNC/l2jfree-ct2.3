@@ -36,6 +36,12 @@ import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.model.base.ClassId;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Armor;
+import com.l2jfree.gameserver.model.items.templates.L2Equip;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItem;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.L2Skill;
@@ -47,12 +53,6 @@ import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.item.L2Armor;
-import com.l2jfree.gameserver.templates.item.L2Equip;
-import com.l2jfree.gameserver.templates.item.L2EtcItem;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 
 /**
  * Smart GM Shop that can give you all available items

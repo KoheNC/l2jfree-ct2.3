@@ -45,6 +45,7 @@ import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeStatInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -58,7 +59,6 @@ import com.l2jfree.gameserver.network.packets.server.SetupGauge;
 import com.l2jfree.gameserver.network.packets.server.StatusUpdate;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
 import com.l2jfree.gameserver.templates.StatsSet;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
 

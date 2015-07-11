@@ -19,9 +19,9 @@ import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
 import com.l2jfree.gameserver.model.L2CharPosition;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
 import com.l2jfree.tools.geometry.Point3D;
 
 /**

@@ -34,7 +34,7 @@ import org.apache.commons.lang.StringUtils;
 import com.l2jfree.Config;
 import com.l2jfree.L2AutoInitialization;
 import com.l2jfree.gameserver.model.Elementals;
-import com.l2jfree.gameserver.templates.item.L2WeaponType;
+import com.l2jfree.gameserver.model.items.templates.L2WeaponType;
 import com.l2jfree.lang.L2TextBuilder;
 import com.l2jfree.util.L2Arrays;
 

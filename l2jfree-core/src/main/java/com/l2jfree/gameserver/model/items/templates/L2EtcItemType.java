@@ -12,47 +12,43 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.templates.item;
+package com.l2jfree.gameserver.model.items.templates;
 
 /**
- * Description of Armor Type
+ * Description of EtcItem Type
  */
-public enum L2ArmorType implements AbstractL2ItemType
+public enum L2EtcItemType implements AbstractL2ItemType
 {
-	NONE(1, "None"),
-	LIGHT(2, "Light"),
-	HEAVY(3, "Heavy"),
-	MAGIC(4, "Magic"),
-	PET(5, "Pet"),
-	SIGIL(6, "Sigil");
+	ARROW(1, "Arrow"),
+	BOLT(2, "Bolt"),
+	MATERIAL(3, "Material"),
+	PET_COLLAR(4, "PetCollar"),
+	POTION(5, "Potion"),
+	RECEIPE(6, "Receipe"),
+	SCROLL(7, "Scroll"),
+	QUEST(8, "Quest"),
+	MONEY(9, "Money"),
+	OTHER(10, "Other"),
+	SPELLBOOK(11, "Spellbook"),
+	SEED(12, "Seed"),
+	SHOT(13, "Shot"),
+	HERB(14, "Herb");
 	
-	private final int _mask;
 	private final String _name;
 	
 	/**
-	 * Constructor of the L2ArmorType.
+	 * Constructor of the L2EtcItemType.
 	 * 
-	 * @param id : int designating the ID of the ArmorType
-	 * @param name : String designating the name of the ArmorType
+	 * @param id : int designating the ID of the EtcItemType
+	 * @param name : String designating the name of the EtcItemType
 	 */
-	private L2ArmorType(int id, String name)
+	private L2EtcItemType(int id, String name)
 	{
-		_mask = L2WeaponType.values()[L2WeaponType.values().length - 1].mask() << id;
 		_name = name;
 	}
 	
 	/**
-	 * Returns the ID of the ArmorType after applying a mask.
-	 * 
-	 * @return int : ID of the ArmorType after mask
-	 */
-	public int mask()
-	{
-		return _mask;
-	}
-	
-	/**
-	 * Returns the name of the ArmorType
+	 * Returns the name of the EtcItemType
 	 * 
 	 * @return String
 	 */

@@ -39,13 +39,13 @@ import com.l2jfree.gameserver.gameobjects.templates.L2CreatureTemplate;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
 import com.l2jfree.gameserver.instancemanager.GameTimeManager;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.network.packets.server.ExAirShipInfo;
 import com.l2jfree.gameserver.network.packets.server.ExGetOffAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExGetOnAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExMoveToLocationAirShip;
 import com.l2jfree.gameserver.network.packets.server.ExStopMoveAirShip;
 import com.l2jfree.gameserver.taskmanager.MovementController;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 
 /**
  * Flying airships. Very similar to Maktakien boats (see L2BoatInstance) but these do fly :P

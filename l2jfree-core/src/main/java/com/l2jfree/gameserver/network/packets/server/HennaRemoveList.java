@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.model.items.templates.L2Henna;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
-import com.l2jfree.gameserver.templates.item.L2Henna;
 
 public class HennaRemoveList extends L2ServerPacket
 {

@@ -21,10 +21,10 @@ import com.l2jfree.gameserver.datatables.RecipeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.recipe.L2RecipeList;
+import com.l2jfree.gameserver.model.items.templates.L2EtcItemType;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
+import com.l2jfree.gameserver.model.items.templates.L2WarehouseItem;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
-import com.l2jfree.gameserver.templates.item.L2EtcItemType;
-import com.l2jfree.gameserver.templates.item.L2Item;
-import com.l2jfree.gameserver.templates.item.L2WarehouseItem;
 import com.l2jfree.util.L2Collections;
 import com.l2jfree.util.L2Collections.Filter;
 

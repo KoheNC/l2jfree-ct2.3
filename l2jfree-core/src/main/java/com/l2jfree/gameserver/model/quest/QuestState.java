@@ -37,6 +37,7 @@ import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.model.L2DropData;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
@@ -49,7 +50,6 @@ import com.l2jfree.gameserver.network.packets.server.TutorialCloseHtml;
 import com.l2jfree.gameserver.network.packets.server.TutorialEnableClientEvent;
 import com.l2jfree.gameserver.network.packets.server.TutorialShowHtml;
 import com.l2jfree.gameserver.network.packets.server.TutorialShowQuestionMark;
-import com.l2jfree.gameserver.templates.item.L2Item;
 import com.l2jfree.tools.random.Rnd;
 
 /**

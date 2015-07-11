@@ -38,6 +38,7 @@ import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Weapon;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.model.world.L2WorldRegion;
@@ -59,7 +60,6 @@ import com.l2jfree.gameserver.network.packets.server.EffectInfoPacket.EffectInfo
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.LeakTaskManager;
 import com.l2jfree.gameserver.taskmanager.SQLQueue;
-import com.l2jfree.gameserver.templates.item.L2Weapon;
 
 public abstract class L2Summon extends L2Playable
 {

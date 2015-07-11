@@ -19,8 +19,8 @@ import java.util.List;
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.model.L2TradeList;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.templates.L2Item;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
-import com.l2jfree.gameserver.templates.item.L2Item;
 
 public class ShopPreviewList extends L2ServerPacket
 {
