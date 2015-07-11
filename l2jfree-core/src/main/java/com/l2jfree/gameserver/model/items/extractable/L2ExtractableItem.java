@@ -12,37 +12,33 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model.items;
+package com.l2jfree.gameserver.model.items.extractable;
+
+import java.util.List;
 
 /**
  *
  * @author -Nemesiss-
  */
-public class L2ExtractableProductItem
+public class L2ExtractableItem
 {
-	private final int[] _id;
-	private final int[] _ammount;
-	private final int _chance;
+	private final int _itemId;
+	private final L2ExtractableProductItem[] _products;
 	
-	public L2ExtractableProductItem(int[] id, int[] ammount, int chance)
+	public L2ExtractableItem(int itemid, List<L2ExtractableProductItem> products)
 	{
-		_id = id;
-		_ammount = ammount;
-		_chance = chance;
+		_itemId = itemid;
+		_products = new L2ExtractableProductItem[products.size()];
+		products.toArray(_products);
 	}
 	
-	public int[] getId()
+	public int getItemId()
 	{
-		return _id;
+		return _itemId;
 	}
 	
-	public int[] getAmmount()
+	public L2ExtractableProductItem[] getProductItemsArray()
 	{
-		return _ammount;
-	}
-	
-	public int getChance()
-	{
-		return _chance;
+		return _products;
 	}
 }

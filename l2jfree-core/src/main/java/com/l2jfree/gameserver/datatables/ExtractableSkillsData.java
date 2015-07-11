@@ -24,8 +24,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.Config;
-import com.l2jfree.gameserver.model.items.L2ExtractableProductItem;
-import com.l2jfree.gameserver.model.items.L2ExtractableSkill;
+import com.l2jfree.gameserver.model.items.extractable.L2ExtractableProductItem;
+import com.l2jfree.gameserver.model.items.extractable.L2ExtractableSkill;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
