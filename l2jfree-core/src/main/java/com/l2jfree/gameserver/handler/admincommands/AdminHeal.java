@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.handler.admincommands;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 
 /**
  * This class handles following admin commands:

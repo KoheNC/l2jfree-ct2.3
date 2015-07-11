@@ -27,9 +27,9 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.model.L2World;
-import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.world.L2World;
+import com.l2jfree.gameserver.model.world.L2WorldRegion;
 import com.l2jfree.gameserver.model.zone.L2Zone;
 import com.l2jfree.gameserver.model.zone.L2Zone.ZoneType;
 import com.l2jfree.gameserver.util.Util;

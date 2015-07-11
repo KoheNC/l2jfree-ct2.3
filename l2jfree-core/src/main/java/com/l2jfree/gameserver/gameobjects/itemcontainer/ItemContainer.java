@@ -33,7 +33,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.GMAudit;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.items.L2ItemInstance.ItemLocation;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.templates.item.L2Item;
 
 /**

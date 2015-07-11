@@ -34,7 +34,7 @@ import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.FactionAggressionNotificationQueue;
 import com.l2jfree.gameserver.gameobjects.reference.ImmutableReference;
 import com.l2jfree.gameserver.model.L2Spawn;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.lang.L2Thread;
 import com.l2jfree.util.L2FastSet;
 

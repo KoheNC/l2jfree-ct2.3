@@ -25,10 +25,10 @@ import javolution.text.TextBuilder;
 import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
-import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TVTInstance;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TvTIMain;
 import com.l2jfree.gameserver.model.entity.events.TvTInstanced.TvTITeam;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.util.Util;
 

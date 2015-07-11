@@ -40,7 +40,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IIrcCommandHandler;
 import com.l2jfree.gameserver.handler.IrcCommandHandler;
 import com.l2jfree.gameserver.instancemanager.IrcManager;
-import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.packets.server.CreatureSay;
 import com.l2jfree.tools.codec.Base64;
 import com.l2jfree.tools.random.Rnd;
