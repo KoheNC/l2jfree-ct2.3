@@ -23,10 +23,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2ManufactureItem;
-import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.model.TradeList;
 import com.l2jfree.gameserver.model.TradeList.TradeItem;
+import com.l2jfree.gameserver.model.items.manufacture.L2ManufactureItem;
+import com.l2jfree.gameserver.model.items.manufacture.L2ManufactureList;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.packets.server.RecipeShopMsg;
 

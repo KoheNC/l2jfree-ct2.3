@@ -18,8 +18,8 @@ import com.l2jfree.gameserver.Announcements;
 import com.l2jfree.gameserver.datatables.EventDroplist;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2DropCategory;
-import com.l2jfree.gameserver.model.L2DropData;
+import com.l2jfree.gameserver.model.drop.L2DropCategory;
+import com.l2jfree.gameserver.model.drop.L2DropData;
 import com.l2jfree.gameserver.script.DateRange;
 import com.l2jfree.gameserver.script.EngineInterface;
 

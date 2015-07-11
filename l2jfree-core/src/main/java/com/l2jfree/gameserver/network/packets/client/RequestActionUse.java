@@ -27,7 +27,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.L2CharPosition;
-import com.l2jfree.gameserver.model.L2ManufactureList;
+import com.l2jfree.gameserver.model.items.manufacture.L2ManufactureList;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
