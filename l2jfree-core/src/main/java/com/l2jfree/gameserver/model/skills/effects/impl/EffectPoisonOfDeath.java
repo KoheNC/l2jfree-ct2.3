@@ -15,8 +15,8 @@
 package com.l2jfree.gameserver.model.skills.effects.impl;
 
 import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;
 import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
-import com.l2jfree.gameserver.templates.effects.EffectTemplate;
 
 /**
  * Poison of death used by Witch Kalis in the "Proof of Clan Alliance"

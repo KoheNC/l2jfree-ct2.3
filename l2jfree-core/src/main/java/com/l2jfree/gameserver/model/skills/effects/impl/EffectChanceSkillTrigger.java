@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.IChanceSkillTrigger;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;
-import com.l2jfree.gameserver.templates.effects.EffectTemplate;
+import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;
 
 public final class EffectChanceSkillTrigger extends EffectBuff implements IChanceSkillTrigger
 {

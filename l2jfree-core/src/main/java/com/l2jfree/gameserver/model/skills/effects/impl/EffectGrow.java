@@ -17,7 +17,7 @@ package com.l2jfree.gameserver.model.skills.effects.impl;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.model.skills.AbnormalEffect;
 import com.l2jfree.gameserver.model.skills.Env;
-import com.l2jfree.gameserver.templates.effects.EffectTemplate;
+import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;
 
 public final class EffectGrow extends EffectBuff
 {

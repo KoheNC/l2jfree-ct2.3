@@ -21,11 +21,11 @@ import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;
+import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;
 import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.packets.server.FlyToLocation;
 import com.l2jfree.gameserver.network.packets.server.ValidateLocation;
 import com.l2jfree.gameserver.network.packets.server.FlyToLocation.FlyType;
-import com.l2jfree.gameserver.templates.effects.EffectTemplate;
 import com.l2jfree.gameserver.util.Util;
 
 /**
