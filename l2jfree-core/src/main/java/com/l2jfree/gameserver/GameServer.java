@@ -143,6 +143,7 @@ import com.l2jfree.gameserver.network.L2ClientSelectorThread;
 import com.l2jfree.gameserver.script.faenor.FaenorScriptEngine;
 import com.l2jfree.gameserver.scripting.CompiledScriptCache;
 import com.l2jfree.gameserver.scripting.L2ScriptEngineManager;
+import com.l2jfree.gameserver.status.Status;
 import com.l2jfree.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
 import com.l2jfree.gameserver.taskmanager.KnownListUpdateTaskManager;
@@ -158,7 +159,6 @@ import com.l2jfree.gameserver.util.OfflineTradeManager;
 import com.l2jfree.gameserver.util.TableOptimizer;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.lang.management.StartupManager;
-import com.l2jfree.status.Status;
 import com.l2jfree.util.concurrent.RunnableStatsManager;
 
 public final class GameServer extends L2AutoInitialization
