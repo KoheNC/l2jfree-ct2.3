@@ -18,11 +18,11 @@ import java.util.StringTokenizer;
 
 import javolution.text.TextBuilder;
 
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.Fort;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;

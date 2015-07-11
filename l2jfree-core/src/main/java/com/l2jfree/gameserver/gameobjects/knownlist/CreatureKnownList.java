@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.gameobjects.knownlist;
 import java.util.Map;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.util.L2Collections;

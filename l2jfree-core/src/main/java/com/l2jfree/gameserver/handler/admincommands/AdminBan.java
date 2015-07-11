@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.handler.admincommands;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.LoginServerThread;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.network.Disconnection;
 import com.l2jfree.gameserver.network.SystemMessageId;

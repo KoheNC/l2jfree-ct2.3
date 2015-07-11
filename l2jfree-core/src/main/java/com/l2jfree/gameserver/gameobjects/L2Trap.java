@@ -112,7 +112,7 @@ public class L2Trap extends L2Creature
 	
 	/**
 	 *
-	 * @see com.l2jfree.gameserver.model.L2Object#isAutoAttackable(com.l2jfree.gameserver.gameobjects.L2Creature)
+	 * @see com.l2jfree.gameserver.gameobjects.L2Object#isAutoAttackable(com.l2jfree.gameserver.gameobjects.L2Creature)
 	 */
 	@Override
 	public boolean isAutoAttackable(L2Creature attacker)

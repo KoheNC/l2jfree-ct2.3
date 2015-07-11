@@ -2721,7 +2721,7 @@ public class L2Npc extends L2Creature
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : This method DOESN'T REMOVE the object from _allObjects of L2World </B></FONT><BR>
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : This method DOESN'T SEND Server->Client packets to players</B></FONT><BR><BR>
 	 *
-	 * @see com.l2jfree.gameserver.model.L2Object#decayMe()
+	 * @see com.l2jfree.gameserver.gameobjects.L2Object#decayMe()
 	 */
 	@Override
 	public void onDecay()

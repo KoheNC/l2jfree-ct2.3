@@ -12,17 +12,16 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.gameobjects;
 
-import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.gameobjects.L2Npc;
-import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.knownlist.ObjectKnownList;
 import com.l2jfree.gameserver.gameobjects.poly.ObjectPoly;
 import com.l2jfree.gameserver.gameobjects.position.ObjectPosition;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
+import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.L2WorldRegion;
+import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.entity.Instance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;

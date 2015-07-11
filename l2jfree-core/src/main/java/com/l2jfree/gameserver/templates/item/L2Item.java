@@ -18,10 +18,10 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.model.skills.conditions.Condition;

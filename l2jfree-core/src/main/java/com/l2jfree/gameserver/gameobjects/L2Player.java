@@ -154,7 +154,6 @@ import com.l2jfree.gameserver.model.L2FriendList;
 import com.l2jfree.gameserver.model.L2Macro;
 import com.l2jfree.gameserver.model.L2ManufactureList;
 import com.l2jfree.gameserver.model.L2Marker;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2Party;
 import com.l2jfree.gameserver.model.L2PartyRoom;
 import com.l2jfree.gameserver.model.L2PetData;

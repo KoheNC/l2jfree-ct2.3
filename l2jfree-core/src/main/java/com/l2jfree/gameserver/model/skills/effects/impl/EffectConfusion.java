@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 import com.l2jfree.gameserver.model.skills.effects.templates.EffectTemplate;

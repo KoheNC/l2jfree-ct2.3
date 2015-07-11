@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.handler.items;
 
 import com.l2jfree.gameserver.datatables.SkillTable.SkillInfo;
 import com.l2jfree.gameserver.gameobjects.L2Boss;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Playable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
@@ -24,7 +25,6 @@ import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManorManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.model.L2Manor;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;

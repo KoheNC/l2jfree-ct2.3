@@ -18,10 +18,10 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 import com.l2jfree.gameserver.datatables.ClanTable;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.GMViewPledgeInfo;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;

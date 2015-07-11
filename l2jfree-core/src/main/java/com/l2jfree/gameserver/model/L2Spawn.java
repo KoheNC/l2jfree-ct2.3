@@ -26,6 +26,7 @@ import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Attackable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.instance.L2DecoyInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2EffectPointInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MinionInstance;

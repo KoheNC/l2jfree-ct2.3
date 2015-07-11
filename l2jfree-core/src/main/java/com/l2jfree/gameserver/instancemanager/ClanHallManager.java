@@ -28,8 +28,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.datatables.ClanTable;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.ClanHall;
 
 public class ClanHallManager

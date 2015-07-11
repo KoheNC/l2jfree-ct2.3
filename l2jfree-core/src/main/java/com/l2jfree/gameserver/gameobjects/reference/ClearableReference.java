@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.gameobjects.reference;
 
 import java.lang.ref.WeakReference;
 
-import com.l2jfree.gameserver.model.L2Object;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 
 /**
  * @author NB4L1

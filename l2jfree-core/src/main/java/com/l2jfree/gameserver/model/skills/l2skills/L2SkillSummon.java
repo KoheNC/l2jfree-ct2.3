@@ -16,6 +16,7 @@ package com.l2jfree.gameserver.model.skills.l2skills;
 
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
@@ -23,7 +24,6 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.skills.L2Skill;

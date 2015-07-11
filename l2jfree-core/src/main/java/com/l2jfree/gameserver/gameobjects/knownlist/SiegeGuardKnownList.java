@@ -14,11 +14,11 @@
  */
 package com.l2jfree.gameserver.gameobjects.knownlist;
 
+import com.l2jfree.gameserver.gameobjects.L2Object;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
-import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.entity.Castle;
 
 public class SiegeGuardKnownList extends AttackableKnownList
