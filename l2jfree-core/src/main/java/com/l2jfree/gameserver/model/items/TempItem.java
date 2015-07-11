@@ -14,7 +14,6 @@
  */
 package com.l2jfree.gameserver.model.items;
 
-import com.l2jfree.gameserver.model.L2ItemInstance;
 
 /**
  * Class explanation:

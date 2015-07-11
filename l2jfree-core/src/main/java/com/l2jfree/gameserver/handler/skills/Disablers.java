@@ -35,7 +35,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.handler.ICubicSkillHandler;
 import com.l2jfree.gameserver.handler.SkillHandler;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.model.skills.L2Skill;

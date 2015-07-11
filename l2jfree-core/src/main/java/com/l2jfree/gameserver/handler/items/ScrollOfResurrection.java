@@ -21,8 +21,8 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.entity.Castle;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
@@ -39,7 +39,7 @@ public class ScrollOfResurrection implements IItemHandler
 	
 	/**
 	 * 
-	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.gameobjects.L2Playable, com.l2jfree.gameserver.model.L2ItemInstance)
+	 * @see com.l2jfree.gameserver.handler.IItemHandler#useItem(com.l2jfree.gameserver.gameobjects.L2Playable, com.l2jfree.gameserver.model.items.L2ItemInstance)
 	 */
 	@Override
 	public void useItem(L2Playable playable, L2ItemInstance item)

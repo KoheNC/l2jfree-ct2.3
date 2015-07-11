@@ -26,8 +26,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
-import com.l2jfree.gameserver.model.L2ItemInstance;
 import com.l2jfree.gameserver.model.L2TradeList;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 
 /**
  *  This class manages buylists from database

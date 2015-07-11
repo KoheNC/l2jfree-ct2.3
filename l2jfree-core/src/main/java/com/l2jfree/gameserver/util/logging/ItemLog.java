@@ -22,7 +22,7 @@ import java.util.logging.LogRecord;
 
 import javolution.text.TextBuilder;
 
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.templates.item.AbstractL2ItemType;
 import com.l2jfree.gameserver.templates.item.L2EtcItemType;
 import com.l2jfree.util.logging.L2LogFilter;

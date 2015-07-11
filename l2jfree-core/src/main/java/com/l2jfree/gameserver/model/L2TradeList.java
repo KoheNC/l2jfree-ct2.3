@@ -18,6 +18,8 @@ import java.util.List;
 
 import javolution.util.FastList;
 
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
+
 public class L2TradeList
 {
 	private final FastList<L2ItemInstance> _items;

@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.network.packets.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jfree.gameserver.model.ItemInfo;
-import com.l2jfree.gameserver.model.L2ItemInstance;
+import com.l2jfree.gameserver.model.items.ItemInfo;
+import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 
 /**
