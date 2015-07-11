@@ -78,6 +78,7 @@ import com.l2jfree.gameserver.handler.VoicedCommandHandler;
 import com.l2jfree.gameserver.idfactory.IdFactory;
 import com.l2jfree.gameserver.instancemanager.AirShipManager;
 import com.l2jfree.gameserver.instancemanager.AuctionManager;
+import com.l2jfree.gameserver.instancemanager.AutoChatManager;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager;
 import com.l2jfree.gameserver.instancemanager.BlockListManager;
 import com.l2jfree.gameserver.instancemanager.BoatManager;
@@ -127,7 +128,6 @@ import com.l2jfree.gameserver.instancemanager.hellbound.TowerOfNaiaManager;
 import com.l2jfree.gameserver.instancemanager.lastimperialtomb.LastImperialTombManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.ArenaManager;
 import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
-import com.l2jfree.gameserver.model.AutoChatHandler;
 import com.l2jfree.gameserver.model.L2Manor;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
 import com.l2jfree.gameserver.model.entity.Castle;
@@ -318,7 +318,7 @@ public final class GameServer extends L2AutoInitialization
 		RaidBossSpawnManager.getInstance();
 		GrandBossSpawnManager.getInstance();
 		RaidPointsManager.init();
-		AutoChatHandler.getInstance();
+		AutoChatManager.getInstance();
 		AutoSpawnManager.getInstance();
 		
 		Util.printSection("Quests");

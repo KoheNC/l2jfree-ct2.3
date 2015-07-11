@@ -38,7 +38,6 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeTeleporterInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.idfactory.IdFactory;
-import com.l2jfree.gameserver.model.AutoChatHandler;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.entity.Castle;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
@@ -1033,7 +1032,7 @@ public class MercTicketManager
 			merc.getStatus().setCurrentHpMp(merc.getMaxHp(), merc.getMaxMp());
 			merc.setDecayed(false);
 			merc.spawnMe(x, y, (z + 20));
-			AutoChatHandler.getInstance().registerChat(merc, MercTicketManager.MESSAGES, 0);
+			AutoChatManager.getInstance().registerChat(merc, MercTicketManager.MESSAGES, 0);
 			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 				@Override
 				public void run()

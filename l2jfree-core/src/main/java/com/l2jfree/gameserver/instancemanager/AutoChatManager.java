@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.instancemanager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,15 +47,15 @@ import com.l2jfree.tools.random.Rnd;
  * 
  * @author Tempy
  */
-public class AutoChatHandler implements SpawnListener
+public class AutoChatManager implements SpawnListener
 {
-	protected static Log _log = LogFactory.getLog(AutoChatHandler.class);
+	protected static Log _log = LogFactory.getLog(AutoChatManager.class);
 	
 	private static final int DEFAULT_CHAT_RANGE = 1500;
 	
 	protected final FastMap<Integer, AutoChatInstance> _registeredChats;
 	
-	private AutoChatHandler()
+	private AutoChatManager()
 	{
 		_registeredChats = new FastMap<Integer, AutoChatInstance>();
 		restoreChatData();
@@ -143,7 +143,7 @@ public class AutoChatHandler implements SpawnListener
 		restoreChatData();
 	}
 	
-	public static AutoChatHandler getInstance()
+	public static AutoChatManager getInstance()
 	{
 		return SingletonHolder._instance;
 	}
@@ -905,6 +905,6 @@ public class AutoChatHandler implements SpawnListener
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{
-		protected static final AutoChatHandler _instance = new AutoChatHandler();
+		protected static final AutoChatManager _instance = new AutoChatManager();
 	}
 }

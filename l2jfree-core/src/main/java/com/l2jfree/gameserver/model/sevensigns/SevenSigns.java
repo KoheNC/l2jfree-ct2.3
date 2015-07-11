@@ -31,10 +31,10 @@ import com.l2jfree.L2DatabaseFactory;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
+import com.l2jfree.gameserver.instancemanager.AutoChatManager;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager;
 import com.l2jfree.gameserver.instancemanager.AutoSpawnManager.AutoSpawnInstance;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
-import com.l2jfree.gameserver.model.AutoChatHandler;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
 import com.l2jfree.gameserver.model.world.L2World;
 import com.l2jfree.gameserver.network.SystemMessageId;
@@ -233,9 +233,9 @@ public class SevenSigns
 							.isSpawnActive())
 						AutoSpawnManager.getInstance().setSpawnActive(spawnInst, true);
 				
-				if (!AutoChatHandler.getInstance().getAutoChatInstance(PREACHER_NPC_ID, false).isActive()
-						&& !AutoChatHandler.getInstance().getAutoChatInstance(ORATOR_NPC_ID, false).isActive())
-					AutoChatHandler.getInstance().setAutoChatActive(true);
+				if (!AutoChatManager.getInstance().getAutoChatInstance(PREACHER_NPC_ID, false).isActive()
+						&& !AutoChatManager.getInstance().getAutoChatInstance(ORATOR_NPC_ID, false).isActive())
+					AutoChatManager.getInstance().setAutoChatActive(true);
 			}
 			else
 			{
@@ -247,7 +247,7 @@ public class SevenSigns
 				for (AutoSpawnInstance spawnInst : _preacherSpawns.values())
 					AutoSpawnManager.getInstance().setSpawnActive(spawnInst, false);
 				
-				AutoChatHandler.getInstance().setAutoChatActive(false);
+				AutoChatManager.getInstance().setAutoChatActive(false);
 			}
 			
 			if (getSealOwner(SEAL_AVARICE) == getCabalHighestScore() && getSealOwner(SEAL_AVARICE) != CABAL_NULL)
@@ -327,7 +327,7 @@ public class SevenSigns
 			for (AutoSpawnInstance spawnInst : _marketeerSpawns.values())
 				AutoSpawnManager.getInstance().setSpawnActive(spawnInst, false);
 			
-			AutoChatHandler.getInstance().setAutoChatActive(false);
+			AutoChatManager.getInstance().setAutoChatActive(false);
 		}
 	}
 	
