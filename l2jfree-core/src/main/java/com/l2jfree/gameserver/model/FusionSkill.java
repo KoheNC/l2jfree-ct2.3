@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
 import com.l2jfree.gameserver.ThreadPoolManager;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.geodata.GeoData;
-import com.l2jfree.gameserver.model.skills.effects.EffectFusion;
+import com.l2jfree.gameserver.model.skills.effects.impl.EffectFusion;
 import com.l2jfree.gameserver.model.skills.l2skills.L2SkillFusion;
 import com.l2jfree.gameserver.util.Util;
 

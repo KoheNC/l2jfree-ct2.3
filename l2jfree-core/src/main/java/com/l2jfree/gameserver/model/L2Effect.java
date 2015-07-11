@@ -29,7 +29,7 @@ import com.l2jfree.gameserver.gameobjects.instance.L2SummonInstance;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
 import com.l2jfree.gameserver.model.skills.Env;
 import com.l2jfree.gameserver.model.skills.L2Skill;
-import com.l2jfree.gameserver.model.skills.effects.EffectCharmOfCourage;
+import com.l2jfree.gameserver.model.skills.effects.impl.EffectCharmOfCourage;
 import com.l2jfree.gameserver.model.skills.funcs.Func;
 import com.l2jfree.gameserver.model.skills.funcs.FuncOwner;
 import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
