@@ -23,10 +23,10 @@ import com.l2jfree.gameserver.gameobjects.instance.L2AirShipInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2BoatInstance;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.Calculator;
-import com.l2jfree.gameserver.skills.Env;
-import com.l2jfree.gameserver.skills.Stats;
+import com.l2jfree.gameserver.model.skills.Calculator;
+import com.l2jfree.gameserver.model.skills.Env;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.Stats;
 import com.l2jfree.gameserver.templates.item.L2Weapon;
 import com.l2jfree.gameserver.templates.item.L2WeaponType;
 

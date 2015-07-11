@@ -25,7 +25,7 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.packets.server.MagicSkillUse;
 import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.gameserver.util.Util;

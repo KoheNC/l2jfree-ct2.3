@@ -17,9 +17,9 @@ package com.l2jfree.gameserver.handler.skills;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.SystemMessageId;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 /**
  * @author _drunk_

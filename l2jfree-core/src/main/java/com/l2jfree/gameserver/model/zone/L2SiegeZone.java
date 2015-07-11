@@ -20,10 +20,10 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2SiegeSummonInstance;
 import com.l2jfree.gameserver.instancemanager.FortManager;
 import com.l2jfree.gameserver.instancemanager.FortSiegeManager;
-import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.Fort;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 
 public class L2SiegeZone extends SiegeableEntityZone
 {

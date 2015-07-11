@@ -25,9 +25,9 @@ import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.idfactory.IdFactory;
+import com.l2jfree.gameserver.model.skills.Formulas;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
-import com.l2jfree.gameserver.skills.Formulas;
 import com.l2jfree.tools.random.Rnd;
 
 /**

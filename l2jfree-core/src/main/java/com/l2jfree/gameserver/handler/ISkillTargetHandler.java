@@ -17,8 +17,8 @@ package com.l2jfree.gameserver.handler;
 import java.util.List;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill.SkillTargetType;
 
 /**
  * @author NB4L1

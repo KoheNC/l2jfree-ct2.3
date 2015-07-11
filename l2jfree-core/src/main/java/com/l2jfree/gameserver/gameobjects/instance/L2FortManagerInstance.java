@@ -24,14 +24,14 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.ai.CtrlIntention;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2TeleportLocation;
 import com.l2jfree.gameserver.model.entity.Fort;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.NpcHtmlMessage;
 import com.l2jfree.gameserver.network.packets.server.WareHouseDepositList;
 import com.l2jfree.gameserver.network.packets.server.WareHouseWithdrawalList;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 import com.l2jfree.gameserver.util.IllegalPlayerAction;
 import com.l2jfree.gameserver.util.Util;
 

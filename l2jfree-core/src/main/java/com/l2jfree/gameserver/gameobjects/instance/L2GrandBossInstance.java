@@ -20,7 +20,7 @@ import com.l2jfree.gameserver.gameobjects.status.CreatureStatus;
 import com.l2jfree.gameserver.gameobjects.status.GrandBossStatus;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.GrandBossSpawnManager;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * This class manages all Bosses.

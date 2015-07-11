@@ -20,9 +20,9 @@ import com.l2jfree.gameserver.gameobjects.instance.L2ArtefactInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
 import com.l2jfree.gameserver.instancemanager.CastleManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.Castle;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 
 /**
  * @author _drunk_

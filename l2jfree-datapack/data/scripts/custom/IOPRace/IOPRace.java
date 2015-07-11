@@ -17,9 +17,9 @@ package custom.IOPRace;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.QuestState;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 public class IOPRace extends Quest
 {

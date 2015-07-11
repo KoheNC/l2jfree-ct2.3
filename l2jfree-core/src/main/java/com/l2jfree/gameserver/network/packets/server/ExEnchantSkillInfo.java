@@ -18,7 +18,7 @@ import javolution.util.FastList;
 
 import com.l2jfree.gameserver.datatables.SkillTreeTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
-import com.l2jfree.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
+import com.l2jfree.gameserver.model.skills.learn.L2EnchantSkillLearn.EnchantSkillDetail;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.ExEnchantSkillList.EnchantSkillType;
 

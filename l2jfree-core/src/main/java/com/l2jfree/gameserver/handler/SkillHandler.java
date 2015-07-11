@@ -64,10 +64,10 @@ import com.l2jfree.gameserver.handler.skills.TransformDispel;
 import com.l2jfree.gameserver.handler.skills.Trap;
 import com.l2jfree.gameserver.handler.skills.Unlock;
 import com.l2jfree.gameserver.handler.skills.ZakenTeleport;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.Formulas;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillDrain;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillDrain;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.util.EnumHandlerRegistry;
 import com.l2jfree.util.HandlerRegistry;
 

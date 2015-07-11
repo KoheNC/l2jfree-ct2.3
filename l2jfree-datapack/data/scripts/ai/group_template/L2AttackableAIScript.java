@@ -31,9 +31,9 @@ import com.l2jfree.gameserver.gameobjects.instance.L2RiftInvaderInstance;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
 import com.l2jfree.gameserver.instancemanager.DimensionalRiftManager;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.quest.Quest;
 import com.l2jfree.gameserver.model.quest.jython.QuestJython;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * 

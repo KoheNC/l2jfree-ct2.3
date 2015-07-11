@@ -23,7 +23,7 @@ import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.L2MerchantSummonInstance;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 public class L2SummonAI extends L2CreatureAI
 {

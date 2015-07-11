@@ -16,7 +16,7 @@ package com.l2jfree.gameserver.handler;
 
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.instance.L2CubicInstance;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 public interface ICubicSkillHandler extends ISkillHandler
 {

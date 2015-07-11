@@ -18,8 +18,8 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 
 /**
  * This class manages AI of Body Destroyer in Steel Citadel<br>

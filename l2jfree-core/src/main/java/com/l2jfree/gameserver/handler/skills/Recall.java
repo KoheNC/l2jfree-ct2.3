@@ -21,13 +21,13 @@ import com.l2jfree.gameserver.gameobjects.L2Player.TeleportMode;
 import com.l2jfree.gameserver.handler.ISkillConditionChecker;
 import com.l2jfree.gameserver.instancemanager.InstanceManager;
 import com.l2jfree.gameserver.instancemanager.MapRegionManager;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.Location;
 import com.l2jfree.gameserver.model.mapregion.TeleportWhereType;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillRecall;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillTeleport;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillRecall;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillTeleport;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 public class Recall extends ISkillConditionChecker
 {

@@ -14,7 +14,7 @@
  */
 package com.l2jfree.gameserver.templates.item;
 
-import com.l2jfree.gameserver.skills.Stats;
+import com.l2jfree.gameserver.model.skills.Stats;
 
 /**
  * @author mkizub <BR>

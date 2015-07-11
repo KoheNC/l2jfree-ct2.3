@@ -33,6 +33,7 @@ import com.l2jfree.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jfree.gameserver.instancemanager.TransformationManager;
 import com.l2jfree.gameserver.model.restriction.global.CursedWeaponRestriction;
 import com.l2jfree.gameserver.model.restriction.global.GlobalRestrictions;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.Earthquake;
 import com.l2jfree.gameserver.network.packets.server.ExRedSky;

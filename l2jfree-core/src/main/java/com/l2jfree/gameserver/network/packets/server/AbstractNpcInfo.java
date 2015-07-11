@@ -23,9 +23,9 @@ import com.l2jfree.gameserver.gameobjects.L2Trap;
 import com.l2jfree.gameserver.gameobjects.instance.L2MonsterInstance;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.Inventory;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
+import com.l2jfree.gameserver.model.skills.effects.AbnormalEffect;
 import com.l2jfree.gameserver.network.L2Client;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
-import com.l2jfree.gameserver.skills.AbnormalEffect;
 
 public abstract class AbstractNpcInfo extends L2ServerPacket
 {

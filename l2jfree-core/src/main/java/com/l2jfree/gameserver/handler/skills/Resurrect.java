@@ -20,11 +20,11 @@ import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.ISkillHandler;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
-import com.l2jfree.gameserver.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.Formulas;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill.SkillTargetType;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.taskmanager.DecayTaskManager;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 
 /**
  * This class ...

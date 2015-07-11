@@ -18,9 +18,9 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.handler.ISkillHandler;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.skills.l2skills.L2SkillLearnSkill;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.l2skills.L2SkillLearnSkill;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 
 public class LearnSkill implements ISkillHandler
 {

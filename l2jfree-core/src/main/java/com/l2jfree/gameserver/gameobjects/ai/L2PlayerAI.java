@@ -23,8 +23,8 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.gameobjects.instance.L2StaticObjectInstance;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
-import com.l2jfree.gameserver.model.L2Skill.SkillTargetType;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill.SkillTargetType;
 
 public class L2PlayerAI extends L2CreatureAI
 {

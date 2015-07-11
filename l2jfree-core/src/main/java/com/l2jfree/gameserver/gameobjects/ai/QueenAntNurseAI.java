@@ -21,7 +21,7 @@ import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Creature.AIAccessor;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.instancemanager.grandbosses.QueenAntManager;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
 import com.l2jfree.gameserver.util.Util;
 
 /**

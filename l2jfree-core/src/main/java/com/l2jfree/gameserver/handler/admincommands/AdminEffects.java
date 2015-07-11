@@ -26,8 +26,9 @@ import com.l2jfree.gameserver.gameobjects.instance.L2ChestInstance;
 import com.l2jfree.gameserver.handler.IAdminCommandHandler;
 import com.l2jfree.gameserver.instancemanager.grandbosses.FrintezzaManager;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.L2World;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.AbnormalEffect;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.network.packets.server.Earthquake;
@@ -39,7 +40,6 @@ import com.l2jfree.gameserver.network.packets.server.SocialAction;
 import com.l2jfree.gameserver.network.packets.server.StopMove;
 import com.l2jfree.gameserver.network.packets.server.SunRise;
 import com.l2jfree.gameserver.network.packets.server.SunSet;
-import com.l2jfree.gameserver.skills.AbnormalEffect;
 
 /**
  * This class handles following admin commands:

@@ -32,9 +32,9 @@ import com.l2jfree.gameserver.gameobjects.instance.L2FortSiegeGuardInstance;
 import com.l2jfree.gameserver.gameobjects.instance.L2NpcInstance;
 import com.l2jfree.gameserver.geodata.GeoData;
 import com.l2jfree.gameserver.model.L2Object;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.templates.L2SkillType;
 import com.l2jfree.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
-import com.l2jfree.gameserver.templates.skills.L2SkillType;
 import com.l2jfree.gameserver.util.Util;
 import com.l2jfree.tools.random.Rnd;
 

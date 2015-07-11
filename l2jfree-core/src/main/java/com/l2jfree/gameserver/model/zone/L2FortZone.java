@@ -19,9 +19,9 @@ import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.gameobjects.L2Creature;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.model.L2Clan;
-import com.l2jfree.gameserver.model.L2Effect;
-import com.l2jfree.gameserver.model.L2Skill;
 import com.l2jfree.gameserver.model.entity.FortSiege;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
 
 public class L2FortZone extends SiegeableEntityZone
 {

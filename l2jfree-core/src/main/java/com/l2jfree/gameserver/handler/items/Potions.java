@@ -21,13 +21,13 @@ import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.L2Summon;
 import com.l2jfree.gameserver.gameobjects.instance.L2PetInstance;
 import com.l2jfree.gameserver.handler.IItemHandler;
-import com.l2jfree.gameserver.model.L2Effect;
 import com.l2jfree.gameserver.model.L2ItemInstance;
-import com.l2jfree.gameserver.model.L2Skill;
+import com.l2jfree.gameserver.model.skills.L2Skill;
+import com.l2jfree.gameserver.model.skills.effects.L2Effect;
+import com.l2jfree.gameserver.model.skills.templates.L2EffectType;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.SystemMessage;
-import com.l2jfree.gameserver.templates.skills.L2EffectType;
 
 public class Potions implements IItemHandler
 {
