@@ -53,11 +53,11 @@ public final class L2MapRegionRestart
 		{
 			if ("normal".equalsIgnoreCase(n.getNodeName()))
 			{
-				_restartPoints = (Location[])ArrayUtils.add(_restartPoints, getLocation(n));
+				_restartPoints = ArrayUtils.add(_restartPoints, getLocation(n));
 			}
 			else if ("chaotic".equalsIgnoreCase(n.getNodeName()))
 			{
-				_chaoticPoints = (Location[])ArrayUtils.add(_chaoticPoints, getLocation(n));
+				_chaoticPoints = ArrayUtils.add(_chaoticPoints, getLocation(n));
 			}
 			else if ("bannedrace".equalsIgnoreCase(n.getNodeName()))
 			{

@@ -218,6 +218,6 @@ public abstract class L2Equip extends L2Item
 		if (_funcTemplates == null)
 			_funcTemplates = new FuncTemplate[] { f };
 		else
-			_funcTemplates = (FuncTemplate[])ArrayUtils.add(_funcTemplates, f);
+			_funcTemplates = ArrayUtils.add(_funcTemplates, f);
 	}
 }

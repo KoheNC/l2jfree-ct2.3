@@ -654,7 +654,7 @@ public class L2Spawn
 	{
 		synchronized (_spawnListeners)
 		{
-			_spawnListeners = (SpawnListener[])ArrayUtils.add(_spawnListeners, listener);
+			_spawnListeners = ArrayUtils.add(_spawnListeners, listener);
 		}
 	}
 	

@@ -1628,14 +1628,14 @@ public class Siege extends AbstractSiege
 			if (_dangerZonesE == null)
 				_dangerZonesE = new L2SiegeDangerZone[] { sdz };
 			else
-				_dangerZonesE = (L2SiegeDangerZone[])ArrayUtils.add(_dangerZonesE, sdz);
+				_dangerZonesE = ArrayUtils.add(_dangerZonesE, sdz);
 		}
 		else
 		{
 			if (_dangerZonesW == null)
 				_dangerZonesW = new L2SiegeDangerZone[] { sdz };
 			else
-				_dangerZonesW = (L2SiegeDangerZone[])ArrayUtils.add(_dangerZonesW, sdz);
+				_dangerZonesW = ArrayUtils.add(_dangerZonesW, sdz);
 		}
 	}
 	

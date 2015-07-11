@@ -34,7 +34,7 @@ abstract class ConditionLogic extends Condition
 			throw new IllegalStateException("Tried to add a 'null' condition to an <"
 					+ getClass().getSimpleName().replace("ConditionLogic", "").toLowerCase() + "> condition");
 		
-		_conditions = (Condition[])ArrayUtils.add(_conditions, condition);
+		_conditions = ArrayUtils.add(_conditions, condition);
 	}
 	
 	public final Condition getCanonicalCondition()

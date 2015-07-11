@@ -467,7 +467,7 @@ public final class NpcTable
 			L2DropCategory[] categories = new L2DropCategory[0];
 			
 			if (old != null && old.getDropData() != null)
-				categories = (L2DropCategory[])ArrayUtils.addAll(categories, old.getDropData());
+				categories = ArrayUtils.addAll(categories, old.getDropData());
 			
 			FastList<ClassId> classIds = new FastList<ClassId>();
 			
@@ -477,7 +477,7 @@ public final class NpcTable
 			L2MinionData[] minions = new L2MinionData[0];
 			
 			if (old != null && old.getMinionData() != null)
-				minions = (L2MinionData[])ArrayUtils.addAll(minions, old.getMinionData());
+				minions = ArrayUtils.addAll(minions, old.getMinionData());
 			
 			// reload the NPC base data
 			con = L2DatabaseFactory.getInstance().getConnection();

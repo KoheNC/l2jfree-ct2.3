@@ -357,7 +357,7 @@ public final class L2NpcTemplate extends L2CreatureTemplate
 				{
 					L2DropCategory cat = new L2DropCategory(categoryType);
 					cat.addDropData(drop);
-					_categories = (L2DropCategory[])ArrayUtils.add(_categories, cat);
+					_categories = ArrayUtils.add(_categories, cat);
 				}
 			}
 		}
@@ -368,7 +368,7 @@ public final class L2NpcTemplate extends L2CreatureTemplate
 		if (_minions == null)
 			_minions = new L2MinionData[] { minion };
 		else
-			_minions = (L2MinionData[])ArrayUtils.add(_minions, minion);
+			_minions = ArrayUtils.add(_minions, minion);
 	}
 	
 	public void addSkill(L2Skill skill)

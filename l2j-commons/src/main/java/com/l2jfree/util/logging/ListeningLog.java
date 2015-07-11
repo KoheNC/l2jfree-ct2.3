@@ -39,7 +39,7 @@ public final class ListeningLog
 	
 	public static void addListener(LogListener listener)
 	{
-		_listeners = (LogListener[])ArrayUtils.add(_listeners, listener);
+		_listeners = ArrayUtils.add(_listeners, listener);
 	}
 	
 	private static void writeToListeners(String s)

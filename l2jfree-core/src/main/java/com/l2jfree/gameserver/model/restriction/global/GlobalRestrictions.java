@@ -172,7 +172,7 @@ public final class GlobalRestrictions
 			GlobalRestriction[] restrictions = _restrictions[mode.ordinal()];
 			
 			if (!ArrayUtils.contains(restrictions, restriction))
-				restrictions = (GlobalRestriction[])ArrayUtils.add(restrictions, restriction);
+				restrictions = ArrayUtils.add(restrictions, restriction);
 			
 			Arrays.sort(restrictions, mode);
 			
@@ -187,7 +187,7 @@ public final class GlobalRestrictions
 			GlobalRestriction[] restrictions = _restrictions[mode.ordinal()];
 			
 			for (int index; (index = ArrayUtils.indexOf(restrictions, restriction)) != -1;)
-				restrictions = (GlobalRestriction[])ArrayUtils.remove(restrictions, index);
+				restrictions = ArrayUtils.remove(restrictions, index);
 			
 			_restrictions[mode.ordinal()] = restrictions;
 		}

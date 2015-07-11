@@ -571,7 +571,7 @@ public abstract class L2Item implements FuncOwner
 		if (c == null || ArrayUtils.contains(_preConditions, c))
 			return;
 		
-		_preConditions = (Condition[])ArrayUtils.add(_preConditions, c);
+		_preConditions = ArrayUtils.add(_preConditions, c);
 	}
 	
 	public boolean checkCondition(L2Creature activeChar, L2Object target, boolean sendMessage)

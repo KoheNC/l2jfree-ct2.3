@@ -75,7 +75,7 @@ public class L2SiegeDangerZone extends L2DamageZone
 			if (_applyEnter == null)
 				_applyEnter = new L2Skill[] { s };
 			else
-				_applyEnter = (L2Skill[])ArrayUtils.add(_applyEnter, s);
+				_applyEnter = ArrayUtils.add(_applyEnter, s);
 			_removeExit = ArrayUtils.add(_removeExit, SPEED_SKILL);
 		}
 		else

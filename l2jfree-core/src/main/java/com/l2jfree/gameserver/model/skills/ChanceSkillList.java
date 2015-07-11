@@ -55,7 +55,7 @@ public final class ChanceSkillList
 		}
 		
 		if (nullIndex < 0)
-			_triggers = (IChanceSkillTrigger[])ArrayUtils.add(_triggers, trigger);
+			_triggers = ArrayUtils.add(_triggers, trigger);
 		
 		else
 			_triggers[nullIndex] = trigger;

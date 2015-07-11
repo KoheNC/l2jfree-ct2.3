@@ -3640,7 +3640,7 @@ public final class Config
 						
 						final Pattern pattern = Pattern.compile(line);
 						
-						FILTER_LIST = (Pattern[])ArrayUtils.add(FILTER_LIST, pattern);
+						FILTER_LIST = ArrayUtils.add(FILTER_LIST, pattern);
 					}
 					
 					_log.info("Say Filter: Loaded " + FILTER_LIST.length + " words");

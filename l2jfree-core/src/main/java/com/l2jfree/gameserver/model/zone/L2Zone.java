@@ -227,7 +227,7 @@ public class L2Zone implements FuncOwner
 		if (_statFuncs == null)
 			_statFuncs = new Func[] { func };
 		else
-			_statFuncs = (Func[])ArrayUtils.add(_statFuncs, func);
+			_statFuncs = ArrayUtils.add(_statFuncs, func);
 	}
 	
 	protected void register() throws Exception
@@ -973,7 +973,7 @@ public class L2Zone implements FuncOwner
 		else
 		{
 			if (!ArrayUtils.contains(questByEvents, q))
-				questByEvents = (Quest[])ArrayUtils.add(questByEvents, q);
+				questByEvents = ArrayUtils.add(questByEvents, q);
 		}
 		
 		_questEvents[EventType.ordinal()] = questByEvents;
@@ -1190,7 +1190,7 @@ public class L2Zone implements FuncOwner
 		int y = Integer.parseInt(yn.getNodeValue());
 		int z = Integer.parseInt(zn.getNodeValue());
 		
-		_restarts[t.ordinal()] = (Location[])ArrayUtils.add(_restarts[t.ordinal()], new Location(x, y, z));
+		_restarts[t.ordinal()] = ArrayUtils.add(_restarts[t.ordinal()], new Location(x, y, z));
 	}
 	
 	private void parseEntity(Node n) throws Exception
@@ -1322,7 +1322,7 @@ public class L2Zone implements FuncOwner
 				if (skills == null)
 					skills = new L2Skill[] { skill };
 				else
-					skills = (L2Skill[])ArrayUtils.add(skills, skill);
+					skills = ArrayUtils.add(skills, skill);
 			}
 		}
 		return skills;

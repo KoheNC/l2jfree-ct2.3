@@ -10840,17 +10840,17 @@ public final class L2Player extends L2Playable
 	public void addSnooper(L2Player snooper)
 	{
 		if (!ArrayUtils.contains(_snoopers, snooper))
-			_snoopers = (L2Player[])ArrayUtils.add(_snoopers, snooper);
+			_snoopers = ArrayUtils.add(_snoopers, snooper);
 	}
 	
 	public void removeSnooper(L2Player snooper)
 	{
-		_snoopers = (L2Player[])ArrayUtils.removeElement(_snoopers, snooper);
+		_snoopers = ArrayUtils.removeElement(_snoopers, snooper);
 	}
 	
 	public void removeSnooped(L2Player snooped)
 	{
-		_snoopedPlayers = (L2Player[])ArrayUtils.removeElement(_snoopedPlayers, snooped);
+		_snoopedPlayers = ArrayUtils.removeElement(_snoopedPlayers, snooped);
 	}
 	
 	/**
@@ -10861,7 +10861,7 @@ public final class L2Player extends L2Playable
 	{
 		if (!ArrayUtils.contains(_snoopedPlayers, snooped))
 		{
-			_snoopedPlayers = (L2Player[])ArrayUtils.add(_snoopedPlayers, snooped);
+			_snoopedPlayers = ArrayUtils.add(_snoopedPlayers, snooped);
 			
 			sendPacket(new Snoop(snooped, SystemChatChannelId.Chat_Normal, "", "*** Starting snooping of player "
 					+ snooped.getName() + " ***"));

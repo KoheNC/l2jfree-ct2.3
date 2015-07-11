@@ -111,7 +111,7 @@ public final class Attack extends L2ServerPacket
 		}
 		
 		// this will only happen with pole attacks
-		_hits = (Hit[])ArrayUtils.addAll(hits, _hits);
+		_hits = ArrayUtils.addAll(hits, _hits);
 	}
 	
 	/** @return True if the Server-Client packet Attack contains at least 1 hit. */

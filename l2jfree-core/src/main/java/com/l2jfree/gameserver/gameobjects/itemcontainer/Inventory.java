@@ -143,7 +143,7 @@ public abstract class Inventory extends ItemContainer
 		public void notifyEquiped(int slot, L2ItemInstance item)
 		{
 			if (!ArrayUtils.contains(_changed, item))
-				_changed = (L2ItemInstance[])ArrayUtils.add(_changed, item);
+				_changed = ArrayUtils.add(_changed, item);
 		}
 		
 		/**
@@ -153,7 +153,7 @@ public abstract class Inventory extends ItemContainer
 		public void notifyUnequiped(int slot, L2ItemInstance item, boolean noChange)
 		{
 			if (!ArrayUtils.contains(_changed, item))
-				_changed = (L2ItemInstance[])ArrayUtils.add(_changed, item);
+				_changed = ArrayUtils.add(_changed, item);
 		}
 		
 		@Override

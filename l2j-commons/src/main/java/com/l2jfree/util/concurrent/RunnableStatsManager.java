@@ -87,8 +87,8 @@ public final class RunnableStatsManager
 			
 			final MethodStat methodStat = new MethodStat(_className, methodName);
 			
-			_methodNames = (String[])ArrayUtils.add(_methodNames, methodName);
-			_methodStats = (MethodStat[])ArrayUtils.add(_methodStats, methodStat);
+			_methodNames = ArrayUtils.add(_methodNames, methodName);
+			_methodStats = ArrayUtils.add(_methodStats, methodStat);
 			
 			return methodStat;
 		}
