@@ -18,12 +18,12 @@ import java.util.StringTokenizer;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.MerchantPriceConfigTable.MerchantPriceConfig;
 import com.l2jfree.gameserver.datatables.TradeListTable;
 import com.l2jfree.gameserver.gameobjects.L2Merchant;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2TradeList;
 import com.l2jfree.gameserver.network.packets.server.ActionFailed;
 import com.l2jfree.gameserver.network.packets.server.BuyList;
@@ -191,7 +191,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 				return;
 			
 			int val = Integer.parseInt(st.nextToken());
-			L2Multisell.getInstance().separateAndSend(val, player, getNpcId(), false, getCastle().getTaxRate());
+			MultisellTable.getInstance().separateAndSend(val, player, getNpcId(), false, getCastle().getTaxRate());
 		}
 		else if (actualCommand.equalsIgnoreCase("Exc_Multisell"))
 		{
@@ -199,7 +199,7 @@ public class L2MerchantInstance extends L2NpcInstance implements L2Merchant
 				return;
 			
 			int val = Integer.parseInt(st.nextToken());
-			L2Multisell.getInstance().separateAndSend(val, player, getNpcId(), true, getCastle().getTaxRate());
+			MultisellTable.getInstance().separateAndSend(val, player, getNpcId(), true, getCastle().getTaxRate());
 		}
 		else
 		{

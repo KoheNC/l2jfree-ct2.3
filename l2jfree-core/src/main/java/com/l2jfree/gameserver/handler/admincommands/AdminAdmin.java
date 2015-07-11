@@ -26,6 +26,7 @@ import com.l2jfree.gameserver.communitybbs.Manager.AuctionBBSManager;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.GmListTable;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.NpcWalkerRoutesTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
@@ -43,7 +44,6 @@ import com.l2jfree.gameserver.instancemanager.MapRegionManager;
 import com.l2jfree.gameserver.instancemanager.QuestManager;
 import com.l2jfree.gameserver.instancemanager.SiegeManager;
 import com.l2jfree.gameserver.instancemanager.ZoneManager;
-import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.base.Experience;
 import com.l2jfree.gameserver.model.entity.CCHSiege;
@@ -290,7 +290,7 @@ public class AdminAdmin implements IAdminCommandHandler
 				String type = st.nextToken();
 				if (type.startsWith("multisell"))
 				{
-					L2Multisell.getInstance().reload();
+					MultisellTable.getInstance().reload();
 					activeChar.sendMessage("Multisell reloaded");
 				}
 				else if (type.startsWith("teleport"))

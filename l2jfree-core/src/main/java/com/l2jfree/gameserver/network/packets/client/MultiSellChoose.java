@@ -18,15 +18,15 @@ import java.util.ArrayList;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
+import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellEntry;
+import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellIngredient;
+import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellListContainer;
 import com.l2jfree.gameserver.gameobjects.L2Npc;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
 import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.L2Augmentation;
-import com.l2jfree.gameserver.model.L2Multisell;
-import com.l2jfree.gameserver.model.L2Multisell.MultiSellEntry;
-import com.l2jfree.gameserver.model.L2Multisell.MultiSellIngredient;
-import com.l2jfree.gameserver.model.L2Multisell.MultiSellListContainer;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.SystemMessageId;
 import com.l2jfree.gameserver.network.packets.L2ClientPacket;
@@ -89,7 +89,7 @@ public final class MultiSellChoose extends L2ClientPacket
 		if (!FloodProtector.tryPerformAction(player, Protected.MULTISELL))
 			return;
 		
-		MultiSellListContainer list = L2Multisell.getInstance().getList(_listId);
+		MultiSellListContainer list = MultisellTable.getInstance().getList(_listId);
 		if (list != null)
 		{
 			L2Npc target = player.getTarget(L2Npc.class);

@@ -16,9 +16,9 @@ package com.l2jfree.gameserver.network.packets.server;
 
 import com.l2jfree.Config;
 import com.l2jfree.gameserver.datatables.ItemTable;
-import com.l2jfree.gameserver.model.L2Multisell.MultiSellEntry;
-import com.l2jfree.gameserver.model.L2Multisell.MultiSellIngredient;
-import com.l2jfree.gameserver.model.L2Multisell.MultiSellListContainer;
+import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellEntry;
+import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellIngredient;
+import com.l2jfree.gameserver.datatables.MultisellTable.MultiSellListContainer;
 import com.l2jfree.gameserver.network.packets.L2ServerPacket;
 import com.l2jfree.gameserver.templates.item.L2Item;
 

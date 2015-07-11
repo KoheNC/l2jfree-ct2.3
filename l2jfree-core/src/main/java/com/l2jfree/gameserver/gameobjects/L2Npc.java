@@ -33,6 +33,7 @@ import com.l2jfree.gameserver.datatables.BuffTemplateTable;
 import com.l2jfree.gameserver.datatables.ClanTable;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.PetDataTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
@@ -78,7 +79,6 @@ import com.l2jfree.gameserver.instancemanager.leaderboards.FishermanManager;
 import com.l2jfree.gameserver.model.L2Clan;
 import com.l2jfree.gameserver.model.L2DropCategory;
 import com.l2jfree.gameserver.model.L2DropData;
-import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2Spawn;
 import com.l2jfree.gameserver.model.L2WorldRegion;
 import com.l2jfree.gameserver.model.MobGroupTable;
@@ -1342,12 +1342,12 @@ public class L2Npc extends L2Creature
 			else if (command.startsWith("multisell"))
 			{
 				int listId = Integer.parseInt(command.substring(9).trim());
-				L2Multisell.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
+				MultisellTable.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
 			}
 			else if (command.startsWith("exc_multisell"))
 			{
 				int listId = Integer.parseInt(command.substring(13).trim());
-				L2Multisell.getInstance().separateAndSend(listId, player, getNpcId(), true, getCastle().getTaxRate());
+				MultisellTable.getInstance().separateAndSend(listId, player, getNpcId(), true, getCastle().getTaxRate());
 			}
 			else if (command.startsWith("Augment"))
 			{

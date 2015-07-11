@@ -14,9 +14,9 @@
  */
 package com.l2jfree.gameserver.gameobjects.instance;
 
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.templates.L2NpcTemplate;
-import com.l2jfree.gameserver.model.L2Multisell;
 
 /**
  * @author zabbix
@@ -36,7 +36,7 @@ public class L2BlacksmithInstance extends L2NpcInstance
 		if (command.startsWith("multisell"))
 		{
 			int listId = Integer.parseInt(command.substring(9).trim());
-			L2Multisell.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
+			MultisellTable.getInstance().separateAndSend(listId, player, getNpcId(), false, getCastle().getTaxRate());
 		}
 		else
 			super.onBypassFeedback(player, command);

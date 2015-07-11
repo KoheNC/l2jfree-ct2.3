@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jfree.gameserver.model;
+package com.l2jfree.gameserver.datatables;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.l2jfree.gameserver.datatables.ItemTable;
 import com.l2jfree.gameserver.gameobjects.L2Player;
 import com.l2jfree.gameserver.gameobjects.itemcontainer.PlayerInventory;
+import com.l2jfree.gameserver.model.Elementals;
 import com.l2jfree.gameserver.model.items.L2ItemInstance;
 import com.l2jfree.gameserver.network.packets.server.MultiSellList;
 import com.l2jfree.gameserver.templates.item.L2Armor;
@@ -40,18 +40,18 @@ import com.l2jfree.gameserver.util.Util;
 /**
  * Multisell list manager
  */
-public final class L2Multisell
+public final class MultisellTable
 {
-	private static final Log _log = LogFactory.getLog(L2Multisell.class);
+	private static final Log _log = LogFactory.getLog(MultisellTable.class);
 	
-	public static L2Multisell getInstance()
+	public static MultisellTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
 	
 	private final Map<Integer, MultiSellListContainer> _entries = new HashMap<Integer, MultiSellListContainer>();
 	
-	private L2Multisell()
+	private MultisellTable()
 	{
 		reload();
 	}
@@ -791,6 +791,6 @@ public final class L2Multisell
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{
-		protected static final L2Multisell _instance = new L2Multisell();
+		protected static final MultisellTable _instance = new MultisellTable();
 	}
 }

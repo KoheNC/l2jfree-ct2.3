@@ -45,6 +45,7 @@ import com.l2jfree.gameserver.datatables.CharNameTable;
 import com.l2jfree.gameserver.datatables.DoorTable;
 import com.l2jfree.gameserver.datatables.GmListTable;
 import com.l2jfree.gameserver.datatables.ItemTable;
+import com.l2jfree.gameserver.datatables.MultisellTable;
 import com.l2jfree.gameserver.datatables.NpcTable;
 import com.l2jfree.gameserver.datatables.SkillTable;
 import com.l2jfree.gameserver.datatables.TeleportLocationTable;
@@ -61,7 +62,6 @@ import com.l2jfree.gameserver.instancemanager.IrcManager;
 import com.l2jfree.gameserver.instancemanager.Manager;
 import com.l2jfree.gameserver.instancemanager.ZoneManager;
 import com.l2jfree.gameserver.model.GMAudit;
-import com.l2jfree.gameserver.model.L2Multisell;
 import com.l2jfree.gameserver.model.L2Object;
 import com.l2jfree.gameserver.model.L2World;
 import com.l2jfree.gameserver.model.TradeList;
@@ -940,7 +940,7 @@ public final class GameStatusThread extends Thread
 						if (type.equals("multisell"))
 						{
 							_print.print("Reloading multisell... ");
-							L2Multisell.getInstance().reload();
+							MultisellTable.getInstance().reload();
 							_print.println("done");
 						}
 						else if (type.equals("teleport"))
