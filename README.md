@@ -36,3 +36,5 @@ Basically the repository was made mostly for myself in case I need a stable CT2.
 http://svn.l2jfree.com/l2jfree/
 
 https://github.com/savormix/
+
+https://github.com/l2jfree/svn/commits
