@@ -30,11 +30,24 @@ Basically the repository was made mostly for myself in case I need a stable CT2.
 # Known Bugs: #
 1. 'enchant_skill_trees.sql' is not executable fully by the built-in L2JServer's database installer, you have to execute it by Navicat or phpMyAdmin. Also with some versions of MySQL it is not possible. Try & luck. However it is does not worth to be fixed. Here comes my advice: if you plan to use this pack as a base of your project/server you should implement a new skill enchanting system. Nowdays you can find better skill enchanting systems in many open source projects which requires on DP side nothing more then a 20-40 lines long XML file instead of that heavy SQL file.
 
+# Required Tools: #
+1. JAVA JDK 8 (latest)
+2. Maven 3
+3. Eclipse IDE (latest)
+4. GIT
+
+# Compile Process: #
+1. Checkout the project with "git clone https://lord_rex@bitbucket.org/lord_rex/l2jfree-ct2.3.git" command.
+2. Export all existing projects into Eclipse.
+3. Select "l2jfree-module" project, then right-click -> Run as -> Clean (or command-line 'mvn clean')
+4. Select "l2jfree-module" project, then right-click -> Run as -> Install (or command-line 'mvn install')
+5. Here we are. The project is built into "target" folders. (l2jfree-login/target/l2jfree-login-1.3.0-dist.zip, l2jfree-core/target/l2jfree-core-1.3.0-dist.zip, l2jfree-datapack/target/l2jfree-datapack-1.3.0-dist.zip)
+
 
 # Links: #
 
-http://svn.l2jfree.com/l2jfree/
+http://svn.l2jfree.com/l2jfree
 
-https://github.com/savormix/
+https://github.com/savormix
 
 https://github.com/l2jfree/svn/commits
